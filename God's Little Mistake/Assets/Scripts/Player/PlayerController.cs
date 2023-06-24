@@ -53,11 +53,8 @@ public class PlayerController : Singleton<PlayerController>
 
         #region Attacks
 
-
-
         if (Input.GetButton("Fire1"))
         {
-
             //SPIT
             FireProjectile(_AD.attacks[0].projectilePF, _AD.attacks[0].projectileSpeed, _AD.attacks[0].fireRate,_AD.attacks[0].range);
 
@@ -73,24 +70,7 @@ public class PlayerController : Singleton<PlayerController>
     void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
     {
 
-        //Vector2 screenMousePos = Input.mousePosition;
-        //Vector2 mousePos = Camera.main.ScreenToWorldPoint(new Vector3(screenMousePos.x, screenMousePos.y, 1));
-
-        //GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, Quaternion.identity);
-
-        //if(!projectileShot)
-        //{
-        //    Vector3 bulletDirection = new Vector3(mousePos.x, mousePos.y, 1) - transform.position;
-        //    bullet.GetComponent<Rigidbody>().velocity += _projectileSpeed * bulletDirection;
-        //    projectileShot = true;
-        //    ExecuteAfterSeconds(_firerate, () => projectileShot = false);
-        //}
-
-
-
-
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-
         RaycastHit hit;
 
         if (Physics.Raycast(ray, out hit))
@@ -100,19 +80,16 @@ public class PlayerController : Singleton<PlayerController>
                 Vector3 target = hit.point;
                 target = new Vector3(target.x, 0.5f, target.z);
 
-
-                //spawn bullet
+                //Spawn bullet and apply force in the direction of the mouse
                 GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
+
+                //This will destroy bullet once it exits the range, aka after a certain amount of time
                 Destroy(bullet, _range);
 
-                //shoot direction   
-
+                //Controls the firerate, player can shoot another bullet after a certain amount of time
                 projectileShot = true;
                 ExecuteAfterSeconds(_firerate, () => projectileShot = false);
-
-
-
             }
         }
     }
