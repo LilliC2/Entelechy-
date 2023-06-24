@@ -7,6 +7,8 @@ public class GameBehaviour : LC.Behaviour //inherits from
     //unquie to this project
     protected static GameManager _GM { get { return GameManager.INSTANCE; } }
     protected static UIManager _UI { get { return UIManager.INSTANCE; } }
+    protected static PlayerController _PC { get { return PlayerController.INSTANCE; } }
+    protected static AttackDataBase _AD { get { return AttackDataBase.INSTANCE; } }
     
     //protected static SceneController _SC { get { return SceneController.INSTANCE; } }
 
