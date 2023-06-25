@@ -100,14 +100,18 @@ public class PlayerController : Singleton<PlayerController>
 
         if (Physics.Raycast(ray, out hit))
         {
+            firingPoint.transform.LookAt(hit.point);
+
             if (!projectileShot)
             {
 
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
-                GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, Quaternion.LookRotation(flatAimTarget, Vector3.forward));
+                GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
+
+                Mathf.Clamp(bullet.transform.position.y, 0, 0);
 
                 //This will destroy bullet once it exits the range, aka after a certain amount of time
                 Destroy(bullet, _range);
