@@ -5,6 +5,13 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
+
+    public enum GameState
+    {
+        Playing, Pause, Iventory
+    }
+
+    public GameState gameState;
     
     // Start is called before the first frame update
     void Start()
