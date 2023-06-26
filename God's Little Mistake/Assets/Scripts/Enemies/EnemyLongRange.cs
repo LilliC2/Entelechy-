@@ -15,27 +15,20 @@ public class EnemyLongRange : GameBehaviour
         Patrolling, Chase, Attacking, Die
     }
 
-    EnemyState enemyState;
+    public EnemyState enemyState;
 
     public NavMeshAgent agent;
 
-    //states
-    bool walking;
-    bool idle;
-    bool rotateDetermined = false;
 
     //patrolling
     public Vector3 walkPoint;
-    bool walkPointSet;
     public float walkPointRange;
 
     public bool playerInSightRange, playerInAttackRange, enemyInHitRange;
+    public bool isPatrolling;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
-
-
-    float enemySpeed;
     float enemyRange;
     float enemySightRange;
 
@@ -43,8 +36,6 @@ public class EnemyLongRange : GameBehaviour
     // Start is called before the first frame update
     void Start()
     {
-
-        enemySpeed = _ED.enemies[0].speed;
         enemyRange = _ED.enemies[0].range;
         enemySightRange = _ED.enemies[0].range + 0.5f;
         //player = GameObject.Find("Player");
@@ -67,11 +58,18 @@ public class EnemyLongRange : GameBehaviour
         switch(enemyState)
         {
             case EnemyState.Patrolling:
-                StartCoroutine(PatrolingIE());
+                if(isPatrolling != true)
+                {
+                    isPatrolling = true;
+                    StartCoroutine(PatrolingIE());
+                    walkPointRange = 5;
+                }
                 break;
             case EnemyState.Chase:
                 break;
             case EnemyState.Attacking:
+                isPatrolling = false;
+                walkPointRange = 2;
                 print("ATTACK");
                 FireProjectile(_ED.enemies[0].projectilePF, _ED.enemies[0].projectileSpeed, _ED.enemies[0].fireRate, _ED.enemies[0].range);
                 break;
@@ -84,41 +82,23 @@ public class EnemyLongRange : GameBehaviour
 
     IEnumerator PatrolingIE()
     {
-        rotateDetermined = false;
-        if (!walkPointSet) SearchWalkPoint();
 
-        if (walkPointSet)
-        {
-            agent.SetDestination(walkPoint);
-            gameObject.GetComponent<NavMeshAgent>().speed = enemySpeed;
-        }
-
-
-        //calculate distance to walk point
-        Vector3 distanceToWalkPoint = transform.position - walkPoint;
-
-        //walkpouint reached
-        if (distanceToWalkPoint.magnitude < 1f)
-        {
-            float result = RandomFloatBetweenTwoFloats(2f, 5f);
-            yield return new WaitForSeconds(result);
-            walkPointSet = false;
-        }
+        agent.SetDestination(SearchWalkPoint());
+        yield return new WaitForSeconds(Random.Range(2, 6));
+        StartCoroutine(PatrolingIE());
     }
 
-    private void SearchWalkPoint()
+    private Vector3 SearchWalkPoint()
     {
-        //calculate random point in range
-        float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        float randomx = Random.Range(-walkPointRange, walkPointRange);
 
-        walkPoint = new Vector3(transform.position.x + randomx, transform.position.y, transform.position.z + randomZ);
+        return transform.position + Random.insideUnitSphere * walkPointRange;
+        ////calculate random point in range
+        //float randomZ = Random.Range(-walkPointRange, walkPointRange);
+        //float randomx = Random.Range(-walkPointRange, walkPointRange);
 
-        //check if new walkpoint is on ground
-        if (Physics.Raycast(walkPoint, -transform.up, 2f, whatIsGround))
-        {
-            walkPointSet = true;
-        }
+        //walkPoint = new Vector3(transform.position.x + randomx, transform.position.y, transform.position.z + randomZ);
+
+        //walkPointSet = true;
     }
 
 
