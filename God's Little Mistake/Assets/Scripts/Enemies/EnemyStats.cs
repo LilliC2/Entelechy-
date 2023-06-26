@@ -13,6 +13,7 @@ public class EnemyStats
     public CategoryLegs categoryLegs;
 
     public float health;
+    public float maxHP;
     public float speed;
     public float dmg;
     public float dps;
