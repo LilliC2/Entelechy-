@@ -38,17 +38,22 @@ public class PlayerController : Singleton<PlayerController>
 
                 controller.Move(playerVelocity * Time.deltaTime);
 
-                //Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-                //if(Physics.Raycast(ray,out RaycastHit raycasthit))
-                //{
-                //    var mousePos = raycasthit.point;
-                //    print(mousePos);
-                //    firingPoint.transform.LookAt(mousePos * Time.deltaTime * 10,Vector3.up);    
-                //    directional.transform.LookAt(mousePos * Time.deltaTime * 1);
-                //    Mathf.Clamp(directional.transform.rotation.x, 0, 0);
-                //    Mathf.Clamp(directional.transform.rotation.z, 0, 0);
 
-                //}
+                //Rotate melee hit box and head
+
+                Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+                RaycastHit hit;
+                if (Physics.Raycast(ray, out hit))
+                {
+                    directional.transform.LookAt(hit.point);
+                    Mathf.Clamp(directional.transform.rotation.x, 0, 0);
+                    Mathf.Clamp(directional.transform.rotation.z, 0, 0);
+
+                    //var angle = Vector3.Angle(head.transform.position, hit.point);
+                    //head.transform.localEulerAngles = new Vector3(0,angle,0);
+
+                }
+
 
                 #region Attacks
 

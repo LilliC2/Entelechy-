@@ -6,6 +6,8 @@ public class ItemPickUp : GameBehaviour
 {
     public GameObject pickupText;
 
+    bool inRange;
+
 
     // Start is called before the first frame update
     void Start()
@@ -17,23 +19,32 @@ public class ItemPickUp : GameBehaviour
     void Update()
     {
 
-        if (Physics.CheckSphere(transform.position, 2))
+        if (inRange)
         {
+            print("player pick up here");
 
-            pickupText.SetActive(true);
-
-            if(Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-
-                _DC.heldItem = gameObject;
-                pickupText.SetActive(false);
-            }
                
-
+            }
         }
-        else pickupText.SetActive(false);
 
+    }
 
+    private void OnTriggerEnter(Collider other)
+    {
+        inRange = true;
+        if (other.CompareTag("Player")) inRange = true;
+    }
 
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player")) inRange = false;
+    }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, 1);   
     }
 }
