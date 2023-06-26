@@ -4,20 +4,29 @@ public class PlayerController : Singleton<PlayerController>
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
+
+    [Header ("Player Stats")]
+    public float health;
+    public float speed;
+    public float dmg;
+    public float dps;
+    public float fireRate;
+    public float range;
+
+    public bool projectile;
+    public float projectileSpeed;
+    public GameObject projectilePF;
     public float playerSpeed = 2.0f;
 
+    [Header("Head Movement")]
+    public float headSpeed = 1000;
     public GameObject head;
 
-    public Vector3 target;
-
-    public float headSpeed = 1000;
-
-
-    bool projectileShot;
-
+    [Header("Projectile")]
     public GameObject firingPoint;
-    public GameObject directional;
-
+    public GameObject directional; //is for current melee attack and will probably be removed
+    public Vector3 target;
+    bool projectileShot;
 
     private void Start()
     {
@@ -27,8 +36,6 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
-
-
         switch(_GM.gameState)
         {
             case GameManager.GameState.Playing:
@@ -38,9 +45,7 @@ public class PlayerController : Singleton<PlayerController>
 
                 controller.Move(playerVelocity * Time.deltaTime);
 
-
                 //Rotate melee hit box and head
-
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
@@ -48,10 +53,6 @@ public class PlayerController : Singleton<PlayerController>
                     directional.transform.LookAt(hit.point);
                     Mathf.Clamp(directional.transform.rotation.x, 0, 0);
                     Mathf.Clamp(directional.transform.rotation.z, 0, 0);
-
-                    //var angle = Vector3.Angle(head.transform.position, hit.point);
-                    //head.transform.localEulerAngles = new Vector3(0,angle,0);
-
                 }
 
 
@@ -78,10 +79,9 @@ public class PlayerController : Singleton<PlayerController>
                 break;
         }
 
-
-        
-
     }
+
+
 
     void MeleeAttack()
     {

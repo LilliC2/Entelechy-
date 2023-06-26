@@ -5,8 +5,12 @@ using UnityEngine;
 [System.Serializable]
 public class EnemyStats 
 {
-    public string category;
-    public string category2;
+    public enum CategoryHead { Eyes, Mouth, Horns, None}
+    public CategoryHead categoryHead;
+    public enum CategoryTorso { Slappies, Punchies, Launchers, None}
+    public CategoryTorso categoryTorso;
+    public enum CategoryLegs { Legs, Crawlies, None}
+    public CategoryLegs categoryLegs;
 
     public float health;
     public float speed;

@@ -5,7 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : Singleton<GameManager>
 {
-
     public enum GameState
     {
         Playing, Pause, Iventory

@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyDatabase : Singleton<EnemyDatabase>
+public class BaseEnemy : GameBehaviour
 {
-    public EnemyStats[] enemies;    
+    public EnemyStats stats;
 
     // Start is called before the first frame update
     void Start()

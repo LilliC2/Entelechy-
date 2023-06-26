@@ -5,9 +5,10 @@ using UnityEngine.AI;
 
 public class EnemyLongRange : GameBehaviour
 {
+
+    [Header ("Enemy Navigation")]
     bool projectileShot;
     public GameObject firingPoint;
-
     public GameObject player;
 
     public enum EnemyState
@@ -29,16 +30,18 @@ public class EnemyLongRange : GameBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
-    float enemyRange;
-    float enemySightRange;
+
+
+    BaseEnemy enemyStats;
 
 
     // Start is called before the first frame update
     void Start()
     {
-        enemyRange = _ED.enemies[0].range;
-        enemySightRange = _ED.enemies[0].range + 0.5f;
+        //enemyRange = _ED.enemies[0].range;
+        //enemySightRange = _ED.enemies[0].range + 0.5f;
         //player = GameObject.Find("Player");
+        enemyStats = GetComponent<BaseEnemy>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -47,8 +50,12 @@ public class EnemyLongRange : GameBehaviour
     {
 
         //check for the sight and attack range
-        playerInAttackRange = Physics.CheckSphere(transform.position, enemyRange, whatIsPlayer);
-        playerInSightRange = Physics.CheckSphere(transform.position, enemySightRange, whatIsPlayer);
+        if(enemyState != EnemyState.Die)
+        {
+            playerInAttackRange = Physics.CheckSphere(transform.position, enemyStats.stats.range, whatIsPlayer);
+            playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range + 1, whatIsPlayer);
+        }
+        
 
         if (playerInAttackRange) enemyState = EnemyState.Attacking;
         if (!playerInAttackRange) enemyState = EnemyState.Patrolling;
@@ -71,12 +78,14 @@ public class EnemyLongRange : GameBehaviour
                 isPatrolling = false;
                 walkPointRange = 2;
                 print("ATTACK");
-                FireProjectile(_ED.enemies[0].projectilePF, _ED.enemies[0].projectileSpeed, _ED.enemies[0].fireRate, _ED.enemies[0].range);
+                FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
                 break;
             case EnemyState.Die:
+                //death animation etc
+                print("Dead");
+                Destroy(this.gameObject);
                 break;
         }
-
 
     }
 
@@ -125,12 +134,29 @@ public class EnemyLongRange : GameBehaviour
         }
     }
 
+    void Hit()
+    {
+        if (enemyStats.stats.health != 0)
+        {
+            enemyStats.stats.health -= _PC.dmg;
+            print(enemyStats.stats.health);
+            StopAllCoroutines();
+
+        }
+        else
+        {
+            StopAllCoroutines();
+            enemyState = EnemyState.Die;
+        }
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.collider.CompareTag("Projectile"))
         {
             print("hit");
             //Add hit code here;
+            Hit();
 
             //destroy bullet that hit it
             Destroy(collision.gameObject);
@@ -140,10 +166,10 @@ public class EnemyLongRange : GameBehaviour
     //visualise sight range
     private void OnDrawGizmosSelected()
     {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(transform.position, enemyRange);
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, enemySightRange);
+        //Gizmos.color = Color.red;
+        //Gizmos.DrawWireSphere(transform.position, enemyStats.stats.range);
+        //Gizmos.color = Color.yellow;
+        //Gizmos.DrawWireSphere(transform.position, enemyStats.stats.range+1);
 
 
 
