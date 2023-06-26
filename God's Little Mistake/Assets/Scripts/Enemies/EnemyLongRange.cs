@@ -34,7 +34,7 @@ public class EnemyLongRange : GameBehaviour
 
     BaseEnemy enemyStats;
 
-
+    //wowo
     // Start is called before the first frame update
     void Start()
     {
