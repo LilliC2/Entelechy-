@@ -1068,6 +1068,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ShortRangeEnemy
       objectReference: {fileID: 0}
+    - target: {fileID: 3718395452026233766, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_RootOrder
       value: 11
@@ -2182,15 +2186,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroy: 0
   health: 10
-  speed: 20
+  speed: 2
   dmg: 5
   dps: 0
   fireRate: 0
   range: 0
   projectile: 0
   projectileSpeed: 0
-  projectilePF: {fileID: 0}
-  playerSpeed: 2
+  projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
   headSpeed: 1000
   head: {fileID: 1673379733}
   firingPoint: {fileID: 35132813}
@@ -2407,7 +2410,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1004982790652352589, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 5396413634656670049, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: player
@@ -2456,6 +2459,14 @@ PrefabInstance:
     - target: {fileID: 7431377151105404353, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561204402898261305, guid: be866254d4dc2ec4da24417472026e76, type: 3}
+      propertyPath: stats.maxHP
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561204402898261305, guid: be866254d4dc2ec4da24417472026e76, type: 3}
+      propertyPath: stats.health
+      value: 15
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

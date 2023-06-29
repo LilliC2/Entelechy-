@@ -69,7 +69,7 @@ public class EnemyLongRange : GameBehaviour
         }
 
         //Visual indicator for health
-        HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.health);
+        HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
 
 
         firingPoint.transform.LookAt(player.transform.position);
@@ -143,9 +143,9 @@ public class EnemyLongRange : GameBehaviour
 
     void HealthVisualIndicator(float _health, float _maxHP)
     {
-        var currentHPpercent = (_health / _maxHP) * 100;
+        float currentHPpercent = _health / _maxHP;
 
-        print(currentHPpercent);
+        print("Current Hp as decimal: " + currentHPpercent);
 
         float H, S, V;
 
