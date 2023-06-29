@@ -21,6 +21,8 @@ public class EnemyLongRange : GameBehaviour
     public NavMeshAgent agent;
 
 
+
+
     //patrolling
     public Vector3 walkPoint;
     public float walkPointRange;
@@ -30,7 +32,7 @@ public class EnemyLongRange : GameBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
-
+    public GameObject image;
 
     BaseEnemy enemyStats;
 
@@ -41,6 +43,7 @@ public class EnemyLongRange : GameBehaviour
         //enemyRange = _ED.enemies[0].range;
         //enemySightRange = _ED.enemies[0].range + 0.5f;
         //player = GameObject.Find("Player");
+        image = GameObject.Find("Image");
         enemyStats = GetComponent<BaseEnemy>();
         agent = GetComponent<NavMeshAgent>();
     }
@@ -50,15 +53,24 @@ public class EnemyLongRange : GameBehaviour
     {
 
         //check for the sight and attack range
-        if(enemyState != EnemyState.Die)
+        if (enemyState != EnemyState.Die)
         {
             playerInAttackRange = Physics.CheckSphere(transform.position, enemyStats.stats.range, whatIsPlayer);
             playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range + 1, whatIsPlayer);
-        }
-        
+            if (playerInAttackRange) enemyState = EnemyState.Attacking;
+            if (!playerInAttackRange) enemyState = EnemyState.Patrolling;
 
-        if (playerInAttackRange) enemyState = EnemyState.Attacking;
-        if (!playerInAttackRange) enemyState = EnemyState.Patrolling;
+        }
+
+        //Health Manager
+        if (enemyStats.stats.health <= 0)
+        {
+            enemyState = EnemyState.Die;
+        }
+
+        //Visual indicator for health
+        HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.health);
+
 
         firingPoint.transform.LookAt(player.transform.position);
 
@@ -81,6 +93,7 @@ public class EnemyLongRange : GameBehaviour
                 FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
                 break;
             case EnemyState.Die:
+                StopCoroutine(PatrolingIE());
                 //death animation etc
                 print("Dead");
                 Destroy(this.gameObject);
@@ -128,19 +141,25 @@ public class EnemyLongRange : GameBehaviour
         }
     }
 
+    void HealthVisualIndicator(float _health, float _maxHP)
+    {
+        var currentHPpercent = (_health / _maxHP) * 100;
+
+        print(currentHPpercent);
+
+        float H, S, V;
+
+        Color.RGBToHSV(image.GetComponent<Renderer>().material.color, out H, out S, out V);
+
+        image.GetComponent<Renderer>().material.color = Color.HSVToRGB(H, currentHPpercent, V);
+    }
+
     void Hit()
     {
-        if (enemyStats.stats.health != 0)
+        if (enemyStats.stats.health > 0)
         {
             enemyStats.stats.health -= _PC.dmg;
             print(enemyStats.stats.health);
-            StopAllCoroutines();
-
-        }
-        else
-        {
-            StopAllCoroutines();
-            enemyState = EnemyState.Die;
         }
     }
 
