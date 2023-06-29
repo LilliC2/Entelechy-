@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyShortRange : MonoBehaviour
+public class EnemyShortRange : GameBehaviour
 {
 
     public float detectionRange = 10f; 
@@ -15,26 +15,86 @@ public class EnemyShortRange : MonoBehaviour
     private bool isChasing = false; 
     private bool canAttack = true;
 
+    BaseEnemy enemyStats;
+
+    public enum EnemyState
+    {
+        Patrolling, Chase, Attacking, Die
+    }
+
+    public EnemyState enemyState;
+
+    private void Start()
+    {
+        enemyStats = GetComponent<BaseEnemy>();
+    }
+
     private void Update()
     {
-        if (Vector3.Distance(transform.position, player.position) <= detectionRange)
+        switch(enemyState)
         {
-            isChasing = true;
+            case EnemyState.Patrolling:
+                if (Vector3.Distance(transform.position, player.position) <= enemyStats.stats.range + 1)
+                {
+                    isChasing = true;
 
-            if (Vector3.Distance(transform.position, player.position) <= attackRange && canAttack)
-            {
-                Attack();
-            }
+                    if (Vector3.Distance(transform.position, player.position) <= enemyStats.stats.range && canAttack)
+                    {
+                        Attack();
+                    }
+                }
+                else
+                {
+                    isChasing = false;
+                }
+
+                if (isChasing)
+                {
+                    Vector3 direction = (player.position - transform.position).normalized;
+                    transform.Translate(direction * enemyStats.stats.speed * Time.deltaTime);
+                }
+                break;
+            case EnemyState.Chase:
+                break;
+            case EnemyState.Attacking:
+               
+                break;
+            case EnemyState.Die:
+                //death animation etc
+                print("Dead");
+                Destroy(this.gameObject);
+                break;
+        }
+
+        
+    }
+
+    void Hit()
+    {
+        if (enemyStats.stats.health != 0)
+        {
+            enemyStats.stats.health -= _PC.dmg;
+            print(enemyStats.stats.health);
+            StopAllCoroutines();
+
         }
         else
         {
-            isChasing = false;
+            StopAllCoroutines();
+            enemyState = EnemyState.Die;
         }
+    }
 
-        if (isChasing)
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Projectile"))
         {
-            Vector3 direction = (player.position - transform.position).normalized;
-            transform.Translate(direction * movementSpeed * Time.deltaTime);
+            print("hit");
+            //Add hit code here;
+            Hit();
+
+            //destroy bullet that hit it
+            Destroy(collision.gameObject);
         }
     }
 
@@ -51,7 +111,7 @@ public class EnemyShortRange : MonoBehaviour
     {
         canAttack = false;
 
-        yield return new WaitForSeconds(attackCooldown);
+        yield return new WaitForSeconds(enemyStats.stats.fireRate);
 
         canAttack = true;
     }

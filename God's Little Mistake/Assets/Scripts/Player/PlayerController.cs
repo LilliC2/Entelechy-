@@ -16,7 +16,6 @@ public class PlayerController : Singleton<PlayerController>
     public bool projectile;
     public float projectileSpeed;
     public GameObject projectilePF;
-    public float playerSpeed = 2.0f;
 
     [Header("Head Movement")]
     public float headSpeed = 1000;
@@ -41,7 +40,7 @@ public class PlayerController : Singleton<PlayerController>
             case GameManager.GameState.Playing:
 
                 Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-                controller.Move(move * Time.deltaTime * playerSpeed);
+                controller.Move(move * Time.deltaTime * speed);
 
                 controller.Move(playerVelocity * Time.deltaTime);
 

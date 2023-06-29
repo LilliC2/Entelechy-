@@ -101,13 +101,7 @@ public class EnemyLongRange : GameBehaviour
     {
 
         return transform.position + Random.insideUnitSphere * walkPointRange;
-        ////calculate random point in range
-        //float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        //float randomx = Random.Range(-walkPointRange, walkPointRange);
 
-        //walkPoint = new Vector3(transform.position.x + randomx, transform.position.y, transform.position.z + randomZ);
-
-        //walkPointSet = true;
     }
 
 
