@@ -69,7 +69,7 @@ public class EnemyLongRange : GameBehaviour
         }
 
         //Visual indicator for health
-        HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.health);
+        HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
 
 
         firingPoint.transform.LookAt(player.transform.position);
@@ -114,13 +114,7 @@ public class EnemyLongRange : GameBehaviour
     {
 
         return transform.position + Random.insideUnitSphere * walkPointRange;
-        ////calculate random point in range
-        //float randomZ = Random.Range(-walkPointRange, walkPointRange);
-        //float randomx = Random.Range(-walkPointRange, walkPointRange);
 
-        //walkPoint = new Vector3(transform.position.x + randomx, transform.position.y, transform.position.z + randomZ);
-
-        //walkPointSet = true;
     }
 
 
@@ -149,9 +143,9 @@ public class EnemyLongRange : GameBehaviour
 
     void HealthVisualIndicator(float _health, float _maxHP)
     {
-        var currentHPpercent = (_health / _maxHP) * 100;
+        float currentHPpercent = _health / _maxHP;
 
-        print(currentHPpercent);
+        print("Current Hp as decimal: " + currentHPpercent);
 
         float H, S, V;
 

@@ -6,6 +6,7 @@ public class BaseEnemy : GameBehaviour
 {
     public EnemyStats stats;
 
+
     // Start is called before the first frame update
     void Start()
     {
