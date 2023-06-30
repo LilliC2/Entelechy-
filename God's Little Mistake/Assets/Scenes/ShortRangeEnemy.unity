@@ -274,12 +274,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 50
-  movementSpeed: 10
+  chaseSpeed: 3
+  roamSpeed: 1.5
   attackRange: 2
   attackDamage: 10
   attackCooldown: 2
-  player: {fileID: 592566365}
-  enemyState: 0
+
 --- !u!212 &428922160
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -424,13 +424,14 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592566363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.39, y: 1.2, z: 18.47}
+  m_LocalPosition: {x: 3.39, y: 1.2, z: -236.4}
   m_LocalScale: {x: 2.5026, y: 2.5026, z: 2.5026}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+
 --- !u!1 &885280055
 GameObject:
   m_ObjectHideFlags: 0
@@ -530,12 +531,12 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 50
-  movementSpeed: 10
+  chaseSpeed: 3
+  roamSpeed: 1.5
   attackRange: 2
   attackDamage: 10
   attackCooldown: 2
-  player: {fileID: 592566365}
-  enemyState: 0
+
 --- !u!54 &885280059
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -772,7 +773,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh24806
+
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2

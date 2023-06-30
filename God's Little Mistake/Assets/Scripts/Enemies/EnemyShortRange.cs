@@ -4,16 +4,28 @@ using UnityEngine;
 
 public class EnemyShortRange : GameBehaviour
 {
-
-    public float detectionRange = 10f; 
-    public float movementSpeed = 3f; 
+    public float detectionRange = 10f;
+    public float chaseSpeed = 3f;
+    public float roamSpeed = 1.5f;
     public float attackRange = 2f;
     public int attackDamage = 10;
-    public float attackCooldown = 2f; 
-    public Transform player;
+    public float attackCooldown = 2f;
+    public int maxHealth = 100;
+    public float roamingRadius = 5f;
+    public float rotationSpeed = 5f;
 
+    private int currentHealth;
     private bool isChasing = false; 
     private bool canAttack = true;
+    private Transform player;
+    private Vector3 roamingPosition;
+
+    private void Start()
+    {
+        currentHealth = maxHealth;
+        player = GameObject.FindGameObjectWithTag("Player").transform;
+        GenerateRoamingPosition();
+    }
 
     BaseEnemy enemyStats;
 
@@ -80,8 +92,7 @@ public class EnemyShortRange : GameBehaviour
         }
         else
         {
-            StopAllCoroutines();
-            enemyState = EnemyState.Die;
+
         }
     }
 
@@ -89,21 +100,16 @@ public class EnemyShortRange : GameBehaviour
     {
         if (collision.collider.CompareTag("Projectile"))
         {
-            print("hit");
-            //Add hit code here;
-            Hit();
 
-            //destroy bullet that hit it
-            Destroy(collision.gameObject);
         }
     }
 
     private void Attack()
     {
         Debug.Log("Enemy performs melee attack!");
+        //player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
 
-        //player.GetComponent<Health>().TakeDamage(attackDamage);
-
+        // Start the attack cooldown
         StartCoroutine(AttackCooldown());
     }
 
@@ -114,5 +120,44 @@ public class EnemyShortRange : GameBehaviour
         yield return new WaitForSeconds(enemyStats.stats.fireRate);
 
         canAttack = true;
+    }
+
+    public void TakeDamage(int damage)
+    {
+        currentHealth -= damage;
+
+        if (currentHealth <= 0)
+        {
+            Die();
+        }
+    }
+
+    private void Die()
+    {
+        Debug.Log("Enemy defeated!");
+
+        Destroy(gameObject);
+    }
+
+    private void Roam()
+    {
+        if (Vector3.Distance(transform.position, roamingPosition) <= 0.1f)
+        {
+            GenerateRoamingPosition();
+        }
+        else
+        {
+            Quaternion targetRotation = Quaternion.LookRotation(roamingPosition - transform.position);
+            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
+
+            Vector3 direction = (roamingPosition - transform.position).normalized;
+            transform.Translate(direction * roamSpeed * Time.deltaTime);
+        }
+    }
+
+    private void GenerateRoamingPosition()
+    {
+        roamingPosition = transform.position + Random.insideUnitSphere * roamingRadius;
+        roamingPosition.y = transform.position.y;
     }
 }
