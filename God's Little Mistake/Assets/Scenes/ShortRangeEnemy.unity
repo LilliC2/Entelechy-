@@ -282,6 +282,7 @@ MonoBehaviour:
   maxHealth: 100
   roamingRadius: 5
   rotationSpeed: 5
+  player: {fileID: 0}
   enemyState: 0
 --- !u!212 &428922160
 SpriteRenderer:
@@ -427,7 +428,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592566363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.39, y: 1.2, z: 22.7}
+  m_LocalPosition: {x: 3.39, y: 1.2, z: -25.4}
   m_LocalScale: {x: 2.5026, y: 2.5026, z: 2.5026}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -542,6 +543,7 @@ MonoBehaviour:
   maxHealth: 100
   roamingRadius: 5
   rotationSpeed: 5
+  player: {fileID: 592566365}
   enemyState: 0
 --- !u!54 &885280059
 Rigidbody:
@@ -587,12 +589,12 @@ MonoBehaviour:
     categoryTorso: 0
     categoryLegs: 0
     health: 20
-    maxHP: 0
-    speed: 0
-    dmg: 0
-    dps: 0
-    fireRate: 0
-    range: 0
+    maxHP: 20
+    speed: 5
+    dmg: 5
+    dps: 5
+    fireRate: 5
+    range: 50
     projectile: 0
     projectileSpeed: 0
     projectilePF: {fileID: 0}
@@ -805,7 +807,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30010
+  m_Name: pb_Mesh24006
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
