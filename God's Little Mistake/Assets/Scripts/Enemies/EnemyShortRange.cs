@@ -24,6 +24,7 @@ public class EnemyShortRange : GameBehaviour
     {
         currentHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyStats = GetComponent<BaseEnemy>();
         GenerateRoamingPosition();
     }
 
@@ -35,12 +36,6 @@ public class EnemyShortRange : GameBehaviour
     }
 
     public EnemyState enemyState;
-
-    private void Start()
-    {
-        enemyStats = GetComponent<BaseEnemy>();
-    }
-
     private void Update()
     {
         switch(enemyState)
@@ -109,7 +104,6 @@ public class EnemyShortRange : GameBehaviour
         Debug.Log("Enemy performs melee attack!");
         //player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
 
-        // Start the attack cooldown
         StartCoroutine(AttackCooldown());
     }
 
