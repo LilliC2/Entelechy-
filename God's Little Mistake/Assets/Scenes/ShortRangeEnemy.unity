@@ -279,7 +279,11 @@ MonoBehaviour:
   attackRange: 2
   attackDamage: 10
   attackCooldown: 2
-
+  maxHealth: 100
+  roamingRadius: 5
+  rotationSpeed: 5
+  player: {fileID: 0}
+  enemyState: 0
 --- !u!212 &428922160
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -424,14 +428,13 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 592566363}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 3.39, y: 1.2, z: -236.4}
+  m_LocalPosition: {x: 3.39, y: 1.2, z: -25.4}
   m_LocalScale: {x: 2.5026, y: 2.5026, z: 2.5026}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-
 --- !u!1 &885280055
 GameObject:
   m_ObjectHideFlags: 0
@@ -443,6 +446,7 @@ GameObject:
   - component: {fileID: 885280057}
   - component: {fileID: 885280056}
   - component: {fileID: 885280058}
+  - component: {fileID: 885280060}
   - component: {fileID: 885280059}
   m_Layer: 0
   m_Name: Enemy
@@ -536,7 +540,11 @@ MonoBehaviour:
   attackRange: 2
   attackDamage: 10
   attackCooldown: 2
-
+  maxHealth: 100
+  roamingRadius: 5
+  rotationSpeed: 5
+  player: {fileID: 592566365}
+  enemyState: 0
 --- !u!54 &885280059
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -564,6 +572,32 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &885280060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 885280055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 609035b677042b34f9bd4c25621ebe3b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stats:
+    categoryHead: 0
+    categoryTorso: 0
+    categoryLegs: 0
+    health: 20
+    maxHP: 20
+    speed: 5
+    dmg: 5
+    dps: 5
+    fireRate: 5
+    range: 50
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
 --- !u!1 &1723701324
 GameObject:
   m_ObjectHideFlags: 0
@@ -606,7 +640,7 @@ MeshCollider:
   serializedVersion: 5
   m_Convex: 0
   m_CookingOptions: 30
-  m_Mesh: {fileID: 1862644668}
+  m_Mesh: {fileID: 0}
 --- !u!33 &1723701326
 MeshFilter:
   m_ObjectHideFlags: 10
@@ -773,19 +807,19 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-
+  m_Name: pb_Mesh24006
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
     firstByte: 0
-    indexCount: 6
+    indexCount: 0
     topology: 0
     baseVertex: 0
     firstVertex: 0
-    vertexCount: 4
+    vertexCount: 0
     localAABB:
-      m_Center: {x: -36.76696, y: 0.0001, z: -38.120384}
-      m_Extent: {x: 36.76696, y: 0, z: 38.120384}
+      m_Center: {x: 0, y: 0, z: 0}
+      m_Extent: {x: 0, y: 0, z: 0}
   m_Shapes:
     vertices: []
     shapes: []
@@ -802,69 +836,69 @@ Mesh:
   m_KeepVertices: 1
   m_KeepIndices: 1
   m_IndexFormat: 0
-  m_IndexBuffer: 000001000200010003000200
+  m_IndexBuffer: 
   m_VertexData:
     serializedVersion: 3
-    m_VertexCount: 4
+    m_VertexCount: 0
     m_Channels:
     - stream: 0
       offset: 0
       format: 0
-      dimension: 3
+      dimension: 0
     - stream: 0
-      offset: 12
+      offset: 0
       format: 0
-      dimension: 3
+      dimension: 0
     - stream: 0
-      offset: 24
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 0
+      offset: 0
+      format: 0
+      dimension: 0
+    - stream: 1
+      offset: 0
       format: 0
       dimension: 4
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 40
-      format: 0
-      dimension: 2
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    - stream: 0
-      offset: 0
-      format: 0
-      dimension: 0
-    m_DataSize: 192
-    _typelessdata: 5e1193c217b7d138467b98c2000000000000803f000000000000803f0000000000000000000080bf5e1193c2467b98c25e1193c217b7d13800000000000000000000803f000000000000803f0000000000000000000080bf5e1193c200000000000080b617b7d138467b98c2000000000000803f000000000000803f0000000000000000000080bf000080b6467b98c2000080b617b7d13800000000000000000000803f000000000000803f0000000000000000000080bf000080b600000000
+    - stream: 1
+      offset: 16
+      format: 10
+      dimension: 4
+    m_DataSize: 0
+    _typelessdata: 
   m_CompressedMesh:
     m_Vertices:
       m_NumItems: 0
@@ -918,15 +952,15 @@ Mesh:
       m_BitSize: 0
     m_UVInfo: 0
   m_LocalAABB:
-    m_Center: {x: -36.76696, y: 0.0001, z: -38.120384}
-    m_Extent: {x: 36.76696, y: 0, z: 38.120384}
+    m_Center: {x: 0, y: 0, z: 0}
+    m_Extent: {x: 0, y: 0, z: 0}
   m_MeshUsageFlags: 0
   m_CookingOptions: 30
   m_BakedConvexCollisionMesh: 
   m_BakedTriangleCollisionMesh: 
   m_MeshMetrics[0]: 1
   m_MeshMetrics[1]: 1
-  m_MeshOptimizationFlags: 1
+  m_MeshOptimizationFlags: -1
   m_StreamData:
     serializedVersion: 2
     offset: 0
@@ -1037,6 +1071,10 @@ PrefabInstance:
     - target: {fileID: 3718395452026233766, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_Name
       value: ShortRangeEnemy
+      objectReference: {fileID: 0}
+    - target: {fileID: 3718395452026233766, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_RootOrder

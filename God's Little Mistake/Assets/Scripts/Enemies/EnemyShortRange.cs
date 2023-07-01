@@ -17,13 +17,14 @@ public class EnemyShortRange : GameBehaviour
     private int currentHealth;
     private bool isChasing = false; 
     private bool canAttack = true;
-    private Transform player;
+    public Transform player;
     private Vector3 roamingPosition;
 
     private void Start()
     {
         currentHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
+        enemyStats = GetComponent<BaseEnemy>();
         GenerateRoamingPosition();
     }
 
@@ -35,12 +36,6 @@ public class EnemyShortRange : GameBehaviour
     }
 
     public EnemyState enemyState;
-
-    private void Start()
-    {
-        enemyStats = GetComponent<BaseEnemy>();
-    }
-
     private void Update()
     {
         switch(enemyState)
@@ -52,12 +47,14 @@ public class EnemyShortRange : GameBehaviour
 
                     if (Vector3.Distance(transform.position, player.position) <= enemyStats.stats.range && canAttack)
                     {
+                        enemyState = EnemyState.Chase;
                         Attack();
                     }
                 }
                 else
                 {
                     isChasing = false;
+                    Roam();
                 }
 
                 if (isChasing)
@@ -67,6 +64,19 @@ public class EnemyShortRange : GameBehaviour
                 }
                 break;
             case EnemyState.Chase:
+                if (Vector3.Distance(transform.position, player.position) <= attackRange)
+                {
+                    enemyState = EnemyState.Attacking; // Switch to attacking state
+                    Attack();
+                }
+                else if (Vector3.Distance(transform.position, player.position) > detectionRange)
+                {
+                    enemyState = EnemyState.Patrolling; // Switch back to patrolling state
+                }
+                else
+                {
+                    Chase();
+                }
                 break;
             case EnemyState.Attacking:
                
@@ -92,7 +102,7 @@ public class EnemyShortRange : GameBehaviour
         }
         else
         {
-
+            Roam();
         }
     }
 
@@ -109,7 +119,6 @@ public class EnemyShortRange : GameBehaviour
         Debug.Log("Enemy performs melee attack!");
         //player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
 
-        // Start the attack cooldown
         StartCoroutine(AttackCooldown());
     }
 
@@ -139,6 +148,12 @@ public class EnemyShortRange : GameBehaviour
         Destroy(gameObject);
     }
 
+    private void Chase()
+    {
+        Vector3 direction = (player.position - transform.position).normalized;
+        transform.Translate(direction * chaseSpeed * Time.deltaTime);
+    }
+
     private void Roam()
     {
         if (Vector3.Distance(transform.position, roamingPosition) <= 0.1f)
@@ -154,7 +169,6 @@ public class EnemyShortRange : GameBehaviour
             transform.Translate(direction * roamSpeed * Time.deltaTime);
         }
     }
-
     private void GenerateRoamingPosition()
     {
         roamingPosition = transform.position + Random.insideUnitSphere * roamingRadius;
