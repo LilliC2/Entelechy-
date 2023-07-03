@@ -10,12 +10,7 @@ public class PlayerController : Singleton<PlayerController>
     public float speed;
     public float dmg;
     public float dps;
-    public float fireRate;
     public float range;
-
-    public bool projectile;
-    public float projectileSpeed;
-    public GameObject projectilePF;
 
     [Header("Head Movement")]
     public float headSpeed = 1000;
@@ -26,6 +21,10 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject directional; //is for current melee attack and will probably be removed
     public Vector3 target;
     bool projectileShot;
+
+    [Header("Items and Inventory")]
+
+    public Item[] playerInventory;  
 
     private void Start()
     {
@@ -66,7 +65,7 @@ public class PlayerController : Singleton<PlayerController>
                 if (Input.GetButton("Fire1"))
                 {
                     //SPIT
-                    FireProjectile(_AD.attacks[0].projectilePF, _AD.attacks[0].projectileSpeed, _AD.attacks[0].fireRate, _AD.attacks[0].range);
+                    FireProjectile(_ID.items[0].projectilePF, _ID.items[0].projectileSpeed, _ID.items[0].fireRate, _ID.items[0].range);
 
                 }
 

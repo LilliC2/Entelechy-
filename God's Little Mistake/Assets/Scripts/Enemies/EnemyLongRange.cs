@@ -145,8 +145,6 @@ public class EnemyLongRange : GameBehaviour
     {
         float currentHPpercent = _health / _maxHP;
 
-        print("Current Hp as decimal: " + currentHPpercent);
-
         float H, S, V;
 
         Color.RGBToHSV(image.GetComponent<Renderer>().material.color, out H, out S, out V);

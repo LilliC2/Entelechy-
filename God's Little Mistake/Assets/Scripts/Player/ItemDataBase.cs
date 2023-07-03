@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class AttackDataBase : Singleton<AttackDataBase>
+public class ItemDataBase : Singleton<ItemDataBase>
 {
-    public Attack[] attacks;
+    public Item[] items;
 
     // Start is called before the first frame update
     void Start()

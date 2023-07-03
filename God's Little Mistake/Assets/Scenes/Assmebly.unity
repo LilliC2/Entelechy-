@@ -418,7 +418,7 @@ GameObject:
   - component: {fileID: 378920751}
   - component: {fileID: 378920750}
   m_Layer: 0
-  m_Name: Attack Database
+  m_Name: Item Database
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -437,20 +437,24 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
-  attacks:
-  - atkName: SpitAtk
+  items:
+  - itemName: Spit
     ID: 0
-    category: Mouth
-    active: 0
-    dmg: 1
+    lvl: 0
+    category: Head
+    currencyValue: 0
+    active: 1
+    dmg: 5
     dps: 5
-    fireRate: 2
+    fireRate: 1
     critX: 0
     critChance: 0
-    range: 1
+    range: 5
     projectile: 1
     projectileSpeed: 500
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    modifier: 0
+    modifierID: 0
 --- !u!4 &378920751
 Transform:
   m_ObjectHideFlags: 0
@@ -1001,13 +1005,17 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3718395452026233766, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
+      propertyPath: m_TagString
+      value: Enemy
+      objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_RootOrder
       value: 11
       objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.94
+      value: -3.91
       objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_LocalPosition.y
@@ -1015,7 +1023,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -1.238
+      value: -2.5
       objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_LocalRotation.w
@@ -1053,6 +1061,10 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1967995610}
+    - target: {fileID: 8561684140997754689, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
+      propertyPath: detectionRange
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -2118,7 +2130,7 @@ MonoBehaviour:
   speed: 2
   dmg: 5
   dps: 0
-  fireRate: 0
+  fireRate: 1
   range: 0
   projectile: 0
   projectileSpeed: 0
@@ -2128,6 +2140,7 @@ MonoBehaviour:
   firingPoint: {fileID: 35132813}
   directional: {fileID: 1919251608}
   target: {x: 0, y: 0, z: 0}
+  playerInventory: []
 --- !u!65 &1967995615
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2339,7 +2352,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1004982790652352589, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5396413634656670049, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: player
