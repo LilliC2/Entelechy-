@@ -93,8 +93,6 @@ public class PlayerController : Singleton<PlayerController>
 
     }
 
-
-
     void MeleeAttack()
     {
         var inRangeEnemies = GetComponentInChildren<MeleeRangeCheck>().inRangeEnemies;
@@ -140,6 +138,21 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
+    public void AddItemStatsToPlayer(int _inventoryID)
+    {
+        dmg += playerInventory[_inventoryID].dmg;
+        dps += playerInventory[_inventoryID].dps;
+        range += playerInventory[_inventoryID].range;
+
+    }
+    
+    public void RemoveItemStatsToPlayer(int _inventoryID)
+    {
+        dmg -= playerInventory[_inventoryID].dmg;
+        dps -= playerInventory[_inventoryID].dps;
+        range -= playerInventory[_inventoryID].range;
+
+    }
 
 }
 
