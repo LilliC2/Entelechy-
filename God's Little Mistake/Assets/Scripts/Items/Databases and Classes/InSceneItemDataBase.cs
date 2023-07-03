@@ -21,31 +21,13 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
             {
                 inSceneItemDataBase[i].inSceneID = inSceneItemDataBase[i].inSceneID - 1;
             }
-
-            int index = _PC.playerInventory.Count - 1;
-            //run add item stats here
-
-            _PC.AddItemStatsToPlayer(index);
-
-                 //run add modifer script here
         }
-
-
-
-        
-
 
 
     }
 
     public void RemoveItemFromInventory(int _inventoryID)
     {
-        //run remove modifer script here
-
-        //run remove item stats here
-        _PC.RemoveItemStatsToPlayer(_inventoryID);
-
-
         inSceneItemDataBase.Add(_PC.playerInventory[_inventoryID]);
         _PC.playerInventory.Remove(_PC.playerInventory[_inventoryID]);
         
@@ -56,7 +38,6 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
         //WHEN CURRENCY IS ADDED, PLAYER WOULD GAIN CURRENCY HERE
 
-        
     }
 
 }
