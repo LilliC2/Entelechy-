@@ -10,12 +10,14 @@ public class PlayerController : Singleton<PlayerController>
     public float speed;
     public float dmg;
     public float dps;
-    public float fireRate;
     public float range;
 
     public bool projectile;
     public float projectileSpeed;
     public GameObject projectilePF;
+
+    [Header("Inventory")]
+    public Item[] playerInventory;
 
     [Header("Head Movement")]
     public float headSpeed = 1000;
@@ -66,7 +68,9 @@ public class PlayerController : Singleton<PlayerController>
                 if (Input.GetButton("Fire1"))
                 {
                     //SPIT
-                    FireProjectile(_AD.attacks[0].projectilePF, _AD.attacks[0].projectileSpeed, _AD.attacks[0].fireRate, _AD.attacks[0].range);
+
+                    //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
+                    FireProjectile(_ItemD.itemDataBase[0].projectilePF, _ItemD.itemDataBase[0].projectileSpeed, _ItemD.itemDataBase[0].fireRate, _ItemD.itemDataBase[0].range);
 
                 }
 
