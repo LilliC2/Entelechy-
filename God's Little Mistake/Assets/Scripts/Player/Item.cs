@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [System.Serializable]
-public class Item
+public class Items
 {
     public string itemName;
     public float ID;
@@ -30,7 +30,7 @@ public class Item
     public float modifierID;
 
 
-    public Item()
+    public Items()
     {
 
     }

@@ -31,9 +31,6 @@ public class PlayerController : Singleton<PlayerController>
     public Vector3 target;
     bool projectileShot;
 
-    [Header("Items and Inventory")]
-
-    public Item[] playerInventory;  
 
     private void Start()
     {
