@@ -1,5 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Collections.Generic;
+
 public class PlayerController : Singleton<PlayerController>
 {
     private CharacterController controller;
@@ -17,7 +19,7 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject projectilePF;
 
     [Header("Inventory")]
-    public Item[] playerInventory;
+    public List<Item> playerInventory;
 
     [Header("Head Movement")]
     public float headSpeed = 1000;

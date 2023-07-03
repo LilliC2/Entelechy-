@@ -53,10 +53,16 @@ public class ItemGeneration : Singleton<ItemGeneration>
         /*Here we would edit the item values here, so based on level and etc. the prefab of the item would be saved on this too
          */
 
+        //add item to inscene list
         _ISitemD.inSceneItemDataBase.Add(itemSpawned);
+
+        //give item inscene id
         int index = _ISitemD.inSceneItemDataBase.Count - 1;
         print(index);
         _ISitemD.inSceneItemDataBase[index].inSceneID = index;
+
+        //give item script inscene id
+        itemTemp.GetComponentInChildren<ItemIdentifier>().id = index;
 
         return itemTemp;
     }

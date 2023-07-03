@@ -69,7 +69,7 @@ public class EnemyLongRange : GameBehaviour
         }
 
         //Visual indicator for health
-        HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
+        //HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
 
 
         firingPoint.transform.LookAt(player.transform.position);
@@ -147,7 +147,7 @@ public class EnemyLongRange : GameBehaviour
 
         float H, S, V;
 
-        Color.RGBToHSV(image.GetComponent<Renderer>().material.color, out H, out S, out V);
+        Color.RGBToHSV(image.GetComponent<Renderer>().material.color, out H, out S, out V); 
 
         image.GetComponent<Renderer>().material.color = Color.HSVToRGB(H, currentHPpercent, V);
     }
