@@ -31,6 +31,10 @@ public class PlayerController : Singleton<PlayerController>
     public Vector3 target;
     bool projectileShot;
 
+    [Header("Items and Inventory")]
+
+    public Item[] playerInventory;  
+
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -80,6 +84,7 @@ public class PlayerController : Singleton<PlayerController>
 
                     //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
                     FireProjectile(_ItemD.itemDataBase[0].projectilePF, _ItemD.itemDataBase[0].projectileSpeed, _ItemD.itemDataBase[0].fireRate, _ItemD.itemDataBase[0].range);
+
 
                 }
 

@@ -12,6 +12,7 @@ public class GameBehaviour : LC.Behaviour //inherits from
     protected static InSceneItemDataBase _ISitemD { get { return InSceneItemDataBase.INSTANCE; } }
     protected static ItemGeneration _IG { get { return ItemGeneration.INSTANCE; } }
 
+
     
     //protected static SceneController _SC { get { return SceneController.INSTANCE; } }
 
