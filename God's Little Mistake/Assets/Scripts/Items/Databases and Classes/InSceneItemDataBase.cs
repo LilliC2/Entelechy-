@@ -15,14 +15,29 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
             print("added item");
             inSceneItemDataBase.Remove(inSceneItemDataBase[_sceneID]);
 
-            for(int i = 0; i < inSceneItemDataBase.Count; i++)
+            //move all items in list downm (automatic)
+            //make sure their ids stay the same!!!
+            for (int i = 0; i < inSceneItemDataBase.Count; i++)
             {
                 inSceneItemDataBase[i].inSceneID = inSceneItemDataBase[i].inSceneID - 1;
             }
         }
 
 
-        //move all items in list downm (automatic)
-        //make sure their ids stay the same!!!
     }
+
+    public void RemoveItemFromInventory(int _inventoryID)
+    {
+        inSceneItemDataBase.Add(_PC.playerInventory[_inventoryID]);
+        _PC.playerInventory.Remove(_PC.playerInventory[_inventoryID]);
+        
+        var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
+
+        int index = _ISitemD.inSceneItemDataBase.Count - 1;
+        inSceneItemDataBase[index].inSceneID = index;
+
+        //WHEN CURRENCY IS ADDED, PLAYER WOULD GAIN CURRENCY HERE
+
+    }
+
 }

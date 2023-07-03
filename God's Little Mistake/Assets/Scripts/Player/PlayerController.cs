@@ -39,6 +39,13 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
+        //for testing
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            _ISitemD.RemoveItemFromInventory(0);    
+        }
+
+
         switch(_GM.gameState)
         {
             case GameManager.GameState.Playing:
