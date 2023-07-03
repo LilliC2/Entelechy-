@@ -8,7 +8,11 @@ public class GameBehaviour : LC.Behaviour //inherits from
     protected static GameManager _GM { get { return GameManager.INSTANCE; } }
     protected static UIManager _UI { get { return UIManager.INSTANCE; } }
     protected static PlayerController _PC { get { return PlayerController.INSTANCE; } }
-    protected static ItemDataBase _ID { get { return ItemDataBase.INSTANCE; } }
+    protected static ItemDataBase _ItemD { get { return ItemDataBase.INSTANCE; } }
+    protected static InSceneItemDataBase _ISitemD { get { return InSceneItemDataBase.INSTANCE; } }
+    protected static ItemGeneration _IG { get { return ItemGeneration.INSTANCE; } }
+
+
     
     //protected static SceneController _SC { get { return SceneController.INSTANCE; } }
 
