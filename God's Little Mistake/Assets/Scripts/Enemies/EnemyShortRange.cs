@@ -60,12 +60,12 @@ public class EnemyShortRange : GameBehaviour
             case EnemyState.Chase:
                 if (Vector3.Distance(transform.position, player.position) <= attackRange)
                 {
-                    enemyState = EnemyState.Attacking; // Switch to attacking state
+                    enemyState = EnemyState.Attacking;
                     Attack();
                 }
                 else if (Vector3.Distance(transform.position, player.position) > detectionRange)
                 {
-                    enemyState = EnemyState.Patrolling; // Switch back to patrolling state
+                    enemyState = EnemyState.Patrolling; 
                 }
                 else
                 {
@@ -108,7 +108,7 @@ public class EnemyShortRange : GameBehaviour
     {
         if (collision.collider.CompareTag("Projectile"))
         {
-            // Handle projectile collision if needed
+           
         }
     }
 
@@ -128,7 +128,6 @@ public class EnemyShortRange : GameBehaviour
         {
             if (Vector3.Distance(transform.position, player.position) <= attackRange)
             {
-                // Perform the attack logic here
                 Debug.Log("Enemy performs melee attack!");
                 // player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
             }
@@ -169,12 +168,12 @@ public class EnemyShortRange : GameBehaviour
 
         if (distanceToPlayer <= attackRange)
         {
-            enemyState = EnemyState.Attacking; // Switch to attacking state
+            enemyState = EnemyState.Attacking; 
             Attack();
         }
         else if (distanceToPlayer > detectionRange)
         {
-            enemyState = EnemyState.Patrolling; // Switch back to patrolling state
+            enemyState = EnemyState.Patrolling; 
         }
         else
         {
