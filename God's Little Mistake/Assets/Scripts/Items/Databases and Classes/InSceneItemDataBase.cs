@@ -8,6 +8,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
     public void AddItemToInventory(int _sceneID)
     {
+
         //move item to inventory
         if(_PC.playerInventory.Count < 9)
         {
@@ -23,6 +24,9 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
             {
                 inSceneItemDataBase[i].inSceneID = inSceneItemDataBase[i].inSceneID - 1;
             }
+
+            _UI.OrganiseInventory();
+
         }
 
 
@@ -32,6 +36,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
     {
         
 
+
         inSceneItemDataBase.Add(_PC.playerInventory[_inventoryID]);
         _PC.playerInventory.Remove(_PC.playerInventory[_inventoryID]);
         
@@ -39,6 +44,8 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
         int index = _ISitemD.inSceneItemDataBase.Count - 1;
         inSceneItemDataBase[index].inSceneID = index;
+
+        _UI.OrganiseInventory();
 
         //WHEN CURRENCY IS ADDED, PLAYER WOULD GAIN CURRENCY HERE
 

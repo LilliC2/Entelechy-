@@ -9,7 +9,10 @@ public class Item
     public float ID;
     public float inSceneID;
     public int lvl;
-    public string category;
+    public enum Category { Eyes, Mouth, Horns, Slappies, Punchies, Launchers, Legs, Crawlies, None }
+    public Category category;
+    public enum Segment {Head, Torso, Legs }
+    public Segment segment;
     public float currencyValue;
 
     public bool active;

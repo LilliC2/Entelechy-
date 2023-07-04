@@ -37,7 +37,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
 
         for(int i = 0; i < _ItemD.itemDataBase.Length; i++)
         {
-            if (_ItemD.itemDataBase[i].category == _category)
+            if (_ItemD.itemDataBase[i].category.ToString() == _category)
             {
                 //possibleDrops.Add(_ItemD.itemDataBase[i]);
                 possibleDropsIndex.Add(i);

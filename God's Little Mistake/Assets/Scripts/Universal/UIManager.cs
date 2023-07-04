@@ -1,12 +1,22 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using Unity.UI;
+using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
 
 public class UIManager : Singleton<UIManager>
 {
+    [Header("Segment Inventory")]
+    int headSlotCount;
+    int torsoSlotCount;
+    int legSlotCount;
+
+    [Header("Head Segment Images")]
+    public Image headSlot0;
+    int headlSlot0id;
+    public Image headSlot1;
+
     [Header("Item stats pop up panel")]
     public GameObject statsPopUpPanel;
     public TMP_Text popupName;
@@ -90,4 +100,52 @@ public class UIManager : Singleton<UIManager>
 
 
     #endregion
+
+    
+    public void OrganiseInventory()
+    {
+        for (int i = 0; i < _PC.playerInventory.Count; i++)
+        {
+
+            //iterate through inventory
+
+            //find what category there is 
+            if (_PC.playerInventory[i].segment.ToString() == "Head")
+            {
+                //change image to match the thingo
+                headlSlot0id = i;
+            }
+            
+
+            //then add to the slot 
+
+        }
+    }
+
+    
+    
+    public void HeadSlot(int _whichSlot)
+    {
+        switch(_whichSlot)
+        {
+            case 0:
+                headPopupName.text = _PC.playerInventory[headlSlot0id].itemName;
+                headPopupDmg.text = "Dmg: "+_PC.playerInventory[headlSlot0id].dmg.ToString();
+                headPopupCritX.text = "CritX: " +_PC.playerInventory[headlSlot0id].critX.ToString();
+                headPopupCritChance.text = "Crit%: " + _PC.playerInventory[headlSlot0id].critChance.ToString();
+                headPopupFirerate.text = "Firerate%: " + _PC.playerInventory[headlSlot0id].fireRate.ToString();
+
+                break;
+        }
+    }
+
+    #region Inventory Item Stats Popup
+
+    void UpdateHeadSegmentStats(int _inventorySlot)
+    {
+
+    }
+
+    #endregion
+
 }
