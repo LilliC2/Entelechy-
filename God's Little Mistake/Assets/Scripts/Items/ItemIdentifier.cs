@@ -41,4 +41,19 @@ public class ItemIdentifier : GameBehaviour
 
         }
     }
+
+    private void OnMouseOver()
+    {
+        print("mouse on me");
+
+        _UI.UpdateItemPopUp(_ISitemD.inSceneItemDataBase[id].itemName, _ISitemD.inSceneItemDataBase[id].dmg, _ISitemD.inSceneItemDataBase[id].critX, _ISitemD.inSceneItemDataBase[id].critChance, _ISitemD.inSceneItemDataBase[id].fireRate);
+        _UI.statsPopUpPanel.SetActive(true);
+        _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+    }
+
+    private void OnMouseExit()
+    {
+        _UI.statsPopUpPanel.SetActive(false);
+
+    }
 }

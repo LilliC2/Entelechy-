@@ -78,7 +78,6 @@ public class EnemyLongRange : GameBehaviour
             case BaseEnemy.EnemyState.Attacking:
                 isPatrolling = false;
                 walkPointRange = 2;
-                print("ATTACK");
                 FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
                 break;
             case BaseEnemy.EnemyState.Die:
