@@ -31,6 +31,7 @@ public class PlayerController : Singleton<PlayerController>
     public Vector3 target;
     bool projectileShot;
 
+
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
