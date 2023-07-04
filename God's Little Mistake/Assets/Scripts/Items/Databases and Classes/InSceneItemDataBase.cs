@@ -11,6 +11,8 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         //move item to inventory
         if(_PC.playerInventory.Count < 9)
         {
+
+            _UI.statsPopUpPanel.SetActive(false);
             _PC.playerInventory.Add(inSceneItemDataBase[_sceneID]);
             print("added item");
             inSceneItemDataBase.Remove(inSceneItemDataBase[_sceneID]);
@@ -28,6 +30,8 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
     public void RemoveItemFromInventory(int _inventoryID)
     {
+        
+
         inSceneItemDataBase.Add(_PC.playerInventory[_inventoryID]);
         _PC.playerInventory.Remove(_PC.playerInventory[_inventoryID]);
         
