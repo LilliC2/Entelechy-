@@ -80,7 +80,7 @@ public class PlayerController : Singleton<PlayerController>
                     //SPIT
 
                     //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
-                    FireProjectile(_ItemD.itemDataBase[0].projectilePF, _ItemD.itemDataBase[0].projectileSpeed, _ItemD.itemDataBase[0].fireRate, _ItemD.itemDataBase[0].range);
+                    FireProjectile(playerInventory[0].projectilePF, playerInventory[0].projectileSpeed, playerInventory[0].fireRate, playerInventory[0].range);
 
 
                 }
