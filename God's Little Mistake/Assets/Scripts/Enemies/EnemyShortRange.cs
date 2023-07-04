@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyShortRange : GameBehaviour
 {
@@ -15,16 +16,20 @@ public class EnemyShortRange : GameBehaviour
     public float rotationSpeed = 5f;
 
     private int currentHealth;
-    private bool isChasing = false; 
+    private bool isChasing = false;
     private bool canAttack = true;
-    public Transform player;
+    private Transform player;
     private Vector3 roamingPosition;
+    public NavMeshAgent navMeshAgent;
+    private Animator animator;
 
     private void Start()
     {
         currentHealth = maxHealth;
         player = GameObject.FindGameObjectWithTag("Player").transform;
         enemyStats = GetComponent<BaseEnemy>();
+        navMeshAgent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         GenerateRoamingPosition();
     }
 
@@ -38,29 +43,18 @@ public class EnemyShortRange : GameBehaviour
     public EnemyState enemyState;
     private void Update()
     {
-        switch(enemyState)
+        switch (enemyState)
         {
             case EnemyState.Patrolling:
-                if (Vector3.Distance(transform.position, player.position) <= enemyStats.stats.range + 1)
+                if (Vector3.Distance(transform.position, player.position) <= detectionRange)
                 {
                     isChasing = true;
-
-                    if (Vector3.Distance(transform.position, player.position) <= enemyStats.stats.range && canAttack)
-                    {
-                        enemyState = EnemyState.Chase;
-                        Attack();
-                    }
+                    enemyState = EnemyState.Chase;
                 }
                 else
                 {
                     isChasing = false;
                     Roam();
-                }
-
-                if (isChasing)
-                {
-                    Vector3 direction = (player.position - transform.position).normalized;
-                    transform.Translate(direction * enemyStats.stats.speed * Time.deltaTime);
                 }
                 break;
             case EnemyState.Chase:
@@ -79,16 +73,21 @@ public class EnemyShortRange : GameBehaviour
                 }
                 break;
             case EnemyState.Attacking:
-               
                 break;
             case EnemyState.Die:
-                //death animation etc
+                // Death animation, etc.
                 print("Dead");
                 Destroy(this.gameObject);
                 break;
         }
+    }
 
-        
+    private void FixedUpdate()
+    {
+        if (isChasing)
+        {
+            navMeshAgent.SetDestination(player.position);
+        }
     }
 
     void Hit()
@@ -98,7 +97,6 @@ public class EnemyShortRange : GameBehaviour
             enemyStats.stats.health -= _PC.dmg;
             print(enemyStats.stats.health);
             StopAllCoroutines();
-
         }
         else
         {
@@ -110,24 +108,41 @@ public class EnemyShortRange : GameBehaviour
     {
         if (collision.collider.CompareTag("Projectile"))
         {
-
+            // Handle projectile collision if needed
         }
     }
 
     private void Attack()
     {
-        Debug.Log("Enemy performs melee attack!");
-        //player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
-
-        StartCoroutine(AttackCooldown());
+        if (canAttack)
+        {
+            StartCoroutine(PerformAttack());
+        }
     }
 
-    private System.Collections.IEnumerator AttackCooldown()
+    private IEnumerator PerformAttack()
     {
         canAttack = false;
 
-        yield return new WaitForSeconds(enemyStats.stats.fireRate);
+        while (enemyState == EnemyState.Attacking)
+        {
+            if (Vector3.Distance(transform.position, player.position) <= attackRange)
+            {
+                // Perform the attack logic here
+                Debug.Log("Enemy performs melee attack!");
+                // player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
+            }
 
+            yield return new WaitForSeconds(attackCooldown);
+        }
+
+        canAttack = true;
+    }
+
+    private IEnumerator AttackCooldown()
+    {
+        canAttack = false;
+        yield return new WaitForSeconds(attackCooldown);
         canAttack = true;
     }
 
@@ -150,28 +165,38 @@ public class EnemyShortRange : GameBehaviour
 
     private void Chase()
     {
-        Vector3 direction = (player.position - transform.position).normalized;
-        transform.Translate(direction * chaseSpeed * Time.deltaTime);
-    }
+        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
 
-    private void Roam()
-    {
-        if (Vector3.Distance(transform.position, roamingPosition) <= 0.1f)
+        if (distanceToPlayer <= attackRange)
         {
-            GenerateRoamingPosition();
+            enemyState = EnemyState.Attacking; // Switch to attacking state
+            Attack();
+        }
+        else if (distanceToPlayer > detectionRange)
+        {
+            enemyState = EnemyState.Patrolling; // Switch back to patrolling state
         }
         else
         {
-            Quaternion targetRotation = Quaternion.LookRotation(roamingPosition - transform.position);
-            transform.rotation = Quaternion.Lerp(transform.rotation, targetRotation, rotationSpeed * Time.deltaTime);
-
-            Vector3 direction = (roamingPosition - transform.position).normalized;
-            transform.Translate(direction * roamSpeed * Time.deltaTime);
+            navMeshAgent.SetDestination(player.position);
         }
     }
+    private void Roam()
+    {
+        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
+        {
+            GenerateRoamingPosition();
+            navMeshAgent.SetDestination(roamingPosition);
+        }
+    }
+
     private void GenerateRoamingPosition()
     {
         roamingPosition = transform.position + Random.insideUnitSphere * roamingRadius;
         roamingPosition.y = transform.position.y;
+
+        NavMeshHit navHit;
+        NavMesh.SamplePosition(roamingPosition, out navHit, roamingRadius, -1);
+        roamingPosition = navHit.position;
     }
 }
