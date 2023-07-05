@@ -25,8 +25,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
                 inSceneItemDataBase[i].inSceneID = inSceneItemDataBase[i].inSceneID - 1;
             }
 
-            _UI.OrganiseInventory();
-
+            _UI.UpdateInventorySlotImages();
         }
 
 
@@ -45,8 +44,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         int index = _ISitemD.inSceneItemDataBase.Count - 1;
         inSceneItemDataBase[index].inSceneID = index;
 
-        _UI.OrganiseInventory();
-
+        _UI.UpdateInventorySlotImages();
         //WHEN CURRENCY IS ADDED, PLAYER WOULD GAIN CURRENCY HERE
 
     }

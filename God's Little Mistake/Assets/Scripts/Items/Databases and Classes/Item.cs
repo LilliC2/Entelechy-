@@ -32,6 +32,7 @@ public class Item
     public bool modifier;
     public float modifierID;
 
+    public Sprite icon;
 
     public Item()
     {

@@ -7,17 +7,19 @@ using DG.Tweening;
 
 public class UIManager : Singleton<UIManager>
 {
-    [Header("Segment Inventory")]
-    int headSlotCount;
-    int torsoSlotCount;
-    int legSlotCount;
+    public TMP_Text playerHPText;
+    public TMP_Text roomLevelText;
 
-    [Header("Head Segment Images")]
-    public Image headSlot0;
-    int headlSlot0id;
-    public Image headSlot1;
+    [Header("Inventory Images")]
+    public Image invenSlot0;
+    public Image invenSlot1;
+    public Image invenSlot2;
+    public Image invenSlot3;
+    public Image invenSlot4;
+    public Image invenSlot5;
+    public Image invenSlot6;
 
-    [Header("Item stats pop up panel")]
+    [Header("Item Hover Over Panel")]
     public GameObject statsPopUpPanel;
     public TMP_Text popupName;
     public TMP_Text popupDmg;
@@ -25,31 +27,19 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text popupCritChance;
     public TMP_Text popupFirerate;
 
-    [Header("Head Segment Pop up")]
-    public GameObject headSegementPopUpPanel;
-    public TMP_Text headPopupName;
-    public TMP_Text headPopupDmg;
-    public TMP_Text headPopupCritX;
-    public TMP_Text headPopupCritChance;
-    public TMP_Text headPopupFirerate;
-    
-    [Header("Torso Segment Pop up")]
-    public GameObject torsoSegementPopUpPanel;
-    public TMP_Text torsoPopupName;
-    public TMP_Text torsoPopupDmg;
-    public TMP_Text torsopupCritX;
-    public TMP_Text torsoPopupCritChance;
-    public TMP_Text torsoPopupFirerate;
-    
-    [Header("Leg Segment Pop up")]
-    public GameObject legSegementPopUpPanel;
-    public TMP_Text legPopupName;
-    public TMP_Text legPopupDmg;
-    public TMP_Text legpupCritX;
-    public TMP_Text legPopupCritChance;
-    public TMP_Text legPopupFirerate;
+    [Header("Inventory Pop up")]
+    public GameObject invenSegementPopUpPanel;
+    public TMP_Text invenPopupName;
+    public TMP_Text invenPopupDmg;
+    public TMP_Text invenPopupCritX;
+    public TMP_Text invenPopupCritChance;
+    public TMP_Text invenPopupFirerate;
 
 
+    private void Start()
+    {
+        UpdateInventorySlotImages();
+    }
 
     public void UpdateItemPopUp(string _itemName, float _itemDmg, float _itemCritX, float _itemCritChance, float _itemFirerate)
     {
@@ -62,89 +52,91 @@ public class UIManager : Singleton<UIManager>
         popupFirerate.text = "Firerate%: " + _itemFirerate.ToString();
     }
 
-    #region Item Segment Popup
+    #region Inventory Item Stats Popup
 
-    public void HeadSegmentPopUp()
+    public void InvenSegmentPopUp()
     {
-        var rt = headSegementPopUpPanel.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(234.49f, -339.00f);
+        var rt = invenSegementPopUpPanel.GetComponent<RectTransform>();
+        print(rt.anchoredPosition);
+        rt.anchoredPosition = new Vector2(522.75f, -400.00f);
         //headSegementPopUpPanel.transform.DOMove(new Vector3(234.489014f, -343f, 0), 1); //COULD ADD EASE HERE;
     }
-    public void HeadSegmentPopDown()
+    public void InvenSegmentPopDown()
     {
-        var rt = headSegementPopUpPanel.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(234.49f, -561.85f);
-    }
-    
-    public void TorsoSegmentPopUp()
-    {
-        var rt = torsoSegementPopUpPanel.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(467.30f, -339.00f);
-    }
-    public void TorsoSegmentPopDown()
-    {
-        var rt = torsoSegementPopUpPanel.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(467.30f, -561.85f);
-    }
-    
-    public void LegSegmentPopUp()
-    {
-        var rt = legSegementPopUpPanel.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(705, -339.00f);
-    }
-    public void LegSegmentPopDown()
-    {
-        var rt = legSegementPopUpPanel.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(705, -561.85f);
+        var rt = invenSegementPopUpPanel.GetComponent<RectTransform>();
+        rt.anchoredPosition = new Vector2(522.75f, -561.85f);
     }
 
-
-    #endregion
-
-    
-    public void OrganiseInventory()
+    public void UpdateInventorySlotImages()
     {
-        for (int i = 0; i < _PC.playerInventory.Count; i++)
+        for(int i = 0; _PC.playerInventory.Count > i; i++)
         {
 
-            //iterate through inventory
-
-            //find what category there is 
-            if (_PC.playerInventory[i].segment.ToString() == "Head")
+            switch(i)
             {
-                //change image to match the thingo
-                headlSlot0id = i;
-            }
-            
+                case 0:
 
-            //then add to the slot 
+                    invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
+                    break;
+            }
+
 
         }
     }
 
-    
-    
-    public void HeadSlot(int _whichSlot)
+    public void InventorySlotHover(int _whichSlot)
     {
-        switch(_whichSlot)
+        switch (_whichSlot)
         {
             case 0:
-                headPopupName.text = _PC.playerInventory[headlSlot0id].itemName;
-                headPopupDmg.text = "Dmg: "+_PC.playerInventory[headlSlot0id].dmg.ToString();
-                headPopupCritX.text = "CritX: " +_PC.playerInventory[headlSlot0id].critX.ToString();
-                headPopupCritChance.text = "Crit%: " + _PC.playerInventory[headlSlot0id].critChance.ToString();
-                headPopupFirerate.text = "Firerate%: " + _PC.playerInventory[headlSlot0id].fireRate.ToString();
+                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
+                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
+                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
+                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
+                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
 
+                break;
+            case 1:
+                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
+                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
+                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
+                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
+                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
+                break;
+            case 3:
+                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
+                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
+                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
+                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
+                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
+                break;
+            case 4:
+                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
+                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
+                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
+                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
+                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
+                break;
+            case 5:
+                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
+                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
+                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
+                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
+                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
+                break;
+            case 6:
+                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
+                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
+                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
+                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
+                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
                 break;
         }
     }
 
-    #region Inventory Item Stats Popup
+    
 
-    void UpdateHeadSegmentStats(int _inventorySlot)
-    {
 
-    }
 
     #endregion
 
