@@ -9,6 +9,7 @@ public class UIManager : Singleton<UIManager>
 {
     public TMP_Text playerHPText;
     public TMP_Text roomLevelText;
+    public Sprite emptySlotSprite;
 
     [Header("Inventory Images")]
     public Image invenSlot0;
@@ -69,19 +70,35 @@ public class UIManager : Singleton<UIManager>
 
     public void UpdateInventorySlotImages()
     {
-        for(int i = 0; _PC.playerInventory.Count > i; i++)
+        for (int i = 0; 12 > i; i++)
         {
-
-            switch(i)
+            print(i);
+            switch (i)
             {
                 case 0:
-
-                    invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
+                    print("count is " + _PC.playerInventory.Count + "i " + i);
+                    if (!(i >= -1 && i < _PC.playerInventory.Count))
+                    {
+                        print("out of array");
+                        invenSlot0.sprite = emptySlotSprite;
+                    }
+                    else invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
+                    
+                    break;
+                case 1:
+                    if (!(i >= -1 && i < _PC.playerInventory.Count))
+                    {
+                        print("out of array");
+                        invenSlot1.sprite = emptySlotSprite;
+                    }
+                    else invenSlot1.sprite = _PC.playerInventory[i].icon; //images for icon
                     break;
             }
 
 
         }
+
+
     }
 
     public void InventorySlotHover(int _whichSlot)
@@ -103,6 +120,13 @@ public class UIManager : Singleton<UIManager>
                 invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
                 invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
                 break;
+            case 2:
+                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
+                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
+                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
+                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
+                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
+                break;
             case 3:
                 invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
                 invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
@@ -118,13 +142,6 @@ public class UIManager : Singleton<UIManager>
                 invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
                 break;
             case 5:
-                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
-                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
-                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
-                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
-                break;
-            case 6:
                 invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
                 invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
                 invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();

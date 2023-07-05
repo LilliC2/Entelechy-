@@ -40,8 +40,9 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
+        _UI.UpdateInventorySlotImages();
         //for testing
-        if(Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
             _ISitemD.RemoveItemFromInventory(0);    
         }
