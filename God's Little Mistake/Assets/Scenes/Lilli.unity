@@ -3258,6 +3258,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3718395452026233766, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598768146126801953, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
+      propertyPath: m_CastShadows
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4598768146126801953, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
+      propertyPath: m_ReceiveShadows
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
@@ -3270,7 +3278,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_LocalPosition.y
-      value: 0.22
+      value: 0.132
       objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_LocalPosition.z
@@ -3857,7 +3865,7 @@ MonoBehaviour:
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
     modifier: 0
     modifierID: 0
-    icon: {fileID: 0}
+    icon: {fileID: 21300000, guid: f73f68fe6815f5548a6c2a61b9e49add, type: 3}
 --- !u!1 &1152912961
 GameObject:
   m_ObjectHideFlags: 0
@@ -4602,6 +4610,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
+  cursor: {fileID: 537516183}
+  canvas: {fileID: 102228821}
   playerHPText: {fileID: 1366834532}
   roomLevelText: {fileID: 1666290678}
   emptySlotSprite: {fileID: 21300000, guid: 6bb92db56863a49bf9fc5e992e334d82, type: 3}

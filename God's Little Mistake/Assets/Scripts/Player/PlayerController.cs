@@ -40,7 +40,6 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
-        _UI.UpdateInventorySlotImages();
         //for testing
         if (Input.GetKeyDown(KeyCode.K))
         {
@@ -90,8 +89,6 @@ public class PlayerController : Singleton<PlayerController>
 
                 break;
 
-            case GameManager.GameState.Iventory:
-                break;
         }
 
     }

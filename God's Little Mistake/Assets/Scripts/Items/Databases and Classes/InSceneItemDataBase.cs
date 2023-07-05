@@ -8,9 +8,10 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
     public void AddItemToInventory(int _sceneID)
     {
+        
 
         //move item to inventory
-        if(_PC.playerInventory.Count < 9)
+        if (_PC.playerInventory.Count < 9)
         {
 
             _UI.statsPopUpPanel.SetActive(false);

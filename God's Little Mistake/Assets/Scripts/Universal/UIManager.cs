@@ -7,11 +7,17 @@ using DG.Tweening;
 
 public class UIManager : Singleton<UIManager>
 {
+    
     public TMP_Text playerHPText;
     public TMP_Text roomLevelText;
-    public Sprite emptySlotSprite;
+
+    [Header("Equip")]
+    public Sprite defaultCursor;
+    public Image cursor;
+    public GameObject canvas;
 
     [Header("Inventory Images")]
+    public Sprite emptySlotSprite;
     public Image invenSlot0;
     public Image invenSlot1;
     public Image invenSlot2;
@@ -72,14 +78,11 @@ public class UIManager : Singleton<UIManager>
     {
         for (int i = 0; 12 > i; i++)
         {
-            print(i);
             switch (i)
             {
                 case 0:
-                    print("count is " + _PC.playerInventory.Count + "i " + i);
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
-                        print("out of array");
                         invenSlot0.sprite = emptySlotSprite;
                     }
                     else invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
@@ -88,7 +91,6 @@ public class UIManager : Singleton<UIManager>
                 case 1:
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
-                        print("out of array");
                         invenSlot1.sprite = emptySlotSprite;
                     }
                     else invenSlot1.sprite = _PC.playerInventory[i].icon; //images for icon
@@ -151,9 +153,31 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-    
 
 
+
+
+    #endregion
+
+    #region Item Equip
+
+    public void CreateItemSelected(int _inSceneId)
+    {
+        Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
+        cursor.sprite = itemSprite;
+
+        _ISitemD.AddItemToInventory(_inSceneId);
+    }
+
+    public void EquipImage(int _slot)
+    {
+        //might not need _avatar just hold it on playercontroller
+        if(_AVTAR.slotsOnPlayer[_slot] == null)
+        {
+            //check right segment if slot from 1 to 2 the head etc. 
+            //then instantiate prefab on player and detroy this iamge
+        }
+    }
 
     #endregion
 

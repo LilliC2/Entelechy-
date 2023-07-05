@@ -15,7 +15,12 @@ public class ItemIdentifier : GameBehaviour
             {
                 print("PICK UP");
                 //pick up item
-                _ISitemD.AddItemToInventory(id);
+                if (_PC.playerInventory.Count < 12)//invenotry cap number here
+                {
+                    _UI.CreateItemSelected(id);
+                }
+
+                
                 Destroy(this.gameObject);
 
             }
