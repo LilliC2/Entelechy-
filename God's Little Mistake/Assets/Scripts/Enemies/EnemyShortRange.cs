@@ -1,4 +1,4 @@
-using System.Collections;
+    using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -61,18 +61,20 @@ public class EnemyShortRange : GameBehaviour
                 if (Vector3.Distance(transform.position, player.position) <= attackRange)
                 {
                     enemyState = EnemyState.Attacking;
-                    Attack();
+                    
                 }
-                else if (Vector3.Distance(transform.position, player.position) > detectionRange)
+                break;
+            case EnemyState.Attacking:
+                Attack();
+                if (Vector3.Distance(transform.position, player.position) > detectionRange)
                 {
-                    enemyState = EnemyState.Patrolling; 
+                    enemyState = EnemyState.Patrolling;
                 }
                 else
                 {
                     Chase();
                 }
-                break;
-            case EnemyState.Attacking:
+
                 break;
             case EnemyState.Die:
                 // Death animation, etc.
@@ -90,25 +92,25 @@ public class EnemyShortRange : GameBehaviour
         }
     }
 
-    void Hit()
-    {
-        if (enemyStats.stats.health != 0)
-        {
-            enemyStats.stats.health -= _PC.dmg;
-            print(enemyStats.stats.health);
-            StopAllCoroutines();
-        }
-        else
-        {
-            Roam();
-        }
-    }
+    //void Hit()
+    //{
+    //    if (enemyStats.stats.health != 0)
+    //    {
+    //        enemyStats.stats.health -= _PC.dmg;
+    //        print(enemyStats.stats.health);
+    //        StopAllCoroutines();
+    //    }
+    //    else
+    //    {
+    //        Roam();
+    //    }
+    //}
 
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Projectile"))
         {
-           
+           //hit
         }
     }
 
@@ -138,12 +140,12 @@ public class EnemyShortRange : GameBehaviour
         canAttack = true;
     }
 
-    private IEnumerator AttackCooldown()
-    {
-        canAttack = false;
-        yield return new WaitForSeconds(attackCooldown);
-        canAttack = true;
-    }
+    //private IEnumerator AttackCooldown()
+    //{
+    //    canAttack = false;
+    //    yield return new WaitForSeconds(attackCooldown);
+    //    canAttack = true;
+    //}
 
     public void TakeDamage(int damage)
     {
@@ -198,4 +200,13 @@ public class EnemyShortRange : GameBehaviour
         NavMesh.SamplePosition(roamingPosition, out navHit, roamingRadius, -1);
         roamingPosition = navHit.position;
     }
+
+    private void OnDrawGizmos()
+    {
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, detectionRange);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(transform.position, attackRange);
+    }
+
 }

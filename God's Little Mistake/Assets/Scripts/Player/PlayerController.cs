@@ -70,10 +70,10 @@ public class PlayerController : Singleton<PlayerController>
                 #region Attacks
 
 
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    MeleeAttack();
-                }
+                //if (Input.GetKey(KeyCode.Space))
+                //{
+                //    MeleeAttack();
+                //}
 
                 if (Input.GetButton("Fire1"))
                 {

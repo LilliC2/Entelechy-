@@ -473,7 +473,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eededf40dce6034e98758411968599c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimPoint: {fileID: 0}
+  meleeRange: 1
   inRangeEnemies: []
+  player: {fileID: 0}
 --- !u!1 &312397097
 GameObject:
   m_ObjectHideFlags: 0
@@ -570,65 +573,6 @@ MonoBehaviour:
     projectile: 1
     projectileSpeed: 500
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-<<<<<<< HEAD
-=======
-    modifier: 0
-    modifierID: 0
-  - itemName: TestEye
-    ID: 1
-    inSceneID: 0
-    lvl: 0
-    category: Eye
-    currencyValue: 0
-    active: 0
-    dmg: 0
-    dps: 0
-    fireRate: 1
-    critX: 0
-    critChance: 0
-    range: 1
-    projectile: 1
-    projectileSpeed: 500
-    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    modifier: 0
-    modifierID: 0
-  - itemName: TestEye
-    ID: 2
-    inSceneID: 0
-    lvl: 0
-    category: Eye
-    currencyValue: 0
-    active: 0
-    dmg: 0
-    dps: 0
-    fireRate: 1
-    critX: 0
-    critChance: 0
-    range: 1
-    projectile: 1
-    projectileSpeed: 500
-    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    modifier: 0
-    modifierID: 0
-  - itemName: TestEye
-    ID: 3
-    inSceneID: 0
-    lvl: 0
-    category: Eye
-    currencyValue: 0
-    active: 0
-    dmg: 0
-    dps: 0
-    fireRate: 1
-    critX: 0
-    critChance: 0
-    range: 1
-    projectile: 1
-    projectileSpeed: 500
-    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    modifier: 0
-    modifierID: 0
->>>>>>> parent of 49fbc2b (Item stats are added to player)
 --- !u!4 &378920751
 Transform:
   m_ObjectHideFlags: 0
@@ -1129,7 +1073,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3718395452026233766, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_RootOrder
@@ -1183,10 +1127,21 @@ PrefabInstance:
       propertyPath: player
       value: 
       objectReference: {fileID: 1967995610}
+    - target: {fileID: 8561684140997754689, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
+      propertyPath: navMeshAgent
+      value: 
+      objectReference: {fileID: 1468977672}
+    - target: {fileID: 8561684140997754689, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
+      propertyPath: detectionRange
+      value: 5
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 3718395452026233766, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1468977672}
   m_SourcePrefab: {fileID: 100100000, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
 --- !u!1 &963194225
 GameObject:
@@ -1738,6 +1693,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1468977666 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3718395452026233766, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
+  m_PrefabInstance: {fileID: 926369618}
+  m_PrefabAsset: {fileID: 0}
+--- !u!195 &1468977672
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1468977666}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.36
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 120
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 1
+  m_AutoBraking: 1
+  m_AutoRepath: 1
+  m_Height: 0.5
+  m_BaseOffset: 0
+  m_WalkableMask: 4294967295
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &1524366799
 GameObject:
   m_ObjectHideFlags: 0
@@ -2248,11 +2230,11 @@ MonoBehaviour:
   speed: 2
   dmg: 5
   dps: 0
-  fireRate: 0
   range: 0
   projectile: 0
   projectileSpeed: 0
   projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+  playerInventory: []
   headSpeed: 1000
   head: {fileID: 1673379733}
   firingPoint: {fileID: 35132813}
