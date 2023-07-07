@@ -6,8 +6,8 @@ using UnityEngine;
 public class Item
 {
     public string itemName;
-    public float ID;
-    public float inSceneID;
+    public int ID;
+    public int inSceneID;
     public int lvl;
     public enum Category { Eyes, Mouth, Horns, Slappies, Punchies, Launchers, Legs, Crawlies, None }
     public Category category;
@@ -33,6 +33,7 @@ public class Item
     public float modifierID;
 
     public Sprite icon;
+    public GameObject avtarPrefab;
 
     public Item()
     {

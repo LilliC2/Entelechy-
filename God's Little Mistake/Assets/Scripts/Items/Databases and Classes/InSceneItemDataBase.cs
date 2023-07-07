@@ -11,7 +11,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         
 
         //move item to inventory
-        if (_PC.playerInventory.Count < 9)
+        if (_PC.playerInventory.Count < 6)
         {
 
             _UI.statsPopUpPanel.SetActive(false);
@@ -26,6 +26,8 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
                 inSceneItemDataBase[i].inSceneID = inSceneItemDataBase[i].inSceneID - 1;
             }
 
+            _PC.playerInventory[_PC.playerInventory.Count - 1].ID = _PC.playerInventory.Count-1;
+
             _UI.UpdateInventorySlotImages();
         }
 
@@ -34,7 +36,23 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
     public void RemoveItemFromInventory(int _inventoryID)
     {
-        
+        //remove item from player canvas
+        for (int i = 0; i < _AVTAR.slotsOnPlayer.Length; i++)
+        {
+            //check if slot hhas child
+            if (_AVTAR.slotsOnPlayer[i].transform.childCount != 0)
+            {
+                //check if item equipped is the item
+                var obj = _AVTAR.slotsOnPlayer[i].transform.GetChild(0);
+                print(obj.name);
+                print(i);
+                if (obj.name.Contains(_inventoryID.ToString()))
+                {
+                    print("obj name contains " + i.ToString());
+                    Destroy(obj.gameObject);
+                }
+            }
+        }
 
 
         inSceneItemDataBase.Add(_PC.playerInventory[_inventoryID]);
@@ -44,6 +62,8 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
         int index = _ISitemD.inSceneItemDataBase.Count - 1;
         inSceneItemDataBase[index].inSceneID = index;
+
+        
 
         _UI.UpdateInventorySlotImages();
         //WHEN CURRENCY IS ADDED, PLAYER WOULD GAIN CURRENCY HERE

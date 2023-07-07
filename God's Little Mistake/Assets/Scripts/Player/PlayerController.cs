@@ -43,7 +43,7 @@ public class PlayerController : Singleton<PlayerController>
         //for testing
         if (Input.GetKeyDown(KeyCode.K))
         {
-            _ISitemD.RemoveItemFromInventory(0);    
+            _ISitemD.RemoveItemFromInventory(2);    
         }
 
 

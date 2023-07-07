@@ -15,6 +15,8 @@ public class UIManager : Singleton<UIManager>
     public Sprite defaultCursor;
     public Image cursor;
     public GameObject canvas;
+    public GameObject playerCanvas;
+    public Item heldItem;
 
     [Header("Inventory Images")]
     public Sprite emptySlotSprite;
@@ -24,7 +26,6 @@ public class UIManager : Singleton<UIManager>
     public Image invenSlot3;
     public Image invenSlot4;
     public Image invenSlot5;
-    public Image invenSlot6;
 
     [Header("Item Hover Over Panel")]
     public GameObject statsPopUpPanel;
@@ -76,7 +77,7 @@ public class UIManager : Singleton<UIManager>
 
     public void UpdateInventorySlotImages()
     {
-        for (int i = 0; 12 > i; i++)
+        for (int i = 0; 6 > i; i++)
         {
             switch (i)
             {
@@ -86,14 +87,54 @@ public class UIManager : Singleton<UIManager>
                         invenSlot0.sprite = emptySlotSprite;
                     }
                     else invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
-                    
                     break;
+
                 case 1:
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot1.sprite = emptySlotSprite;
                     }
-                    else invenSlot1.sprite = _PC.playerInventory[i].icon; //images for icon
+                    else
+                    {
+                        invenSlot1.sprite = _PC.playerInventory[i].icon; //images for icon
+                        
+                    }
+                    break;
+
+                case 2:
+                    if (!(i >= -1 && i < _PC.playerInventory.Count))
+                    {
+                        invenSlot2.sprite = emptySlotSprite;
+                    }
+                    else
+                    {
+                        invenSlot2.sprite = _PC.playerInventory[i].icon; //images for icon
+                        invenSlot2.GetComponentInParent<Transform>().localScale = new Vector3(-1, 1, 1);
+                    }
+                    break;
+
+                case 3:
+                    if (!(i >= -1 && i < _PC.playerInventory.Count))
+                    {
+                        invenSlot3.sprite = emptySlotSprite;
+                    }
+                    else invenSlot3.sprite = _PC.playerInventory[i].icon; 
+                    break;
+
+                case 4:
+                    if (!(i >= -1 && i < _PC.playerInventory.Count))
+                    {
+                        invenSlot4.sprite = emptySlotSprite;
+                    }
+                    else invenSlot4.sprite = _PC.playerInventory[i].icon; 
+                    break;
+
+                case 5:
+                    if (!(i >= -1 && i < _PC.playerInventory.Count))
+                    {
+                        invenSlot5.sprite = emptySlotSprite;
+                    }
+                    else invenSlot5.sprite = _PC.playerInventory[i].icon; 
                     break;
             }
 
@@ -154,9 +195,6 @@ public class UIManager : Singleton<UIManager>
     }
 
 
-
-
-
     #endregion
 
     #region Item Equip
@@ -166,17 +204,31 @@ public class UIManager : Singleton<UIManager>
         Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
         cursor.sprite = itemSprite;
 
-        _ISitemD.AddItemToInventory(_inSceneId);
+        heldItem = _ISitemD.inSceneItemDataBase[_inSceneId];
+
     }
 
     public void EquipImage(int _slot)
     {
         //might not need _avatar just hold it on playercontroller
-        if(_AVTAR.slotsOnPlayer[_slot] == null)
+        if (_AVTAR.slotsOnPlayer[_slot].transform.childCount == 0) //check if child object is there
         {
             //check right segment if slot from 1 to 2 the head etc. 
-            //then instantiate prefab on player and detroy this iamge
+
+            if (_AVTAR.slotsOnPlayer[_slot].name.Contains(heldItem.segment.ToString()))
+            {
+                _ISitemD.AddItemToInventory(heldItem.inSceneID);
+                //then instantiate prefab on player and detroy this iamge
+                var item = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
+                item.name = item.name + heldItem.ID;
+
+                cursor.sprite = defaultCursor;
+
+                
+            }
+
         }
+        else print("slot taken");
     }
 
     #endregion

@@ -7,5 +7,7 @@ public class ItemsOnPlayer : Singleton<ItemsOnPlayer>
     public GameObject[] slotsOnPlayer;
     public GameObject[] slotsOnCanvas;
 
+    
+
 
 }
