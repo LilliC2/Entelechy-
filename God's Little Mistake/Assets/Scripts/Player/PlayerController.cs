@@ -1,5 +1,7 @@
 using UnityEngine;
 using DG.Tweening;
+using System.Collections.Generic;
+
 public class PlayerController : Singleton<PlayerController>
 {
     private CharacterController controller;
@@ -10,12 +12,14 @@ public class PlayerController : Singleton<PlayerController>
     public float speed;
     public float dmg;
     public float dps;
-    public float fireRate;
     public float range;
 
     public bool projectile;
     public float projectileSpeed;
     public GameObject projectilePF;
+
+    [Header("Inventory")]
+    public List<Item> playerInventory;
 
     [Header("Head Movement")]
     public float headSpeed = 1000;
@@ -27,6 +31,7 @@ public class PlayerController : Singleton<PlayerController>
     public Vector3 target;
     bool projectileShot;
 
+
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
@@ -35,6 +40,13 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
+        //for testing
+        if(Input.GetKeyDown(KeyCode.K))
+        {
+            _ISitemD.RemoveItemFromInventory(0);    
+        }
+
+
         switch(_GM.gameState)
         {
             case GameManager.GameState.Playing:
@@ -58,15 +70,18 @@ public class PlayerController : Singleton<PlayerController>
                 #region Attacks
 
 
-                if (Input.GetKey(KeyCode.Space))
-                {
-                    MeleeAttack();
-                }
+                //if (Input.GetKey(KeyCode.Space))
+                //{
+                //    MeleeAttack();
+                //}
 
                 if (Input.GetButton("Fire1"))
                 {
                     //SPIT
-                    FireProjectile(_AD.attacks[0].projectilePF, _AD.attacks[0].projectileSpeed, _AD.attacks[0].fireRate, _AD.attacks[0].range);
+
+                    //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
+                    FireProjectile(_ItemD.itemDataBase[0].projectilePF, _ItemD.itemDataBase[0].projectileSpeed, _ItemD.itemDataBase[0].fireRate, _ItemD.itemDataBase[0].range);
+
 
                 }
 

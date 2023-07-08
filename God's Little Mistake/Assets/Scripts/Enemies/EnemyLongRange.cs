@@ -69,7 +69,7 @@ public class EnemyLongRange : GameBehaviour
         }
 
         //Visual indicator for health
-        HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
+        //HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
 
 
         firingPoint.transform.LookAt(player.transform.position);
@@ -96,7 +96,7 @@ public class EnemyLongRange : GameBehaviour
                 StopCoroutine(PatrolingIE());
                 //death animation etc
                 print("Dead");
-                Destroy(this.gameObject);
+                Die();
                 break;
         }
 
@@ -145,11 +145,9 @@ public class EnemyLongRange : GameBehaviour
     {
         float currentHPpercent = _health / _maxHP;
 
-        print("Current Hp as decimal: " + currentHPpercent);
-
         float H, S, V;
 
-        Color.RGBToHSV(image.GetComponent<Renderer>().material.color, out H, out S, out V);
+        Color.RGBToHSV(image.GetComponent<Renderer>().material.color, out H, out S, out V); 
 
         image.GetComponent<Renderer>().material.color = Color.HSVToRGB(H, currentHPpercent, V);
     }
@@ -159,8 +157,16 @@ public class EnemyLongRange : GameBehaviour
         if (enemyStats.stats.health > 0)
         {
             enemyStats.stats.health -= _PC.dmg;
-            print(enemyStats.stats.health);
+            //print(enemyStats.stats.health);
         }
+    }
+
+
+    void Die()
+    {
+        //eye is for testing
+        Instantiate(_IG.GenerateItem("Eye"), gameObject.transform.position,Quaternion.identity);
+        Destroy(this.gameObject);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -175,6 +181,7 @@ public class EnemyLongRange : GameBehaviour
             Destroy(collision.gameObject);
         }
     }
+
 
     //visualise sight range
     private void OnDrawGizmosSelected()
