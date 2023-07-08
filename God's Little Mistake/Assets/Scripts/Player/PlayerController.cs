@@ -74,7 +74,24 @@ public class PlayerController : Singleton<PlayerController>
 
                 if (Input.GetKey(KeyCode.Space))
                 {
-                    MeleeAttack();
+
+                    for (int i = 0; playerInventory.Count > i; i++)
+                    {
+                        //check for primary
+                        if (playerInventory[i].active)
+                        {
+                            //check if primary is projectile
+                            if (!playerInventory[i].projectile)
+                            {
+                                //shoot
+
+                                //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
+                                //changed to use player stats, the primary attack will just change
+                                MeleeAttack();
+                            }
+                        }
+                    }
+                    
                 }
 
                 if (Input.GetButton("Fire1"))
@@ -210,14 +227,31 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    void Hit()
+    void Hit(float _dmg)
     {
-        _UI.UpdateHealthText(health);
+        print("player has been hit");
+        health -= _dmg;
+        if(health >0)
+        {
+            _UI.UpdateHealthText(health);
+        }
+        else
+        {
+            //GAME OVER
+        }
+        
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        
+        if(collision.collider.CompareTag("EnemyProjectile"))
+        {
+            print("player has been hit in collision");
+
+            Destroy(collision.gameObject);
+            //get dmg from enemy
+            //Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);
+        }
     }
 }
 
