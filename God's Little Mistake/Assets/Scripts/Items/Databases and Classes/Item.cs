@@ -13,6 +13,8 @@ public class Item
     public Category category;
     public enum Segment {Head, Torso, Legs }
     public Segment segment;
+    public enum ItemType {Primary, Secondary, Passive, Symbiote }
+    public ItemType itemType;
     public float currencyValue;
 
     public bool active;

@@ -11,6 +11,10 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text playerHPText;
     public TMP_Text roomLevelText;
 
+    [Header("Player Feedback")]
+    public TMP_Text hpText;
+    public TMP_Text levelText;
+
     [Header("Equip")]
     public Sprite defaultCursor;
     public Image cursor;
@@ -59,6 +63,15 @@ public class UIManager : Singleton<UIManager>
         popupCritX.text = "CritX: " + _itemCritX.ToString();
         popupCritChance.text = "Crit%: " + _itemCritChance.ToString();
         popupFirerate.text = "Firerate%: " + _itemFirerate.ToString();
+    }
+
+    public void UpdateHealthText(float _hp)
+    {
+        hpText.text = _hp.ToString("F0"); //removes any decimals
+    }
+    public void UpdateLevelext(int _lvl)
+    {
+        levelText.text = _lvl.ToString();
     }
 
     #region Inventory Item Stats Popup
@@ -198,7 +211,10 @@ public class UIManager : Singleton<UIManager>
     #endregion
 
     #region Item Equip
-
+    /// <summary>
+    /// Changes cursor to most recently picked up item
+    /// </summary>
+    /// <param name="_slot"></param>
     public void CreateItemSelected(int _inSceneId)
     {
         Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
@@ -208,6 +224,10 @@ public class UIManager : Singleton<UIManager>
         statsPopUpPanel.SetActive(false);
     }
 
+    /// <summary>
+    /// Equips item to player inventory and resets cursor to default
+    /// </summary>
+    /// <param name="_slot"></param>
     public void EquipImage(int _slot)
     {
         if(canEquip)
@@ -221,10 +241,12 @@ public class UIManager : Singleton<UIManager>
             heldItem = null;
             //rotate image
         }
-
-
     }
 
+    /// <summary>
+    /// Checks whether held item can be placed on slot that is hovered over
+    /// </summary>
+    /// <param name="_slot"></param>
     public void CheckSlotHover(int _slot)
     {
         if(cursor.sprite != defaultCursor)
@@ -236,14 +258,12 @@ public class UIManager : Singleton<UIManager>
                 if (_AVTAR.slotsOnPlayer[_slot].name.Contains(heldItem.segment.ToString()))
                 {
                     canEquip = true;
-
                 }
                 else
                 {
                     canEquip = false;
                     _AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
                 }
-
             }
             else
             {
@@ -253,11 +273,13 @@ public class UIManager : Singleton<UIManager>
         }
     }
         
-
+    /// <summary>
+    /// Changes colour of slots when mouse exits hover
+    /// </summary>
+    /// <param name="_slot"></param>
     public void CheckSlotHoverExit(int _slot)
     {
         _AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.yellow;
-        
     }
 
     #endregion

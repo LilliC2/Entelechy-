@@ -6,6 +6,10 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 {
     public List<Item> inSceneItemDataBase;
 
+    /// <summary>
+    /// Adds item to players inventory and removes it from scene
+    /// </summary>
+    /// <param name="_sceneID"></param>
     public void AddItemToInventory(int _sceneID)
     {
         
@@ -26,14 +30,38 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
                 inSceneItemDataBase[i].inSceneID = inSceneItemDataBase[i].inSceneID - 1;
             }
 
-            _PC.playerInventory[_PC.playerInventory.Count - 1].ID = _PC.playerInventory.Count-1;
+            var index = _PC.playerInventory.Count - 1;
+            _PC.playerInventory[index].ID = index;
 
             _UI.UpdateInventorySlotImages();
+
+            //check if its passive, secondary, primary or symbiote
+            switch(_PC.playerInventory[index].itemType)
+            {
+                //calls apprioriate function
+                case Item.ItemType.Primary:
+                    break;
+                case Item.ItemType.Secondary:
+                    break;
+                case Item.ItemType.Passive:
+                    AddPassiveItem(index);
+                    break;
+                case Item.ItemType.Symbiote:
+                    break;
+            }
+
+
+            
         }
+
 
 
     }
 
+    /// <summary>
+    /// Removes item from player's invetory and model and add its to the scene
+    /// </summary>
+    /// <param name="_inventoryID"></param>
     public void RemoveItemFromInventory(int _inventoryID)
     {
         //remove item from player canvas
@@ -51,7 +79,23 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
             }
         }
 
+        //check if its passive, secondary, primary or symbiote
+        switch (_PC.playerInventory[_inventoryID].itemType)
+        {
+            //calls apprioriate function
+            case Item.ItemType.Primary:
+                break;
+            case Item.ItemType.Secondary:
+                break;
+            case Item.ItemType.Passive:
+                RemovePassiveItem(_inventoryID);
+                break;
+            case Item.ItemType.Symbiote:
+                break;
+        }
 
+
+        //add item to scene and remove from inventory
         inSceneItemDataBase.Add(_PC.playerInventory[_inventoryID]);
         _PC.playerInventory.Remove(_PC.playerInventory[_inventoryID]);
         
@@ -66,5 +110,44 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         //WHEN CURRENCY IS ADDED, PLAYER WOULD GAIN CURRENCY HERE
 
     }
+
+    /// <summary>
+    /// Add passive item buffs to player stats
+    /// </summary>
+    /// <param name="_index"></param>
+    public void AddPassiveItem(int _inventoryID)
+    {
+        //if the items ever add HP
+        //_PC.health += _PC.playerInventory[_index].health
+
+        //if the items ever add speed
+        //_PC.speed += _PC.playerInventory[_index].speed;
+        
+        _PC.dmg += _PC.playerInventory[_inventoryID].dmg;
+        _PC.dps += _PC.playerInventory[_inventoryID].dps;
+        _PC.range += _PC.playerInventory[_inventoryID].range;
+        _PC.projectileSpeed += _PC.playerInventory[_inventoryID].projectileSpeed;
+        _PC.firerate += _PC.playerInventory[_inventoryID].fireRate;
+    }
+
+    /// <summary>
+    /// Remove passive item buffs to player stats
+    /// </summary>
+    /// <param name="_index"></param>
+    public void RemovePassiveItem(int _inventoryID)
+    {
+        //if the items ever add HP
+        //_PC.health -= _PC.playerInventory[_index].health
+
+        //if the items ever add speed
+        //_PC.speed -= _PC.playerInventory[_index].speed;
+        
+        _PC.dmg -= _PC.playerInventory[_inventoryID].dmg;
+        _PC.dps -= _PC.playerInventory[_inventoryID].dps;
+        _PC.range -= _PC.playerInventory[_inventoryID].range;
+        _PC.projectileSpeed -= _PC.playerInventory[_inventoryID].projectileSpeed;
+        _PC.firerate -= _PC.playerInventory[_inventoryID].fireRate;
+    }
+
 
 }
