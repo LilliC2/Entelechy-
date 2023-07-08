@@ -44,11 +44,8 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
             {
                 //check if item equipped is the item
                 var obj = _AVTAR.slotsOnPlayer[i].transform.GetChild(0);
-                print(obj.name);
-                print(i);
                 if (obj.name.Contains(_inventoryID.ToString()))
                 {
-                    print("obj name contains " + i.ToString());
                     Destroy(obj.gameObject);
                 }
             }

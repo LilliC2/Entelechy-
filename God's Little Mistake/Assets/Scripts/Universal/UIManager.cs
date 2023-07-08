@@ -16,7 +16,8 @@ public class UIManager : Singleton<UIManager>
     public Image cursor;
     public GameObject canvas;
     public GameObject playerCanvas;
-    public Item heldItem;
+    public Item heldItem = null;
+    bool canEquip;
 
     [Header("Inventory Images")]
     public Sprite emptySlotSprite;
@@ -109,7 +110,6 @@ public class UIManager : Singleton<UIManager>
                     else
                     {
                         invenSlot2.sprite = _PC.playerInventory[i].icon; //images for icon
-                        invenSlot2.GetComponentInParent<Transform>().localScale = new Vector3(-1, 1, 1);
                     }
                     break;
 
@@ -205,30 +205,59 @@ public class UIManager : Singleton<UIManager>
         cursor.sprite = itemSprite;
 
         heldItem = _ISitemD.inSceneItemDataBase[_inSceneId];
-
+        statsPopUpPanel.SetActive(false);
     }
 
     public void EquipImage(int _slot)
     {
-        //might not need _avatar just hold it on playercontroller
-        if (_AVTAR.slotsOnPlayer[_slot].transform.childCount == 0) //check if child object is there
+        if(canEquip)
         {
-            //check right segment if slot from 1 to 2 the head etc. 
+            _ISitemD.AddItemToInventory(heldItem.inSceneID);
+            //then instantiate prefab on player and detroy this iamge
+            var item = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
+            item.name = item.name + heldItem.ID;
 
-            if (_AVTAR.slotsOnPlayer[_slot].name.Contains(heldItem.segment.ToString()))
-            {
-                _ISitemD.AddItemToInventory(heldItem.inSceneID);
-                //then instantiate prefab on player and detroy this iamge
-                var item = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
-                item.name = item.name + heldItem.ID;
-
-                cursor.sprite = defaultCursor;
-
-                
-            }
-
+            cursor.sprite = defaultCursor;
+            heldItem = null;
+            //rotate image
         }
-        else print("slot taken");
+
+
+    }
+
+    public void CheckSlotHover(int _slot)
+    {
+        if(cursor.sprite != defaultCursor)
+        {
+            if (_AVTAR.slotsOnPlayer[_slot].transform.childCount == 0) //check if child object is there
+            {
+                //check right segment if slot from 1 to 2 the head etc. 
+
+                if (_AVTAR.slotsOnPlayer[_slot].name.Contains(heldItem.segment.ToString()))
+                {
+                    canEquip = true;
+
+                }
+                else
+                {
+                    canEquip = false;
+                    _AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
+                }
+
+            }
+            else
+            {
+                canEquip = false;
+                _AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
+            }
+        }
+    }
+        
+
+    public void CheckSlotHoverExit(int _slot)
+    {
+        _AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.yellow;
+        
     }
 
     #endregion
