@@ -36,12 +36,15 @@ public class MeleeAttack : MonoBehaviour
 
 
     public GameObject Player;
+    public Camera phantomCamera;
 
     public bool reload;
     public float reloadTime;
 
     public float critChance;
     public float critMultiplier;
+
+    public GameObject firingPoint;
 
     //public GameObject mouseLook;
 
@@ -74,10 +77,18 @@ public class MeleeAttack : MonoBehaviour
     }
     public void MouseRotate()
     {
-        Ray mouseRay = Camera.main.ScreenPointToRay(Input.mousePosition);
-        float midPoint = (transform.position - Camera.main.transform.position).magnitude * 0.5f;
+        Ray ray = phantomCamera.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+        if (Physics.Raycast(ray, out hit))
+        {
+            transform.LookAt(hit.point);
+            Mathf.Clamp(transform.rotation.x, 0, 0);
+            Mathf.Clamp(transform.rotation.z, 0, 0);
+        }
+       // Ray mouseRay = phantomCamera.ScreenPointToRay(Input.mousePosition);
+        //float midPoint = (transform.position - phantomCamera.transform.position).magnitude * 0.5f;
 
-        transform.LookAt(mouseRay.origin + mouseRay.direction);
+       // transform.LookAt(mouseRay.origin + mouseRay.direction);
 
     }
 
