@@ -11,12 +11,7 @@ public class EnemyLongRange : GameBehaviour
     public GameObject firingPoint;
     public GameObject player;
 
-    public enum EnemyState
-    {
-        Patrolling, Chase, Attacking, Die
-    }
 
-    public EnemyState enemyState;
 
     public NavMeshAgent agent;
 
@@ -32,9 +27,9 @@ public class EnemyLongRange : GameBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
-    public GameObject image;
 
     BaseEnemy enemyStats;
+    BaseEnemy BaseEnemy;
 
     //wowo
     // Start is called before the first frame update
@@ -43,8 +38,8 @@ public class EnemyLongRange : GameBehaviour
         //enemyRange = _ED.enemies[0].range;
         //enemySightRange = _ED.enemies[0].range + 0.5f;
         //player = GameObject.Find("Player");
-        image = GameObject.Find("Image");
         enemyStats = GetComponent<BaseEnemy>();
+        BaseEnemy = GetComponent<BaseEnemy>();
         agent = GetComponent<NavMeshAgent>();
     }
 
@@ -53,19 +48,13 @@ public class EnemyLongRange : GameBehaviour
     {
 
         //check for the sight and attack range
-        if (enemyState != EnemyState.Die)
+        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
         {
             playerInAttackRange = Physics.CheckSphere(transform.position, enemyStats.stats.range, whatIsPlayer);
             playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range + 1, whatIsPlayer);
-            if (playerInAttackRange) enemyState = EnemyState.Attacking;
-            if (!playerInAttackRange) enemyState = EnemyState.Patrolling;
+            if (playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Attacking;
+            if (!playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
 
-        }
-
-        //Health Manager
-        if (enemyStats.stats.health <= 0)
-        {
-            enemyState = EnemyState.Die;
         }
 
         //Visual indicator for health
@@ -74,9 +63,9 @@ public class EnemyLongRange : GameBehaviour
 
         firingPoint.transform.LookAt(player.transform.position);
 
-        switch(enemyState)
+        switch(BaseEnemy.enemyState)
         {
-            case EnemyState.Patrolling:
+            case BaseEnemy.EnemyState.Patrolling:
                 if(isPatrolling != true)
                 {
                     isPatrolling = true;
@@ -84,19 +73,18 @@ public class EnemyLongRange : GameBehaviour
                     walkPointRange = 5;
                 }
                 break;
-            case EnemyState.Chase:
+            case BaseEnemy.EnemyState.Chase:
                 break;
-            case EnemyState.Attacking:
+            case BaseEnemy.EnemyState.Attacking:
                 isPatrolling = false;
                 walkPointRange = 2;
-                print("ATTACK");
                 FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
                 break;
-            case EnemyState.Die:
+            case BaseEnemy.EnemyState.Die:
                 StopCoroutine(PatrolingIE());
                 //death animation etc
                 print("Dead");
-                Die();
+                BaseEnemy.Die();
                 break;
         }
 
@@ -124,7 +112,6 @@ public class EnemyLongRange : GameBehaviour
         if (!projectileShot)
         {
 
-
             //Spawn bullet and apply force in the direction of the mouse
             //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
             GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
@@ -141,46 +128,12 @@ public class EnemyLongRange : GameBehaviour
         }
     }
 
-    void HealthVisualIndicator(float _health, float _maxHP)
-    {
-        float currentHPpercent = _health / _maxHP;
-
-        float H, S, V;
-
-        Color.RGBToHSV(image.GetComponent<Renderer>().material.color, out H, out S, out V); 
-
-        image.GetComponent<Renderer>().material.color = Color.HSVToRGB(H, currentHPpercent, V);
-    }
-
-    void Hit()
-    {
-        if (enemyStats.stats.health > 0)
-        {
-            enemyStats.stats.health -= _PC.dmg;
-            //print(enemyStats.stats.health);
-        }
-    }
 
 
-    void Die()
-    {
-        //eye is for testing
-        Instantiate(_IG.GenerateItem("Eye"), gameObject.transform.position,Quaternion.identity);
-        Destroy(this.gameObject);
-    }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if(collision.collider.CompareTag("Projectile"))
-        {
-            print("hit");
-            //Add hit code here;
-            Hit();
 
-            //destroy bullet that hit it
-            Destroy(collision.gameObject);
-        }
-    }
+
+
 
 
     //visualise sight range

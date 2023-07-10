@@ -4,18 +4,71 @@ using UnityEngine;
 
 public class BaseEnemy : GameBehaviour
 {
-    public EnemyStats stats;
-
-
-    // Start is called before the first frame update
-    void Start()
+    public enum EnemyState
     {
-        
+        Patrolling, Chase, Attacking, Die
     }
 
-    // Update is called once per frame
-    void Update()
+    public EnemyState enemyState;
+
+    public Renderer image;
+    public EnemyStats stats;
+
+    private void Start()
     {
-        
+        image = GetComponentInChildren<Renderer>();
+
+    }
+
+    private void Update()
+    {
+        HealthVisualIndicator(stats.health, stats.maxHP);
+
+        //Health Manager
+        if (stats.health <= 0)
+        {
+            enemyState = EnemyState.Die;
+        }
+
+    }
+
+    void HealthVisualIndicator(float _health, float _maxHP)
+    {
+        float currentHPpercent = _health / _maxHP;
+
+        float H, S, V;
+
+        Color.RGBToHSV(image.material.color, out H, out S, out V);
+
+        image.material.color = Color.HSVToRGB(H, currentHPpercent, V);
+    }
+
+    void Hit()
+    {
+        if (stats.health > 0)
+        {
+            stats.health -= _PC.dmg;
+            //print(enemyStats.stats.health);
+        }
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Projectile"))
+        {
+            print("hit");
+            //Add hit code here;
+            Hit();
+
+            //destroy bullet that hit it
+            Destroy(collision.gameObject);
+        }
+    }
+
+    public void Die()
+    {
+        //eye is for testing
+        Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
+        Destroy(this.gameObject);
     }
 }

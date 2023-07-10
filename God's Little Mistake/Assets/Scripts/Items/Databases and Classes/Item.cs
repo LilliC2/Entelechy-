@@ -6,10 +6,15 @@ using UnityEngine;
 public class Item
 {
     public string itemName;
-    public float ID;
-    public float inSceneID;
+    public int ID;
+    public int inSceneID;
     public int lvl;
-    public string category;
+    public enum Category { Eyes, Mouth, Horns, Slappies, Punchies, Launchers, Legs, Crawlies, None }
+    public Category category;
+    public enum Segment {Head, Torso, Legs }
+    public Segment segment;
+    public enum ItemType {Primary, Secondary, Passive, Symbiote }
+    public ItemType itemType;
     public float currencyValue;
 
     public bool active;
@@ -29,6 +34,8 @@ public class Item
     public bool modifier;
     public float modifierID;
 
+    public Sprite icon;
+    public GameObject avtarPrefab;
 
     public Item()
     {
