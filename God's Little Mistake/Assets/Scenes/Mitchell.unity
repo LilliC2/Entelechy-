@@ -473,7 +473,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3eededf40dce6034e98758411968599c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  aimPoint: {fileID: 0}
+  meleeRange: 1
   inRangeEnemies: []
+  player: {fileID: 0}
 --- !u!1 &312397097
 GameObject:
   m_ObjectHideFlags: 0
@@ -555,21 +558,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71b6306feacfef4398b0e3dc39c69b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroy: 0
-  attacks:
-  - atkName: SpitAtk
-    ID: 0
-    category: Mouth
-    active: 0
-    dmg: 1
-    dps: 5
-    fireRate: 2
-    critX: 0
-    critChance: 0
-    range: 1
-    projectile: 1
-    projectileSpeed: 500
-    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
 --- !u!4 &378920751
 Transform:
   m_ObjectHideFlags: 0
@@ -702,7 +690,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPoint: {fileID: 549164266}
   player: {fileID: 1967995609}
-  enemyState: 0
   agent: {fileID: 521165884}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 2
@@ -790,11 +777,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609035b677042b34f9bd4c25621ebe3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyState: 0
+  image: {fileID: 0}
   stats:
-    categoryHead: 3
-    categoryTorso: 3
-    categoryLegs: 2
+    category: 0
     health: 5
+    maxHP: 0
     speed: 0
     dmg: 0
     dps: 0
@@ -1357,19 +1345,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c5c86742908296547a36a01e7c8483e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  dontDestroy: 0
-  enemies:
-  - category: Mouth
-    category2: 
-    health: 10
-    speed: 5
-    dmg: 5
-    dps: 0
-    fireRate: 1
-    range: 3
-    projectile: 0
-    projectileSpeed: 500
-    projectilePF: {fileID: 7752005100104120040, guid: ee28d0d4f4bdba24fab537334d015338, type: 3}
 --- !u!4 &1047953881
 Transform:
   m_ObjectHideFlags: 0
@@ -2391,12 +2366,12 @@ MonoBehaviour:
   speed: 0
   dmg: 5
   dps: 0
-  fireRate: 0
   range: 0
+  firerate: 0
   projectile: 0
   projectileSpeed: 0
   projectilePF: {fileID: 0}
-  playerSpeed: 2
+  playerInventory: []
   headSpeed: 1000
   head: {fileID: 1673379733}
   firingPoint: {fileID: 35132813}
