@@ -18,6 +18,7 @@ public class UIManager : Singleton<UIManager>
     [Header("Equip")]
     public Sprite defaultCursor;
     public Image cursor;
+    public Sprite cursorClick;
     public GameObject canvas;
     public GameObject playerCanvas;
     public Item heldItem = null;
@@ -52,6 +53,12 @@ public class UIManager : Singleton<UIManager>
     private void Start()
     {
         UpdateInventorySlotImages();
+    }
+
+    private void Update()
+    {
+        if (Input.GetKey(KeyCode.Mouse0) && heldItem == null) cursor.sprite = cursorClick;
+        else if (!Input.GetKey(KeyCode.Mouse0) && heldItem == null) cursor.sprite = defaultCursor;
     }
 
     public void UpdateItemPopUp(string _itemName, float _itemDmg, float _itemCritX, float _itemCritChance, float _itemFirerate)
@@ -207,7 +214,6 @@ public class UIManager : Singleton<UIManager>
         }
     }
 
-
     #endregion
 
     #region Item Equip
@@ -249,7 +255,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CheckSlotHover(int _slot)
     {
-        if(cursor.sprite != defaultCursor)
+        if(cursor != defaultCursor)
         {
             if (_AVTAR.slotsOnPlayer[_slot].transform.childCount == 0) //check if child object is there
             {

@@ -2864,6 +2864,7 @@ GameObject:
   - component: {fileID: 537516184}
   - component: {fileID: 537516183}
   - component: {fileID: 537516185}
+  - component: {fileID: 537516186}
   m_Layer: 5
   m_Name: Cursor
   m_TagString: Untagged
@@ -2888,8 +2889,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.000014305, y: 0.000014305}
-  m_SizeDelta: {x: 34.795, y: 34.795}
+  m_AnchoredPosition: {x: 4.3, y: 0}
+  m_SizeDelta: {x: 74.308, y: 74.308}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &537516183
 MonoBehaviour:
@@ -2911,7 +2912,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 21300000, guid: 5173b9a6d0ba5e94c935a8597ac166c2, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -2943,6 +2944,35 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   mCursorVisual: {fileID: 537516182}
   mDisplacement: {x: 0, y: 0, z: 0}
+--- !u!114 &537516186
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 537516181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 4
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1520956315}
+          m_TargetAssemblyTypeName: UIManager, Assembly-CSharp
+          m_MethodName: MouseOnClick
+          m_Mode: 1
+          m_Arguments:
+            m_ObjectArgument: {fileID: 0}
+            m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &569632144
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5956,8 +5986,9 @@ MonoBehaviour:
   roomLevelText: {fileID: 1666290678}
   hpText: {fileID: 1366834532}
   levelText: {fileID: 1666290678}
-  defaultCursor: {fileID: 10913, guid: 0000000000000000f000000000000000, type: 0}
+  defaultCursor: {fileID: 21300000, guid: 5173b9a6d0ba5e94c935a8597ac166c2, type: 3}
   cursor: {fileID: 537516183}
+  cursorClick: {fileID: 21300000, guid: 93aab99cd7e2020468f0d7b4e386d58c, type: 3}
   canvas: {fileID: 102228821}
   playerCanvas: {fileID: 795707247}
   heldItem:

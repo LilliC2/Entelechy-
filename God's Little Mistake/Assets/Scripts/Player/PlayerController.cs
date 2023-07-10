@@ -216,6 +216,9 @@ public class PlayerController : Singleton<PlayerController>
                 GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
+                Vector3 targetPos = new Vector3(hit.point.x, bullet.transform.position.y, hit.point.z);
+                
+
                 Mathf.Clamp(bullet.transform.position.y, 0, 0);
 
                 //This will destroy bullet once it exits the range, aka after a certain amount of time

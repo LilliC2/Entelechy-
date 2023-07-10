@@ -15,7 +15,7 @@ public class ItemLook : MonoBehaviour
     {
 
         //Rotates bullet so it faces the camera
-        Vector3 rotate = new Vector3(-45f, 0f, 0f);
+        Vector3 rotate = new Vector3(-45f, this.transform.rotation.y, this.transform.rotation.z);
         transform.eulerAngles = rotate;
     }
 }
