@@ -94,6 +94,7 @@ public class PlayerController : Singleton<PlayerController>
                     
                 }
 
+
                 if (Input.GetButton("Fire1"))
                 {
                     for (int i = 0; playerInventory.Count > i; i++)
