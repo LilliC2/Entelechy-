@@ -18,6 +18,7 @@ public class MeleeAttack : MonoBehaviour
     public bool box;
 
     public float damage;
+    public float DMGOutput;
 
     public float cone1x;
     public float cone1y;
@@ -90,6 +91,27 @@ public class MeleeAttack : MonoBehaviour
 
        // transform.LookAt(mouseRay.origin + mouseRay.direction);
 
+    }
+
+    public void Critical(int rnd)
+    {
+        rnd = Random.Range(1, 100);
+
+        if (rnd <= critChance)
+        {
+            DMGOutput = damage * critMultiplier;
+        }
+        else
+        {
+            DMGOutput = damage;
+        }
+    }
+    public void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Enemy")
+        {
+            Critical(1);
+        }
     }
 
     public IEnumerator ConeAttack() //activates cone attack

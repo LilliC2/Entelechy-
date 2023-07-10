@@ -15,13 +15,15 @@ public class EnemyShortRange : GameBehaviour
     public float roamingRadius = 5f;
     public float rotationSpeed = 5f;
 
-    private int currentHealth;
+    private float currentHealth;
     private bool isChasing = false;
     private bool canAttack = true;
     private Transform player;
     private Vector3 roamingPosition;
     public NavMeshAgent navMeshAgent;
     private Animator animator;
+
+    public float MeleeDMG;
 
     private void Start()
     {
@@ -112,6 +114,11 @@ public class EnemyShortRange : GameBehaviour
         {
            //hit
         }
+        if (collision.collider.CompareTag("Melee"))
+        {
+            MeleeDMG = collision.gameObject.GetComponent<MeleeAttack>().DMGOutput;
+            TakeDamage(MeleeDMG);
+        }
     }
 
     private void Attack()
@@ -147,7 +154,7 @@ public class EnemyShortRange : GameBehaviour
     //    canAttack = true;
     //}
 
-    public void TakeDamage(int damage)
+    public void TakeDamage(float damage)
     {
         currentHealth -= damage;
 
