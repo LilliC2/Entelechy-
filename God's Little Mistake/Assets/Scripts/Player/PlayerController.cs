@@ -13,6 +13,7 @@ public class PlayerController : Singleton<PlayerController>
     public float dmg;
     public float dps;
     public float range;
+    public float firerate;
 
     public bool projectile;
     public float projectileSpeed;
@@ -35,15 +36,16 @@ public class PlayerController : Singleton<PlayerController>
     private void Start()
     {
         controller = gameObject.GetComponent<CharacterController>();
+        _UI.UpdateHealthText(health);
 
     }
 
     void Update()
     {
         //for testing
-        if(Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-            _ISitemD.RemoveItemFromInventory(0);    
+            _ISitemD.RemoveItemFromInventory(2);    
         }
 
 
@@ -70,18 +72,47 @@ public class PlayerController : Singleton<PlayerController>
                 #region Attacks
 
 
-                //if (Input.GetKey(KeyCode.Space))
-                //{
-                //    MeleeAttack();
-                //}
+                if (Input.GetKey(KeyCode.Space))
+                {
+
+                    for (int i = 0; playerInventory.Count > i; i++)
+                    {
+                        //check for primary
+                        if (playerInventory[i].active)
+                        {
+                            //check if primary is projectile
+                            if (!playerInventory[i].projectile)
+                            {
+                                //shoot
+
+                                //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
+                                //changed to use player stats, the primary attack will just change
+                                MeleeAttack();
+                            }
+                        }
+                    }
+                    
+                }
+
 
                 if (Input.GetButton("Fire1"))
                 {
-                    //SPIT
+                    for (int i = 0; playerInventory.Count > i; i++)
+                    {
+                        //check for primary
+                        if(playerInventory[i].active)
+                        {
+                            //check if primary is projectile
+                            if(playerInventory[i].projectile)
+                            {
+                                //shoot
 
-                    //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
-                    FireProjectile(_ItemD.itemDataBase[0].projectilePF, _ItemD.itemDataBase[0].projectileSpeed, _ItemD.itemDataBase[0].fireRate, _ItemD.itemDataBase[0].range);
-
+                                //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
+                                //changed to use player stats, the primary attack will just change
+                                FireProjectile(playerInventory[0].projectilePF, projectileSpeed, firerate, range);
+                            }
+                        }
+                    }
 
                 }
 
@@ -89,13 +120,68 @@ public class PlayerController : Singleton<PlayerController>
 
                 break;
 
-            case GameManager.GameState.Iventory:
-                break;
         }
 
+
+        //change primary
+        #region Primary Change Inputs
+
+        if(Input.GetKeyDown(KeyCode.Alpha1))
+        {
+            ChangePrimary(0);
+        }
+        
+        if(Input.GetKeyDown(KeyCode.Alpha2))
+        {
+            ChangePrimary(1);
+        }
+        
+        if(Input.GetKeyDown(KeyCode.Alpha3))
+        {
+            ChangePrimary(2);
+        }
+        
+        if(Input.GetKeyDown(KeyCode.Alpha4))
+        {
+            ChangePrimary(3);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha5))
+        {
+            ChangePrimary(4);
+        }
+
+        if(Input.GetKeyDown(KeyCode.Alpha6))
+        {
+            ChangePrimary(5);
+        }
+
+
+
+        #endregion
     }
 
+    void ChangePrimary(int _inventorySlot)
+    {
+        //check if item is primary
+        if (playerInventory[_inventorySlot].itemType == Item.ItemType.Primary)
+        {
+            //if yes activate
+            playerInventory[_inventorySlot].active = true;
 
+            //turn off any others in the same segment
+            for (int i = _inventorySlot; playerInventory.Count > i; i++)
+            {
+                if (i != _inventorySlot)
+                {
+                    if (playerInventory[i].segment == playerInventory[_inventorySlot].segment)
+                    {
+                        if (playerInventory[i].active == true) playerInventory[i].active = false;
+                    }
+                }
+            }
+        }
+    }
 
     void MeleeAttack()
     {
@@ -142,7 +228,32 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
+    void Hit(float _dmg)
+    {
+        print("player has been hit");
+        health -= _dmg;
+        if(health >0)
+        {
+            _UI.UpdateHealthText(health);
+        }
+        else
+        {
+            //GAME OVER
+        }
+        
+    }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.collider.CompareTag("EnemyProjectile"))
+        {
+            print("player has been hit in collision");
+
+            Destroy(collision.gameObject);
+            //get dmg from enemy
+            //Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);
+        }
+    }
 }
 
 
