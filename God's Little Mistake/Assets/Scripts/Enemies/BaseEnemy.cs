@@ -51,6 +51,14 @@ public class BaseEnemy : GameBehaviour
             //print(enemyStats.stats.health);
         }
     }
+    void MeleeHit()
+    {
+        if (stats.health > 0)
+        {
+            stats.health -= _PC.dmg;
+            //print(enemyStats.stats.health);
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -62,6 +70,12 @@ public class BaseEnemy : GameBehaviour
 
             //destroy bullet that hit it
             Destroy(collision.gameObject);
+        }
+        if (collision.collider.CompareTag("Melee"))
+        {
+            print("melee hit");
+            //Add hit code here;
+            MeleeHit();
         }
     }
 
