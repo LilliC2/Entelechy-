@@ -100,11 +100,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   detectionRange: 50
-  movementSpeed: 10
+  chaseSpeed: 3
+  roamSpeed: 1.5
   attackRange: 2
   attackDamage: 10
   attackCooldown: 2
-  player: {fileID: 0}
+  maxHealth: 100
+  roamingRadius: 5
+  rotationSpeed: 5
+  navMeshAgent: {fileID: 0}
   enemyState: 0
 --- !u!54 &2677008712180439866
 Rigidbody:
@@ -145,11 +149,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609035b677042b34f9bd4c25621ebe3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyState: 0
+  image: {fileID: 0}
   stats:
-    categoryHead: 0
-    categoryTorso: 0
-    categoryLegs: 0
+    category: 0
     health: 20
+    maxHP: 0
     speed: 5
     dmg: 5
     dps: 0
