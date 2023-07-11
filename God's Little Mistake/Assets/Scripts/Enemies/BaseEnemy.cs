@@ -55,7 +55,7 @@ public class BaseEnemy : GameBehaviour
     {
         if (stats.health > 0)
         {
-            stats.health -= _PC.dmg;
+            stats.health -= _MA.DMGOutput;
             //print(enemyStats.stats.health);
         }
     }
