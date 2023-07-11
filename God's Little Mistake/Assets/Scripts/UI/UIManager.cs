@@ -23,6 +23,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject playerCanvas;
     public Item heldItem = null;
     bool canEquip;
+    float rotation;
 
     [Header("Inventory Images")]
     public Sprite emptySlotSprite;
@@ -57,8 +58,12 @@ public class UIManager : Singleton<UIManager>
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0)) cursor.sprite = cursorClick;
-        else cursor.sprite = defaultCursor;
+        if(heldItem == null)
+        {
+            if (Input.GetKey(KeyCode.Mouse0)) cursor.sprite = cursorClick;
+            else cursor.sprite = defaultCursor;
+        }
+        
     }
 
     public void UpdateItemPopUp(string _itemName, float _itemDmg, float _itemCritX, float _itemCritChance, float _itemFirerate)
@@ -238,9 +243,35 @@ public class UIManager : Singleton<UIManager>
     {
         if(canEquip)
         {
+            //set piece rotation
+            switch (_slot)
+            {
+ 
+                case 1:
+                    rotation = 90;
+                break;  
+                case 2:
+                    rotation = 270;
+                break; 
+                case 3:
+                    rotation = 90;
+                break;  
+                case 4:
+                    rotation = 270;
+                break;
+                default:
+                    rotation = 0;
+                    break;
+
+            
+            }
+
+
             _ISitemD.AddItemToInventory(heldItem.inSceneID);
             //then instantiate prefab on player and detroy this iamge
+            print("ITEM ADDED TO PLAYER");
             var item = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
+            item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
             item.name = item.name + heldItem.ID;
 
             cursor.sprite = defaultCursor;
@@ -255,7 +286,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CheckSlotHover(int _slot)
     {
-        if(cursor != defaultCursor)
+        if (cursor.sprite != defaultCursor && cursor.sprite != cursorClick)
         {
             if (_AVTAR.slotsOnPlayer[_slot].transform.childCount == 0) //check if child object is there
             {
