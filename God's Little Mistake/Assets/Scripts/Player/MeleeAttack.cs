@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using static UnityEngine.GraphicsBuffer;
 
-public class MeleeAttack : MonoBehaviour
+public class MeleeAttack : Singleton<MeleeAttack>
 {
     public GameObject boxAttack;
     public GameObject ConeAttack1;
