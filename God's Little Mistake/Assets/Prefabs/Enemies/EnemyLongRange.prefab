@@ -51,7 +51,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPoint: {fileID: 8688615738539537223}
   player: {fileID: 0}
-  enemyState: 0
   agent: {fileID: 9168112645038497975}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 2
@@ -65,7 +64,6 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
-  image: {fileID: 0}
 --- !u!114 &8561204402898261305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,10 +76,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609035b677042b34f9bd4c25621ebe3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyState: 0
+  image: {fileID: 0}
   stats:
-    categoryHead: 3
-    categoryTorso: 3
-    categoryLegs: 2
+    category: 0
     health: 15
     maxHP: 15
     speed: 0
@@ -91,7 +89,7 @@ MonoBehaviour:
     range: 2
     projectile: 0
     projectileSpeed: 500
-    projectilePF: {fileID: 7752005100104120040, guid: ee28d0d4f4bdba24fab537334d015338, type: 3}
+    projectilePF: {fileID: 7752005100104120040, guid: 37666b6d8a88375499769a7b044a5ba7, type: 3}
 --- !u!195 &9168112645038497975
 NavMeshAgent:
   m_ObjectHideFlags: 0

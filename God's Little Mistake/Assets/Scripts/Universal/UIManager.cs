@@ -57,8 +57,8 @@ public class UIManager : Singleton<UIManager>
 
     private void Update()
     {
-        if (Input.GetKey(KeyCode.Mouse0) && heldItem == null) cursor.sprite = cursorClick;
-        else if (!Input.GetKey(KeyCode.Mouse0) && heldItem == null) cursor.sprite = defaultCursor;
+        if (Input.GetKey(KeyCode.Mouse0)) cursor.sprite = cursorClick;
+        else cursor.sprite = defaultCursor;
     }
 
     public void UpdateItemPopUp(string _itemName, float _itemDmg, float _itemCritX, float _itemCritChance, float _itemFirerate)
