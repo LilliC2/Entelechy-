@@ -25,14 +25,14 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 215733643793970339}
-  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
   m_LocalPosition: {x: 0, y: 0, z: -0.117024556}
   m_LocalScale: {x: 0.34102648, y: 0.34102648, z: 0.34102648}
   m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 227332480198306969}
   m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
   m_AnchoredPosition: {x: 0.5923419, y: -0}
@@ -111,7 +111,7 @@ GameObject:
   - component: {fileID: 4376689456851108352}
   - component: {fileID: 7351292330556947468}
   - component: {fileID: -5779310085204854185}
-  - component: {fileID: -8797842275407018278}
+  - component: {fileID: 2587648621803013624}
   m_Layer: 0
   m_Name: EnemyProjectileMockUP
   m_TagString: EnemyProjectile
@@ -133,7 +133,7 @@ Transform:
   m_Children:
   - {fileID: 4347991386478800833}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3282544750240422274
 MeshFilter:
@@ -233,7 +233,7 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 10, y: 10, z: 10}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &-8797842275407018278
+--- !u!114 &2587648621803013624
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
