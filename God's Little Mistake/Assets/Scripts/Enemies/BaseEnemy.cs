@@ -29,6 +29,7 @@ public class BaseEnemy : GameBehaviour
         //Health Manager
         if (stats.health <= 0)
         {
+            FindObjectOfType<MeleeRangeCheck>().inRangeEnemies.Remove(gameObject);
             enemyState = EnemyState.Die;
         }
 
