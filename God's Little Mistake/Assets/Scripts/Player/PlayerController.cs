@@ -6,6 +6,9 @@ public class PlayerController : Singleton<PlayerController>
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
+    public GameObject groundCheck;
+    public LayerMask groundLayer;
+    public bool grounded;
 
     [Header ("Player Stats")]
     public float health;
@@ -48,8 +51,9 @@ public class PlayerController : Singleton<PlayerController>
             _ISitemD.RemoveItemFromInventory(2);    
         }
 
+ 
 
-        switch(_GM.gameState)
+        switch (_GM.gameState)
         {
             case GameManager.GameState.Playing:
 
