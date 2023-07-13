@@ -6,6 +6,9 @@ public class PlayerController : Singleton<PlayerController>
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
+    public GameObject groundCheck;
+    public LayerMask groundLayer;
+    public bool grounded;
 
     [Header ("Player Stats")]
     public float health;
@@ -57,7 +60,8 @@ public class PlayerController : Singleton<PlayerController>
 
         UpdateMelee();
 
-        switch(_GM.gameState)
+
+        switch (_GM.gameState)
         {
             case GameManager.GameState.Playing:
 
@@ -261,6 +265,9 @@ public class PlayerController : Singleton<PlayerController>
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
+
+                Vector3 targetPos = new Vector3(hit.point.x, bullet.transform.position.y, hit.point.z);
+                
 
                 Mathf.Clamp(bullet.transform.position.y, 0, 0);
 

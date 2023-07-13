@@ -12,13 +12,12 @@ public class BaseEnemy : GameBehaviour
     public EnemyState enemyState;
 
 
-
-    public Renderer image;
+    public SpriteRenderer image;
     public EnemyStats stats;
 
     private void Start()
     {
-        image = GetComponentInChildren<Renderer>();
+        image = GetComponentInChildren<SpriteRenderer>();
 
     }
 
@@ -41,9 +40,9 @@ public class BaseEnemy : GameBehaviour
 
         float H, S, V;
 
-        Color.RGBToHSV(image.material.color, out H, out S, out V);
+        Color.RGBToHSV(image.color, out H, out S, out V);
 
-        image.material.color = Color.HSVToRGB(H, currentHPpercent, V);
+        image.color = Color.HSVToRGB(H, currentHPpercent, V);
     }
 
     public void Hit()
