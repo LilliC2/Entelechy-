@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8561204402898261305}
   - component: {fileID: 9168112645038497975}
   - component: {fileID: 2921513011551687282}
+  - component: {fileID: 816280974104142014}
   m_Layer: 0
   m_Name: EnemyLongRange
   m_TagString: Enemy
@@ -51,7 +52,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   firingPoint: {fileID: 8688615738539537223}
   player: {fileID: 0}
-  enemyState: 0
   agent: {fileID: 9168112645038497975}
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 2
@@ -65,7 +65,6 @@ MonoBehaviour:
   whatIsPlayer:
     serializedVersion: 2
     m_Bits: 64
-  image: {fileID: 0}
 --- !u!114 &8561204402898261305
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,10 +77,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609035b677042b34f9bd4c25621ebe3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  enemyState: 0
+  image: {fileID: 0}
   stats:
-    categoryHead: 3
-    categoryTorso: 3
-    categoryLegs: 2
+    category: 0
     health: 15
     maxHP: 15
     speed: 0
@@ -137,6 +136,33 @@ CapsuleCollider:
   m_Height: 1.15
   m_Direction: 1
   m_Center: {x: 0, y: 0.5, z: 0}
+--- !u!54 &816280974104142014
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004982790652352589}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 1
+  m_IsKinematic: 1
+  m_Interpolate: 0
+  m_Constraints: 0
+  m_CollisionDetection: 0
 --- !u!1 &3045206561866432424
 GameObject:
   m_ObjectHideFlags: 0

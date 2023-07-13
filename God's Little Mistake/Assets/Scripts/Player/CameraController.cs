@@ -20,7 +20,7 @@ public class CameraController : GameBehaviour
         {
             case GameManager.GameState.Playing:
 
-                gameObject.transform.position = new Vector3(player.transform.position.x, 3, player.transform.position.z + -3);
+                gameObject.transform.position = new Vector3(player.transform.position.x, 6, player.transform.position.z + -6);
                 break;
 
             case GameManager.GameState.Iventory:

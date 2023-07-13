@@ -11,6 +11,8 @@ public class BaseEnemy : GameBehaviour
 
     public EnemyState enemyState;
 
+
+
     public Renderer image;
     public EnemyStats stats;
 
@@ -43,22 +45,16 @@ public class BaseEnemy : GameBehaviour
         image.material.color = Color.HSVToRGB(H, currentHPpercent, V);
     }
 
-    void Hit()
+    public void Hit()
     {
         if (stats.health > 0)
         {
+            
             stats.health -= _PC.dmg;
             //print(enemyStats.stats.health);
         }
     }
-    void MeleeHit()
-    {
-        if (stats.health > 0)
-        {
-            stats.health -= _MA.DMGOutput;
-            //print(enemyStats.stats.health);
-        }
-    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -71,18 +67,16 @@ public class BaseEnemy : GameBehaviour
             //destroy bullet that hit it
             Destroy(collision.gameObject);
         }
-        if (collision.collider.CompareTag("Melee"))
-        {
-            print("melee hit");
-            //Add hit code here;
-            MeleeHit();
-        }
+
     }
 
     public void Die()
     {
         //eye is for testing
         Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
-        Destroy(this.gameObject);
+
+        Destroy(gameObject);
+
+
     }
 }
