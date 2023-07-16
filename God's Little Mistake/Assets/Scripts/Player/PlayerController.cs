@@ -35,13 +35,6 @@ public class PlayerController : Singleton<PlayerController>
     public Vector3 target;
     bool projectileShot;
 
-    [Header("Melee")]
-    bool meleeCooDown;
-    public GameObject lineHitbox;
-    public GameObject coneHitbox;
-
-    public enum MeleeHitBox { Line, Cone}
-    public MeleeHitBox meleeHitBox;
 
     private void Start()
     {
@@ -58,8 +51,7 @@ public class PlayerController : Singleton<PlayerController>
             _ISitemD.RemoveItemFromInventory(2);    
         }
 
-        UpdateMelee();
-
+ 
 
         switch (_GM.gameState)
         {
@@ -75,9 +67,7 @@ public class PlayerController : Singleton<PlayerController>
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
-                    Vector3 targetPos = new Vector3(hit.point.x, this.transform.position.y, hit.point.z);
-
-                    directional.transform.LookAt(targetPos);
+                    directional.transform.LookAt(hit.point);
                     Mathf.Clamp(directional.transform.rotation.x, 0, 0);
                     Mathf.Clamp(directional.transform.rotation.z, 0, 0);
                 }
@@ -86,7 +76,7 @@ public class PlayerController : Singleton<PlayerController>
                 #region Attacks
 
 
-                if (Input.GetMouseButton(1))
+                if (Input.GetKey(KeyCode.Space))
                 {
 
                     for (int i = 0; playerInventory.Count > i; i++)
@@ -101,7 +91,7 @@ public class PlayerController : Singleton<PlayerController>
 
                                 //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
                                 //changed to use player stats, the primary attack will just change
-                                MeleeAttack(firerate);
+                                MeleeAttack();
                             }
                         }
                     }
@@ -109,7 +99,7 @@ public class PlayerController : Singleton<PlayerController>
                 }
 
 
-                if (Input.GetMouseButton(0))
+                if (Input.GetButton("Fire1"))
                 {
                     for (int i = 0; playerInventory.Count > i; i++)
                     {
@@ -136,7 +126,6 @@ public class PlayerController : Singleton<PlayerController>
 
         }
 
-        //change melee
 
         //change primary
         #region Primary Change Inputs
@@ -176,23 +165,6 @@ public class PlayerController : Singleton<PlayerController>
         #endregion
     }
 
-    void UpdateMelee()
-    {
-        switch(meleeHitBox)
-        {
-            case MeleeHitBox.Line:
-                lineHitbox.SetActive(true);
-                coneHitbox.SetActive(false);
-                lineHitbox.transform.localScale = new Vector3(1,1,range);
-                break;
-            case MeleeHitBox.Cone:
-                lineHitbox.SetActive(false);
-                coneHitbox.SetActive(true);
-                coneHitbox.transform.localScale = new Vector3(1, 1, range);
-                break;
-        }
-    }
-
     void ChangePrimary(int _inventorySlot)
     {
         //check if item is primary
@@ -215,31 +187,13 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    void MeleeAttack(float _firerate)
+    void MeleeAttack()
     {
         var inRangeEnemies = GetComponentInChildren<MeleeRangeCheck>().inRangeEnemies;
 
-        if(!meleeCooDown)
-        {
-            if(inRangeEnemies.Count != 0)
-            {
-                // add that enemey gets it, do with foreach in list, get enemy component then run hit script;
-                print(inRangeEnemies[0]);
+        print(inRangeEnemies[0]);
 
-                foreach (var enemy in inRangeEnemies)
-                {
-                    enemy.GetComponent<BaseEnemy>().Hit();
-                    if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
-
-                }
-
-                print("melee attack");
-                meleeCooDown = true;
-                ExecuteAfterSeconds(_firerate, () => meleeCooDown = false);
-            }
-            
-        }
-
+        //add that enemey gets it, do with foreach in list, get enemy component then run hit script;
     }
 
     void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
@@ -301,7 +255,6 @@ public class PlayerController : Singleton<PlayerController>
         if(collision.collider.CompareTag("EnemyProjectile"))
         {
             print("player has been hit in collision");
-            Hit(collision.gameObject.GetComponent<BaseEnemy>().stats.dmg);
 
             Destroy(collision.gameObject);
             //get dmg from enemy

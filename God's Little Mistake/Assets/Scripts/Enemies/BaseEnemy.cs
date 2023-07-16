@@ -11,7 +11,6 @@ public class BaseEnemy : GameBehaviour
 
     public EnemyState enemyState;
 
-
     public SpriteRenderer image;
     public EnemyStats stats;
 
@@ -28,7 +27,6 @@ public class BaseEnemy : GameBehaviour
         //Health Manager
         if (stats.health <= 0)
         {
-            FindObjectOfType<MeleeRangeCheck>().inRangeEnemies.Remove(gameObject);
             enemyState = EnemyState.Die;
         }
 
@@ -45,16 +43,22 @@ public class BaseEnemy : GameBehaviour
         image.color = Color.HSVToRGB(H, currentHPpercent, V);
     }
 
-    public void Hit()
+    void Hit()
     {
         if (stats.health > 0)
         {
-            
             stats.health -= _PC.dmg;
             //print(enemyStats.stats.health);
         }
     }
-
+    void MeleeHit()
+    {
+        if (stats.health > 0)
+        {
+            stats.health -= _MA.DMGOutput;
+            //print(enemyStats.stats.health);
+        }
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -67,16 +71,18 @@ public class BaseEnemy : GameBehaviour
             //destroy bullet that hit it
             Destroy(collision.gameObject);
         }
-
+        if (collision.collider.CompareTag("Melee"))
+        {
+            print("melee hit");
+            //Add hit code here;
+            MeleeHit();
+        }
     }
 
     public void Die()
     {
         //eye is for testing
         Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
-
-        Destroy(gameObject);
-
-
+        Destroy(this.gameObject);
     }
 }

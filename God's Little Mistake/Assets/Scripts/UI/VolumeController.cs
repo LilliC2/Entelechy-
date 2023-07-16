@@ -2,30 +2,38 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using TMPro;
 
 public class VolumeController : MonoBehaviour
 {
     public Slider volumeSlider;
-    private static float volumeLevel = 1.0f;
+    private const string VolumePrefsKey = "VolumeLevel";
 
     private void Start()
     {
-        if (volumeLevel != 0.0f)
+        // Load the volume level from player prefs if it exists
+        if (PlayerPrefs.HasKey(VolumePrefsKey))
         {
-            SetVolume(volumeLevel);
+            float savedVolume = PlayerPrefs.GetFloat(VolumePrefsKey);
+            SetVolume(savedVolume);
         }
         else
         {
+            // Set the default volume to the slider value
             SetVolume(volumeSlider.value);
         }
 
+        // Add a listener to the slider's value change event
         volumeSlider.onValueChanged.AddListener(SetVolume);
     }
 
-    public void SetVolume(float volume)
+    public void SetVolume(float volumeLevel)
     {
-        AudioListener.volume = volume;
+        // Set the volume using the slider value
+        AudioListener.volume = volumeLevel;
 
-        volumeLevel = volume;
+        // Save the volume level to player prefs
+        PlayerPrefs.SetFloat(VolumePrefsKey, volumeLevel);
+        PlayerPrefs.Save();
     }
 }
