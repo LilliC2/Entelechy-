@@ -13,11 +13,10 @@ public class ItemIdentifier : GameBehaviour
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                
+                print("PICK UP");
                 //pick up item
                 if (_PC.playerInventory.Count < 5)//invenotry cap number here
                 {
-                    print("PICK UP");
                     _UI.CreateItemSelected(id);
                 }
 

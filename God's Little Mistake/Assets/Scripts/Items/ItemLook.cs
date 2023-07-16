@@ -15,14 +15,7 @@ public class ItemLook : MonoBehaviour
     {
 
         //Rotates bullet so it faces the camera
-        Vector3 rotate = new Vector3(45f, this.transform.rotation.y, this.transform.rotation.z);
-        
-
-        if(this.tag.Contains("Projectile"))
-        {
-            rotate = new Vector3(-45f, this.transform.rotation.y, this.transform.rotation.z);
-        }
-
+        Vector3 rotate = new Vector3(-45f, 0f, 0f);
         transform.eulerAngles = rotate;
     }
 }

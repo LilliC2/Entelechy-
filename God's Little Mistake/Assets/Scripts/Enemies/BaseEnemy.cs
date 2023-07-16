@@ -11,12 +11,18 @@ public class BaseEnemy : GameBehaviour
 
     public EnemyState enemyState;
 
+<<<<<<< HEAD
     public SpriteRenderer image;
+=======
+
+
+    public Renderer image;
+>>>>>>> git-checkout--b-GLM-0--Melee-
     public EnemyStats stats;
 
     private void Start()
     {
-        image = GetComponentInChildren<SpriteRenderer>();
+        image = GetComponentInChildren<Renderer>();
 
     }
 
@@ -38,9 +44,9 @@ public class BaseEnemy : GameBehaviour
 
         float H, S, V;
 
-        Color.RGBToHSV(image.color, out H, out S, out V);
+        Color.RGBToHSV(image.material.color, out H, out S, out V);
 
-        image.color = Color.HSVToRGB(H, currentHPpercent, V);
+        image.material.color = Color.HSVToRGB(H, currentHPpercent, V);
     }
 
     void Hit()

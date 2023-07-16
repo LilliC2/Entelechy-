@@ -203,10 +203,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_UiScaleMode: 1
+  m_UiScaleMode: 0
   m_ReferencePixelsPerUnit: 100
   m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 1920, y: 1080}
+  m_ReferenceResolution: {x: 800, y: 600}
   m_ScreenMatchMode: 0
   m_MatchWidthOrHeight: 0
   m_PhysicalUnit: 3
@@ -573,6 +573,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a71b6306feacfef4398b0e3dc39c69b4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroy: 0
+
+  attacks:
+  - atkName: SpitAtk
+    ID: 0
+    category: Mouth
+    active: 0
+    dmg: 1
+    dps: 5
+    fireRate: 2
+    critX: 0
+    critChance: 0
+    range: 1
+    projectile: 1
+    projectileSpeed: 500
+    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
 --- !u!4 &378920751
 Transform:
   m_ObjectHideFlags: 0
@@ -3168,9 +3184,7 @@ MonoBehaviour:
     ID: 0
     inSceneID: 0
     lvl: 0
-    category: 0
-    segment: 0
-    itemType: 0
+    category: Mouth
     currencyValue: 0
     active: 0
     dmg: 5
@@ -3184,8 +3198,6 @@ MonoBehaviour:
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
     modifier: 0
     modifierID: 0
-    icon: {fileID: 0}
-    avtarPrefab: {fileID: 0}
 --- !u!4 &1823708170
 Transform:
   m_ObjectHideFlags: 0
@@ -3529,7 +3541,6 @@ MonoBehaviour:
   dmg: 5
   dps: 0
   range: 0
-  firerate: 0
   projectile: 0
   projectileSpeed: 0
   projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
@@ -3538,9 +3549,7 @@ MonoBehaviour:
     ID: 0
     inSceneID: 0
     lvl: 0
-    category: 0
-    segment: 0
-    itemType: 0
+    category: Mouth
     currencyValue: 0
     active: 0
     dmg: 5
@@ -3553,9 +3562,7 @@ MonoBehaviour:
     projectileSpeed: 500
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
     modifier: 0
-    modifierID: 0
-    icon: {fileID: 0}
-    avtarPrefab: {fileID: 0}
+    modifierID: 
   headSpeed: 1000
   head: {fileID: 1673379733}
   firingPoint: {fileID: 35132813}
