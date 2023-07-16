@@ -3,47 +3,24 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class MeleeRangeCheck : MonoBehaviour
+public class MeleeRangeCheck : GameBehaviour
 {
-
-    [SerializeField] GameObject aimPoint; //Aims at the cursor
-    [SerializeField] float meleeRange = 1.0f;
     public List<GameObject> inRangeEnemies;
-    GameObject obj = null;
-    public GameObject player;
-    
-    private void Update()
+
+
+    private void OnTriggerEnter(Collider other)
     {
-        if (Input.GetMouseButtonDown(1))
+        if (other.CompareTag("Enemy"))
         {
-           
-            for (int i = 0; i < inRangeEnemies.Count; i++)
-            {
-                float dist = Vector3.Distance(player.transform.position, inRangeEnemies[i].gameObject.transform.position);
-                if (dist > meleeRange)
-                {
-                    inRangeEnemies.Remove(inRangeEnemies[i]);
-                }
-            }
+            inRangeEnemies.Add(other.gameObject);
         }
-            RaycastHit hit;
-            // Does the ray intersect any objects excluding the player layer
-            if (Physics.Raycast(transform.position, transform.TransformDirection(aimPoint.transform.position), out hit, meleeRange))
-            {
-                Debug.DrawRay(transform.position, transform.TransformDirection(Vector3.forward) * hit.distance, Color.magenta);
-                Debug.Log("Did Hit");
-                obj = hit.collider.gameObject;
-                EnemyCheck();
-            }
-        
     }
 
-    void EnemyCheck()
+    private void OnTriggerExit(Collider other)
     {
-        if (obj.tag == "Enemy")
+        if (other.CompareTag("Enemy"))
         {
-            inRangeEnemies.Add(obj);
-            obj = null;
+            inRangeEnemies.Remove(other.gameObject);
         }
     }
 }
