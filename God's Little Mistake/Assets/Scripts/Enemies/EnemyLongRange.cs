@@ -129,13 +129,6 @@ public class EnemyLongRange : GameBehaviour
     }
 
 
-
-
-
-
-
-
-
     //visualise sight range
     private void OnDrawGizmosSelected()
     {

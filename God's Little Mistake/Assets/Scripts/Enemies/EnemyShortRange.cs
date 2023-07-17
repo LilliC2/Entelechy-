@@ -5,215 +5,144 @@ using UnityEngine.AI;
 
 public class EnemyShortRange : GameBehaviour
 {
-    public float detectionRange = 10f;
-    public float chaseSpeed = 3f;
-    public float roamSpeed = 1.5f;
-    public float attackRange = 2f;
-    public int attackDamage = 10;
-    public float attackCooldown = 2f;
-    public int maxHealth = 100;
-    public float roamingRadius = 5f;
-    public float rotationSpeed = 5f;
+    //public float detectionRange = 10f;
+    //public float chaseSpeed = 3f;
+    //public float roamSpeed = 1.5f;
+    //public float attackRange = 2f;
+    //public int attackDamage = 10;
+    //public float attackCooldown = 2f;
+    //public int maxHealth = 100;
+    //public float roamingRadius = 5f;
+    //public float rotationSpeed = 5f;
 
-    private float currentHealth;
-    private bool isChasing = false;
-    private bool canAttack = true;
-    private Transform player;
-    private Vector3 roamingPosition;
-    public NavMeshAgent navMeshAgent;
-    private Animator animator;
+    //private float currentHealth;
+    //private bool isChasing = false;
+    //private bool canAttack = true;
+    //private Transform player;
+    //private Vector3 roamingPosition;
+    //public NavMeshAgent navMeshAgent;
+    //private Animator animator;
 
-    public float MeleeDMG;
+    //public float MeleeDMG;
+
+    [Header("Enemy Navigation")]
+    bool canAttack;
+    public GameObject player;
+
+    public NavMeshAgent agent;
+
+    //patrolling
+    public Vector3 walkPoint;
+    public float walkPointRange;
+    public float attackRange =1;
+
+    public bool playerInSightRange, playerInAttackRange, playerInChaseRange;
+    public bool isPatrolling;
+
+    public LayerMask whatIsGround, whatIsPlayer;
+
+
+    BaseEnemy enemyStats;
+    BaseEnemy BaseEnemy;
+
 
     private void Start()
     {
-        currentHealth = maxHealth;
-        player = GameObject.FindGameObjectWithTag("Player").transform;
         enemyStats = GetComponent<BaseEnemy>();
-        navMeshAgent = GetComponent<NavMeshAgent>();
-        animator = GetComponent<Animator>();
-        GenerateRoamingPosition();
+        BaseEnemy = GetComponent<BaseEnemy>();
+        agent = GetComponent<NavMeshAgent>();
     }
-
-    BaseEnemy enemyStats;
-
-    public enum EnemyState
-    {
-        Patrolling, Chase, Attacking, Die
-    }
-
-    public EnemyState enemyState;
+  
     private void Update()
     {
-        switch (enemyState)
+        //check for the sight and attack range
+        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
         {
-            case EnemyState.Patrolling:
-                if (Vector3.Distance(transform.position, player.position) <= detectionRange)
-                {
-                    isChasing = true;
-                    enemyState = EnemyState.Chase;
-                }
-                else
-                {
-                    isChasing = false;
-                    Roam();
-                }
+            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            
+            playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range+1, whatIsPlayer);
+
+            if (playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Attacking;
+            if (playerInSightRange && !playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+            
+            if (!playerInSightRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+            
+        }
+
+
+        switch (BaseEnemy.enemyState)
+        {
+            case BaseEnemy.EnemyState.Patrolling:
+                Patroling();
+                walkPointRange = 5;
                 break;
-            case EnemyState.Chase:
-                if (Vector3.Distance(transform.position, player.position) <= attackRange)
-                {
-                    enemyState = EnemyState.Attacking;
-                    
-                }
-                break;
-            case EnemyState.Attacking:
-                Attack();
-                if (Vector3.Distance(transform.position, player.position) > detectionRange)
-                {
-                    enemyState = EnemyState.Patrolling;
-                }
-                else
-                {
-                    Chase();
-                }
+            case BaseEnemy.EnemyState.Chase:
+
+                Chase();
 
                 break;
-            case EnemyState.Die:
-                // Death animation, etc.
+            case BaseEnemy.EnemyState.Attacking:
+                isPatrolling = false;
+                walkPointRange = 2;
+
+                print("attacking");
+                Patroling();
+                
+                agent.isStopped = true;
+                PerformAttack(enemyStats.stats.fireRate);
+                //do attack
+
+                break;
+            case BaseEnemy.EnemyState.Die:
+                Patroling();
+                //death animation etc
                 print("Dead");
-                Destroy(this.gameObject);
+                BaseEnemy.Die();
                 break;
         }
     }
 
-    private void FixedUpdate()
+
+    void Patroling()
     {
-        if (isChasing)
-        {
-            navMeshAgent.SetDestination(player.position);
-        }
+        var pos = SearchWalkPoint();
+        agent.SetDestination(pos);
+
+        if (Vector3.Distance(transform.position, pos) < 1f) Patroling();
+        //yield return new WaitForSeconds(Random.Range(3, 6));
+        //StartCoroutine(PatrolingIE());
+
     }
 
-    //void Hit()
-    //{
-    //    if (enemyStats.stats.health != 0)
-    //    {
-    //        enemyStats.stats.health -= _PC.dmg;
-    //        print(enemyStats.stats.health);
-    //        StopAllCoroutines();
-    //    }
-    //    else
-    //    {
-    //        Roam();
-    //    }
-    //}
-
-    private void OnCollisionEnter(Collision collision)
+    private Vector3 SearchWalkPoint()
     {
-        if (collision.collider.CompareTag("Projectile"))
-        {
-           //hit
-        }
-        if (collision.collider.CompareTag("Melee"))
-        {
-            MeleeDMG = collision.gameObject.GetComponent<MeleeAttack>().DMGOutput;
-            TakeDamage(MeleeDMG);
-        }
+        return transform.position + Random.insideUnitSphere * walkPointRange;
     }
 
-    private void Attack()
+    private void PerformAttack(float _firerate)
     {
-        if (canAttack)
+        if(!canAttack)
         {
-            StartCoroutine(PerformAttack());
+            //attack shit
+            canAttack = true;
+            ExecuteAfterSeconds(_firerate, () => canAttack = false);
         }
-    }
-
-    private IEnumerator PerformAttack()
-    {
-        canAttack = false;
-
-        while (enemyState == EnemyState.Attacking)
-        {
-            if (Vector3.Distance(transform.position, player.position) <= attackRange)
-            {
-                Debug.Log("Enemy performs melee attack!");
-                // player.GetComponent<PlayerHealth>().TakeDamage(attackDamage);
-            }
-
-            yield return new WaitForSeconds(attackCooldown);
-        }
-
-        canAttack = true;
-    }
-
-    //private IEnumerator AttackCooldown()
-    //{
-    //    canAttack = false;
-    //    yield return new WaitForSeconds(attackCooldown);
-    //    canAttack = true;
-    //}
-
-    public void TakeDamage(float damage)
-    {
-        currentHealth -= damage;
-
-        if (currentHealth <= 0)
-        {
-            Die();
-        }
-    }
-
-    private void Die()
-    {
-        Debug.Log("Enemy defeated!");
-
-        Destroy(gameObject);
     }
 
     private void Chase()
     {
-        float distanceToPlayer = Vector3.Distance(transform.position, player.position);
-
-        if (distanceToPlayer <= attackRange)
-        {
-            enemyState = EnemyState.Attacking; 
-            Attack();
-        }
-        else if (distanceToPlayer > detectionRange)
-        {
-            enemyState = EnemyState.Patrolling; 
-        }
-        else
-        {
-            navMeshAgent.SetDestination(player.position);
-        }
-    }
-    private void Roam()
-    {
-        if (!navMeshAgent.pathPending && navMeshAgent.remainingDistance < 0.5f)
-        {
-            GenerateRoamingPosition();
-            navMeshAgent.SetDestination(roamingPosition);
-        }
+        print("chase");
+        agent.SetDestination(player.transform.position);
     }
 
-    private void GenerateRoamingPosition()
-    {
-        roamingPosition = transform.position + Random.insideUnitSphere * roamingRadius;
-        roamingPosition.y = transform.position.y;
-
-        NavMeshHit navHit;
-        NavMesh.SamplePosition(roamingPosition, out navHit, roamingRadius, -1);
-        roamingPosition = navHit.position;
-    }
 
     private void OnDrawGizmos()
     {
-        Gizmos.color = Color.yellow;
-        Gizmos.DrawWireSphere(transform.position, detectionRange);
         Gizmos.color = Color.red;
         Gizmos.DrawWireSphere(transform.position, attackRange);
+        Gizmos.color = Color.yellow;
+        Gizmos.DrawWireSphere(transform.position, enemyStats.stats.range);
+
     }
 
 }
