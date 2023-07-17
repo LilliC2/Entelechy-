@@ -33,6 +33,7 @@ public class UIManager : Singleton<UIManager>
     public Image invenSlot3;
     public Image invenSlot4;
     public Image invenSlot5;
+    public Image invenSlot6;
 
     [Header("Item Hover Over Panel")]
     public GameObject statsPopUpPanel;
@@ -103,7 +104,7 @@ public class UIManager : Singleton<UIManager>
 
     public void UpdateInventorySlotImages()
     {
-        for (int i = 0; 6 > i; i++)
+        for (int i = 0; 7 > i; i++)
         {
             switch (i)
             {
@@ -161,6 +162,13 @@ public class UIManager : Singleton<UIManager>
                     }
                     else invenSlot5.sprite = _PC.playerInventory[i].icon; 
                     break;
+                case 6:
+                    if (!(i >= -1 && i < _PC.playerInventory.Count))
+                    {
+                        invenSlot6.sprite = emptySlotSprite;
+                    }
+                    else invenSlot6.sprite = _PC.playerInventory[i].icon; 
+                    break;
             }
 
 
@@ -171,52 +179,11 @@ public class UIManager : Singleton<UIManager>
 
     public void InventorySlotHover(int _whichSlot)
     {
-        switch (_whichSlot)
-        {
-            case 0:
-                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
-                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
-                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
-                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
-
-                break;
-            case 1:
-                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
-                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
-                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
-                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
-                break;
-            case 2:
-                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
-                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
-                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
-                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
-                break;
-            case 3:
-                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
-                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
-                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
-                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
-                break;
-            case 4:
-                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
-                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
-                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
-                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
-                break;
-            case 5:
-                invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
-                invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
-                invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
-                invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-                invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
-                break;
-        }
+        invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
+        invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
+        invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
+        invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
+        invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
     }
 
     #endregion
@@ -243,12 +210,14 @@ public class UIManager : Singleton<UIManager>
     {
         if(canEquip)
         {
+            print("slot is " + _slot);
             //set piece rotation
             switch (_slot)
             {
  
                 case 1:
                     rotation = 90;
+                    
                 break;  
                 case 2:
                     rotation = 270;
@@ -257,8 +226,15 @@ public class UIManager : Singleton<UIManager>
                     rotation = 90;
                 break;  
                 case 4:
-                    rotation = 270;
-                break;
+                    if (heldItem.segment == Item.Segment.Torso) rotation = 0;
+                    else
+                    {
+                        print("270 rotation");
+                        rotation = 270;
+                    }
+
+                    break;
+
                 default:
                     rotation = 0;
                     break;
@@ -286,8 +262,12 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CheckSlotHover(int _slot)
     {
+        print(_slot);
+
         if (cursor.sprite != defaultCursor && cursor.sprite != cursorClick)
         {
+            print(heldItem.itemName);
+
             if (_AVTAR.slotsOnPlayer[_slot].transform.childCount == 0) //check if child object is there
             {
                 //check right segment if slot from 1 to 2 the head etc. 

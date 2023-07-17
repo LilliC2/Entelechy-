@@ -45,6 +45,8 @@ public class PlayerController : Singleton<PlayerController>
         controller = gameObject.GetComponent<CharacterController>();
         _UI.UpdateHealthText(health);
 
+        //add stats for the 1 item in the inventory
+        _ISitemD.AddPassiveItem(0);
     }
 
     void Update()

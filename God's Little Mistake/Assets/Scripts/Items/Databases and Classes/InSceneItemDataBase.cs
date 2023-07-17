@@ -15,7 +15,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         
 
         //move item to inventory
-        if (_PC.playerInventory.Count < 6)
+        if (_PC.playerInventory.Count < 7)
         {
 
             _UI.statsPopUpPanel.SetActive(false);
@@ -127,7 +127,9 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         _PC.dps += _PC.playerInventory[_inventoryID].dps;
         _PC.range += _PC.playerInventory[_inventoryID].range;
         _PC.projectileSpeed += _PC.playerInventory[_inventoryID].projectileSpeed;
-        _PC.firerate += _PC.playerInventory[_inventoryID].fireRate;
+
+
+        _PC.firerate -= _PC.playerInventory[_inventoryID].fireRate;
     }
 
     /// <summary>
