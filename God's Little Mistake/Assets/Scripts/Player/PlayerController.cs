@@ -7,7 +7,7 @@ public class PlayerController : Singleton<PlayerController>
     private CharacterController controller;
     private Vector3 playerVelocity;
 
-    [Header ("Player Stats")]
+    [Header("Player Stats")]
     public float health;
     public float speed;
     public float dmg;
@@ -32,6 +32,13 @@ public class PlayerController : Singleton<PlayerController>
     public Vector3 target;
     bool projectileShot;
 
+    [Header("Melee")]
+    bool meleeCooDown;
+    public GameObject lineHitbox;
+    public GameObject coneHitbox;
+
+    public enum MeleeHitBox { Line, Cone }
+    public MeleeHitBox meleeHitBox;
 
     private void Start()
     {
@@ -45,18 +52,12 @@ public class PlayerController : Singleton<PlayerController>
         //for testing
         if (Input.GetKeyDown(KeyCode.K))
         {
-            _ISitemD.RemoveItemFromInventory(2);    
+            _ISitemD.RemoveItemFromInventory(2);
         }
 
-<<<<<<< HEAD
- 
-
-        switch (_GM.gameState)
-=======
         UpdateMelee();
 
-        switch(_GM.gameState)
->>>>>>> git-checkout--b-GLM-0--Melee-
+        switch (_GM.gameState)
         {
             case GameManager.GameState.Playing:
 
@@ -70,7 +71,9 @@ public class PlayerController : Singleton<PlayerController>
                 RaycastHit hit;
                 if (Physics.Raycast(ray, out hit))
                 {
-                    directional.transform.LookAt(hit.point);
+                    Vector3 targetPos = new Vector3(hit.point.x, this.transform.position.y, hit.point.z);
+
+                    directional.transform.LookAt(targetPos);
                     Mathf.Clamp(directional.transform.rotation.x, 0, 0);
                     Mathf.Clamp(directional.transform.rotation.z, 0, 0);
                 }
@@ -79,7 +82,7 @@ public class PlayerController : Singleton<PlayerController>
                 #region Attacks
 
 
-                if (Input.GetKey(KeyCode.Space))
+                if (Input.GetMouseButton(1))
                 {
 
                     for (int i = 0; playerInventory.Count > i; i++)
@@ -94,23 +97,23 @@ public class PlayerController : Singleton<PlayerController>
 
                                 //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
                                 //changed to use player stats, the primary attack will just change
-                                MeleeAttack();
+                                MeleeAttack(firerate);
                             }
                         }
                     }
-                    
+
                 }
 
 
-                if (Input.GetButton("Fire1"))
+                if (Input.GetMouseButton(0))
                 {
                     for (int i = 0; playerInventory.Count > i; i++)
                     {
                         //check for primary
-                        if(playerInventory[i].active)
+                        if (playerInventory[i].active)
                         {
                             //check if primary is projectile
-                            if(playerInventory[i].projectile)
+                            if (playerInventory[i].projectile)
                             {
                                 //shoot
 
@@ -129,36 +132,37 @@ public class PlayerController : Singleton<PlayerController>
 
         }
 
+        //change melee
 
         //change primary
         #region Primary Change Inputs
 
-        if(Input.GetKeyDown(KeyCode.Alpha1))
+        if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ChangePrimary(0);
         }
-        
-        if(Input.GetKeyDown(KeyCode.Alpha2))
+
+        if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             ChangePrimary(1);
         }
-        
-        if(Input.GetKeyDown(KeyCode.Alpha3))
+
+        if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             ChangePrimary(2);
         }
-        
-        if(Input.GetKeyDown(KeyCode.Alpha4))
+
+        if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             ChangePrimary(3);
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha5))
+        if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             ChangePrimary(4);
         }
 
-        if(Input.GetKeyDown(KeyCode.Alpha6))
+        if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             ChangePrimary(5);
         }
@@ -166,6 +170,23 @@ public class PlayerController : Singleton<PlayerController>
 
 
         #endregion
+    }
+
+    void UpdateMelee()
+    {
+        switch (meleeHitBox)
+        {
+            case MeleeHitBox.Line:
+                lineHitbox.SetActive(true);
+                coneHitbox.SetActive(false);
+                lineHitbox.transform.localScale = new Vector3(1, 1, range);
+                break;
+            case MeleeHitBox.Cone:
+                lineHitbox.SetActive(false);
+                coneHitbox.SetActive(true);
+                coneHitbox.transform.localScale = new Vector3(1, 1, range);
+                break;
+        }
     }
 
     void ChangePrimary(int _inventorySlot)
@@ -190,13 +211,31 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    void MeleeAttack()
+    void MeleeAttack(float _firerate)
     {
         var inRangeEnemies = GetComponentInChildren<MeleeRangeCheck>().inRangeEnemies;
 
-        print(inRangeEnemies[0]);
+        if (!meleeCooDown)
+        {
+            if (inRangeEnemies.Count != 0)
+            {
+                // add that enemey gets it, do with foreach in list, get enemy component then run hit script;
+                print(inRangeEnemies[0]);
 
-        //add that enemey gets it, do with foreach in list, get enemy component then run hit script;
+                foreach (var enemy in inRangeEnemies)
+                {
+                    enemy.GetComponent<BaseEnemy>().Hit();
+                    if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
+
+                }
+
+                print("melee attack");
+                meleeCooDown = true;
+                ExecuteAfterSeconds(_firerate, () => meleeCooDown = false);
+            }
+
+        }
+
     }
 
     void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
@@ -239,7 +278,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         print("player has been hit");
         health -= _dmg;
-        if(health >0)
+        if (health > 0)
         {
             _UI.UpdateHealthText(health);
         }
@@ -247,14 +286,15 @@ public class PlayerController : Singleton<PlayerController>
         {
             //GAME OVER
         }
-        
+
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if(collision.collider.CompareTag("EnemyProjectile"))
+        if (collision.collider.CompareTag("EnemyProjectile"))
         {
             print("player has been hit in collision");
+            Hit(collision.gameObject.GetComponent<BaseEnemy>().stats.dmg);
 
             Destroy(collision.gameObject);
             //get dmg from enemy

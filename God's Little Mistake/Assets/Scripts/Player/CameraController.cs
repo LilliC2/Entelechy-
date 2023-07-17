@@ -23,6 +23,7 @@ public class CameraController : GameBehaviour
                 gameObject.transform.position = new Vector3(player.transform.position.x, 6, player.transform.position.z + -6);
                 break;
 
+            //MIGHT NOT USE
             case GameManager.GameState.Iventory:
 
                 gameObject.transform.DOMoveY(2f, 2);
