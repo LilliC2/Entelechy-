@@ -96,7 +96,7 @@ public class PlayerController : Singleton<PlayerController>
                             if (!playerInventory[i].projectile)
                             {
                                 //shoot
-
+                                print("do melee attack");
                                 //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
                                 //changed to use player stats, the primary attack will just change
                                 MeleeAttack(firerate);
@@ -130,6 +130,16 @@ public class PlayerController : Singleton<PlayerController>
 
                 #endregion
 
+                //DROP ITEM IF HOLDING
+                if(_UI.heldItem != null)
+                {
+                    print("holding an item");
+                    if(Input.GetKeyDown(KeyCode.E))
+                    {
+                        _UI.DropHeldItem();
+                    }
+                }
+
                 break;
 
         }
@@ -146,6 +156,7 @@ public class PlayerController : Singleton<PlayerController>
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
+            print("Chaning primary");
             ChangePrimary(1);
         }
 

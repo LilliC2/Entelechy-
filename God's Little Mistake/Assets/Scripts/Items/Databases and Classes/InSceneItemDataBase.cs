@@ -111,6 +111,8 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
     }
 
+
+
     /// <summary>
     /// Add passive item buffs to player stats
     /// </summary>

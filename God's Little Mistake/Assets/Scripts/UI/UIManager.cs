@@ -289,6 +289,23 @@ public class UIManager : Singleton<UIManager>
             }
         }
     }
+
+    public void DropHeldItem()
+    {
+        //change cursor
+        cursor.sprite = defaultCursor;
+
+        //create item on player
+        var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
+        _ISitemD.inSceneItemDataBase.Add(heldItem);
+
+
+        //add to scene array
+        int index = _ISitemD.inSceneItemDataBase.Count - 1;
+        _ISitemD.inSceneItemDataBase[index].inSceneID = index;
+
+        heldItem = null;
+    }
         
     /// <summary>
     /// Changes colour of slots when mouse exits hover
