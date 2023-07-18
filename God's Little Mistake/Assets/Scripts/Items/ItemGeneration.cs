@@ -41,6 +41,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
             {
                 //possibleDrops.Add(_ItemD.itemDataBase[i]);
                 possibleDropsIndex.Add(i);
+                print("Item added to possible drops CATEGORY: " + _category + i);
             }
         }
 

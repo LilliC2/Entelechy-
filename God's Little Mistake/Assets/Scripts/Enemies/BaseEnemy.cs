@@ -83,6 +83,7 @@ public class BaseEnemy : GameBehaviour
     {
         //eye is for testing
         Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
+        print("Spawning item of " + stats.category.ToString() + " category");
         Destroy(this.gameObject);
     }
 }
