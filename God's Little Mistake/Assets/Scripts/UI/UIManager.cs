@@ -55,6 +55,7 @@ public class UIManager : Singleton<UIManager>
     private void Start()
     {
         UpdateInventorySlotImages();
+        heldItem = null;
     }
 
     private void Update()
