@@ -6,6 +6,7 @@ public class PlayerController : Singleton<PlayerController>
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
+    public BearTrap bearTrap;
 
     [Header("Player Stats")]
     public float health;
@@ -36,6 +37,7 @@ public class PlayerController : Singleton<PlayerController>
     bool meleeCooDown;
     public GameObject lineHitbox;
     public GameObject coneHitbox;
+
 
     public enum MeleeHitBox { Line, Cone }
     public MeleeHitBox meleeHitBox;
