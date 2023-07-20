@@ -209,38 +209,26 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void EquipImage(int _slot)
     {
-        if(canEquip)
+        bool flip = false;
+
+        if (canEquip)
         {
             print("slot is " + _slot);
             //set piece rotation
             switch (_slot)
             {
- 
-                case 1:
-                    rotation = 90;
-                    
-                break;  
+
                 case 2:
-                    rotation = 270;
-                break; 
-                case 3:
-                    rotation = 90;
-                break;  
-                case 4:
-                    if (heldItem.segment == Item.Segment.Torso) rotation = 0;
-                    else
-                    {
-                        print("270 rotation");
-                        rotation = 270;
-                    }
-
+                    flip = true;
                     break;
-
+                case 5:
+                    flip = true;
+                    break;
                 default:
                     rotation = 0;
                     break;
 
-            
+
             }
 
 
@@ -249,6 +237,7 @@ public class UIManager : Singleton<UIManager>
             print("ITEM ADDED TO PLAYER");
             var item = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
             item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
+            if (flip) item.transform.localScale = new Vector3(-1, 0, 0);
             item.name = item.name + heldItem.ID;
 
             cursor.sprite = defaultCursor;

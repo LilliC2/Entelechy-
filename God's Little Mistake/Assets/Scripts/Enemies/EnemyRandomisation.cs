@@ -4,19 +4,103 @@ using UnityEngine;
 
 public class EnemyRandomisation : GameBehaviour
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+    float rotation;
+    public GameObject[] slots;
+
+    string[] categoryHead = new string[] { "Eyes", "Horns" };
+    string[] categoryTorso = new string[] { "Slappies", "Punchies", "Launchers" };
+    string[] categoryLegs = new string[] { "Legs", "Crawlies"};
+
 
     // Update is called once per frame
-    void Update()
+    void Start()
     {
         //
 
         //each enemy needs atleast legs
 
-        //random
+        //Top slot
+        //HEAD
+        if(Random.Range(0,2) == 1)
+        {
+            EquipItem(0, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length )]));
+
+        }
+        
+        if(Random.Range(0, 2) == 1)
+        {
+            EquipItem(1, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
+
+        }
+        if(Random.Range(0, 2) == 1)
+        {
+            EquipItem(2, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
+
+        }
+        
+        //MOUTH
+        if(Random.Range(0, 2) == 1)
+        {
+            EquipItem(3, GenerateItem("Mouth"));
+
+
+        }
+
+        //TORSO
+        if (Random.Range(0, 2) == 1)
+        {
+            EquipItem(4, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
+
+        }
+        if (Random.Range(0, 2) == 1)
+        {
+            EquipItem(5, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
+
+        }
+
+        //LEGS
+        EquipItem(6, GenerateItem(categoryLegs[Random.Range(0,categoryLegs.Length)]));
+
+    }
+
+    void EquipItem(int _slot, GameObject _prefab)
+    {
+        bool flip = false;
+        switch (_slot)
+        {
+
+            case 2:
+                flip = true;
+                break;
+            case 5:
+                flip = true;
+                break;
+            default:
+                rotation = 0;
+                break;
+
+
+        }
+        var item = Instantiate(_prefab, slots[_slot].transform);
+        item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
+        if(flip) item.transform.localScale = new Vector3(-1, 0, -1);
+
+
+    }
+
+    public GameObject GenerateItem(string _category)
+    {
+        GameObject prefab = null;
+
+        for (int i = 0; i < _ItemD.itemDataBase.Length; i++)
+        {
+            if (_ItemD.itemDataBase[i].category.ToString() == _category)
+            {
+                //possibleDrops.Add(_ItemD.itemDataBase[i]);
+                prefab = _ItemD.itemDataBase[i].avtarPrefab;
+
+            }
+        }
+        return prefab;
     }
 }
