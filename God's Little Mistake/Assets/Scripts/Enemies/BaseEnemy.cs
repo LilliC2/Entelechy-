@@ -11,13 +11,20 @@ public class BaseEnemy : GameBehaviour
 
     public EnemyState enemyState;
 
+    public EnemyRandomisation enemyRnd;
+
     public SpriteRenderer image;
     public EnemyStats stats;
 
     private void Start()
     {
         image = GetComponentInChildren<SpriteRenderer>();
+        enemyRnd = GetComponentInChildren<EnemyRandomisation>();
 
+        string cat = enemyRnd.categories[Random.Range(0, enemyRnd.categories.Count)];
+
+        stats.category = (EnemyStats.Category)System.Enum.Parse(typeof(EnemyStats.Category), cat);
+        print("this enemies category is " + cat + " and is set to " + stats.category);
     }
 
     private void Update()

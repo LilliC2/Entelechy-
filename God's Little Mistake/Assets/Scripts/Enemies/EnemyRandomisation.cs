@@ -11,17 +11,32 @@ public class EnemyRandomisation : GameBehaviour
     string[] categoryTorso = new string[] { "Slappies", "Punchies", "Launchers" };
     string[] categoryLegs = new string[] { "Legs", "Crawlies"};
 
+    public List<string> categories;
+
+    public Sprite[] enemySpritesArray;
+    public SpriteRenderer enemySprite;
+
+    public Color[] hueArray;
+    Color colour;
+
 
     // Update is called once per frame
     void Start()
     {
         //
+        colour = hueArray[Random.Range(0, hueArray.Length)];
+
+        enemySprite.sprite = enemySpritesArray[Random.Range(0, enemySpritesArray.Length)];
+
+
+        enemySprite.color = colour;
+
 
         //each enemy needs atleast legs
 
         //Top slot
         //HEAD
-        if(Random.Range(0,2) == 1)
+        if (Random.Range(0,2) == 1)
         {
             EquipItem(0, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length )]));
 
@@ -61,6 +76,8 @@ public class EnemyRandomisation : GameBehaviour
         //LEGS
         EquipItem(6, GenerateItem(categoryLegs[Random.Range(0,categoryLegs.Length)]));
 
+
+
     }
 
     void EquipItem(int _slot, GameObject _prefab)
@@ -85,12 +102,16 @@ public class EnemyRandomisation : GameBehaviour
         item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
         if(flip) item.transform.localScale = new Vector3(-1, 0, -1);
 
+        SpriteRenderer sprite = item.GetComponentInChildren<SpriteRenderer>();
+        sprite.color = colour;
 
     }
 
     public GameObject GenerateItem(string _category)
     {
         GameObject prefab = null;
+
+        categories.Add(_category);
 
         for (int i = 0; i < _ItemD.itemDataBase.Length; i++)
         {
