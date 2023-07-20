@@ -36,7 +36,7 @@ public class RandomiseProps : GameBehaviour
                     spawnPoint = hit.position;
                     Instantiate(props[RandomIntBetweenTwoInt(0, props.Length)], spawnPoint, Quaternion.identity, parent.transform);
                 }
-                print("i=" + i + " numofprops spawn " + numOfPropsSpawns);
+                //print("i=" + i + " numofprops spawn " + numOfPropsSpawns);
 
                 if (i == numOfPropsSpawns - 1) isSpawningProps = false;
             }

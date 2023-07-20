@@ -93,7 +93,7 @@ public class UIManager : Singleton<UIManager>
     public void InvenSegmentPopUp()
     {
         var rt = invenSegementPopUpPanel.GetComponent<RectTransform>();
-        print(rt.anchoredPosition);
+        //print(rt.anchoredPosition);
         rt.anchoredPosition = new Vector2(522.75f, -400.00f);
         //headSegementPopUpPanel.transform.DOMove(new Vector3(234.489014f, -343f, 0), 1); //COULD ADD EASE HERE;
     }

@@ -5,25 +5,6 @@ using UnityEngine.AI;
 
 public class EnemyShortRange : GameBehaviour
 {
-    //public float detectionRange = 10f;
-    //public float chaseSpeed = 3f;
-    //public float roamSpeed = 1.5f;
-    //public float attackRange = 2f;
-    //public int attackDamage = 10;
-    //public float attackCooldown = 2f;
-    //public int maxHealth = 100;
-    //public float roamingRadius = 5f;
-    //public float rotationSpeed = 5f;
-
-    //private float currentHealth;
-    //private bool isChasing = false;
-    //private bool canAttack = true;
-    //private Transform player;
-    //private Vector3 roamingPosition;
-    //public NavMeshAgent navMeshAgent;
-    //private Animator animator;
-
-    //public float MeleeDMG;
 
     [Header("Enemy Navigation")]
     bool canAttack;
@@ -41,7 +22,6 @@ public class EnemyShortRange : GameBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
-
     BaseEnemy enemyStats;
     BaseEnemy BaseEnemy;
 
@@ -51,50 +31,39 @@ public class EnemyShortRange : GameBehaviour
         enemyStats = GetComponent<BaseEnemy>();
         BaseEnemy = GetComponent<BaseEnemy>();
         agent = GetComponent<NavMeshAgent>();
+        agent.SetDestination(RandomNavSphere());
     }
   
     private void Update()
     {
-        //check for the sight and attack range
-        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
-        {
-            playerInAttackRange = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
-            
-            playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range+1, whatIsPlayer);
-
-            if (playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Attacking;
-            if (playerInSightRange && !playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
-            
-            if (!playerInSightRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
-            
-        }
+        playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range + 1, whatIsPlayer);
+        playerInAttackRange = Physics.CheckSphere(transform.position, enemyStats.stats.range, whatIsPlayer);
+        if (playerInSightRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+        if(playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Attacking;
+        else if (!playerInSightRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
 
 
         switch (BaseEnemy.enemyState)
         {
             case BaseEnemy.EnemyState.Patrolling:
-                Patroling();
-                walkPointRange = 5;
+                if(agent.remainingDistance <= agent.stoppingDistance)
+                {
+                    walkPointRange = 5;
+                    agent.SetDestination(RandomNavSphere());
+                }
+                    
                 break;
             case BaseEnemy.EnemyState.Chase:
-
-                Chase();
-
+                agent.SetDestination(player.transform.position);
+                
                 break;
             case BaseEnemy.EnemyState.Attacking:
-                isPatrolling = false;
-                walkPointRange = 2;
-
-                print("attacking");
-                Patroling();
                 
-                agent.isStopped = true;
                 PerformAttack(enemyStats.stats.fireRate);
-                //do attack
+
 
                 break;
             case BaseEnemy.EnemyState.Die:
-                Patroling();
                 //death animation etc
                 print("Dead");
                 BaseEnemy.Die();
@@ -103,36 +72,32 @@ public class EnemyShortRange : GameBehaviour
     }
 
 
-    void Patroling()
+    public Vector3 RandomNavSphere()
     {
-        var pos = SearchWalkPoint();
-        agent.SetDestination(pos);
+        Vector3 finalPos = Vector3.zero;
+        Vector3 randomPos = Random.insideUnitSphere * walkPointRange;
+        randomPos += transform.position;
+        if(NavMesh.SamplePosition(randomPos, out NavMeshHit hit, walkPointRange, NavMesh.AllAreas))
+        {
+            print("Get new pos");
+            finalPos = hit.position;
+        }
 
-        if (Vector3.Distance(transform.position, pos) < 1f) Patroling();
-        //yield return new WaitForSeconds(Random.Range(3, 6));
-        //StartCoroutine(PatrolingIE());
-
-    }
-
-    private Vector3 SearchWalkPoint()
-    {
-        return transform.position + Random.insideUnitSphere * walkPointRange;
+        return finalPos; 
     }
 
     private void PerformAttack(float _firerate)
     {
         if(!canAttack)
         {
+            print("Attack");
             //attack shit
+
+            player.GetComponent<PlayerController>().health -= enemyStats.stats.dmg;
+
             canAttack = true;
             ExecuteAfterSeconds(_firerate, () => canAttack = false);
         }
-    }
-
-    private void Chase()
-    {
-        print("chase");
-        agent.SetDestination(player.transform.position);
     }
 
 

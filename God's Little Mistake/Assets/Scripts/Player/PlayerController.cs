@@ -58,6 +58,7 @@ public class PlayerController : Singleton<PlayerController>
         }
 
         UpdateMelee();
+        _UI.UpdateHealthText(health);   
 
         switch (_GM.gameState)
         {
