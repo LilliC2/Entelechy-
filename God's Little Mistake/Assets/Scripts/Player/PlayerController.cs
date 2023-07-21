@@ -6,6 +6,7 @@ public class PlayerController : Singleton<PlayerController>
 {
     private CharacterController controller;
     private Vector3 playerVelocity;
+    public BearTrap bearTrap;
 
     [Header("Player Stats")]
     public float health;
