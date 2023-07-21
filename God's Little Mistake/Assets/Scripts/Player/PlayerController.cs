@@ -9,6 +9,7 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Player Stats")]
     public float health;
+    public float maxHP;
     public float speed;
     public float dmg;
     public float dps;
@@ -42,6 +43,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Start()
     {
+        health = maxHP;
         controller = gameObject.GetComponent<CharacterController>();
         _UI.UpdateHealthText(health);
 
