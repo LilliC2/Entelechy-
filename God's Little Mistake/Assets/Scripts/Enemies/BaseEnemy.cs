@@ -15,6 +15,7 @@ public class BaseEnemy : GameBehaviour
 
     public SpriteRenderer image;
     public EnemyStats stats;
+    public GameObject healPool;
 
     private void Start()
     {
@@ -89,8 +90,21 @@ public class BaseEnemy : GameBehaviour
     public void Die()
     {
         //eye is for testing
-        Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
-        print("Spawning item of " + stats.category.ToString() + " category");
+        int rand = Random.Range(0, 4);
+
+        switch(rand)
+        {
+            case 1:
+                Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
+                print("Spawning item of " + stats.category.ToString() + " category");
+                break;
+            case 2:
+                Instantiate(healPool, gameObject.transform.position, Quaternion.identity);
+                break;
+        }
+
+        
+        
         Destroy(this.gameObject);
     }
 }

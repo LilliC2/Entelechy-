@@ -78,6 +78,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyState: 0
+  enemyRnd: {fileID: 0}
   image: {fileID: 775106265641318351}
   stats:
     category: 1
@@ -91,6 +92,7 @@ MonoBehaviour:
     projectile: 1
     projectileSpeed: 500
     projectilePF: {fileID: 7752005100104120040, guid: 37666b6d8a88375499769a7b044a5ba7, type: 3}
+  healPool: {fileID: 407576363337914560, guid: 6b03099f3bcc3c940ad7839fa995e050, type: 3}
 --- !u!195 &9168112645038497975
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -346,6 +348,7 @@ MonoBehaviour:
   - {fileID: 8784662878224333273}
   - {fileID: 9120490152112793022}
   - {fileID: 210789215194484393}
+  categories: []
   enemySpritesArray:
   - {fileID: 21300000, guid: 74b0411ab80ddb54ebfb024c219a49d0, type: 3}
   enemySprite: {fileID: 775106265641318351}

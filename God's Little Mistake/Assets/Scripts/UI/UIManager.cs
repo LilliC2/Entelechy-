@@ -237,7 +237,7 @@ public class UIManager : Singleton<UIManager>
             print("ITEM ADDED TO PLAYER");
             var item = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
             item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
-            if (flip) item.transform.localScale = new Vector3(-1, 0, 0);
+            if (flip) item.transform.localScale = new Vector3(-1, 0, -1);
             item.name = item.name + heldItem.ID;
 
             cursor.sprite = defaultCursor;
