@@ -36,11 +36,15 @@ public class EnemyShortRange : GameBehaviour
   
     private void Update()
     {
-        playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range + 1, whatIsPlayer);
-        playerInAttackRange = Physics.CheckSphere(transform.position, enemyStats.stats.range, whatIsPlayer);
-        if (playerInSightRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
-        if(playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Attacking;
-        else if (!playerInSightRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+        {
+            playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range + 1, whatIsPlayer);
+            playerInAttackRange = Physics.CheckSphere(transform.position, enemyStats.stats.range, whatIsPlayer);
+            if (playerInSightRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+            if (playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Attacking;
+            else if (!playerInSightRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+        }
+            
 
 
         switch (BaseEnemy.enemyState)
