@@ -65,6 +65,8 @@ public class UIManager : Singleton<UIManager>
             if (Input.GetKey(KeyCode.Mouse0)) cursor.sprite = cursorClick;
             else cursor.sprite = defaultCursor;
         }
+
+
         
     }
 
