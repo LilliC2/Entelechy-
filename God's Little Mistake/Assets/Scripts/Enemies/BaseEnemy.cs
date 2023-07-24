@@ -90,12 +90,17 @@ public class BaseEnemy : GameBehaviour
     public void Die()
     {
         //eye is for testing
-        int rand = Random.Range(0, 4);
+        int rand = 1; //Random.Range(0, 4);
 
         switch(rand)
         {
             case 1:
-                Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
+                GameObject item =Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
+                
+                int id = item.GetComponent<ItemIdentifier>().id;
+
+                item.GetComponentInChildren<SpriteRenderer>().sprite = _ISitemD.inSceneItemDataBase[id].icon;
+
                 print("Spawning item of " + stats.category.ToString() + " category");
                 break;
             case 2:

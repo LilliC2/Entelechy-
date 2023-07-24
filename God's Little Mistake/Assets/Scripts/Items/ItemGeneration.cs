@@ -64,6 +64,8 @@ public class ItemGeneration : Singleton<ItemGeneration>
         //give item script inscene id
         itemTemp.GetComponentInChildren<ItemIdentifier>().id = index;
 
+        
+
         return itemTemp;
     }
 }
