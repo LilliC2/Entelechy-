@@ -101,6 +101,10 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         
         var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
 
+        int id = item.GetComponent<ItemIdentifier>().id;
+
+        item.GetComponentInChildren<SpriteRenderer>().sprite = _ISitemD.inSceneItemDataBase[id].icon;
+
         int index = _ISitemD.inSceneItemDataBase.Count - 1;
         inSceneItemDataBase[index].inSceneID = index;
 

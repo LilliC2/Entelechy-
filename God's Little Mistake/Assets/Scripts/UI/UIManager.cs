@@ -201,6 +201,7 @@ public class UIManager : Singleton<UIManager>
         Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
         cursor.sprite = itemSprite;
 
+        print("Create item, id is " + _inSceneId);
         heldItem = _ISitemD.inSceneItemDataBase[_inSceneId];
         statsPopUpPanel.SetActive(false);
     }
