@@ -172,9 +172,11 @@ public class PlayerController : Singleton<PlayerController>
                             {
                                 //shoot
 
-                                //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
                                 //changed to use player stats, the primary attack will just change
                                 FireProjectile(playerInventory[0].projectilePF, projectileSpeed, firerate, range);
+
+                                //ADD KNOCK BACK
+
                             }
                         }
                     }

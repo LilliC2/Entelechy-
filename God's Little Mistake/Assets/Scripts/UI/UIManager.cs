@@ -68,7 +68,6 @@ public class UIManager : Singleton<UIManager>
             else cursor.sprite = defaultCursor;
         }
 
-        print(isHoldingItem);
         
     }
 
