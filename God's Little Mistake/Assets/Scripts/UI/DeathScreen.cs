@@ -19,9 +19,9 @@ public class DeathScreen : GameBehaviour<DeathScreen>
 
     public void Respawn()
     {
-            Time.timeScale = 1f;
-            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
-        
+        Scene scene = SceneManager.GetActiveScene();
+        Time.timeScale = 1f;
+            SceneManager.LoadScene(scene.name);
     }
     public void Menu()
     {
