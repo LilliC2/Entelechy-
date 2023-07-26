@@ -32,7 +32,7 @@ public class ItemIdentifier : GameBehaviour
     {
         if (other.tag == "Player")
         {
-            print("player");
+            //print("player");
             inRange = true;
             
         }
@@ -42,7 +42,7 @@ public class ItemIdentifier : GameBehaviour
     {
         if (other.tag == "Player")
         {
-            print("player");
+            //print("player");
             inRange = false;
 
         }

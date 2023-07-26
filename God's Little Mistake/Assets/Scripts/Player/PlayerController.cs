@@ -111,7 +111,7 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if(transform.position == lastPos)
                 {
-                    print("not moved");
+                    //print("not moved");
                     baseAnimator.SetBool("ForwardWalk", false);
                     baseAnimator.SetBool("SideWalk", false);
                     legsAnimator.SetBool("ForwardWalk", false);
@@ -184,7 +184,7 @@ public class PlayerController : Singleton<PlayerController>
                 #endregion
 
                 //DROP ITEM IF HOLDING
-                if(_UI.isHoldingItem == true)
+                if(_UI.heldItem != null)
                 {
                     print("holding an item");
                     //Open Slots
@@ -200,9 +200,8 @@ public class PlayerController : Singleton<PlayerController>
                             
                     }
 
-
                     //Drop Held Item
-                    if(Input.GetKeyDown(KeyCode.E))
+                    if(Input.GetKeyDown(KeyCode.R))
                     {
                         _UI.DropHeldItem();
 

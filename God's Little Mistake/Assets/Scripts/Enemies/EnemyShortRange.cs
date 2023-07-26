@@ -83,7 +83,7 @@ public class EnemyShortRange : GameBehaviour
         randomPos += transform.position;
         if(NavMesh.SamplePosition(randomPos, out NavMeshHit hit, walkPointRange, NavMesh.AllAreas))
         {
-            print("Get new pos");
+            //print("Get new pos");
             finalPos = hit.position;
         }
 
