@@ -24,6 +24,7 @@ public class UIManager : Singleton<UIManager>
     public Item heldItem = null;
     bool canEquip;
     float rotation;
+    public bool isHoldingItem;
 
     [Header("Inventory Images")]
     public Sprite emptySlotSprite;
@@ -56,12 +57,14 @@ public class UIManager : Singleton<UIManager>
     {
         UpdateInventorySlotImages();
         heldItem = null;
+        isHoldingItem = false;
     }
 
     private void Update()
     {
         if(heldItem == null)
         {
+            isHoldingItem = false;
             if (Input.GetKey(KeyCode.Mouse0)) cursor.sprite = cursorClick;
             else cursor.sprite = defaultCursor;
         }
@@ -203,6 +206,7 @@ public class UIManager : Singleton<UIManager>
 
         print("Create item, id is " + _inSceneId);
         heldItem = _ISitemD.inSceneItemDataBase[_inSceneId];
+        isHoldingItem = true;
         statsPopUpPanel.SetActive(false);
     }
 
@@ -245,6 +249,7 @@ public class UIManager : Singleton<UIManager>
 
             cursor.sprite = defaultCursor;
             heldItem = null;
+            isHoldingItem = false;
             //rotate image
         }
     }
@@ -272,13 +277,13 @@ public class UIManager : Singleton<UIManager>
                 else
                 {
                     canEquip = false;
-                    _AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
+                    //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
                 }
             }
             else
             {
                 canEquip = false;
-                _AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
+                //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
             }
         }
     }
@@ -292,12 +297,16 @@ public class UIManager : Singleton<UIManager>
         var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
         _ISitemD.inSceneItemDataBase.Add(heldItem);
 
+        int id = item.GetComponent<ItemIdentifier>().id;
+
+        item.GetComponentInChildren<SpriteRenderer>().sprite = _ISitemD.inSceneItemDataBase[id].icon;
 
         //add to scene array
         int index = _ISitemD.inSceneItemDataBase.Count - 1;
         _ISitemD.inSceneItemDataBase[index].inSceneID = index;
 
         heldItem = null;
+        isHoldingItem = false;
     }
         
     /// <summary>
@@ -306,7 +315,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CheckSlotHoverExit(int _slot)
     {
-        _AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.yellow;
+        //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.yellow;
     }
 
     #endregion

@@ -13,6 +13,9 @@ public class PlayerController : Singleton<PlayerController>
     public Animator baseAnimator;
     public Animator legsAnimator;
 
+    public Animator[] slotsAnim;
+    public GameObject[] slotsGO;
+
     Vector3 currentPos;
     Vector3 lastPos;
 
@@ -69,7 +72,10 @@ public class PlayerController : Singleton<PlayerController>
             _ISitemD.RemoveItemFromInventory(2);
         }
 
-
+        if (Input.GetKeyDown(KeyCode.Space))
+        {
+            DieAnimation();
+        }
 
 
         UpdateMelee();
@@ -178,12 +184,44 @@ public class PlayerController : Singleton<PlayerController>
                 #endregion
 
                 //DROP ITEM IF HOLDING
-                if(_UI.heldItem != null)
+                if(_UI.isHoldingItem == true)
                 {
                     print("holding an item");
+                    //Open Slots
+
+                    for(int i =0; i < slotsAnim.Length; i++)
+                    {
+                        
+                        if (_AVTAR.slotsOnPlayer[i].transform.childCount == 0)
+                        {
+                            slotsGO[i].SetActive(true);
+                            slotsAnim[i].SetBool("OpenSlot", true);
+                        }
+                            
+                    }
+
+
+                    //Drop Held Item
                     if(Input.GetKeyDown(KeyCode.E))
                     {
                         _UI.DropHeldItem();
+
+                        
+                    }
+                }
+                else
+                {
+                    for (int i = 0; i < slotsAnim.Length; i++)
+                    {
+                        if (_AVTAR.slotsOnPlayer[i].transform.childCount == 0)
+                        {
+                            slotsAnim[i].SetBool("OpenSlot", false);
+                            slotsAnim[i].SetBool("CloseSlot", true);
+                        }
+
+                        
+
+                        ExecuteAfterSeconds(1, () => ChangeSlots(false));
                     }
                 }
 
@@ -235,6 +273,13 @@ public class PlayerController : Singleton<PlayerController>
         #endregion
     }
 
+    void ChangeSlots(bool _bool)
+    {
+        for (int i = 0; i < slotsAnim.Length; i++)
+        {
+            slotsGO[i].SetActive(_bool);
+        }
+    }
     void UpdateMelee()
     {
         switch (meleeHitBox)
@@ -347,9 +392,20 @@ public class PlayerController : Singleton<PlayerController>
         }
         else
         {
-            //GAME OVER
+
+            DieAnimation();
+            //add particles in die animation too
         }
 
+    }
+
+    void DieAnimation()
+    {
+        baseAnimator.SetBool("ForwardWalk", false);
+        baseAnimator.SetBool("SideWalk", false);
+        legsAnimator.SetBool("ForwardWalk", false);
+        legsAnimator.SetBool("SideWalk", false);
+        baseAnimator.SetTrigger("DeathTrigger");
     }
 
     private void OnCollisionEnter(Collision collision)
