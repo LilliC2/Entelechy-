@@ -8,11 +8,7 @@ using Random = UnityEngine.Random;
 public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
 {
     [SerializeField]
-    private int iterations = 10; //number of times the algrothim is run
-    [SerializeField]
-    public int walkLength = 10;
-    [SerializeField]
-    public bool startRandomlyEachIteration = true;
+    private SimpleRandomWalkData randomWalkParameters;
 
 
     protected override void RunProceduralGeneration()
@@ -23,6 +19,7 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
 
         //generate tiles
         tileMapVisualiser.PaintFloorTiles(floorPositions);
+        WallGenerator.CreateWalls(floorPositions, tileMapVisualiser);
     }
 
 
@@ -30,12 +27,12 @@ public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
     {
         var currenPos = startPos;
         HashSet<Vector3> floorPositions = new HashSet<Vector3>();
-        for (int i = 0; i < iterations; i++)
+        for (int i = 0; i < randomWalkParameters.iterations; i++)
         {
-            var path = ProceduralGenerationAlgorthrims.SimpleRandomWalk(currenPos, walkLength);
+            var path = ProceduralGenerationAlgorthrims.SimpleRandomWalk(currenPos, randomWalkParameters.walkLength);
             //add to floor pos and ensure no dups are added
             floorPositions.UnionWith(path);
-            if(startRandomlyEachIteration)
+            if(randomWalkParameters.startRandomlyEachIteration)
             {
                 currenPos = floorPositions.ElementAt(Random.Range(0, floorPositions.Count));
             }

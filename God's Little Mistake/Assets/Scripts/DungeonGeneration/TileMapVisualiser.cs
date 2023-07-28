@@ -7,30 +7,33 @@ using UnityEngine.Tilemaps;
 public class TileMapVisualiser : MonoBehaviour
 {
     [SerializeField]
-    private Tilemap floorTilemap;
+    private Tilemap floorTilemap, wallTilemap;
     [SerializeField]
-    GameObject parent;
+    GameObject parentFloor;
     [SerializeField]
-    private TileBase floorTile; //change to gameobject??? can change to array later
-    public GameObject floorOB; //change to gameobject??? can change to array later
+    public GameObject floorOB, wallTopOB; 
 
     public void PaintFloorTiles(IEnumerable<Vector3> _floorPositions)
     {
 
-        PaintTiles(_floorPositions, floorTilemap, floorTile); 
+        PaintTiles(_floorPositions, floorTilemap); 
     }
 
-    private void PaintTiles(IEnumerable<Vector3> positions, Tilemap tilemap, TileBase tile)
+    internal void PaintSingleBasicWall(Vector3 position)
+    {
+        PaintSingleTile(wallTilemap, wallTopOB, position);
+    }
+
+    private void PaintTiles(IEnumerable<Vector3> positions, Tilemap tilemap)
     {
         foreach (var position in positions)
         {
-            PaintSingleTile(tilemap, tile, position);
+            PaintSingleTile(tilemap, floorOB, position);
         }
     }
 
-    private void PaintSingleTile(Tilemap tilemap, TileBase tile, Vector3 position)
+    private void PaintSingleTile(Tilemap tilemap, GameObject tile,Vector3 position)
     {
-        HashSet<Vector3> floorPositions3D = new HashSet<Vector3>();
         //get pos
         //var tilePosition = tilemap.WorldToCell((Vector3Int)position);
         //var pos = new Vector3(tilePosition.x, 1, tilePosition.y);
@@ -40,7 +43,7 @@ public class TileMapVisualiser : MonoBehaviour
 
         //print("making a tile at " + pos);
 
-        Instantiate(floorOB, new Vector3(position.x,1f, position.y), Quaternion.identity,parent.transform);
+        Instantiate(tile, new Vector3(position.x,1f, position.y), Quaternion.identity,tilemap.transform);
         //paint
         
         //tilemap.SetTile(tilePosition, tile);
@@ -48,10 +51,17 @@ public class TileMapVisualiser : MonoBehaviour
 
     public void Clear()
     {
-        while (parent.transform.childCount > 0)
+        Tilemap[] tileMaps = FindObjectsOfType<Tilemap>();
+
+        foreach (var tileMap in tileMaps)
         {
-            DestroyImmediate(parent.transform.GetChild(0).gameObject);
+            while (tileMap.transform.childCount > 0)
+            {
+                DestroyImmediate(tileMap.transform.GetChild(0).gameObject);
+            }
         }
+
+        
         //floorTilemap.ClearAllTiles();
     }
 }
