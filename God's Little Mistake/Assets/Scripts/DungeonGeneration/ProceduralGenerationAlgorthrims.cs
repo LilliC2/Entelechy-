@@ -9,9 +9,9 @@ public static class ProceduralGenerationAlgorthrims
     //might have to have vector2int
 
     //Hashset allows you to not process the same tile at the same time
-    public static HashSet<Vector2Int> SimpleRandomWalk(Vector2Int _startPos, int _walkLength)
+    public static HashSet<Vector3> SimpleRandomWalk(Vector3 _startPos, int _walkLength)
     {
-        HashSet<Vector2Int> path = new HashSet<Vector2Int>();
+        HashSet<Vector3> path = new HashSet<Vector3>();
 
         path.Add(_startPos);
         var prevPos = _startPos;
@@ -33,17 +33,17 @@ public static class ProceduralGenerationAlgorthrims
     public static class Direction2D
     {
         //cardinal directions
-        public static List<Vector2Int> cardinalDirectionList = new List<Vector2Int>
+        public static List<Vector3> cardinalDirectionList = new List<Vector3>
         {
-            new Vector2Int(0,1), //up
-            new Vector2Int(1,0), //right
-            new Vector2Int(0,-1), //down
-            new Vector2Int(-1,0) //down
+            new Vector3 (0,1), //up
+            new Vector3(1,0), //right
+            new Vector3(0,-1), //down
+            new Vector3(-1,0) //down
 
         };
 
         //get the direction
-        public static Vector2Int GetRandomCardinalDirection()
+        public static Vector3 GetRandomCardinalDirection()
         {
 
             return cardinalDirectionList[Random.Range(0, cardinalDirectionList.Count)];

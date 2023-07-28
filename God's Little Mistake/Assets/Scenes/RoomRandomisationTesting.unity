@@ -717,7 +717,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   floorTilemap: {fileID: 88898601}
+  parent: {fileID: 88898598}
   floorTile: {fileID: 11400000, guid: 26d430e3c3d5a914abdeeb8426c80913, type: 2}
+  floorOB: {fileID: 6050983408243293998, guid: d4a38cd2837d02344ae2e3d192d99281, type: 3}
 --- !u!4 &722874721
 Transform:
   m_ObjectHideFlags: 0
@@ -865,11 +867,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3c29eb34b777cb94ab2bb80b13b4fb4e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  startPos: {x: 0, y: 0}
-  iterations: 1
-  walkLength: 10
-  startRandomlyEachIteration: 1
   tileMapVisualiser: {fileID: 722874720}
+  startPos: {x: 0, y: 0, z: 0}
+  iterations: 100
+  walkLength: 100
+  startRandomlyEachIteration: 1
 --- !u!4 &923085215
 Transform:
   m_ObjectHideFlags: 0
@@ -913,7 +915,7 @@ Grid:
   m_CellSize: {x: 2, y: 2, z: 2}
   m_CellGap: {x: 0, y: 0, z: 0}
   m_CellLayout: 0
-  m_CellSwizzle: 0
+  m_CellSwizzle: 1
 --- !u!4 &1020939384
 Transform:
   m_ObjectHideFlags: 0
@@ -1015,8 +1017,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 923085214}
-        m_TargetAssemblyTypeName: SimpleRandomWalkDungeonGenerator, Assembly-CSharp
-        m_MethodName: RunProceduralGeneration
+        m_TargetAssemblyTypeName: AbstractDungeonGenerator, Assembly-CSharp
+        m_MethodName: GenerateDungeon
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

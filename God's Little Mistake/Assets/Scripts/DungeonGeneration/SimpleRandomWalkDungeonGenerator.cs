@@ -5,11 +5,8 @@ using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
-public class SimpleRandomWalkDungeonGenerator : MonoBehaviour
+public class SimpleRandomWalkDungeonGenerator : AbstractDungeonGenerator
 {
-    [SerializeField]
-    protected Vector2Int startPos = Vector2Int.zero;
-
     [SerializeField]
     private int iterations = 10; //number of times the algrothim is run
     [SerializeField]
@@ -17,23 +14,22 @@ public class SimpleRandomWalkDungeonGenerator : MonoBehaviour
     [SerializeField]
     public bool startRandomlyEachIteration = true;
 
-    [SerializeField]
-    private TileMapVisualiser tileMapVisualiser;
 
-    public void RunProceduralGeneration()
+    protected override void RunProceduralGeneration()
     {
         //create floor position
-        HashSet<Vector2Int> floorPositions = RunRandomWalk();
+        HashSet<Vector3> floorPositions = RunRandomWalk();
+        tileMapVisualiser.Clear();
 
-        //temp visualtion
+        //generate tiles
         tileMapVisualiser.PaintFloorTiles(floorPositions);
     }
 
-    //private method
-    protected HashSet<Vector2Int> RunRandomWalk()
+
+    protected HashSet<Vector3> RunRandomWalk()
     {
         var currenPos = startPos;
-        HashSet<Vector2Int> floorPositions = new HashSet<Vector2Int>();
+        HashSet<Vector3> floorPositions = new HashSet<Vector3>();
         for (int i = 0; i < iterations; i++)
         {
             var path = ProceduralGenerationAlgorthrims.SimpleRandomWalk(currenPos, walkLength);
