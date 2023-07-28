@@ -27,6 +27,109 @@ public static class ProceduralGenerationAlgorthrims
         return path;
     }
 
+    public static List<Vector3> RandomWalkCorridor(Vector3 _startPos, int _corridorLength)
+    {
+        List<Vector3> corridor = new List<Vector3>();
+        var direction = Direction2D.GetRandomCardinalDirection();
+
+        var currentPos = _startPos;
+
+        //add start pos
+        corridor.Add(currentPos);
+
+        for (int i = 0; i < _corridorLength; i++)
+        {
+            currentPos += direction;
+            corridor.Add(currentPos);
+        }
+        return corridor;
+
+        //get last position in path
+
+        //return path created
+    }
+
+    public static List<BoundsInt> BinarySpacePartitioning(BoundsInt spaceToSplit, int minWidth, int minHeight) //min width and height of splits
+    {
+        Queue<BoundsInt> roomsQueue = new Queue<BoundsInt>();
+        List<BoundsInt> roomsList = new List<BoundsInt>();
+
+        //take object from queue
+        roomsQueue.Enqueue(spaceToSplit);
+
+        while(roomsQueue.Count >0)
+        {
+            var room = roomsQueue.Dequeue();
+            if(room.size.y >= minHeight && room.size.x >= minWidth) //check if room can be split
+            {
+                if(Random.value<0.5f)
+                {
+                    //horizontal split
+                    //check if big enough
+                    if(room.size.y >= minHeight*2)
+                    {
+                        SplitHorizontally(minHeight, roomsQueue, room);
+
+                        
+                        
+                    }
+                    //check if can split vertically
+                    else if(room.size.x >= minWidth * 2)
+                    {
+                        SplitVertically(minWidth, roomsQueue, room);
+                    }
+                    //if cannot be split at all but can hold room
+                    else if(room.size.x >=minWidth && room.size.y >= minHeight)
+                    {
+                        roomsList.Add(room);
+                    }
+                }
+                else
+                {
+                    //vertical split
+                    if (room.size.x >= minWidth * 2)
+                    {
+                        SplitVertically(minWidth, roomsQueue, room);
+                    }
+                    //check if can split horizontally
+                    else if (room.size.y >= minHeight * 2)
+                    {
+                        SplitHorizontally(minHeight, roomsQueue, room);
+                    }
+                    //if cannot be split at all but can hold room
+                    else if (room.size.x >= minWidth && room.size.y >= minHeight)
+                    {
+                        roomsList.Add(room);
+                    }
+
+                }
+            }
+        }
+        return roomsList;
+    }
+
+    private static void SplitVertically(int minWidth, Queue<BoundsInt> roomsQueue, BoundsInt room)
+    {
+        var xSplit = Random.Range(1, room.size.x); //pick split spot
+
+        //define bounds
+        BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(xSplit, room.min.y, room.min.z));
+        BoundsInt room2 = new BoundsInt( new Vector3Int(room.min.x + xSplit, room.min.y,room.min.z),
+            new Vector3Int(room.size.x - xSplit, room.size.y,room.size.z));
+
+        roomsQueue.Enqueue(room1);
+        roomsQueue.Enqueue(room2);
+    }
+
+    private static void SplitHorizontally(int minHeight, Queue<BoundsInt> roomsQueue, BoundsInt room)
+    {
+        var ySplit = Random.Range(1, room.size.y); //pick split spot
+
+        BoundsInt room1 = new BoundsInt(room.min, new Vector3Int(room.min.x,ySplit, room.min.z));
+        BoundsInt room2 = new BoundsInt(new Vector3Int(room.min.x, room.min.y + ySplit, room.min.z),
+            new Vector3Int(room.size.x, room.size.y - ySplit, room.size.z));
+    }
+
     /// <summary>
     /// Get random direction
     /// </summary>
@@ -50,4 +153,6 @@ public static class ProceduralGenerationAlgorthrims
         }
 
     }
+
+
 }
