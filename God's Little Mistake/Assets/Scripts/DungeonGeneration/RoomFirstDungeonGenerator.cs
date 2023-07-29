@@ -39,7 +39,13 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
 
         HashSet<Vector3> floor = new HashSet<Vector3>();
-        floor = CreateSimpleRooms(roomsList);
+        
+        if(randomWalkRooms)
+        {
+            floor = CreateRoomsRandomly(roomsList);
+        }
+        else floor = CreateSimpleRooms(roomsList);
+
 
         List<Vector3> roomCenters = new List<Vector3>();
         foreach (var room in roomsList)
@@ -54,6 +60,32 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         tileMapVisualiser.PaintFloorTiles(floor);
         WallGenerator.CreateWalls(floor, tileMapVisualiser);
         
+    }
+
+    private HashSet<Vector3> CreateRoomsRandomly(List<BoundsInt> roomsList)
+    {
+        HashSet<Vector3> floor = new();
+
+        for (int i = 0; i < roomsList.Count; i++)
+        {
+            var roomBounds = roomsList[i];
+            var roomCenter = roomBounds.center;
+
+            var roomFloor = RunRandomWalk(randomWalkParameters, roomCenter);
+
+            //account for offset
+            foreach (var position in roomFloor)
+            {
+                if (position.x >= (roomBounds.xMin + offset) && position.x <= (roomBounds.xMax - offset)
+                    && position.y >= (roomBounds.yMin - offset) && position.y <= (roomBounds.yMax - offset))
+                {
+                    floor.Add(position);
+                }
+            }
+
+        }
+
+        return floor;
     }
 
     private HashSet<Vector3> ConnectRooms(List<Vector3> roomCenters)
@@ -81,6 +113,10 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     private HashSet<Vector3> CreateCorridor(Vector3 currentRoomCenter, Vector3 destination)
     {
         HashSet<Vector3> corridor = new HashSet<Vector3>();
+
+        //this creates corridors that lead to nothing, could fix with dead end function
+        //currentRoomCenter = new Vector3(Mathf.Round(currentRoomCenter.x), 1, Mathf.Round(currentRoomCenter.y));
+
         var position = currentRoomCenter;
         corridor.Add(position);
         
@@ -145,32 +181,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
             }
         }
 
-            
 
-        //while (position.y != destination.y)
-        //{
-        //    if (destination.y > position.y)
-        //    {
-        //        position += Vector3.up;
-        //    }
-        //    else if (destination.y < position.y)
-        //    {
-        //        position += Vector3.down;
-        //    }
-        //    corridor.Add(position);
-        //}
-        //while (position.x != destination.x)
-        //{
-        //    if (destination.x > position.x)
-        //    {
-        //        position += Vector3.right;
-        //    }
-        //    else if (destination.x < position.x)
-        //    {
-        //        position += Vector3.left;
-        //    }
-        //    corridor.Add(position);
-        //}
         return corridor;
     }
 
