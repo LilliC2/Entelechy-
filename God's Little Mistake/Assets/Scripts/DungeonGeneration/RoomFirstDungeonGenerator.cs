@@ -21,6 +21,7 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     public GameObject playerTemp;
     public GameObject endRoomOB;
 
+
     //split offset
     [SerializeField]
     [Range(0,10)]
@@ -87,6 +88,8 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         playerTemp.transform.position = new Vector3(startRoom.x, 1, startRoom.y) ;
         endRoomOB.transform.position = new Vector3(endRoom.x, 1, endRoom.y) ;
     }
+
+    
 
     private List<Vector3> IncreaseCorridorBrush3by3(List<Vector3> corridor)
     {
