@@ -5,7 +5,7 @@ using UnityEngine;
 public class LandmineTrap : MonoBehaviour
 {
     public float explosionRadius = 5f;
-    public int damageAmount = 50;
+    public int damageAmount = 20;
     public float explosionDelay = 1f;
 
     public Color triggeredColor = Color.red;
@@ -22,9 +22,10 @@ public class LandmineTrap : MonoBehaviour
     {
         if (!exploded)
         {
-            if (other.CompareTag("Player") || other.CompareTag("Enemy"))
+            if (other.CompareTag("Player"))
             {
                 Explode(other.gameObject);
+                Debug.Log("riggered");
             }
         }
     }
