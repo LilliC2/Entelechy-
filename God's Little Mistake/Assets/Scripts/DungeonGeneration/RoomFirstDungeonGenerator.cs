@@ -15,14 +15,16 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
     private int dungeonWidth = 20, dungeonHeight = 20;
 
 
+    Vector3 startRoom;
+    Vector3 endRoom;
 
+    public GameObject playerTemp;
+    public GameObject endRoomOB;
 
     //split offset
     [SerializeField]
     [Range(0,10)]
     private int offset = 1;
-
-    private bool hasReachedX, hasReachedZ;
 
     //check want to use randomwalk for rooms or boundsint rooms
     [SerializeField]
@@ -35,11 +37,16 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
 
     private void CreateRooms()
     {
+        
+
+
         var roomsList = ProceduralGenerationAlgorthrims.BinarySpacePartitioning(new BoundsInt(Vector3Int.FloorToInt(startPos),
             new Vector3Int(dungeonWidth, dungeonHeight, 0)), minRoomWidth, minRoomHeight);
 
         HashSet<Vector3> floor = new HashSet<Vector3>();
         
+
+
         if(randomWalkRooms)
         {
             floor = CreateRoomsRandomly(roomsList);
@@ -50,16 +57,52 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         List<Vector3> roomCenters = new List<Vector3>();
         foreach (var room in roomsList)
         {
-            roomCenters.Add(room.center);
+            if(floor.Contains(room.center))
+            {
+                roomCenters.Add(room.center);
+            }
+            
 
         }
 
-        HashSet<Vector3> corridors = ConnectRooms(roomCenters);
-        floor.UnionWith(corridors);
+        List<List<Vector3>> corridors = ConnectRooms(roomCenters);
+
+        var hashset = new HashSet<Vector3>();
+
+        for (int i = 0; i < corridors.Count; i++)
+        {
+
+            corridors[i] = IncreaseCorridorBrush3by3(corridors[i]);
+
+            var temp = new HashSet<Vector3>(corridors[i]);
+
+            hashset.UnionWith(temp);
+        }
+
+        floor.UnionWith(hashset);
 
         tileMapVisualiser.PaintFloorTiles(floor);
         WallGenerator.CreateWalls(floor, tileMapVisualiser);
-        
+
+        playerTemp.transform.position = new Vector3(startRoom.x, 1, startRoom.y) ;
+        endRoomOB.transform.position = new Vector3(endRoom.x, 1, endRoom.y) ;
+    }
+
+    private List<Vector3> IncreaseCorridorBrush3by3(List<Vector3> corridor)
+    {
+        List<Vector3> newCorridor = new List<Vector3>();
+        for (int i = 1; i < corridor.Count; i++)
+        {
+            for (int x = -1; x < 2; x++)
+            {
+                for (int y = -1; y < 2; y++)
+                {
+                    newCorridor.Add(corridor[i - 1] + new Vector3(x, y));
+
+                }
+            }
+        }
+        return newCorridor;
     }
 
     private HashSet<Vector3> CreateRoomsRandomly(List<BoundsInt> roomsList)
@@ -79,6 +122,8 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                 if (position.x >= (roomBounds.xMin + offset) && position.x <= (roomBounds.xMax - offset)
                     && position.y >= (roomBounds.yMin - offset) && position.y <= (roomBounds.yMax - offset))
                 {
+
+                    
                     floor.Add(position);
                 }
             }
@@ -88,34 +133,39 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
         return floor;
     }
 
-    private HashSet<Vector3> ConnectRooms(List<Vector3> roomCenters)
+    private List<List<Vector3>> ConnectRooms(List<Vector3> roomCenters)
     {
-        HashSet<Vector3> corridors = new HashSet<Vector3>();
+
+        List<List<Vector3>> corridors = new();
 
         //can use this to get start room and end room
 
         var currentRoomCenter = roomCenters[Random.Range(0, roomCenters.Count)];
+
+        startRoom = currentRoomCenter; 
+
         roomCenters.Remove(currentRoomCenter);
 
         while(roomCenters.Count > 0)
         {
+            if (roomCenters.Count == 1) endRoom = currentRoomCenter;
+            
             Vector3 closest = FindClosestPointTo(currentRoomCenter, roomCenters);
             roomCenters.Remove(closest);
-            HashSet<Vector3> newCorridor = CreateCorridor(currentRoomCenter, closest);
+            var newCorridor = CreateCorridor(currentRoomCenter, closest);
             currentRoomCenter = closest;
-            corridors.UnionWith(newCorridor);
+            corridors.Add(newCorridor);
         }
         return corridors;
     }
 
 
 
-    private HashSet<Vector3> CreateCorridor(Vector3 currentRoomCenter, Vector3 destination)
+    private List<Vector3> CreateCorridor(Vector3 currentRoomCenter, Vector3 destination)
     {
-        HashSet<Vector3> corridor = new HashSet<Vector3>();
+        List<Vector3> corridor = new ();
 
         //this creates corridors that lead to nothing, could fix with dead end function
-        //currentRoomCenter = new Vector3(Mathf.Round(currentRoomCenter.x), 1, Mathf.Round(currentRoomCenter.y));
 
         var position = currentRoomCenter;
         corridor.Add(position);
@@ -131,6 +181,8 @@ public class RoomFirstDungeonGenerator : SimpleRandomWalkDungeonGenerator
                 for (int i = 0; i < distance; i++)
                 {
                     position += Vector3.up;
+
+
                     corridor.Add(position);
                 }
 
