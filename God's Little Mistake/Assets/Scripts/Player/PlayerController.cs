@@ -61,7 +61,7 @@ public class PlayerController : Singleton<PlayerController>
         lastPos = transform.position;
 
         //add stats for the 1 item in the inventory
-        _ISitemD.AddPassiveItem(0);
+        //_ISitemD.AddPassiveItem(0);
     }
 
     void Update()

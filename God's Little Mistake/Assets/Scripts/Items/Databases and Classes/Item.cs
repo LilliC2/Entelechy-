@@ -36,6 +36,8 @@ public class Item
 
     public Sprite icon;
     public GameObject avtarPrefab;
+    public GameObject avtarPrefabFront;
+    public GameObject avtarPrefabSide;
 
     public Item()
     {

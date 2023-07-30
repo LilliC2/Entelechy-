@@ -25,7 +25,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
             //move all items in list downm (automatic)
             //make sure their ids stay the same!!!
-            for (int i = 0; i < inSceneItemDataBase.Count; i++)
+            for (int i = _sceneID; i < inSceneItemDataBase.Count; i++)
             {
                 inSceneItemDataBase[i].inSceneID = inSceneItemDataBase[i].inSceneID - 1;
             }

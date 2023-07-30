@@ -203,7 +203,6 @@ public class UIManager : Singleton<UIManager>
         heldItem = _ISitemD.inSceneItemDataBase[_inSceneId];
 
         Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
-        print("New cursor is: " + itemSprite.name);
         cursor.sprite = itemSprite;
 
         
@@ -247,10 +246,28 @@ public class UIManager : Singleton<UIManager>
             _ISitemD.AddItemToInventory(heldItem.inSceneID);
             //then instantiate prefab on player and detroy this iamge
             print("ITEM ADDED TO PLAYER");
-            var item = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
-            item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
-            //if (flip) item.transform.localScale = new Vector3(-1, 0, -1);
-            item.name = item.name + heldItem.ID;
+
+            //testing cardinal directions
+            if (_slot == 3)
+            {
+                var itemFront = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
+            }
+            //sides
+            else if (_slot != 3)
+            {
+                print("ADD SIDE ONE");
+                var itemSide = Instantiate(heldItem.avtarPrefabSide, _AVTAR.slotsOnPlayer[_slot].transform);
+                //item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
+            }
+            //else
+            //{
+            //    var item = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
+            //    item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
+            //    //if (flip) item.transform.localScale = new Vector3(-1, 0, -1);
+            //    item.name = item.name + heldItem.ID;
+            //}
+
+
 
             cursor.sprite = defaultCursor;
             heldItem = null;
@@ -265,7 +282,6 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CheckSlotHover(int _slot)
     {
-        print(_slot);
 
         if (cursor.sprite != defaultCursor && cursor.sprite != cursorClick)
         {
@@ -304,7 +320,8 @@ public class UIManager : Singleton<UIManager>
         var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
         _ISitemD.inSceneItemDataBase.Add(heldItem);
 
-        int id = item.GetComponent<ItemIdentifier>().id;
+        item.GetComponent<ItemIdentifier>().id = heldItem.inSceneID;
+        var id = item.GetComponent<ItemIdentifier>().id;
 
         print("item dropping id = " + id);
         print(_ISitemD.inSceneItemDataBase[id].icon.name);
