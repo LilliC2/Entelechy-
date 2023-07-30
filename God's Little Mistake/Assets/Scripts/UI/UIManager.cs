@@ -259,6 +259,9 @@ public class UIManager : Singleton<UIManager>
                 var itemSide = Instantiate(heldItem.avtarPrefabSide, _AVTAR.slotsOnPlayer[_slot].transform);
                 //item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
             }
+
+            //FOR ALL OTHER ITEMS
+
             //else
             //{
             //    var item = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
