@@ -250,13 +250,22 @@ public class UIManager : Singleton<UIManager>
             //testing cardinal directions
             if (_slot == 3)
             {
-                var itemFront = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
+                var itemFront = Instantiate(heldItem.avtarPrefabFront, _AVTAR.slotsOnPlayer[_slot].transform);
+
+                //add item animator to inventory
+                _PC.itemsAnim.Add(itemFront.GetComponentInChildren<Animator>());
+
             }
             //sides
             else if (_slot != 3)
             {
                 print("ADD SIDE ONE");
-                var itemSide = Instantiate(heldItem.avtarPrefabSide, _AVTAR.slotsOnPlayer[_slot].transform);
+                var itemSide = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
+
+                _PC.itemsAnim.Add(itemSide.GetComponentInChildren<Animator>());
+
+                if (flip) itemSide.transform.localScale = new Vector3(-itemSide.transform.rotation.x, itemSide.transform.rotation.y, itemSide.transform.rotation.z);
+
                 //item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
             }
 
@@ -276,6 +285,8 @@ public class UIManager : Singleton<UIManager>
             heldItem = null;
             isHoldingItem = false;
             //rotate image
+
+            _PC.CloseSlots();
         }
     }
 

@@ -11,10 +11,13 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Animation")]
     public Animator baseAnimator;
-    public Animator legsAnimator;
+    public Animator nubsAnimator;
+    public GameObject nubsOB;
 
     public Animator[] slotsAnim;
     public GameObject[] slotsGO;
+
+    public List<Animator> itemsAnim;
 
     Vector3 currentPos;
     Vector3 lastPos;
@@ -92,13 +95,21 @@ public class PlayerController : Singleton<PlayerController>
                 controller.Move(playerVelocity * Time.deltaTime);
 
                 #region Animation
+
+                //turn off and on nubs
+                if(_AVTAR.slotsOnPlayer[6].transform.childCount == 0)
+                {
+                    nubsOB.SetActive(true);
+                }
+                else nubsOB.SetActive(false);
+
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
                 {
                     baseAnimator.SetBool("ForwardWalk", false);
                     baseAnimator.SetBool("SideWalk", true);
 
-                    legsAnimator.SetBool("ForwardWalk", false);
-                    legsAnimator.SetBool("SideWalk", true);
+                    nubsAnimator.SetBool("ForwardWalk", false);
+                    nubsAnimator.SetBool("SideWalk", true);
 
                     
                 }
@@ -106,16 +117,16 @@ public class PlayerController : Singleton<PlayerController>
                 {
                     baseAnimator.SetBool("ForwardWalk", true);
                     baseAnimator.SetBool("SideWalk", false);
-                    legsAnimator.SetBool("ForwardWalk", true);
-                    legsAnimator.SetBool("SideWalk", false);
+                    nubsAnimator.SetBool("ForwardWalk", true);
+                    nubsAnimator.SetBool("SideWalk", false);
                 }
                 if(transform.position == lastPos)
                 {
                     //print("not moved");
                     baseAnimator.SetBool("ForwardWalk", false);
                     baseAnimator.SetBool("SideWalk", false);
-                    legsAnimator.SetBool("ForwardWalk", false);
-                    legsAnimator.SetBool("SideWalk", false);
+                    nubsAnimator.SetBool("ForwardWalk", false);
+                    nubsAnimator.SetBool("SideWalk", false);
                 }
 
                 
@@ -149,6 +160,8 @@ public class PlayerController : Singleton<PlayerController>
                             if (!playerInventory[i].projectile)
                             {
                                 //shoot
+                                RunItemAnimations("Torso");
+
                                 print("do melee attack");
                                 //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
                                 //changed to use player stats, the primary attack will just change
@@ -171,6 +184,7 @@ public class PlayerController : Singleton<PlayerController>
                             if (playerInventory[i].projectile)
                             {
                                 //shoot
+                                RunItemAnimations("Head");
 
                                 //changed to use player stats, the primary attack will just change
                                 FireProjectile(playerInventory[0].projectilePF, projectileSpeed, firerate, range);
@@ -206,25 +220,10 @@ public class PlayerController : Singleton<PlayerController>
                     if(Input.GetKeyDown(KeyCode.R))
                     {
                         _UI.DropHeldItem();
-
-                        
+ 
                     }
                 }
-                else
-                {
-                    for (int i = 0; i < slotsAnim.Length; i++)
-                    {
-                        if (_AVTAR.slotsOnPlayer[i].transform.childCount == 0)
-                        {
-                            slotsAnim[i].SetBool("OpenSlot", false);
-                            slotsAnim[i].SetBool("CloseSlot", true);
-                        }
-
-                        
-
-                        ExecuteAfterSeconds(1, () => ChangeSlots(false));
-                    }
-                }
+          
 
                 break;
 
@@ -274,6 +273,39 @@ public class PlayerController : Singleton<PlayerController>
         #endregion
     }
 
+    public void CloseSlots()
+    {
+        for (int i = 0; i < slotsAnim.Length; i++)
+        {
+            if (_AVTAR.slotsOnPlayer[i].transform.childCount == 0)
+            {
+                print("trying to slot");
+                slotsAnim[i].SetBool("OpenSlot", false);
+                slotsAnim[i].SetBool("CloseSlot", true);
+
+            }
+
+
+
+            ExecuteAfterSeconds(1, () => ChangeSlots(false));
+        }
+    }
+
+    void RunItemAnimations(string _segment)
+    {
+        for (int i = 0; i < playerInventory.Count; i++)
+        {
+            if (playerInventory[i].active == true)
+            {
+                if(playerInventory[i].segment.ToString() == _segment)
+                {
+                    itemsAnim[i].SetTrigger("Attack");
+                }
+            }
+        }
+        
+    }
+
     void ChangeSlots(bool _bool)
     {
         for (int i = 0; i < slotsAnim.Length; i++)
@@ -298,7 +330,7 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    void ChangePrimary(int _inventorySlot)
+    public void ChangePrimary(int _inventorySlot)
     {
         //check if item is primary
         if (playerInventory[_inventorySlot].itemType == Item.ItemType.Primary)
@@ -404,8 +436,8 @@ public class PlayerController : Singleton<PlayerController>
     {
         baseAnimator.SetBool("ForwardWalk", false);
         baseAnimator.SetBool("SideWalk", false);
-        legsAnimator.SetBool("ForwardWalk", false);
-        legsAnimator.SetBool("SideWalk", false);
+        nubsAnimator.SetBool("ForwardWalk", false);
+        nubsAnimator.SetBool("SideWalk", false);
         baseAnimator.SetTrigger("DeathTrigger");
     }
 

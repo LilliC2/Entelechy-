@@ -40,6 +40,10 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
             {
                 //calls apprioriate function
                 case Item.ItemType.Primary:
+
+                    //if primary and no other primarys are there, add this one
+                    _PC.ChangePrimary(index);
+
                     break;
                 case Item.ItemType.Secondary:
                     break;
@@ -74,6 +78,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
                 var obj = _AVTAR.slotsOnPlayer[i].transform.GetChild(0);
                 if (obj.name.Contains(_inventoryID.ToString()))
                 {
+                    _PC.itemsAnim.Remove(obj.GetComponentInChildren<Animator>());
                     Destroy(obj.gameObject);
                 }
             }
@@ -84,6 +89,9 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         {
             //calls apprioriate function
             case Item.ItemType.Primary:
+
+                //makes sure if previously active, it removes itself
+
                 break;
             case Item.ItemType.Secondary:
                 break;
