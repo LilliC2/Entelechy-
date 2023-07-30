@@ -24,6 +24,7 @@ public class UIManager : Singleton<UIManager>
     public Item heldItem = null;
     bool canEquip;
     float rotation;
+    public bool isHoldingItem;
 
     [Header("Inventory Images")]
     public Sprite emptySlotSprite;
@@ -56,6 +57,7 @@ public class UIManager : Singleton<UIManager>
     {
         UpdateInventorySlotImages();
         heldItem = null;
+        isHoldingItem = false;
     }
 
     private void Update()
@@ -65,7 +67,6 @@ public class UIManager : Singleton<UIManager>
             if (Input.GetKey(KeyCode.Mouse0)) cursor.sprite = cursorClick;
             else cursor.sprite = defaultCursor;
         }
-
 
         
     }
@@ -198,12 +199,20 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CreateItemSelected(int _inSceneId)
     {
-        Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
-        cursor.sprite = itemSprite;
-
         print("Create item, id is " + _inSceneId);
         heldItem = _ISitemD.inSceneItemDataBase[_inSceneId];
+
+        Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
+        print("New cursor is: " + itemSprite.name);
+        cursor.sprite = itemSprite;
+
+        
+
+        print(heldItem);
+        
         statsPopUpPanel.SetActive(false);
+        isHoldingItem = true;
+        
     }
 
     /// <summary>
@@ -240,11 +249,12 @@ public class UIManager : Singleton<UIManager>
             print("ITEM ADDED TO PLAYER");
             var item = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
             item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
-            if (flip) item.transform.localScale = new Vector3(-1, 0, -1);
+            //if (flip) item.transform.localScale = new Vector3(-1, 0, -1);
             item.name = item.name + heldItem.ID;
 
             cursor.sprite = defaultCursor;
             heldItem = null;
+            isHoldingItem = false;
             //rotate image
         }
     }
@@ -272,19 +282,21 @@ public class UIManager : Singleton<UIManager>
                 else
                 {
                     canEquip = false;
-                    _AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
+                    //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
                 }
             }
             else
             {
                 canEquip = false;
-                _AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
+                //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
             }
         }
     }
 
     public void DropHeldItem()
     {
+
+        print("Drop held item");
         //change cursor
         cursor.sprite = defaultCursor;
 
@@ -292,12 +304,19 @@ public class UIManager : Singleton<UIManager>
         var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
         _ISitemD.inSceneItemDataBase.Add(heldItem);
 
+        int id = item.GetComponent<ItemIdentifier>().id;
+
+        print("item dropping id = " + id);
+        print(_ISitemD.inSceneItemDataBase[id].icon.name);
+        //ERROR
+        item.GetComponentInChildren<SpriteRenderer>().sprite = _ISitemD.inSceneItemDataBase[id].icon;
 
         //add to scene array
         int index = _ISitemD.inSceneItemDataBase.Count - 1;
         _ISitemD.inSceneItemDataBase[index].inSceneID = index;
 
         heldItem = null;
+        isHoldingItem = false;
     }
         
     /// <summary>
@@ -306,7 +325,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CheckSlotHoverExit(int _slot)
     {
-        _AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.yellow;
+        //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.yellow;
     }
 
     #endregion
