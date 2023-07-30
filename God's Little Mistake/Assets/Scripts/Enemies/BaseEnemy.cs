@@ -13,6 +13,17 @@ public class BaseEnemy : GameBehaviour
 
     public EnemyRandomisation enemyRnd;
 
+
+    [SerializeField]
+    ParticleSystem deathParticles;
+
+    [SerializeField]
+    Animator explosionAnim;
+    [SerializeField]
+    GameObject explosionAnimOB;
+    [SerializeField]
+    GameObject enemyVisuals;
+
     public SpriteRenderer image;
     public EnemyStats stats;
     public GameObject healPool;
@@ -89,6 +100,20 @@ public class BaseEnemy : GameBehaviour
 
     public void Die()
     {
+
+        Destroy(GetComponent<EnemyLongRange>());
+
+        //turn off collider
+        gameObject.GetComponent<CapsuleCollider>().enabled = false;
+        enemyVisuals.SetActive(false);
+
+        //run partciles
+        deathParticles.Play();
+
+        explosionAnimOB.SetActive(true);
+        //ooze animation
+        explosionAnim.SetTrigger("Death");
+
         //eye is for testing
         int rand = 1; //Random.Range(0, 4);
 
@@ -108,8 +133,8 @@ public class BaseEnemy : GameBehaviour
                 break;
         }
 
+
+        ExecuteAfterSeconds(1, () => Destroy(this.gameObject));
         
-        
-        Destroy(this.gameObject);
     }
 }
