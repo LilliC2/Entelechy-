@@ -70,6 +70,8 @@ public class PlayerController : Singleton<PlayerController>
         _UI.UpdateHealthText(health);
         lastPos = transform.position;
 
+
+        
         //add stats for the 1 item in the inventory
         //_ISitemD.AddPassiveItem(0);
     }
@@ -80,11 +82,6 @@ public class PlayerController : Singleton<PlayerController>
         if (Input.GetKeyDown(KeyCode.K))
         {
             _ISitemD.RemoveItemFromInventory(2);
-        }
-
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DieAnimation();
         }
 
 
@@ -127,7 +124,7 @@ public class PlayerController : Singleton<PlayerController>
                 #region Animation
 
                 //turn off and on nubs
-                if (_AVTAR.slotsOnPlayer[6].transform.childCount == 0)
+                if (_AVTAR.slotsOnPlayer[5].transform.childCount == 0)
                 {
                     nubsOB.SetActive(true);
                 }
@@ -230,29 +227,29 @@ public class PlayerController : Singleton<PlayerController>
                 #endregion
 
                 //DROP ITEM IF HOLDING
-                if(_UI.heldItem != null)
-                {
-                    print("holding an item");
-                    //Open Slots
+                //if(_UI.heldItem != null)
+                //{
+                //    print("holding an item");
+                //    //Open Slots
 
-                    for(int i =0; i < slotsAnim.Length; i++)
-                    {
+                //    for(int i =0; i < slotsAnim.Length; i++)
+                //    {
                         
-                        if (_AVTAR.slotsOnPlayer[i].transform.childCount == 0)
-                        {
-                            slotsGO[i].SetActive(true);
-                            slotsAnim[i].SetBool("OpenSlot", true);
-                        }
+                //        if (_AVTAR.slotsOnPlayer[i].transform.childCount == 0)
+                //        {
+                //            slotsGO[i].SetActive(true);
+                //            slotsAnim[i].SetBool("OpenSlot", true);
+                //        }
                             
-                    }
+                //    }
 
-                    //Drop Held Item
-                    if(Input.GetKeyDown(KeyCode.R))
-                    {
-                        _UI.DropHeldItem();
+                //    ////Drop Held Item
+                //    //if(Input.GetKeyDown(KeyCode.R))
+                //    //{
+                //    //    _UI.DropHeldItem();
  
-                    }
-                }
+                //    //}
+                //}
           
 
                 break;
