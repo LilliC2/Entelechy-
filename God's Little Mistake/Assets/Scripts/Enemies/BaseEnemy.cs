@@ -88,7 +88,7 @@ public class BaseEnemy : GameBehaviour
             Hit();
 
             //destroy bullet that hit it
-            Destroy(collision.gameObject);
+            //Destroy(collision.gameObject);
         }
         if (collision.collider.CompareTag("Melee"))
         {

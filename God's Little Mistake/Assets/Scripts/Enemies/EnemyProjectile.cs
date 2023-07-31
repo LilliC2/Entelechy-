@@ -5,7 +5,7 @@ using UnityEngine;
 public class EnemyProjectile : GameBehaviour
 {
     public float dmg;
-
+    
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player"))
@@ -13,7 +13,9 @@ public class EnemyProjectile : GameBehaviour
             print("player has been hit in collision");
             _PC.Hit(dmg);
 
-            Destroy(this.gameObject);
+
+            ExecuteAfterSeconds(1, () => Destroy(this.gameObject));
+            
             //get dmg from enemy
             //Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);
         }

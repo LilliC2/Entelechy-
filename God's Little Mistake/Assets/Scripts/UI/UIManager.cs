@@ -166,13 +166,7 @@ public class UIManager : Singleton<UIManager>
                     }
                     else invenSlot5.sprite = _PC.playerInventory[i].icon; 
                     break;
-                case 6:
-                    if (!(i >= -1 && i < _PC.playerInventory.Count))
-                    {
-                        invenSlot6.sprite = emptySlotSprite;
-                    }
-                    else invenSlot6.sprite = _PC.playerInventory[i].icon; 
-                    break;
+
             }
 
 
@@ -202,16 +196,65 @@ public class UIManager : Singleton<UIManager>
         print("Create item, id is " + _inSceneId);
         heldItem = _ISitemD.inSceneItemDataBase[_inSceneId];
 
-        Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
-        cursor.sprite = itemSprite;
+        //Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
+        //cursor.sprite = itemSprite;
 
-        
 
         print(heldItem);
         
         statsPopUpPanel.SetActive(false);
         isHoldingItem = true;
-        
+
+        int slot = 0;
+
+        //find segement
+        if(heldItem.segment == Item.Segment.Head)
+        {
+            //find category
+            if (heldItem.category == Item.Category.Horns)
+            {
+                //check if slot is free
+                if (_AVTAR.slotsOnPlayer[0].transform.childCount == 0)
+                    slot = 0;   
+            }
+            if (heldItem.category == Item.Category.Eyes)
+            {
+                if (_AVTAR.slotsOnPlayer[1].transform.childCount == 0)
+                    slot = 1;
+            }
+            if (heldItem.category == Item.Category.Mouth)
+            {
+                if (_AVTAR.slotsOnPlayer[2].transform.childCount == 0)
+                    slot = 2;
+            }
+        }
+        else if (heldItem.segment == Item.Segment.Torso)
+        {
+            if (_AVTAR.slotsOnPlayer[3].transform.childCount == 0)
+            {
+                slot = 3;
+            }
+            else if (_AVTAR.slotsOnPlayer[4].transform.childCount == 0)
+            {
+                slot = 4;
+            }
+
+        }
+        else if (heldItem.segment == Item.Segment.Legs)
+        {
+            if (_AVTAR.slotsOnPlayer[5].transform.childCount == 0)
+                slot = 5;
+        }
+
+        EquipImage(slot);
+
+        //check category
+
+            //check if slots in cateogry are free
+
+            //if free then add it
+
+
     }
 
     /// <summary>
@@ -222,142 +265,97 @@ public class UIManager : Singleton<UIManager>
     {
         bool flip = false;
 
-        if (canEquip)
-        {
-            print("slot is " + _slot);
-            //set piece rotation
-            switch (_slot)
-            {
+        if (_slot == 4) flip = true;
 
-                case 2:
-                    flip = true;
-                    break;
-                case 5:
-                    flip = true;
-                    break;
-                default:
-                    rotation = 0;
-                    break;
+        print("Creating item for slot " + _slot);
 
+        _ISitemD.AddItemToInventory(heldItem.inSceneID);
+        //then instantiate prefab on player and detroy this iamge
 
-            }
+        var itemSide = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
 
+        _PC.itemsAnim.Add(itemSide.GetComponentInChildren<Animator>());
 
-            _ISitemD.AddItemToInventory(heldItem.inSceneID);
-            //then instantiate prefab on player and detroy this iamge
-            print("ITEM ADDED TO PLAYER");
+        if (flip) itemSide.transform.localScale = new Vector3(-itemSide.transform.rotation.x, itemSide.transform.rotation.y, itemSide.transform.rotation.z);
 
-            //testing cardinal directions
-            if (_slot == 3)
-            {
-                var itemFront = Instantiate(heldItem.avtarPrefabFront, _AVTAR.slotsOnPlayer[_slot].transform);
+        //FOR ALL OTHER ITEMS
 
-                //add item animator to inventory
-                _PC.itemsAnim.Add(itemFront.GetComponentInChildren<Animator>());
+        cursor.sprite = defaultCursor;
+        heldItem = null;
+        isHoldingItem = false;
+        //rotate image
 
-            }
-            //sides
-            else if (_slot != 3)
-            {
-                print("ADD SIDE ONE");
-                var itemSide = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
-
-                _PC.itemsAnim.Add(itemSide.GetComponentInChildren<Animator>());
-
-                if (flip) itemSide.transform.localScale = new Vector3(-itemSide.transform.rotation.x, itemSide.transform.rotation.y, itemSide.transform.rotation.z);
-
-                //item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
-            }
-
-            //FOR ALL OTHER ITEMS
-
-            //else
-            //{
-            //    var item = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
-            //    item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
-            //    //if (flip) item.transform.localScale = new Vector3(-1, 0, -1);
-            //    item.name = item.name + heldItem.ID;
-            //}
-
-
-
-            cursor.sprite = defaultCursor;
-            heldItem = null;
-            isHoldingItem = false;
-            //rotate image
-
-            _PC.CloseSlots();
-        }
+        _PC.CloseSlots();
     }
 
     /// <summary>
     /// Checks whether held item can be placed on slot that is hovered over
     /// </summary>
     /// <param name="_slot"></param>
-    public void CheckSlotHover(int _slot)
-    {
+    //public void CheckSlotHover(int _slot)
+    //{
 
-        if (cursor.sprite != defaultCursor && cursor.sprite != cursorClick)
-        {
-            print(heldItem.itemName);
+    //    if (cursor.sprite != defaultCursor && cursor.sprite != cursorClick)
+    //    {
+    //        print(heldItem.itemName);
 
-            if (_AVTAR.slotsOnPlayer[_slot].transform.childCount == 0) //check if child object is there
-            {
-                //check right segment if slot from 1 to 2 the head etc. 
+    //        if (_AVTAR.slotsOnPlayer[_slot].transform.childCount == 0) //check if child object is there
+    //        {
+    //            //check right segment if slot from 1 to 2 the head etc. 
 
-                if (_AVTAR.slotsOnPlayer[_slot].name.Contains(heldItem.segment.ToString()))
-                {
-                    canEquip = true;
-                }
-                else
-                {
-                    canEquip = false;
-                    //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
-                }
-            }
-            else
-            {
-                canEquip = false;
-                //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
-            }
-        }
-    }
+    //            if (_AVTAR.slotsOnPlayer[_slot].name.Contains(heldItem.segment.ToString()))
+    //            {
+    //                canEquip = true;
+    //            }
+    //            else
+    //            {
+    //                canEquip = false;
+    //                //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
+    //            }
+    //        }
+    //        else
+    //        {
+    //            canEquip = false;
+    //            //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
+    //        }
+    //    }
+    //}
 
-    public void DropHeldItem()
-    {
+    //public void DropHeldItem()
+    //{
 
-        print("Drop held item");
-        //change cursor
-        cursor.sprite = defaultCursor;
+    //    print("Drop held item");
+    //    //change cursor
+    //    cursor.sprite = defaultCursor;
 
-        //create item on player
-        var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
-        _ISitemD.inSceneItemDataBase.Add(heldItem);
+    //    //create item on player
+    //    var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
+    //    _ISitemD.inSceneItemDataBase.Add(heldItem);
 
-        item.GetComponent<ItemIdentifier>().id = heldItem.inSceneID;
-        var id = item.GetComponent<ItemIdentifier>().id;
+    //    item.GetComponent<ItemIdentifier>().id = heldItem.inSceneID;
+    //    var id = item.GetComponent<ItemIdentifier>().id;
 
-        print("item dropping id = " + id);
-        print(_ISitemD.inSceneItemDataBase[id].icon.name);
-        //ERROR
-        item.GetComponentInChildren<SpriteRenderer>().sprite = _ISitemD.inSceneItemDataBase[id].icon;
+    //    print("item dropping id = " + id);
+    //    print(_ISitemD.inSceneItemDataBase[id].icon.name);
+    //    //ERROR
+    //    item.GetComponentInChildren<SpriteRenderer>().sprite = _ISitemD.inSceneItemDataBase[id].icon;
 
-        //add to scene array
-        int index = _ISitemD.inSceneItemDataBase.Count - 1;
-        _ISitemD.inSceneItemDataBase[index].inSceneID = index;
+    //    //add to scene array
+    //    int index = _ISitemD.inSceneItemDataBase.Count - 1;
+    //    _ISitemD.inSceneItemDataBase[index].inSceneID = index;
 
-        heldItem = null;
-        isHoldingItem = false;
-    }
+    //    heldItem = null;
+    //    isHoldingItem = false;
+    //}
         
     /// <summary>
     /// Changes colour of slots when mouse exits hover
     /// </summary>
     /// <param name="_slot"></param>
-    public void CheckSlotHoverExit(int _slot)
-    {
-        //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.yellow;
-    }
+    //public void CheckSlotHoverExit(int _slot)
+    //{
+    //    //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.yellow;
+    //}
 
     #endregion
 
