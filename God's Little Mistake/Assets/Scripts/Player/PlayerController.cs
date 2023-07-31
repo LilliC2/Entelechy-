@@ -415,7 +415,7 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    void Hit(float _dmg)
+    public void Hit(float _dmg)
     {
         print("player has been hit");
         health -= _dmg;
@@ -441,18 +441,7 @@ public class PlayerController : Singleton<PlayerController>
         baseAnimator.SetTrigger("DeathTrigger");
     }
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.collider.CompareTag("EnemyProjectile"))
-        {
-            print("player has been hit in collision");
-            Hit(collision.gameObject.GetComponent<BaseEnemy>().stats.dmg);
 
-            Destroy(collision.gameObject);
-            //get dmg from enemy
-            //Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);
-        }
-    }
 }
 
 
