@@ -17,6 +17,13 @@ public class PlayerController : Singleton<PlayerController>
     public Animator[] slotsAnim;
     public GameObject[] slotsGO;
 
+    public GameObject torsoForward;
+    public GameObject bellyForward;
+
+    public GameObject missyLeftSide;
+    public GameObject missyRightSide;
+    public GameObject missyBack;
+
     public List<Animator> itemsAnim;
 
     Vector3 currentPos;
@@ -99,20 +106,20 @@ public class PlayerController : Singleton<PlayerController>
                 //find inpus for movement
                 if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
                 {
-                    if(!isMoving)
+                    if (!isMoving)
                     {
                         speed = speed + initalSpeedBoost;
 
-                        ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed,1));
+                        ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed, 1));
                     }
-                     
+
                 }
-                
-                
+
+
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
                 else isMoving = false;
 
-                if(!isMoving)
+                if (!isMoving)
                 {
                     speed = maxSpeed;
                 }
@@ -126,7 +133,7 @@ public class PlayerController : Singleton<PlayerController>
                 //turn off and on nubs
                 if (_AVTAR.slotsOnPlayer[5].transform.childCount == 0)
                 {
-                    nubsOB.SetActive(true);
+                    //nubsOB.SetActive(true);
                 }
                 else nubsOB.SetActive(false);
 
@@ -138,16 +145,18 @@ public class PlayerController : Singleton<PlayerController>
                     nubsAnimator.SetBool("ForwardWalk", false);
                     nubsAnimator.SetBool("SideWalk", true);
 
-                    
+
+
+
                 }
-                if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
                     baseAnimator.SetBool("ForwardWalk", true);
                     baseAnimator.SetBool("SideWalk", false);
                     nubsAnimator.SetBool("ForwardWalk", true);
                     nubsAnimator.SetBool("SideWalk", false);
                 }
-                if(transform.position == lastPos)
+                if (transform.position == lastPos)
                 {
                     //print("not moved");
                     baseAnimator.SetBool("ForwardWalk", false);
@@ -156,7 +165,50 @@ public class PlayerController : Singleton<PlayerController>
                     nubsAnimator.SetBool("SideWalk", false);
                 }
 
-                
+
+                //change for cardinal direction
+                if (Input.GetKeyDown(KeyCode.W))
+                {
+                    torsoForward.SetActive(false);
+                    bellyForward.SetActive(false);
+                    missyLeftSide.SetActive(false);
+                    nubsOB.SetActive(false);
+                    missyRightSide.SetActive(false);
+                    missyBack.SetActive(true);
+
+                }
+                if (Input.GetKeyDown(KeyCode.A))
+                {
+                    torsoForward.SetActive(false);
+                    bellyForward.SetActive(false);
+                    missyLeftSide.SetActive(true);
+                    nubsOB.SetActive(false);
+                    missyRightSide.SetActive(false);
+                    missyBack.SetActive(false);
+                }
+                if (Input.GetKeyDown(KeyCode.S))
+                {
+                    
+
+                    torsoForward.SetActive(true);
+                    bellyForward.SetActive(true);
+                    missyLeftSide.SetActive(false);
+                    nubsOB.SetActive(true);
+                    missyRightSide.SetActive(false);
+                    missyBack.SetActive(false);
+                }
+                if (Input.GetKeyDown(KeyCode.D))
+                {
+                    torsoForward.SetActive(false);
+                    bellyForward.SetActive(false);
+                    missyLeftSide.SetActive(false);
+                    nubsOB.SetActive(false);
+                    missyRightSide.SetActive(true);
+                    missyBack.SetActive(false);
+                }
+
+        
+
                 #endregion
 
                 //Rotate melee hit box and head
