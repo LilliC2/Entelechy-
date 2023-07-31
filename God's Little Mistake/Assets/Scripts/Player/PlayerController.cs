@@ -43,6 +43,10 @@ public class PlayerController : Singleton<PlayerController>
     public float projectileSpeed;
     public GameObject projectilePF;
 
+    public GameObject mouthFront;
+    public GameObject mouthLeftSide;
+    public GameObject mouthRightSide;
+
     [SerializeField]
     int initalSpeedBoost = 3;
     bool isMoving;
@@ -176,6 +180,10 @@ public class PlayerController : Singleton<PlayerController>
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(true);
 
+                    mouthRightSide.SetActive(false);
+                    mouthLeftSide.SetActive(false);
+                    mouthFront.SetActive(false);
+
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
@@ -185,6 +193,10 @@ public class PlayerController : Singleton<PlayerController>
                     nubsOB.SetActive(false);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(false);
+
+                    mouthRightSide.SetActive(false);
+                    mouthLeftSide.SetActive(true);
+                    mouthFront.SetActive(false);
                 }
                 if (Input.GetKeyDown(KeyCode.S))
                 {
@@ -196,6 +208,10 @@ public class PlayerController : Singleton<PlayerController>
                     nubsOB.SetActive(true);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(false);
+
+                    mouthRightSide.SetActive(false);
+                    mouthLeftSide.SetActive(false);
+                    mouthFront.SetActive(true);
                 }
                 if (Input.GetKeyDown(KeyCode.D))
                 {
@@ -205,6 +221,10 @@ public class PlayerController : Singleton<PlayerController>
                     nubsOB.SetActive(false);
                     missyRightSide.SetActive(true);
                     missyBack.SetActive(false);
+
+                    mouthRightSide.SetActive(true);
+                    mouthLeftSide.SetActive(false);
+                    mouthFront.SetActive(false);
                 }
 
         
@@ -352,6 +372,12 @@ public class PlayerController : Singleton<PlayerController>
         #endregion
     }
 
+    public void UpdateMouthOB(GameObject _front,GameObject _sideR, GameObject _sideL)
+    {
+        mouthFront = _front;
+        mouthLeftSide = _sideL;
+        mouthRightSide = _sideR;
+    }
     private Tween TweenSpeed(float endValue,float time)
     {
         speedTween = DOTween.To(() => speed, (x) => speed = x, endValue, time);

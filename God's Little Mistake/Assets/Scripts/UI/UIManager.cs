@@ -272,11 +272,23 @@ public class UIManager : Singleton<UIManager>
         _ISitemD.AddItemToInventory(heldItem.inSceneID);
         //then instantiate prefab on player and detroy this iamge
 
-        var itemSide = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
+        var itemFront = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
+        var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayer[_slot].transform);
+        var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayer[_slot].transform);
 
-        _PC.itemsAnim.Add(itemSide.GetComponentInChildren<Animator>());
+        itemLeftSide.SetActive(false);
+        itemRightSide.SetActive(false);
 
-        if (flip) itemSide.transform.localScale = new Vector3(-itemSide.transform.rotation.x, itemSide.transform.rotation.y, itemSide.transform.rotation.z);
+
+        if(heldItem.category == Item.Category.Mouth)
+        {
+            _PC.UpdateMouthOB(itemFront, itemRightSide, itemLeftSide);
+        }
+
+
+        _PC.itemsAnim.Add(itemFront.GetComponentInChildren<Animator>());
+
+        if (flip) itemFront.transform.localScale = new Vector3(-itemFront.transform.rotation.x, itemFront.transform.rotation.y, itemFront.transform.rotation.z);
 
         //FOR ALL OTHER ITEMS
 
