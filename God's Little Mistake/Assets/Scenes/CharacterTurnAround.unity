@@ -8853,7 +8853,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &852555786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10037,7 +10037,7 @@ Camera:
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
-    m_Bits: 511
+    m_Bits: 3583
   m_RenderingPath: -1
   m_TargetTexture: {fileID: 0}
   m_TargetDisplay: 0
@@ -23409,7 +23409,8 @@ MonoBehaviour:
   itemsAnim: []
   health: 100
   maxHP: 100
-  speed: 4
+  speed: 5
+  maxSpeed: 5
   dmg: 5
   dps: 0
   range: 1
@@ -23417,6 +23418,7 @@ MonoBehaviour:
   projectile: 1
   projectileSpeed: 1000
   projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+  initalSpeedBoost: 3
   playerInventory: []
   headSpeed: 1000
   head: {fileID: 348322359}

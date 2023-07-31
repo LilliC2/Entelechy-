@@ -26,6 +26,7 @@ public class PlayerController : Singleton<PlayerController>
     public float health;
     public float maxHP;
     public float speed;
+    public float maxSpeed;
     public float dmg;
     public float dps;
     public float range;
@@ -34,6 +35,12 @@ public class PlayerController : Singleton<PlayerController>
     public bool projectile;
     public float projectileSpeed;
     public GameObject projectilePF;
+
+    [SerializeField]
+    int initalSpeedBoost = 3;
+    bool isMoving;
+
+    Tween speedTween;
 
     [Header("Inventory")]
     public List<Item> playerInventory;
@@ -82,22 +89,45 @@ public class PlayerController : Singleton<PlayerController>
 
 
         UpdateMelee();
-        _UI.UpdateHealthText(health);   
+        _UI.UpdateHealthText(health);
 
         switch (_GM.gameState)
         {
             case GameManager.GameState.Playing:
 
+                #region Movement
                 Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
                 controller.Move(move * Time.deltaTime * speed);
+
+                //find inpus for movement
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+                {
+                    if(!isMoving)
+                    {
+                        speed = speed + initalSpeedBoost;
+
+                        ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed,1));
+                    }
+                     
+                }
                 
                 
-                controller.Move(playerVelocity * Time.deltaTime);
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
+                else isMoving = false;
+
+                if(!isMoving)
+                {
+                    speed = maxSpeed;
+                }
+
+                #endregion
+
+                //controller.Move(playerVelocity * Time.deltaTime);
 
                 #region Animation
 
                 //turn off and on nubs
-                if(_AVTAR.slotsOnPlayer[6].transform.childCount == 0)
+                if (_AVTAR.slotsOnPlayer[6].transform.childCount == 0)
                 {
                     nubsOB.SetActive(true);
                 }
@@ -273,6 +303,12 @@ public class PlayerController : Singleton<PlayerController>
         #endregion
     }
 
+    private Tween TweenSpeed(float endValue,float time)
+    {
+        speedTween = DOTween.To(() => speed, (x) => speed = x, endValue, time);
+        return speedTween;
+    }
+   
     public void CloseSlots()
     {
         for (int i = 0; i < slotsAnim.Length; i++)
