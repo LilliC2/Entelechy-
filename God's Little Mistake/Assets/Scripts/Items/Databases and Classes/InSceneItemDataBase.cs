@@ -15,7 +15,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         
 
         //move item to inventory
-        if (_PC.playerInventory.Count < 7)
+        if (_PC.playerInventory.Count < 6)
         {
 
             _UI.statsPopUpPanel.SetActive(false);
