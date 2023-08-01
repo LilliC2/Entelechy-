@@ -277,28 +277,50 @@ public class UIManager : Singleton<UIManager>
         _ISitemD.AddItemToInventory(heldItem.inSceneID);
         //then instantiate prefab on player and detroy this iamge
 
-        var itemFront = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayerFront[_slot].transform);
         var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
         var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerRight[_slot].transform);
-        var itemBackSide = Instantiate(heldItem.avtarPrefabBack, _AVTAR.slotsOnPlayerBack[_slot].transform);
-        
 
-        if(heldItem.category == Item.Category.Mouth)
+
+        if (_slot == 4)
         {
-            _PC.UpdateMouthOB(itemFront, itemRightSide, itemLeftSide);
+            var itemFront = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerFront[_slot].transform);
+            _PC.itemsAnimBack.Add(itemFront.GetComponentInChildren<Animator>());
+        }
+        if (_slot == 3)
+        {
+            var itemFront = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
+            _PC.itemsAnimBack.Add(itemFront.GetComponentInChildren<Animator>());
         }
 
+        //change back based 
+        if (_slot == 3)
+        {
+            var itemBackSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerBack[_slot].transform);
+            _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+        }
+        if(_slot == 4)
+        {
+            var itemBackSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
+            _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+        }
+        
+        
 
-        _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
+        //if(heldItem.category == Item.Category.Mouth)
+        //{
+        //    _PC.UpdateMouthOB(itemFront, itemRightSide, itemLeftSide);
+        //}
+
+
         _PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());
         _PC.itemsAnimRightSide.Add(itemRightSide.GetComponentInChildren<Animator>());
-        _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+        
 
 
 
 
 
-        if (flip) itemFront.transform.GetChild(0).localScale = new Vector3(-itemFront.transform.GetChild(0).localScale.x, itemFront.transform.GetChild(0).localScale.y, itemFront.transform.GetChild(0).localScale.z);
+        //if (flip) itemFront.transform.GetChild(0).localScale = new Vector3(-itemFront.transform.GetChild(0).localScale.x, itemFront.transform.GetChild(0).localScale.y, itemFront.transform.GetChild(0).localScale.z);
 
         //FOR ALL OTHER ITEMS
 
