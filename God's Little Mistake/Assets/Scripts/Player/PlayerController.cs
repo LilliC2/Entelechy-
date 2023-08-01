@@ -24,7 +24,10 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject missyRightSide;
     public GameObject missyBack;
 
-    public List<Animator> itemsAnim;
+    public List<Animator> itemsAnimForward;
+    public List<Animator> itemsAnimRightSide;
+    public List<Animator> itemsAnimLeftSide;
+    public List<Animator> itemsAnimBack;
 
     Vector3 currentPos;
     Vector3 lastPos;
@@ -70,6 +73,7 @@ public class PlayerController : Singleton<PlayerController>
     bool meleeCooDown;
     public GameObject lineHitbox;
     public GameObject coneHitbox;
+    MeleeUISwitcher meleeUISwitcher;
 
     public enum MeleeHitBox { Line, Cone }
     public MeleeHitBox meleeHitBox;
@@ -81,6 +85,7 @@ public class PlayerController : Singleton<PlayerController>
         _UI.UpdateHealthText(health);
         lastPos = transform.position;
 
+        meleeUISwitcher = GetComponent<MeleeUISwitcher>();
 
         
         //add stats for the 1 item in the inventory
@@ -135,7 +140,7 @@ public class PlayerController : Singleton<PlayerController>
                 #region Animation
 
                 //turn off and on nubs
-                if (_AVTAR.slotsOnPlayer[5].transform.childCount == 0)
+                if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
                 {
                     //nubsOB.SetActive(true);
                 }
@@ -259,7 +264,14 @@ public class PlayerController : Singleton<PlayerController>
                             if (!playerInventory[i].projectile)
                             {
                                 //shoot
-                                RunItemAnimations("Torso");
+
+                                //active primary attack
+
+                                itemsAnimForward[i].SetTrigger("Attack");
+                                itemsAnimBack[i].SetTrigger("Attack");
+                                itemsAnimLeftSide[i].SetTrigger("Attack");
+                                itemsAnimRightSide[i].SetTrigger("Attack");
+
 
                                 print("do melee attack");
                                 //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
@@ -283,7 +295,12 @@ public class PlayerController : Singleton<PlayerController>
                             if (playerInventory[i].projectile)
                             {
                                 //shoot
-                                RunItemAnimations("Head");
+
+                                //activate animation
+                                itemsAnimForward[i].SetTrigger("Attack");
+                                itemsAnimBack[i].SetTrigger("Attack");
+                                itemsAnimLeftSide[i].SetTrigger("Attack");
+                                itemsAnimRightSide[i].SetTrigger("Attack");
 
                                 //changed to use player stats, the primary attack will just change
                                 FireProjectile(playerInventory[0].projectilePF, projectileSpeed, firerate, range);
@@ -388,7 +405,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         for (int i = 0; i < slotsAnim.Length; i++)
         {
-            if (_AVTAR.slotsOnPlayer[i].transform.childCount == 0)
+            if (_AVTAR.slotsOnPlayerFront[i].transform.childCount == 0)
             {
                 print("trying to slot");
                 slotsAnim[i].SetBool("OpenSlot", false);
@@ -400,21 +417,6 @@ public class PlayerController : Singleton<PlayerController>
 
             ExecuteAfterSeconds(1, () => ChangeSlots(false));
         }
-    }
-
-    void RunItemAnimations(string _segment)
-    {
-        for (int i = 0; i < playerInventory.Count; i++)
-        {
-            if (playerInventory[i].active == true)
-            {
-                if(playerInventory[i].segment.ToString() == _segment)
-                {
-                    itemsAnim[i].SetTrigger("Attack");
-                }
-            }
-        }
-        
     }
 
     void ChangeSlots(bool _bool)
@@ -448,6 +450,14 @@ public class PlayerController : Singleton<PlayerController>
         {
             //if yes activate
             playerInventory[_inventorySlot].active = true;
+
+
+            //check if melee attack
+            if(!playerInventory[_inventorySlot].projectile)
+            {
+                //change melee UI
+                meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
+            }
 
             //turn off any others in the same segment
             for (int i = _inventorySlot; playerInventory.Count > i; i++)
@@ -536,7 +546,7 @@ public class PlayerController : Singleton<PlayerController>
         }
         else
         {
-
+            _GM.gameState = GameManager.GameState.Dead;
             DieAnimation();
             //add particles in die animation too
         }

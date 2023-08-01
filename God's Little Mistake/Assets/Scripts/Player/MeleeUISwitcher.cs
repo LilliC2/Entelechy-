@@ -4,18 +4,50 @@ using UnityEngine;
 
 public class MeleeUISwitcher : GameBehaviour
 {
+    [SerializeField]
+    GameObject antlersUI;
+    [SerializeField]
+    GameObject beakUI;
+    [SerializeField]
+    GameObject clawUI; 
+    [SerializeField]
+    GameObject slugUI; 
+    [SerializeField]
+    GameObject fistUI; 
 
+    GameObject newMeleeUI;
 
-
-    // Start is called before the first frame update
-    void Start()
+    public void SwitchMeleeUI(int _itemID)
     {
-        
-    }
+        print("Item ID is " + _itemID);
 
-    // Update is called once per frame
-    void Update()
-    {
-        
+        switch (_itemID)
+        {
+            case 8: //CLAW
+                newMeleeUI = clawUI;
+                break;
+            case 6: //SLUG
+                newMeleeUI = slugUI;
+                break;
+            case 9: //HUMAN FIST
+                newMeleeUI = fistUI;
+                break;
+
+        }
+
+
+        //destroy current child
+        for (int i = 0; i < _PC.directional.transform.childCount; i++)
+        {
+            if (_PC.directional.transform.GetChild(i).name.Contains("Attack_Melee_"))
+            {
+                var objToDestroy = _PC.directional.transform.GetChild(i).gameObject;
+                Destroy(objToDestroy);
+            }
+        }
+
+        //make new one
+        Instantiate(newMeleeUI, _PC.directional.transform);
+
     }
 }

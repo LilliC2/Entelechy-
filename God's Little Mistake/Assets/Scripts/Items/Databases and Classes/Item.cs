@@ -38,6 +38,7 @@ public class Item
     public GameObject avtarPrefab;
     public GameObject avtarPrefabLeft;
     public GameObject avtarPrefabRight;
+    public GameObject avtarPrefabBack;
 
     public Item()
     {
