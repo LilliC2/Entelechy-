@@ -18,20 +18,38 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         if (_PC.playerInventory.Count < 6)
         {
 
+            print("Player Health is " + _PC.health);
+
             _UI.statsPopUpPanel.SetActive(false);
             _PC.playerInventory.Add(inSceneItemDataBase[_sceneID]);
-            print("added item");
+            //print("added item");
             inSceneItemDataBase.Remove(inSceneItemDataBase[_sceneID]);
 
             //move all items in list downm (automatic)
+
+            //THIS DOESNT WORK CAUSE OF THE ITEM IDS
+
             //make sure their ids stay the same!!!
             for (int i = _sceneID; i < inSceneItemDataBase.Count; i++)
             {
                 inSceneItemDataBase[i].inSceneID = inSceneItemDataBase[i].inSceneID - 1;
             }
 
+            //change items
+            GameObject[] itemsOnGround = GameObject.FindGameObjectsWithTag("Item Drop");
+
+            for (int i = 0; i < itemsOnGround.Length; i++)
+            {
+                if(itemsOnGround[i].GetComponent<ItemIdentifier>().id > _sceneID)
+                {
+                    itemsOnGround[i].GetComponent<ItemIdentifier>().id -= 1;
+                }
+            }
+
+
             var index = _PC.playerInventory.Count - 1;
-            _PC.playerInventory[index].ID = index;
+
+            //print("Item ID in additem is " + index);
 
             _UI.UpdateInventorySlotImages();
 
@@ -42,7 +60,21 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
                 case Item.ItemType.Primary:
 
                     //if primary and no other primarys are there, add this one
-                    _PC.ChangePrimary(index);
+                    bool canAutoAddPrimary = true;
+                    //find segement
+                    foreach (var item in _PC.playerInventory)
+                    {
+                        //check if active in segment
+                        if (item.active)
+                        {
+                            if(item.segment == _PC.playerInventory[index].segment)
+                            {
+                                canAutoAddPrimary = false;
+                            }
+                        }
+                    }
+                   if(canAutoAddPrimary) _PC.ChangePrimary(index);
+
 
                     break;
                 case Item.ItemType.Secondary:
@@ -69,16 +101,20 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
     public void RemoveItemFromInventory(int _inventoryID)
     {
         //remove item from player canvas
-        for (int i = 0; i < _AVTAR.slotsOnPlayer.Length; i++)
+        for (int i = 0; i < _AVTAR.slotsOnPlayerFront.Length; i++)
         {
             //check if slot hhas child
-            if (_AVTAR.slotsOnPlayer[i].transform.childCount != 0)
+            if (_AVTAR.slotsOnPlayerFront[i].transform.childCount != 0)
             {
                 //check if item equipped is the item
-                var obj = _AVTAR.slotsOnPlayer[i].transform.GetChild(0);
+                var obj = _AVTAR.slotsOnPlayerFront[i].transform.GetChild(0);
                 if (obj.name.Contains(_inventoryID.ToString()))
                 {
-                    _PC.itemsAnim.Remove(obj.GetComponentInChildren<Animator>());
+                    _PC.itemsAnimForward.Remove(obj.GetComponentInChildren<Animator>());
+                    _PC.itemsAnimLeftSide.Remove(obj.GetComponentInChildren<Animator>());
+                    _PC.itemsAnimRightSide.Remove(obj.GetComponentInChildren<Animator>());
+                    _PC.itemsAnimBack.Remove(obj.GetComponentInChildren<Animator>());
+
                     Destroy(obj.gameObject);
                 }
             }

@@ -193,14 +193,15 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CreateItemSelected(int _inSceneId)
     {
-        print("Create item, id is " + _inSceneId);
+        print("Player Health is " + _PC.health);
+
+        //print("Create item, in scene id is " + _inSceneId);
         heldItem = _ISitemD.inSceneItemDataBase[_inSceneId];
+
+        //print("in CreateItemSelected ID is " + heldItem.ID);
 
         //Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
         //cursor.sprite = itemSprite;
-
-
-        print(heldItem);
         
         statsPopUpPanel.SetActive(false);
         isHoldingItem = true;
@@ -214,27 +215,27 @@ public class UIManager : Singleton<UIManager>
             if (heldItem.category == Item.Category.Horns)
             {
                 //check if slot is free
-                if (_AVTAR.slotsOnPlayer[0].transform.childCount == 0)
+                if (_AVTAR.slotsOnPlayerFront[0].transform.childCount == 0)
                     slot = 0;   
             }
             if (heldItem.category == Item.Category.Eyes)
             {
-                if (_AVTAR.slotsOnPlayer[1].transform.childCount == 0)
+                if (_AVTAR.slotsOnPlayerFront[1].transform.childCount == 0)
                     slot = 1;
             }
             if (heldItem.category == Item.Category.Mouth)
             {
-                if (_AVTAR.slotsOnPlayer[2].transform.childCount == 0)
+                if (_AVTAR.slotsOnPlayerFront[2].transform.childCount == 0)
                     slot = 2;
             }
         }
         else if (heldItem.segment == Item.Segment.Torso)
         {
-            if (_AVTAR.slotsOnPlayer[3].transform.childCount == 0)
+            if (_AVTAR.slotsOnPlayerFront[3].transform.childCount == 0)
             {
                 slot = 3;
             }
-            else if (_AVTAR.slotsOnPlayer[4].transform.childCount == 0)
+            else if (_AVTAR.slotsOnPlayerFront[4].transform.childCount == 0)
             {
                 slot = 4;
             }
@@ -242,7 +243,7 @@ public class UIManager : Singleton<UIManager>
         }
         else if (heldItem.segment == Item.Segment.Legs)
         {
-            if (_AVTAR.slotsOnPlayer[5].transform.childCount == 0)
+            if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
                 slot = 5;
         }
 
@@ -267,17 +268,25 @@ public class UIManager : Singleton<UIManager>
 
         if (_slot == 4) flip = true;
 
-        print("Creating item for slot " + _slot);
+        //print("Creating item for slot " + _slot);
+
+        //print("in EquipImage ID is " + heldItem.ID);
+
+        print("Player Health is " + _PC.health);
 
         _ISitemD.AddItemToInventory(heldItem.inSceneID);
         //then instantiate prefab on player and detroy this iamge
 
-        var itemFront = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
-        var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayer[_slot].transform);
-        var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayer[_slot].transform);
+        var itemFront = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayerFront[_slot].transform);
+        var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
+        var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerRight[_slot].transform);
+        var itemBackSide = Instantiate(heldItem.avtarPrefabBack, _AVTAR.slotsOnPlayerBack[_slot].transform);
+        
+
 
         itemLeftSide.SetActive(false);
         itemRightSide.SetActive(false);
+        itemBackSide.SetActive(false);
 
 
         if(heldItem.category == Item.Category.Mouth)
@@ -286,7 +295,14 @@ public class UIManager : Singleton<UIManager>
         }
 
 
-        _PC.itemsAnim.Add(itemFront.GetComponentInChildren<Animator>());
+        _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
+        _PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());
+        _PC.itemsAnimRightSide.Add(itemRightSide.GetComponentInChildren<Animator>());
+        _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+
+
+
+
 
         if (flip) itemFront.transform.localScale = new Vector3(-itemFront.transform.rotation.x, itemFront.transform.rotation.y, itemFront.transform.rotation.z);
 
