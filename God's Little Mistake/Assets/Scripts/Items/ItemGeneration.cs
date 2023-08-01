@@ -46,7 +46,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
         }
 
         //pick a random possible drop
-        int rand = RandomIntBetweenTwoInt(0, possibleDropsIndex.Count-1);
+        int rand = Random.Range(0, possibleDropsIndex.Count);
 
         Item itemSpawned = _ItemD.itemDataBase[possibleDropsIndex[rand]];
 

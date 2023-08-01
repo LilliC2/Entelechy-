@@ -25,7 +25,7 @@ public class BaseEnemy : GameBehaviour
         string cat = enemyRnd.categories[Random.Range(0, enemyRnd.categories.Count)];
 
         stats.category = (EnemyStats.Category)System.Enum.Parse(typeof(EnemyStats.Category), cat);
-        print("this enemies category is " + cat + " and is set to " + stats.category);
+        //print("this enemies category is " + cat + " and is set to " + stats.category);
     }
 
     private void Update()

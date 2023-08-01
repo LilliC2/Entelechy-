@@ -8,7 +8,7 @@ public class EnemyRandomisation : GameBehaviour
     public GameObject[] slots;
 
     string[] categoryHead = new string[] { "Eyes", "Horns" };
-    string[] categoryTorso = new string[] { "Slappies", "Punchies", "Launchers" };
+    string[] categoryTorso = new string[] { "Slappies", "Launchers" }; //ADD PUNCHIES WHEN AN ITEM IS ADDED
     string[] categoryLegs = new string[] { "Legs", "Crawlies"};
 
     public List<string> categories;
@@ -72,6 +72,11 @@ public class EnemyRandomisation : GameBehaviour
             EquipItem(5, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
 
         }
+        //var gencat = categoryTorso[Random.Range(0, categoryTorso.Length)];
+        //print("generating cat = " + gencat);
+        //GameObject go = GenerateItem(gencat);
+        //print(go.name);
+        //EquipItem(4, go);
 
         //LEGS
         EquipItem(6, GenerateItem(categoryLegs[Random.Range(0,categoryLegs.Length)]));
