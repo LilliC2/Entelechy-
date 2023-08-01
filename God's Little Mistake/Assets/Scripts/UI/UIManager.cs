@@ -283,12 +283,6 @@ public class UIManager : Singleton<UIManager>
         var itemBackSide = Instantiate(heldItem.avtarPrefabBack, _AVTAR.slotsOnPlayerBack[_slot].transform);
         
 
-
-        itemLeftSide.SetActive(false);
-        itemRightSide.SetActive(false);
-        itemBackSide.SetActive(false);
-
-
         if(heldItem.category == Item.Category.Mouth)
         {
             _PC.UpdateMouthOB(itemFront, itemRightSide, itemLeftSide);
@@ -304,7 +298,7 @@ public class UIManager : Singleton<UIManager>
 
 
 
-        if (flip) itemFront.transform.localScale = new Vector3(-itemFront.transform.rotation.x, itemFront.transform.rotation.y, itemFront.transform.rotation.z);
+        if (flip) itemFront.transform.GetChild(0).localScale = new Vector3(-itemFront.transform.GetChild(0).localScale.x, itemFront.transform.GetChild(0).localScale.y, itemFront.transform.GetChild(0).localScale.z);
 
         //FOR ALL OTHER ITEMS
 
