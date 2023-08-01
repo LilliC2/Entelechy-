@@ -17,7 +17,6 @@ public class RandomiseProps : GameBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        parent = GameObject.Find("PropsHeader");
         RandomiseEnvionmentProps();
         
 

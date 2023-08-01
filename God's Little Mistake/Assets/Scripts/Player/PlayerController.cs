@@ -9,16 +9,6 @@ public class PlayerController : Singleton<PlayerController>
     public BearTrap bearTrap;
     public CactusTrap cactusTrap;
 
-    [Header("Animation")]
-    public Animator baseAnimator;
-    public Animator legsAnimator;
-
-    public Animator[] slotsAnim;
-    public GameObject[] slotsGO;
-
-    Vector3 currentPos;
-    Vector3 lastPos;
-
     [Header("Player Stats")]
     public float health;
     public float maxHP;
@@ -58,7 +48,6 @@ public class PlayerController : Singleton<PlayerController>
         health = maxHP;
         controller = gameObject.GetComponent<CharacterController>();
         _UI.UpdateHealthText(health);
-        lastPos = transform.position;
 
         //add stats for the 1 item in the inventory
         _ISitemD.AddPassiveItem(0);
@@ -72,12 +61,6 @@ public class PlayerController : Singleton<PlayerController>
             _ISitemD.RemoveItemFromInventory(2);
         }
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            DieAnimation();
-        }
-
-
         UpdateMelee();
         _UI.UpdateHealthText(health);   
 
@@ -87,39 +70,8 @@ public class PlayerController : Singleton<PlayerController>
 
                 Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
                 controller.Move(move * Time.deltaTime * speed);
-                
-                
+
                 controller.Move(playerVelocity * Time.deltaTime);
-
-                #region Animation
-                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-                {
-                    baseAnimator.SetBool("ForwardWalk", false);
-                    baseAnimator.SetBool("SideWalk", true);
-
-                    legsAnimator.SetBool("ForwardWalk", false);
-                    legsAnimator.SetBool("SideWalk", true);
-
-                    
-                }
-                if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
-                {
-                    baseAnimator.SetBool("ForwardWalk", true);
-                    baseAnimator.SetBool("SideWalk", false);
-                    legsAnimator.SetBool("ForwardWalk", true);
-                    legsAnimator.SetBool("SideWalk", false);
-                }
-                if(transform.position == lastPos)
-                {
-                    //print("not moved");
-                    baseAnimator.SetBool("ForwardWalk", false);
-                    baseAnimator.SetBool("SideWalk", false);
-                    legsAnimator.SetBool("ForwardWalk", false);
-                    legsAnimator.SetBool("SideWalk", false);
-                }
-
-                
-                #endregion
 
                 //Rotate melee hit box and head
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -172,11 +124,9 @@ public class PlayerController : Singleton<PlayerController>
                             {
                                 //shoot
 
+                                //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
                                 //changed to use player stats, the primary attack will just change
                                 FireProjectile(playerInventory[0].projectilePF, projectileSpeed, firerate, range);
-
-                                //ADD KNOCK BACK
-
                             }
                         }
                     }
@@ -189,49 +139,15 @@ public class PlayerController : Singleton<PlayerController>
                 if(_UI.heldItem != null)
                 {
                     print("holding an item");
-                    //Open Slots
-
-                    for(int i =0; i < slotsAnim.Length; i++)
-                    {
-                        
-                        if (_AVTAR.slotsOnPlayer[i].transform.childCount == 0)
-                        {
-                            slotsGO[i].SetActive(true);
-                            slotsAnim[i].SetBool("OpenSlot", true);
-                        }
-                            
-                    }
-
-                    //Drop Held Item
-                    if(Input.GetKeyDown(KeyCode.R))
+                    if(Input.GetKeyDown(KeyCode.E))
                     {
                         _UI.DropHeldItem();
-
-                        
-                    }
-                }
-                else
-                {
-                    for (int i = 0; i < slotsAnim.Length; i++)
-                    {
-                        if (_AVTAR.slotsOnPlayer[i].transform.childCount == 0)
-                        {
-                            slotsAnim[i].SetBool("OpenSlot", false);
-                            slotsAnim[i].SetBool("CloseSlot", true);
-                        }
-
-                        
-
-                        ExecuteAfterSeconds(1, () => ChangeSlots(false));
                     }
                 }
 
                 break;
 
-                
         }
-
-        lastPos = transform.position;
 
         //change melee
 
@@ -274,13 +190,6 @@ public class PlayerController : Singleton<PlayerController>
         #endregion
     }
 
-    void ChangeSlots(bool _bool)
-    {
-        for (int i = 0; i < slotsAnim.Length; i++)
-        {
-            slotsGO[i].SetActive(_bool);
-        }
-    }
     void UpdateMelee()
     {
         switch (meleeHitBox)
@@ -393,20 +302,9 @@ public class PlayerController : Singleton<PlayerController>
         }
         else
         {
-
-            DieAnimation();
-            //add particles in die animation too
+            //GAME OVER
         }
 
-    }
-
-    void DieAnimation()
-    {
-        baseAnimator.SetBool("ForwardWalk", false);
-        baseAnimator.SetBool("SideWalk", false);
-        legsAnimator.SetBool("ForwardWalk", false);
-        legsAnimator.SetBool("SideWalk", false);
-        baseAnimator.SetTrigger("DeathTrigger");
     }
 
     private void OnCollisionEnter(Collision collision)
