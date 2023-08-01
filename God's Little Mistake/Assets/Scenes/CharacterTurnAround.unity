@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 262.33694, g: 325.04984, b: 430.2193, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3035,6 +3035,9 @@ MonoBehaviour:
   gooSlowdownFactor: 0.5
   damageOverTime: 1
   minSpeedInGoo: 1
+  isInGoo: 0
+  playerController: {fileID: 0}
+  originalSpeed: 0
 --- !u!1 &332289826
 GameObject:
   m_ObjectHideFlags: 0
@@ -20946,6 +20949,7 @@ MonoBehaviour:
   - {fileID: 982121158107881444, guid: 13d51b1ea14d5474fa3d6a966c3b121d, type: 3}
   - {fileID: 1140362711681262925, guid: bfc9b9795afc6204698390f0c96dc7bc, type: 3}
   - {fileID: 762644917726218470, guid: 92c2444574046df4889599abcd42003b, type: 3}
+  lastRoomPos: {x: 0, y: 0, z: 0}
   distanceBetweenRooms: 50
   roomParent: {fileID: 176975312}
 --- !u!4 &1920518045 stripped
@@ -21740,7 +21744,13 @@ MonoBehaviour:
   explosionRadius: 3
   damageAmount: 20
   explosionDelay: 2
-  triggeredColor: {r: 1, g: 0, b: 0, a: 1}
+  triggeredColor:
+    r: 1
+    g: 0
+    b: 0
+    a: 1
+  exploded: 0
+  trapRenderer: {fileID: 0}
 --- !u!65 &1974988462
 BoxCollider:
   m_ObjectHideFlags: 0
