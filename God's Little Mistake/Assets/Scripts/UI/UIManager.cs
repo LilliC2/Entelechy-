@@ -76,10 +76,10 @@ public class UIManager : Singleton<UIManager>
         //ADD LATER FORMATTING FOR FLOATS
 
         popupName.text = _itemName;
-        popupDmg.text = "DMG: " + _itemDmg.ToString();
-        popupCritX.text = "CritX: " + _itemCritX.ToString();
-        popupCritChance.text = "Crit%: " + _itemCritChance.ToString();
-        popupFirerate.text = "Firerate%: " + _itemFirerate.ToString();
+        popupDmg.text = _itemDmg.ToString();
+        popupCritX.text = _itemCritX.ToString();
+        popupCritChance.text = _itemCritChance.ToString();
+        popupFirerate.text = _itemFirerate.ToString();
     }
 
     public void UpdateHealthText(float _hp)
