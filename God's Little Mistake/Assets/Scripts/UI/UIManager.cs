@@ -266,7 +266,7 @@ public class UIManager : Singleton<UIManager>
     {
         bool flip = false;
 
-        if (_slot == 4) flip = true;
+
 
         //print("Creating item for slot " + _slot);
 
@@ -279,30 +279,47 @@ public class UIManager : Singleton<UIManager>
 
         var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
         var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerRight[_slot].transform);
+        _PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());
+        _PC.itemsAnimRightSide.Add(itemRightSide.GetComponentInChildren<Animator>());
 
+        //if torso piece make sure its correct
 
-        if (_slot == 4)
+        if (heldItem.segment == Item.Segment.Torso)
         {
-            var itemFront = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerFront[_slot].transform);
-            _PC.itemsAnimBack.Add(itemFront.GetComponentInChildren<Animator>());
+            if (_slot == 4) //  RIGHT
+            {
+                //FRONT
+                var itemFront = Instantiate(heldItem.avatarPrefabFrontRight, _AVTAR.slotsOnPlayerFront[_slot].transform);
+                _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
+
+                //BACKL
+                var itemBackSide = Instantiate(heldItem.avtarPrefabBackRight, _AVTAR.slotsOnPlayerBack[_slot].transform);
+                _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+            }
+            if (_slot == 3) // LEFT
+            {
+                //FRONT
+                var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
+                _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
+
+                //BACKK
+                var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
+                _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+            }
+
         }
-        if (_slot == 3)
+        else
         {
+            //default left
             var itemFront = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
-            _PC.itemsAnimBack.Add(itemFront.GetComponentInChildren<Animator>());
-        }
+            _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
 
-        //change back based 
-        if (_slot == 3)
-        {
             var itemBackSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerBack[_slot].transform);
             _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
         }
-        if(_slot == 4)
-        {
-            var itemBackSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
-            _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
-        }
+
+        //front
+        
         
         
 
@@ -310,15 +327,6 @@ public class UIManager : Singleton<UIManager>
         //{
         //    _PC.UpdateMouthOB(itemFront, itemRightSide, itemLeftSide);
         //}
-
-
-        _PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());
-        _PC.itemsAnimRightSide.Add(itemRightSide.GetComponentInChildren<Animator>());
-        
-
-
-
-
 
         //if (flip) itemFront.transform.GetChild(0).localScale = new Vector3(-itemFront.transform.GetChild(0).localScale.x, itemFront.transform.GetChild(0).localScale.y, itemFront.transform.GetChild(0).localScale.z);
 

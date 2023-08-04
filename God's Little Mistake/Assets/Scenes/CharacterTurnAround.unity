@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 262.33694, g: 325.04984, b: 430.2193, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6372,6 +6372,79 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6396217571161385355, guid: 746fc3a0e458d11469c34d8f7a4b5a4c, type: 3}
   m_PrefabInstance: {fileID: 1554112272}
   m_PrefabAsset: {fileID: 0}
+--- !u!1001 &655787782
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: id
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 2474645652190830804, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_Sprite
+      value: 
+      objectReference: {fileID: 21300000, guid: 7093392c41770d64c9655ad4adf9ff07, type: 3}
+    - target: {fileID: 2474645652190830804, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 5956623696610171656, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_Name
+      value: Item (4)
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131078138101766082, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_RootOrder
+      value: 16
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131078138101766082, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0.04
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131078138101766082, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131078138101766082, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -3.7
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131078138101766082, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131078138101766082, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131078138101766082, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131078138101766082, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131078138101766082, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131078138101766082, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8131078138101766082, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
 --- !u!4 &656382816 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3516826103330883936, guid: d3c0a53dfa30a284f9c495ba82ff4069, type: 3}
@@ -7177,7 +7250,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6221929558728588357, guid: 1a0b4ebaa987eb8479659e6ece88c6bd, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8557501651609699679, guid: 1a0b4ebaa987eb8479659e6ece88c6bd, type: 3}
       propertyPath: m_RootOrder
@@ -15608,10 +15681,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 024fc9c35ba18ca428570b98b46bf663, type: 3}
-    avtarPrefab: {fileID: 2488954977722880308, guid: cfd216175cb362e4bb1f401639db8b3a, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Crab Slash
     ID: 1
     inSceneID: 0
@@ -15633,10 +15708,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7cc89a56291aab243b1ad54b3d060bd2, type: 3}
-    avtarPrefab: {fileID: 2488954977722880308, guid: cc5d961b6dd27c94eb67c5e3b01c9b04, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Crab Legs
     ID: 2
     inSceneID: 0
@@ -15658,10 +15735,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 287dee240327f1c49b971086fb4e25e4, type: 3}
-    avtarPrefab: {fileID: 2488954977722880308, guid: 61f387802283430419ed8bf53c8f4247, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Ram Horn
     ID: 3
     inSceneID: 0
@@ -15683,10 +15762,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: bef197e96a8879244a33105fbee27c71, type: 3}
-    avtarPrefab: {fileID: 2488954977722880308, guid: f039b6dd9183dca4dab50bb94d93d9d2, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Big Eye
     ID: 4
     inSceneID: 0
@@ -15708,10 +15789,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 5a7e378ce68e15e4c82d73912d0334be, type: 3}
-    avtarPrefab: {fileID: 2488954977722880308, guid: 00842b9e437d92248b1f01ffa34fc244, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Sabertooth Mouth
     ID: 5
     inSceneID: 0
@@ -15733,10 +15816,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 8c8d7341c5769dc4785d01d0396b89e8, type: 3}
-    avtarPrefab: {fileID: 2488954977722880308, guid: 43d78c2e26c6dfb4e85adc745d532359, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Slug Eye
     ID: 6
     inSceneID: 0
@@ -15758,10 +15843,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: a449de21e42caeb44af07a02d9a6f6c9, type: 3}
-    avtarPrefab: {fileID: 2488954977722880308, guid: 7ef593d0acc0e1e489fef5cc089e55f0, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Tripod Legs
     ID: 7
     inSceneID: 0
@@ -15783,10 +15870,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7093392c41770d64c9655ad4adf9ff07, type: 3}
-    avtarPrefab: {fileID: 2488954977722880308, guid: ff3ebacd5344d024390d82f93e07f3ca, type: 3}
-    avtarPrefabLeft: {fileID: 0}
-    avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 4606861279539314582, guid: 2f1b1b45cd64db044b499a9c321004e6, type: 3}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 4091500121735840396, guid: 8d794e32512806d4bb6f4877e3d4ccf2, type: 3}
+    avtarPrefabRight: {fileID: 4091500121735840396, guid: 8d794e32512806d4bb6f4877e3d4ccf2, type: 3}
+    avtarPrefabBackLeft: {fileID: 8874638542472807533, guid: 0c196b59a1c743c43a7b692a77090a95, type: 3}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Wolf Arm
     ID: 8
     inSceneID: 0
@@ -15808,10 +15897,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7de54af799ae79546a27ddf96654d397, type: 3}
-    avtarPrefab: {fileID: 2488954977722880308, guid: 718b6986b1279c746bcab0b4123090fa, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Human Arm
     ID: 9
     inSceneID: 0
@@ -15833,10 +15924,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7bc417d86db616f4a8dbe7f55b1445e3, type: 3}
-    avtarPrefab: {fileID: 3304035445752850085, guid: 63770e382e26a844c908349217336416, type: 3}
+    avatarPrefabFrontLeft: {fileID: 3304035445752850085, guid: 63770e382e26a844c908349217336416, type: 3}
+    avatarPrefabFrontRight: {fileID: 3304035445752850085, guid: 63770e382e26a844c908349217336416, type: 3}
     avtarPrefabLeft: {fileID: 3304035445752850085, guid: ddec4422571eaa54887a087a398f8c19, type: 3}
     avtarPrefabRight: {fileID: 3304035445752850085, guid: 76a3e71709e2dab4996df3a7046db1af, type: 3}
-    avtarPrefabBack: {fileID: 3304035445752850085, guid: 85425d5f7eb5e004c9f4477b1872f66c, type: 3}
+    avtarPrefabBackLeft: {fileID: 3304035445752850085, guid: 85425d5f7eb5e004c9f4477b1872f66c, type: 3}
+    avtarPrefabBackRight: {fileID: 3304035445752850085, guid: cc3074f12705d114b9e44e5bb59916c1, type: 3}
   - itemName: Pea Shooter
     ID: 10
     inSceneID: 0
@@ -15858,10 +15951,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 812645abc4fdaeb4dbf29b1a51a8e22d, type: 3}
-    avtarPrefab: {fileID: 6396217571161385355, guid: 746fc3a0e458d11469c34d8f7a4b5a4c, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 1830519018957802660, guid: 093b0354d4226e44b90bf9f5dbfa09fe, type: 3}
     avtarPrefabRight: {fileID: 1830519018957802660, guid: 093b0354d4226e44b90bf9f5dbfa09fe, type: 3}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Hover Legs
     ID: 11
     inSceneID: 0
@@ -15883,10 +15978,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7372f879581802b43a65a29058d0f040, type: 3}
-    avtarPrefab: {fileID: 1515133602579431012, guid: 31f2fd7f23e71ff47bbafb78c1299eda, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
 --- !u!1 &1152912961
 GameObject:
   m_ObjectHideFlags: 0
@@ -18846,10 +18943,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 0}
-    avtarPrefab: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   isHoldingItem: 0
   emptySlotSprite: {fileID: 21300000, guid: 6bb92db56863a49bf9fc5e992e334d82, type: 3}
   invenSlot0: {fileID: 435883434}
@@ -19715,17 +19814,19 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 812645abc4fdaeb4dbf29b1a51a8e22d, type: 3}
-    avtarPrefab: {fileID: 6396217571161385355, guid: 746fc3a0e458d11469c34d8f7a4b5a4c, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 1830519018957802660, guid: 093b0354d4226e44b90bf9f5dbfa09fe, type: 3}
     avtarPrefabRight: {fileID: 1830519018957802660, guid: 093b0354d4226e44b90bf9f5dbfa09fe, type: 3}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Human Arm
     ID: 9
     inSceneID: 1
     lvl: 0
     category: 3
     segment: 1
-    itemType: 0
+    itemType: 2
     currencyValue: 0
     active: 0
     dmg: 0
@@ -19740,10 +19841,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7bc417d86db616f4a8dbe7f55b1445e3, type: 3}
-    avtarPrefab: {fileID: 3304035445752850085, guid: 63770e382e26a844c908349217336416, type: 3}
+    avatarPrefabFrontLeft: {fileID: 3304035445752850085, guid: 63770e382e26a844c908349217336416, type: 3}
+    avatarPrefabFrontRight: {fileID: 3304035445752850085, guid: 47c02e76353aa084d8a0530e9293a0d3, type: 3}
     avtarPrefabLeft: {fileID: 3304035445752850085, guid: ddec4422571eaa54887a087a398f8c19, type: 3}
     avtarPrefabRight: {fileID: 3304035445752850085, guid: 76a3e71709e2dab4996df3a7046db1af, type: 3}
-    avtarPrefabBack: {fileID: 3304035445752850085, guid: 85425d5f7eb5e004c9f4477b1872f66c, type: 3}
+    avtarPrefabBackLeft: {fileID: 3304035445752850085, guid: 85425d5f7eb5e004c9f4477b1872f66c, type: 3}
+    avtarPrefabBackRight: {fileID: 3304035445752850085, guid: cc3074f12705d114b9e44e5bb59916c1, type: 3}
   - itemName: Wolf Arm
     ID: 8
     inSceneID: 2
@@ -19765,17 +19868,19 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7de54af799ae79546a27ddf96654d397, type: 3}
-    avtarPrefab: {fileID: 2488954977722880308, guid: 718b6986b1279c746bcab0b4123090fa, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   - itemName: Human Arm
     ID: 9
     inSceneID: 3
     lvl: 0
     category: 3
     segment: 1
-    itemType: 0
+    itemType: 2
     currencyValue: 0
     active: 0
     dmg: 0
@@ -19790,10 +19895,39 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7bc417d86db616f4a8dbe7f55b1445e3, type: 3}
-    avtarPrefab: {fileID: 3304035445752850085, guid: 63770e382e26a844c908349217336416, type: 3}
+    avatarPrefabFrontLeft: {fileID: 3304035445752850085, guid: 63770e382e26a844c908349217336416, type: 3}
+    avatarPrefabFrontRight: {fileID: 3304035445752850085, guid: 47c02e76353aa084d8a0530e9293a0d3, type: 3}
     avtarPrefabLeft: {fileID: 3304035445752850085, guid: ddec4422571eaa54887a087a398f8c19, type: 3}
     avtarPrefabRight: {fileID: 3304035445752850085, guid: 76a3e71709e2dab4996df3a7046db1af, type: 3}
-    avtarPrefabBack: {fileID: 3304035445752850085, guid: 85425d5f7eb5e004c9f4477b1872f66c, type: 3}
+    avtarPrefabBackLeft: {fileID: 3304035445752850085, guid: 85425d5f7eb5e004c9f4477b1872f66c, type: 3}
+    avtarPrefabBackRight: {fileID: 3304035445752850085, guid: cc3074f12705d114b9e44e5bb59916c1, type: 3}
+  - itemName: Tripod Legs
+    ID: 7
+    inSceneID: 4
+    lvl: 0
+    category: 6
+    segment: 2
+    itemType: 2
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    dps: 0
+    fireRate: 0
+    critX: 0
+    critChance: 2
+    range: 0
+    projectile: 0
+    projectileSpeed: 500
+    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: 7093392c41770d64c9655ad4adf9ff07, type: 3}
+    avatarPrefabFrontLeft: {fileID: 4606861279539314582, guid: 2f1b1b45cd64db044b499a9c321004e6, type: 3}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 4091500121735840396, guid: 8d794e32512806d4bb6f4877e3d4ccf2, type: 3}
+    avtarPrefabRight: {fileID: 4091500121735840396, guid: 8d794e32512806d4bb6f4877e3d4ccf2, type: 3}
+    avtarPrefabBackLeft: {fileID: 8874638542472807533, guid: 0c196b59a1c743c43a7b692a77090a95, type: 3}
+    avtarPrefabBackRight: {fileID: 0}
 --- !u!1001 &1640485609
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -22267,10 +22401,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 812645abc4fdaeb4dbf29b1a51a8e22d, type: 3}
-    avtarPrefab: {fileID: 6396217571161385355, guid: 746fc3a0e458d11469c34d8f7a4b5a4c, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 1830519018957802660, guid: 093b0354d4226e44b90bf9f5dbfa09fe, type: 3}
     avtarPrefabRight: {fileID: 1830519018957802660, guid: 093b0354d4226e44b90bf9f5dbfa09fe, type: 3}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
   headSpeed: 1000
   head: {fileID: 348322359}
   firingPoint: {fileID: 35132813}

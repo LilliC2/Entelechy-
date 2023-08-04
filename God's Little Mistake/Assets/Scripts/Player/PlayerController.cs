@@ -192,6 +192,9 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
+                    //missy right arm closest to camera
+                    _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
+
                     torsoForward.SetActive(false);
                     bellyForward.SetActive(false);
                     missyLeftSide.SetActive(true);
@@ -220,6 +223,10 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.D))
                 {
+                    //missy left arm closest to camera
+                    _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
+
+
                     torsoForward.SetActive(false);
                     bellyForward.SetActive(false);
                     missyLeftSide.SetActive(false);
