@@ -52,6 +52,11 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text invenPopupCritChance;
     public TMP_Text invenPopupFirerate;
 
+    [Header("Missy Height")]
+    public GameObject playerAvatar;
+    Vector3 standard = new Vector3( -0.0160000008f, -0.305000007f, -0.114f);
+    Vector3 tall = new Vector3(-0.0209999997f, -0.136000007f, 0.0540000014f);
+
 
     private void Start()
     {
@@ -311,10 +316,10 @@ public class UIManager : Singleton<UIManager>
         else
         {
             //default left
-            var itemFront = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
+            var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
             _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
 
-            var itemBackSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerBack[_slot].transform);
+            var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
             _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
         }
 
@@ -336,6 +341,8 @@ public class UIManager : Singleton<UIManager>
         heldItem = null;
         isHoldingItem = false;
         //rotate image
+
+        CheckHeight();
 
         _PC.CloseSlots();
     }
@@ -411,4 +418,32 @@ public class UIManager : Singleton<UIManager>
 
     #endregion
 
+    public void CheckHeight()
+    {
+        //find leg item
+        for (int i = 0; i < _PC.playerInventory.Count; i++)
+        {
+            if (_PC.playerInventory[i].segment == Item.Segment.Legs)
+            {
+                //7 tripod legs, 11 hoover
+                if(_PC.playerInventory[i].ID == 11 || _PC.playerInventory[i].ID == 7)
+                {
+                    print("Go taller");
+                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, -0.134f, playerAvatar.transform.position.z);
+                }
+                else
+                {
+                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, -0.305f, playerAvatar.transform.position.z);
+                }
+            }
+        }
+        
+
+        //check if item is mean to be tall
+
+            //if yes raise height
+
+            //if no, keep standard
+
+    }
 }

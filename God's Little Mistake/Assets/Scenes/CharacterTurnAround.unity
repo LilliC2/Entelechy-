@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 262.33694, g: 325.04984, b: 430.2193, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3767,7 +3767,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.30814
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalRotation.w
@@ -3787,11 +3787,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.5780391
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -20.20093
+      value: -2.27
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -4589,15 +4589,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.046810806
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.046810817
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.04681081
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalPosition.x
@@ -4646,6 +4646,10 @@ PrefabInstance:
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8621578061740408062, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
@@ -5769,6 +5773,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1742153670}
     m_Modifications:
+    - target: {fileID: 332207019457068764, guid: 1a0b4ebaa987eb8479659e6ece88c6bd, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 448610045644804385, guid: 1a0b4ebaa987eb8479659e6ece88c6bd, type: 3}
       propertyPath: m_Name
       value: belly_forward
@@ -7228,6 +7236,10 @@ PrefabInstance:
       propertyPath: m_Sprite
       value: 
       objectReference: {fileID: 21300000, guid: adea8863e3eb8bc4ab3f7786acdab75f, type: 3}
+    - target: {fileID: 963980612594625905, guid: 1a0b4ebaa987eb8479659e6ece88c6bd, type: 3}
+      propertyPath: m_SortingOrder
+      value: 9
+      objectReference: {fileID: 0}
     - target: {fileID: 2972063290907950685, guid: 1a0b4ebaa987eb8479659e6ece88c6bd, type: 3}
       propertyPath: m_Name
       value: torso_side
@@ -15849,7 +15861,7 @@ MonoBehaviour:
     avtarPrefabRight: {fileID: 0}
     avtarPrefabBackLeft: {fileID: 0}
     avtarPrefabBackRight: {fileID: 0}
-  - itemName: Tripod Legs
+  - itemName: Tripod
     ID: 7
     inSceneID: 0
     lvl: 0
@@ -15858,23 +15870,23 @@ MonoBehaviour:
     itemType: 2
     currencyValue: 0
     active: 0
-    dmg: 0
-    dps: 0
-    fireRate: 0
+    dmg: 1
+    dps: 1
+    fireRate: 1
     critX: 0
     critChance: 2
-    range: 0
+    range: 5
     projectile: 0
     projectileSpeed: 500
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
     modifier: 0
     modifierID: 0
-    icon: {fileID: 21300000, guid: 7093392c41770d64c9655ad4adf9ff07, type: 3}
-    avatarPrefabFrontLeft: {fileID: 4606861279539314582, guid: 2f1b1b45cd64db044b499a9c321004e6, type: 3}
+    icon: {fileID: 21300000, guid: 7372f879581802b43a65a29058d0f040, type: 3}
+    avatarPrefabFrontLeft: {fileID: 273599904979284594, guid: 77403b443ab381040a443808ffe02c80, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
-    avtarPrefabLeft: {fileID: 4091500121735840396, guid: 8d794e32512806d4bb6f4877e3d4ccf2, type: 3}
-    avtarPrefabRight: {fileID: 4091500121735840396, guid: 8d794e32512806d4bb6f4877e3d4ccf2, type: 3}
-    avtarPrefabBackLeft: {fileID: 8874638542472807533, guid: 0c196b59a1c743c43a7b692a77090a95, type: 3}
+    avtarPrefabLeft: {fileID: 3239956158546672173, guid: 66ab223e6fcf3df4dbecb9428ab8adee, type: 3}
+    avtarPrefabRight: {fileID: 3239956158546672173, guid: bf1cd5accbc8fbd4bb36106a7b57b14e, type: 3}
+    avtarPrefabBackLeft: {fileID: 1954937682116899211, guid: 2032ea15cb4fa5948a341c82152bd3c4, type: 3}
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Wolf Arm
     ID: 8
@@ -15957,7 +15969,7 @@ MonoBehaviour:
     avtarPrefabRight: {fileID: 1830519018957802660, guid: 093b0354d4226e44b90bf9f5dbfa09fe, type: 3}
     avtarPrefabBackLeft: {fileID: 0}
     avtarPrefabBackRight: {fileID: 0}
-  - itemName: Hover Legs
+  - itemName: Hover
     ID: 11
     inSceneID: 0
     lvl: 0
@@ -15978,11 +15990,11 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7372f879581802b43a65a29058d0f040, type: 3}
-    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 273599904979284594, guid: 77403b443ab381040a443808ffe02c80, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
-    avtarPrefabLeft: {fileID: 0}
-    avtarPrefabRight: {fileID: 0}
-    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabLeft: {fileID: 3239956158546672173, guid: 66ab223e6fcf3df4dbecb9428ab8adee, type: 3}
+    avtarPrefabRight: {fileID: 3239956158546672173, guid: bf1cd5accbc8fbd4bb36106a7b57b14e, type: 3}
+    avtarPrefabBackLeft: {fileID: 1954937682116899211, guid: 2032ea15cb4fa5948a341c82152bd3c4, type: 3}
     avtarPrefabBackRight: {fileID: 0}
 --- !u!1 &1152912961
 GameObject:
@@ -18044,15 +18056,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.22227354
+      value: 0.009858355
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.22227357
+      value: 0.009858355
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.22227356
+      value: 0.009858355
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalPosition.x
@@ -18064,7 +18076,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 28.30814
+      value: -0.17
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalRotation.w
@@ -18084,11 +18096,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -0.5780391
+      value: -0.25
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -20.20093
+      value: -1.83
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -18101,6 +18113,10 @@ PrefabInstance:
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8621578061740408062, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
@@ -18970,6 +18986,7 @@ MonoBehaviour:
   invenPopupCritX: {fileID: 2099366802}
   invenPopupCritChance: {fileID: 1872807698}
   invenPopupFirerate: {fileID: 249585646}
+  playerAvatar: {fileID: 1742153669}
 --- !u!4 &1520956316
 Transform:
   m_ObjectHideFlags: 0
@@ -19922,11 +19939,11 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7093392c41770d64c9655ad4adf9ff07, type: 3}
-    avatarPrefabFrontLeft: {fileID: 4606861279539314582, guid: 2f1b1b45cd64db044b499a9c321004e6, type: 3}
+    avatarPrefabFrontLeft: {fileID: 273599904979284594, guid: 77403b443ab381040a443808ffe02c80, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
-    avtarPrefabLeft: {fileID: 4091500121735840396, guid: 8d794e32512806d4bb6f4877e3d4ccf2, type: 3}
-    avtarPrefabRight: {fileID: 4091500121735840396, guid: 8d794e32512806d4bb6f4877e3d4ccf2, type: 3}
-    avtarPrefabBackLeft: {fileID: 8874638542472807533, guid: 0c196b59a1c743c43a7b692a77090a95, type: 3}
+    avtarPrefabLeft: {fileID: 3239956158546672173, guid: 66ab223e6fcf3df4dbecb9428ab8adee, type: 3}
+    avtarPrefabRight: {fileID: 3239956158546672173, guid: bf1cd5accbc8fbd4bb36106a7b57b14e, type: 3}
+    avtarPrefabBackLeft: {fileID: 1954937682116899211, guid: 2032ea15cb4fa5948a341c82152bd3c4, type: 3}
     avtarPrefabBackRight: {fileID: 0}
 --- !u!1001 &1640485609
 PrefabInstance:
