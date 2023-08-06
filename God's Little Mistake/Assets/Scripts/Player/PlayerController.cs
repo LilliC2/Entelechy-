@@ -10,16 +10,16 @@ public class PlayerController : Singleton<PlayerController>
     public CactusTrap cactusTrap;
 
     [Header("Animation")]
-    public Animator baseAnimator;
+    public List<Animator>  baseAnimator;
     public Animator nubsAnimator;
     public GameObject nubsOB;
+    public GameObject nubsOBback;
 
     public Animator[] slotsAnim;
     public GameObject[] slotsGO;
 
-    public GameObject torsoForward;
-    public GameObject bellyForward;
 
+    public GameObject missyFront;
     public GameObject missyLeftSide;
     public GameObject missyRightSide;
     public GameObject missyBack;
@@ -144,12 +144,16 @@ public class PlayerController : Singleton<PlayerController>
                 {
                     //nubsOB.SetActive(true);
                 }
-                else nubsOB.SetActive(false);
-
-                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                else
                 {
-                    baseAnimator.SetBool("ForwardWalk", false);
-                    baseAnimator.SetBool("SideWalk", true);
+                    nubsOB.SetActive(false);
+                    nubsOBback.SetActive(false);
+                }
+
+                    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                {
+                    //baseAnimator.SetBool("ForwardWalk", false);
+                    //baseAnimator.SetBool("SideWalk", true);
 
                     nubsAnimator.SetBool("ForwardWalk", false);
                     nubsAnimator.SetBool("SideWalk", true);
@@ -160,16 +164,16 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
-                    baseAnimator.SetBool("ForwardWalk", true);
-                    baseAnimator.SetBool("SideWalk", false);
+                    //baseAnimator.SetBool("ForwardWalk", true);
+                    //baseAnimator.SetBool("SideWalk", false);
                     nubsAnimator.SetBool("ForwardWalk", true);
                     nubsAnimator.SetBool("SideWalk", false);
                 }
                 if (transform.position == lastPos)
                 {
                     //print("not moved");
-                    baseAnimator.SetBool("ForwardWalk", false);
-                    baseAnimator.SetBool("SideWalk", false);
+                    //baseAnimator.SetBool("ForwardWalk", false);
+                    //baseAnimator.SetBool("SideWalk", false);
                     nubsAnimator.SetBool("ForwardWalk", false);
                     nubsAnimator.SetBool("SideWalk", false);
                 }
@@ -178,8 +182,7 @@ public class PlayerController : Singleton<PlayerController>
                 //change for cardinal direction
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    torsoForward.SetActive(false);
-                    bellyForward.SetActive(false);
+                    missyFront.SetActive(false);
                     missyLeftSide.SetActive(false);
                     nubsOB.SetActive(false);
                     missyRightSide.SetActive(false);
@@ -195,8 +198,7 @@ public class PlayerController : Singleton<PlayerController>
                     //missy right arm closest to camera
                     _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
 
-                    torsoForward.SetActive(false);
-                    bellyForward.SetActive(false);
+                    missyFront.SetActive(false);
                     missyLeftSide.SetActive(true);
                     nubsOB.SetActive(false);
                     missyRightSide.SetActive(false);
@@ -210,8 +212,7 @@ public class PlayerController : Singleton<PlayerController>
                 {
                     
 
-                    torsoForward.SetActive(true);
-                    bellyForward.SetActive(true);
+                    missyFront.SetActive(true);
                     missyLeftSide.SetActive(false);
                     nubsOB.SetActive(true);
                     missyRightSide.SetActive(false);
@@ -227,8 +228,7 @@ public class PlayerController : Singleton<PlayerController>
                     _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
 
 
-                    torsoForward.SetActive(false);
-                    bellyForward.SetActive(false);
+                    missyFront.SetActive(false);
                     missyLeftSide.SetActive(false);
                     nubsOB.SetActive(false);
                     missyRightSide.SetActive(true);
@@ -562,11 +562,11 @@ public class PlayerController : Singleton<PlayerController>
 
     void DieAnimation()
     {
-        baseAnimator.SetBool("ForwardWalk", false);
-        baseAnimator.SetBool("SideWalk", false);
+        //baseAnimator.SetBool("ForwardWalk", false);
+        //baseAnimator.SetBool("SideWalk", false);
         nubsAnimator.SetBool("ForwardWalk", false);
         nubsAnimator.SetBool("SideWalk", false);
-        baseAnimator.SetTrigger("DeathTrigger");
+        //baseAnimator.SetTrigger("DeathTrigger");
     }
 
 
