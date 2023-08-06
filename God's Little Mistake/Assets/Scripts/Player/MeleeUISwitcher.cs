@@ -25,6 +25,7 @@ public class MeleeUISwitcher : GameBehaviour
         {
             case 8: //CLAW
                 newMeleeUI = clawUI;
+                
                 break;
             case 6: //SLUG
                 newMeleeUI = slugUI;
@@ -34,7 +35,11 @@ public class MeleeUISwitcher : GameBehaviour
                 break;
 
         }
+        _PC.meleeUI = newMeleeUI;
+        newMeleeUI.GetComponent<Animator>().gameObject.SetActive(true);
 
+       
+        print("MELEE IS " + _PC.meleeUI);
 
         //destroy current child
         for (int i = 0; i < _PC.directional.transform.childCount; i++)
@@ -45,6 +50,7 @@ public class MeleeUISwitcher : GameBehaviour
                 Destroy(objToDestroy);
             }
         }
+        
 
         //make new one
         Instantiate(newMeleeUI, _PC.directional.transform);

@@ -24,6 +24,8 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject missyRightSide;
     public GameObject missyBack;
 
+    public GameObject meleeUI;
+
     public List<Animator> itemsAnimForward;
     public List<Animator> itemsAnimRightSide;
     public List<Animator> itemsAnimLeftSide;
@@ -264,13 +266,18 @@ public class PlayerController : Singleton<PlayerController>
                             if (!playerInventory[i].projectile)
                             {
                                 //shoot
-
+                                if (meleeUI != null)
+                                {
+                                    
+                                }
+                                meleeUI.gameObject.SetActive(true);
+                                meleeUI.GetComponent<Animator>().SetTrigger("Attack");
                                 //active primary attack
 
-                                itemsAnimForward[i].SetTrigger("Attack");
-                                itemsAnimBack[i].SetTrigger("Attack");
-                                itemsAnimLeftSide[i].SetTrigger("Attack");
-                                itemsAnimRightSide[i].SetTrigger("Attack");
+                                //itemsAnimForward[i].SetTrigger("Attack");
+                                //itemsAnimBack[i].SetTrigger("Attack");
+                                //itemsAnimLeftSide[i].SetTrigger("Attack");
+                                //itemsAnimRightSide[i].SetTrigger("Attack");
 
 
                                 print("do melee attack");
@@ -296,11 +303,13 @@ public class PlayerController : Singleton<PlayerController>
                             {
                                 //shoot
 
+                                
+
                                 //activate animation
-                                itemsAnimForward[i].SetTrigger("Attack");
-                                itemsAnimBack[i].SetTrigger("Attack");
-                                itemsAnimLeftSide[i].SetTrigger("Attack");
-                                itemsAnimRightSide[i].SetTrigger("Attack");
+                                //itemsAnimForward[i].SetTrigger("Attack");
+                                //itemsAnimBack[i].SetTrigger("Attack");
+                                //itemsAnimLeftSide[i].SetTrigger("Attack");
+                                //itemsAnimRightSide[i].SetTrigger("Attack");
 
                                 //changed to use player stats, the primary attack will just change
                                 FireProjectile(playerInventory[0].projectilePF, projectileSpeed, firerate, range);

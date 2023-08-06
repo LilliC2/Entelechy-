@@ -280,13 +280,13 @@ public class UIManager : Singleton<UIManager>
         var itemFront = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayerFront[_slot].transform);
         var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
         var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerRight[_slot].transform);
-        var itemBackSide = Instantiate(heldItem.avtarPrefabBack, _AVTAR.slotsOnPlayerBack[_slot].transform);
+        //var itemBackSide = Instantiate(heldItem.avtarPrefabBack, _AVTAR.slotsOnPlayerBack[_slot].transform);
         
 
 
         itemLeftSide.SetActive(false);
         itemRightSide.SetActive(false);
-        itemBackSide.SetActive(false);
+        //itemBackSide.SetActive(false);
 
 
         if(heldItem.category == Item.Category.Mouth)
@@ -298,7 +298,7 @@ public class UIManager : Singleton<UIManager>
         _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
         _PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());
         _PC.itemsAnimRightSide.Add(itemRightSide.GetComponentInChildren<Animator>());
-        _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+        //_PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
 
 
 
