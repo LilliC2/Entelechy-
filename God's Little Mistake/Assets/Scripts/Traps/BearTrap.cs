@@ -5,29 +5,36 @@ using UnityEngine;
 public class BearTrap : MonoBehaviour
 {
     public PlayerController playerController;
-
     public float damageOnCollision = 5f;
+    public Sprite triggeredSprite;
+    private bool isTrapActive = true;
+
+    private SpriteRenderer spriteRenderer;
 
     private void Start()
     {
-        playerController = GetComponent<PlayerController>();
         playerController = FindObjectOfType<PlayerController>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
     }
+
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.gameObject.CompareTag("Player"))
+        if (isTrapActive && collision.gameObject.CompareTag("Player"))
         {
-            playerController.speed = 0f;
-
+            isTrapActive = false;
             playerController.health -= damageOnCollision;
-            StartCoroutine(ResetSpeed(2f));
+
+            spriteRenderer.sprite = triggeredSprite;
+
+            playerController.GetComponent<CharacterController>().enabled = false;
+            StartCoroutine(EnableMovementAfterDelay(2f));
         }
     }
 
-    private IEnumerator ResetSpeed(float delay)
+    private IEnumerator EnableMovementAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
-        playerController.speed = 4f;
+        playerController.GetComponent<CharacterController>().enabled = true;
         Destroy(gameObject);
     }
 }

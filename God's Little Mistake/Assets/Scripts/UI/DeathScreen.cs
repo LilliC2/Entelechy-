@@ -7,7 +7,6 @@ using UnityEngine.SceneManagement;
 public class DeathScreen : GameBehaviour<DeathScreen> 
 {
     public GameObject DeathScreenPanel;
-    public string currentScene;
     void Update()
     {
         if(_PC.health <= 0)
@@ -19,9 +18,8 @@ public class DeathScreen : GameBehaviour<DeathScreen>
 
     public void Respawn()
     {
-        Scene scene = SceneManager.GetActiveScene();
         Time.timeScale = 1f;
-            SceneManager.LoadScene(scene.name);
+            SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
     public void Menu()
     {
