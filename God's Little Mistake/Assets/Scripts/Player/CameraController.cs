@@ -26,8 +26,7 @@ public class CameraController : GameBehaviour
             //MIGHT NOT USE
             case GameManager.GameState.Iventory:
 
-                gameObject.transform.DOMoveY(2f, 2);
-                gameObject.transform.DOMoveZ(-2f, 2);
+
 
                 break;
         }
