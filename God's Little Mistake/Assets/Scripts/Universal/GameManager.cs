@@ -7,7 +7,7 @@ public class GameManager : Singleton<GameManager>
 {
     public enum GameState
     {
-        Playing, Pause, Iventory
+        Playing, Pause, Iventory, Dead
     }
 
     public GameState gameState;

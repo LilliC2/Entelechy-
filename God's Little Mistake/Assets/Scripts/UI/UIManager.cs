@@ -52,6 +52,11 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text invenPopupCritChance;
     public TMP_Text invenPopupFirerate;
 
+    [Header("Missy Height")]
+    public GameObject playerAvatar;
+    Vector3 standard = new Vector3( -0.0160000008f, -0.305000007f, -0.114f);
+    Vector3 tall = new Vector3(-0.0209999997f, -0.136000007f, 0.0540000014f);
+
 
     private void Start()
     {
@@ -193,14 +198,15 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CreateItemSelected(int _inSceneId)
     {
-        print("Create item, id is " + _inSceneId);
+        print("Player Health is " + _PC.health);
+
+        //print("Create item, in scene id is " + _inSceneId);
         heldItem = _ISitemD.inSceneItemDataBase[_inSceneId];
+
+        //print("in CreateItemSelected ID is " + heldItem.ID);
 
         //Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
         //cursor.sprite = itemSprite;
-
-
-        print(heldItem);
         
         statsPopUpPanel.SetActive(false);
         isHoldingItem = true;
@@ -214,27 +220,27 @@ public class UIManager : Singleton<UIManager>
             if (heldItem.category == Item.Category.Horns)
             {
                 //check if slot is free
-                if (_AVTAR.slotsOnPlayer[0].transform.childCount == 0)
+                if (_AVTAR.slotsOnPlayerFront[0].transform.childCount == 0)
                     slot = 0;   
             }
             if (heldItem.category == Item.Category.Eyes)
             {
-                if (_AVTAR.slotsOnPlayer[1].transform.childCount == 0)
+                if (_AVTAR.slotsOnPlayerFront[1].transform.childCount == 0)
                     slot = 1;
             }
             if (heldItem.category == Item.Category.Mouth)
             {
-                if (_AVTAR.slotsOnPlayer[2].transform.childCount == 0)
+                if (_AVTAR.slotsOnPlayerFront[2].transform.childCount == 0)
                     slot = 2;
             }
         }
         else if (heldItem.segment == Item.Segment.Torso)
         {
-            if (_AVTAR.slotsOnPlayer[3].transform.childCount == 0)
+            if (_AVTAR.slotsOnPlayerFront[3].transform.childCount == 0)
             {
                 slot = 3;
             }
-            else if (_AVTAR.slotsOnPlayer[4].transform.childCount == 0)
+            else if (_AVTAR.slotsOnPlayerFront[4].transform.childCount == 0)
             {
                 slot = 4;
             }
@@ -242,7 +248,7 @@ public class UIManager : Singleton<UIManager>
         }
         else if (heldItem.segment == Item.Segment.Legs)
         {
-            if (_AVTAR.slotsOnPlayer[5].transform.childCount == 0)
+            if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
                 slot = 5;
         }
 
@@ -265,18 +271,69 @@ public class UIManager : Singleton<UIManager>
     {
         bool flip = false;
 
-        if (_slot == 4) flip = true;
 
-        print("Creating item for slot " + _slot);
+
+        //print("Creating item for slot " + _slot);
+
+        //print("in EquipImage ID is " + heldItem.ID);
+
+        print("Player Health is " + _PC.health);
 
         _ISitemD.AddItemToInventory(heldItem.inSceneID);
         //then instantiate prefab on player and detroy this iamge
 
-        var itemSide = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayer[_slot].transform);
+        var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
+        var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerRight[_slot].transform);
+        _PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());
+        _PC.itemsAnimRightSide.Add(itemRightSide.GetComponentInChildren<Animator>());
 
-        _PC.itemsAnim.Add(itemSide.GetComponentInChildren<Animator>());
+        //if torso piece make sure its correct
 
-        if (flip) itemSide.transform.localScale = new Vector3(-itemSide.transform.rotation.x, itemSide.transform.rotation.y, itemSide.transform.rotation.z);
+        if (heldItem.segment == Item.Segment.Torso)
+        {
+            if (_slot == 4) //  RIGHT
+            {
+                //FRONT
+                var itemFront = Instantiate(heldItem.avatarPrefabFrontRight, _AVTAR.slotsOnPlayerFront[_slot].transform);
+                _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
+
+                //BACKL
+                var itemBackSide = Instantiate(heldItem.avtarPrefabBackRight, _AVTAR.slotsOnPlayerBack[_slot].transform);
+                _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+            }
+            if (_slot == 3) // LEFT
+            {
+                //FRONT
+                var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
+                _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
+
+                //BACKK
+                var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
+                _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+            }
+
+        }
+        else
+        {
+            //default left
+            var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
+            _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
+
+            var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
+            _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+        }
+
+        //front
+        
+        
+        
+
+        //if(heldItem.category == Item.Category.Mouth)
+        //{
+        //    _PC.UpdateMouthOB(itemFront, itemRightSide, itemLeftSide);
+        //}
+
+        //if (flip) itemFront.transform.GetChild(0).localScale = new Vector3(-itemFront.transform.GetChild(0).localScale.x, itemFront.transform.GetChild(0).localScale.y, itemFront.transform.GetChild(0).localScale.z);
 
         //FOR ALL OTHER ITEMS
 
@@ -284,6 +341,8 @@ public class UIManager : Singleton<UIManager>
         heldItem = null;
         isHoldingItem = false;
         //rotate image
+
+        CheckHeight();
 
         _PC.CloseSlots();
     }
@@ -359,4 +418,32 @@ public class UIManager : Singleton<UIManager>
 
     #endregion
 
+    public void CheckHeight()
+    {
+        //find leg item
+        for (int i = 0; i < _PC.playerInventory.Count; i++)
+        {
+            if (_PC.playerInventory[i].segment == Item.Segment.Legs)
+            {
+                //7 tripod legs, 11 hoover
+                if(_PC.playerInventory[i].ID == 11 || _PC.playerInventory[i].ID == 7)
+                {
+                    print("Go taller");
+                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, -0.134f, playerAvatar.transform.position.z);
+                }
+                else
+                {
+                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, -0.305f, playerAvatar.transform.position.z);
+                }
+            }
+        }
+        
+
+        //check if item is mean to be tall
+
+            //if yes raise height
+
+            //if no, keep standard
+
+    }
 }

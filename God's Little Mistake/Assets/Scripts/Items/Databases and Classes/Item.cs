@@ -34,9 +34,16 @@ public class Item
     public bool modifier;
     public float modifierID;
 
+    [Header("Animation")]
     public Sprite icon;
-    public GameObject avtarPrefab;
-    public GameObject avtarPrefabFront;
+    public GameObject avatarPrefabFrontLeft;
+    public GameObject avatarPrefabFrontRight;
+
+    public GameObject avtarPrefabLeft;
+    public GameObject avtarPrefabRight;
+
+    public GameObject avtarPrefabBackLeft;
+    public GameObject avtarPrefabBackRight;
 
     public Item()
     {
