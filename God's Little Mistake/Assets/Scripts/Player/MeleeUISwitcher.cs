@@ -4,7 +4,18 @@ using UnityEngine;
 
 public class MeleeUISwitcher : GameBehaviour
 {
-    public List<GameObject> meleeUI;
+    [SerializeField]
+    GameObject antlersUI;
+    [SerializeField]
+    GameObject beakUI;
+    [SerializeField]
+    GameObject clawUI; 
+    [SerializeField]
+    GameObject slugUI; 
+    [SerializeField]
+    GameObject fistUI; 
+
+    GameObject newMeleeUI;
 
     public void SwitchMeleeUI(int _itemID)
     {
@@ -13,34 +24,30 @@ public class MeleeUISwitcher : GameBehaviour
         switch (_itemID)
         {
             case 8: //CLAW
-                TurnOffOtherUI(meleeUI[0]);
+                newMeleeUI = clawUI;
                 break;
             case 6: //SLUG
-                TurnOffOtherUI(meleeUI[1]);
+                newMeleeUI = slugUI;
                 break;
             case 9: //HUMAN FIST
-                TurnOffOtherUI(meleeUI[2]);
+                newMeleeUI = fistUI;
                 break;
 
         }
 
 
-
-    }
-
-    void TurnOffOtherUI(GameObject _active)
-    {
-        foreach (var item in meleeUI)
+        //destroy current child
+        for (int i = 0; i < _PC.directional.transform.childCount; i++)
         {
-            if (item != _active)
+            if (_PC.directional.transform.GetChild(i).name.Contains("Attack_Melee_"))
             {
-                item.gameObject.SetActive(false);
-            }
-            else
-            {
-                item.SetActive(true);
-                _PC.meleeUI = item;
+                var objToDestroy = _PC.directional.transform.GetChild(i).gameObject;
+                Destroy(objToDestroy);
             }
         }
+
+        //make new one
+        Instantiate(newMeleeUI, _PC.directional.transform);
+
     }
 }

@@ -284,7 +284,6 @@ public class UIManager : Singleton<UIManager>
 
         var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
         var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerRight[_slot].transform);
-
         _PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());
         _PC.itemsAnimRightSide.Add(itemRightSide.GetComponentInChildren<Animator>());
 
@@ -307,7 +306,6 @@ public class UIManager : Singleton<UIManager>
                 //FRONT
                 var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
                 _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
-
 
                 //BACKK
                 var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
