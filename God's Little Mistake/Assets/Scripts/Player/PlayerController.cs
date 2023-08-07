@@ -119,14 +119,93 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         speed = speed + initalSpeedBoost;
 
+                        //legs animation (if have to change, have it look for the legs
+                        
+
+
                         ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed, 1));
                     }
 
                 }
 
 
-                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
-                else isMoving = false;
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                {
+                    if (itemsAnimForward.Count != 0)
+                    {
+                        foreach (var item in itemsAnimForward)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", true);
+                            }
+                        }
+                        foreach (var item in itemsAnimBack)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", true);
+                            }
+                        }
+                        
+                        foreach (var item in itemsAnimLeftSide)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", true);
+                            }
+                        }
+                        foreach (var item in itemsAnimRightSide)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", true);
+                            }
+                        }
+
+                    }
+
+
+                    isMoving = true;
+                }
+                else
+                {
+                    if (itemsAnimForward.Count != 0)
+                    {
+                        foreach (var item in itemsAnimForward)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", false);
+                            }
+                        }
+                        foreach (var item in itemsAnimBack)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", false);
+                            }
+                        }
+
+                        foreach (var item in itemsAnimLeftSide)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", false);
+                            }
+                        }
+                        foreach (var item in itemsAnimRightSide)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", false);
+                            }
+                        }
+
+                    }
+
+                    isMoving = false;
+                }
 
                 if (!isMoving)
                 {
@@ -150,7 +229,7 @@ public class PlayerController : Singleton<PlayerController>
                     nubsOBback.SetActive(false);
                 }
 
-                    if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
                 {
                     //baseAnimator.SetBool("ForwardWalk", false);
                     //baseAnimator.SetBool("SideWalk", true);
