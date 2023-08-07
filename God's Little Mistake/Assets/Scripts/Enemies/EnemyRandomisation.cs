@@ -118,7 +118,7 @@ public class EnemyRandomisation : GameBehaviour
             if (_ItemD.itemDataBase[i].category.ToString() == _category)
             {
                 //possibleDrops.Add(_ItemD.itemDataBase[i]);
-                prefab = _ItemD.itemDataBase[i].avtarPrefab;
+                prefab = _ItemD.itemDataBase[i].avatarPrefabFrontLeft;
 
             }
         }

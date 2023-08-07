@@ -10,16 +10,16 @@ public class PlayerController : Singleton<PlayerController>
     public CactusTrap cactusTrap;
 
     [Header("Animation")]
-    public Animator baseAnimator;
+    public List<Animator>  baseAnimator;
     public Animator nubsAnimator;
     public GameObject nubsOB;
+    public GameObject nubsOBback;
 
     public Animator[] slotsAnim;
     public GameObject[] slotsGO;
 
-    public GameObject torsoForward;
-    public GameObject bellyForward;
 
+    public GameObject missyFront;
     public GameObject missyLeftSide;
     public GameObject missyRightSide;
     public GameObject missyBack;
@@ -121,14 +121,93 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         speed = speed + initalSpeedBoost;
 
+                        //legs animation (if have to change, have it look for the legs
+                        
+
+
                         ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed, 1));
                     }
 
                 }
 
 
-                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
-                else isMoving = false;
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
+                {
+                    if (itemsAnimForward.Count != 0)
+                    {
+                        foreach (var item in itemsAnimForward)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", true);
+                            }
+                        }
+                        foreach (var item in itemsAnimBack)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", true);
+                            }
+                        }
+                        
+                        foreach (var item in itemsAnimLeftSide)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", true);
+                            }
+                        }
+                        foreach (var item in itemsAnimRightSide)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", true);
+                            }
+                        }
+
+                    }
+
+
+                    isMoving = true;
+                }
+                else
+                {
+                    if (itemsAnimForward.Count != 0)
+                    {
+                        foreach (var item in itemsAnimForward)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", false);
+                            }
+                        }
+                        foreach (var item in itemsAnimBack)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", false);
+                            }
+                        }
+
+                        foreach (var item in itemsAnimLeftSide)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", false);
+                            }
+                        }
+                        foreach (var item in itemsAnimRightSide)
+                        {
+                            if (item.name.Contains("Leg"))
+                            {
+                                item.SetBool("Walk", false);
+                            }
+                        }
+
+                    }
+
+                    isMoving = false;
+                }
 
                 if (!isMoving)
                 {
@@ -146,12 +225,16 @@ public class PlayerController : Singleton<PlayerController>
                 {
                     //nubsOB.SetActive(true);
                 }
-                else nubsOB.SetActive(false);
+                else
+                {
+                    nubsOB.SetActive(false);
+                    nubsOBback.SetActive(false);
+                }
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
                 {
-                    baseAnimator.SetBool("ForwardWalk", false);
-                    baseAnimator.SetBool("SideWalk", true);
+                    //baseAnimator.SetBool("ForwardWalk", false);
+                    //baseAnimator.SetBool("SideWalk", true);
 
                     nubsAnimator.SetBool("ForwardWalk", false);
                     nubsAnimator.SetBool("SideWalk", true);
@@ -162,16 +245,16 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
-                    baseAnimator.SetBool("ForwardWalk", true);
-                    baseAnimator.SetBool("SideWalk", false);
+                    //baseAnimator.SetBool("ForwardWalk", true);
+                    //baseAnimator.SetBool("SideWalk", false);
                     nubsAnimator.SetBool("ForwardWalk", true);
                     nubsAnimator.SetBool("SideWalk", false);
                 }
                 if (transform.position == lastPos)
                 {
                     //print("not moved");
-                    baseAnimator.SetBool("ForwardWalk", false);
-                    baseAnimator.SetBool("SideWalk", false);
+                    //baseAnimator.SetBool("ForwardWalk", false);
+                    //baseAnimator.SetBool("SideWalk", false);
                     nubsAnimator.SetBool("ForwardWalk", false);
                     nubsAnimator.SetBool("SideWalk", false);
                 }
@@ -180,8 +263,7 @@ public class PlayerController : Singleton<PlayerController>
                 //change for cardinal direction
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    torsoForward.SetActive(false);
-                    bellyForward.SetActive(false);
+                    missyFront.SetActive(false);
                     missyLeftSide.SetActive(false);
                     nubsOB.SetActive(false);
                     missyRightSide.SetActive(false);
@@ -194,8 +276,10 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
-                    torsoForward.SetActive(false);
-                    bellyForward.SetActive(false);
+                    //missy right arm closest to camera
+                    _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
+
+                    missyFront.SetActive(false);
                     missyLeftSide.SetActive(true);
                     nubsOB.SetActive(false);
                     missyRightSide.SetActive(false);
@@ -209,8 +293,7 @@ public class PlayerController : Singleton<PlayerController>
                 {
                     
 
-                    torsoForward.SetActive(true);
-                    bellyForward.SetActive(true);
+                    missyFront.SetActive(true);
                     missyLeftSide.SetActive(false);
                     nubsOB.SetActive(true);
                     missyRightSide.SetActive(false);
@@ -222,8 +305,11 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.D))
                 {
-                    torsoForward.SetActive(false);
-                    bellyForward.SetActive(false);
+                    //missy left arm closest to camera
+                    _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
+
+
+                    missyFront.SetActive(false);
                     missyLeftSide.SetActive(false);
                     nubsOB.SetActive(false);
                     missyRightSide.SetActive(true);
@@ -307,9 +393,7 @@ public class PlayerController : Singleton<PlayerController>
                             {
                                 //shoot
 
-                                
-
-                                //activate animation
+                   ////activate animation
                                 //itemsAnimForward[i].SetTrigger("Attack");
                                 //itemsAnimBack[i].SetTrigger("Attack");
                                 //itemsAnimLeftSide[i].SetTrigger("Attack");
@@ -569,11 +653,11 @@ public class PlayerController : Singleton<PlayerController>
 
     void DieAnimation()
     {
-        baseAnimator.SetBool("ForwardWalk", false);
-        baseAnimator.SetBool("SideWalk", false);
+        //baseAnimator.SetBool("ForwardWalk", false);
+        //baseAnimator.SetBool("SideWalk", false);
         nubsAnimator.SetBool("ForwardWalk", false);
         nubsAnimator.SetBool("SideWalk", false);
-        baseAnimator.SetTrigger("DeathTrigger");
+        //baseAnimator.SetTrigger("DeathTrigger");
     }
 
 
