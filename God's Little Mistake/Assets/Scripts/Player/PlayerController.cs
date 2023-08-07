@@ -268,10 +268,14 @@ public class PlayerController : Singleton<PlayerController>
                                 //shoot
                                 if (meleeUI != null)
                                 {
-                                    
+                                    meleeUI.gameObject.SetActive(true);
+
+                                    meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                                    ExecuteAfterSeconds(1, () => meleeUI.gameObject.SetActive(false));
                                 }
-                                meleeUI.gameObject.SetActive(true);
-                                meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+
+
+
                                 //active primary attack
 
                                 //itemsAnimForward[i].SetTrigger("Attack");
@@ -289,7 +293,7 @@ public class PlayerController : Singleton<PlayerController>
                     }
 
                 }
-
+             
 
                 if (Input.GetMouseButton(0))
                 {
@@ -466,6 +470,7 @@ public class PlayerController : Singleton<PlayerController>
             {
                 //change melee UI
                 meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
+                meleeUI.gameObject.SetActive(false);
             }
 
             //turn off any others in the same segment
