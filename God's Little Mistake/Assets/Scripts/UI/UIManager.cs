@@ -71,15 +71,21 @@ public class UIManager : Singleton<UIManager>
         
     }
 
-    public void UpdateItemPopUp(string _itemName, float _itemDmg, float _itemCritX, float _itemCritChance, float _itemFirerate)
+    public void UpdateItemPopUp(Item _hoverItem)
     {
         //ADD LATER FORMATTING FOR FLOATS
 
-        popupName.text = _itemName;
-        popupDmg.text = "DMG: " + _itemDmg.ToString();
-        popupCritX.text = "CritX: " + _itemCritX.ToString();
-        popupCritChance.text = "Crit%: " + _itemCritChance.ToString();
-        popupFirerate.text = "Firerate%: " + _itemFirerate.ToString();
+        popupName.text = _hoverItem.itemName;
+        popupDmg.text = "DMG: " + _hoverItem.dmg.ToString();
+        popupCritX.text = "CritX: " + _hoverItem.critX.ToString();
+        popupCritChance.text = "Crit%: " + _hoverItem.critChance.ToString();
+        popupFirerate.text = "Firerate%: " + _hoverItem.fireRate.ToString();
+
+        var matchItem = SearchForItemMatch(_hoverItem);
+
+        if (matchItem != null)
+            print(matchItem.itemName);
+        else print("no match");
     }
 
     public void UpdateHealthText(float _hp)
@@ -182,6 +188,8 @@ public class UIManager : Singleton<UIManager>
         invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
         invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
         invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
+
+        
     }
 
     #endregion
@@ -191,12 +199,11 @@ public class UIManager : Singleton<UIManager>
     /// Changes cursor to most recently picked up item
     /// </summary>
     /// <param name="_slot"></param>
-    public void CreateItemSelected(int _inSceneId)
+    public void CreateItemSelected(Item _itemInfo)
     {
-        print("Player Health is " + _PC.health);
 
         //print("Create item, in scene id is " + _inSceneId);
-        heldItem = _ISitemD.inSceneItemDataBase[_inSceneId];
+        heldItem = _itemInfo;
 
         //print("in CreateItemSelected ID is " + heldItem.ID);
 
@@ -272,7 +279,6 @@ public class UIManager : Singleton<UIManager>
 
         //print("in EquipImage ID is " + heldItem.ID);
 
-        print("Player Health is " + _PC.health);
 
         _ISitemD.AddItemToInventory(heldItem.inSceneID);
         //then instantiate prefab on player and detroy this iamge
@@ -315,6 +321,9 @@ public class UIManager : Singleton<UIManager>
 
         _PC.CloseSlots();
     }
+
+
+
 
     /// <summary>
     /// Checks whether held item can be placed on slot that is hovered over
@@ -375,7 +384,7 @@ public class UIManager : Singleton<UIManager>
     //    heldItem = null;
     //    isHoldingItem = false;
     //}
-        
+
     /// <summary>
     /// Changes colour of slots when mouse exits hover
     /// </summary>
@@ -387,4 +396,18 @@ public class UIManager : Singleton<UIManager>
 
     #endregion
 
+    Item SearchForItemMatch(Item _hoverItem)
+    {
+        Item itemMatchInPlayerInven = null;
+
+        foreach (var item in _PC.playerInventory)
+        {
+            if(item.segment == _hoverItem.segment)
+            {
+                itemMatchInPlayerInven = item;
+            }
+        }
+
+        return itemMatchInPlayerInven;
+    }
 }

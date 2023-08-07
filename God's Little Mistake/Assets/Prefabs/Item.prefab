@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -3370031360521855638}
   m_Layer: 0
   m_Name: Item
-  m_TagString: Item Drop
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -44,7 +44,7 @@ SphereCollider:
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 4294967295
   m_ExcludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -67,7 +67,32 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8a978b1cf67c97a4b8bed0d7705b003b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  id: 0
+  itemInfo:
+    itemName: Spit Attack
+    ID: 0
+    inSceneID: 3
+    lvl: 0
+    category: 1
+    segment: 0
+    itemType: 0
+    currencyValue: 0
+    active: 0
+    dmg: 5
+    dps: 5
+    fireRate: 0.3
+    critX: 0
+    critChance: 0
+    range: 5
+    projectile: 1
+    projectileSpeed: 500
+    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: 024fc9c35ba18ca428570b98b46bf663, type: 3}
+    avtarPrefab: {fileID: 2488954977722880308, guid: cfd216175cb362e4bb1f401639db8b3a, type: 3}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBack: {fileID: 0}
 --- !u!1 &8504357115592238806
 GameObject:
   m_ObjectHideFlags: 0
