@@ -126,7 +126,7 @@ public class PlayerController : Singleton<PlayerController>
                         
 
 
-                        ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed, 1));
+                        ExecuteAfterSeconds(0.5f, () => TweenSpeed(maxSpeed, 1));
                     }
 
                 }
