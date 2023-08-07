@@ -24,6 +24,8 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject missyRightSide;
     public GameObject missyBack;
 
+    public GameObject meleeUI;
+
     public List<Animator> itemsAnimForward;
     public List<Animator> itemsAnimRightSide;
     public List<Animator> itemsAnimLeftSide;
@@ -350,13 +352,22 @@ public class PlayerController : Singleton<PlayerController>
                             if (!playerInventory[i].projectile)
                             {
                                 //shoot
+                                if (meleeUI != null)
+                                {
+                                    meleeUI.gameObject.SetActive(true);
+
+                                    meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                                    ExecuteAfterSeconds(1, () => meleeUI.gameObject.SetActive(false));
+                                }
+
+
 
                                 //active primary attack
 
-                                itemsAnimForward[i].SetTrigger("Attack");
-                                itemsAnimBack[i].SetTrigger("Attack");
-                                itemsAnimLeftSide[i].SetTrigger("Attack");
-                                itemsAnimRightSide[i].SetTrigger("Attack");
+                                //itemsAnimForward[i].SetTrigger("Attack");
+                                //itemsAnimBack[i].SetTrigger("Attack");
+                                //itemsAnimLeftSide[i].SetTrigger("Attack");
+                                //itemsAnimRightSide[i].SetTrigger("Attack");
 
 
                                 print("do melee attack");
@@ -368,7 +379,7 @@ public class PlayerController : Singleton<PlayerController>
                     }
 
                 }
-
+             
 
                 if (Input.GetMouseButton(0))
                 {
@@ -382,7 +393,7 @@ public class PlayerController : Singleton<PlayerController>
                             {
                                 //shoot
 
-                                ////activate animation
+                   ////activate animation
                                 //itemsAnimForward[i].SetTrigger("Attack");
                                 //itemsAnimBack[i].SetTrigger("Attack");
                                 //itemsAnimLeftSide[i].SetTrigger("Attack");
@@ -543,6 +554,7 @@ public class PlayerController : Singleton<PlayerController>
             {
                 //change melee UI
                 meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
+                meleeUI.gameObject.SetActive(false);
             }
 
             //turn off any others in the same segment
