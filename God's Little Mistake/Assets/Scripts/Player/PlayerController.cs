@@ -18,6 +18,7 @@ public class PlayerController : Singleton<PlayerController>
     public Animator[] slotsAnim;
     public GameObject[] slotsGO;
 
+    public GameObject meleeUI;
 
     public GameObject missyFront;
     public GameObject missyLeftSide;
@@ -49,6 +50,8 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject mouthFront;
     public GameObject mouthLeftSide;
     public GameObject mouthRightSide;
+
+    
 
     [SerializeField]
     int initalSpeedBoost = 3;
@@ -351,6 +354,14 @@ public class PlayerController : Singleton<PlayerController>
                             {
                                 //shoot
 
+                                if (meleeUI != null)
+                                {
+                                    meleeUI.gameObject.SetActive(true);
+
+                                    meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                                    ExecuteAfterSeconds(1, () => meleeUI.gameObject.SetActive(false));
+                                }
+
                                 //active primary attack
 
                                 itemsAnimForward[i].SetTrigger("Attack");
@@ -543,6 +554,7 @@ public class PlayerController : Singleton<PlayerController>
             {
                 //change melee UI
                 meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
+                meleeUI.gameObject.SetActive(false);
             }
 
             //turn off any others in the same segment
