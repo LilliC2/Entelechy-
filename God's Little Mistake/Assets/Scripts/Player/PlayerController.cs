@@ -10,19 +10,21 @@ public class PlayerController : Singleton<PlayerController>
     public CactusTrap cactusTrap;
 
     [Header("Animation")]
-    public List<Animator>  baseAnimator;
+    public Animator baseAnimator;
     public Animator nubsAnimator;
     public GameObject nubsOB;
-    public GameObject nubsOBback;
 
     public Animator[] slotsAnim;
     public GameObject[] slotsGO;
 
+    public GameObject torsoForward;
+    public GameObject bellyForward;
 
-    public GameObject missyFront;
     public GameObject missyLeftSide;
     public GameObject missyRightSide;
     public GameObject missyBack;
+
+    public GameObject meleeUI;
 
     public List<Animator> itemsAnimForward;
     public List<Animator> itemsAnimRightSide;
@@ -87,8 +89,9 @@ public class PlayerController : Singleton<PlayerController>
 
         meleeUISwitcher = GetComponent<MeleeUISwitcher>();
 
-        //Find if any items are in inventory if so equip
-
+        
+        //add stats for the 1 item in the inventory
+        //_ISitemD.AddPassiveItem(0);
     }
 
     void Update()
@@ -118,93 +121,14 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         speed = speed + initalSpeedBoost;
 
-                        //legs animation (if have to change, have it look for the legs
-                        
-
-
                         ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed, 1));
                     }
 
                 }
 
 
-                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-                {
-                    if (itemsAnimForward.Count != 0)
-                    {
-                        foreach (var item in itemsAnimForward)
-                        {
-                            if (item.name.Contains("Leg"))
-                            {
-                                item.SetBool("Walk", true);
-                            }
-                        }
-                        foreach (var item in itemsAnimBack)
-                        {
-                            if (item.name.Contains("Leg"))
-                            {
-                                item.SetBool("Walk", true);
-                            }
-                        }
-                        
-                        foreach (var item in itemsAnimLeftSide)
-                        {
-                            if (item.name.Contains("Leg"))
-                            {
-                                item.SetBool("Walk", true);
-                            }
-                        }
-                        foreach (var item in itemsAnimRightSide)
-                        {
-                            if (item.name.Contains("Leg"))
-                            {
-                                item.SetBool("Walk", true);
-                            }
-                        }
-
-                    }
-
-
-                    isMoving = true;
-                }
-                else
-                {
-                    if (itemsAnimForward.Count != 0)
-                    {
-                        foreach (var item in itemsAnimForward)
-                        {
-                            if (item.name.Contains("Leg"))
-                            {
-                                item.SetBool("Walk", false);
-                            }
-                        }
-                        foreach (var item in itemsAnimBack)
-                        {
-                            if (item.name.Contains("Leg"))
-                            {
-                                item.SetBool("Walk", false);
-                            }
-                        }
-
-                        foreach (var item in itemsAnimLeftSide)
-                        {
-                            if (item.name.Contains("Leg"))
-                            {
-                                item.SetBool("Walk", false);
-                            }
-                        }
-                        foreach (var item in itemsAnimRightSide)
-                        {
-                            if (item.name.Contains("Leg"))
-                            {
-                                item.SetBool("Walk", false);
-                            }
-                        }
-
-                    }
-
-                    isMoving = false;
-                }
+                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
+                else isMoving = false;
 
                 if (!isMoving)
                 {
@@ -218,14 +142,19 @@ public class PlayerController : Singleton<PlayerController>
                 #region Animation
 
                 //turn off and on nubs
+                if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
+                {
+                    //nubsOB.SetActive(true);
+                }
+                else nubsOB.SetActive(false);
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
                 {
-                    //baseAnimator.SetBool("ForwardWalk", false);
-                    //baseAnimator.SetBool("SideWalk", true);
+                    baseAnimator.SetBool("ForwardWalk", false);
+                    baseAnimator.SetBool("SideWalk", true);
 
-                    //nubsAnimator.SetBool("ForwardWalk", false);
-                    //nubsAnimator.SetBool("SideWalk", true);
+                    nubsAnimator.SetBool("ForwardWalk", false);
+                    nubsAnimator.SetBool("SideWalk", true);
 
 
 
@@ -233,71 +162,76 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
-                    //baseAnimator.SetBool("ForwardWalk", true);
-                    ////baseAnimator.SetBool("SideWalk", false);
-                    //nubsAnimator.SetBool("ForwardWalk", true);
-                    //nubsAnimator.SetBool("SideWalk", false);
+                    baseAnimator.SetBool("ForwardWalk", true);
+                    baseAnimator.SetBool("SideWalk", false);
+                    nubsAnimator.SetBool("ForwardWalk", true);
+                    nubsAnimator.SetBool("SideWalk", false);
                 }
                 if (transform.position == lastPos)
                 {
                     //print("not moved");
-                    //baseAnimator.SetBool("ForwardWalk", false);
-                    //baseAnimator.SetBool("SideWalk", false);
-                    //nubsAnimator.SetBool("ForwardWalk", false);
-                    //nubsAnimator.SetBool("SideWalk", false);
+                    baseAnimator.SetBool("ForwardWalk", false);
+                    baseAnimator.SetBool("SideWalk", false);
+                    nubsAnimator.SetBool("ForwardWalk", false);
+                    nubsAnimator.SetBool("SideWalk", false);
                 }
 
 
                 //change for cardinal direction
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    missyFront.SetActive(false);
+                    torsoForward.SetActive(false);
+                    bellyForward.SetActive(false);
                     missyLeftSide.SetActive(false);
-                    //nubsOB.SetActive(false);
+                    nubsOB.SetActive(false);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(true);
 
-
+                    mouthRightSide.SetActive(false);
+                    mouthLeftSide.SetActive(false);
+                    mouthFront.SetActive(false);
 
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
-                    //missy right arm closest to camera
-                    _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
-
-                    missyFront.SetActive(false);
+                    torsoForward.SetActive(false);
+                    bellyForward.SetActive(false);
                     missyLeftSide.SetActive(true);
-                    //nubsOB.SetActive(false);
+                    nubsOB.SetActive(false);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(false);
 
-
+                    mouthRightSide.SetActive(false);
+                    mouthLeftSide.SetActive(true);
+                    mouthFront.SetActive(false);
                 }
                 if (Input.GetKeyDown(KeyCode.S))
                 {
                     
 
-                    missyFront.SetActive(true);
+                    torsoForward.SetActive(true);
+                    bellyForward.SetActive(true);
                     missyLeftSide.SetActive(false);
-                    //nubsOB.SetActive(true);
+                    nubsOB.SetActive(true);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(false);
 
-
+                    mouthRightSide.SetActive(false);
+                    mouthLeftSide.SetActive(false);
+                    mouthFront.SetActive(true);
                 }
                 if (Input.GetKeyDown(KeyCode.D))
                 {
-                    //missy left arm closest to camera
-                    _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
-
-
-                    missyFront.SetActive(false);
+                    torsoForward.SetActive(false);
+                    bellyForward.SetActive(false);
                     missyLeftSide.SetActive(false);
-                    //nubsOB.SetActive(false);
+                    nubsOB.SetActive(false);
                     missyRightSide.SetActive(true);
                     missyBack.SetActive(false);
 
-
+                    mouthRightSide.SetActive(true);
+                    mouthLeftSide.SetActive(false);
+                    mouthFront.SetActive(false);
                 }
 
         
@@ -332,13 +266,22 @@ public class PlayerController : Singleton<PlayerController>
                             if (!playerInventory[i].projectile)
                             {
                                 //shoot
+                                if (meleeUI != null)
+                                {
+                                    meleeUI.gameObject.SetActive(true);
+
+                                    meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                                    ExecuteAfterSeconds(1, () => meleeUI.gameObject.SetActive(false));
+                                }
+
+
 
                                 //active primary attack
 
-                                itemsAnimForward[i].SetTrigger("Attack");
-                                itemsAnimBack[i].SetTrigger("Attack");
-                                itemsAnimLeftSide[i].SetTrigger("Attack");
-                                itemsAnimRightSide[i].SetTrigger("Attack");
+                                //itemsAnimForward[i].SetTrigger("Attack");
+                                //itemsAnimBack[i].SetTrigger("Attack");
+                                //itemsAnimLeftSide[i].SetTrigger("Attack");
+                                //itemsAnimRightSide[i].SetTrigger("Attack");
 
 
                                 print("do melee attack");
@@ -350,7 +293,7 @@ public class PlayerController : Singleton<PlayerController>
                     }
 
                 }
-
+             
 
                 if (Input.GetMouseButton(0))
                 {
@@ -364,7 +307,9 @@ public class PlayerController : Singleton<PlayerController>
                             {
                                 //shoot
 
-                                ////activate animation
+                                
+
+                                //activate animation
                                 //itemsAnimForward[i].SetTrigger("Attack");
                                 //itemsAnimBack[i].SetTrigger("Attack");
                                 //itemsAnimLeftSide[i].SetTrigger("Attack");
@@ -457,23 +402,6 @@ public class PlayerController : Singleton<PlayerController>
         #endregion
     }
 
-    void CheckForStartingItems()
-    {
-        foreach (var item in playerInventory)
-        {
-            if(item !=null)
-            {
-                //add to animator
-                _UI.CreateItemSelected(0);
-
-                //equip to player
-
-                //add stats?
-            
-            }
-        }
-    }
-
     public void UpdateMouthOB(GameObject _front,GameObject _sideR, GameObject _sideL)
     {
         mouthFront = _front;
@@ -542,6 +470,7 @@ public class PlayerController : Singleton<PlayerController>
             {
                 //change melee UI
                 meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
+                meleeUI.gameObject.SetActive(false);
             }
 
             //turn off any others in the same segment
@@ -640,11 +569,11 @@ public class PlayerController : Singleton<PlayerController>
 
     void DieAnimation()
     {
-        //baseAnimator.SetBool("ForwardWalk", false);
-        //baseAnimator.SetBool("SideWalk", false);
+        baseAnimator.SetBool("ForwardWalk", false);
+        baseAnimator.SetBool("SideWalk", false);
         nubsAnimator.SetBool("ForwardWalk", false);
         nubsAnimator.SetBool("SideWalk", false);
-        //baseAnimator.SetTrigger("DeathTrigger");
+        baseAnimator.SetTrigger("DeathTrigger");
     }
 
 

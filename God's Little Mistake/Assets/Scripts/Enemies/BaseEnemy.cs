@@ -122,9 +122,8 @@ public class BaseEnemy : GameBehaviour
             case 1:
                 GameObject item =Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
                 
-                int id = item.GetComponent<ItemIdentifier>().id;
 
-                item.GetComponentInChildren<SpriteRenderer>().sprite = _ISitemD.inSceneItemDataBase[id].icon;
+                item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
                 print("Spawning item of " + stats.category.ToString() + " category");
                 break;
