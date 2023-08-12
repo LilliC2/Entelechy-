@@ -86,20 +86,23 @@ public class ItemIdentifier : GameBehaviour
 
         if(match != null)
         {
+            print("ITS A MATCH");
             _UI.statComp1.SetActive(true);
-            //anim1.SetTrigger("Open");
+            anim1.SetTrigger("Open");
             _UI.arrowComp.SetActive(true);
             _UI.UpdateItemPopUpComp1(itemInfo);
         }
+
+
     }
 
     public void OnMouseExit()
     {
         print("EXIT");
         anim.ResetTrigger("Open");
-        //anim1.ResetTrigger("Open");
+        anim1.ResetTrigger("Open");
         anim.SetTrigger("Close");
-        //anim1.SetTrigger("Close");
+        anim1.SetTrigger("Close");
         ExecuteAfterSeconds(1, () => TurnOff());
 
 
