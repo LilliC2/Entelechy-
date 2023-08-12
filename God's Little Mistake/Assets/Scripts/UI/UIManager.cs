@@ -280,31 +280,22 @@ public class UIManager : Singleton<UIManager>
         //print("in EquipImage ID is " + heldItem.ID);
 
 
-        _ISitemD.AddItemToInventory(heldItem.inSceneID);
+        _ISitemD.AddItemToInventory(heldItem);
+        
+        
         //then instantiate prefab on player and detroy this iamge
 
-        var itemFront = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayerFront[_slot].transform);
+        var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
         var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
         var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerRight[_slot].transform);
-        //var itemBackSide = Instantiate(heldItem.avtarPrefabBack, _AVTAR.slotsOnPlayerBack[_slot].transform);
+        var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
         
-
-
-        itemLeftSide.SetActive(false);
-        itemRightSide.SetActive(false);
         //itemBackSide.SetActive(false);
-
-
-        if(heldItem.category == Item.Category.Mouth)
-        {
-            _PC.UpdateMouthOB(itemFront, itemRightSide, itemLeftSide);
-        }
-
 
         _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
         _PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());
         _PC.itemsAnimRightSide.Add(itemRightSide.GetComponentInChildren<Animator>());
-        //_PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+        _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
 
 
 
@@ -319,7 +310,7 @@ public class UIManager : Singleton<UIManager>
         isHoldingItem = false;
         //rotate image
 
-        _PC.CloseSlots();
+        //_PC.CloseSlots();
     }
 
 

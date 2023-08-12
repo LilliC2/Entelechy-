@@ -8,6 +8,11 @@ public class ItemIdentifier : GameBehaviour
     bool inRange;
     public Item itemInfo;
 
+    private void Awake()
+    {
+        GetComponentInChildren<SpriteRenderer>().sprite = itemInfo.icon;
+    }
+
     private void Update()
     {
         if(inRange)

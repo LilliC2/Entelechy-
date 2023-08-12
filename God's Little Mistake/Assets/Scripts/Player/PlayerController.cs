@@ -23,6 +23,7 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject missyLeftSide;
     public GameObject missyRightSide;
     public GameObject missyBack;
+    public GameObject missyForward;
 
     public GameObject meleeUI;
 
@@ -48,9 +49,6 @@ public class PlayerController : Singleton<PlayerController>
     public float projectileSpeed;
     public GameObject projectilePF;
 
-    public GameObject mouthFront;
-    public GameObject mouthLeftSide;
-    public GameObject mouthRightSide;
 
     [SerializeField]
     int initalSpeedBoost = 3;
@@ -89,7 +87,8 @@ public class PlayerController : Singleton<PlayerController>
 
         meleeUISwitcher = GetComponent<MeleeUISwitcher>();
 
-        
+        CheckForStartingItems();
+
         //add stats for the 1 item in the inventory
         //_ISitemD.AddPassiveItem(0);
     }
@@ -141,97 +140,55 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Animation
 
-                //turn off and on nubs
-                if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
-                {
-                    //nubsOB.SetActive(true);
-                }
-                else nubsOB.SetActive(false);
-
-                if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
-                {
-                    baseAnimator.SetBool("ForwardWalk", false);
-                    baseAnimator.SetBool("SideWalk", true);
-
-                    nubsAnimator.SetBool("ForwardWalk", false);
-                    nubsAnimator.SetBool("SideWalk", true);
-
-
-
-
-                }
-                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
-                {
-                    baseAnimator.SetBool("ForwardWalk", true);
-                    baseAnimator.SetBool("SideWalk", false);
-                    nubsAnimator.SetBool("ForwardWalk", true);
-                    nubsAnimator.SetBool("SideWalk", false);
-                }
+                
+                //Idle Check
                 if (transform.position == lastPos)
                 {
                     //print("not moved");
-                    baseAnimator.SetBool("ForwardWalk", false);
-                    baseAnimator.SetBool("SideWalk", false);
-                    nubsAnimator.SetBool("ForwardWalk", false);
-                    nubsAnimator.SetBool("SideWalk", false);
+                    //baseAnimator.SetBool("ForwardWalk", false);
+                    //baseAnimator.SetBool("SideWalk", false);
+
                 }
 
 
                 //change for cardinal direction
                 if (Input.GetKeyDown(KeyCode.W))
                 {
-                    torsoForward.SetActive(false);
-                    bellyForward.SetActive(false);
+                    missyForward.SetActive(false);
                     missyLeftSide.SetActive(false);
-                    nubsOB.SetActive(false);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(true);
 
-                    mouthRightSide.SetActive(false);
-                    mouthLeftSide.SetActive(false);
-                    mouthFront.SetActive(false);
+
 
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
-                    torsoForward.SetActive(false);
-                    bellyForward.SetActive(false);
+                    missyForward.SetActive(false);
                     missyLeftSide.SetActive(true);
-                    nubsOB.SetActive(false);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(false);
 
-                    mouthRightSide.SetActive(false);
-                    mouthLeftSide.SetActive(true);
-                    mouthFront.SetActive(false);
                 }
                 if (Input.GetKeyDown(KeyCode.S))
                 {
-                    
 
-                    torsoForward.SetActive(true);
-                    bellyForward.SetActive(true);
+
+                    missyForward.SetActive(true);
+
                     missyLeftSide.SetActive(false);
-                    nubsOB.SetActive(true);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(false);
 
-                    mouthRightSide.SetActive(false);
-                    mouthLeftSide.SetActive(false);
-                    mouthFront.SetActive(true);
                 }
                 if (Input.GetKeyDown(KeyCode.D))
                 {
-                    torsoForward.SetActive(false);
-                    bellyForward.SetActive(false);
+                    missyForward.SetActive(false);
+
                     missyLeftSide.SetActive(false);
-                    nubsOB.SetActive(false);
                     missyRightSide.SetActive(true);
                     missyBack.SetActive(false);
 
-                    mouthRightSide.SetActive(true);
-                    mouthLeftSide.SetActive(false);
-                    mouthFront.SetActive(false);
                 }
 
         
@@ -402,35 +359,41 @@ public class PlayerController : Singleton<PlayerController>
         #endregion
     }
 
-    public void UpdateMouthOB(GameObject _front,GameObject _sideR, GameObject _sideL)
+    void CheckForStartingItems()
     {
-        mouthFront = _front;
-        mouthLeftSide = _sideL;
-        mouthRightSide = _sideR;
+        foreach (var item in playerInventory)
+        {
+            if(item !=null)
+            {
+                _UI.CreateItemSelected(item);
+            }
+        }
     }
+
+
     private Tween TweenSpeed(float endValue,float time)
     {
         speedTween = DOTween.To(() => speed, (x) => speed = x, endValue, time);
         return speedTween;
     }
    
-    public void CloseSlots()
-    {
-        for (int i = 0; i < slotsAnim.Length; i++)
-        {
-            if (_AVTAR.slotsOnPlayerFront[i].transform.childCount == 0)
-            {
-                print("trying to slot");
-                slotsAnim[i].SetBool("OpenSlot", false);
-                slotsAnim[i].SetBool("CloseSlot", true);
+    //public void CloseSlots()
+    //{
+    //    for (int i = 0; i < slotsAnim.Length; i++)
+    //    {
+    //        if (_AVTAR.slotsOnPlayerFront[i].transform.childCount == 0)
+    //        {
+    //            print("trying to slot");
+    //            slotsAnim[i].SetBool("OpenSlot", false);
+    //            slotsAnim[i].SetBool("CloseSlot", true);
 
-            }
+    //        }
 
 
 
-            ExecuteAfterSeconds(1, () => ChangeSlots(false));
-        }
-    }
+    //        ExecuteAfterSeconds(1, () => ChangeSlots(false));
+    //    }
+    //}
 
     void ChangeSlots(bool _bool)
     {
