@@ -733,11 +733,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.49
+      value: -1.31
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6.47
+      value: 1.32
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -5038,11 +5038,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.49
+      value: -1.31
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6.47
+      value: 1.32
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -7179,11 +7179,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.49
+      value: -1.31
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6.47
+      value: 1.32
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -8786,11 +8786,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: -1.49
+      value: -1.31
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: 6.47
+      value: 1.32
       objectReference: {fileID: 0}
     - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -16950,6 +16950,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8621578061740408062, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
     m_RemovedGameObjects: []
@@ -18328,6 +18332,7 @@ MonoBehaviour:
   invenPopupCritX: {fileID: 2099366802}
   invenPopupCritChance: {fileID: 1872807698}
   invenPopupFirerate: {fileID: 249585646}
+  playerAvatar: {fileID: 1967995609}
 --- !u!4 &1520956316
 Transform:
   m_ObjectHideFlags: 0
@@ -21374,8 +21379,89 @@ MonoBehaviour:
   projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
   initalSpeedBoost: 3
   playerInventory:
-  - itemName: Nubs
+  - itemName: Chicken Beak
     ID: 13
+    inSceneID: 0
+    lvl: 0
+    category: 1
+    segment: 0
+    itemType: 2
+    currencyValue: 0
+    active: 0
+    dmg: 1
+    dps: 1
+    fireRate: 1
+    critX: 0
+    critChance: 2
+    range: 5
+    projectile: 0
+    projectileSpeed: 500
+    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: 024fc9c35ba18ca428570b98b46bf663, type: 3}
+    avatarPrefabFrontLeft: {fileID: 6746399273307538296, guid: e1d04f8ecd7742e40b66da4fd27cca07, type: 3}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 2944755447898596729, guid: 6d922066a28d80e4cbd9aa6957658322, type: 3}
+    avtarPrefabRight: {fileID: 2944755447898596729, guid: 6d922066a28d80e4cbd9aa6957658322, type: 3}
+    avtarPrefabBackLeft: {fileID: 1080939457727681299, guid: 518a405904d8c6c4a94e2d4971316f5b, type: 3}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Big Eyes
+    ID: 12
+    inSceneID: 0
+    lvl: 0
+    category: 0
+    segment: 0
+    itemType: 2
+    currencyValue: 0
+    active: 0
+    dmg: 1
+    dps: 1
+    fireRate: 1
+    critX: 0
+    critChance: 2
+    range: 5
+    projectile: 0
+    projectileSpeed: 500
+    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: 5a7e378ce68e15e4c82d73912d0334be, type: 3}
+    avatarPrefabFrontLeft: {fileID: 9171547814619546566, guid: 359a7eb7927572040891a3a1a96caa7a, type: 3}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 6521519663572596647, guid: 8f67f27a28ff56c43ac7c34a74e91ab2, type: 3}
+    avtarPrefabRight: {fileID: 6521519663572596647, guid: 8f67f27a28ff56c43ac7c34a74e91ab2, type: 3}
+    avtarPrefabBackLeft: {fileID: 1080939457727681299, guid: 518a405904d8c6c4a94e2d4971316f5b, type: 3}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Antler
+    ID: 15
+    inSceneID: 0
+    lvl: 0
+    category: 2
+    segment: 0
+    itemType: 2
+    currencyValue: 0
+    active: 0
+    dmg: 1
+    dps: 1
+    fireRate: 1
+    critX: 0
+    critChance: 2
+    range: 5
+    projectile: 0
+    projectileSpeed: 500
+    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: 608464b8a67cd3c49be069b9ca583730, type: 3}
+    avatarPrefabFrontLeft: {fileID: 6587079511304155387, guid: 2c532cd1a2a4da646b07e3230dd76a97, type: 3}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 3367084592925445924, guid: cd3f147d38bf461478718e741b9114b2, type: 3}
+    avtarPrefabRight: {fileID: 3367084592925445924, guid: cd3f147d38bf461478718e741b9114b2, type: 3}
+    avtarPrefabBackLeft: {fileID: 880381823602299727, guid: 77307150fb8706c44b7c5d0662fd0ed3, type: 3}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Tripod
+    ID: 7
     inSceneID: 0
     lvl: 0
     category: 6
@@ -21394,12 +21480,12 @@ MonoBehaviour:
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
     modifier: 0
     modifierID: 0
-    icon: {fileID: 21300000, guid: 5a7e378ce68e15e4c82d73912d0334be, type: 3}
-    avatarPrefabFrontLeft: {fileID: 4037416830258721223, guid: f8e5a5357d5205b42977b80ed0a00d59, type: 3}
+    icon: {fileID: 21300000, guid: 7372f879581802b43a65a29058d0f040, type: 3}
+    avatarPrefabFrontLeft: {fileID: 273599904979284594, guid: 77403b443ab381040a443808ffe02c80, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
-    avtarPrefabLeft: {fileID: 1354293937271909763, guid: 6b218fdb74991b1439d2af3aa983991e, type: 3}
-    avtarPrefabRight: {fileID: 1354293937271909763, guid: 6b218fdb74991b1439d2af3aa983991e, type: 3}
-    avtarPrefabBackLeft: {fileID: 1397305912410096892, guid: b0abff0b9da44a64eb6034a316f05721, type: 3}
+    avtarPrefabLeft: {fileID: 3239956158546672173, guid: 66ab223e6fcf3df4dbecb9428ab8adee, type: 3}
+    avtarPrefabRight: {fileID: 3239956158546672173, guid: bf1cd5accbc8fbd4bb36106a7b57b14e, type: 3}
+    avtarPrefabBackLeft: {fileID: 1954937682116899211, guid: 2032ea15cb4fa5948a341c82152bd3c4, type: 3}
     avtarPrefabBackRight: {fileID: 0}
   headSpeed: 1000
   head: {fileID: 0}
@@ -22858,10 +22944,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[9].avatarPrefabFrontRight
-      value: 
-      objectReference: {fileID: 3304035445752850085, guid: 47c02e76353aa084d8a0530e9293a0d3, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
