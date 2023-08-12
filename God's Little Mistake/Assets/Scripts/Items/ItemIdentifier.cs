@@ -8,6 +8,19 @@ public class ItemIdentifier : GameBehaviour
     bool inRange;
     public Item itemInfo;
 
+    [Header("Animation")]
+    public Animator anim;
+
+    public GameObject statPop;
+
+
+    public void Start()
+    {
+        statPop = GameObject.Find("Stat Popup");
+        
+        anim = statPop.GetComponent<Animator>();
+    }
+
     private void Update()
     {
         if(inRange)
@@ -44,21 +57,34 @@ public class ItemIdentifier : GameBehaviour
         {
             print("player");
             inRange = false;
-
         }
     }
 
+    //public void OnMouseEnter()
+    //{
+    //    print("ENTER");
+    //    _UI.statsPopUpPanel.SetActive(true);
+    //    _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+    //    _UI.UpdateItemPopUp(itemInfo);
+    //    anim.SetTrigger("Open");
+
+    //}
+
     public void OnMouseOver()
     {
-        print("HOVER");
-        _UI.UpdateItemPopUp(itemInfo);
+        print("ENTER");
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        _UI.UpdateItemPopUp(itemInfo);
+        anim.SetTrigger("Open");
     }
 
     public void OnMouseExit()
     {
-        _UI.statsPopUpPanel.SetActive(false);
+        print("EXIT");
+        anim.ResetTrigger("Open");
+        anim.SetTrigger("Close");
+        ExecuteAfterSeconds(1, () => _UI.statsPopUpPanel.SetActive(false));
 
     }
 }
