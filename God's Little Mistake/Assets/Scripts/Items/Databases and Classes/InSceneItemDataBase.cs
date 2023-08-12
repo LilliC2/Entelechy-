@@ -18,7 +18,6 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         if (_PC.playerInventory.Count < 6)
         {
 
-            print("Player Health is " + _PC.health);
 
             _UI.statsPopUpPanel.SetActive(false);
             _PC.playerInventory.Add(inSceneItemDataBase[_sceneID]);

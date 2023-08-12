@@ -198,7 +198,6 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CreateItemSelected(int _inSceneId)
     {
-        print("Player Health is " + _PC.health);
 
         //print("Create item, in scene id is " + _inSceneId);
         heldItem = _ISitemD.inSceneItemDataBase[_inSceneId];
@@ -277,7 +276,6 @@ public class UIManager : Singleton<UIManager>
 
         //print("in EquipImage ID is " + heldItem.ID);
 
-        print("Player Health is " + _PC.health);
 
         _ISitemD.AddItemToInventory(heldItem.inSceneID);
         //then instantiate prefab on player and detroy this iamge

@@ -17,7 +17,6 @@ public class ItemIdentifier : GameBehaviour
                 //pick up item
                 if (_PC.playerInventory.Count < 5)//invenotry cap number here
                 {
-                    print("Destroy obj");
                     Destroy(gameObject);
                     _UI.CreateItemSelected(id);
 
@@ -34,7 +33,6 @@ public class ItemIdentifier : GameBehaviour
     {
         if (other.tag == "Player")
         {
-            print("player");
             inRange = true;
             
         }

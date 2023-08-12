@@ -87,9 +87,8 @@ public class PlayerController : Singleton<PlayerController>
 
         meleeUISwitcher = GetComponent<MeleeUISwitcher>();
 
-        
-        //add stats for the 1 item in the inventory
-        //_ISitemD.AddPassiveItem(0);
+        //Find if any items are in inventory if so equip
+
     }
 
     void Update()
@@ -219,23 +218,14 @@ public class PlayerController : Singleton<PlayerController>
                 #region Animation
 
                 //turn off and on nubs
-                if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
-                {
-                    //nubsOB.SetActive(true);
-                }
-                else
-                {
-                    nubsOB.SetActive(false);
-                    nubsOBback.SetActive(false);
-                }
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))
                 {
                     //baseAnimator.SetBool("ForwardWalk", false);
                     //baseAnimator.SetBool("SideWalk", true);
 
-                    nubsAnimator.SetBool("ForwardWalk", false);
-                    nubsAnimator.SetBool("SideWalk", true);
+                    //nubsAnimator.SetBool("ForwardWalk", false);
+                    //nubsAnimator.SetBool("SideWalk", true);
 
 
 
@@ -244,17 +234,17 @@ public class PlayerController : Singleton<PlayerController>
                 if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S))
                 {
                     //baseAnimator.SetBool("ForwardWalk", true);
-                    //baseAnimator.SetBool("SideWalk", false);
-                    nubsAnimator.SetBool("ForwardWalk", true);
-                    nubsAnimator.SetBool("SideWalk", false);
+                    ////baseAnimator.SetBool("SideWalk", false);
+                    //nubsAnimator.SetBool("ForwardWalk", true);
+                    //nubsAnimator.SetBool("SideWalk", false);
                 }
                 if (transform.position == lastPos)
                 {
                     //print("not moved");
                     //baseAnimator.SetBool("ForwardWalk", false);
                     //baseAnimator.SetBool("SideWalk", false);
-                    nubsAnimator.SetBool("ForwardWalk", false);
-                    nubsAnimator.SetBool("SideWalk", false);
+                    //nubsAnimator.SetBool("ForwardWalk", false);
+                    //nubsAnimator.SetBool("SideWalk", false);
                 }
 
 
@@ -263,13 +253,11 @@ public class PlayerController : Singleton<PlayerController>
                 {
                     missyFront.SetActive(false);
                     missyLeftSide.SetActive(false);
-                    nubsOB.SetActive(false);
+                    //nubsOB.SetActive(false);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(true);
 
-                    mouthRightSide.SetActive(false);
-                    mouthLeftSide.SetActive(false);
-                    mouthFront.SetActive(false);
+
 
                 }
                 if (Input.GetKeyDown(KeyCode.A))
@@ -279,13 +267,11 @@ public class PlayerController : Singleton<PlayerController>
 
                     missyFront.SetActive(false);
                     missyLeftSide.SetActive(true);
-                    nubsOB.SetActive(false);
+                    //nubsOB.SetActive(false);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(false);
 
-                    mouthRightSide.SetActive(false);
-                    mouthLeftSide.SetActive(true);
-                    mouthFront.SetActive(false);
+
                 }
                 if (Input.GetKeyDown(KeyCode.S))
                 {
@@ -293,13 +279,11 @@ public class PlayerController : Singleton<PlayerController>
 
                     missyFront.SetActive(true);
                     missyLeftSide.SetActive(false);
-                    nubsOB.SetActive(true);
+                    //nubsOB.SetActive(true);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(false);
 
-                    mouthRightSide.SetActive(false);
-                    mouthLeftSide.SetActive(false);
-                    mouthFront.SetActive(true);
+
                 }
                 if (Input.GetKeyDown(KeyCode.D))
                 {
@@ -309,13 +293,11 @@ public class PlayerController : Singleton<PlayerController>
 
                     missyFront.SetActive(false);
                     missyLeftSide.SetActive(false);
-                    nubsOB.SetActive(false);
+                    //nubsOB.SetActive(false);
                     missyRightSide.SetActive(true);
                     missyBack.SetActive(false);
 
-                    mouthRightSide.SetActive(true);
-                    mouthLeftSide.SetActive(false);
-                    mouthFront.SetActive(false);
+
                 }
 
         
@@ -473,6 +455,23 @@ public class PlayerController : Singleton<PlayerController>
 
 
         #endregion
+    }
+
+    void CheckForStartingItems()
+    {
+        foreach (var item in playerInventory)
+        {
+            if(item !=null)
+            {
+                //add to animator
+                _UI.CreateItemSelected(0);
+
+                //equip to player
+
+                //add stats?
+            
+            }
+        }
     }
 
     public void UpdateMouthOB(GameObject _front,GameObject _sideR, GameObject _sideL)
