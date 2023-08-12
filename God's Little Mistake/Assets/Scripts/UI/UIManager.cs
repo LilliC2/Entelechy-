@@ -58,6 +58,7 @@ public class UIManager : Singleton<UIManager>
         UpdateInventorySlotImages();
         heldItem = null;
         isHoldingItem = false;
+        statsPopUpPanel.SetActive(false);
     }
 
     private void Update()
@@ -76,10 +77,10 @@ public class UIManager : Singleton<UIManager>
         //ADD LATER FORMATTING FOR FLOATS
 
         popupName.text = _hoverItem.itemName;
-        popupDmg.text = "DMG: " + _hoverItem.dmg.ToString();
-        popupCritX.text = "CritX: " + _hoverItem.critX.ToString();
-        popupCritChance.text = "Crit%: " + _hoverItem.critChance.ToString();
-        popupFirerate.text = "Firerate%: " + _hoverItem.fireRate.ToString();
+        popupDmg.text = _hoverItem.dmg.ToString();
+        popupCritX.text = _hoverItem.critX.ToString();
+        popupCritChance.text = _hoverItem.critChance.ToString();
+        popupFirerate.text = _hoverItem.fireRate.ToString();
 
         var matchItem = SearchForItemMatch(_hoverItem);
 
