@@ -164,6 +164,8 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.A))
                 {
+                    _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
+
                     missyForward.SetActive(false);
                     missyLeftSide.SetActive(true);
                     missyRightSide.SetActive(false);
@@ -183,6 +185,8 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.D))
                 {
+
+                    _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
                     missyForward.SetActive(false);
 
                     missyLeftSide.SetActive(false);
