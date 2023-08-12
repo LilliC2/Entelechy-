@@ -52,6 +52,24 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text invenPopupCritChance;
     public TMP_Text invenPopupFirerate;
 
+    [Header("Inventory Comparison1")]
+    public GameObject statComp1;
+    public GameObject arrowComp;
+    public TMP_Text popupName1;
+    public TMP_Text popupDmg1;
+    public TMP_Text popupCritX1;
+    public TMP_Text popupCritChance1;
+    public TMP_Text popupFirerate1;
+
+    //[Header("Inventory Comparison2")]
+    //public GameObject statComp2;
+    //public TMP_Text popupName2;
+    //public TMP_Text popupDmg2;
+    //public TMP_Text popupCritX2;
+    //public TMP_Text popupCritChance2;
+    //public TMP_Text popupFirerate2;
+
+
 
     private void Start()
     {
@@ -59,6 +77,9 @@ public class UIManager : Singleton<UIManager>
         heldItem = null;
         isHoldingItem = false;
         statsPopUpPanel.SetActive(false);
+        statComp1.SetActive(false);
+        //statComp2.SetActive(false);
+        arrowComp.SetActive(false);
     }
 
     private void Update()
@@ -81,6 +102,23 @@ public class UIManager : Singleton<UIManager>
         popupCritX.text = _hoverItem.critX.ToString();
         popupCritChance.text = _hoverItem.critChance.ToString();
         popupFirerate.text = _hoverItem.fireRate.ToString();
+
+        var matchItem = SearchForItemMatch(_hoverItem);
+
+        if (matchItem != null)
+            print(matchItem.itemName);
+        else print("no match");
+    }
+
+    public void UpdateItemPopUpComp1(Item _hoverItem)
+    {
+        //ADD LATER FORMATTING FOR FLOATS
+
+        popupName1.text = _hoverItem.itemName;
+        popupDmg1.text = _hoverItem.dmg.ToString();
+        popupCritX1.text = _hoverItem.critX.ToString();
+        popupCritChance1.text = _hoverItem.critChance.ToString();
+        popupFirerate1.text = _hoverItem.fireRate.ToString();
 
         var matchItem = SearchForItemMatch(_hoverItem);
 
@@ -397,7 +435,7 @@ public class UIManager : Singleton<UIManager>
 
     #endregion
 
-    Item SearchForItemMatch(Item _hoverItem)
+    public Item SearchForItemMatch(Item _hoverItem)
     {
         Item itemMatchInPlayerInven = null;
 

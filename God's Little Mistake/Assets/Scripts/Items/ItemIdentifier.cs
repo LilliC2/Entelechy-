@@ -10,15 +10,19 @@ public class ItemIdentifier : GameBehaviour
 
     [Header("Animation")]
     public Animator anim;
+    public Animator anim1;
 
     public GameObject statPop;
+    public GameObject statComp1;
 
 
     public void Start()
     {
         statPop = GameObject.Find("Stat Popup");
+        statComp1 = GameObject.Find("Stat Comp 1");
         
         anim = statPop.GetComponent<Animator>();
+        anim1 = statComp1.GetComponent<Animator>();
     }
 
     private void Update()
@@ -77,14 +81,34 @@ public class ItemIdentifier : GameBehaviour
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         _UI.UpdateItemPopUp(itemInfo);
         anim.SetTrigger("Open");
+
+        var match = _UI.SearchForItemMatch(itemInfo);
+
+        if(match != null)
+        {
+            _UI.statComp1.SetActive(true);
+            //anim1.SetTrigger("Open");
+            _UI.arrowComp.SetActive(true);
+            _UI.UpdateItemPopUpComp1(itemInfo);
+        }
     }
 
     public void OnMouseExit()
     {
         print("EXIT");
         anim.ResetTrigger("Open");
+        //anim1.ResetTrigger("Open");
         anim.SetTrigger("Close");
-        ExecuteAfterSeconds(1, () => _UI.statsPopUpPanel.SetActive(false));
+        //anim1.SetTrigger("Close");
+        ExecuteAfterSeconds(1, () => TurnOff());
 
+
+    }
+
+    public void TurnOff()
+    {
+        _UI.statsPopUpPanel.SetActive(false);
+        _UI.statComp1.SetActive(false);
+        _UI.arrowComp.SetActive(false);
     }
 }
