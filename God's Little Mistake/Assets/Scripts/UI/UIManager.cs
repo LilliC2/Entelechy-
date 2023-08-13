@@ -286,15 +286,9 @@ public class UIManager : Singleton<UIManager>
         //print("in EquipImage ID is " + heldItem.ID);
 
 
-        //check if item is arleady in inventory
-        var itemExsists = false;
-        foreach (var item in _PC.playerInventory)
-        {
-            if (item == heldItem) itemExsists = true;
-        }
+        
 
-        if(!itemExsists) _ISitemD.AddItemToInventory(heldItem);
-
+        _ISitemD.AddItemToInventory(heldItem);
 
 
         var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
@@ -313,8 +307,9 @@ public class UIManager : Singleton<UIManager>
                 _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
 
                 //BACKL
-                var itemBackSide = Instantiate(heldItem.avtarPrefabBackRight, _AVTAR.slotsOnPlayerBack[_slot].transform);
+                var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
                 _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+                
             }
             if (_slot == 3) // LEFT
             {
@@ -322,9 +317,12 @@ public class UIManager : Singleton<UIManager>
                 var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
                 _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
 
-                //BACKK
-                var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
+
+                var itemBackSide = Instantiate(heldItem.avtarPrefabBackRight, _AVTAR.slotsOnPlayerBack[_slot].transform);
                 _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+
+                //BACKK
+                
             }
 
         }

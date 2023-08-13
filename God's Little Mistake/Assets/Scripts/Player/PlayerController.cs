@@ -370,6 +370,8 @@ public class PlayerController : Singleton<PlayerController>
             if(item !=null)
             {
                 _UI.CreateItemSelected(item);
+
+                //check if item is arleady in inventory
             }
         }
     }
