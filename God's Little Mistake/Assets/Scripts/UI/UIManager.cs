@@ -54,7 +54,7 @@ public class UIManager : Singleton<UIManager>
 
     [Header("Missy Height")]
     public GameObject playerAvatar;
-    Vector3 standard = new Vector3(-0.0160000008f, -0.305000007f, -0.114f);
+    Vector3 standard = new Vector3(0.239999443f, 0.0800049901f, -0.555116713f);
     Vector3 tall = new Vector3(-0.0209999997f, -0.136000007f, 0.0540000014f);
 
     private void Start()
@@ -255,7 +255,11 @@ public class UIManager : Singleton<UIManager>
         else if (heldItem.segment == Item.Segment.Legs)
         {
             if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
+            {
                 slot = 5;
+                
+            }
+            
         }
 
         print(heldItem.itemName + " is on slot " + slot);
@@ -286,9 +290,14 @@ public class UIManager : Singleton<UIManager>
         //print("in EquipImage ID is " + heldItem.ID);
 
 
-        
+        var itemExsists = false;
+        foreach (var item in _PC.playerInventory)
+        {
+            if (item == heldItem) itemExsists = true;
+        }
 
-        _ISitemD.AddItemToInventory(heldItem);
+        if(itemExsists == false) _ISitemD.AddItemToInventory(heldItem);
+
 
 
         var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
@@ -336,6 +345,7 @@ public class UIManager : Singleton<UIManager>
             _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
         }
 
+        if (heldItem.segment == Item.Segment.Legs) _PC.UpdateLegAnimators();
 
 
         CheckHeight();

@@ -9,6 +9,7 @@ public class PlayerController : Singleton<PlayerController>
     public BearTrap bearTrap;
     public CactusTrap cactusTrap;
 
+    #region Animation Variables
     [Header("Animation")]
     public Animator baseAnimator;
     public Animator nubsAnimator;
@@ -32,9 +33,14 @@ public class PlayerController : Singleton<PlayerController>
     public List<Animator> itemsAnimLeftSide;
     public List<Animator> itemsAnimBack;
 
+
+    public List<Animator> legsAnimators;
+
     Vector3 currentPos;
     Vector3 lastPos;
+    #endregion
 
+    #region Player Variables
     [Header("Player Stats")]
     public float health;
     public float maxHP;
@@ -56,6 +62,8 @@ public class PlayerController : Singleton<PlayerController>
 
     Tween speedTween;
 
+    #endregion
+    
     [Header("Inventory")]
     public List<Item> playerInventory;
 
@@ -74,7 +82,6 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject lineHitbox;
     public GameObject coneHitbox;
     MeleeUISwitcher meleeUISwitcher;
-
     public enum MeleeHitBox { Line, Cone }
     public MeleeHitBox meleeHitBox;
 
@@ -140,16 +147,28 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Animation
 
-                
+                #region Legs Animation
+
                 //Idle Check
                 if (transform.position == lastPos)
                 {
-                    //print("not moved");
-                    //baseAnimator.SetBool("ForwardWalk", false);
-                    //baseAnimator.SetBool("SideWalk", false);
+                    foreach (var item in legsAnimators)
+                    {
+                        item.SetBool("Walk", false);
+                    }
 
                 }
+                else
+                {
+                    foreach (var item in legsAnimators)
+                    {
+                        item.SetBool("Walk", true);
+                    }
+                }
 
+                #endregion
+
+                #region Swapping Missy Sprites
 
                 //change for cardinal direction
                 if (Input.GetKeyDown(KeyCode.W))
@@ -158,8 +177,6 @@ public class PlayerController : Singleton<PlayerController>
                     missyLeftSide.SetActive(false);
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(true);
-
-
 
                 }
                 if (Input.GetKeyDown(KeyCode.A))
@@ -195,8 +212,8 @@ public class PlayerController : Singleton<PlayerController>
 
                 }
 
-        
 
+                #endregion
                 #endregion
 
                 //Rotate melee hit box and head
@@ -235,19 +252,17 @@ public class PlayerController : Singleton<PlayerController>
                                     ExecuteAfterSeconds(1, () => meleeUI.gameObject.SetActive(false));
                                 }
 
-
+                                
 
                                 //active primary attack
 
-                                //itemsAnimForward[i].SetTrigger("Attack");
-                                //itemsAnimBack[i].SetTrigger("Attack");
-                                //itemsAnimLeftSide[i].SetTrigger("Attack");
-                                //itemsAnimRightSide[i].SetTrigger("Attack");
+                                itemsAnimForward[i].SetTrigger("Attack");
+                                itemsAnimBack[i].SetTrigger("Attack");
+                                itemsAnimLeftSide[i].SetTrigger("Attack");
+                                itemsAnimRightSide[i].SetTrigger("Attack");
 
 
-                                print("do melee attack");
-                                //THIS WILL BE REWRITTEN WHEN INVENTORY IS IMPLEMENTED
-                                //changed to use player stats, the primary attack will just change
+
                                 MeleeAttack(firerate);
                             }
                         }
@@ -288,32 +303,7 @@ public class PlayerController : Singleton<PlayerController>
                 }
 
                 #endregion
-
-                //DROP ITEM IF HOLDING
-                //if(_UI.heldItem != null)
-                //{
-                //    print("holding an item");
-                //    //Open Slots
-
-                //    for(int i =0; i < slotsAnim.Length; i++)
-                //    {
-                        
-                //        if (_AVTAR.slotsOnPlayer[i].transform.childCount == 0)
-                //        {
-                //            slotsGO[i].SetActive(true);
-                //            slotsAnim[i].SetBool("OpenSlot", true);
-                //        }
-                            
-                //    }
-
-                //    ////Drop Held Item
-                //    //if(Input.GetKeyDown(KeyCode.R))
-                //    //{
-                //    //    _UI.DropHeldItem();
  
-                //    //}
-                //}
-          
 
                 break;
 
@@ -363,6 +353,24 @@ public class PlayerController : Singleton<PlayerController>
         #endregion
     }
 
+    public void UpdateLegAnimators()
+    {
+
+        legsAnimators.Clear();
+
+        for (int i = 0; i < playerInventory.Count; i++)
+        {
+            if (playerInventory[i].segment == Item.Segment.Legs)
+            {
+                legsAnimators.Add(itemsAnimBack[i]);
+                legsAnimators.Add(itemsAnimForward[i]);
+                legsAnimators.Add(itemsAnimLeftSide[i]);
+                legsAnimators.Add(itemsAnimRightSide[i]);
+            }
+        }
+
+    }
+
     void CheckForStartingItems()
     {
         foreach (var item in playerInventory)
@@ -375,7 +383,6 @@ public class PlayerController : Singleton<PlayerController>
             }
         }
     }
-
 
     private Tween TweenSpeed(float endValue,float time)
     {
@@ -401,13 +408,13 @@ public class PlayerController : Singleton<PlayerController>
     //    }
     //}
 
-    void ChangeSlots(bool _bool)
-    {
-        for (int i = 0; i < slotsAnim.Length; i++)
-        {
-            slotsGO[i].SetActive(_bool);
-        }
-    }
+    //void ChangeSlots(bool _bool)
+    //{
+    //    for (int i = 0; i < slotsAnim.Length; i++)
+    //    {
+    //        slotsGO[i].SetActive(_bool);
+    //    }
+    //}
     void UpdateMelee()
     {
         switch (meleeHitBox)
@@ -427,6 +434,16 @@ public class PlayerController : Singleton<PlayerController>
 
     public void ChangePrimary(int _inventorySlot)
     {
+
+        //turn off any others in the same segment
+        foreach (var item in playerInventory)
+        {
+            if(item.segment == playerInventory[_inventorySlot].segment)
+            {
+                item.active = false;
+            }
+        }
+
         //check if item is primary
         if (playerInventory[_inventorySlot].itemType == Item.ItemType.Primary)
         {
@@ -442,17 +459,7 @@ public class PlayerController : Singleton<PlayerController>
                 meleeUI.gameObject.SetActive(false);
             }
 
-            //turn off any others in the same segment
-            for (int i = _inventorySlot; playerInventory.Count > i; i++)
-            {
-                if (i != _inventorySlot)
-                {
-                    if (playerInventory[i].segment == playerInventory[_inventorySlot].segment)
-                    {
-                        if (playerInventory[i].active == true) playerInventory[i].active = false;
-                    }
-                }
-            }
+            
         }
     }
 
