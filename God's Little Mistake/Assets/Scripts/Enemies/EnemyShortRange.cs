@@ -32,6 +32,7 @@ public class EnemyShortRange : GameBehaviour
         BaseEnemy = GetComponent<BaseEnemy>();
         agent = GetComponent<NavMeshAgent>();
         agent.SetDestination(RandomNavSphere());
+        player = GameObject.FindGameObjectWithTag("Player");
     }
   
     private void Update()

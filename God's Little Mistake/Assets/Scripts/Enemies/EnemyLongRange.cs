@@ -41,6 +41,7 @@ public class EnemyLongRange : GameBehaviour
         enemyStats = GetComponent<BaseEnemy>();
         BaseEnemy = GetComponent<BaseEnemy>();
         agent = GetComponent<NavMeshAgent>();
+        player = GameObject.FindGameObjectWithTag("Player");
     }
 
     // Update is called once per frame

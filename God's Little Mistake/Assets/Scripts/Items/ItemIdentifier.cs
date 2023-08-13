@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class ItemIdentifier : GameBehaviour
 {
-    public int id;
     bool inRange;
+    public Item itemInfo;
+
+    private void Awake()
+    {
+        GetComponentInChildren<SpriteRenderer>().sprite = itemInfo.icon;
+    }
 
     private void Update()
     {
@@ -17,14 +23,10 @@ public class ItemIdentifier : GameBehaviour
                 //pick up item
                 if (_PC.playerInventory.Count < 5)//invenotry cap number here
                 {
-                    print("Destroy obj");
                     Destroy(gameObject);
-                    _UI.CreateItemSelected(id);
+                    _UI.CreateItemSelected(itemInfo);
 
-                    
-                }
-
-                
+                }  
 
             }
         }
@@ -34,7 +36,6 @@ public class ItemIdentifier : GameBehaviour
     {
         if (other.tag == "Player")
         {
-            print("player");
             inRange = true;
             
         }
@@ -50,14 +51,15 @@ public class ItemIdentifier : GameBehaviour
         }
     }
 
-    private void OnMouseOver()
+    public void OnMouseOver()
     {
-        _UI.UpdateItemPopUp(_ISitemD.inSceneItemDataBase[id].itemName, _ISitemD.inSceneItemDataBase[id].dmg, _ISitemD.inSceneItemDataBase[id].critX, _ISitemD.inSceneItemDataBase[id].critChance, _ISitemD.inSceneItemDataBase[id].fireRate);
+        print("HOVER");
+        _UI.UpdateItemPopUp(itemInfo);
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
     }
 
-    private void OnMouseExit()
+    public void OnMouseExit()
     {
         _UI.statsPopUpPanel.SetActive(false);
 
