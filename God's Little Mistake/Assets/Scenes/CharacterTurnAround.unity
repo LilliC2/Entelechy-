@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 262.33694, g: 325.04984, b: 430.2193, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1493,7 +1493,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7bc417d86db616f4a8dbe7f55b1445e3, type: 3}
     - target: {fileID: 2474645652190830804, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5956623696610171656, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: m_Name
@@ -6173,7 +6173,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7bc417d86db616f4a8dbe7f55b1445e3, type: 3}
     - target: {fileID: 2474645652190830804, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5956623696610171656, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: m_Name
@@ -14966,7 +14966,6 @@ MonoBehaviour:
   heldItem:
     itemName: 
     ID: 0
-    inSceneID: 0
     lvl: 0
     category: 0
     segment: 0
@@ -17999,7 +17998,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7bc417d86db616f4a8dbe7f55b1445e3, type: 3}
     - target: {fileID: 2474645652190830804, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: m_WasSpriteAssigned
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5956623696610171656, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: m_Name
@@ -18380,6 +18379,86 @@ PrefabInstance:
       propertyPath: cactusTrap
       value: 
       objectReference: {fileID: 746408213}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].ID
+      value: 8
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].dmg
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].dps
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].icon
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].range
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].segment
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].category
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].fireRate
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].itemName
+      value: Human Arm
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].itemType
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].critChance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].projectilePF
+      value: 
+      objectReference: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].avtarPrefabLeft
+      value: 
+      objectReference: {fileID: 3304035445752850085, guid: ddec4422571eaa54887a087a398f8c19, type: 3}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].projectileSpeed
+      value: 500
+      objectReference: {fileID: 0}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].avtarPrefabRight
+      value: 
+      objectReference: {fileID: 3304035445752850085, guid: 76a3e71709e2dab4996df3a7046db1af, type: 3}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].avtarPrefabBackLeft
+      value: 
+      objectReference: {fileID: 3304035445752850085, guid: cc3074f12705d114b9e44e5bb59916c1, type: 3}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].avtarPrefabBackRight
+      value: 
+      objectReference: {fileID: 3304035445752850085, guid: 85425d5f7eb5e004c9f4477b1872f66c, type: 3}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].avatarPrefabFrontLeft
+      value: 
+      objectReference: {fileID: 3304035445752850085, guid: 63770e382e26a844c908349217336416, type: 3}
+    - target: {fileID: 1675922068933763832, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
+      propertyPath: playerInventory.Array.data[1].avatarPrefabFrontRight
+      value: 
+      objectReference: {fileID: 3304035445752850085, guid: 47c02e76353aa084d8a0530e9293a0d3, type: 3}
     - target: {fileID: 1791071095792500285, guid: 829f7974b556856488bd0cc8d917386b, type: 3}
       propertyPath: m_Mesh
       value: 

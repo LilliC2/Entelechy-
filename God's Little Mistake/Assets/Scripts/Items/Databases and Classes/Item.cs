@@ -7,7 +7,6 @@ public class Item
 {
     public string itemName;
     public int ID;
-    public int inSceneID;
     public int lvl;
     public enum Category { Eyes, Mouth, Horns, Slappies, Punchies, Launchers, Legs, Crawlies, None }
     public Category category;

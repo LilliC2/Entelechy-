@@ -371,8 +371,8 @@ public class UIManager : Singleton<UIManager>
         {
             if (_PC.playerInventory[i].segment == Item.Segment.Legs)
             {
-                //7 tripod legs, 11 hoover
-                if (_PC.playerInventory[i].ID == 11 || _PC.playerInventory[i].ID == 7)
+                //6 tripod legs, 10 hoover
+                if (_PC.playerInventory[i].ID == 10 || _PC.playerInventory[i].ID == 6)
                 {
                     print("Go taller");
                     playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, tall.y, playerAvatar.transform.position.z);

@@ -58,8 +58,6 @@ public class ItemGeneration : Singleton<ItemGeneration>
         _ISitemD.inSceneItemDataBase.Add(itemSpawned);
 
         //give item inscene id
-        int index = _ISitemD.inSceneItemDataBase.Count - 1;
-        _ISitemD.inSceneItemDataBase[index].inSceneID = index;
 
         //give item script inscene id
         itemTemp.GetComponentInChildren<ItemIdentifier>().itemInfo = itemSpawned;
