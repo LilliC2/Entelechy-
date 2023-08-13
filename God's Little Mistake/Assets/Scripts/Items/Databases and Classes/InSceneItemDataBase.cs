@@ -10,7 +10,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
     /// Adds item to players inventory and removes it from scene
     /// </summary>
     /// <param name="_sceneID"></param>
-    public void AddItemToInventory(int _sceneID)
+    public void AddItemToInventory(Item _item)
     {
         
 
@@ -18,33 +18,17 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         if (_PC.playerInventory.Count < 6)
         {
 
-            print("Player Health is " + _PC.health);
 
             _UI.statsPopUpPanel.SetActive(false);
-            _PC.playerInventory.Add(inSceneItemDataBase[_sceneID]);
+            _PC.playerInventory.Add(_item);
             //print("added item");
-            inSceneItemDataBase.Remove(inSceneItemDataBase[_sceneID]);
 
-            //move all items in list downm (automatic)
 
-            //THIS DOESNT WORK CAUSE OF THE ITEM IDS
-
-            //make sure their ids stay the same!!!
-            for (int i = _sceneID; i < inSceneItemDataBase.Count; i++)
-            {
-                inSceneItemDataBase[i].inSceneID = inSceneItemDataBase[i].inSceneID - 1;
-            }
 
             //change items
             GameObject[] itemsOnGround = GameObject.FindGameObjectsWithTag("Item Drop");
 
-            for (int i = 0; i < itemsOnGround.Length; i++)
-            {
-                if(itemsOnGround[i].GetComponent<ItemIdentifier>().id > _sceneID)
-                {
-                    itemsOnGround[i].GetComponent<ItemIdentifier>().id -= 1;
-                }
-            }
+
 
 
             var index = _PC.playerInventory.Count - 1;
@@ -140,17 +124,13 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
 
         //add item to scene and remove from inventory
-        inSceneItemDataBase.Add(_PC.playerInventory[_inventoryID]);
-        _PC.playerInventory.Remove(_PC.playerInventory[_inventoryID]);
-        
+
         var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
+        item.GetComponent<ItemIdentifier>().itemInfo = _PC.playerInventory[_inventoryID];
 
-        int id = item.GetComponent<ItemIdentifier>().id;
-
-        item.GetComponentInChildren<SpriteRenderer>().sprite = _ISitemD.inSceneItemDataBase[id].icon;
-
-        int index = _ISitemD.inSceneItemDataBase.Count - 1;
-        inSceneItemDataBase[index].inSceneID = index;
+        
+        
+        item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
         
 
