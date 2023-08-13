@@ -248,7 +248,7 @@ public class PlayerController : Singleton<PlayerController>
                                 {
                                     meleeUI.gameObject.SetActive(true);
 
-                                    meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                                    meleeUI.GetComponent<Animator>().SetTrigger("Attack2");
                                     ExecuteAfterSeconds(1, () => meleeUI.gameObject.SetActive(false));
                                 }
 
@@ -286,10 +286,10 @@ public class PlayerController : Singleton<PlayerController>
                                 
 
                                 //activate animation
-                                //itemsAnimForward[i].SetTrigger("Attack");
-                                //itemsAnimBack[i].SetTrigger("Attack");
-                                //itemsAnimLeftSide[i].SetTrigger("Attack");
-                                //itemsAnimRightSide[i].SetTrigger("Attack");
+                                itemsAnimForward[i].SetTrigger("Attack");
+                                itemsAnimBack[i].SetTrigger("Attack");
+                                itemsAnimLeftSide[i].SetTrigger("Attack");
+                                itemsAnimRightSide[i].SetTrigger("Attack");
 
                                 //changed to use player stats, the primary attack will just change
                                 FireProjectile(playerInventory[0].projectilePF, projectileSpeed, firerate, range);
