@@ -62,6 +62,7 @@ public class UIManager : Singleton<UIManager>
         UpdateInventorySlotImages();
         heldItem = null;
         isHoldingItem = false;
+        playerAvatar = GameObject.FindGameObjectWithTag("Player");
     }
 
     private void Update()
@@ -374,11 +375,11 @@ public class UIManager : Singleton<UIManager>
                 if (_PC.playerInventory[i].ID == 11 || _PC.playerInventory[i].ID == 7)
                 {
                     print("Go taller");
-                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, -0.134f, playerAvatar.transform.position.z);
+                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, tall.y, playerAvatar.transform.position.z);
                 }
                 else
                 {
-                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, -0.305f, playerAvatar.transform.position.z);
+                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, standard.y, playerAvatar.transform.position.z);
                 }
             }
         }
