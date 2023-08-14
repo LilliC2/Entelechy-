@@ -40,8 +40,10 @@ public class CameraController : GameBehaviour
             case CameraStates.Default:
                 gameObject.transform.position = new Vector3(player.transform.position.x, 6, player.transform.position.z + -6);
 
+                var target = GetNearbyEnemies();
 
-                break;
+                if (target != null) cameraState = CameraStates.EnemyTargetting;
+                    break;
 
             //MIGHT NOT USE
             case CameraStates.EnemyTargetting:
@@ -49,7 +51,7 @@ public class CameraController : GameBehaviour
                 //gameObject.transform.position = new Vector3(player.transform.position.x, 6, player.transform.position.z + -6);
 
 
-                var target = GetNearbyEnemies();
+                target = GetNearbyEnemies();
 
                 if(target != null)
                 {
@@ -74,6 +76,7 @@ public class CameraController : GameBehaviour
                 {
                     gameObject.transform.position = Vector3.SmoothDamp(transform.position, new Vector3(player.transform.position.x, 6, player.transform.position.z + -6), ref velocity, 0.2f);
 
+                    //ExecuteAfterSeconds(lerpSpeed, () => cameraState = CameraStates.Default);
 
                 }
 
