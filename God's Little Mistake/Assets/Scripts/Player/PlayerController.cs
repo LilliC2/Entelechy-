@@ -287,7 +287,7 @@ public class PlayerController : Singleton<PlayerController>
 
                                 //activate animation
                                 itemsAnimForward[i].SetTrigger("Attack");
-                                itemsAnimBack[i].SetTrigger("Attack");
+                                //itemsAnimBack[i].SetTrigger("Attack");
                                 itemsAnimLeftSide[i].SetTrigger("Attack");
                                 itemsAnimRightSide[i].SetTrigger("Attack");
 
