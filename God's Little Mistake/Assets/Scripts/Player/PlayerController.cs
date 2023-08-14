@@ -40,6 +40,8 @@ public class PlayerController : Singleton<PlayerController>
     Vector3 lastPos;
     #endregion
 
+    public GameObject frontPivot;
+
     #region Player Variables
     [Header("Player Stats")]
     public float health;
@@ -183,8 +185,13 @@ public class PlayerController : Singleton<PlayerController>
                 {
                     _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
 
-                    missyForward.SetActive(false);
-                    missyLeftSide.SetActive(true);
+                    frontPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
+
+                    //
+                   ExecuteAfterFrames(4, ()=> missyForward.SetActive(false));
+                    ExecuteAfterFrames(4, () => missyLeftSide.SetActive(true));
+                    ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+
                     missyRightSide.SetActive(false);
                     missyBack.SetActive(false);
 
