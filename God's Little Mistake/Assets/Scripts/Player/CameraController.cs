@@ -21,6 +21,8 @@ public class CameraController : GameBehaviour
     CameraStates cameraState;
     public GameObject closestToMouse;
 
+    public GameObject dummy;
+
     Vector3 defaultPOS;
     Vector3 velocity = Vector3.zero;
 
@@ -91,7 +93,12 @@ public class CameraController : GameBehaviour
 
         enemiesNearPlayer = Physics.OverlapSphere(player.transform.position, playerCheckRadius, enemyLayerMask);
 
-        Vector3 mousePos = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+
+        var mouse = Input.mousePosition;
+        mouse.z = 6;
+        Vector3 mousePos = Camera.main.ScreenToWorldPoint(mouse);
+
+        dummy.transform.position = mousePos;
         
 
         foreach (var enemyCollider in enemiesNearPlayer)
