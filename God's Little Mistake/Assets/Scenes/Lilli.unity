@@ -10863,7 +10863,6 @@ MonoBehaviour:
   itemDataBase:
   - itemName: Spit Attack
     ID: 0
-    inSceneID: 0
     lvl: 0
     category: 1
     segment: 0
@@ -10890,7 +10889,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Crab Slash
     ID: 1
-    inSceneID: 0
     lvl: 0
     category: 5
     segment: 1
@@ -10917,7 +10915,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Crab Legs
     ID: 2
-    inSceneID: 0
     lvl: 0
     category: 7
     segment: 2
@@ -10944,7 +10941,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Ram Horn
     ID: 3
-    inSceneID: 0
     lvl: 0
     category: 2
     segment: 0
@@ -10971,7 +10967,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Big Eye
     ID: 4
-    inSceneID: 0
     lvl: 0
     category: 0
     segment: 0
@@ -10998,7 +10993,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Sabertooth Mouth
     ID: 5
-    inSceneID: 0
     lvl: 0
     category: 1
     segment: 0
@@ -11025,7 +11019,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Slug Eye
     ID: 6
-    inSceneID: 0
     lvl: 0
     category: 0
     segment: 0
@@ -11052,7 +11045,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Tripod Legs
     ID: 7
-    inSceneID: 0
     lvl: 0
     category: 6
     segment: 2
@@ -11079,7 +11071,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Wolf Arm
     ID: 8
-    inSceneID: 0
     lvl: 0
     category: 3
     segment: 1
@@ -11106,7 +11097,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Human Arm
     ID: 8
-    inSceneID: 0
     lvl: 0
     category: 3
     segment: 1
@@ -11133,7 +11123,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Pea Shooter
     ID: 9
-    inSceneID: 0
     lvl: 0
     category: 1
     segment: 0
@@ -11160,7 +11149,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Hover Legs
     ID: 9
-    inSceneID: 0
     lvl: 0
     category: 6
     segment: 2
@@ -12098,7 +12086,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1004982790652352589, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1261436063562562078, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: m_RootOrder
@@ -14201,7 +14189,6 @@ MonoBehaviour:
   heldItem:
     itemName: 
     ID: 0
-    inSceneID: 0
     lvl: 0
     category: 0
     segment: 0
@@ -14990,7 +14977,6 @@ MonoBehaviour:
   inSceneItemDataBase:
   - itemName: Human Arm
     ID: 8
-    inSceneID: 0
     lvl: 0
     category: 3
     segment: 1
@@ -15017,7 +15003,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Pea Shooter
     ID: 9
-    inSceneID: 1
     lvl: 0
     category: 1
     segment: 0
@@ -15044,7 +15029,6 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Hover Legs
     ID: 9
-    inSceneID: 2
     lvl: 0
     category: 6
     segment: 2
@@ -16045,7 +16029,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1004982790652352589, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 5396413634656670049, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: player
@@ -19215,7 +19199,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &2122514652
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -19347,6 +19331,14 @@ PrefabInstance:
     - target: {fileID: 5396413634656670049, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: player
       value: 
+      objectReference: {fileID: 1655376323}
+    - target: {fileID: 5396413634656670049, guid: be866254d4dc2ec4da24417472026e76, type: 3}
+      propertyPath: attackRange
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 5396413634656670049, guid: be866254d4dc2ec4da24417472026e76, type: 3}
+      propertyPath: walkPointRange
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 7431377151105404353, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: m_RootOrder
@@ -19354,7 +19346,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7431377151105404353, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -5.24
+      value: -3.5
       objectReference: {fileID: 0}
     - target: {fileID: 7431377151105404353, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: m_LocalPosition.y
@@ -19362,7 +19354,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7431377151105404353, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -28.27
+      value: -6.54
       objectReference: {fileID: 0}
     - target: {fileID: 7431377151105404353, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: m_LocalRotation.w
@@ -19398,6 +19390,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7497331590142679130, guid: be866254d4dc2ec4da24417472026e76, type: 3}
       propertyPath: hueArray.Array.data[1].a
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8561204402898261305, guid: be866254d4dc2ec4da24417472026e76, type: 3}
+      propertyPath: enemyState
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8561204402898261305, guid: be866254d4dc2ec4da24417472026e76, type: 3}

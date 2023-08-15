@@ -10,26 +10,31 @@ public class EnemyLongRange : GameBehaviour
     bool projectileShot;
     public GameObject firingPoint;
     public GameObject player;
-
-
-
     public NavMeshAgent agent;
 
 
+    public float sightRange = 7;
+    public float attackRange;
+
+    bool canAttack;
+    bool canSee;
 
 
-    //patrolling
+
+    ////patrolling
     public Vector3 walkPoint;
     public float walkPointRange;
 
-    public bool playerInSightRange, playerInAttackRange, enemyInHitRange;
-    public bool isPatrolling;
+    //public bool playerInSightRange, playerInAttackRange, enemyInHitRange;
+    //public bool isPatrolling;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
 
     BaseEnemy enemyStats;
     BaseEnemy BaseEnemy;
+
+    Vector3 target;
 
     //wowo
     // Start is called before the first frame update
@@ -42,19 +47,30 @@ public class EnemyLongRange : GameBehaviour
         BaseEnemy = GetComponent<BaseEnemy>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
+
+        attackRange = enemyStats.stats.range;
+        target = SearchWalkPoint();
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        //check for the sight and attack range
+        ////check for the sight and attack range
         if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
         {
-            playerInAttackRange = Physics.CheckSphere(transform.position, enemyStats.stats.range, whatIsPlayer);
-            playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range + 1, whatIsPlayer);
-            if (playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Attacking;
-            if (!playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+            canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+            canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+
+            //if cant see player, patrol
+            if(!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+            else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+
+            //playerInAttackRange = Physics.CheckSphere(transform.position, enemyStats.stats.range, whatIsPlayer);
+            //playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range + 1, whatIsPlayer);
+            //if (playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Attacking;
+            //if (!playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
 
         }
 
@@ -64,39 +80,143 @@ public class EnemyLongRange : GameBehaviour
 
         firingPoint.transform.LookAt(player.transform.position);
 
-        switch(BaseEnemy.enemyState)
+
+        switch (BaseEnemy.enemyState)
         {
             case BaseEnemy.EnemyState.Patrolling:
-                if(isPatrolling != true)
+
+
+
+                if (!agent.pathPending)
                 {
-                    isPatrolling = true;
-                    StartCoroutine(PatrolingIE());
-                    walkPointRange = 5;
+                    if (agent.remainingDistance <= agent.stoppingDistance)
+                    {
+                        if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                        {
+                            // Destination reached
+
+                            //new target
+                            target = SearchWalkPoint();
+                        }
+                    }
                 }
+
+
+                agent.SetDestination(target);
+
                 break;
             case BaseEnemy.EnemyState.Chase:
-                break;
-            case BaseEnemy.EnemyState.Attacking:
-                isPatrolling = false;
-                walkPointRange = 2;
-                FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
-                break;
-            case BaseEnemy.EnemyState.Die:
-                StopCoroutine(PatrolingIE());
-                //death animation etc
-                print("Dead");
-                BaseEnemy.Die();
-                break;
+
+                if (Vector3.Distance(player.transform.position, gameObject.transform.position) > 5)
+                {
+
+                    agent.isStopped = false;
+
+                    agent.SetDestination(player.transform.position);
+
+                }
+                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < 4)
+                {
+
+                    agent.isStopped = false;
+                    Vector3 toPlayer = player.transform.position - transform.position;
+                    Vector3 targetPosition = toPlayer.normalized * -5f;
+
+                    agent.SetDestination(targetPosition);
+
+
+                }
+                else
+                {
+
+                    agent.isStopped = true;
+
+                }
+
+                // ATTACK
+
+                if(canAttack)
+                {
+                    FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
+                }
+
+
+                break; 
         }
 
-    }
 
-    IEnumerator PatrolingIE()
+
+
+        //enemy to patrol
+
+        //if player is in sight range of player, chase
+
+        //if player is in attack range, shoot, CAN BE CHASING AND SHOOT AT THE SAME TIME
+
+
+
+        //switch(BaseEnemy.enemyState)
+        //{
+        //    case BaseEnemy.EnemyState.Patrolling:
+        //        //if(isPatrolling != true)
+        //        //{
+        //        //    isPatrolling = true;
+        //        //    StartCoroutine(PatrolingIE());
+        //        //    walkPointRange = 5;
+        //        //}
+        //        break;
+        //    case BaseEnemy.EnemyState.Chase:
+
+
+
+
+
+        //        break;
+        //    case BaseEnemy.EnemyState.Attacking:
+        //        //isPatrolling = false;
+        //        //walkPointRange = 2;
+        //        //FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
+        //        break;
+        //    case BaseEnemy.EnemyState.Die:
+        //        //StopCoroutine(PatrolingIE());
+        //        ////death animation etc
+        //        //print("Dead");
+        //        //BaseEnemy.Die();
+        //        break;
+        //}
+
+        }
+
+    void Patroling()
     {
 
-        agent.SetDestination(SearchWalkPoint());
-        yield return new WaitForSeconds(Random.Range(2, 6));
-        StartCoroutine(PatrolingIE());
+        var target = SearchWalkPoint();
+
+
+        if (!agent.pathPending)
+        {
+            if (agent.remainingDistance <= agent.stoppingDistance)
+            {
+                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
+                {
+                    // Destination reached
+
+                    //new target
+                    target = SearchWalkPoint();
+                }
+            }
+        }
+
+        agent.SetDestination(target);
+        //    var destination = SearchWalkPoint();
+
+        //    agent.SetDestination(destination);
+
+        //    if(Vector3.Distance(transform.gameObject))
+
+        //    yield return new WaitForSeconds(Random.Range(2, 6));
+        //    StartCoroutine(PatrolingIE());
+        //}
     }
 
     private Vector3 SearchWalkPoint()
@@ -134,8 +254,8 @@ public class EnemyLongRange : GameBehaviour
     //visualise sight range
     private void OnDrawGizmosSelected()
     {
-        //Gizmos.color = Color.red;
-        //Gizmos.DrawWireSphere(transform.position, enemyStats.stats.range);
+        Gizmos.color = Color.red;
+        Gizmos.DrawWireSphere(player.transform.position, 5);
         //Gizmos.color = Color.yellow;
         //Gizmos.DrawWireSphere(transform.position, enemyStats.stats.range+1);
 
