@@ -67,11 +67,6 @@ public class EnemyLongRange : GameBehaviour
             if(!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
             else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
 
-            //playerInAttackRange = Physics.CheckSphere(transform.position, enemyStats.stats.range, whatIsPlayer);
-            //playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range + 1, whatIsPlayer);
-            //if (playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Attacking;
-            //if (!playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
-
         }
 
         //Visual indicator for health
@@ -107,7 +102,7 @@ public class EnemyLongRange : GameBehaviour
                 break;
             case BaseEnemy.EnemyState.Chase:
 
-                if (Vector3.Distance(player.transform.position, gameObject.transform.position) > 5)
+                if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange*2)
                 {
 
                     agent.isStopped = false;
@@ -115,7 +110,7 @@ public class EnemyLongRange : GameBehaviour
                     agent.SetDestination(player.transform.position);
 
                 }
-                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < 4)
+                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange*2-1)
                 {
 
                     agent.isStopped = false;
@@ -129,7 +124,12 @@ public class EnemyLongRange : GameBehaviour
                 else
                 {
 
-                    agent.isStopped = true;
+                    //agent.isStopped = true;
+
+
+                    //orbit player
+
+                    transform.RotateAround(player.transform.position, Vector3.up, 9 * Time.deltaTime);
 
                 }
 
@@ -147,76 +147,6 @@ public class EnemyLongRange : GameBehaviour
 
 
 
-        //enemy to patrol
-
-        //if player is in sight range of player, chase
-
-        //if player is in attack range, shoot, CAN BE CHASING AND SHOOT AT THE SAME TIME
-
-
-
-        //switch(BaseEnemy.enemyState)
-        //{
-        //    case BaseEnemy.EnemyState.Patrolling:
-        //        //if(isPatrolling != true)
-        //        //{
-        //        //    isPatrolling = true;
-        //        //    StartCoroutine(PatrolingIE());
-        //        //    walkPointRange = 5;
-        //        //}
-        //        break;
-        //    case BaseEnemy.EnemyState.Chase:
-
-
-
-
-
-        //        break;
-        //    case BaseEnemy.EnemyState.Attacking:
-        //        //isPatrolling = false;
-        //        //walkPointRange = 2;
-        //        //FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
-        //        break;
-        //    case BaseEnemy.EnemyState.Die:
-        //        //StopCoroutine(PatrolingIE());
-        //        ////death animation etc
-        //        //print("Dead");
-        //        //BaseEnemy.Die();
-        //        break;
-        //}
-
-        }
-
-    void Patroling()
-    {
-
-        var target = SearchWalkPoint();
-
-
-        if (!agent.pathPending)
-        {
-            if (agent.remainingDistance <= agent.stoppingDistance)
-            {
-                if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
-                {
-                    // Destination reached
-
-                    //new target
-                    target = SearchWalkPoint();
-                }
-            }
-        }
-
-        agent.SetDestination(target);
-        //    var destination = SearchWalkPoint();
-
-        //    agent.SetDestination(destination);
-
-        //    if(Vector3.Distance(transform.gameObject))
-
-        //    yield return new WaitForSeconds(Random.Range(2, 6));
-        //    StartCoroutine(PatrolingIE());
-        //}
     }
 
     private Vector3 SearchWalkPoint()
@@ -252,14 +182,14 @@ public class EnemyLongRange : GameBehaviour
 
 
     //visualise sight range
-    private void OnDrawGizmosSelected()
-    {
-        Gizmos.color = Color.red;
-        Gizmos.DrawWireSphere(player.transform.position, 5);
-        //Gizmos.color = Color.yellow;
-        //Gizmos.DrawWireSphere(transform.position, enemyStats.stats.range+1);
+    //private void OnDrawGizmosSelected()
+    //{
+    //    Gizmos.color = Color.red;
+    //    Gizmos.DrawWireSphere(player.transform.position, 5);
+    //    //Gizmos.color = Color.yellow;
+    //    //Gizmos.DrawWireSphere(transform.position, enemyStats.stats.range+1);
 
 
 
-    }   
+    //}   
 }
