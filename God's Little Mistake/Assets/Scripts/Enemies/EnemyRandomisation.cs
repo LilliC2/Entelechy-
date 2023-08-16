@@ -36,45 +36,45 @@ public class EnemyRandomisation : GameBehaviour
 
         //Top slot
         //HEAD
-        if (Random.Range(0,2) == 1)
-        {
-            EquipItem(0, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length )]));
+        //if (Random.Range(0,2) == 1)
+        //{
+        //    EquipItem(0, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length )]));
 
-        }
+        //}
         
-        if(Random.Range(0, 2) == 1)
-        {
-            EquipItem(1, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
+        //if(Random.Range(0, 2) == 1)
+        //{
+        //    EquipItem(1, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
 
-        }
-        if(Random.Range(0, 2) == 1)
-        {
-            EquipItem(2, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
+        //}
+        //if(Random.Range(0, 2) == 1)
+        //{
+        //    EquipItem(2, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
 
-        }
+        //}
         
-        //MOUTH
-        if(Random.Range(0, 2) == 1)
-        {
-            EquipItem(3, GenerateItem("Mouth"));
+        ////MOUTH
+        //if(Random.Range(0, 2) == 1)
+        //{
+        //    EquipItem(3, GenerateItem("Mouth"));
 
 
-        }
+        //}
 
-        //TORSO
-        if (Random.Range(0, 2) == 1)
-        {
-            EquipItem(4, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
+        ////TORSO
+        //if (Random.Range(0, 2) == 1)
+        //{
+        //    EquipItem(4, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
 
-        }
-        if (Random.Range(0, 2) == 1)
-        {
-            EquipItem(5, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
+        //}
+        //if (Random.Range(0, 2) == 1)
+        //{
+        //    EquipItem(5, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
 
-        }
+        //}
 
-        //LEGS
-        EquipItem(6, GenerateItem(categoryLegs[Random.Range(0,categoryLegs.Length)]));
+        ////LEGS
+        //EquipItem(6, GenerateItem(categoryLegs[Random.Range(0,categoryLegs.Length)]));
 
 
 
