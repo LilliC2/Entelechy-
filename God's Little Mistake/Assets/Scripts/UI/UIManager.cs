@@ -44,6 +44,7 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text popupCritChance;
     public TMP_Text popupFirerate;
 
+
     [Header("Inventory Pop up")]
     public GameObject invenSegementPopUpPanel;
     public TMP_Text invenPopupName;
@@ -51,6 +52,17 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text invenPopupCritX;
     public TMP_Text invenPopupCritChance;
     public TMP_Text invenPopupFirerate;
+    public GameObject topEye;
+    public GameObject middleEye;
+    public GameObject bottomEye;
+    public GameObject attackPill;
+    public TMP_Text attackPillText;
+    public GameObject attackIcon;
+    public GameObject rangePill;
+    public TMP_Text rangePillText;
+    public GameObject rangeIcon;
+    public GameObject itemIcon;
+    public GameObject typeIcon;
 
     [Header("Inventory Comparison1")]
     public GameObject statComp1;
@@ -449,4 +461,66 @@ public class UIManager : Singleton<UIManager>
 
         return itemMatchInPlayerInven;
     }
+
+    #region Indicators
+    
+    public void TopSegmentIndicator()
+    {
+        topEye.SetActive(true);
+        topEye.GetComponent<SpriteRenderer>().color = Color.yellow;
+        middleEye.SetActive(false);
+        bottomEye.SetActive(false);
+    }
+
+    public void MiddleSegmentIndicator()
+    {
+        middleEye.SetActive(true);
+        middleEye.GetComponent<SpriteRenderer>().color = Color.red;
+        topEye.SetActive(false);
+        bottomEye.SetActive(false);
+
+    }
+
+    public void BottomSegmentIndicator()
+    {
+        bottomEye.SetActive(true);
+        bottomEye.GetComponent<SpriteRenderer>().color = Color.red;
+        topEye.SetActive(false);
+        middleEye.SetActive(false);
+    }
+
+    public void AttackPillChange(int num)
+    {
+        attackPill.SetActive(true);
+        if (num == 1)
+        {
+            attackPillText.text = "Melee";
+            //attackIcon.SetActive(true); change the icon
+            attackPill.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+        if (num == 2) 
+        {
+            attackPillText.text = "Range";
+            //attackIcon.SetActive(true); change the icon
+            attackPill.GetComponent<SpriteRenderer>().color = Color.red;
+        }
+    }
+
+    public void RangePillChange(int num)
+    {
+        rangePill.SetActive(true);
+        attackPillText.text = num.ToString();
+    }
+
+    public void ChangeItemIcon()
+    {
+        //Chnage the item icons
+    }
+
+    public void ChangeItemType()
+    {
+        //Chnage the type icons
+    }
+
+    #endregion
 }

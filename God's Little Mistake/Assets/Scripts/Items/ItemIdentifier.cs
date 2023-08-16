@@ -7,6 +7,8 @@ public class ItemIdentifier : GameBehaviour
 {
     bool inRange;
     public Item itemInfo;
+    public Item.Category category;
+    public Item.Segment segment;
 
     [Header("Animation")]
     public Animator anim;
@@ -114,4 +116,21 @@ public class ItemIdentifier : GameBehaviour
         _UI.statComp1.SetActive(false);
         _UI.arrowComp.SetActive(false);
     }
+
+    public void InfoSwitch()
+    {
+        switch (segment)
+        {
+            case (Item.Segment.Head):
+                _UI.TopSegmentIndicator();
+                break;
+            case (Item.Segment.Torso):
+                _UI.MiddleSegmentIndicator();
+                break;
+            case (Item.Segment.Legs):
+                _UI.BottomSegmentIndicator();
+                break;
+        }
+    }
+            
 }
