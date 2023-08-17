@@ -533,6 +533,10 @@ public class PlayerController : Singleton<PlayerController>
             if (!projectileShot)
             {
 
+                //particle system
+                var particleSystem = GetComponentInChildren<ParticleSystem>();
+                particleSystem.Play();
+
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
@@ -559,12 +563,6 @@ public class PlayerController : Singleton<PlayerController>
             }
         }
     }
-
-    public void Knockback(float amount)
-    {
-        
-    }
-
 
     public void Hit(float _dmg)
     {
