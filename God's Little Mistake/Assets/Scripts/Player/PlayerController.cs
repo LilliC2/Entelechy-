@@ -178,27 +178,36 @@ public class PlayerController : Singleton<PlayerController>
                 #region Swapping Missy Sprites
 
                 //change for cardinal direction
-                if (Input.GetKeyDown(KeyCode.W))
+                if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
                 {
+                    print("Just pressed W. lastDir was " + lastDir.name);
+
                     if (lastDir == missyLeftSide)
                     {
                         leftPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
 
                     }
-                    else if (lastDir = missyRightSide) rightPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
+                    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
 
                     if(lastDir == missyForward)
                     {
+                        print("Going from front to back");
+
+                        missyBack.SetActive(true);
                         missyForward.SetActive(false);
                         missyLeftSide.SetActive(false);
                         missyRightSide.SetActive(false);
-                        missyBack.SetActive(true);
 
 
                     }
-                    else
+
+                    if (lastDir != missyBack && lastDir != missyForward)
                     {
+
+
+
                         missyForward.SetActive(false);
+
                         ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
                         ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
                         ExecuteAfterFrames(4, () => missyBack.SetActive(true));
@@ -206,13 +215,13 @@ public class PlayerController : Singleton<PlayerController>
                         ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
                     }
 
-                    
+
 
 
                     lastDir = missyBack;
 
                 }
-                if (Input.GetKeyDown(KeyCode.A))
+                if (Input.GetKeyDown(KeyCode.A)) //FACE LEFT
                 {
                     _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
 
@@ -233,15 +242,16 @@ public class PlayerController : Singleton<PlayerController>
                     }
                     else
                     {
-                        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
-                        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(true));
-                        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-
-
-                        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
                         missyRightSide.SetActive(false);
 
+                        //WAIT UNTIL TWEEN ANIMATION IS DONE BEFORE CHANGING
+                        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
+                        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(true));
+                        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
+
+                        //RESET PIVOTS
+                        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
 
                     }
 
@@ -250,39 +260,44 @@ public class PlayerController : Singleton<PlayerController>
 
 
                 }
-                if (Input.GetKeyDown(KeyCode.S))
+                if (Input.GetKeyDown(KeyCode.S)) //FACE FORWARD
                 {
-                    if(lastDir == missyLeftSide)
+
+                    //print("Just pressed S. lastDir was " + lastDir.name);
+                    if (lastDir == missyLeftSide)
                     {
                         leftPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
 
                     }
-                    else if (lastDir = missyRightSide) rightPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
+                    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
 
                     if(lastDir == missyBack)
                     {
+                        print("Going from back to front");
                         missyForward.SetActive(true);
                         missyLeftSide.SetActive(false);
                         missyRightSide.SetActive(false);
                         missyBack.SetActive(false);
 
                     }
-                    else
+                    else if (lastDir != missyForward)
                     {
-                        ExecuteAfterFrames(4, () => missyForward.SetActive(true));
+                        //print("delay");
 
+                        ExecuteAfterFrames(4, () => missyForward.SetActive(true));
                         ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
                         ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
                         ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
                         ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
                         missyBack.SetActive(false);
+
                     }
 
-                    
+
 
                     lastDir = missyForward;
                 }
-                if (Input.GetKeyDown(KeyCode.D))
+                if (Input.GetKeyDown(KeyCode.D)) //FACE RIGHT
                 {
 
                     _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
@@ -299,7 +314,7 @@ public class PlayerController : Singleton<PlayerController>
                     }
                     
 
-                    if(lastDir == leftPivot)
+                    if(lastDir == missyLeftSide)
                     {
                         missyForward.SetActive(false);
                         missyRightSide.SetActive(true);
@@ -325,7 +340,7 @@ public class PlayerController : Singleton<PlayerController>
 
                 }
 
-
+                print(lastDir.name);
                 #endregion
                 #endregion
 
