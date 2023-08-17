@@ -53,6 +53,7 @@ public class PlayerController : Singleton<PlayerController>
 
     public bool projectile;
     public float projectileSpeed;
+    public float projectileKnockback;
     public GameObject projectilePF;
 
 
@@ -77,6 +78,14 @@ public class PlayerController : Singleton<PlayerController>
     public Vector3 target;
     bool projectileShot;
 
+    [Header("Knockback")]
+    [SerializeField]
+    float knockbackAmount;
+    bool knockbackActive;
+    public float knockbackDuration = 0.5f;
+    private float knockbackStartTime;
+
+
     [Header("Melee")]
     bool meleeCooDown;
     public GameObject lineHitbox;
@@ -87,6 +96,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Start()
     {
+
         health = maxHP;
         controller = gameObject.GetComponent<CharacterController>();
         _UI.UpdateHealthText(health);
@@ -286,14 +296,29 @@ public class PlayerController : Singleton<PlayerController>
                                 
 
                                 //activate animation
-                                itemsAnimForward[i].SetTrigger("Attack");
-                                //itemsAnimBack[i].SetTrigger("Attack");
-                                itemsAnimLeftSide[i].SetTrigger("Attack");
-                                itemsAnimRightSide[i].SetTrigger("Attack");
+                                //itemsAnimForward[i].SetTrigger("Attack");
+                                ////itemsAnimBack[i].SetTrigger("Attack");
+                                //itemsAnimLeftSide[i].SetTrigger("Attack");
+                                //itemsAnimRightSide[i].SetTrigger("Attack");
 
                                 //changed to use player stats, the primary attack will just change
                                 FireProjectile(playerInventory[0].projectilePF, projectileSpeed, firerate, range);
+                                if (knockbackActive)
+                                {
+                                    float timeSinceKnockback = Time.time - knockbackStartTime;
 
+                                    if (timeSinceKnockback >= knockbackDuration)
+                                    {
+                                        knockbackActive = false;
+                                    }
+                                    else
+                                    {
+                                        float knockbackProgress = timeSinceKnockback / knockbackDuration;
+                                        var dir = (-firingPoint.transform.forward * knockbackAmount);
+                                        dir = new Vector3(dir.x, 0, dir.z);
+                                        controller.Move(dir * Time.deltaTime);
+                                    }
+                                }
                                 //ADD KNOCK BACK
 
                             }
@@ -514,6 +539,11 @@ public class PlayerController : Singleton<PlayerController>
                 GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
+
+
+
+                knockbackActive = true;
+                knockbackStartTime = Time.time;
                 Mathf.Clamp(bullet.transform.position.y, 0, 0);
 
                 //This will destroy bullet once it exits the range, aka after a certain amount of time
@@ -521,10 +551,20 @@ public class PlayerController : Singleton<PlayerController>
 
                 //Controls the firerate, player can shoot another bullet after a certain amount of time
                 projectileShot = true;
+
+                //knock player back
+                //Knockback(knockbackAmount);
+
                 ExecuteAfterSeconds(_firerate, () => projectileShot = false);
             }
         }
     }
+
+    public void Knockback(float amount)
+    {
+        
+    }
+
 
     public void Hit(float _dmg)
     {

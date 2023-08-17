@@ -26,7 +26,7 @@ public class EnemyRandomisation : GameBehaviour
         //
         colour = hueArray[Random.Range(0, hueArray.Length)];
 
-        enemySprite.sprite = enemySpritesArray[Random.Range(0, enemySpritesArray.Length)];
+        //enemySprite.sprite = enemySpritesArray[Random.Range(0, enemySpritesArray.Length)];
 
 
         enemySprite.color = colour;
