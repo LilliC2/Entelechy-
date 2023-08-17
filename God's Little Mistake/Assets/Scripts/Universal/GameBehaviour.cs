@@ -15,6 +15,7 @@ public class GameBehaviour : LC.Behaviour //inherits from
 
     protected static MeleeAttack _MA { get { return MeleeAttack.INSTANCE; } }
 
+   
 
 
     //protected static SceneController _SC { get { return SceneController.INSTANCE; } }
