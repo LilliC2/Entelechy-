@@ -44,6 +44,10 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text popupCritChance;
     public TMP_Text popupFirerate;
 
+    [Header("Global Scroll UI")]
+    public RectTransform scrollContent;
+    public float scrollSpeed = 10f;
+
 
     [Header("Inventory Pop up")]
     public GameObject invenSegementPopUpPanel;
@@ -102,7 +106,14 @@ public class UIManager : Singleton<UIManager>
             else cursor.sprite = defaultCursor;
         }
 
-        
+        float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
+        if (scrollDelta != 0)
+        {
+            Vector3 newPosition = scrollContent.localPosition + Vector3.up * scrollDelta * scrollSpeed;
+            scrollContent.localPosition = newPosition;
+        }
+
+
     }
 
     public void UpdateItemPopUp(Item _hoverItem)
