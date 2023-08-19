@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: -3370031360521855638}
   m_Layer: 0
   m_Name: Item
-  m_TagString: Untagged
+  m_TagString: Item Drop
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,7 +70,6 @@ MonoBehaviour:
   itemInfo:
     itemName: Spit Attack
     ID: 0
-    inSceneID: 3
     lvl: 0
     category: 1
     segment: 0
@@ -89,10 +88,12 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 024fc9c35ba18ca428570b98b46bf663, type: 3}
-    avtarPrefab: {fileID: 2488954977722880308, guid: cfd216175cb362e4bb1f401639db8b3a, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
     avtarPrefabRight: {fileID: 0}
-    avtarPrefabBack: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
 --- !u!1 &8504357115592238806
 GameObject:
   m_ObjectHideFlags: 0
