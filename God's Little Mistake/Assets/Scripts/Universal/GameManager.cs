@@ -9,10 +9,10 @@ public class GameManager : Singleton<GameManager>
     GameObject player;
 
     [Header("Dungeon Generation")]
-    bool readyForGeneration = true;
+    public bool readyForGeneration = true;
     public int dungeonLevel;
     public Transform levelParent;
-
+    public GameObject endRoomOB;
 
     public enum GameState
     {
@@ -49,6 +49,7 @@ public class GameManager : Singleton<GameManager>
     {
         if(readyForGeneration)
         {
+            print("Generate new level");
             GenerateLevel();
 
         }
@@ -61,6 +62,7 @@ public class GameManager : Singleton<GameManager>
 
         //increase dungeon lvl
         dungeonLevel++;
+        print("Dungeon Level " + dungeonLevel);
 
         //update UI
         //_UI.UpdateLevelext(dungeonLevel);
@@ -81,6 +83,9 @@ public class GameManager : Singleton<GameManager>
         Transform levelStartRoom = currentLevel.transform.Find("BeginningRoom");
         Transform levelEndRoom = currentLevel.transform.Find("EndRoom");
 
+        //move end room trigger
+        endRoomOB.transform.position = levelEndRoom.position;
+
         //move player to room
         player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z);
 
@@ -91,9 +96,9 @@ public class GameManager : Singleton<GameManager>
         //destroy all room and any enemies, item etc. (could be all in same layer)
         if (levelParent.childCount != 0)
         {
-            foreach (GameObject child in levelParent.transform)
+            foreach (Transform child in levelParent.transform)
             {
-                Destroy(child);
+                Destroy(child.gameObject);
             }
 
         }
