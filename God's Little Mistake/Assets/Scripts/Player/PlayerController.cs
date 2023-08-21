@@ -429,6 +429,7 @@ public class PlayerController : Singleton<PlayerController>
                                 itemsAnimRightSide[i].SetTrigger("Attack");
 
                                 //changed to use player stats, the primary attack will just change
+
                                 FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, range);
                                 if (knockbackActive)
                                 {
@@ -657,6 +658,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             firingPoint.transform.LookAt(hit.point);
 
+
             if (!projectileShot)
             {
 
@@ -688,6 +690,8 @@ public class PlayerController : Singleton<PlayerController>
 
                 ExecuteAfterSeconds(_firerate, () => projectileShot = false);
             }
+            print("FIRE PROJECTILE");
+
         }
     }
 
