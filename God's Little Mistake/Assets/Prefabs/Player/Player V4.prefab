@@ -158,38 +158,38 @@ MonoBehaviour:
     avtarPrefabRight: {fileID: 1354293937271909763, guid: 6b218fdb74991b1439d2af3aa983991e, type: 3}
     avtarPrefabBackLeft: {fileID: 1397305912410096892, guid: b0abff0b9da44a64eb6034a316f05721, type: 3}
     avtarPrefabBackRight: {fileID: 0}
-  - itemName: Chicken Beak
-    ID: 13
+  - itemName: Sabertooth Mouth
+    ID: 4
     lvl: 0
     category: 1
     segment: 0
     itemType: 0
     currencyValue: 0
     active: 0
-    dmg: 1
-    dps: 1
-    fireRate: 1
+    dmg: 0
+    dps: 0
+    fireRate: 0
     critX: 0
     critChance: 2
-    range: 5
+    range: 0
     projectile: 1
     projectileSpeed: 500
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
     modifier: 0
     modifierID: 0
     icon: {fileID: 0}
-    avatarPrefabFrontLeft: {fileID: 6746399273307538296, guid: e1d04f8ecd7742e40b66da4fd27cca07, type: 3}
+    avatarPrefabFrontLeft: {fileID: 3225624940023983247, guid: 2750fd8978d7615429bfc25a67e2af38, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
-    avtarPrefabLeft: {fileID: 2944755447898596729, guid: 6d922066a28d80e4cbd9aa6957658322, type: 3}
-    avtarPrefabRight: {fileID: 2944755447898596729, guid: 6d922066a28d80e4cbd9aa6957658322, type: 3}
-    avtarPrefabBackLeft: {fileID: 1080939457727681299, guid: 518a405904d8c6c4a94e2d4971316f5b, type: 3}
+    avtarPrefabLeft: {fileID: 365269094101784285, guid: 975dc6895c548f84d91060d45d353b4b, type: 3}
+    avtarPrefabRight: {fileID: 365269094101784285, guid: 975dc6895c548f84d91060d45d353b4b, type: 3}
+    avtarPrefabBackLeft: {fileID: 0}
     avtarPrefabBackRight: {fileID: 0}
   headSpeed: 1000
   head: {fileID: 0}
   firingPoint: {fileID: 1995653723488041272}
   directional: {fileID: 2957067202371749133}
   target: {x: 0, y: 0, z: 0}
-  knockbackAmount: 0
+  knockbackAmount: 5
   knockbackDuration: 0.5
   lineHitbox: {fileID: 3093193407110768123}
   coneHitbox: {fileID: 7185573057747795183}
@@ -3868,9 +3868,17 @@ PrefabInstance:
       propertyPath: m_LocalScale.z
       value: 0.65529
       objectReference: {fileID: 0}
+    - target: {fileID: 7362844901715718854, guid: cb015b8c9c907f1419da41920a874fb4, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7656573414998178700, guid: cb015b8c9c907f1419da41920a874fb4, type: 3}
       propertyPath: m_Name
       value: SpitDroplets_ParticleSystem
+      objectReference: {fileID: 0}
+    - target: {fileID: 8798604186123993390, guid: cb015b8c9c907f1419da41920a874fb4, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
