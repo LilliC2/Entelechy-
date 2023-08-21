@@ -26,14 +26,14 @@ public class EnemyManager : Singleton<EnemyManager>
 
         //find all spawn points
 
-        print("Spawn enemies");
+        //print("Spawn enemies");
         spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
 
         foreach (var spawnPoint in spawnPoints)
         {
             var enemyTypeR = Random.Range(0, 2); // last digit excluded
 
-            print("Spawn: Enemy" + enemyTypes[enemyTypeR]);
+            //print("Spawn: Enemy" + enemyTypes[enemyTypeR]);
 
             GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[enemyTypeR], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
 

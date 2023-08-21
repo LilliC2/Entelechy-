@@ -38,6 +38,9 @@ public class PlayerController : Singleton<PlayerController>
 
     public List<Animator> legsAnimators;
 
+    bool meleeAnimationCooldown;
+
+
     Vector3 currentPos;
     Vector3 lastPos;
     #endregion
@@ -379,33 +382,36 @@ public class PlayerController : Singleton<PlayerController>
                             //check if primary is projectile
                             if (!playerInventory[i].projectile)
                             {
-                                //shoot
+                                //MELEE ATTACK
                                 if (meleeUI != null)
                                 {
+                                    print("MELEE ATTACK");
                                     meleeUI.gameObject.SetActive(true);
 
-                                    meleeUI.GetComponent<Animator>().SetTrigger("Attack2");
-                                    ExecuteAfterSeconds(1, () => meleeUI.gameObject.SetActive(false));
+
+
+                                    //ExecuteAfterFrames(26, () => meleeUI.gameObject.SetActive(false));
                                 }
 
                                 
 
                                 //active primary attack
 
-                                itemsAnimForward[i].SetTrigger("Attack");
-                                itemsAnimBack[i].SetTrigger("Attack");
-                                itemsAnimLeftSide[i].SetTrigger("Attack");
-                                itemsAnimRightSide[i].SetTrigger("Attack");
+                                //itemsAnimForward[i].SetTrigger("Attack");
+                                //itemsAnimBack[i].SetTrigger("Attack");
+                                //itemsAnimLeftSide[i].SetTrigger("Attack");
+                                //itemsAnimRightSide[i].SetTrigger("Attack");
 
 
 
-                                MeleeAttack(firerate);
+                                MeleeAttack(firerate, i);
                             }
                         }
                     }
 
                 }
-             
+ 
+
 
                 if (Input.GetMouseButton(0))
                 {
@@ -419,13 +425,6 @@ public class PlayerController : Singleton<PlayerController>
                             {
                                 //shoot
 
-
-
-                                //activate animation
-                                itemsAnimForward[i].SetTrigger("Attack");
-                                //itemsAnimBack[i].SetTrigger("Attack");
-                                itemsAnimLeftSide[i].SetTrigger("Attack");
-                                itemsAnimRightSide[i].SetTrigger("Attack");
 
                                 //changed to use player stats, the primary attack will just change
 
@@ -615,28 +614,47 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    void MeleeAttack(float _firerate)
+    void MeleeAttack(float _firerate, int _index)
     {
         var inRangeEnemies = GetComponentInChildren<MeleeRangeCheck>().inRangeEnemies;
 
+
         if (!meleeCooDown)
         {
-            if (inRangeEnemies.Count != 0)
+            if(!meleeAnimationCooldown)
             {
-                // add that enemey gets it, do with foreach in list, get enemy component then run hit script;
-                print(inRangeEnemies[0]);
 
-                foreach (var enemy in inRangeEnemies)
+                meleeAnimationCooldown = true;
+                meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                //activate animation
+                itemsAnimForward[_index].SetTrigger("Attack");
+                //itemsAnimBack[i].SetTrigger("Attack");
+                itemsAnimLeftSide[_index].SetTrigger("Attack");
+                itemsAnimRightSide[_index].SetTrigger("Attack");
+                ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
+
+                if (inRangeEnemies.Count != 0)
                 {
-                    enemy.GetComponent<BaseEnemy>().Hit();
-                    if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
 
+                    // add that enemey gets it, do with foreach in list, get enemy component then run hit script;
+                    print("Enemies in range of melee attack" + inRangeEnemies[0]);
+
+                    foreach (var enemy in inRangeEnemies)
+                    {
+                        enemy.GetComponent<BaseEnemy>().Hit();
+                        if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
+
+                    }
+
+                    print("melee attack");
+                    meleeCooDown = true;
+                    ExecuteAfterSeconds(_firerate, () => meleeCooDown = false);
                 }
 
-                print("melee attack");
-                meleeCooDown = true;
-                ExecuteAfterSeconds(_firerate, () => meleeCooDown = false);
             }
+
+
+            
 
         }
 

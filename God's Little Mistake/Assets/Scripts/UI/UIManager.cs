@@ -212,7 +212,7 @@ public class UIManager : Singleton<UIManager>
         //Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
         //cursor.sprite = itemSprite;
         
-        statsPopUpPanel.SetActive(false);
+        //statsPopUpPanel.SetActive(false);
         isHoldingItem = true;
 
         int slot = 0;

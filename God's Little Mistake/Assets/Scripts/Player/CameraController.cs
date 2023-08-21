@@ -57,7 +57,6 @@ public class CameraController : GameBehaviour
 
                 if(target != null)
                 {
-                    print(target);
 
                     //list.average
 
@@ -98,7 +97,7 @@ public class CameraController : GameBehaviour
         mouse.z = 6;
         Vector3 mousePos = Camera.main.ScreenToWorldPoint(mouse);
 
-        dummy.transform.position = mousePos;
+        //dummy.transform.position = mousePos;
         
 
         foreach (var enemyCollider in enemiesNearPlayer)
