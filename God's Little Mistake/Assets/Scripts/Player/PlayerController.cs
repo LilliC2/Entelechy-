@@ -58,7 +58,8 @@ public class PlayerController : Singleton<PlayerController>
     public float maxSpeed;
     public float dmg;
     public float dps;
-    public float range;
+    public float projectileRange;
+    public float meleeRange;
     public float firerate;
 
     public bool projectile;
@@ -428,7 +429,7 @@ public class PlayerController : Singleton<PlayerController>
 
                                 //changed to use player stats, the primary attack will just change
 
-                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, range);
+                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, projectileRange);
                                 if (knockbackActive)
                                 {
                                     float timeSinceKnockback = Time.time - knockbackStartTime;
@@ -573,12 +574,12 @@ public class PlayerController : Singleton<PlayerController>
             case MeleeHitBox.Line:
                 lineHitbox.SetActive(true);
                 coneHitbox.SetActive(false);
-                lineHitbox.transform.localScale = new Vector3(1, 1, range);
+                lineHitbox.transform.localScale = new Vector3(1, 1, projectileRange);
                 break;
             case MeleeHitBox.Cone:
                 lineHitbox.SetActive(false);
                 coneHitbox.SetActive(true);
-                coneHitbox.transform.localScale = new Vector3(1, 1, range);
+                coneHitbox.transform.localScale = new Vector3(1, 1, projectileRange);
                 break;
         }
     }
@@ -608,6 +609,8 @@ public class PlayerController : Singleton<PlayerController>
                 //change melee UI
                 meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
                 meleeUI.gameObject.SetActive(false);
+                //change ui scale
+                meleeUI.GetComponentInParent<Transform>().localScale = new Vector3(meleeRange, meleeRange, meleeRange);
             }
 
             
