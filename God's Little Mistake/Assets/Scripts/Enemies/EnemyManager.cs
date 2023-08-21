@@ -6,6 +6,8 @@ public class EnemyManager : Singleton<EnemyManager>
 {
     public string[] enemyTypes;
 
+    public GameObject[] spawnPoints;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -24,13 +26,16 @@ public class EnemyManager : Singleton<EnemyManager>
 
         //find all spawn points
 
-        GameObject[] spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
+        print("Spawn enemies");
+        spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
 
         foreach (var spawnPoint in spawnPoints)
         {
             var enemyTypeR = Random.Range(0, 2); // last digit excluded
 
-            GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[enemyTypeR], typeof(GameObject))) as GameObject;
+            print("Spawn: Enemy" + enemyTypes[enemyTypeR]);
+
+            GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[enemyTypeR], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
 
             //spawn enemies at appropriate level
 
