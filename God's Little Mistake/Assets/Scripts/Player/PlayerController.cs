@@ -9,6 +9,8 @@ public class PlayerController : Singleton<PlayerController>
     public BearTrap bearTrap;
     public CactusTrap cactusTrap;
 
+    public bool immortal;
+
     #region Animation Variables
     [Header("Animation")]
     public Animator baseAnimator;
@@ -694,18 +696,22 @@ public class PlayerController : Singleton<PlayerController>
 
     public void Hit(float _dmg)
     {
-        print("player has been hit");
-        health -= _dmg;
-        if (health > 0)
+        if(!immortal)
         {
-            _UI.UpdateHealthText(health);
+            print("player has been hit");
+            health -= _dmg;
+            if (health > 0)
+            {
+                _UI.UpdateHealthText(health);
+            }
+            else
+            {
+                _GM.gameState = GameManager.GameState.Dead;
+                DieAnimation();
+                //add particles in die animation too
+            }
         }
-        else
-        {
-            _GM.gameState = GameManager.GameState.Dead;
-            DieAnimation();
-            //add particles in die animation too
-        }
+        
 
     }
 
