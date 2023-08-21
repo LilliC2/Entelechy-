@@ -142,10 +142,10 @@ public class PlayerController : Singleton<PlayerController>
                 #region Animation
 
                 //turn off and on nubs
-                if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
-                {
-                    //nubsOB.SetActive(true);
-                }
+                //if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
+                //{
+                //    //nubsOB.SetActive(true);
+                //}
                 else nubsOB.SetActive(false);
 
                 if (Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D))

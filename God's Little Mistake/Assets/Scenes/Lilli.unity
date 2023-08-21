@@ -3807,6 +3807,10 @@ PrefabInstance:
       value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: category
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.ID
       value: 9
       objectReference: {fileID: 0}
@@ -3824,11 +3828,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 7372f879581802b43a65a29058d0f040, type: 3}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.segment
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.category
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.fireRate
@@ -15462,7 +15466,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Content: {fileID: 1985670617}
   m_Horizontal: 0
-  m_Vertical: 1
+  m_Vertical: 0
   m_MovementType: 1
   m_Elasticity: 0.1
   m_Inertia: 1
@@ -15491,14 +15495,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 0.392}
+  m_Color: {r: 1, g: 1, b: 1, a: 0}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -17346,6 +17350,7 @@ MonoBehaviour:
     category: 1
     segment: 0
     itemType: 0
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 5
@@ -17371,6 +17376,7 @@ MonoBehaviour:
     category: 5
     segment: 1
     itemType: 0
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 5
@@ -17396,6 +17402,7 @@ MonoBehaviour:
     category: 7
     segment: 2
     itemType: 2
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 0
@@ -17421,6 +17428,7 @@ MonoBehaviour:
     category: 2
     segment: 0
     itemType: 2
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 0
@@ -17446,6 +17454,7 @@ MonoBehaviour:
     category: 0
     segment: 0
     itemType: 2
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 0
@@ -17471,6 +17480,7 @@ MonoBehaviour:
     category: 1
     segment: 0
     itemType: 2
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 0
@@ -17496,6 +17506,7 @@ MonoBehaviour:
     category: 0
     segment: 0
     itemType: 2
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 0
@@ -17521,6 +17532,7 @@ MonoBehaviour:
     category: 6
     segment: 2
     itemType: 2
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 0
@@ -17546,6 +17558,7 @@ MonoBehaviour:
     category: 3
     segment: 1
     itemType: 0
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 0
@@ -17571,6 +17584,7 @@ MonoBehaviour:
     category: 3
     segment: 1
     itemType: 2
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 0
@@ -17596,6 +17610,7 @@ MonoBehaviour:
     category: 1
     segment: 0
     itemType: 0
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 1
@@ -17621,6 +17636,7 @@ MonoBehaviour:
     category: 6
     segment: 2
     itemType: 2
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 1
@@ -22576,6 +22592,7 @@ MonoBehaviour:
     category: 0
     segment: 0
     itemType: 0
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 0
@@ -22635,6 +22652,8 @@ MonoBehaviour:
   popupCritX1: {fileID: 672295629}
   popupCritChance1: {fileID: 1766780304}
   popupFirerate1: {fileID: 1783655412}
+  anim: {fileID: 940189396}
+  anim1: {fileID: 1599445287}
 --- !u!4 &1520956316
 Transform:
   m_ObjectHideFlags: 0
@@ -23663,6 +23682,7 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1705063117}
+  - {fileID: 1140955760}
   - {fileID: 25168793}
   - {fileID: 2062185298}
   m_Father: {fileID: 1985670617}
@@ -24593,6 +24613,7 @@ MonoBehaviour:
     category: 3
     segment: 1
     itemType: 0
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 5
@@ -24618,6 +24639,7 @@ MonoBehaviour:
     category: 1
     segment: 0
     itemType: 0
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 1
@@ -24643,6 +24665,7 @@ MonoBehaviour:
     category: 6
     segment: 2
     itemType: 2
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 1
@@ -27193,27 +27216,35 @@ PrefabInstance:
   serializedVersion: 2
   m_Modification:
     serializedVersion: 3
-    m_TransformParent: {fileID: 2119199028}
+    m_TransformParent: {fileID: 1599445285}
     m_Modifications:
     - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
       propertyPath: m_RootOrder
       value: -1
       objectReference: {fileID: 0}
     - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 12.447325
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 3.1118312
+      objectReference: {fileID: 0}
+    - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 12.447325
       objectReference: {fileID: 0}
     - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -6
+      value: -1197.9031
       objectReference: {fileID: 0}
     - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
       propertyPath: m_LocalPosition.y
-      value: -0.5
+      value: -541.4591
       objectReference: {fileID: 0}
     - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 2
+      value: 6.2236624
       objectReference: {fileID: 0}
     - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
       propertyPath: m_LocalRotation.w
@@ -27221,15 +27252,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
       propertyPath: m_LocalRotation.x
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
       propertyPath: m_LocalRotation.y
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
       propertyPath: m_LocalRotation.z
-      value: 0
+      value: -0
       objectReference: {fileID: 0}
     - target: {fileID: 2206700375787011649, guid: 4b2ccf45ce8e52c419748fcdf0793893, type: 3}
       propertyPath: m_LocalEulerAnglesHint.x
@@ -27273,12 +27304,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 940189396}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: segment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: category
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.ID
       value: 8
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.dmg
-      value: 0
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.dps
@@ -27294,11 +27333,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.segment
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.category
-      value: 3
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.fireRate
@@ -27310,7 +27349,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.itemType
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.inSceneID
@@ -28709,8 +28748,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 935180231}
   m_HandleRect: {fileID: 935180230}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.9999998
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -29754,8 +29793,9 @@ MonoBehaviour:
     inSceneID: 0
     lvl: 0
     category: 1
-    segment: 0
+    segment: 1
     itemType: 0
+    attackType: 0
     currencyValue: 0
     active: 0
     dmg: 5
@@ -29950,7 +29990,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: -0.000021282569}
+  m_AnchoredPosition: {x: 0, y: 0.000020374486}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!1 &2001257322
@@ -30435,7 +30475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 1, g: 0.9920237, b: 0, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -30585,6 +30625,18 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: id
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: segment
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: category
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
+      propertyPath: itemInfo.segment
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2474645652190830804, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
@@ -32062,7 +32114,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 1140955760}
   - {fileID: 1362300785}
   - {fileID: 1005421618}
   - {fileID: 1203338299}

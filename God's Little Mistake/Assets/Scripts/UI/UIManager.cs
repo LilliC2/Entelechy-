@@ -77,6 +77,10 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text popupCritChance1;
     public TMP_Text popupFirerate1;
 
+    [Header("Animation")]
+    public Animator anim;
+    public Animator anim1;
+
     //[Header("Inventory Comparison2")]
     //public GameObject statComp2;
     //public TMP_Text popupName2;
@@ -94,8 +98,9 @@ public class UIManager : Singleton<UIManager>
         isHoldingItem = false;
         statsPopUpPanel.SetActive(false);
         statComp1.SetActive(false);
-        //statComp2.SetActive(false);
         arrowComp.SetActive(false);
+
+        anim1 = statComp1.GetComponent<Animator>();
     }
 
     private void Update()
@@ -129,7 +134,7 @@ public class UIManager : Singleton<UIManager>
         var matchItem = SearchForItemMatch(_hoverItem);
 
         if (matchItem != null)
-            print(matchItem.itemName);
+            print(matchItem[0]);
         else print("no match");
     }
 
@@ -146,7 +151,7 @@ public class UIManager : Singleton<UIManager>
         var matchItem = SearchForItemMatch(_hoverItem);
 
         if (matchItem != null)
-            print(matchItem.itemName);
+            print(matchItem[0]);
         else print("no match");
     }
 
@@ -460,14 +465,39 @@ public class UIManager : Singleton<UIManager>
 
     public List<Item> SearchForItemMatch(Item _hoverItem)
     {
-        List<Item> itemMatchInPlayerInven = null;
+        List<Item> itemMatchInPlayerInven = new();
+
+        print("Hover item is " + _hoverItem.itemName);
 
         foreach (var item in _PC.playerInventory)
         {
             if(item.segment == _hoverItem.segment)
             {
                 itemMatchInPlayerInven.Add(item);
+
+
+                print("ITS A MATCH");
+                statComp1.SetActive(true);
+                anim1.SetTrigger("Open");
+                arrowComp.SetActive(true);
+                UpdateItemPopUpComp1(item);
             }
+
+            if (item.projectile == true)
+            {
+                attackPill.GetComponent<SpriteRenderer>().color = new Color(220, 255, 0);
+            }
+            else
+            {
+                attackPill.GetComponent<SpriteRenderer>().color = new Color(0, 154, 255);
+
+            }
+
+            var icon = item.icon;
+
+
+
+
         }
 
         /*

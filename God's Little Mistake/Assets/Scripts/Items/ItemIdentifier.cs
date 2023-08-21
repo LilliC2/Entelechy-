@@ -7,8 +7,7 @@ public class ItemIdentifier : GameBehaviour
 {
     bool inRange;
     public Item itemInfo;
-    public Item.Category category;
-    public Item.Segment segment;
+
 
     [Header("Animation")]
     public Animator anim;
@@ -22,7 +21,7 @@ public class ItemIdentifier : GameBehaviour
     {
         statPop = GameObject.Find("Stat Popup");
         statComp1 = GameObject.Find("Stat Comp 1");
-        
+
         anim = statPop.GetComponent<Animator>();
         anim1 = statComp1.GetComponent<Animator>();
     }
@@ -84,18 +83,36 @@ public class ItemIdentifier : GameBehaviour
         _UI.UpdateItemPopUp(itemInfo);
         anim.SetTrigger("Open");
 
-        var match = _UI.SearchForItemMatch(itemInfo);
+        //var match = _UI.SearchForItemMatch(itemInfo);
 
-        if(match != null)
-        {
-            print("ITS A MATCH");
-            _UI.statComp1.SetActive(true);
-            anim1.SetTrigger("Open");
-            _UI.arrowComp.SetActive(true);
-            _UI.UpdateItemPopUpComp1(itemInfo);
-        }
+        List<Item> itemMatchInPlayerInven = new();
+
+        //foreach (var item in match)
+        //{
+        //    if (item != null)
+        //    {
+        //        print("ITS A MATCH");
+        //        _UI.statComp1.SetActive(true);
+        //        anim1.SetTrigger("Open");
+        //        _UI.arrowComp.SetActive(true);
+        //        _UI.UpdateItemPopUpComp1(itemInfo);
+        //    }
+        //}
+
+        //foreach (var item in _PC.playerInventory)
+        //{
+        //    if (item.segment == itemInfo.segment)
+        //    {
+        //        print("ITS A MATCH");
+        //        _UI.statComp1.SetActive(true);
+        //        anim1.SetTrigger("Open");
+        //        _UI.arrowComp.SetActive(true);
+        //        _UI.UpdateItemPopUpComp1(itemInfo);
+        //    }
 
 
+
+        //}
     }
 
     public void OnMouseExit()
@@ -119,7 +136,7 @@ public class ItemIdentifier : GameBehaviour
 
     public void InfoSwitch()
     {
-        switch (segment)
+        switch (itemInfo.segment)
         {
             case (Item.Segment.Head):
                 _UI.TopSegmentIndicator();
