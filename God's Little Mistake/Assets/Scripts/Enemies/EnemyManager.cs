@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class EnemyManager : MonoBehaviour
 {
+
     // Start is called before the first frame update
     void Start()
     {
@@ -13,6 +14,18 @@ public class EnemyManager : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+
+    }
+
+    void SpawnEnemiesForLevel()
+    {
+        //start of dungeon
+
+        //find all spawn points
+
+        //List<GameObject> spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
+
+
+        //spawn enemies at appropriate level
     }
 }
