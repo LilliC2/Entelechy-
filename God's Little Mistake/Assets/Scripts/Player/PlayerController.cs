@@ -190,7 +190,6 @@ public class PlayerController : Singleton<PlayerController>
                 //change for cardinal direction
                 if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
                 {
-                    print("Just pressed W. lastDir was " + lastDir.name);
 
                     if (lastDir == missyLeftSide)
                     {
@@ -201,7 +200,6 @@ public class PlayerController : Singleton<PlayerController>
 
                     if(lastDir == missyForward)
                     {
-                        print("Going from front to back");
 
                         missyBack.SetActive(true);
                         missyForward.SetActive(false);
@@ -283,7 +281,6 @@ public class PlayerController : Singleton<PlayerController>
 
                     if(lastDir == missyBack)
                     {
-                        print("Going from back to front");
                         missyForward.SetActive(true);
                         missyLeftSide.SetActive(false);
                         missyRightSide.SetActive(false);

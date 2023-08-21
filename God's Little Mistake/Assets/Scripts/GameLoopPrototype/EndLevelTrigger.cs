@@ -5,17 +5,17 @@ using UnityEngine;
 public class EndLevelTrigger : GameBehaviour
 {
     // Start is called before the first frame update
-    private void OnTriggerEnter(Collider other)
+    private void OnTriggerStay(Collider other)
     {
-        if(other.CompareTag("Player"))
+        if (other.CompareTag("Player"))
         {
-            print("Reached end of level. Press E to spawn new level");  
-            if(Input.GetKeyDown(KeyCode.E))
+            print("Reached end of level. Press E to spawn new level");
+            if (Input.GetKeyDown(KeyCode.E))
             {
                 _GM.readyForGeneration = true;
             }
         }
-        
-        
+
+
     }
 }

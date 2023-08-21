@@ -23,7 +23,7 @@ public class EnemyManager : MonoBehaviour
 
         //find all spawn points
 
-        //List<GameObject> spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
+        List<GameObject> spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
 
 
         //spawn enemies at appropriate level
