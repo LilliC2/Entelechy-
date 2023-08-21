@@ -83,37 +83,50 @@ public class ItemIdentifier : GameBehaviour
         _UI.UpdateItemPopUp(itemInfo);
         anim.SetTrigger("Open");
 
-        //var match = _UI.SearchForItemMatch(itemInfo);
-
         List<Item> itemMatchInPlayerInven = new();
 
-        //foreach (var item in match)
-        //{
-        //    if (item != null)
-        //    {
-        //        print("ITS A MATCH");
-        //        _UI.statComp1.SetActive(true);
-        //        anim1.SetTrigger("Open");
-        //        _UI.arrowComp.SetActive(true);
-        //        _UI.UpdateItemPopUpComp1(itemInfo);
-        //    }
-        //}
+        foreach (var item in _PC.playerInventory)
+        {
+            if (item.segment == itemInfo.segment)
+            {
+                print("ITS A MATCH");
+                _UI.statComp1.SetActive(true);
+                anim1.SetTrigger("Open");
+                _UI.arrowComp.SetActive(true);
+                _UI.UpdateItemPopUpComp1(itemInfo);
+            }
+        }
 
-        //foreach (var item in _PC.playerInventory)
-        //{
-        //    if (item.segment == itemInfo.segment)
-        //    {
-        //        print("ITS A MATCH");
-        //        _UI.statComp1.SetActive(true);
-        //        anim1.SetTrigger("Open");
-        //        _UI.arrowComp.SetActive(true);
-        //        _UI.UpdateItemPopUpComp1(itemInfo);
-        //    }
+            //var match = _UI.SearchForItemMatch(itemInfo);
 
 
+            //foreach (var item in match)
+            //{
+            //    if (item != null)
+            //    {
+            //        print("ITS A MATCH");
+            //        _UI.statComp1.SetActive(true);
+            //        anim1.SetTrigger("Open");
+            //        _UI.arrowComp.SetActive(true);
+            //        _UI.UpdateItemPopUpComp1(itemInfo);
+            //    }
+            //}
 
-        //}
-    }
+            //foreach (var item in _PC.playerInventory)
+            //{
+            //    if (item.segment == itemInfo.segment)
+            //    {
+            //        print("ITS A MATCH");
+            //        _UI.statComp1.SetActive(true);
+            //        anim1.SetTrigger("Open");
+            //        _UI.arrowComp.SetActive(true);
+            //        _UI.UpdateItemPopUpComp1(itemInfo);
+            //    }
+
+
+
+            //}
+        }
 
     public void OnMouseExit()
     {
@@ -134,20 +147,20 @@ public class ItemIdentifier : GameBehaviour
         _UI.arrowComp.SetActive(false);
     }
 
-    public void InfoSwitch()
-    {
-        switch (itemInfo.segment)
-        {
-            case (Item.Segment.Head):
-                _UI.TopSegmentIndicator();
-                break;
-            case (Item.Segment.Torso):
-                _UI.MiddleSegmentIndicator();
-                break;
-            case (Item.Segment.Legs):
-                _UI.BottomSegmentIndicator();
-                break;
-        }
-    }
+    //public void InfoSwitch()
+    //{
+    //    switch (itemInfo.segment)
+    //    {
+    //        case (Item.Segment.Head):
+    //            _UI.TopSegmentIndicator();
+    //            break;
+    //        case (Item.Segment.Torso):
+    //            _UI.MiddleSegmentIndicator();
+    //            break;
+    //        case (Item.Segment.Legs):
+    //            _UI.BottomSegmentIndicator();
+    //            break;
+    //    }
+    //}
             
 }

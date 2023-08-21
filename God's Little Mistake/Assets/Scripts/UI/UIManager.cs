@@ -11,6 +11,9 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text playerHPText;
     public TMP_Text roomLevelText;
 
+    public Item leftArmItem;
+    public Item rightArmItem;
+
     [Header("Player Feedback")]
     public TMP_Text hpText;
     public TMP_Text levelText;
@@ -308,10 +311,12 @@ public class UIManager : Singleton<UIManager>
             if (_AVTAR.slotsOnPlayerFront[3].transform.childCount == 0)
             {
                 slot = 3;
+                leftArmItem = heldItem;
             }
             else if (_AVTAR.slotsOnPlayerFront[4].transform.childCount == 0)
             {
                 slot = 4;
+                rightArmItem = heldItem;
             }
 
         }
@@ -476,22 +481,22 @@ public class UIManager : Singleton<UIManager>
                 itemMatchInPlayerInven.Add(item);
 
 
-                print("ITS A MATCH");
-                statComp1.SetActive(true);
-                anim1.SetTrigger("Open");
-                arrowComp.SetActive(true);
-                UpdateItemPopUpComp1(item);
+                //print("ITS A MATCH");
+                //statComp1.SetActive(true);
+                //anim1.SetTrigger("Open");
+                //arrowComp.SetActive(true);
+                //UpdateItemPopUpComp1(item);
             }
 
-            if (item.projectile == true)
-            {
-                attackPill.GetComponent<SpriteRenderer>().color = new Color(220, 255, 0);
-            }
-            else
-            {
-                attackPill.GetComponent<SpriteRenderer>().color = new Color(0, 154, 255);
+            //if (item.projectile == true)
+            //{
+            //    attackPill.GetComponent<SpriteRenderer>().color = new Color(220, 255, 0);
+            //}
+            //else
+            //{
+            //    attackPill.GetComponent<SpriteRenderer>().color = new Color(0, 154, 255);
 
-            }
+            //}
 
             var icon = item.icon;
 
@@ -525,63 +530,63 @@ public class UIManager : Singleton<UIManager>
 
     #region Indicators
     
-    public void TopSegmentIndicator()
-    {
-        topEye.SetActive(true);
-        topEye.GetComponent<SpriteRenderer>().color = Color.yellow;
-        middleEye.SetActive(false);
-        bottomEye.SetActive(false);
-    }
+    //public void TopSegmentIndicator()
+    //{
+    //    topEye.SetActive(true);
+    //    topEye.GetComponent<SpriteRenderer>().color = Color.yellow;
+    //    middleEye.SetActive(false);
+    //    bottomEye.SetActive(false);
+    //}
 
-    public void MiddleSegmentIndicator()
-    {
-        middleEye.SetActive(true);
-        middleEye.GetComponent<SpriteRenderer>().color = Color.red;
-        topEye.SetActive(false);
-        bottomEye.SetActive(false);
+    //public void MiddleSegmentIndicator()
+    //{
+    //    middleEye.SetActive(true);
+    //    middleEye.GetComponent<SpriteRenderer>().color = Color.red;
+    //    topEye.SetActive(false);
+    //    bottomEye.SetActive(false);
 
-    }
+    //}
 
-    public void BottomSegmentIndicator()
-    {
-        bottomEye.SetActive(true);
-        bottomEye.GetComponent<SpriteRenderer>().color = Color.red;
-        topEye.SetActive(false);
-        middleEye.SetActive(false);
-    }
+    //public void BottomSegmentIndicator()
+    //{
+    //    bottomEye.SetActive(true);
+    //    bottomEye.GetComponent<SpriteRenderer>().color = Color.red;
+    //    topEye.SetActive(false);
+    //    middleEye.SetActive(false);
+    //}
 
-    public void AttackPillChange(int num)
-    {
-        attackPill.SetActive(true);
-        if (num == 1)
-        {
-            attackPillText.text = "Melee";
-            //attackIcon.SetActive(true); change the icon
-            attackPill.GetComponent<SpriteRenderer>().color = Color.red;
-        }
-        if (num == 2) 
-        {
-            attackPillText.text = "Range";
-            //attackIcon.SetActive(true); change the icon
-            attackPill.GetComponent<SpriteRenderer>().color = Color.red;
-        }
-    }
+    //public void AttackPillChange(int num)
+    //{
+    //    attackPill.SetActive(true);
+    //    if (num == 1)
+    //    {
+    //        attackPillText.text = "Melee";
+    //        //attackIcon.SetActive(true); change the icon
+    //        attackPill.GetComponent<SpriteRenderer>().color = Color.red;
+    //    }
+    //    if (num == 2) 
+    //    {
+    //        attackPillText.text = "Range";
+    //        //attackIcon.SetActive(true); change the icon
+    //        attackPill.GetComponent<SpriteRenderer>().color = Color.red;
+    //    }
+    //}
 
-    public void RangePillChange(int num)
-    {
-        rangePill.SetActive(true);
-        attackPillText.text = num.ToString();
-    }
+    //public void RangePillChange(int num)
+    //{
+    //    rangePill.SetActive(true);
+    //    attackPillText.text = num.ToString();
+    //}
 
-    public void ChangeItemIcon()
-    {
-        //Chnage the item icons
-    }
+    //public void ChangeItemIcon()
+    //{
+    //    //Chnage the item icons
+    //}
 
-    public void ChangeItemType()
-    {
-        //Chnage the type icons
-    }
+    //public void ChangeItemType()
+    //{
+    //    //Chnage the type icons
+    //}
 
     #endregion
 }
