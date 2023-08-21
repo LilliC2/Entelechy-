@@ -38,7 +38,7 @@ Transform:
   - {fileID: 7806194333582306144}
   - {fileID: 1261436063562562078}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &5396413634656670049
 MonoBehaviour:
@@ -56,9 +56,9 @@ MonoBehaviour:
   player: {fileID: 0}
   agent: {fileID: 9168112645038497975}
   sightRange: 7
-  attackRange: 0
+  attackRange: 2
   walkPoint: {x: 0, y: 0, z: 0}
-  walkPointRange: 2
+  walkPointRange: 5
   whatIsGround:
     serializedVersion: 2
     m_Bits: 128
@@ -77,7 +77,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609035b677042b34f9bd4c25621ebe3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemyState: 0
+  enemyState: 1
   enemyRnd: {fileID: 0}
   deathParticles: {fileID: 3987647337234535241}
   explosionAnim: {fileID: 2286560920850882740}
@@ -85,7 +85,7 @@ MonoBehaviour:
   enemyVisuals: {fileID: 4843604304365309579}
   image: {fileID: 775106265641318351}
   stats:
-    category: 1
+    category: 7
     health: 15
     maxHP: 15
     speed: 6
