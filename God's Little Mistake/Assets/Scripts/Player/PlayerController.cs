@@ -350,7 +350,6 @@ public class PlayerController : Singleton<PlayerController>
 
                 }
 
-                print(lastDir.name);
                 #endregion
                 #endregion
 
@@ -421,16 +420,17 @@ public class PlayerController : Singleton<PlayerController>
                             {
                                 //shoot
 
-                                
+
 
                                 //activate animation
-                                //itemsAnimForward[i].SetTrigger("Attack");
-                                ////itemsAnimBack[i].SetTrigger("Attack");
-                                //itemsAnimLeftSide[i].SetTrigger("Attack");
-                                //itemsAnimRightSide[i].SetTrigger("Attack");
+                                itemsAnimForward[i].SetTrigger("Attack");
+                                //itemsAnimBack[i].SetTrigger("Attack");
+                                itemsAnimLeftSide[i].SetTrigger("Attack");
+                                itemsAnimRightSide[i].SetTrigger("Attack");
 
                                 //changed to use player stats, the primary attack will just change
-                                FireProjectile(playerInventory[0].projectilePF, projectileSpeed, firerate, range);
+
+                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, range);
                                 if (knockbackActive)
                                 {
                                     float timeSinceKnockback = Time.time - knockbackStartTime;
@@ -658,6 +658,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             firingPoint.transform.LookAt(hit.point);
 
+
             if (!projectileShot)
             {
 
@@ -689,6 +690,8 @@ public class PlayerController : Singleton<PlayerController>
 
                 ExecuteAfterSeconds(_firerate, () => projectileShot = false);
             }
+            print("FIRE PROJECTILE");
+
         }
     }
 
