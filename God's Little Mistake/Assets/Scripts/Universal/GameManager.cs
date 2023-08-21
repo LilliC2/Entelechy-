@@ -51,6 +51,7 @@ public class GameManager : Singleton<GameManager>
         {
             print("Generate new level");
             GenerateLevel();
+            _EM.SpawnEnemiesForLevel();
 
         }
 

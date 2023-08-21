@@ -14,6 +14,7 @@ public class GameBehaviour : LC.Behaviour //inherits from
     protected static ItemsOnPlayer _AVTAR { get { return ItemsOnPlayer.INSTANCE; } }
 
     protected static MeleeAttack _MA { get { return MeleeAttack.INSTANCE; } }
+    protected static EnemyManager _EM { get { return EnemyManager.INSTANCE; } }
 
    
 
