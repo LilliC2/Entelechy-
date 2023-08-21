@@ -141,7 +141,12 @@ public class EnemyLongRange : GameBehaviour
                 }
 
 
-                break; 
+                break;
+            case BaseEnemy.EnemyState.Die:
+
+                BaseEnemy.Die();
+
+                break;
         }
 
 

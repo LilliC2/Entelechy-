@@ -24,6 +24,8 @@ public class BaseEnemy : GameBehaviour
     [SerializeField]
     GameObject enemyVisuals;
 
+    bool spawnItem = false;
+
     public SpriteRenderer image;
     public EnemyStats stats;
     public GameObject healPool;
@@ -33,10 +35,10 @@ public class BaseEnemy : GameBehaviour
         image = GetComponentInChildren<SpriteRenderer>();
         enemyRnd = GetComponentInChildren<EnemyRandomisation>();
 
-        string cat = enemyRnd.categories[Random.Range(0, enemyRnd.categories.Count)];
+        string cat = enemyRnd.allCategories[Random.Range(0, enemyRnd.allCategories.Count)];
 
         stats.category = (EnemyStats.Category)System.Enum.Parse(typeof(EnemyStats.Category), cat);
-        print("this enemies category is " + cat + " and is set to " + stats.category);
+        //print("this enemies category is " + cat + " and is set to " + stats.category);
     }
 
     private void Update()
@@ -70,14 +72,7 @@ public class BaseEnemy : GameBehaviour
             //print(enemyStats.stats.health);
         }
     }
-    void MeleeHit()
-    {
-        if (stats.health > 0)
-        {
-            stats.health -= _MA.DMGOutput;
-            //print(enemyStats.stats.health);
-        }
-    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -90,17 +85,11 @@ public class BaseEnemy : GameBehaviour
             //destroy bullet that hit it
             //Destroy(collision.gameObject);
         }
-        if (collision.collider.CompareTag("Melee"))
-        {
-            print("melee hit");
-            //Add hit code here;
-            MeleeHit();
-        }
+
     }
 
     public void Die()
     {
-
         Destroy(GetComponent<EnemyLongRange>());
 
         //turn off collider
@@ -120,12 +109,18 @@ public class BaseEnemy : GameBehaviour
         switch(rand)
         {
             case 1:
-                GameObject item =Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
                 
+                if(!spawnItem)
+                {
+                    spawnItem = true;
+                    GameObject item = Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
 
-                item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
-                print("Spawning item of " + stats.category.ToString() + " category");
+                    item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+
+                    print("Spawning item of " + stats.category.ToString() + " category");
+                }
+                
                 break;
             case 2:
                 Instantiate(healPool, gameObject.transform.position, Quaternion.identity);
@@ -133,7 +128,7 @@ public class BaseEnemy : GameBehaviour
         }
 
 
-        ExecuteAfterSeconds(1, () => Destroy(this.gameObject));
+        ExecuteAfterSeconds(0.5f, () => Destroy(this.gameObject));
         
     }
 }

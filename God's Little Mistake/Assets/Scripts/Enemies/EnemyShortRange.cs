@@ -137,6 +137,11 @@ public class EnemyShortRange : GameBehaviour
 
 
                 break;
+            case BaseEnemy.EnemyState.Die:
+
+                BaseEnemy.Die();
+
+                break;
         }
 
 

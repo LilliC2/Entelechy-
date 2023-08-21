@@ -20,9 +20,6 @@ public class PlayerController : Singleton<PlayerController>
     public Animator[] slotsAnim;
     public GameObject[] slotsGO;
 
-    public GameObject torsoForward;
-    public GameObject bellyForward;
-
     public GameObject missyLeftSide;
     public GameObject missyRightSide;
     public GameObject missyBack;
@@ -530,6 +527,7 @@ public class PlayerController : Singleton<PlayerController>
             if(item !=null)
             {
                 _UI.CreateItemSelected(item);
+                item.active = true;
 
                 //check if item is arleady in inventory
             }
