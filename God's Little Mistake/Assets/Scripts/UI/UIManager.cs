@@ -458,17 +458,37 @@ public class UIManager : Singleton<UIManager>
 
     #endregion
 
-    public Item SearchForItemMatch(Item _hoverItem)
+    public List<Item> SearchForItemMatch(Item _hoverItem)
     {
-        Item itemMatchInPlayerInven = null;
+        List<Item> itemMatchInPlayerInven = null;
 
         foreach (var item in _PC.playerInventory)
         {
             if(item.segment == _hoverItem.segment)
             {
-                itemMatchInPlayerInven = item;
+                itemMatchInPlayerInven.Add(item);
             }
         }
+
+        /*
+         * Is it projectile?
+         * if(item.projectile == true) { IS PROJECTILE}
+         * 
+         * Get Icon
+         * var icon = item.icon
+         * 
+         * Get Attack Type
+         * var attackType = icon.attackType
+         * 
+         * Get Segment Type
+         * var segment = icon.segment
+         * 
+         * Get Range
+         * 
+         * item.range9
+         */
+
+
 
         return itemMatchInPlayerInven;
     }

@@ -15,6 +15,10 @@ public class Item
     public Segment segment;
     public enum ItemType {Primary, Secondary, Passive, Symbiote }
     public ItemType itemType;
+
+    public enum AttackType { Cone, Straight}
+    public AttackType attackType;
+
     public float currencyValue;
 
     public bool active;
