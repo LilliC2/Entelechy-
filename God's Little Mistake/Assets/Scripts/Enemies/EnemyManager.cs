@@ -1,14 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class EnemyManager : MonoBehaviour
 {
-
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -19,13 +19,11 @@ public class EnemyManager : MonoBehaviour
 
     void SpawnEnemiesForLevel()
     {
-        //start of dungeon
+        // Find all spawn points
+        GameObject[] spawnPointsArray = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
 
-        //find all spawn points
+        List<GameObject> spawnPoints = spawnPointsArray.ToList();
 
-        List<GameObject> spawnPoints = GameObject.FindGameObjectsWithTag("EnemySpawnPoint");
-
-
-        //spawn enemies at appropriate level
+        // Now you can work with the List<GameObject> as needed
     }
 }
