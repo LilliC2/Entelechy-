@@ -25,6 +25,8 @@ public class BaseEnemy : GameBehaviour
     GameObject enemyVisuals;
 
     bool spawnItem = false;
+    bool spawnHealPool = false;
+    bool died = false;
 
     public SpriteRenderer image;
     public EnemyStats stats;
@@ -90,45 +92,57 @@ public class BaseEnemy : GameBehaviour
 
     public void Die()
     {
-        Destroy(GetComponent<EnemyLongRange>());
-
-        //turn off collider
-        gameObject.GetComponent<CapsuleCollider>().enabled = false;
-        enemyVisuals.SetActive(false);
-
-        //run partciles
-        deathParticles.Play();
-
-        explosionAnimOB.SetActive(true);
-        //ooze animation
-        explosionAnim.SetTrigger("Death");
-
-        //eye is for testing
-        int rand = 1; //Random.Range(0, 4);
-
-        switch(rand)
+        if(!died)
         {
-            case 1:
-                
-                if(!spawnItem)
-                {
-                    spawnItem = true;
-                    GameObject item = Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
+            died = true;
+
+            Destroy(GetComponent<EnemyLongRange>());
+
+            //turn off collider
+            gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            enemyVisuals.SetActive(false);
+
+            //run partciles
+            deathParticles.Play();
+
+            explosionAnimOB.SetActive(true);
+            //ooze animation
+            explosionAnim.SetTrigger("Death");
+
+            //eye is for testing
+            int rand = Random.Range(0, 4);
+
+            switch (rand)
+            {
+                case 1:
+
+                    if (!spawnItem)
+                    {
+                        spawnItem = true;
+                        GameObject item = Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
 
 
-                    item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+                        item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
-                    print("Spawning item of " + stats.category.ToString() + " category");
-                }
-                
-                break;
-            case 2:
-                Instantiate(healPool, gameObject.transform.position, Quaternion.identity);
-                break;
+                        print("Spawning item of " + stats.category.ToString() + " category");
+                    }
+
+                    break;
+                case 2:
+                    if(!spawnHealPool)
+                    {
+                        spawnHealPool = true;
+                        Instantiate(healPool, gameObject.transform.position, Quaternion.identity);
+
+                    }
+                    break;
+            }
+
+
+            ExecuteAfterSeconds(0.5f, () => Destroy(this.gameObject));
         }
 
-
-        ExecuteAfterSeconds(0.5f, () => Destroy(this.gameObject));
+        
         
     }
 }

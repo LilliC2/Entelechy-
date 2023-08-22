@@ -624,15 +624,18 @@ public class PlayerController : Singleton<PlayerController>
         {
             if(!meleeAnimationCooldown)
             {
+                if(meleeUI != null)
+                {
+                    meleeAnimationCooldown = true;
+                    meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                    //activate animation
+                    itemsAnimForward[_index].SetTrigger("Attack");
+                    itemsAnimBack[_index].SetTrigger("Attack");
+                    itemsAnimLeftSide[_index].SetTrigger("Attack");
+                    itemsAnimRightSide[_index].SetTrigger("Attack");
+                    ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
 
-                meleeAnimationCooldown = true;
-                meleeUI.GetComponent<Animator>().SetTrigger("Attack");
-                //activate animation
-                itemsAnimForward[_index].SetTrigger("Attack");
-                //itemsAnimBack[i].SetTrigger("Attack");
-                itemsAnimLeftSide[_index].SetTrigger("Attack");
-                itemsAnimRightSide[_index].SetTrigger("Attack");
-                ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
+                }
 
                 if (inRangeEnemies.Count != 0)
                 {

@@ -66,7 +66,7 @@ public class GameManager : Singleton<GameManager>
         print("Dungeon Level " + dungeonLevel);
 
         //update UI
-        //_UI.UpdateLevelext(dungeonLevel);
+        _UI.UpdateLevelext(dungeonLevel);
         //clear dungeon
         ClearPreviousLevel();
 

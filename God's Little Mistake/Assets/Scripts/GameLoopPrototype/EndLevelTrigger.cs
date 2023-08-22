@@ -4,10 +4,10 @@ using UnityEngine;
 
 public class EndLevelTrigger : GameBehaviour
 {
-    // Start is called before the first frame update
-    private void OnTriggerStay(Collider other)
+    bool inRange;
+    private void FixedUpdate()
     {
-        if (other.CompareTag("Player"))
+        if(inRange)
         {
             print("Reached end of level. Press E to spawn new level");
             if (Input.GetKeyDown(KeyCode.E))
@@ -15,7 +15,24 @@ public class EndLevelTrigger : GameBehaviour
                 _GM.readyForGeneration = true;
             }
         }
+    }
+
+    // Start is called before the first frame update
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inRange = true;
+        }
 
 
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.CompareTag("Player"))
+        {
+            inRange = false;
+        }
     }
 }
