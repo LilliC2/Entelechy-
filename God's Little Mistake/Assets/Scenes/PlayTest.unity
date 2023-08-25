@@ -5962,6 +5962,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
+  readyForGeneration: 1
+  dungeonLevel: 0
+  levelParent: {fileID: 0}
+  endRoomOB: {fileID: 0}
   gameState: 0
 --- !u!114 &835394013
 MonoBehaviour:
@@ -11971,6 +11975,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   DeathScreenPanel: {fileID: 1574145269}
+  currentScene: 
 --- !u!114 &1686916612
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -12248,8 +12253,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
-  playerHPText: {fileID: 2001437773}
-  roomLevelText: {fileID: 1702236832}
   hpText: {fileID: 2001437773}
   levelText: {fileID: 1702236832}
   defaultCursor: {fileID: 21300000, guid: 5173b9a6d0ba5e94c935a8597ac166c2, type: 3}

@@ -8,9 +8,6 @@ using DG.Tweening;
 public class UIManager : Singleton<UIManager>
 {
     
-    public TMP_Text playerHPText;
-    public TMP_Text roomLevelText;
-
     [Header("Player Feedback")]
     public TMP_Text hpText;
     public TMP_Text levelText;
