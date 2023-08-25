@@ -84,6 +84,10 @@ public class UIManager : Singleton<UIManager>
     public Animator anim;
     public Animator anim1;
 
+    [Header("Pause")]
+    public GameObject pausePanel;
+
+
     //[Header("Inventory Comparison2")]
     //public GameObject statComp2;
     //public TMP_Text popupName2;
@@ -95,7 +99,7 @@ public class UIManager : Singleton<UIManager>
 
 
     private void Start()
-    {
+    {   
         UpdateInventorySlotImages();
         heldItem = null;
         isHoldingItem = false;
@@ -104,6 +108,10 @@ public class UIManager : Singleton<UIManager>
         arrowComp.SetActive(false);
 
         anim1 = statComp1.GetComponent<Animator>();
+
+        //Pause Related
+        pausePanel.SetActive(false);
+
     }
 
     private void Update()
@@ -123,6 +131,22 @@ public class UIManager : Singleton<UIManager>
 
 
     }
+
+    #region Pause
+    public void OnPause()
+    {
+        pausePanel.SetActive(true);
+    }
+
+    public void OnResume()
+    {
+        pausePanel.SetActive(false);
+    }
+
+
+
+
+    #endregion
 
     public void UpdateItemPopUp(Item _hoverItem)
     {
