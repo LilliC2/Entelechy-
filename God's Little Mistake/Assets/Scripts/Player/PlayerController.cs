@@ -123,9 +123,10 @@ public class PlayerController : Singleton<PlayerController>
     void Update()
     {
         //for testing
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            _ISitemD.RemoveItemFromInventory(2);
+            print("add chrom");
+            _PE.ChromaticABFade();
         }
 
 
@@ -391,14 +392,14 @@ public class PlayerController : Singleton<PlayerController>
                                     //ExecuteAfterFrames(26, () => meleeUI.gameObject.SetActive(false));
                                 }
 
-                                
+
 
                                 //active primary attack
 
-                                //itemsAnimForward[i].SetTrigger("Attack");
-                                //itemsAnimBack[i].SetTrigger("Attack");
-                                //itemsAnimLeftSide[i].SetTrigger("Attack");
-                                //itemsAnimRightSide[i].SetTrigger("Attack");
+                                itemsAnimForward[i].SetTrigger("Attack");
+                                itemsAnimBack[i].SetTrigger("Attack");
+                                itemsAnimLeftSide[i].SetTrigger("Attack");
+                                itemsAnimRightSide[i].SetTrigger("Attack");
 
 
 
@@ -722,6 +723,8 @@ public class PlayerController : Singleton<PlayerController>
         {
             print("player has been hit");
             health -= _dmg;
+            _PE.ChromaticABFade();
+
             if (health > 0)
             {
                 _UI.UpdateHealthText(health);
