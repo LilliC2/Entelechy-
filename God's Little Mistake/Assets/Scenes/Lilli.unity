@@ -1704,7 +1704,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a642d2ad109ac4a92d781d6c62daa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotNumber: 0
+  slotNumber1: 0
+  slotNumber2: 0
+  slotNumber3: 0
+  slotNumber4: 0
+  slotNumber5: 0
+  slotNumber6: 0
+  itemIcon: {fileID: 0}
+  typeIcon: {fileID: 0}
+  effectIcon: {fileID: 0}
+  itemName: {fileID: 0}
+  itemDamage: {fileID: 0}
+  itemCritMultiplier: {fileID: 0}
+  itemCritChance: {fileID: 0}
+  itemFireRate: {fileID: 0}
+  attackPill: {fileID: 0}
+  attackIcon: {fileID: 0}
+  attackText: {fileID: 0}
+  rangePill: {fileID: 0}
+  rangeIcon: {fileID: 0}
+  rangeText: {fileID: 0}
+  abilityName: {fileID: 0}
+  abilityDescription: 
+  itemTypeIcons: []
+  itemEffectIcons: []
+  itemAttackEffects: []
 --- !u!95 &77629350
 Animator:
   serializedVersion: 5
@@ -2384,6 +2408,8 @@ GameObject:
   - component: {fileID: 103813654}
   - component: {fileID: 103813656}
   - component: {fileID: 103813655}
+  - component: {fileID: 103813657}
+  - component: {fileID: 103813658}
   m_Layer: 5
   m_Name: Pause_Slot_2
   m_TagString: Untagged
@@ -2449,6 +2475,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 103813653}
   m_CullTransparentMesh: 1
+--- !u!114 &103813657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103813653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefbb8a70bb213d4896a17fc39f4bd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotNumber: 1
+  itemName: 
+  category: 0
+  segment: 0
+  itemType: 0
+  attackType: 0
+  currencyValue: 0
+  active: 0
+  dmg: 0
+  dps: 0
+  fireRate: 0
+  critX: 0
+  critChance: 0
+  range: 0
+  projectile: 0
+  projectileSpeed: 0
+  projectilePF: {fileID: 0}
+  modifier: 0
+  modifierID: 0
+  icon: {fileID: 0}
+  avtarPrefab: {fileID: 0}
+  avtarPrefabLeft: {fileID: 0}
+  avtarPrefabRight: {fileID: 0}
+  avtarPrefabBack: {fileID: 0}
+--- !u!114 &103813658
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 103813653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1429368871}
+          m_TargetAssemblyTypeName: PauseFunctionality, Assembly-CSharp
+          m_MethodName: UpdateStats
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 103813657}
+            m_ObjectArgumentAssemblyTypeName: PauseSlotStats, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &108087245
 GameObject:
   m_ObjectHideFlags: 0
@@ -4119,6 +4210,8 @@ GameObject:
   - component: {fileID: 218369606}
   - component: {fileID: 218369608}
   - component: {fileID: 218369607}
+  - component: {fileID: 218369609}
+  - component: {fileID: 218369610}
   m_Layer: 5
   m_Name: Pause_Slot_4
   m_TagString: Untagged
@@ -4184,6 +4277,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 218369605}
   m_CullTransparentMesh: 1
+--- !u!114 &218369609
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218369605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefbb8a70bb213d4896a17fc39f4bd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotNumber: 3
+  itemName: 
+  category: 0
+  segment: 0
+  itemType: 0
+  attackType: 0
+  currencyValue: 0
+  active: 0
+  dmg: 0
+  dps: 0
+  fireRate: 0
+  critX: 0
+  critChance: 0
+  range: 0
+  projectile: 0
+  projectileSpeed: 0
+  projectilePF: {fileID: 0}
+  modifier: 0
+  modifierID: 0
+  icon: {fileID: 0}
+  avtarPrefab: {fileID: 0}
+  avtarPrefabLeft: {fileID: 0}
+  avtarPrefabRight: {fileID: 0}
+  avtarPrefabBack: {fileID: 0}
+--- !u!114 &218369610
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 218369605}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1429368871}
+          m_TargetAssemblyTypeName: PauseFunctionality, Assembly-CSharp
+          m_MethodName: UpdateStats
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 218369609}
+            m_ObjectArgumentAssemblyTypeName: PauseSlotStats, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &219001210
 GameObject:
   m_ObjectHideFlags: 0
@@ -23166,7 +23324,7 @@ GameObject:
   - component: {fileID: 1048089136}
   - component: {fileID: 1048089135}
   m_Layer: 5
-  m_Name: DamageText
+  m_Name: AbilityName
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -25896,6 +26054,8 @@ GameObject:
   - component: {fileID: 1184720753}
   - component: {fileID: 1184720755}
   - component: {fileID: 1184720754}
+  - component: {fileID: 1184720756}
+  - component: {fileID: 1184720757}
   m_Layer: 5
   m_Name: Pause_Slot_6
   m_TagString: Untagged
@@ -25961,6 +26121,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1184720752}
   m_CullTransparentMesh: 1
+--- !u!114 &1184720756
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184720752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefbb8a70bb213d4896a17fc39f4bd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotNumber: 5
+  itemName: 
+  category: 0
+  segment: 0
+  itemType: 0
+  attackType: 0
+  currencyValue: 0
+  active: 0
+  dmg: 0
+  dps: 0
+  fireRate: 0
+  critX: 0
+  critChance: 0
+  range: 0
+  projectile: 0
+  projectileSpeed: 0
+  projectilePF: {fileID: 0}
+  modifier: 0
+  modifierID: 0
+  icon: {fileID: 0}
+  avtarPrefab: {fileID: 0}
+  avtarPrefabLeft: {fileID: 0}
+  avtarPrefabRight: {fileID: 0}
+  avtarPrefabBack: {fileID: 0}
+--- !u!114 &1184720757
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1184720752}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1429368871}
+          m_TargetAssemblyTypeName: PauseFunctionality, Assembly-CSharp
+          m_MethodName: UpdateStats
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1184720756}
+            m_ObjectArgumentAssemblyTypeName: PauseSlotStats, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!4 &1186817149 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3516826103330883936, guid: 1f56d741b02168f43a840b4aa3aae3a1, type: 3}
@@ -27807,7 +28032,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 0.000040654155}
+  m_AnchoredPosition: {x: 0, y: 0.000043303393}
   m_SizeDelta: {x: 0, y: 300}
   m_Pivot: {x: 0, y: 1}
 --- !u!114 &1321528987
@@ -30686,7 +30911,31 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 43a642d2ad109ac4a92d781d6c62daa7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  slotNumber: 0
+  slotNumber1: 0
+  slotNumber2: 0
+  slotNumber3: 0
+  slotNumber4: 0
+  slotNumber5: 0
+  slotNumber6: 0
+  itemIcon: {fileID: 21300000, guid: 8c8d7341c5769dc4785d01d0396b89e8, type: 3}
+  typeIcon: {fileID: 21300000, guid: a4eecca34bb21714a948808a2f3f8eb5, type: 3}
+  effectIcon: {fileID: 21300000, guid: a4eecca34bb21714a948808a2f3f8eb5, type: 3}
+  itemName: {fileID: 289556883}
+  itemDamage: {fileID: 503773233}
+  itemCritMultiplier: {fileID: 1005825131}
+  itemCritChance: {fileID: 1370402855}
+  itemFireRate: {fileID: 1037479794}
+  attackPill: {fileID: 21300000, guid: 0dc524a66477e0b42a0fbb6d2f58f42c, type: 3}
+  attackIcon: {fileID: 21300000, guid: 0dc524a66477e0b42a0fbb6d2f58f42c, type: 3}
+  attackText: {fileID: 1171443482}
+  rangePill: {fileID: 0}
+  rangeIcon: {fileID: 21300000, guid: 0437ff1192553d949bdb9f831669a326, type: 3}
+  rangeText: {fileID: 1351982751}
+  abilityName: {fileID: 1048089135}
+  abilityDescription: 
+  itemTypeIcons: []
+  itemEffectIcons: []
+  itemAttackEffects: []
 --- !u!1 &1431826532
 GameObject:
   m_ObjectHideFlags: 0
@@ -34520,6 +34769,8 @@ GameObject:
   - component: {fileID: 1615775861}
   - component: {fileID: 1615775863}
   - component: {fileID: 1615775862}
+  - component: {fileID: 1615775864}
+  - component: {fileID: 1615775865}
   m_Layer: 5
   m_Name: Pause_Slot_3
   m_TagString: Untagged
@@ -34585,6 +34836,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1615775860}
   m_CullTransparentMesh: 1
+--- !u!114 &1615775864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615775860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefbb8a70bb213d4896a17fc39f4bd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotNumber: 2
+  itemName: 
+  category: 0
+  segment: 0
+  itemType: 0
+  attackType: 0
+  currencyValue: 0
+  active: 0
+  dmg: 0
+  dps: 0
+  fireRate: 0
+  critX: 0
+  critChance: 0
+  range: 0
+  projectile: 0
+  projectileSpeed: 0
+  projectilePF: {fileID: 0}
+  modifier: 0
+  modifierID: 0
+  icon: {fileID: 0}
+  avtarPrefab: {fileID: 0}
+  avtarPrefabLeft: {fileID: 0}
+  avtarPrefabRight: {fileID: 0}
+  avtarPrefabBack: {fileID: 0}
+--- !u!114 &1615775865
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1615775860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1429368871}
+          m_TargetAssemblyTypeName: PauseFunctionality, Assembly-CSharp
+          m_MethodName: UpdateStats
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1615775864}
+            m_ObjectArgumentAssemblyTypeName: PauseSlotStats, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1001 &1619575059
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -36302,7 +36618,7 @@ GameObject:
   - component: {fileID: 1676224024}
   - component: {fileID: 1676224023}
   m_Layer: 5
-  m_Name: DamageText (1)
+  m_Name: AbilityDescription
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -39201,6 +39517,7 @@ GameObject:
   - component: {fileID: 1843311056}
   - component: {fileID: 1843311058}
   - component: {fileID: 1843311057}
+  - component: {fileID: 1843311060}
   - component: {fileID: 1843311059}
   m_Layer: 5
   m_Name: Pause_Slot_1
@@ -39279,7 +39596,59 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  m_Delegates: []
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1429368871}
+          m_TargetAssemblyTypeName: PauseFunctionality, Assembly-CSharp
+          m_MethodName: UpdateStats
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 1843311060}
+            m_ObjectArgumentAssemblyTypeName: PauseSlotStats, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
+--- !u!114 &1843311060
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1843311055}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefbb8a70bb213d4896a17fc39f4bd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotNumber: 0
+  itemName: 
+  category: 0
+  segment: 0
+  itemType: 0
+  attackType: 0
+  currencyValue: 0
+  active: 0
+  dmg: 0
+  dps: 0
+  fireRate: 0
+  critX: 0
+  critChance: 0
+  range: 0
+  projectile: 0
+  projectileSpeed: 0
+  projectilePF: {fileID: 0}
+  modifier: 0
+  modifierID: 0
+  icon: {fileID: 0}
+  avtarPrefab: {fileID: 0}
+  avtarPrefabLeft: {fileID: 0}
+  avtarPrefabRight: {fileID: 0}
+  avtarPrefabBack: {fileID: 0}
 --- !u!1001 &1843911155
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -41065,7 +41434,7 @@ MonoBehaviour:
   m_HandleRect: {fileID: 1936135154}
   m_Direction: 2
   m_Value: 0
-  m_Size: 1
+  m_Size: 0.9999911
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:
@@ -44090,6 +44459,8 @@ GameObject:
   - component: {fileID: 2051759644}
   - component: {fileID: 2051759646}
   - component: {fileID: 2051759645}
+  - component: {fileID: 2051759647}
+  - component: {fileID: 2051759648}
   m_Layer: 5
   m_Name: Pause_Slot_5
   m_TagString: Untagged
@@ -44155,6 +44526,71 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2051759643}
   m_CullTransparentMesh: 1
+--- !u!114 &2051759647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051759643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fefbb8a70bb213d4896a17fc39f4bd1d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  slotNumber: 4
+  itemName: 
+  category: 0
+  segment: 0
+  itemType: 0
+  attackType: 0
+  currencyValue: 0
+  active: 0
+  dmg: 0
+  dps: 0
+  fireRate: 0
+  critX: 0
+  critChance: 0
+  range: 0
+  projectile: 0
+  projectileSpeed: 0
+  projectilePF: {fileID: 0}
+  modifier: 0
+  modifierID: 0
+  icon: {fileID: 0}
+  avtarPrefab: {fileID: 0}
+  avtarPrefabLeft: {fileID: 0}
+  avtarPrefabRight: {fileID: 0}
+  avtarPrefabBack: {fileID: 0}
+--- !u!114 &2051759648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2051759643}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0b148fe25e99eb48b9724523833bab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Delegates:
+  - eventID: 0
+    callback:
+      m_PersistentCalls:
+        m_Calls:
+        - m_Target: {fileID: 1429368871}
+          m_TargetAssemblyTypeName: PauseFunctionality, Assembly-CSharp
+          m_MethodName: UpdateStats
+          m_Mode: 2
+          m_Arguments:
+            m_ObjectArgument: {fileID: 2051759647}
+            m_ObjectArgumentAssemblyTypeName: PauseSlotStats, Assembly-CSharp
+            m_IntArgument: 0
+            m_FloatArgument: 0
+            m_StringArgument: 
+            m_BoolArgument: 0
+          m_CallState: 2
 --- !u!1 &2061885411
 GameObject:
   m_ObjectHideFlags: 0
