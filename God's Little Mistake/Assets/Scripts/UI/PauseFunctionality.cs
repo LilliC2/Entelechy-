@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class PauseFunctionality : GameBehaviour
 {
+    public int slotNumber;
     // Start is called before the first frame update
     void Start()
     {
@@ -20,4 +21,17 @@ public class PauseFunctionality : GameBehaviour
     {
         _GM.OnPause();
     }
+
+    public void SearchSlot()
+    {
+        //_AVTAR.slotsOnCanvas[slotNumber];
+
+        //_PC.playerInventory.(slotNumber)
+    }
+
+    //public List<Item> SearchForItemMatch(Item item)
+    //{
+    //    List<Item> itemMatchInPlayerInven = new();
+
+    //}
 }

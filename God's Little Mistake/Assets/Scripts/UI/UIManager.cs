@@ -143,7 +143,18 @@ public class UIManager : Singleton<UIManager>
         pausePanel.SetActive(false);
     }
 
+    public void Options()
+    {
+        pausePanel.SetActive(false); //temporary
+        //change to options panel here
+    }
 
+    public void OnExit()
+    {
+        pausePanel.SetActive(false); //temporary
+        //Turn on death panel
+        //Show score, time, etc.
+    }
 
 
     #endregion

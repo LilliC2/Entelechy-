@@ -70,6 +70,8 @@ public class GameManager : Singleton<GameManager>
         gameState = GameState.Playing;
     }
 
+    #region Pause Functions
+
     public void OnPause()
     {
         gameState = GameState.Pause;
@@ -83,5 +85,7 @@ public class GameManager : Singleton<GameManager>
         _UI.OnResume();
         Time.timeScale = 1;
     }
+
+    #endregion
 
 }
