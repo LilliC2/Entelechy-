@@ -86,6 +86,8 @@ public class UIManager : Singleton<UIManager>
 
     [Header("Pause")]
     public GameObject pausePanel;
+    public GameObject pauseFunctionalityPanel;
+    public GameObject optionPanel;
 
 
     //[Header("Inventory Comparison2")]
@@ -111,6 +113,7 @@ public class UIManager : Singleton<UIManager>
 
         //Pause Related
         pausePanel.SetActive(false);
+        optionPanel.SetActive(false);
 
     }
 
@@ -141,11 +144,20 @@ public class UIManager : Singleton<UIManager>
     public void OnResume()
     {
         pausePanel.SetActive(false);
+        optionPanel.SetActive(false);
     }
 
-    public void Options()
+    public void OptionsOpen()
     {
-        pausePanel.SetActive(false); //temporary
+        optionPanel.SetActive(true);
+        pauseFunctionalityPanel.SetActive(false);
+        //change to options panel here
+    }
+
+    public void OptionsClose()
+    {
+        optionPanel.SetActive(false);
+        pauseFunctionalityPanel.SetActive(true);
         //change to options panel here
     }
 
@@ -155,6 +167,8 @@ public class UIManager : Singleton<UIManager>
         //Turn on death panel
         //Show score, time, etc.
     }
+
+    
 
 
     #endregion
