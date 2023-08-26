@@ -26889,6 +26889,7 @@ GameObject:
   - component: {fileID: 1429368870}
   - component: {fileID: 1429368869}
   - component: {fileID: 1429368868}
+  - component: {fileID: 1429368871}
   m_Layer: 5
   m_Name: PausePanel
   m_TagString: Untagged
@@ -26930,7 +26931,7 @@ Animator:
   m_Avatar: {fileID: 0}
   m_Controller: {fileID: 9100000, guid: 9e4da9993c2f3f34a9a45d0c3024bf1a, type: 2}
   m_CullingMode: 0
-  m_UpdateMode: 0
+  m_UpdateMode: 2
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
   m_StabilizeFeet: 0
@@ -26959,7 +26960,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 10907, guid: 0000000000000000f000000000000000, type: 0}
+  m_Sprite: {fileID: 0}
   m_Type: 1
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -26977,6 +26978,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1429368866}
   m_CullTransparentMesh: 1
+--- !u!114 &1429368871
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1429368866}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 43a642d2ad109ac4a92d781d6c62daa7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1431826532
 GameObject:
   m_ObjectHideFlags: 0
