@@ -189,8 +189,9 @@ public class PlayerController : Singleton<PlayerController>
                 if(isGrounded)
                 {
                     lastPosOnGround = lastPos;
-                    var col = Physics.OverlapSphere(groundCheck.transform.position, 0.5f);
-                    tileLastStoodOn = col[0].gameObject;
+                    var col = Physics.OverlapSphere(groundCheck.transform.position, 0.5f, groundMask);
+                    if (col.Length != 0) tileLastStoodOn = col[0].gameObject;
+
                 }
                 else
                 {
@@ -199,6 +200,11 @@ public class PlayerController : Singleton<PlayerController>
                         //find closest tile, put player above
                         Vector3 targetPos = new Vector3(tileLastStoodOn.transform.position.x, 4, tileLastStoodOn.transform.position.z);
                         print("Put on ground");
+
+                        //player lose health when fall off
+
+                        health = (health / 2) - 1;
+                        
                         transform.position = targetPos;
 
                     }
