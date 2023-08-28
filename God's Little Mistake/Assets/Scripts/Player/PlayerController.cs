@@ -130,11 +130,11 @@ public class PlayerController : Singleton<PlayerController>
     void Update()
     {
         //for testing
-        //if (Input.GetKeyDown(KeyCode.Space))
-        //{
-        //    print("add chrom");
-        //    _PE.ChromaticABFade();
-        //}
+        if (Input.GetKeyDown(KeyCode.Space))
+            {
+                print("add chrom");
+                _PE.ChromaticABFade();
+            }
 
 
         UpdateMelee();
