@@ -12,6 +12,7 @@ public class EnemyRandomisation : GameBehaviour
     string[] categoryLegs = new string[] { "Legs", "Crawlies"};
 
     public List<string> categories;
+    public List<string> allCategories = new List<string> { "Eyes", "Horns", "Slappies", "Punchies", "Launchers", "Legs", "Crawlies" };
 
     public Sprite[] enemySpritesArray;
     public SpriteRenderer enemySprite;
@@ -23,6 +24,7 @@ public class EnemyRandomisation : GameBehaviour
     // Update is called once per frame
     void Start()
     {
+
         //
         colour = hueArray[Random.Range(0, hueArray.Length)];
 

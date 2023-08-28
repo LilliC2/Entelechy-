@@ -155,7 +155,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         
         _PC.dmg += _PC.playerInventory[_inventoryID].dmg;
         _PC.dps += _PC.playerInventory[_inventoryID].dps;
-        _PC.range += _PC.playerInventory[_inventoryID].range;
+        _PC.projectileRange += _PC.playerInventory[_inventoryID].range;
         _PC.projectileSpeed += _PC.playerInventory[_inventoryID].projectileSpeed;
 
 
@@ -176,7 +176,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         
         _PC.dmg -= _PC.playerInventory[_inventoryID].dmg;
         _PC.dps -= _PC.playerInventory[_inventoryID].dps;
-        _PC.range -= _PC.playerInventory[_inventoryID].range;
+        _PC.projectileRange -= _PC.playerInventory[_inventoryID].range;
         _PC.projectileSpeed -= _PC.playerInventory[_inventoryID].projectileSpeed;
         _PC.firerate -= _PC.playerInventory[_inventoryID].fireRate;
     }

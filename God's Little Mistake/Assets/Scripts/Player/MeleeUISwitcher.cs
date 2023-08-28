@@ -8,17 +8,17 @@ public class MeleeUISwitcher : GameBehaviour
 
     public void SwitchMeleeUI(int _itemID)
     {
-        print("Item ID is " + _itemID);
+        print("SwitchMeleeUI: Item ID is " + _itemID);
 
         switch (_itemID)
         {
-            case 8: //CLAW
+            case 7: //CLAW
                 TurnOffOtherUI(meleeUI[0]);
                 break;
-            case 6: //SLUG
+            case 5: //SLUG
                 TurnOffOtherUI(meleeUI[1]);
                 break;
-            case 9: //HUMAN FIST
+            case 8: //HUMAN FIST
                 TurnOffOtherUI(meleeUI[2]);
                 break;
 

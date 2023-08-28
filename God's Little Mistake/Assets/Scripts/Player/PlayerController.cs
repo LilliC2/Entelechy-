@@ -9,6 +9,8 @@ public class PlayerController : Singleton<PlayerController>
     public BearTrap bearTrap;
     public CactusTrap cactusTrap;
 
+    public bool immortal;
+
     #region Animation Variables
     [Header("Animation")]
     public Animator baseAnimator;
@@ -17,9 +19,6 @@ public class PlayerController : Singleton<PlayerController>
 
     public Animator[] slotsAnim;
     public GameObject[] slotsGO;
-
-    public GameObject torsoForward;
-    public GameObject bellyForward;
 
     public GameObject missyLeftSide;
     public GameObject missyRightSide;
@@ -35,6 +34,9 @@ public class PlayerController : Singleton<PlayerController>
 
 
     public List<Animator> legsAnimators;
+
+    bool meleeAnimationCooldown;
+
 
     Vector3 currentPos;
     Vector3 lastPos;
@@ -53,7 +55,8 @@ public class PlayerController : Singleton<PlayerController>
     public float maxSpeed;
     public float dmg;
     public float dps;
-    public float range;
+    public float projectileRange;
+    public float meleeRange;
     public float firerate;
 
     public bool projectile;
@@ -120,9 +123,10 @@ public class PlayerController : Singleton<PlayerController>
     void Update()
     {
         //for testing
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            _ISitemD.RemoveItemFromInventory(2);
+            print("add chrom");
+            _PE.ChromaticABFade();
         }
 
 
@@ -377,16 +381,18 @@ public class PlayerController : Singleton<PlayerController>
                             //check if primary is projectile
                             if (!playerInventory[i].projectile)
                             {
-                                //shoot
+                                //MELEE ATTACK
                                 if (meleeUI != null)
                                 {
+                                    print("MELEE ATTACK");
                                     meleeUI.gameObject.SetActive(true);
 
-                                    meleeUI.GetComponent<Animator>().SetTrigger("Attack2");
-                                    ExecuteAfterSeconds(1, () => meleeUI.gameObject.SetActive(false));
+
+
+                                    //ExecuteAfterFrames(26, () => meleeUI.gameObject.SetActive(false));
                                 }
 
-                                
+
 
                                 //active primary attack
 
@@ -397,13 +403,14 @@ public class PlayerController : Singleton<PlayerController>
 
 
 
-                                MeleeAttack(firerate);
+                                MeleeAttack(firerate, i);
                             }
                         }
                     }
 
                 }
-             
+ 
+
 
                 if (Input.GetMouseButton(0))
                 {
@@ -418,16 +425,9 @@ public class PlayerController : Singleton<PlayerController>
                                 //shoot
 
 
-
-                                //activate animation
-                                itemsAnimForward[i].SetTrigger("Attack");
-                                //itemsAnimBack[i].SetTrigger("Attack");
-                                itemsAnimLeftSide[i].SetTrigger("Attack");
-                                itemsAnimRightSide[i].SetTrigger("Attack");
-
                                 //changed to use player stats, the primary attack will just change
 
-                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, range);
+                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, projectileRange);
                                 if (knockbackActive)
                                 {
                                     float timeSinceKnockback = Time.time - knockbackStartTime;
@@ -528,6 +528,7 @@ public class PlayerController : Singleton<PlayerController>
             if(item !=null)
             {
                 _UI.CreateItemSelected(item);
+                item.active = true;
 
                 //check if item is arleady in inventory
             }
@@ -572,12 +573,12 @@ public class PlayerController : Singleton<PlayerController>
             case MeleeHitBox.Line:
                 lineHitbox.SetActive(true);
                 coneHitbox.SetActive(false);
-                lineHitbox.transform.localScale = new Vector3(1, 1, range);
+                lineHitbox.transform.localScale = new Vector3(1, 1, projectileRange);
                 break;
             case MeleeHitBox.Cone:
                 lineHitbox.SetActive(false);
                 coneHitbox.SetActive(true);
-                coneHitbox.transform.localScale = new Vector3(1, 1, range);
+                coneHitbox.transform.localScale = new Vector3(1, 1, projectileRange);
                 break;
         }
     }
@@ -607,34 +608,58 @@ public class PlayerController : Singleton<PlayerController>
                 //change melee UI
                 meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
                 meleeUI.gameObject.SetActive(false);
+                //change ui scale
+                meleeUI.GetComponentInParent<Transform>().localScale = new Vector3(meleeRange, meleeRange, meleeRange);
             }
 
             
         }
     }
 
-    void MeleeAttack(float _firerate)
+    void MeleeAttack(float _firerate, int _index)
     {
         var inRangeEnemies = GetComponentInChildren<MeleeRangeCheck>().inRangeEnemies;
 
+
         if (!meleeCooDown)
         {
-            if (inRangeEnemies.Count != 0)
+            if(!meleeAnimationCooldown)
             {
-                // add that enemey gets it, do with foreach in list, get enemy component then run hit script;
-                print(inRangeEnemies[0]);
-
-                foreach (var enemy in inRangeEnemies)
+                if(meleeUI != null)
                 {
-                    enemy.GetComponent<BaseEnemy>().Hit();
-                    if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
+                    meleeAnimationCooldown = true;
+                    meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                    //activate animation
+                    itemsAnimForward[_index].SetTrigger("Attack");
+                    itemsAnimBack[_index].SetTrigger("Attack");
+                    itemsAnimLeftSide[_index].SetTrigger("Attack");
+                    itemsAnimRightSide[_index].SetTrigger("Attack");
+                    ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
 
                 }
 
-                print("melee attack");
-                meleeCooDown = true;
-                ExecuteAfterSeconds(_firerate, () => meleeCooDown = false);
+                if (inRangeEnemies.Count != 0)
+                {
+
+                    // add that enemey gets it, do with foreach in list, get enemy component then run hit script;
+                    print("Enemies in range of melee attack" + inRangeEnemies[0]);
+
+                    foreach (var enemy in inRangeEnemies)
+                    {
+                        enemy.GetComponent<BaseEnemy>().Hit();
+                        if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
+
+                    }
+
+                    print("melee attack");
+                    meleeCooDown = true;
+                    ExecuteAfterSeconds(_firerate, () => meleeCooDown = false);
+                }
+
             }
+
+
+            
 
         }
 
@@ -694,18 +719,24 @@ public class PlayerController : Singleton<PlayerController>
 
     public void Hit(float _dmg)
     {
-        print("player has been hit");
-        health -= _dmg;
-        if (health > 0)
+        if(!immortal)
         {
-            _UI.UpdateHealthText(health);
+            print("player has been hit");
+            health -= _dmg;
+            _PE.ChromaticABFade();
+
+            if (health > 0)
+            {
+                _UI.UpdateHealthText(health);
+            }
+            else
+            {
+                _GM.gameState = GameManager.GameState.Dead;
+                DieAnimation();
+                //add particles in die animation too
+            }
         }
-        else
-        {
-            _GM.gameState = GameManager.GameState.Dead;
-            DieAnimation();
-            //add particles in die animation too
-        }
+        
 
     }
 

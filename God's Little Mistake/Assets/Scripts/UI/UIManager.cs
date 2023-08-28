@@ -96,7 +96,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void UpdateLevelext(int _lvl)
     {
-        levelText.text = _lvl.ToString();
+        levelText.text = "Level " + _lvl.ToString();
     }
 
     #region Inventory Item Stats Popup
@@ -212,7 +212,7 @@ public class UIManager : Singleton<UIManager>
         //Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
         //cursor.sprite = itemSprite;
         
-        statsPopUpPanel.SetActive(false);
+        //statsPopUpPanel.SetActive(false);
         isHoldingItem = true;
 
         int slot = 0;

@@ -130,11 +130,16 @@ public class EnemyShortRange : GameBehaviour
 
                 if (canAttack)
                 {
-                    print("Can Attack");
+                    //print("Can Attack");
                     PerformAttack(enemyStats.stats.fireRate);
 
                 }
 
+
+                break;
+            case BaseEnemy.EnemyState.Die:
+
+                BaseEnemy.Die();
 
                 break;
         }
@@ -155,7 +160,7 @@ public class EnemyShortRange : GameBehaviour
     {
         if (!attacking)
         {
-            print("Attack");
+            //print("Attack");
             //attack shit
 
             _PC.health -= enemyStats.stats.dmg;

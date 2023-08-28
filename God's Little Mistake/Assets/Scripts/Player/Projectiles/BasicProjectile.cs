@@ -32,7 +32,7 @@ public class BasicProjectile : GameBehaviour
 
 
             rb.velocity = Vector3.zero;
-            ExecuteAfterSeconds(0.5f, () => Destroy(this.gameObject));
+            ExecuteAfterSeconds(0.1f, () => Destroy(this.gameObject));
 
             //get dmg from enemy
             //Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);

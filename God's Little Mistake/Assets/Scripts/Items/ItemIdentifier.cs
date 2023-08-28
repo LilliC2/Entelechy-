@@ -45,7 +45,6 @@ public class ItemIdentifier : GameBehaviour
     {
         if (other.tag == "Player")
         {
-            print("player");
             inRange = false;
 
         }
@@ -53,7 +52,6 @@ public class ItemIdentifier : GameBehaviour
 
     public void OnMouseOver()
     {
-        print("HOVER");
         _UI.UpdateItemPopUp(itemInfo);
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
