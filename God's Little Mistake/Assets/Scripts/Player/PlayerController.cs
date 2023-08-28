@@ -244,6 +244,7 @@ public class PlayerController : Singleton<PlayerController>
                 //change for cardinal direction
                 if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
                 {
+                    StopAllAnimations();
 
                     if (lastDir == missyLeftSide)
                     {
@@ -266,7 +267,7 @@ public class PlayerController : Singleton<PlayerController>
                     if (lastDir != missyBack && lastDir != missyForward)
                     {
 
-
+                       
 
                         missyForward.SetActive(false);
 
@@ -285,6 +286,8 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.A)) //FACE LEFT
                 {
+                    StopAllAnimations();
+
                     _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
 
                     if(lastDir == missyForward)
@@ -324,7 +327,7 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.S)) //FACE FORWARD
                 {
-
+                    StopAllAnimations();
                     //print("Just pressed S. lastDir was " + lastDir.name);
                     if (lastDir == missyLeftSide)
                     {
@@ -360,7 +363,7 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.D)) //FACE RIGHT
                 {
-
+                    StopAllAnimations();
                     _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
 
 
@@ -543,6 +546,26 @@ public class PlayerController : Singleton<PlayerController>
 
 
         #endregion
+    }
+
+    void StopAllAnimations()
+    {
+        foreach (var animator in itemsAnimForward)
+        {
+            animator.StopPlayback();
+        }
+        foreach (var animator in itemsAnimBack)
+        {
+            animator.StopPlayback();
+        }
+        foreach (var animator in itemsAnimLeftSide)
+        {
+            animator.StopPlayback();
+        }
+        foreach (var animator in itemsAnimRightSide)
+        {
+            animator.StopPlayback();
+        }
     }
 
     public void UpdateLegAnimators()
