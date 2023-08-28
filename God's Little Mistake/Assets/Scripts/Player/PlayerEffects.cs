@@ -27,8 +27,8 @@ public class PlayerEffects : Singleton<PlayerEffects>
             
                 print("CHRROM");
                 chromab.intensity.value = speed;
-            TweenSpeed(0, 0.2f);
-            ExecuteAfterSeconds(0.2f, () => chromABbool = false);
+            TweenSpeed(0, 0.5f);
+            ExecuteAfterSeconds(0.5f, () => chromABbool = false);
         }
     }
 
