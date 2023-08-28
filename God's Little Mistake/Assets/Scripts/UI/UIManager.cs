@@ -7,6 +7,8 @@ using DG.Tweening;
 
 public class UIManager : Singleton<UIManager>
 {
+    public Item leftArmItem;
+    public Item rightArmItem;
 
     [Header("Player Feedback")]
     public TMP_Text hpText;

@@ -92,6 +92,34 @@ public class GameManager : Singleton<GameManager>
 
         }
 
+        if (gameState == GameState.Playing)
+        {
+            isPlaying = true;
+            isPaused = false;
+        }
+
+
+        if (gameState == GameState.Pause)
+        {
+            isPlaying = false;
+            isPaused = true;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Escape) && isPlaying)
+        {
+            OnPause();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && isPaused)
+        {
+            OnResume();
+        }
+
+        if (gameState == GameState.Dead)
+        {
+
+        }
     }
 
     void GenerateLevel()
