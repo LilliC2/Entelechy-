@@ -65,7 +65,7 @@ public class PauseFunctionality : GameBehaviour
 
         //_PC.playerInventory.(slotNumber)
 
-        _PC.playerInventory.Clear();
+        //_PC.playerInventory.Clear();
     }
 
     public void UpdateStats(PauseSlotStats _hoverItem)
