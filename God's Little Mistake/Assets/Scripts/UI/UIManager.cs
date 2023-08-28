@@ -554,6 +554,11 @@ public class UIManager : Singleton<UIManager>
 
         }
 
+        foreach (var item in itemMatchInPlayerInven)
+        {
+            print(item.itemName);
+        }
+
         /*
          * Is it projectile?
          * if(item.projectile == true) { IS PROJECTILE}
