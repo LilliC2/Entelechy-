@@ -7,12 +7,6 @@ using DG.Tweening;
 
 public class UIManager : Singleton<UIManager>
 {
-    
-    public TMP_Text playerHPText;
-    public TMP_Text roomLevelText;
-
-    public Item leftArmItem;
-    public Item rightArmItem;
 
     [Header("Player Feedback")]
     public TMP_Text hpText;
@@ -38,6 +32,11 @@ public class UIManager : Singleton<UIManager>
     public Image invenSlot4;
     public Image invenSlot5;
     public Image invenSlot6;
+
+    [Header("Missy Height")]
+    public GameObject playerAvatar;
+    Vector3 standard = new Vector3(0.239999443f, 0.0800049901f, -0.555116713f);
+    Vector3 tall = new Vector3(-0.0209999997f, -0.136000007f, 0.0540000014f);
 
     [Header("Item Hover Over Panel")]
     public GameObject statsPopUpPanel;
@@ -108,6 +107,7 @@ public class UIManager : Singleton<UIManager>
         statsPopUpPanel.SetActive(false);
         statComp1.SetActive(false);
         arrowComp.SetActive(false);
+        playerAvatar = GameObject.FindGameObjectWithTag("Player");
 
         anim1 = statComp1.GetComponent<Animator>();
 
@@ -328,21 +328,21 @@ public class UIManager : Singleton<UIManager>
 
         //Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
         //cursor.sprite = itemSprite;
-        
-        statsPopUpPanel.SetActive(false);
+
+        //statsPopUpPanel.SetActive(false);
         isHoldingItem = true;
 
         int slot = 0;
 
         //find segement
-        if(heldItem.segment == Item.Segment.Head)
+        if (heldItem.segment == Item.Segment.Head)
         {
             //find category
             if (heldItem.category == Item.Category.Horns)
             {
                 //check if slot is free
                 if (_AVTAR.slotsOnPlayerFront[0].transform.childCount == 0)
-                    slot = 0;   
+                    slot = 0;
             }
             if (heldItem.category == Item.Category.Eyes)
             {
@@ -360,28 +360,32 @@ public class UIManager : Singleton<UIManager>
             if (_AVTAR.slotsOnPlayerFront[3].transform.childCount == 0)
             {
                 slot = 3;
-                leftArmItem = heldItem;
             }
             else if (_AVTAR.slotsOnPlayerFront[4].transform.childCount == 0)
             {
                 slot = 4;
-                rightArmItem = heldItem;
             }
 
         }
         else if (heldItem.segment == Item.Segment.Legs)
         {
             if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
+            {
                 slot = 5;
+
+            }
+
         }
+
+        print(heldItem.itemName + " is on slot " + slot);
 
         EquipImage(slot);
 
         //check category
 
-            //check if slots in cateogry are free
+        //check if slots in cateogry are free
 
-            //if free then add it
+        //if free then add it
 
 
     }
@@ -401,37 +405,67 @@ public class UIManager : Singleton<UIManager>
         //print("in EquipImage ID is " + heldItem.ID);
 
 
-        _ISitemD.AddItemToInventory(heldItem.inSceneID);
-        //then instantiate prefab on player and detroy this iamge
-
-        var itemFront = Instantiate(heldItem.avtarPrefab, _AVTAR.slotsOnPlayerFront[_slot].transform);
-        var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
-        var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerRight[_slot].transform);
-        //var itemBackSide = Instantiate(heldItem.avtarPrefabBack, _AVTAR.slotsOnPlayerBack[_slot].transform);
-        
-
-
-        itemLeftSide.SetActive(false);
-        itemRightSide.SetActive(false);
-        //itemBackSide.SetActive(false);
-
-
-        if(heldItem.category == Item.Category.Mouth)
+        var itemExsists = false;
+        foreach (var item in _PC.playerInventory)
         {
-            _PC.UpdateMouthOB(itemFront, itemRightSide, itemLeftSide);
+            if (item == heldItem) itemExsists = true;
         }
 
+        if (itemExsists == false) _ISitemD.AddItemToInventory(heldItem);
 
-        _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
+
+
+        var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
+        var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerRight[_slot].transform);
         _PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());
         _PC.itemsAnimRightSide.Add(itemRightSide.GetComponentInChildren<Animator>());
-        //_PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+
+        //if torso piece make sure its correct
+
+        if (heldItem.segment == Item.Segment.Torso)
+        {
+            if (_slot == 4) //  RIGHT
+            {
+                //FRONT
+                var itemFront = Instantiate(heldItem.avatarPrefabFrontRight, _AVTAR.slotsOnPlayerFront[_slot].transform);
+                _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
+
+                //BACKL
+                var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
+                _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+
+            }
+            if (_slot == 3) // LEFT
+            {
+                //FRONT
+                var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
+                _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
 
 
+                var itemBackSide = Instantiate(heldItem.avtarPrefabBackRight, _AVTAR.slotsOnPlayerBack[_slot].transform);
+                _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+
+                //BACKK
+
+            }
+
+        }
+        else
+        {
+            //default left
+            var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
+            _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
+
+            var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
+            _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
+        }
+
+        if (heldItem.segment == Item.Segment.Legs) _PC.UpdateLegAnimators();
 
 
+        CheckHeight();
 
-        if (flip) itemFront.transform.localScale = new Vector3(-itemFront.transform.rotation.x, itemFront.transform.rotation.y, itemFront.transform.rotation.z);
+        // (flip) itemFront.transform.localScale = new Vector3(-itemFront.transform.rotation.x, itemFront.transform.rotation.y, itemFront.transform.rotation.z);
 
         //FOR ALL OTHER ITEMS
 
@@ -440,11 +474,38 @@ public class UIManager : Singleton<UIManager>
         isHoldingItem = false;
         //rotate image
 
-        _PC.CloseSlots();
+        //_PC.CloseSlots();
     }
 
 
+    public void CheckHeight()
+    {
+        //find leg item
+        for (int i = 0; i < _PC.playerInventory.Count; i++)
+        {
+            if (_PC.playerInventory[i].segment == Item.Segment.Legs)
+            {
+                //6 tripod legs, 10 hoover
+                if (_PC.playerInventory[i].ID == 10 || _PC.playerInventory[i].ID == 6)
+                {
+                    print("Go taller");
+                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, tall.y, playerAvatar.transform.position.z);
+                }
+                else
+                {
+                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, standard.y, playerAvatar.transform.position.z);
+                }
+            }
+        }
 
+
+        //check if item is mean to be tall
+
+        //if yes raise height
+
+        //if no, keep standard
+
+    }
 
     /// <summary>
     /// Checks whether held item can be placed on slot that is hovered over
@@ -516,6 +577,7 @@ public class UIManager : Singleton<UIManager>
     //}
 
     #endregion
+
 
     public List<Item> SearchForItemMatch(Item _hoverItem)
     {
