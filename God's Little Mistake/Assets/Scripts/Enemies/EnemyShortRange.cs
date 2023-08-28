@@ -163,7 +163,8 @@ public class EnemyShortRange : GameBehaviour
             //print("Attack");
             //attack shit
 
-            _PC.health -= enemyStats.stats.dmg;
+            _PC.Hit(enemyStats.stats.dmg);
+
 
             attacking = true;
             ExecuteAfterSeconds(_firerate, () => attacking = false);
