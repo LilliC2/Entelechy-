@@ -77,7 +77,7 @@ public class GameManager : Singleton<GameManager>
 
         var randomLevel = Random.Range(0, 2); // last digit excluded
 
-        GameObject currentLevel = Instantiate(Resources.Load("Floor "+randomLevel, typeof(GameObject)), levelParent) as GameObject;
+        GameObject currentLevel = Instantiate(Resources.Load("Enviroment_Floor "+randomLevel, typeof(GameObject)), levelParent) as GameObject;
 
         //find beginning room
 
