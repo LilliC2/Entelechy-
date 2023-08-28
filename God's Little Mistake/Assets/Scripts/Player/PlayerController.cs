@@ -550,22 +550,23 @@ public class PlayerController : Singleton<PlayerController>
 
     void StopAllAnimations()
     {
-        foreach (var animator in itemsAnimForward)
-        {
-            animator.StopPlayback();
-        }
-        foreach (var animator in itemsAnimBack)
-        {
-            animator.StopPlayback();
-        }
-        foreach (var animator in itemsAnimLeftSide)
-        {
-            animator.StopPlayback();
-        }
-        foreach (var animator in itemsAnimRightSide)
-        {
-            animator.StopPlayback();
-        }
+        //foreach (var animator in itemsAnimForward)
+        //{
+        //    animator.StopPlayback();
+        //}
+        //foreach (var animator in itemsAnimBack)
+        //{
+        //    if(animator.)
+        //    animator.StopPlayback();
+        //}
+        //foreach (var animator in itemsAnimLeftSide)
+        //{
+        //    animator.StopPlayback();
+        //}
+        //foreach (var animator in itemsAnimRightSide)
+        //{
+        //    animator.StopPlayback();
+        //}
     }
 
     public void UpdateLegAnimators()
