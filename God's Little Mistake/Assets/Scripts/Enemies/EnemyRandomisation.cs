@@ -12,6 +12,7 @@ public class EnemyRandomisation : GameBehaviour
     string[] categoryLegs = new string[] { "Legs", "Crawlies"};
 
     public List<string> categories;
+    public List<string> allCategories = new List<string> { "Eyes", "Horns", "Slappies", "Punchies", "Launchers", "Legs", "Crawlies" };
 
     public Sprite[] enemySpritesArray;
     public SpriteRenderer enemySprite;
@@ -23,10 +24,11 @@ public class EnemyRandomisation : GameBehaviour
     // Update is called once per frame
     void Start()
     {
+
         //
         colour = hueArray[Random.Range(0, hueArray.Length)];
 
-        enemySprite.sprite = enemySpritesArray[Random.Range(0, enemySpritesArray.Length)];
+        //enemySprite.sprite = enemySpritesArray[Random.Range(0, enemySpritesArray.Length)];
 
 
         enemySprite.color = colour;
@@ -36,45 +38,45 @@ public class EnemyRandomisation : GameBehaviour
 
         //Top slot
         //HEAD
-        if (Random.Range(0,2) == 1)
-        {
-            EquipItem(0, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length )]));
+        //if (Random.Range(0,2) == 1)
+        //{
+        //    EquipItem(0, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length )]));
 
-        }
+        //}
         
-        if(Random.Range(0, 2) == 1)
-        {
-            EquipItem(1, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
+        //if(Random.Range(0, 2) == 1)
+        //{
+        //    EquipItem(1, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
 
-        }
-        if(Random.Range(0, 2) == 1)
-        {
-            EquipItem(2, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
+        //}
+        //if(Random.Range(0, 2) == 1)
+        //{
+        //    EquipItem(2, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
 
-        }
+        //}
         
-        //MOUTH
-        if(Random.Range(0, 2) == 1)
-        {
-            EquipItem(3, GenerateItem("Mouth"));
+        ////MOUTH
+        //if(Random.Range(0, 2) == 1)
+        //{
+        //    EquipItem(3, GenerateItem("Mouth"));
 
 
-        }
+        //}
 
-        //TORSO
-        if (Random.Range(0, 2) == 1)
-        {
-            EquipItem(4, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
+        ////TORSO
+        //if (Random.Range(0, 2) == 1)
+        //{
+        //    EquipItem(4, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
 
-        }
-        if (Random.Range(0, 2) == 1)
-        {
-            EquipItem(5, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
+        //}
+        //if (Random.Range(0, 2) == 1)
+        //{
+        //    EquipItem(5, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
 
-        }
+        //}
 
-        //LEGS
-        EquipItem(6, GenerateItem(categoryLegs[Random.Range(0,categoryLegs.Length)]));
+        ////LEGS
+        //EquipItem(6, GenerateItem(categoryLegs[Random.Range(0,categoryLegs.Length)]));
 
 
 
@@ -118,7 +120,7 @@ public class EnemyRandomisation : GameBehaviour
             if (_ItemD.itemDataBase[i].category.ToString() == _category)
             {
                 //possibleDrops.Add(_ItemD.itemDataBase[i]);
-                prefab = _ItemD.itemDataBase[i].avtarPrefab;
+                prefab = _ItemD.itemDataBase[i].avatarPrefabFrontLeft;
 
             }
         }

@@ -10,7 +10,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
     /// Adds item to players inventory and removes it from scene
     /// </summary>
     /// <param name="_sceneID"></param>
-    public void AddItemToInventory(int _sceneID)
+    public void AddItemToInventory(Item _item)
     {
         
 
@@ -20,19 +20,10 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
 
             _UI.statsPopUpPanel.SetActive(false);
-            _PC.playerInventory.Add(inSceneItemDataBase[_sceneID]);
+            _PC.playerInventory.Add(_item);
             //print("added item");
-            inSceneItemDataBase.Remove(inSceneItemDataBase[_sceneID]);
 
-            //move all items in list downm (automatic)
 
-            //THIS DOESNT WORK CAUSE OF THE ITEM IDS
-
-            //make sure their ids stay the same!!!
-            for (int i = _sceneID; i < inSceneItemDataBase.Count; i++)
-            {
-                inSceneItemDataBase[i].inSceneID = inSceneItemDataBase[i].inSceneID - 1;
-            }
 
             //change items
             GameObject[] itemsOnGround = GameObject.FindGameObjectsWithTag("Item Drop");
@@ -164,7 +155,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         
         _PC.dmg += _PC.playerInventory[_inventoryID].dmg;
         _PC.dps += _PC.playerInventory[_inventoryID].dps;
-        _PC.range += _PC.playerInventory[_inventoryID].range;
+        _PC.projectileRange += _PC.playerInventory[_inventoryID].range;
         _PC.projectileSpeed += _PC.playerInventory[_inventoryID].projectileSpeed;
 
 
@@ -185,7 +176,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         
         _PC.dmg -= _PC.playerInventory[_inventoryID].dmg;
         _PC.dps -= _PC.playerInventory[_inventoryID].dps;
-        _PC.range -= _PC.playerInventory[_inventoryID].range;
+        _PC.projectileRange -= _PC.playerInventory[_inventoryID].range;
         _PC.projectileSpeed -= _PC.playerInventory[_inventoryID].projectileSpeed;
         _PC.firerate -= _PC.playerInventory[_inventoryID].fireRate;
     }

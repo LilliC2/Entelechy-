@@ -25,7 +25,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
 
         //check game level
 
-        //generate item level
+        //generate item levelds
     }
 
     public GameObject GenerateItem(string _category)
@@ -55,15 +55,13 @@ public class ItemGeneration : Singleton<ItemGeneration>
          */
 
         //add item to inscene list
-        _ISitemD.inSceneItemDataBase.Add(itemSpawned);
+        //_ISitemD.inSceneItemDataBase.Add(itemSpawned);
 
         //give item inscene id
-        int index = _ISitemD.inSceneItemDataBase.Count - 1;
-        _ISitemD.inSceneItemDataBase[index].inSceneID = index;
 
         //give item script inscene id
         itemTemp.GetComponentInChildren<ItemIdentifier>().itemInfo = itemSpawned;
-
+        
         
 
         return itemTemp;

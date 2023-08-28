@@ -1,0 +1,103 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6787832192589604173
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 9027309925178198750}
+  - component: {fileID: 6241059122993911884}
+  m_Layer: 0
+  m_Name: UIManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &9027309925178198750
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6787832192589604173}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 206.18956, y: 99.69409, z: -1.7817383}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &6241059122993911884
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6787832192589604173}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 48ff43d752a7ddb4cb6ce64842f39e3f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroy: 0
+  hpText: {fileID: 0}
+  levelText: {fileID: 0}
+  defaultCursor: {fileID: 21300000, guid: 5173b9a6d0ba5e94c935a8597ac166c2, type: 3}
+  cursor: {fileID: 0}
+  cursorClick: {fileID: 21300000, guid: 93aab99cd7e2020468f0d7b4e386d58c, type: 3}
+  canvas: {fileID: 0}
+  playerCanvas: {fileID: 0}
+  heldItem:
+    itemName: 
+    ID: 0
+    lvl: 0
+    category: 0
+    segment: 0
+    itemType: 0
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    dps: 0
+    fireRate: 0
+    critX: 0
+    critChance: 0
+    range: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  isHoldingItem: 0
+  emptySlotSprite: {fileID: 21300000, guid: 6bb92db56863a49bf9fc5e992e334d82, type: 3}
+  invenSlot0: {fileID: 0}
+  invenSlot1: {fileID: 0}
+  invenSlot2: {fileID: 0}
+  invenSlot3: {fileID: 0}
+  invenSlot4: {fileID: 0}
+  invenSlot5: {fileID: 0}
+  invenSlot6: {fileID: 0}
+  statsPopUpPanel: {fileID: 0}
+  popupName: {fileID: 0}
+  popupDmg: {fileID: 0}
+  popupCritX: {fileID: 0}
+  popupCritChance: {fileID: 0}
+  popupFirerate: {fileID: 0}
+  invenSegementPopUpPanel: {fileID: 0}
+  invenPopupName: {fileID: 0}
+  invenPopupDmg: {fileID: 0}
+  invenPopupCritX: {fileID: 0}
+  invenPopupCritChance: {fileID: 0}
+  invenPopupFirerate: {fileID: 0}
+  playerAvatar: {fileID: 0}

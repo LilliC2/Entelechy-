@@ -5,19 +5,22 @@ using UnityEngine;
 public class EnemyProjectile : GameBehaviour
 {
     public float dmg;
-    
+    bool hit = false;
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Player"))
         {
-            print("player has been hit in collision");
-            _PC.Hit(dmg);
+            if(!hit)
+            {
+                hit = true;
+                print("player has been hit in collision");
+                _PC.Hit(dmg);
 
 
-            ExecuteAfterSeconds(1, () => Destroy(this.gameObject));
-            
-            //get dmg from enemy
-            //Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);
+                Destroy(this.gameObject);
+            }
+
         }
     }
 }

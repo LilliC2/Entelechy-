@@ -24,6 +24,10 @@ public class BaseEnemy : GameBehaviour
     [SerializeField]
     GameObject enemyVisuals;
 
+    bool spawnItem = false;
+    bool spawnHealPool = false;
+    bool died = false;
+
     public SpriteRenderer image;
     public EnemyStats stats;
     public GameObject healPool;
@@ -33,10 +37,10 @@ public class BaseEnemy : GameBehaviour
         image = GetComponentInChildren<SpriteRenderer>();
         enemyRnd = GetComponentInChildren<EnemyRandomisation>();
 
-        string cat = enemyRnd.categories[Random.Range(0, enemyRnd.categories.Count)];
+        string cat = enemyRnd.allCategories[Random.Range(0, enemyRnd.allCategories.Count)];
 
         stats.category = (EnemyStats.Category)System.Enum.Parse(typeof(EnemyStats.Category), cat);
-        print("this enemies category is " + cat + " and is set to " + stats.category);
+        //print("this enemies category is " + cat + " and is set to " + stats.category);
     }
 
     private void Update()
@@ -70,14 +74,7 @@ public class BaseEnemy : GameBehaviour
             //print(enemyStats.stats.health);
         }
     }
-    void MeleeHit()
-    {
-        if (stats.health > 0)
-        {
-            stats.health -= _MA.DMGOutput;
-            //print(enemyStats.stats.health);
-        }
-    }
+
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -90,50 +87,62 @@ public class BaseEnemy : GameBehaviour
             //destroy bullet that hit it
             //Destroy(collision.gameObject);
         }
-        if (collision.collider.CompareTag("Melee"))
-        {
-            print("melee hit");
-            //Add hit code here;
-            MeleeHit();
-        }
+
     }
 
     public void Die()
     {
-
-        Destroy(GetComponent<EnemyLongRange>());
-
-        //turn off collider
-        gameObject.GetComponent<CapsuleCollider>().enabled = false;
-        enemyVisuals.SetActive(false);
-
-        //run partciles
-        deathParticles.Play();
-
-        explosionAnimOB.SetActive(true);
-        //ooze animation
-        explosionAnim.SetTrigger("Death");
-
-        //eye is for testing
-        int rand = 1; //Random.Range(0, 4);
-
-        switch(rand)
+        if(!died)
         {
-            case 1:
-                GameObject item =Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
-                
+            died = true;
 
-                item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+            Destroy(GetComponent<EnemyLongRange>());
 
-                print("Spawning item of " + stats.category.ToString() + " category");
-                break;
-            case 2:
-                Instantiate(healPool, gameObject.transform.position, Quaternion.identity);
-                break;
+            //turn off collider
+            gameObject.GetComponent<CapsuleCollider>().enabled = false;
+            enemyVisuals.SetActive(false);
+
+            //run partciles
+            deathParticles.Play();
+
+            explosionAnimOB.SetActive(true);
+            //ooze animation
+            explosionAnim.SetTrigger("Death");
+
+            //eye is for testing
+            int rand = Random.Range(0, 4);
+
+            switch (rand)
+            {
+                case 1:
+
+                    if (!spawnItem)
+                    {
+                        spawnItem = true;
+                        GameObject item = Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
+
+
+                        item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+
+                        print("Spawning item of " + stats.category.ToString() + " category");
+                    }
+
+                    break;
+                case 2:
+                    if(!spawnHealPool)
+                    {
+                        spawnHealPool = true;
+                        Instantiate(healPool, gameObject.transform.position, Quaternion.identity);
+
+                    }
+                    break;
+            }
+
+
+            ExecuteAfterSeconds(0.5f, () => Destroy(this.gameObject));
         }
 
-
-        ExecuteAfterSeconds(1, () => Destroy(this.gameObject));
+        
         
     }
 }
