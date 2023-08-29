@@ -86,9 +86,9 @@ public class GameManager : Singleton<GameManager>
     {
         if(readyForGeneration)
         {
-            print("Generate new level");
-            GenerateLevel();
-            _EM.SpawnEnemiesForLevel();
+            //print("Generate new level");
+            //GenerateLevel();
+            //_EM.SpawnEnemiesForLevel();
 
         }
 

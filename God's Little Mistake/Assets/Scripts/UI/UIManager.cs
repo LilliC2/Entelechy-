@@ -47,6 +47,7 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text popupCritX;
     public TMP_Text popupCritChance;
     public TMP_Text popupFirerate;
+    public Image popupIcon;
 
     [Header("Global Scroll UI")]
     public RectTransform scrollContent;
@@ -184,12 +185,15 @@ public class UIManager : Singleton<UIManager>
         popupCritX.text = _hoverItem.critX.ToString();
         popupCritChance.text = _hoverItem.critChance.ToString();
         popupFirerate.text = _hoverItem.fireRate.ToString();
+        popupIcon.sprite = _hoverItem.icon;
+
+        print("Update pop up");
 
         var matchItem = SearchForItemMatch(_hoverItem);
 
-        if (matchItem != null)
-            print(matchItem[0]);
-        else print("no match");
+        //if (matchItem != null)
+        //    print(matchItem[0]);
+        //else print("no match");
     }
 
     public void UpdateItemPopUpComp1(Item _hoverItem)
