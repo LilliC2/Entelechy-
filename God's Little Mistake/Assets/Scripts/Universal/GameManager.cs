@@ -47,13 +47,13 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if(readyForGeneration)
-        {
-            print("Generate new level");
-            GenerateLevel();
-            _EM.SpawnEnemiesForLevel();
+        //if(readyForGeneration)
+        //{
+        //    print("Generate new level");
+        //    GenerateLevel();
+        //    _EM.SpawnEnemiesForLevel();
 
-        }
+        //}
 
     }
 

@@ -96,7 +96,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void UpdateLevelext(int _lvl)
     {
-        levelText.text = "Level " + _lvl.ToString();
+        //levelText.text = "Level " + _lvl.ToString();
     }
 
     #region Inventory Item Stats Popup
