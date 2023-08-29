@@ -720,8 +720,12 @@ public class PlayerController : Singleton<PlayerController>
 
                     foreach (var enemy in inRangeEnemies)
                     {
-                        enemy.GetComponent<BaseEnemy>().Hit();
-                        if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
+                        if(enemy != null)
+                        {
+                            enemy.GetComponent<BaseEnemy>().Hit();
+                            if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
+                        }
+
 
                     }
 
@@ -782,7 +786,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             print("player has been hit");
             health -= _dmg;
-            _PE.ChromaticABFade();
+            //_PE.ChromaticABFade();
 
             if (health > 0)
             {
