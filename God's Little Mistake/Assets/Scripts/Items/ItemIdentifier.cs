@@ -78,55 +78,81 @@ public class ItemIdentifier : GameBehaviour
     public void OnMouseOver()
     {
         print("ENTER");
+
+
+        //Stats for item mouse is hovering
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         _UI.UpdateItemPopUp(itemInfo);
         anim.SetTrigger("Open");
 
-        List<Item> itemMatchInPlayerInven = new();
+        //search for matches
+        var matchItemList = _UI.SearchForItemMatch(itemInfo);
 
-        foreach (var item in _PC.playerInventory)
+        //Check if there are any matches
+        if (matchItemList.Count == 0)
+            print(matchItemList);
+        else print("no match");
+
+        //If there is only one match
+        if(matchItemList.Count == 1)
         {
-            if (item.segment == itemInfo.segment)
-            {
-                print("ITS A MATCH");
-                _UI.statComp1.SetActive(true);
-                anim1.SetTrigger("Open");
-                _UI.arrowComp.SetActive(true);
-                _UI.UpdateItemPopUpComp1(itemInfo);
-            }
+            //stats for matched item
+            print("ITS A MATCH");
+            _UI.statComp1.SetActive(true);
+            anim1.SetTrigger("Open");
+            _UI.arrowComp.SetActive(true);
+            _UI.UpdateItemPopUpComp1(matchItemList[0]);
         }
 
-            //var match = _UI.SearchForItemMatch(itemInfo);
+        //If there is two matches
+        if (matchItemList.Count == 2)
+        {
+            //stats for matched item 1
+            print("ITS A MATCH");
+            _UI.statComp1.SetActive(true);
+            anim1.SetTrigger("Open");
+            _UI.arrowComp.SetActive(true);
+            _UI.UpdateItemPopUpComp1(matchItemList[0]);
 
-
-            //foreach (var item in match)
-            //{
-            //    if (item != null)
-            //    {
-            //        print("ITS A MATCH");
-            //        _UI.statComp1.SetActive(true);
-            //        anim1.SetTrigger("Open");
-            //        _UI.arrowComp.SetActive(true);
-            //        _UI.UpdateItemPopUpComp1(itemInfo);
-            //    }
-            //}
-
-            //foreach (var item in _PC.playerInventory)
-            //{
-            //    if (item.segment == itemInfo.segment)
-            //    {
-            //        print("ITS A MATCH");
-            //        _UI.statComp1.SetActive(true);
-            //        anim1.SetTrigger("Open");
-            //        _UI.arrowComp.SetActive(true);
-            //        _UI.UpdateItemPopUpComp1(itemInfo);
-            //    }
-
-
-
-            //}
+            //add in updating ui here for the second one.
+            _UI.statComp2.SetActive(true);
+            //anim1.SetTrigger("Open");
+            _UI.arrowComp.SetActive(true);
+            _UI.UpdateItemPopUpComp2(matchItemList[1]);
         }
+
+
+        //var match = _UI.SearchForItemMatch(itemInfo);
+
+
+        //foreach (var item in match)
+        //{
+        //    if (item != null)
+        //    {
+        //        print("ITS A MATCH");
+        //        _UI.statComp1.SetActive(true);
+        //        anim1.SetTrigger("Open");
+        //        _UI.arrowComp.SetActive(true);
+        //        _UI.UpdateItemPopUpComp1(itemInfo);
+        //    }
+        //}
+
+        //foreach (var item in _PC.playerInventory)
+        //{
+        //    if (item.segment == itemInfo.segment)
+        //    {
+        //        print("ITS A MATCH");
+        //        _UI.statComp1.SetActive(true);
+        //        anim1.SetTrigger("Open");
+        //        _UI.arrowComp.SetActive(true);
+        //        _UI.UpdateItemPopUpComp1(itemInfo);
+        //    }
+
+
+
+        //}
+    }
 
     public void OnMouseExit()
     {

@@ -81,10 +81,12 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text popupCritX1;
     public TMP_Text popupCritChance1;
     public TMP_Text popupFirerate1;
+    public Image popupIcon1;
 
     [Header("Animation")]
-    public Animator anim;
-    public Animator anim1;
+    public Animator hoverItemAnimator;
+    public Animator hoverItemStatComp1Animator;
+    public Animator hoverItemStatComp2Animator;
 
     [Header("Pause")]
     public GameObject pausePanel;
@@ -92,13 +94,15 @@ public class UIManager : Singleton<UIManager>
     public GameObject optionPanel;
 
 
-    //[Header("Inventory Comparison2")]
-    //public GameObject statComp2;
-    //public TMP_Text popupName2;
-    //public TMP_Text popupDmg2;
-    //public TMP_Text popupCritX2;
-    //public TMP_Text popupCritChance2;
-    //public TMP_Text popupFirerate2;
+    [Header("Inventory Comparison2")]
+    public GameObject statComp2;
+    public TMP_Text popupName2;
+    public TMP_Text popupDmg2;
+    public TMP_Text popupCritX2;
+    public TMP_Text popupCritChance2;
+    public TMP_Text popupFirerate2;
+    public Image popupIcon2;
+
 
 
 
@@ -112,7 +116,7 @@ public class UIManager : Singleton<UIManager>
         arrowComp.SetActive(false);
         playerAvatar = GameObject.FindGameObjectWithTag("Player");
 
-        anim1 = statComp1.GetComponent<Animator>();
+        hoverItemStatComp1Animator = statComp1.GetComponent<Animator>();
 
         //Pause Related
         pausePanel.SetActive(false);
@@ -189,6 +193,7 @@ public class UIManager : Singleton<UIManager>
 
         print("Update pop up");
 
+        //Search for matches to item mouse is hovering over
         var matchItem = SearchForItemMatch(_hoverItem);
 
         //if (matchItem != null)
@@ -196,21 +201,34 @@ public class UIManager : Singleton<UIManager>
         //else print("no match");
     }
 
-    public void UpdateItemPopUpComp1(Item _hoverItem)
+    //For comparison 1
+    public void UpdateItemPopUpComp1(Item _itemInfo)
     {
         //ADD LATER FORMATTING FOR FLOATS
 
-        popupName1.text = _hoverItem.itemName;
-        popupDmg1.text = _hoverItem.dmg.ToString();
-        popupCritX1.text = _hoverItem.critX.ToString();
-        popupCritChance1.text = _hoverItem.critChance.ToString();
-        popupFirerate1.text = _hoverItem.fireRate.ToString();
+        popupName1.text = _itemInfo.itemName;
+        popupDmg1.text = _itemInfo.dmg.ToString();
+        popupCritX1.text = _itemInfo.critX.ToString();
+        popupCritChance1.text = _itemInfo.critChance.ToString();
+        popupFirerate1.text = _itemInfo.fireRate.ToString();
+        popupIcon1.sprite = _itemInfo.icon;
 
-        var matchItem = SearchForItemMatch(_hoverItem);
 
-        if (matchItem != null)
-            print(matchItem[0]);
-        else print("no match");
+
+    }
+    public void UpdateItemPopUpComp2(Item _itemInfo)
+    {
+        //ADD LATER FORMATTING FOR FLOATS
+
+        popupName2.text = _itemInfo.itemName;
+        popupDmg2.text = _itemInfo.dmg.ToString();
+        popupCritX2.text = _itemInfo.critX.ToString();
+        popupCritChance2.text = _itemInfo.critChance.ToString();
+        popupFirerate2.text = _itemInfo.fireRate.ToString();
+        popupIcon2.sprite = _itemInfo.icon;
+
+
+
     }
 
     public void UpdateHealthText(float _hp)
@@ -596,55 +614,18 @@ public class UIManager : Singleton<UIManager>
             if(item.segment == _hoverItem.segment)
             {
                 itemMatchInPlayerInven.Add(item);
-
-
-                //print("ITS A MATCH");
-                //statComp1.SetActive(true);
-                //anim1.SetTrigger("Open");
-                //arrowComp.SetActive(true);
-                //UpdateItemPopUpComp1(item);
             }
 
-            //if (item.projectile == true)
-            //{
-            //    attackPill.GetComponent<SpriteRenderer>().color = new Color(220, 255, 0);
-            //}
-            //else
-            //{
-            //    attackPill.GetComponent<SpriteRenderer>().color = new Color(0, 154, 255);
-
-            //}
-
-            var icon = item.icon;
-
-
-
+            //var icon = item.icon;
 
         }
 
         foreach (var item in itemMatchInPlayerInven)
         {
+            print("Printing Item list: ");
             print(item.itemName);
         }
-
-        /*
-         * Is it projectile?
-         * if(item.projectile == true) { IS PROJECTILE}
-         * 
-         * Get Icon
-         * var icon = item.icon
-         * 
-         * Get Attack Type
-         * var attackType = icon.attackType
-         * 
-         * Get Segment Type
-         * var segment = icon.segment
-         * 
-         * Get Range
-         * 
-         * item.range9
-         */
-
+        if (itemMatchInPlayerInven.Count == 0) print("No Matches found");
 
 
         return itemMatchInPlayerInven;
