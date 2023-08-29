@@ -10,6 +10,8 @@ public class LandmineTrap : GameBehaviour
 
     public Color triggeredColor = Color.red;
 
+    bool hitPlayer;
+
     private bool exploded = false;
     private SpriteRenderer trapRenderer;
 
@@ -52,10 +54,10 @@ public class LandmineTrap : GameBehaviour
                     if (target.CompareTag("Player"))
                     {
                         //ensures that it doesn't include hit colliders in calcuation
-                        if(target.name.Contains("Player"))
+                        if(!hitPlayer)
                         {
+                            hitPlayer = true;
                             _PC.health -= damageAmount;
-
                         }
 
                     }
