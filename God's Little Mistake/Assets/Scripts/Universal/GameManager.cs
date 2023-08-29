@@ -47,7 +47,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if(readyForGeneration)
+        if (readyForGeneration && SceneManager.GetActiveScene().name == "GameLoopPrototype")
         {
             print("Generate new level");
             GenerateLevel();
