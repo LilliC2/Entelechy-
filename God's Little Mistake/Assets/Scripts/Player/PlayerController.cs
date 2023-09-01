@@ -427,7 +427,7 @@ public class PlayerController : Singleton<PlayerController>
 
                                 //changed to use player stats, the primary attack will just change
 
-                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, projectileRange);
+                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, projectileRange, i);
                                 if (knockbackActive)
                                 {
                                     float timeSinceKnockback = Time.time - knockbackStartTime;
@@ -665,7 +665,7 @@ public class PlayerController : Singleton<PlayerController>
 
     }
 
-    void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
+    void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range, int _index)
     {
         Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
@@ -683,6 +683,12 @@ public class PlayerController : Singleton<PlayerController>
 
             if (!projectileShot)
             {
+
+                itemsAnimForward[_index].SetTrigger("Attack");
+                if (itemsAnimBack[_index] != null) itemsAnimBack[_index].SetTrigger("Attack");
+                itemsAnimLeftSide[_index].SetTrigger("Attack");
+                itemsAnimRightSide[_index].SetTrigger("Attack");
+
 
                 //particle system
                 var particleSystem = GetComponentInChildren<ParticleSystem>();
