@@ -63,7 +63,7 @@ public class GameManager : Singleton<GameManager>
     {
         var currentScene = SceneManager.GetActiveScene().name;
         Time.timeScale = 1f;
-        dungeonLevel = 1;
+        dungeonLevel = 0;
         readyForGeneration = true;
         
         //SceneManager.LoadScene(currentScene);
@@ -83,6 +83,7 @@ public class GameManager : Singleton<GameManager>
 
         //give player tentacle mouth
         _ISitemD.AddItemToInventory(_ItemD.itemDataBase[9]);
+        gameState = GameState.Playing;
     }
 
     void GenerateLevel()
