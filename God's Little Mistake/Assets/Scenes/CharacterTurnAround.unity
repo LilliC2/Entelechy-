@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 262.33694, g: 325.04984, b: 430.2193, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -1414,7 +1414,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.ID
-      value: 9
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.dmg
@@ -1427,18 +1427,18 @@ PrefabInstance:
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.icon
       value: 
-      objectReference: {fileID: 21300000, guid: 7bc417d86db616f4a8dbe7f55b1445e3, type: 3}
+      objectReference: {fileID: 21300000, guid: 39a38614989899547bb7401eb9884ec2, type: 3}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.range
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.segment
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.category
-      value: 3
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.fireRate
@@ -1446,7 +1446,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.itemName
-      value: Human Arm
+      value: Slug Eye
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.itemType
@@ -1467,27 +1467,27 @@ PrefabInstance:
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avtarPrefabLeft
       value: 
-      objectReference: {fileID: 3304035445752850085, guid: ddec4422571eaa54887a087a398f8c19, type: 3}
+      objectReference: {fileID: 8630172562931530007, guid: c292bc9ab191c3244950a1a885a6f9ed, type: 3}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avtarPrefabRight
       value: 
-      objectReference: {fileID: 3304035445752850085, guid: 76a3e71709e2dab4996df3a7046db1af, type: 3}
+      objectReference: {fileID: 8630172562931530007, guid: c292bc9ab191c3244950a1a885a6f9ed, type: 3}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avtarPrefabBackLeft
       value: 
-      objectReference: {fileID: 3304035445752850085, guid: cc3074f12705d114b9e44e5bb59916c1, type: 3}
+      objectReference: {fileID: 6506642997384734212, guid: c72729dcdde8e3c42b1b9be0940ea76a, type: 3}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avtarPrefabBackRight
       value: 
-      objectReference: {fileID: 3304035445752850085, guid: 85425d5f7eb5e004c9f4477b1872f66c, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avatarPrefabFrontLeft
       value: 
-      objectReference: {fileID: 3304035445752850085, guid: 63770e382e26a844c908349217336416, type: 3}
+      objectReference: {fileID: 2471107043198914699, guid: 6f20769b5548f574486999509cfc286f, type: 3}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avatarPrefabFrontRight
       value: 
-      objectReference: {fileID: 3304035445752850085, guid: 47c02e76353aa084d8a0530e9293a0d3, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2474645652190830804, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -7113,6 +7113,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   player: {fileID: 9082806883094151839}
+  enemiesNearPlayer: []
+  playerCheckRadius: 0
+  lerpSpeed: 0
+  enemyLayerMask:
+    serializedVersion: 2
+    m_Bits: 0
+  cameraState: 0
+  closestToMouse: {fileID: 0}
+  dummy: {fileID: 0}
 --- !u!114 &963194230
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -15018,8 +15027,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
-  playerHPText: {fileID: 1366834532}
-  roomLevelText: {fileID: 0}
   hpText: {fileID: 1366834532}
   levelText: {fileID: 0}
   defaultCursor: {fileID: 21300000, guid: 5173b9a6d0ba5e94c935a8597ac166c2, type: 3}
@@ -17207,6 +17214,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
+  readyForGeneration: 1
+  dungeonLevel: 0
+  levelParent: {fileID: 0}
+  endRoomOB: {fileID: 0}
   gameState: 0
 --- !u!1 &1974988460
 GameObject:
@@ -17961,43 +17972,43 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.ID
-      value: 8
+      value: 15
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.dmg
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.dps
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.icon
       value: 
-      objectReference: {fileID: 21300000, guid: 7de54af799ae79546a27ddf96654d397, type: 3}
+      objectReference: {fileID: 21300000, guid: f74a6c9f5b34cfb4da8a61b517484a52, type: 3}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.range
-      value: 0
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.segment
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.category
-      value: 3
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.fireRate
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.itemName
-      value: Wolf Arm
+      value: Slug Legs
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.itemType
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.inSceneID
@@ -18014,27 +18025,27 @@ PrefabInstance:
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avtarPrefabLeft
       value: 
-      objectReference: {fileID: 4236276474041516820, guid: 8ff1c38c6eb24cb429670db06a7dcf22, type: 3}
+      objectReference: {fileID: 3992858970678303184, guid: d1eedbd08fd6baf449f5cab2a53d7f95, type: 3}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avtarPrefabRight
       value: 
-      objectReference: {fileID: 4236276474041516820, guid: 8ff1c38c6eb24cb429670db06a7dcf22, type: 3}
+      objectReference: {fileID: 3992858970678303184, guid: d1eedbd08fd6baf449f5cab2a53d7f95, type: 3}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avtarPrefabBackLeft
       value: 
-      objectReference: {fileID: 8420908129449654326, guid: f78aaa542af193c49b743f242babe7af, type: 3}
+      objectReference: {fileID: 8049253966410535709, guid: 85fedc2d5e525aa49a7d864ae4dedf95, type: 3}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avtarPrefabBackRight
       value: 
-      objectReference: {fileID: 5941786917773287203, guid: 8bf31c1d8ef02aa41ab0843df66eba8f, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avatarPrefabFrontLeft
       value: 
-      objectReference: {fileID: 2385646219633792786, guid: 1bbbaf6896e6bbd4793ae93d524f0998, type: 3}
+      objectReference: {fileID: 4826423727113875564, guid: 300843ea423d54e409e27745a21410a9, type: 3}
     - target: {fileID: -3370031360521855638, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: itemInfo.avatarPrefabFrontRight
       value: 
-      objectReference: {fileID: 5671305682962102029, guid: 38ce0a6fbdef9224bb5af9cb19d996ec, type: 3}
+      objectReference: {fileID: 0}
     - target: {fileID: 2474645652190830804, guid: 8b40491ab73a92849aa966cbfb24c41d, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -18412,8 +18423,24 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 746408213}
     - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].ID
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: playerInventory.Array.data[1].ID
       value: 11
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].dmg
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].dps
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: playerInventory.Array.data[1].dmg
@@ -18424,11 +18451,39 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].icon
+      value: 
+      objectReference: {fileID: 21300000, guid: bd7436500c08a3b43bcbe43ccb0591d1, type: 3}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].range
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: playerInventory.Array.data[1].range
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].segment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: playerInventory.Array.data[1].segment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].category
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].fireRate
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].itemName
+      value: Solar Eyes
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].itemType
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
@@ -18448,17 +18503,45 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].critChance
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].projectile
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: playerInventory.Array.data[1].projectile
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].projectilePF
+      value: 
+      objectReference: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].avtarPrefabLeft
+      value: 
+      objectReference: {fileID: 5219971542334208531, guid: a32498cd85bb21a44b8d5ccc449360de, type: 3}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].projectileSpeed
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: playerInventory.Array.data[1].avtarPrefabLeft
       value: 
       objectReference: {fileID: 6521519663572596647, guid: 8f67f27a28ff56c43ac7c34a74e91ab2, type: 3}
     - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].avtarPrefabRight
+      value: 
+      objectReference: {fileID: 5219971542334208531, guid: a32498cd85bb21a44b8d5ccc449360de, type: 3}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: playerInventory.Array.data[1].avtarPrefabRight
       value: 
       objectReference: {fileID: 6521519663572596647, guid: 8f67f27a28ff56c43ac7c34a74e91ab2, type: 3}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].avtarPrefabBackLeft
+      value: 
+      objectReference: {fileID: 4415437822580050815, guid: 266ea6fb75ecee04f999b6979e82d30c, type: 3}
     - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: playerInventory.Array.data[1].avtarPrefabBackLeft
       value: 
@@ -18467,6 +18550,10 @@ PrefabInstance:
       propertyPath: playerInventory.Array.data[1].avtarPrefabBackRight
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: playerInventory.Array.data[0].avatarPrefabFrontLeft
+      value: 
+      objectReference: {fileID: 187507235321215683, guid: 8a8ded68bba26d54382fc1b5065e9686, type: 3}
     - target: {fileID: 2260648622255775641, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: playerInventory.Array.data[1].avatarPrefabFrontLeft
       value: 
@@ -18479,6 +18566,14 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 896050662}
+    - target: {fileID: 5087052154843865312, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5166072515975929423, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5183277913676641526, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -18491,6 +18586,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 896050662}
+    - target: {fileID: 6195017071444128732, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 7415359993223792497, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -18534,6 +18633,10 @@ PrefabInstance:
     - target: {fileID: 7415359993223792497, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8427837454163536863, guid: 0bda78ece803b344986dfd08f0d8756b, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
