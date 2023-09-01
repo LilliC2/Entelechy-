@@ -12,6 +12,8 @@ public class GameManager : Singleton<GameManager>
     public bool readyForGeneration = true;
     public int dungeonLevel;
     public Transform levelParent;
+    Transform levelStartRoom;
+    GameObject currentLevel;
     public GameObject endRoomOB;
 
     public enum GameState
@@ -57,6 +59,32 @@ public class GameManager : Singleton<GameManager>
 
     }
 
+    public void Restart()
+    {
+        var currentScene = SceneManager.GetActiveScene().name;
+        Time.timeScale = 1f;
+        dungeonLevel = 1;
+        readyForGeneration = true;
+        
+        //SceneManager.LoadScene(currentScene);
+        levelStartRoom = currentLevel.transform.Find("BeginningRoom");
+        player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z);
+
+        ClearPreviousLevel();
+
+        //reset player
+        _PC.health = 100;
+        _PC.maxHP = 100;
+
+        for (int i = 0; i < _PC.playerInventory.Count; i++)
+        {
+            if (_PC.playerInventory[i] != null) _ISitemD.RemoveItemFromInventory(i);
+        }
+
+        //give player tentacle mouth
+        _ISitemD.AddItemToInventory(_ItemD.itemDataBase[9]);
+    }
+
     void GenerateLevel()
     {
         readyForGeneration = false;
@@ -78,11 +106,11 @@ public class GameManager : Singleton<GameManager>
         var randomLevel = Random.Range(0, 2); // last digit excluded
 
         //will change to change to Environment_Floor_ later
-        GameObject currentLevel = Instantiate(Resources.Load("Enviroment_Floor_" + randomLevel, typeof(GameObject)), levelParent) as GameObject;
+        currentLevel = Instantiate(Resources.Load("Enviroment_Floor_" + randomLevel, typeof(GameObject)), levelParent) as GameObject;
 
         //find beginning room
 
-        Transform levelStartRoom = currentLevel.transform.Find("BeginningRoom");
+        levelStartRoom = currentLevel.transform.Find("BeginningRoom");
         Transform levelEndRoom = currentLevel.transform.Find("EndRoom");
 
         //move end room trigger
