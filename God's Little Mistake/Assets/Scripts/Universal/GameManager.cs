@@ -114,6 +114,12 @@ public class GameManager : Singleton<GameManager>
         levelStartRoom = currentLevel.transform.Find("BeginningRoom");
         Transform levelEndRoom = currentLevel.transform.Find("EndRoom");
 
+        //add in controls
+        if(dungeonLevel == 1)
+        {
+            var controls = Instantiate(Resources.Load("ControlsPrefab", typeof(GameObject)), new Vector3(levelStartRoom.position.x, 0.3f, levelStartRoom.position.z), Quaternion.Euler(new Vector3(90f,0f,0f)), levelParent) as GameObject;
+        }
+
         //move end room trigger
         endRoomOB.transform.position = levelEndRoom.position;
 
