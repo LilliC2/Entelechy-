@@ -52,15 +52,49 @@ MonoBehaviour:
   m_PixelRect:
     serializedVersion: 2
     x: 0
-    y: 42.56604
-    width: 1738.8679
-    height: 887.5472
+    y: 43
+    width: 1920
+    height: 997
   m_ShowMode: 4
+<<<<<<< HEAD
   m_Title: Project
   m_RootView: {fileID: 11}
   m_MinSize: {x: 875, y: 300}
   m_MaxSize: {x: 10000, y: 10000}
   m_Maximized: 1
+=======
+  m_Title: Game
+  m_RootView: {fileID: 8}
+  m_MinSize: {x: 875, y: 300}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_Maximized: 1
+--- !u!114 &2
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: ProjectBrowser
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 554
+    height: 339
+  m_MinSize: {x: 231, y: 271}
+  m_MaxSize: {x: 10001, y: 10021}
+  m_ActualView: {fileID: 15}
+  m_Panes:
+  - {fileID: 15}
+  m_Selected: 0
+  m_LastSelected: 0
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
 --- !u!114 &3
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -70,6 +104,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+<<<<<<< HEAD
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: GameView
   m_EditorClassIdentifier: 
@@ -471,24 +506,35 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
+=======
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: ConsoleWindow
   m_EditorClassIdentifier: 
   m_Children: []
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 0
     y: 726
     width: 330
     height: 205
   m_MinSize: {x: 101, y: 121}
   m_MaxSize: {x: 4001, y: 4021}
+=======
+    x: 554
+    y: 0
+    width: 911
+    height: 339
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_ActualView: {fileID: 20}
   m_Panes:
   - {fileID: 20}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &8
+--- !u!114 &4
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -501,10 +547,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 10}
-  - {fileID: 7}
+  - {fileID: 2}
+  - {fileID: 3}
   m_Position:
     serializedVersion: 2
+<<<<<<< HEAD
     x: 1574
     y: 0
     width: 330
@@ -514,6 +561,17 @@ MonoBehaviour:
   vertical: 1
   controlID: 121
 --- !u!114 &9
+=======
+    x: 0
+    y: 608
+    width: 1465
+    height: 339
+  m_MinSize: {x: 200, y: 100}
+  m_MaxSize: {x: 16192, y: 8096}
+  vertical: 0
+  controlID: 184
+--- !u!114 &5
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -526,13 +584,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 5}
-  - {fileID: 3}
-  - {fileID: 8}
+  - {fileID: 11}
+  - {fileID: 6}
   m_Position:
     serializedVersion: 2
     x: 0
     y: 30
+<<<<<<< HEAD
     width: 1904
     height: 931
   m_MinSize: {x: 300, y: 100}
@@ -540,6 +598,15 @@ MonoBehaviour:
   vertical: 0
   controlID: 27
 --- !u!114 &10
+=======
+    width: 1920
+    height: 947
+  m_MinSize: {x: 300, y: 150}
+  m_MaxSize: {x: 24288, y: 16192}
+  vertical: 0
+  controlID: 220
+--- !u!114 &6
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -554,18 +621,51 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 0
+    x: 1465
     y: 0
+<<<<<<< HEAD
     width: 330
     height: 726
   m_MinSize: {x: 276, y: 71}
   m_MaxSize: {x: 4001, y: 4021}
+=======
+    width: 455
+    height: 947
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_ActualView: {fileID: 16}
   m_Panes:
   - {fileID: 16}
   m_Selected: 0
   m_LastSelected: 0
---- !u!114 &11
+--- !u!114 &7
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12006, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children: []
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 362
+    height: 608
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_ActualView: {fileID: 17}
+  m_Panes:
+  - {fileID: 17}
+  m_Selected: 0
+  m_LastSelected: 0
+--- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -578,9 +678,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Children:
-  - {fileID: 12}
   - {fileID: 9}
-  - {fileID: 13}
+  - {fileID: 5}
+  - {fileID: 10}
   m_Position:
     serializedVersion: 2
     x: 0
@@ -593,7 +693,7 @@ MonoBehaviour:
   m_TopViewHeight: 30
   m_UseBottomView: 1
   m_BottomViewHeight: 20
---- !u!114 &12
+--- !u!114 &9
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -615,6 +715,7 @@ MonoBehaviour:
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
   m_LastLoadedLayoutName: 
+<<<<<<< HEAD
 --- !u!114 &13
 =======
     width: 1326.7925
@@ -624,6 +725,9 @@ MonoBehaviour:
   vertical: 0
   controlID: 75
 --- !u!114 &16
+=======
+--- !u!114 &10
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -672,7 +776,57 @@ MonoBehaviour:
     height: 20
   m_MinSize: {x: 0, y: 0}
   m_MaxSize: {x: 0, y: 0}
---- !u!114 &14
+--- !u!114 &11
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 12}
+  - {fileID: 4}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1465
+    height: 947
+  m_MinSize: {x: 200, y: 150}
+  m_MaxSize: {x: 16192, y: 16192}
+  vertical: 1
+  controlID: 128
+--- !u!114 &12
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12010, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Children:
+  - {fileID: 7}
+  - {fileID: 13}
+  m_Position:
+    serializedVersion: 2
+    x: 0
+    y: 0
+    width: 1465
+    height: 608
+  m_MinSize: {x: 200, y: 50}
+  m_MaxSize: {x: 16192, y: 8096}
+  vertical: 0
+  controlID: 129
+--- !u!114 &13
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -687,18 +841,32 @@ MonoBehaviour:
   m_Children: []
   m_Position:
     serializedVersion: 2
-    x: 0
+    x: 362
     y: 0
+<<<<<<< HEAD
     width: 1293
     height: 159
   m_MinSize: {x: 201, y: 221}
   m_MaxSize: {x: 4001, y: 4021}
+=======
+    width: 1103
+    height: 608
+  m_MinSize: {x: 202, y: 221}
+  m_MaxSize: {x: 4002, y: 4021}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
+  - {fileID: 19}
+  - {fileID: 14}
   m_Selected: 0
+<<<<<<< HEAD
   m_LastSelected: 0
 --- !u!114 &15
+=======
+  m_LastSelected: 1
+--- !u!114 &14
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -706,6 +874,7 @@ MonoBehaviour:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
   m_Enabled: 1
+<<<<<<< HEAD
   m_EditorHideFlags: 1
   m_Script: {fileID: 12014, guid: 0000000000000000e000000000000000, type: 0}
   m_Name: 
@@ -720,10 +889,55 @@ MonoBehaviour:
   m_TitleContent:
     m_Text: Project
 <<<<<<< HEAD
+=======
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2bd056ead3ad9a84dbd2f80323e78ab1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 325, y: 390}
+  m_MaxSize: {x: 4000, y: 4000}
+  m_TitleContent:
+    m_Text: Colored Headers
+    m_Image: {fileID: 0}
+    m_Tooltip: 
+  m_Pos:
+    serializedVersion: 2
+    x: 362
+    y: 73
+    width: 1101
+    height: 587
+  m_SerializedDataModeController:
+    m_DataMode: 0
+    m_PreferredDataMode: 0
+    m_SupportedDataModes: 
+    isAutomatic: 1
+  m_ViewDataDictionary: {fileID: 0}
+  m_OverlayCanvas:
+    m_LastAppliedPresetName: Default
+    m_SaveData: []
+    m_OverlaysVisible: 1
+--- !u!114 &15
+MonoBehaviour:
+  m_ObjectHideFlags: 52
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 1
+  m_Script: {fileID: 12014, guid: 0000000000000000e000000000000000, type: 0}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_MinSize: {x: 230, y: 250}
+  m_MaxSize: {x: 10000, y: 10000}
+  m_TitleContent:
+    m_Text: Project
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
     m_Image: {fileID: -5467254957812901981, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: -619
     y: 701
     width: 279
@@ -738,6 +952,12 @@ MonoBehaviour:
     width: 436.3396
     height: 277.67926
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+    x: 0
+    y: 681
+    width: 553
+    height: 318
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -764,7 +984,11 @@ MonoBehaviour:
     m_SearchArea: 1
     m_Folders:
 <<<<<<< HEAD
+<<<<<<< HEAD
     - Assets/Scenes
+=======
+    - Assets/Prefabs/Environment/Props/Medium
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
     m_Globs: []
     m_OriginalText: 
 =======
@@ -779,12 +1003,17 @@ MonoBehaviour:
   m_LastFolders: []
   m_LastFoldersGridSize: -1
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_LastProjectPath: D:\Github\Gods-Little_Mistake\Gods-Little-Mistake\God's Little
     Mistake
 =======
   m_LastProjectPath: C:\Users\silve\Desktop\JMC\T5\Studio I\GodsLittleMistake\Gods-Little-Mistake\God's
     Little Mistake
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+  m_LastProjectPath: C:\Users\mwilson3\Documents\GitHub\Gods-Little-Mistake\God's
+    Little Mistake
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
@@ -792,10 +1021,14 @@ MonoBehaviour:
     m_SelectedIDs: 3a4b0000
     m_LastClickedID: 19258
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_ExpandedIDs: 00000000a83c0000b03c0000eae30d00ece30d00eee30d00f0e30d00f2e30d00f4e30d00f6e30d00f8e30d00fae30d00fce30d00fee30d0000e40d0002e40d0004e40d0006e40d0008e40d000ae40d000ce40d000ee40d0010e40d0012e40d0014e40d0016e40d0018e40d001ae40d001ce40d001ee40d0020e40d0022e40d0024e40d0026e40d0028e40d002ae40d002ce40d002ee40d0030e40d0032e40d0034e40d0036e40d0038e40d003ae40d003ce40d003ee40d0040e40d0042e40d0044e40d0046e40d0048e40d004ae40d004ce40d004ee40d0050e40d0052e40d0054e40d0056e40d0058e40d005ae40d005ce40d005ee40d0060e40d00
 =======
     m_ExpandedIDs: 000000007a7d000002a0000004a0000006a0000008a000000aa000000ca000000ea0000010a0000012a0000014a0000016a0000018a000001aa000001ca000001ea0000020a0000022a0000024a0000026a0000028a000002aa000002ca000002ea0000030a0000032a00000
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+    m_ExpandedIDs: 00000000c20c0100c40c0100c60c0100c80c0100ca0c0100
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -821,6 +1054,7 @@ MonoBehaviour:
       m_ResourceFile: 
   m_AssetTreeState:
 <<<<<<< HEAD
+<<<<<<< HEAD
     scrollPos: {x: 0, y: 300}
     m_SelectedIDs: 
     m_LastClickedID: 0
@@ -839,12 +1073,23 @@ MonoBehaviour:
       m_Name: 
       m_OriginalName: 
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+    scrollPos: {x: 0, y: 1040}
+    m_SelectedIDs: 
+    m_LastClickedID: 0
+    m_ExpandedIDs: ffffffff00000000523b0000ae3b0000c20c0100c40c0100c60c0100c80c0100ca0c0100740d01007e0d010014590100185901001e590100205901002259010024590100
+    m_RenameOverlay:
+      m_UserAcceptedRename: 0
+      m_Name: GameLoopPrototype
+      m_OriginalName: GameLoopPrototype
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       m_EditFieldRect:
         serializedVersion: 2
         x: 0
         y: 0
         width: 0
         height: 0
+<<<<<<< HEAD
 <<<<<<< HEAD
       m_UserData: 910982
       m_IsWaitingForDelay: 0
@@ -854,9 +1099,12 @@ MonoBehaviour:
       m_ClientGUIView: {fileID: 2}
 =======
       m_UserData: 0
+=======
+      m_UserData: 69028
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       m_IsWaitingForDelay: 0
       m_IsRenaming: 0
-      m_OriginalEventType: 11
+      m_OriginalEventType: 0
       m_IsRenamingFilename: 1
       m_ClientGUIView: {fileID: 0}
 >>>>>>> GLM-187-Game-Loop-Prototype
@@ -924,6 +1172,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: -338
     y: 81
     width: 329
@@ -938,6 +1187,12 @@ MonoBehaviour:
     width: 411.07556
     height: 816.5472
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+    x: 1465
+    y: 73
+    width: 454
+    height: 926
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -952,7 +1207,11 @@ MonoBehaviour:
   m_InstanceIDsLockedBeforeSerialization: 
   m_PreviewResizer:
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_CachedPref: -151
+=======
+    m_CachedPref: 160
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
     m_ControlHash: -371814159
     m_PrefName: Preview_InspectorPreview
   m_LastInspectedObjectInstanceID: -1
@@ -971,9 +1230,12 @@ MonoBehaviour:
   m_PreviewWindow: {fileID: 0}
 <<<<<<< HEAD
 --- !u!114 &17
+<<<<<<< HEAD
 =======
 --- !u!114 &19
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -989,10 +1251,11 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Hierarchy
-    m_Image: {fileID: -3734745235275155857, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: 7966133145522015247, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
     x: -619
     y: 81
@@ -1004,6 +1267,12 @@ MonoBehaviour:
     width: 326.84906
     height: 517.8679
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+    x: 0
+    y: 73
+    width: 361
+    height: 587
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1016,6 +1285,7 @@ MonoBehaviour:
     m_OverlaysVisible: 1
   m_SceneHierarchy:
     m_TreeViewState:
+<<<<<<< HEAD
       scrollPos: {x: 0, y: 0}
 <<<<<<< HEAD
       m_SelectedIDs: 
@@ -1026,6 +1296,12 @@ MonoBehaviour:
       m_LastClickedID: 0
       m_ExpandedIDs: dcf9ffffe2f9ffffe8f9ffffecf9fffff0f9ffffd4faffff627f0000a67f00008c80000012810000
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+      scrollPos: {x: 0, y: 19219}
+      m_SelectedIDs: 2c109bff
+      m_LastClickedID: -6614996
+      m_ExpandedIDs: 8678e9ffe078e9ffb663130076751300
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       m_RenameOverlay:
         m_UserAcceptedRename: 0
         m_Name: AM_SmallRoom_3
@@ -1042,10 +1318,14 @@ MonoBehaviour:
         m_OriginalEventType: 0
         m_IsRenamingFilename: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
         m_ClientGUIView: {fileID: 6}
 =======
         m_ClientGUIView: {fileID: 10}
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+        m_ClientGUIView: {fileID: 7}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       m_SearchString: 
     m_ExpandedScenes: []
     m_CurrenRootInstanceID: 0
@@ -1054,10 +1334,14 @@ MonoBehaviour:
     m_CurrentSortingName: TransformSorting
   m_WindowGUID: 4c969a2b90040154d917609493e03593
 <<<<<<< HEAD
+<<<<<<< HEAD
 --- !u!114 &18
 =======
 --- !u!114 &20
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+--- !u!114 &18
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1073,10 +1357,11 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Scene
-    m_Image: {fileID: 8634526014445323508, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: 2593428753322112591, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
     x: -1912
     y: 81
@@ -1088,6 +1373,12 @@ MonoBehaviour:
     width: 996.9434
     height: 517.8679
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+    x: 362
+    y: 73
+    width: 1101
+    height: 587
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1103,10 +1394,14 @@ MonoBehaviour:
       collapsed: 0
       displayed: 1
 <<<<<<< HEAD
+<<<<<<< HEAD
       snapOffset: {x: -159.39624, y: -26}
 =======
       snapOffset: {x: -156, y: -26}
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+      snapOffset: {x: -166, y: -26}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 3
       id: Tool Settings
@@ -1120,7 +1415,11 @@ MonoBehaviour:
       collapsed: 0
       displayed: 1
       snapOffset: {x: -141, y: 149}
+<<<<<<< HEAD
       snapOffsetDelta: {x: 0, y: -37}
+=======
+      snapOffsetDelta: {x: 0, y: 0}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       snapCorner: 1
       id: unity-grid-and-snap-toolbar
       index: 1
@@ -1132,7 +1431,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-scene-view-toolbar
@@ -1146,7 +1445,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 1
       id: unity-search-toolbar
       index: 1
@@ -1158,7 +1457,7 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
-      snapOffset: {x: 0, y: 0}
+      snapOffset: {x: 0, y: 25}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: unity-transform-toolbar
@@ -1171,7 +1470,11 @@ MonoBehaviour:
       floating: 0
       collapsed: 0
       displayed: 1
+<<<<<<< HEAD
       snapOffset: {x: 67.5, y: 26}
+=======
+      snapOffset: {x: 67.5, y: 86}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Orientation
@@ -1185,7 +1488,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Light Settings
       index: 2
@@ -1211,7 +1514,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Cloth Constraints
       index: 3
@@ -1224,7 +1527,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Cloth Collisions
       index: 4
@@ -1276,7 +1579,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Occlusion Culling
       index: 5
@@ -1289,7 +1592,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Physics Debugger
       index: 6
@@ -1302,7 +1605,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Scene Visibility
       index: 7
@@ -1315,7 +1618,7 @@ MonoBehaviour:
       collapsed: 0
       displayed: 0
       snapOffset: {x: 0, y: 0}
-      snapOffsetDelta: {x: 0, y: 0}
+      snapOffsetDelta: {x: 0, y: 25}
       snapCorner: 0
       id: Scene View/Particles
       index: 8
@@ -1323,6 +1626,7 @@ MonoBehaviour:
       size: {x: 0, y: 0}
       sizeOverriden: 0
     - dockPosition: 1
+<<<<<<< HEAD
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
@@ -1338,14 +1642,17 @@ MonoBehaviour:
       sizeOverriden: 0
     - dockPosition: 1
       containerId: overlay-container--right
+=======
+      containerId: overlay-toolbar__top
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       floating: 0
       collapsed: 0
       displayed: 0
-      snapOffset: {x: 48, y: 48}
+      snapOffset: {x: 0, y: 0}
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
-      id: Scene View/TrailRenderer
-      index: 10
+      id: Cinemachine
+      index: 2
       layout: 4
       size: {x: 0, y: 0}
       sizeOverriden: 0
@@ -1353,6 +1660,7 @@ MonoBehaviour:
       containerId: overlay-container--right
       floating: 0
       collapsed: 0
+<<<<<<< HEAD
       displayed: 1
       snapOffset: {x: 48, y: 10}
       snapOffsetDelta: {x: 0, y: 0}
@@ -1368,6 +1676,8 @@ MonoBehaviour:
       collapsed: 0
 =======
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       displayed: 0
       snapOffset: {x: 48, y: 48}
       snapOffsetDelta: {x: 0, y: 0}
@@ -1400,8 +1710,11 @@ MonoBehaviour:
       snapCorner: 0
       id: Scene View/Path
 <<<<<<< HEAD
+<<<<<<< HEAD
       index: 11
 =======
+=======
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       index: 9
       layout: 4
       size: {x: 0, y: 0}
@@ -1430,7 +1743,10 @@ MonoBehaviour:
       snapCorner: 0
       id: Scene View/Visual Effect
 <<<<<<< HEAD
+<<<<<<< HEAD
 =======
+=======
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       index: 11
       layout: 4
       size: {x: 0, y: 0}
@@ -1444,7 +1760,10 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
       id: Scene View/Visual Effect Timeline Control
+<<<<<<< HEAD
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       index: 12
       layout: 4
       size: {x: 0, y: 0}
@@ -1458,10 +1777,14 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
       id: Scene View/Visual Effect Timeline Control
 =======
       id: Scene View/Visual Effect Event Tester
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+      id: Scene View/Visual Effect Event Tester
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       index: 13
       layout: 4
       size: {x: 0, y: 0}
@@ -1475,10 +1798,14 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
       id: Scene View/Visual Effect Event Tester
 =======
       id: Scene View/Visual Effect Model
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+      id: Scene View/Visual Effect Model
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       index: 14
       layout: 4
       size: {x: 0, y: 0}
@@ -1492,10 +1819,14 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
       id: Scene View/Visual Effect Model
 =======
       id: APV Overlay
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+      id: APV Overlay
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       index: 15
       layout: 4
       size: {x: 0, y: 0}
@@ -1509,10 +1840,14 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
       id: APV Overlay
 =======
       id: Cinemachine Tool Settings
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+      id: Cinemachine Tool Settings
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       index: 16
       layout: 4
       size: {x: 0, y: 0}
@@ -1526,25 +1861,36 @@ MonoBehaviour:
       snapOffsetDelta: {x: 0, y: 0}
       snapCorner: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
       id: Cinemachine Tool Settings
 =======
       id: Scene View/TrailRenderer
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+      id: Scene View/TrailRenderer
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
       index: 17
       layout: 4
       size: {x: 0, y: 0}
       sizeOverriden: 0
     m_OverlaysVisible: 1
   m_WindowGUID: cc27987af1a868c49b0894db9c0f5429
+<<<<<<< HEAD
   m_Gizmos: 1
   m_OverrideSceneCullingMask: 6917529027641081856
   m_SceneIsLit: 1
+=======
+  m_Gizmos: 0
+  m_OverrideSceneCullingMask: 0
+  m_SceneIsLit: 0
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_SceneLighting: 1
   m_2DMode: 0
   m_isRotationLocked: 0
   m_PlayAudio: 0
   m_AudioPlay: 0
   m_Position:
+<<<<<<< HEAD
 <<<<<<< HEAD
     m_Target: {x: 1005.8863, y: 878.7121, z: -164.9273}
     speed: 2
@@ -1554,6 +1900,11 @@ MonoBehaviour:
     speed: 2
     m_Value: {x: -0.08764569, y: 0.48333007, z: 0.05223572}
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+    m_Target: {x: 23.694746, y: 1.623, z: 36.46465}
+    speed: 2
+    m_Value: {x: 23.694746, y: 1.623, z: 36.46465}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_RenderMode: 0
   m_CameraMode:
     drawMode: 0
@@ -1564,7 +1915,7 @@ MonoBehaviour:
   m_SceneViewState:
     m_AlwaysRefresh: 0
     showFog: 1
-    showSkybox: 1
+    showSkybox: 0
     showFlares: 1
     showImageEffects: 1
     showParticleSystems: 1
@@ -1582,6 +1933,7 @@ MonoBehaviour:
     yGrid:
       m_Fade:
 <<<<<<< HEAD
+<<<<<<< HEAD
         m_Target: 0
         speed: 2
         m_Value: 0
@@ -1592,9 +1944,12 @@ MonoBehaviour:
       m_Fade:
         m_Target: 0
 =======
+=======
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
         m_Target: 1
 >>>>>>> GLM-187-Game-Loop-Prototype
         speed: 2
+<<<<<<< HEAD
         m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
@@ -1613,6 +1968,12 @@ MonoBehaviour:
     m_Value: 56.65777
 =======
       m_Size: {x: 1.5, y: 1.5}
+=======
+        m_Value: 0.9999998
+      m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
+      m_Pivot: {x: 0, y: 0, z: 0}
+      m_Size: {x: 1, y: 1}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
     zGrid:
       m_Fade:
         m_Target: 0
@@ -1620,11 +1981,16 @@ MonoBehaviour:
         m_Value: 0
       m_Color: {r: 0.5, g: 0.5, b: 0.5, a: 0.4}
       m_Pivot: {x: 0, y: 0, z: 0}
+<<<<<<< HEAD
       m_Size: {x: 0, y: 0}
+=======
+      m_Size: {x: 1, y: 1}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
     m_ShowGrid: 1
     m_GridAxis: 1
     m_gridOpacity: 0.5
   m_Rotation:
+<<<<<<< HEAD
     m_Target: {x: -0.35267442, y: -0.019993465, z: 0.0075318557, w: -0.9355229}
     speed: 2
     m_Value: {x: -0.35266757, y: -0.019993076, z: 0.0075317095, w: -0.93550473}
@@ -1633,6 +1999,15 @@ MonoBehaviour:
     speed: 2
     m_Value: 0.70125055
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+    m_Target: {x: -0.21936263, y: -0.14646104, z: 0.0340028, w: -0.96416664}
+    speed: 2
+    m_Value: {x: -0.21932487, y: -0.14643583, z: 0.033996947, w: -0.9640007}
+  m_Size:
+    m_Target: 4.894466
+    speed: 2
+    m_Value: 4.894466
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_Ortho:
     m_Target: 0
     speed: 2
@@ -1650,7 +2025,7 @@ MonoBehaviour:
     m_FarClip: 10000
     m_DynamicClip: 1
     m_OcclusionCulling: 0
-  m_LastSceneViewRotation: {x: 0, y: 0, z: 0, w: 0}
+  m_LastSceneViewRotation: {x: -0.23363443, y: 0.0064109736, z: -0.0015545711, w: -0.97234654}
   m_LastSceneViewOrtho: 0
   m_ReplacementShader: {fileID: 0}
   m_ReplacementString: 
@@ -1658,6 +2033,9 @@ MonoBehaviour:
   m_LastLockedObject: {fileID: 0}
   m_ViewIsLockedToObject: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
+=======
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
 --- !u!114 &19
 =======
 --- !u!114 &21
@@ -1682,6 +2060,7 @@ MonoBehaviour:
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
     x: -1912
     y: 240
     width: 1292
@@ -1696,6 +2075,12 @@ MonoBehaviour:
     width: 1238.9435
     height: 628.3585
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+    x: 362
+    y: 73
+    width: 1101
+    height: 587
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
@@ -1713,10 +2098,14 @@ MonoBehaviour:
   m_TargetDisplay: 0
   m_ClearColor: {r: 0, g: 0, b: 0, a: 0}
 <<<<<<< HEAD
+<<<<<<< HEAD
   m_TargetSize: {x: 1292, y: 727}
 =======
   m_TargetSize: {x: 1080, y: 607.3585}
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+  m_TargetSize: {x: 1006, y: 566}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_TextureFilterMode: 0
   m_TextureHideFlags: 61
   m_RenderIMGUI: 1
@@ -1732,6 +2121,7 @@ MonoBehaviour:
     hZoomLockedByDefault: 0
     vZoomLockedByDefault: 0
 <<<<<<< HEAD
+<<<<<<< HEAD
     m_HBaseRangeMin: -646
     m_HBaseRangeMax: 646
     m_VBaseRangeMin: -363.5
@@ -1742,6 +2132,12 @@ MonoBehaviour:
     m_VBaseRangeMin: -275.03027
     m_VBaseRangeMax: 275.03027
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+    m_HBaseRangeMin: -503
+    m_HBaseRangeMax: 503
+    m_VBaseRangeMin: -283
+    m_VBaseRangeMax: 283
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
     m_HAllowExceedBaseRangeMin: 1
     m_HAllowExceedBaseRangeMax: 1
     m_VAllowExceedBaseRangeMin: 1
@@ -1750,7 +2146,7 @@ MonoBehaviour:
     m_HSlider: 0
     m_VSlider: 0
     m_IgnoreScrollWheelUntilClicked: 0
-    m_EnableMouseInput: 1
+    m_EnableMouseInput: 0
     m_EnableSliderZoomHorizontal: 0
     m_EnableSliderZoomVertical: 0
     m_UniformScale: 1
@@ -1759,6 +2155,7 @@ MonoBehaviour:
       serializedVersion: 2
       x: 0
       y: 21
+<<<<<<< HEAD
 <<<<<<< HEAD
       width: 1292
       height: 730
@@ -1770,12 +2167,19 @@ MonoBehaviour:
     m_Scale: {x: 1.1041666, y: 1.1041666}
     m_Translation: {x: 619.47174, y: 303.67926}
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+      width: 1101
+      height: 566
+    m_Scale: {x: 1, y: 1}
+    m_Translation: {x: 550.5, y: 283}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
     m_MarginLeft: 0
     m_MarginRight: 0
     m_MarginTop: 0
     m_MarginBottom: 0
     m_LastShownAreaInsideMargins:
       serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
       x: -646
       y: -365
@@ -1793,6 +2197,15 @@ MonoBehaviour:
   m_defaultScale: 1
   m_LastWindowPixelSize: {x: 1368, y: 693.8125}
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+      x: -550.5
+      y: -283
+      width: 1101
+      height: 566
+    m_MinimalGUI: 1
+  m_defaultScale: 1
+  m_LastWindowPixelSize: {x: 1101, y: 587}
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_ClearInEditMode: 1
   m_NoCameraWarning: 1
   m_LowResolutionForAspectRatios: 01000000000000000000
@@ -1800,9 +2213,12 @@ MonoBehaviour:
   m_RenderTexture: {fileID: 0}
 <<<<<<< HEAD
 --- !u!114 &20
+<<<<<<< HEAD
 =======
 --- !u!114 &22
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
 MonoBehaviour:
   m_ObjectHideFlags: 52
   m_CorrespondingSourceObject: {fileID: 0}
@@ -1818,10 +2234,11 @@ MonoBehaviour:
   m_MaxSize: {x: 4000, y: 4000}
   m_TitleContent:
     m_Text: Console
-    m_Image: {fileID: -4950941429401207979, guid: 0000000000000000d000000000000000, type: 0}
+    m_Image: {fileID: -4327648978806127646, guid: 0000000000000000d000000000000000, type: 0}
     m_Tooltip: 
   m_Pos:
     serializedVersion: 2
+<<<<<<< HEAD
 <<<<<<< HEAD
     x: -338
     y: 807
@@ -1833,6 +2250,12 @@ MonoBehaviour:
     width: 887.4529
     height: 277.67926
 >>>>>>> GLM-187-Game-Loop-Prototype
+=======
+    x: 554
+    y: 681
+    width: 909
+    height: 318
+>>>>>>> origin/GLM-187-Game-Loop-Prototype-Design
   m_SerializedDataModeController:
     m_DataMode: 0
     m_PreferredDataMode: 0
