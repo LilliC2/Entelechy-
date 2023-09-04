@@ -57,6 +57,7 @@ public class PlayerController : Singleton<PlayerController>
     public bool isGrounded;
     public LayerMask groundMask;
     public GameObject tileLastStoodOn;
+    public bool fallDamage;
 
     #region Player Variables
     [Header("Player Stats")]
@@ -101,6 +102,8 @@ public class PlayerController : Singleton<PlayerController>
     public float knockbackDuration = 0.5f;
     private float knockbackStartTime;
 
+    [Header("Movement")]
+    bool enableMovement = true;
 
     [Header("Melee")]
     bool meleeCooDown;
@@ -144,14 +147,14 @@ public class PlayerController : Singleton<PlayerController>
         {
             case GameManager.GameState.Playing:
 
-                isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
+
 
 
                 #region Movement
 
                 Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-                if(!canFloat)
+                if (!canFloat)
                 {
                     move.y -= gravity;
                 }
@@ -180,6 +183,10 @@ public class PlayerController : Singleton<PlayerController>
                 {
                     speed = maxSpeed;
                 }
+
+                isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
+
+                
                 #endregion
 
                 #region Respawn If Fell Off
@@ -191,21 +198,29 @@ public class PlayerController : Singleton<PlayerController>
                     lastPosOnGround = lastPos;
                     var col = Physics.OverlapSphere(groundCheck.transform.position, 0.5f, groundMask);
                     if (col.Length != 0) tileLastStoodOn = col[0].gameObject;
+                    fallDamage = true;
+
 
                 }
                 else
                 {
-                    if(transform.position.y < -5)
+                    if(transform.position.y < -3)
                     {
+
                         //find closest tile, put player above
                         Vector3 targetPos = new Vector3(tileLastStoodOn.transform.position.x, 4, tileLastStoodOn.transform.position.z);
                         print("Put on ground");
 
                         //player lose health when fall off
 
-                        health = (health / 2) - 1;
-                        
-                        transform.position = targetPos;
+                        if (fallDamage)
+                        {
+                            fallDamage = false;
+                            health = (health / 2) - 1;
+                            print("Taken fall damage");
+                            ExecuteAfterSeconds(1, () => transform.position = targetPos);
+
+                        }
 
                     }
                     
