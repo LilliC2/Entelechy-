@@ -12,6 +12,8 @@ public class GameManager : Singleton<GameManager>
     public bool readyForGeneration = true;
     public int dungeonLevel;
     public Transform levelParent;
+    Transform levelStartRoom;
+    GameObject currentLevel;
     public GameObject endRoomOB;
 
     public enum GameState
@@ -47,14 +49,41 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        //if(readyForGeneration)
-        //{
-        //    print("Generate new level");
-        //    GenerateLevel();
-        //    _EM.SpawnEnemiesForLevel();
+        if (readyForGeneration && SceneManager.GetActiveScene().name == "GameLoopPrototype")
+        {
+            print("Generate new level");
+            GenerateLevel();
+            _EM.SpawnEnemiesForLevel();
 
-        //}
+        }
 
+    }
+
+    public void Restart()
+    {
+        var currentScene = SceneManager.GetActiveScene().name;
+        Time.timeScale = 1f;
+        dungeonLevel = 0;
+        readyForGeneration = true;
+        
+        //SceneManager.LoadScene(currentScene);
+        levelStartRoom = currentLevel.transform.Find("BeginningRoom");
+        player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z);
+
+        ClearPreviousLevel();
+
+        //reset player
+        _PC.health = 100;
+        _PC.maxHP = 100;
+
+        for (int i = 0; i < _PC.playerInventory.Count; i++)
+        {
+            if (_PC.playerInventory[i] != null) _ISitemD.RemoveItemFromInventory(i);
+        }
+
+        //give player tentacle mouth
+        _ISitemD.AddItemToInventory(_ItemD.itemDataBase[9]);
+        gameState = GameState.Playing;
     }
 
     void GenerateLevel()
@@ -77,12 +106,19 @@ public class GameManager : Singleton<GameManager>
 
         var randomLevel = Random.Range(0, 2); // last digit excluded
 
-        GameObject currentLevel = Instantiate(Resources.Load("Enviroment_Floor_"+randomLevel, typeof(GameObject)), levelParent) as GameObject;
+        //will change to change to Environment_Floor_ later
+        currentLevel = Instantiate(Resources.Load("Enviroment_Floor_" + randomLevel, typeof(GameObject)), levelParent) as GameObject;
 
         //find beginning room
 
-        Transform levelStartRoom = currentLevel.transform.Find("BeginningRoom");
+        levelStartRoom = currentLevel.transform.Find("BeginningRoom");
         Transform levelEndRoom = currentLevel.transform.Find("EndRoom");
+
+        //add in controls
+        if(dungeonLevel == 1)
+        {
+            var controls = Instantiate(Resources.Load("ControlsPrefab", typeof(GameObject)), new Vector3(levelStartRoom.position.x, 0.3f, levelStartRoom.position.z), Quaternion.Euler(new Vector3(90f,0f,0f)), levelParent) as GameObject;
+        }
 
         //move end room trigger
         endRoomOB.transform.position = levelEndRoom.position;

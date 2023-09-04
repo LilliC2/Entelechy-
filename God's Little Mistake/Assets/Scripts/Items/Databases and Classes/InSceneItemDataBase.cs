@@ -125,7 +125,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
         //add item to scene and remove from inventory
 
-        var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
+        var item = Instantiate(_IG.itemTemp,_PC.transform.position, Quaternion.identity);
         item.GetComponent<ItemIdentifier>().itemInfo = _PC.playerInventory[_inventoryID];
 
         

@@ -215,60 +215,56 @@ public class UIManager : Singleton<UIManager>
         //statsPopUpPanel.SetActive(false);
         isHoldingItem = true;
 
-        int slot = 0;
+        int slot = -1;
 
-        //find segement
-        if(heldItem.segment == Item.Segment.Head)
+        switch(heldItem.segment)
         {
-            //find category
-            if (heldItem.category == Item.Category.Horns)
-            {
-                //check if slot is free
-                if (_AVTAR.slotsOnPlayerFront[0].transform.childCount == 0)
-                    slot = 0;   
-            }
-            if (heldItem.category == Item.Category.Eyes)
-            {
-                if (_AVTAR.slotsOnPlayerFront[1].transform.childCount == 0)
-                    slot = 1;
-            }
-            if (heldItem.category == Item.Category.Mouth)
-            {
-                if (_AVTAR.slotsOnPlayerFront[2].transform.childCount == 0)
-                    slot = 2;
-            }
-        }
-        else if (heldItem.segment == Item.Segment.Torso)
-        {
-            if (_AVTAR.slotsOnPlayerFront[3].transform.childCount == 0)
-            {
-                slot = 3;
-            }
-            else if (_AVTAR.slotsOnPlayerFront[4].transform.childCount == 0)
-            {
-                slot = 4;
-            }
+            case Item.Segment.Head:
 
-        }
-        else if (heldItem.segment == Item.Segment.Legs)
-        {
-            if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
-            {
-                slot = 5;
-                
-            }
-            
+                switch(heldItem.category)
+                {
+                    case Item.Category.Horns:
+                        if (_AVTAR.slotsOnPlayerFront[0].transform.childCount == 0)
+                            slot = 0;
+                        break;
+                    case Item.Category.Eyes:
+                        if (_AVTAR.slotsOnPlayerFront[1].transform.childCount == 0)
+                            slot = 1;
+                        break;
+                    case Item.Category.Mouth:
+                        if (_AVTAR.slotsOnPlayerFront[2].transform.childCount == 0)
+                            slot = 2;
+                        break;
+                    
+                }
+
+                break;
+            case Item.Segment.Torso:
+                if (_AVTAR.slotsOnPlayerFront[3].transform.childCount == 0)
+                {
+                    slot = 3;
+                }
+                else if (_AVTAR.slotsOnPlayerFront[4].transform.childCount == 0)
+                {
+                    slot = 4;
+                }
+                break;
+            case Item.Segment.Legs:
+                if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
+                {
+                    slot = 5;
+
+                }
+                break;  
         }
 
-        print(heldItem.itemName + " is on slot " + slot);
+        if(slot != -1)
+        {
+            print(heldItem.itemName + " is on slot " + slot);
 
-        EquipImage(slot);
+            EquipImage(slot);
 
-        //check category
-
-            //check if slots in cateogry are free
-
-            //if free then add it
+        }
 
 
     }

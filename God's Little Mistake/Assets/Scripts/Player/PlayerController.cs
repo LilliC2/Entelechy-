@@ -9,7 +9,9 @@ public class PlayerController : Singleton<PlayerController>
     public BearTrap bearTrap;
     public CactusTrap cactusTrap;
 
+    [Header("God Cheats")]
     public bool immortal;
+    public bool canFloat;
 
     #region Animation Variables
     [Header("Animation")]
@@ -40,12 +42,22 @@ public class PlayerController : Singleton<PlayerController>
 
     Vector3 currentPos;
     Vector3 lastPos;
-    #endregion
 
     public GameObject frontPivot;
     public GameObject rightPivot;
     public GameObject leftPivot;
     public GameObject backPivot;
+    #endregion
+
+
+    [Header("Physics")]
+    public float gravity = 9.8f;
+    public Vector3 lastPosOnGround;
+    public GameObject groundCheck;
+    public bool isGrounded;
+    public LayerMask groundMask;
+    public GameObject tileLastStoodOn;
+    public bool fallDamage;
 
     #region Player Variables
     [Header("Player Stats")]
@@ -68,7 +80,7 @@ public class PlayerController : Singleton<PlayerController>
     [SerializeField]
     int initalSpeedBoost = 3;
     bool isMoving;
-
+    GameObject lastDir;
     Tween speedTween;
 
     #endregion
@@ -76,9 +88,6 @@ public class PlayerController : Singleton<PlayerController>
     [Header("Inventory")]
     public List<Item> playerInventory;
 
-    [Header("Head Movement")]
-    public float headSpeed = 1000;
-    public GameObject head;
 
     [Header("Projectile")]
     public GameObject firingPoint;
@@ -93,6 +102,8 @@ public class PlayerController : Singleton<PlayerController>
     public float knockbackDuration = 0.5f;
     private float knockbackStartTime;
 
+    [Header("Movement")]
+    bool enableMovement = true;
 
     [Header("Melee")]
     bool meleeCooDown;
@@ -102,7 +113,6 @@ public class PlayerController : Singleton<PlayerController>
     public enum MeleeHitBox { Line, Cone }
     public MeleeHitBox meleeHitBox;
 
-    GameObject lastDir;
 
     private void Start()
     {
@@ -112,22 +122,22 @@ public class PlayerController : Singleton<PlayerController>
         _UI.UpdateHealthText(health);
         lastPos = transform.position;
 
+        groundCheck = GameObject.Find("GroundCheck");
+
         meleeUISwitcher = GetComponent<MeleeUISwitcher>();
 
         CheckForStartingItems();
 
-        //add stats for the 1 item in the inventory
-        //_ISitemD.AddPassiveItem(0);
     }
 
     void Update()
     {
         //for testing
         if (Input.GetKeyDown(KeyCode.Space))
-        {
-            print("add chrom");
-            _PE.ChromaticABFade();
-        }
+            {
+                print("vig");
+                _PE.VignetteFade();
+            }
 
 
         UpdateMelee();
@@ -137,10 +147,22 @@ public class PlayerController : Singleton<PlayerController>
         {
             case GameManager.GameState.Playing:
 
+
+
+
                 #region Movement
+
                 Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+                if (!canFloat)
+                {
+                    move.y -= gravity;
+                }
+
                 controller.Move(move * Time.deltaTime * speed);
 
+
+                #region isMoving Check
                 //find inpus for movement
                 if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
                 {
@@ -162,9 +184,58 @@ public class PlayerController : Singleton<PlayerController>
                     speed = maxSpeed;
                 }
 
+                isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
+
+                
                 #endregion
 
-                //controller.Move(playerVelocity * Time.deltaTime);
+                #region Respawn If Fell Off
+
+                //grounded check
+
+                if(isGrounded)
+                {
+                    lastPosOnGround = lastPos;
+                    var col = Physics.OverlapSphere(groundCheck.transform.position, 0.5f, groundMask);
+                    if (col.Length != 0) tileLastStoodOn = col[0].gameObject;
+                    fallDamage = true;
+
+
+                }
+                else
+                {
+                    if(transform.position.y < -3)
+                    {
+
+                        //find closest tile, put player above
+                        Vector3 targetPos = new Vector3(tileLastStoodOn.transform.position.x, 4, tileLastStoodOn.transform.position.z);
+                        print("Put on ground");
+
+                        //player lose health when fall off
+
+                        if (fallDamage)
+                        {
+                            fallDamage = false;
+                            health = (health / 2) - 1;
+                            print("Taken fall damage");
+                            ExecuteAfterSeconds(1, () => transform.position = targetPos);
+
+                        }
+
+                    }
+                    
+                }
+
+                //while grounded lastPosGrounded = lastPos;
+
+                //if not grounded execute after 1 second and respawn them
+
+                //for some pizazz could have them fly back in from the roof
+
+
+                #endregion
+
+                #endregion
 
                 #region Animation
 
@@ -194,6 +265,7 @@ public class PlayerController : Singleton<PlayerController>
                 //change for cardinal direction
                 if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
                 {
+                    StopAllAnimations();
 
                     if (lastDir == missyLeftSide)
                     {
@@ -216,7 +288,7 @@ public class PlayerController : Singleton<PlayerController>
                     if (lastDir != missyBack && lastDir != missyForward)
                     {
 
-
+                       
 
                         missyForward.SetActive(false);
 
@@ -235,6 +307,8 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.A)) //FACE LEFT
                 {
+                    StopAllAnimations();
+
                     _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
 
                     if(lastDir == missyForward)
@@ -274,7 +348,7 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.S)) //FACE FORWARD
                 {
-
+                    StopAllAnimations();
                     //print("Just pressed S. lastDir was " + lastDir.name);
                     if (lastDir == missyLeftSide)
                     {
@@ -310,7 +384,7 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.D)) //FACE RIGHT
                 {
-
+                    StopAllAnimations();
                     _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
 
 
@@ -354,6 +428,7 @@ public class PlayerController : Singleton<PlayerController>
                 #endregion
                 #endregion
 
+                #region Rotate Firing Point
                 //Rotate melee hit box and head
                 Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
                 RaycastHit hit;
@@ -366,6 +441,7 @@ public class PlayerController : Singleton<PlayerController>
                     Mathf.Clamp(directional.transform.rotation.z, 0, 0);
                 }
 
+                #endregion
 
                 #region Attacks
 
@@ -379,31 +455,20 @@ public class PlayerController : Singleton<PlayerController>
                         if (playerInventory[i].active)
                         {
                             //check if primary is projectile
-                            if (!playerInventory[i].projectile)
+                            if (!playerInventory[i].projectile && playerInventory[i].segment == Item.Segment.Torso)
                             {
+                                print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
+
+                                MeleeAttack(firerate, i);
+
                                 //MELEE ATTACK
                                 if (meleeUI != null)
                                 {
                                     print("MELEE ATTACK");
                                     meleeUI.gameObject.SetActive(true);
 
-
-
-                                    //ExecuteAfterFrames(26, () => meleeUI.gameObject.SetActive(false));
                                 }
 
-
-
-                                //active primary attack
-
-                                itemsAnimForward[i].SetTrigger("Attack");
-                                itemsAnimBack[i].SetTrigger("Attack");
-                                itemsAnimLeftSide[i].SetTrigger("Attack");
-                                itemsAnimRightSide[i].SetTrigger("Attack");
-
-
-
-                                MeleeAttack(firerate, i);
                             }
                         }
                     }
@@ -427,7 +492,8 @@ public class PlayerController : Singleton<PlayerController>
 
                                 //changed to use player stats, the primary attack will just change
 
-                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, projectileRange, i);
+                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, projectileRange);
+                                //ADD KNOCK BACK
                                 if (knockbackActive)
                                 {
                                     float timeSinceKnockback = Time.time - knockbackStartTime;
@@ -442,9 +508,9 @@ public class PlayerController : Singleton<PlayerController>
                                         var dir = (-firingPoint.transform.forward * knockbackAmount);
                                         dir = new Vector3(dir.x, 0, dir.z);
                                         controller.Move(dir * Time.deltaTime);
+
                                     }
                                 }
-                                //ADD KNOCK BACK
 
                             }
                         }
@@ -501,6 +567,27 @@ public class PlayerController : Singleton<PlayerController>
 
 
         #endregion
+    }
+
+    void StopAllAnimations()
+    {
+        //foreach (var animator in itemsAnimForward)
+        //{
+        //    animator.StopPlayback();
+        //}
+        //foreach (var animator in itemsAnimBack)
+        //{
+        //    if(animator.)
+        //    animator.StopPlayback();
+        //}
+        //foreach (var animator in itemsAnimLeftSide)
+        //{
+        //    animator.StopPlayback();
+        //}
+        //foreach (var animator in itemsAnimRightSide)
+        //{
+        //    animator.StopPlayback();
+        //}
     }
 
     public void UpdateLegAnimators()
@@ -628,12 +715,14 @@ public class PlayerController : Singleton<PlayerController>
                 if(meleeUI != null)
                 {
                     meleeAnimationCooldown = true;
-                    meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                    //meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                    print("Attack count");
                     //activate animation
+                    print("Anim slot " + _index);
                     itemsAnimForward[_index].SetTrigger("Attack");
-                    itemsAnimBack[_index].SetTrigger("Attack");
-                    itemsAnimLeftSide[_index].SetTrigger("Attack");
-                    itemsAnimRightSide[_index].SetTrigger("Attack");
+                    //itemsAnimBack[_index].SetTrigger("Attack");
+                    //itemsAnimLeftSide[_index].SetTrigger("Attack");
+                    //itemsAnimRightSide[_index].SetTrigger("Attack");
                     ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
 
                 }
@@ -646,8 +735,12 @@ public class PlayerController : Singleton<PlayerController>
 
                     foreach (var enemy in inRangeEnemies)
                     {
-                        enemy.GetComponent<BaseEnemy>().Hit();
-                        if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
+                        if(enemy != null)
+                        {
+                            enemy.GetComponent<BaseEnemy>().Hit();
+                            if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
+                        }
+
 
                     }
 
@@ -655,23 +748,15 @@ public class PlayerController : Singleton<PlayerController>
                     meleeCooDown = true;
                     ExecuteAfterSeconds(_firerate, () => meleeCooDown = false);
                 }
-
             }
-
-
-            
-
         }
-
     }
 
-    void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range, int _index)
+    void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
     {
         Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
         Vector3 flatAimTarget = screenPoint + cursorRay / Mathf.Abs(cursorRay.y) * Mathf.Abs(screenPoint.y - transform.position.y);
-
-
 
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
         RaycastHit hit;
@@ -684,24 +769,14 @@ public class PlayerController : Singleton<PlayerController>
             if (!projectileShot)
             {
 
-                itemsAnimForward[_index].SetTrigger("Attack");
-                if (itemsAnimBack[_index] != null) itemsAnimBack[_index].SetTrigger("Attack");
-                itemsAnimLeftSide[_index].SetTrigger("Attack");
-                itemsAnimRightSide[_index].SetTrigger("Attack");
-
-
                 //particle system
                 var particleSystem = GetComponentInChildren<ParticleSystem>();
                 particleSystem.Play();
-
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
-
-
-
 
                 knockbackActive = true;
                 knockbackStartTime = Time.time;
@@ -712,9 +787,6 @@ public class PlayerController : Singleton<PlayerController>
 
                 //Controls the firerate, player can shoot another bullet after a certain amount of time
                 projectileShot = true;
-
-                //knock player back
-                //Knockback(knockbackAmount);
 
                 ExecuteAfterSeconds(_firerate, () => projectileShot = false);
             }
@@ -729,7 +801,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             print("player has been hit");
             health -= _dmg;
-            _PE.ChromaticABFade();
+            //_PE.ChromaticABFade();
 
             if (health > 0)
             {
@@ -748,11 +820,11 @@ public class PlayerController : Singleton<PlayerController>
 
     void DieAnimation()
     {
-        baseAnimator.SetBool("ForwardWalk", false);
-        baseAnimator.SetBool("SideWalk", false);
-        nubsAnimator.SetBool("ForwardWalk", false);
-        nubsAnimator.SetBool("SideWalk", false);
-        baseAnimator.SetTrigger("DeathTrigger");
+        //baseAnimator.SetBool("ForwardWalk", false);
+        //baseAnimator.SetBool("SideWalk", false);
+        //nubsAnimator.SetBool("ForwardWalk", false);
+        //nubsAnimator.SetBool("SideWalk", false);
+        //baseAnimator.SetTrigger("DeathTrigger");
     }
 
 
