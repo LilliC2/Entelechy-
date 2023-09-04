@@ -79,7 +79,7 @@ public class PlayerController : Singleton<PlayerController>
 
     [SerializeField]
     int initalSpeedBoost = 3;
-    bool isMoving;
+    public bool isMoving;
     GameObject lastDir;
     Tween speedTween;
 

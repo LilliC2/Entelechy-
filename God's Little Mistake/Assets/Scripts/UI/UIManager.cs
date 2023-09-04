@@ -375,14 +375,7 @@ public class UIManager : Singleton<UIManager>
                     playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, standard.y, playerAvatar.transform.position.z);
                 }
             }
-        }
-
-
-        //check if item is mean to be tall
-
-        //if yes raise height
-
-        //if no, keep standard
+        } 
 
     }
 
