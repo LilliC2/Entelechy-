@@ -16,6 +16,7 @@ public class GameBehaviour : LC.Behaviour //inherits from
     protected static MeleeAttack _MA { get { return MeleeAttack.INSTANCE; } }
     protected static EnemyManager _EM { get { return EnemyManager.INSTANCE; } }
     protected static PlayerEffects _PE { get { return PlayerEffects.INSTANCE; } }
+    protected static PlayerItemAttacks _PIA { get { return PlayerItemAttacks.INSTANCE; } }
 
    
 

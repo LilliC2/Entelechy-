@@ -68,6 +68,14 @@ public class BaseEnemy : GameBehaviour
 
     public void Hit()
     {
+        //check for debuffs
+        if(_PIA.slugEyesEquipped)
+        {
+            if (_PIA.SlugEyes()) ApplySlowness(_PIA.slowDuration, _PIA.slowPercent);
+        }
+
+
+
         if (stats.health > 0)
         {
             stats.health -= _PC.dmg;
@@ -89,6 +97,22 @@ public class BaseEnemy : GameBehaviour
         }
 
     }
+    
+    /// <summary>
+    /// Apply slowness debuff of set percent to enemyfor set duration
+    /// </summary>
+    /// <param name="_duration"></param>
+    /// <param name="_percent"> Perctange as decimal </param>
+    public void ApplySlowness(float _duration, float _percent)
+    {
+        print("Slowed enemy");
+        var speedBefore = stats.speed;
+
+        stats.speed = speedBefore * (1 - _percent);
+        ExecuteAfterSeconds(_duration, () => stats.speed = speedBefore);
+    }
+
+
 
     public void Die()
     {

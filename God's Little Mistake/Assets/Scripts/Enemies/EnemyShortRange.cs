@@ -53,6 +53,8 @@ public class EnemyShortRange : GameBehaviour
     // Update is called once per frame
     void Update()
     {
+        agent.speed = enemyStats.stats.speed;
+
 
         ////check for the sight and attack range
         if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)

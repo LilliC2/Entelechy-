@@ -12,6 +12,8 @@ public class Item
     public Category category;
     public enum Segment {Head, Torso, Legs }
     public Segment segment;
+    public enum MeleeAttackType {Cone, Line, None }
+    public MeleeAttackType meleeAttackType;
     public enum ItemType {Primary, Secondary, Passive, Symbiote }
     public ItemType itemType;
     public float currencyValue;
@@ -21,6 +23,7 @@ public class Item
     public float dmg;
     public float dps;
     public float fireRate;
+    public float meleeSpeed;
 
     public float critX; //crit dmg multipler
     public float critChance;

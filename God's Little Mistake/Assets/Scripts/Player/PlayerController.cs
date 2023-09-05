@@ -69,7 +69,8 @@ public class PlayerController : Singleton<PlayerController>
     public float dps;
     public float projectileRange;
     public float meleeRange;
-    public float firerate;
+    public float meleeFirerate;
+    public float projectileFirerate;
 
     public bool projectile;
     public float projectileSpeed;
@@ -110,7 +111,7 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject lineHitbox;
     public GameObject coneHitbox;
     MeleeUISwitcher meleeUISwitcher;
-    public enum MeleeHitBox { Line, Cone }
+    public enum MeleeHitBox { Line, Cone, None }
     public MeleeHitBox meleeHitBox;
 
 
@@ -455,11 +456,16 @@ public class PlayerController : Singleton<PlayerController>
                         if (playerInventory[i].active)
                         {
                             //check if primary is projectile
-                            if (!playerInventory[i].projectile && playerInventory[i].segment == Item.Segment.Torso)
+                            if (!playerInventory[i].projectile)
                             {
                                 print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
 
-                                MeleeAttack(firerate, i);
+                                //update melee attack pattern
+                                if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
+                                else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
+
+
+                                MeleeAttack(meleeFirerate, i);
 
                                 //MELEE ATTACK
                                 if (meleeUI != null)
@@ -492,7 +498,7 @@ public class PlayerController : Singleton<PlayerController>
 
                                 //changed to use player stats, the primary attack will just change
 
-                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, projectileRange);
+                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, projectileFirerate, projectileRange);
                                 //ADD KNOCK BACK
                                 if (knockbackActive)
                                 {
@@ -712,6 +718,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             if(!meleeAnimationCooldown)
             {
+                print("Melee UI is " + meleeUI.name);
                 if(meleeUI != null)
                 {
                     meleeAnimationCooldown = true;
@@ -720,9 +727,9 @@ public class PlayerController : Singleton<PlayerController>
                     //activate animation
                     print("Anim slot " + _index);
                     itemsAnimForward[_index].SetTrigger("Attack");
-                    //itemsAnimBack[_index].SetTrigger("Attack");
-                    //itemsAnimLeftSide[_index].SetTrigger("Attack");
-                    //itemsAnimRightSide[_index].SetTrigger("Attack");
+                    itemsAnimBack[_index].SetTrigger("Attack");
+                    itemsAnimLeftSide[_index].SetTrigger("Attack");
+                    itemsAnimRightSide[_index].SetTrigger("Attack");
                     ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
 
                 }
@@ -738,6 +745,7 @@ public class PlayerController : Singleton<PlayerController>
                         if(enemy != null)
                         {
                             enemy.GetComponent<BaseEnemy>().Hit();
+
                             if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
                         }
 
@@ -764,7 +772,6 @@ public class PlayerController : Singleton<PlayerController>
         if (Physics.Raycast(ray, out hit))
         {
             firingPoint.transform.LookAt(hit.point);
-
 
             if (!projectileShot)
             {
