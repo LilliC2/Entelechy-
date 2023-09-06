@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 {
-    public List<Item> inSceneItemDataBase;
 
     /// <summary>
     /// Adds item to players inventory and removes it from scene

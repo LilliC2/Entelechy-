@@ -17,15 +17,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
     // Update is called once per frame
     void Update()
     {
-        //get enemy category
 
-        //get random number
-
-        //pick item from list
-
-        //check game level
-
-        //generate item levelds
     }
 
     public GameObject GenerateItem(string _category)
