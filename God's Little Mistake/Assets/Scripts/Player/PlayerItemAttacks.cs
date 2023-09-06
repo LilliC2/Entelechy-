@@ -5,6 +5,10 @@ using DG.Tweening;
 
 public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 {
+
+    [Header("Ability")]
+    bool isOnCoolDown;
+
     [Header("Slug Legs")]
     bool slugLegsEquipped;
     public GameObject slugLeg_trail;
@@ -27,6 +31,10 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     public float dashDuration;
     public float dashPower;
 
+    [Header("Tripod")]
+    bool tripodLegsEquipped;
+    public float tripodCooldownTime;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -36,7 +44,8 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     // Update is called once per frame
     void Update()
     {
-        if(dashing)
+        #region Basic Dash
+        if (dashing)
         {
             float timeSinceDash = Time.time - dashStartTime;
 
@@ -64,16 +73,64 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
             _PC.GetComponent<TrailRenderer>().enabled = false;
 
         }
+
+        #endregion
+
+        #region Passive Abilities
         //SNAIL LEGS
         if (_PC.isMoving&& slugLegsEquipped)
         {
             SlugLegs(timeBetweenTrail);
-        }        
+        }
+        #endregion
+
+        #region Button Activated Abilities
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            if(!isOnCoolDown)
+            {
+                for (int i = 0; i < _PC.playerInventory.Count; i++)
+                {
+                    //check if primary active and has ability
+                    if(_PC.playerInventory[i].active && _PC.playerInventory[i].hasActiveAbility)
+                    {
+                        //tripod dash
+                        if (_PC.playerInventory[i].ID == 6)
+                        {
+                            TripodLegs();
+
+                        }
+                    }
+                }
+
+                
+            }
+            
+        }
+
+        
+        #endregion
     }
 
-    public void Dash(float _dashPower)
+    void TripodLegs()
+    {
+        Dash(5, 0.3f);
+
+        //CoolDown
+        isOnCoolDown = true;
+
+        //OPTIONAL: Invunerable while dashing
+        _PC.immortal = true;
+        ExecuteAfterSeconds(0.3f, () => _PC.immortal = false);
+
+        ExecuteAfterSeconds(tripodCooldownTime, () => isOnCoolDown = false);
+    }
+
+    public void Dash(float _dashPower, float _dashDuration)
     {
         dashPower = _dashPower;
+        dashDuration = _dashDuration;
         dashStartTime = Time.time;
         dashing = true;
 
@@ -106,14 +163,15 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         return speedTween;
     }
 
-    public void ItemCheck()
+    public void PassiveAbilityItemCheck()
     {
         slugLegsEquipped = false;
+        slugEyesEquipped = false;
+        tripodLegsEquipped = false;
         //check if slug legs are on player
         foreach (var item in _PC.playerInventory)
         {
             if (item.ID == 15) slugLegsEquipped = true;
-            if (item.ID == 5) slugEyesEquipped = true;
         }
 
     }

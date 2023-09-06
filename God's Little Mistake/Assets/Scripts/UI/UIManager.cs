@@ -343,7 +343,7 @@ public class UIManager : Singleton<UIManager>
 
 
         CheckHeight();
-        _PIA.ItemCheck();
+        _PIA.PassiveAbilityItemCheck();
 
         // (flip) itemFront.transform.localScale = new Vector3(-itemFront.transform.rotation.x, itemFront.transform.rotation.y, itemFront.transform.rotation.z);
 

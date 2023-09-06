@@ -16,6 +16,8 @@ public class Item
     public MeleeAttackType meleeAttackType;
     public enum ItemType {Primary, Secondary, Passive, Symbiote }
     public ItemType itemType;
+
+    public bool hasActiveAbility;
     public float currencyValue;
 
     public bool active;

@@ -137,8 +137,7 @@ public class PlayerController : Singleton<PlayerController>
         //for testing
         if (Input.GetKeyDown(KeyCode.Space))
         {
-            print("Dash forward");
-            _PIA.Dash(dashAmount);
+
         }
 
 
