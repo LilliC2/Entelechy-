@@ -59,13 +59,15 @@ public class EnemyShortRange : GameBehaviour
         ////check for the sight and attack range
         if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed)
         {
-            canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-            canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            if(BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+            {
+                canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+                canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-            //if cant see player, patrol
-            if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
-            else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
-
+                //if cant see player, patrol
+                if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+                else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+            }
         }
 
         //Visual indicator for health

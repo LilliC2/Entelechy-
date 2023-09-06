@@ -290,7 +290,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
     public bool SlugEyes()
     {
-        var r = Random.Range(1, 3);
+        var r = Random.Range(0, 3);
         if (r == 1) slowProjectile = true;
         return slowProjectile;
     }
@@ -310,6 +310,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         foreach (var item in _PC.playerInventory)
         {
             if (item.ID == 15) slugLegsEquipped = true;
+            if (item.ID == 5) slugEyesEquipped = true;
         }
 
     }

@@ -130,6 +130,7 @@ public class PlayerController : Singleton<PlayerController>
 
         CheckForStartingItems();
 
+
     }
 
     void Update()
@@ -631,6 +632,9 @@ public class PlayerController : Singleton<PlayerController>
                 //check if item is arleady in inventory
             }
         }
+
+        _PIA.PassiveAbilityItemCheck();
+
     }
 
     private Tween TweenSpeed(float endValue,float time)
@@ -749,11 +753,10 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         if(enemy != null)
                         {
-                            enemy.GetComponent<BaseEnemy>().Hit();
+                            enemy.GetComponent<BaseEnemy>().Hit(dmg);
 
                             if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
                         }
-
 
                     }
 

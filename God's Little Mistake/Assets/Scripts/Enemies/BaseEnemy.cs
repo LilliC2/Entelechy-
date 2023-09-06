@@ -75,7 +75,7 @@ public class BaseEnemy : GameBehaviour
         image.color = Color.HSVToRGB(H, currentHPpercent, V);
     }
 
-    public void Hit()
+    public void Hit(float _dmg)
     {
         //check for debuffs
         if(_PIA.slugEyesEquipped)
@@ -87,7 +87,8 @@ public class BaseEnemy : GameBehaviour
 
         if (stats.health > 0)
         {
-            stats.health -= _PC.dmg;
+            stats.health -= _dmg;
+
             //print(enemyStats.stats.health);
         }
     }
@@ -99,7 +100,7 @@ public class BaseEnemy : GameBehaviour
         {
             print("hit");
             //Add hit code here;
-            Hit();
+            Hit(_PC.dmg);
 
             //destroy bullet that hit it
             //Destroy(collision.gameObject);
@@ -162,7 +163,6 @@ public class BaseEnemy : GameBehaviour
                         spawnItem = true;
                         GameObject item = Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
 
-
                         item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
                         print("Spawning item of " + stats.category.ToString() + " category");
@@ -174,13 +174,19 @@ public class BaseEnemy : GameBehaviour
                     {
                         spawnHealPool = true;
                         Instantiate(healPool, gameObject.transform.position, Quaternion.identity);
-
+                        print("Heal pool spawns");
                     }
+                    break;
+                case 3:
+
+                    //nothing
+                    print("Enemy dies and nothing drops");
+
                     break;
             }
 
 
-            ExecuteAfterSeconds(0.5f, () => Destroy(this.gameObject));
+            ExecuteAfterSeconds(1f, () => Destroy(this.gameObject));
         }
 
         

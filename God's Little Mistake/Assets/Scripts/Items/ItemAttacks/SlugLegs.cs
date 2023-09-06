@@ -37,8 +37,8 @@ public class SlugLegs : GameBehaviour
         {
             foreach (var enemy in col)
             {
-                print("HItting enemy " + enemy.name);
-                enemy.gameObject.GetComponent<BaseEnemy>().stats.health -= damage;
+                //print("HItting enemy " + enemy.name);
+                enemy.gameObject.GetComponent<BaseEnemy>().Hit(damage);
 
             }
         }

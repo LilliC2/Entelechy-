@@ -24,12 +24,13 @@ public class Item
 
     public float dmg;
     public float dps;
-    public float fireRate;
+    public float longRangeSpeed;
     public float meleeSpeed;
 
     public float critX; //crit dmg multipler
     public float critChance;
-    public float range;
+    public float longRange_range;
+    public float melee_range;
 
     public bool projectile;
     public float projectileSpeed;

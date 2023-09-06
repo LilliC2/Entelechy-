@@ -21,8 +21,6 @@ public class BasicProjectile : GameBehaviour
     {
         if (collision.collider.CompareTag("Enemy"))
         {
-            print("player has been hit in collision");
-
             //explosionAnimOB.SetActive(true);
             
             image.SetActive(false);
