@@ -688,13 +688,10 @@ public class PlayerController : Singleton<PlayerController>
     public void ChangePrimary(int _inventorySlot)
     {
 
-        //turn off any others in the same segment
+        //turn off any others
         foreach (var item in playerInventory)
         {
-            if(item.segment == playerInventory[_inventorySlot].segment)
-            {
-                item.active = false;
-            }
+            item.active = false;
         }
 
         //check if item is primary
