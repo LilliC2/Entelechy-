@@ -103,7 +103,7 @@ public class PlayerController : Singleton<PlayerController>
     private float knockbackStartTime;
 
     [Header("Movement")]
-    bool enableMovement = true;
+    public bool enableMovement = true;
     public Vector3 move;
 
     [Header("Melee")]
@@ -153,48 +153,53 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Movement
 
-                move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-                if (!canFloat)
+                if(enableMovement)
                 {
-                    move.y -= gravity;
-                }
+                    move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-                controller.Move(move * Time.deltaTime * speed);
-
-
-                #region isMoving Check
-                //find inpus for movement
-                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-                {
-                    if (!isMoving)
+                    if (!canFloat)
                     {
-                        speed = speed + initalSpeedBoost;
-
-                        ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed, 1));
+                        move.y -= gravity;
                     }
 
+                    controller.Move(move * Time.deltaTime * speed);
+
+
+                    #region isMoving Check
+                    //find inpus for movement
+                    if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+                    {
+                        if (!isMoving)
+                        {
+                            speed = speed + initalSpeedBoost;
+
+                            ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed, 1));
+                        }
+
+                    }
+
+
+                    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
+                    else isMoving = false;
+
+                    if (!isMoving)
+                    {
+                        speed = maxSpeed;
+                    }
+
+                    isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
+
                 }
 
 
-                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
-                else isMoving = false;
 
-                if (!isMoving)
-                {
-                    speed = maxSpeed;
-                }
-
-                isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
-
-                
                 #endregion
 
                 #region Respawn If Fell Off
 
                 //grounded check
 
-                if(isGrounded)
+                if (isGrounded)
                 {
                     lastPosOnGround = lastPos;
                     var col = Physics.OverlapSphere(groundCheck.transform.position, 0.5f, groundMask);
@@ -799,6 +804,33 @@ public class PlayerController : Singleton<PlayerController>
             }
             print("FIRE PROJECTILE");
 
+        }
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        //IF RAM HORNS DASHING
+        if(_PIA.ramming)
+        {
+            if(collision.gameObject.CompareTag("Enemy"))
+            {
+                //apply stun
+                collision.gameObject.GetComponent<BaseEnemy>().ApplyStun(_PIA.ramHornsStunDuration);
+
+
+            }
+        }
+
+        if(_PIA.gutpunch)
+        {
+            if (collision.gameObject.CompareTag("Enemy"))
+            {
+                print("GUT PUNCHED");
+                collision.gameObject.GetComponent<BaseEnemy>().stats.health -= _PIA.humanFistDamage;
+
+
+            }
         }
     }
 

@@ -35,10 +35,22 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     bool tripodLegsEquipped;
     public float tripodCooldownTime;
 
+    [Header("Human Fist")]
+    public float humanFistCooldownTime;
+    public float humanFistChargeUpTime;
+    public float humanFistDamage;
+    public bool gutpunch;
+
+    [Header("Ram Horns")]
+    public float ramHornsCooldownTime;
+    public float ramHornsStunDuration;
+    public bool ramming;
+
+
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
@@ -78,7 +90,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
         #region Passive Abilities
         //SNAIL LEGS
-        if (_PC.isMoving&& slugLegsEquipped)
+        if (_PC.isMoving && slugLegsEquipped)
         {
             SlugLegs(timeBetweenTrail);
         }
@@ -86,14 +98,14 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
         #region Button Activated Abilities
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.Space))
         {
-            if(!isOnCoolDown)
+            if (!isOnCoolDown)
             {
                 for (int i = 0; i < _PC.playerInventory.Count; i++)
                 {
                     //check if primary active and has ability
-                    if(_PC.playerInventory[i].active && _PC.playerInventory[i].hasActiveAbility)
+                    if (_PC.playerInventory[i].active && _PC.playerInventory[i].hasActiveAbility)
                     {
                         //tripod dash
                         if (_PC.playerInventory[i].ID == 6)
@@ -101,16 +113,75 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
                             TripodLegs();
 
                         }
+
+                        if (_PC.playerInventory[i].ID == 3)
+                        {
+                            RamHorns();
+                        }
+                        
+                        if (_PC.playerInventory[i].ID == 8)
+                        {
+                            _PC.enableMovement = false;
+                            ExecuteAfterSeconds(humanFistChargeUpTime, () => HumanFist());
+                        }
                     }
                 }
 
-                
+
             }
-            
+
         }
 
-        
+
         #endregion
+    }
+
+    void HumanFist()
+    {
+        //turn off movement while winding up
+
+         _PC.enableMovement = true;
+
+        Dash(5, 0.3f);
+        gutpunch = true;
+
+        //Cooldown
+        isOnCoolDown = true;
+
+
+        //OPTIONAL: Invunerable while dashing
+        _PC.immortal = true;
+        ExecuteAfterSeconds(0.3f, () => FistReset());
+        ExecuteAfterSeconds(humanFistCooldownTime, () => isOnCoolDown = false);
+
+    }
+
+    void FistReset()
+    {
+        _PC.immortal = false;
+        gutpunch = false;
+    }
+
+    void RamHorns()
+    {
+        Dash(5, 0.3f);
+        ramming = true;
+
+        //Cooldown
+        isOnCoolDown = true;
+
+
+        //OPTIONAL: Invunerable while dashing
+        _PC.immortal = true;
+        ExecuteAfterSeconds(0.3f, () => RamReset());
+        ExecuteAfterSeconds(ramHornsCooldownTime, () => isOnCoolDown = false);
+
+    }
+
+    void RamReset()
+    {
+        _PC.immortal = false;
+        ramming = false;
     }
 
     void TripodLegs()
@@ -127,6 +198,11 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         ExecuteAfterSeconds(tripodCooldownTime, () => isOnCoolDown = false);
     }
 
+    /// <summary>
+    /// Dashes player in direction they are walking
+    /// </summary>
+    /// <param name="_dashPower"></param>
+    /// <param name="_dashDuration"></param>
     public void Dash(float _dashPower, float _dashDuration)
     {
         dashPower = _dashPower;

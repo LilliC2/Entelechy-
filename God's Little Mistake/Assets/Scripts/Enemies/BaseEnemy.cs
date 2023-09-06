@@ -6,7 +6,7 @@ public class BaseEnemy : GameBehaviour
 {
     public enum EnemyState
     {
-        Patrolling, Chase, Attacking, Die
+        Patrolling, Chase, Attacking, Die, Stunned
     }
 
     public EnemyState enemyState;
@@ -112,7 +112,15 @@ public class BaseEnemy : GameBehaviour
         ExecuteAfterSeconds(_duration, () => stats.speed = speedBefore);
     }
 
+    public void ApplyStun(float _duration)
+    {
+        print("Enemy stunned");
+        var speedBefore = stats.speed;
+        stats.speed = 0;
 
+        ExecuteAfterSeconds(_duration,() => stats.speed = speedBefore);
+
+    }
 
     public void Die()
     {

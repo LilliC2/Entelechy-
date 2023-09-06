@@ -57,7 +57,7 @@ public class EnemyShortRange : GameBehaviour
 
 
         ////check for the sight and attack range
-        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die || BaseEnemy.enemyState != BaseEnemy.EnemyState.Stunned)
         {
             canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
             canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -142,6 +142,7 @@ public class EnemyShortRange : GameBehaviour
             case BaseEnemy.EnemyState.Die:
 
                 BaseEnemy.Die();
+
 
                 break;
         }

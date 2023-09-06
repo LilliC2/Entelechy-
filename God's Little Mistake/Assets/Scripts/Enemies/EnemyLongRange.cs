@@ -59,7 +59,7 @@ public class EnemyLongRange : GameBehaviour
         agent.speed = enemyStats.stats.speed;
 
         ////check for the sight and attack range
-        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die || BaseEnemy.enemyState != BaseEnemy.EnemyState.Stunned)
         {
             canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
             canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
