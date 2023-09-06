@@ -83,7 +83,10 @@ public class BaseEnemy : GameBehaviour
             if (_PIA.SlugEyes()) ApplySlowness(_PIA.slowDuration, _PIA.slowPercent);
         }
 
-
+        if (_PIA.wolfClawsEquipped)
+        {
+            if (_PIA.WolfClaw()) ApplyBleeding(_PIA.bleedDuration, _PIA.bleedTickDmg);
+        }
 
         if (stats.health > 0)
         {
@@ -131,6 +134,25 @@ public class BaseEnemy : GameBehaviour
         ExecuteAfterSeconds(_duration,() => stats.speed = speedBefore);
 
     }
+
+    public void ApplyBleeding(float _duration, float _dmgPerTick)
+    {
+        bool isbleeding = true;
+        ExecuteAfterSeconds(_duration, () => isbleeding = false);
+        float timer = 0;
+
+        while (isbleeding)
+        {
+            print("is bleeding");
+            timer += Time.deltaTime;
+            if (timer >= 1)
+            {
+                timer = 0;
+                Hit(_dmgPerTick);
+            }
+        }
+    }
+    
 
     public void Die()
     {

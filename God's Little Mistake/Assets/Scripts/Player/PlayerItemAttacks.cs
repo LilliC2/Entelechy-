@@ -53,6 +53,20 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     bool hovering;
     public float hoverLegsDuration;
 
+    [Header("Wolf Claw")]
+    public bool wolfClawsEquipped;
+    bool applyBleed;
+    public float bleedDuration;
+    public float bleedTickDmg;
+
+    [Header("Pea Shooter")]
+    public float peaShooerChargeUpTime;
+    public float peaShooerCooldownTime;
+    public float RPEAGexplosionRadius;
+    public float RPEAGexplosionDmg;
+    public GameObject bigPea;
+
+
     [Header("Ram Horns")]
     public float ramHornsCooldownTime;
     public float ramHornsStunDuration;
@@ -146,6 +160,12 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
                             _PC.enableMovement = false;
                             ExecuteAfterSeconds(humanFistChargeUpTime, () => HumanFist());
                         }
+                        
+                        if (_PC.playerInventory[i].ID == 9)
+                        {
+                            _PC.enableMovement = false;
+                            ExecuteAfterSeconds(peaShooerChargeUpTime, () => PeaShooter());
+                        }
 
 
                     }
@@ -158,6 +178,17 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
 
         #endregion
+    }
+
+    void PeaShooter()
+    {
+        isOnCoolDown = true;
+        _PC.enableMovement = true;
+
+        _PC.FireProjectile(bigPea, 300, 1, _PC.projectileRange);
+
+        ExecuteAfterSeconds(peaShooerCooldownTime, () => isOnCoolDown = false);
+
     }
 
     void HoverLegs()
@@ -288,11 +319,18 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         }
     }
 
-    public bool SlugEyes()
+    public bool WolfClaw()
     {
         var r = Random.Range(0, 3);
         if (r == 1) slowProjectile = true;
         return slowProjectile;
+    }
+
+    public bool SlugEyes()
+    {
+        var r = Random.Range(0, 3);
+        if (r == 1) applyBleed = true;
+        return applyBleed;
     }
 
     private Tween TweenValue(float endValue, float time, float tweenValue)
@@ -306,11 +344,13 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         slugLegsEquipped = false;
         slugEyesEquipped = false;
         tripodLegsEquipped = false;
+        wolfClawsEquipped = false;
         //check if slug legs are on player
         foreach (var item in _PC.playerInventory)
         {
             if (item.ID == 15) slugLegsEquipped = true;
             if (item.ID == 5) slugEyesEquipped = true;
+            if (item.ID == 7) wolfClawsEquipped = true;
         }
 
     }

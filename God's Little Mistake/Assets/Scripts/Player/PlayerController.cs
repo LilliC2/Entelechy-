@@ -768,7 +768,7 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
+    public void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
     {
         Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
@@ -813,28 +813,22 @@ public class PlayerController : Singleton<PlayerController>
 
     private void OnCollisionEnter(Collision collision)
     {
-        //IF RAM HORNS DASHING
-        if(_PIA.ramming)
+        if (collision.gameObject.CompareTag("Enemy"))
         {
-            if(collision.gameObject.CompareTag("Enemy"))
+
+
+            if (_PIA.ramming)
             {
-                //apply stun
                 collision.gameObject.GetComponent<BaseEnemy>().ApplyStun(_PIA.ramHornsStunDuration);
 
-
             }
-        }
-
-        if(_PIA.gutpunch)
-        {
-            if (collision.gameObject.CompareTag("Enemy"))
+            if(_PIA.gutpunch)
             {
                 print("GUT PUNCHED");
                 collision.gameObject.GetComponent<BaseEnemy>().stats.health -= _PIA.humanFistDamage;
-
-
             }
         }
+        
     }
 
     public void Hit(float _dmg)
