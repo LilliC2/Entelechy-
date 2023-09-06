@@ -6,7 +6,7 @@ public class BaseEnemy : GameBehaviour
 {
     public enum EnemyState
     {
-        Patrolling, Chase, Attacking, Die, Stunned
+        Patrolling, Chase, Attacking, Die, Stunned, Charmed
     }
 
     public EnemyState enemyState;
@@ -16,6 +16,8 @@ public class BaseEnemy : GameBehaviour
 
     [SerializeField]
     ParticleSystem deathParticles;
+    [SerializeField]
+    GameObject charmedParticles;
 
     [SerializeField]
     Animator explosionAnim;
@@ -52,6 +54,13 @@ public class BaseEnemy : GameBehaviour
         {
             enemyState = EnemyState.Die;
         }
+
+        //turn on charm particles
+        if(enemyState == EnemyState.Charmed)
+        {
+            charmedParticles.SetActive(true);
+        }
+        else charmedParticles.SetActive(false);
 
     }
 

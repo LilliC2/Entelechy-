@@ -41,17 +41,23 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     public float humanFistDamage;
     public bool gutpunch;
 
+    [Header("Big Eyes")]
+    Collider[] enemiesCharmed;
+    public GameObject enemyLineStart;
+    public int AOEradius;
+    public LayerMask enemyMask;
+    public float charmDuration;
+    public float bigEyesCooldownTime;
+
+    [Header("Hover Legs")]
+    bool hovering;
+    public float hoverLegsDuration;
+
     [Header("Ram Horns")]
     public float ramHornsCooldownTime;
     public float ramHornsStunDuration;
     public bool ramming;
 
-
-    // Start is called before the first frame update
-    void Start()
-    {
-
-    }
 
     // Update is called once per frame
     void Update()
@@ -94,6 +100,12 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         {
             SlugLegs(timeBetweenTrail);
         }
+
+        if(hovering)
+        {
+            //simple bobbing up and down motion
+        }
+
         #endregion
 
         #region Button Activated Abilities
@@ -119,11 +131,23 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
                             RamHorns();
                         }
                         
+                        if (_PC.playerInventory[i].ID == 11)
+                        {
+                            BigEyes();
+                        }
+                        
+                        if (_PC.playerInventory[i].ID == 10)
+                        {
+                            HoverLegs();
+                        }
+                        
                         if (_PC.playerInventory[i].ID == 8)
                         {
                             _PC.enableMovement = false;
                             ExecuteAfterSeconds(humanFistChargeUpTime, () => HumanFist());
                         }
+
+
                     }
                 }
 
@@ -134,6 +158,44 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
 
         #endregion
+    }
+
+    void HoverLegs()
+    {
+        print("HOVERING");
+        hovering = true;
+        _PC.canFloat = true;
+        ExecuteAfterSeconds(hoverLegsDuration, () => ResetHover());
+
+    }
+
+    void ResetHover()
+    {
+        hovering = false;
+        _PC.canFloat = false;
+    }
+
+    void BigEyes()
+    {
+        isOnCoolDown = true;
+
+        enemiesCharmed = Physics.OverlapSphere(_PC.transform.position, AOEradius,enemyMask);
+        foreach (var collider in enemiesCharmed)
+        {
+            collider.gameObject.GetComponent<BaseEnemy>().enemyState = BaseEnemy.EnemyState.Charmed;
+        }
+
+        ExecuteAfterSeconds(charmDuration, () => TurnOffCharm());
+        
+        ExecuteAfterSeconds(bigEyesCooldownTime, () => isOnCoolDown = false);
+    }
+
+    void TurnOffCharm()
+    {
+        foreach (var collider in enemiesCharmed)
+        {
+            collider.gameObject.GetComponent<BaseEnemy>().enemyState = BaseEnemy.EnemyState.Patrolling;
+        }
     }
 
     void HumanFist()
