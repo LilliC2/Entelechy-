@@ -20,6 +20,12 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     [SerializeField]
     public float slowPercent; //decimal
 
+    [Header("Basic Dash")]
+    public Ease dashEase;
+    bool dashing;
+    float dashStartTime;
+    public float dashDuration;
+    public float dashPower;
 
     // Start is called before the first frame update
     void Start()
@@ -30,9 +36,34 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     // Update is called once per frame
     void Update()
     {
+        if(dashing)
+        {
+            float timeSinceDash = Time.time - dashStartTime;
 
+            //turn on trail render
+            _PC.GetComponent<TrailRenderer>().enabled = true;
 
+            if (timeSinceDash >= dashDuration)
+            {
+                dashing = false;
+            }
+            else
+            {
+                float knockbackProgress = timeSinceDash / dashDuration;
 
+                var dashDiresction = _PC.move * dashPower;
+                dashDiresction = new Vector3(dashDiresction.x, 0, dashDiresction.z);
+
+                //_PC.transform.DOMove(dashDiresction, 1).SetEase(dashEase);
+                _PC.controller.Move(dashDiresction * Time.deltaTime); //(WORKS BUT VERY SNAPPY)
+
+            }
+        }
+        else
+        {
+            _PC.GetComponent<TrailRenderer>().enabled = false;
+
+        }
         //SNAIL LEGS
         if (_PC.isMoving&& slugLegsEquipped)
         {
@@ -40,6 +71,14 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         }        
     }
 
+    public void Dash(float _dashPower)
+    {
+        dashPower = _dashPower;
+        dashStartTime = Time.time;
+        dashing = true;
+
+        //start cooldown here
+    }
 
     /// <summary>
     /// Creates trial of toxic slime behind player

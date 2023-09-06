@@ -12,7 +12,6 @@ public class GameBehaviour : LC.Behaviour //inherits from
     protected static InSceneItemDataBase _ISitemD { get { return InSceneItemDataBase.INSTANCE; } }
     protected static ItemGeneration _IG { get { return ItemGeneration.INSTANCE; } }
     protected static ItemsOnPlayer _AVTAR { get { return ItemsOnPlayer.INSTANCE; } }
-    protected static MeleeAttack _MA { get { return MeleeAttack.INSTANCE; } }
     protected static EnemyManager _EM { get { return EnemyManager.INSTANCE; } }
     protected static PlayerEffects _PE { get { return PlayerEffects.INSTANCE; } }
     protected static PlayerItemAttacks _PIA { get { return PlayerItemAttacks.INSTANCE; } }

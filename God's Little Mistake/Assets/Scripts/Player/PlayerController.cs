@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class PlayerController : Singleton<PlayerController>
 {
-    private CharacterController controller;
-    private Vector3 playerVelocity;
+    public CharacterController controller;
     public BearTrap bearTrap;
     public CactusTrap cactusTrap;
 
@@ -105,6 +104,7 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Movement")]
     bool enableMovement = true;
+    public Vector3 move;
 
     [Header("Melee")]
     bool meleeCooDown;
@@ -114,6 +114,7 @@ public class PlayerController : Singleton<PlayerController>
     public enum MeleeHitBox { Line, Cone, None }
     public MeleeHitBox meleeHitBox;
 
+    public float dashAmount;
 
     private void Start()
     {
@@ -135,10 +136,10 @@ public class PlayerController : Singleton<PlayerController>
     {
         //for testing
         if (Input.GetKeyDown(KeyCode.Space))
-            {
-                print("vig");
-                _PE.VignetteFade();
-            }
+        {
+            print("Dash forward");
+            _PIA.Dash(dashAmount);
+        }
 
 
         UpdateMelee();
@@ -153,7 +154,7 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Movement
 
-                Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+                move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
                 if (!canFloat)
                 {
