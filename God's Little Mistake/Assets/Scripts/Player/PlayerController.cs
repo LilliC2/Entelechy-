@@ -883,7 +883,7 @@ public class PlayerController : Singleton<PlayerController>
             if(_PIA.gutpunch)
             {
                 print("GUT PUNCHED");
-                collision.gameObject.GetComponent<BaseEnemy>().stats.health -= _PIA.humanFistDamage;
+                collision.gameObject.GetComponent<BaseEnemy>().Hit(_PIA.humanFistDamage);
             }
         }
         

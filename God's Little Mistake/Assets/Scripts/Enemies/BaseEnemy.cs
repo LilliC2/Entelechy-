@@ -61,7 +61,7 @@ public class BaseEnemy : GameBehaviour
             charmedParticles.SetActive(true);
         }
         else charmedParticles.SetActive(false);
-
+        
     }
 
     void HealthVisualIndicator(float _health, float _maxHP)

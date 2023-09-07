@@ -28,6 +28,7 @@ public class RPEAGProjectile : GameBehaviour
             foreach (var col in enemyCol)
             {
                 col.gameObject.GetComponent<BaseEnemy>().Hit(_PIA.RPEAGexplosionDmg);
+
             }
 
             //explosionAnimOB.SetActive(true);

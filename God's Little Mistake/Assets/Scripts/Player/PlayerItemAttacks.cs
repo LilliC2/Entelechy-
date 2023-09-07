@@ -81,6 +81,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         {
             float timeSinceDash = Time.time - dashStartTime;
 
+            //turn off if u dont want trail render
             //turn on trail render
             _PC.GetComponent<TrailRenderer>().enabled = true;
 
@@ -102,6 +103,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         }
         else
         {
+            //turn off if u dont want trail render
             _PC.GetComponent<TrailRenderer>().enabled = false;
 
         }
