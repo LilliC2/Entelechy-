@@ -451,44 +451,6 @@ public class PlayerController : Singleton<PlayerController>
                 #endregion
 
                 #region Attacks
-
-
-                if (Input.GetMouseButton(1))
-                {
-
-                    for (int i = 0; playerInventory.Count > i; i++)
-                    {
-                        //check for primary
-                        if (playerInventory[i].active)
-                        {
-                            //check if primary is projectile
-                            if (!playerInventory[i].projectile)
-                            {
-                                print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
-
-                                //update melee attack pattern
-                                if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
-                                else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
-
-
-                                MeleeAttack(meleeFirerate, i);
-
-                                //MELEE ATTACK
-                                if (meleeUI != null)
-                                {
-                                    print("MELEE ATTACK");
-                                    meleeUI.gameObject.SetActive(true);
-
-                                }
-
-                            }
-                        }
-                    }
-
-                }
- 
-
-
                 if (Input.GetMouseButton(0))
                 {
                     for (int i = 0; playerInventory.Count > i; i++)
@@ -497,7 +459,7 @@ public class PlayerController : Singleton<PlayerController>
                         if (playerInventory[i].active)
                         {
                             //check if primary is projectile
-                            if (playerInventory[i].projectile)
+                            if (playerInventory[i].projectile) //PROJECTILE ATTACKS------------------------------------------------------------------
                             {
                                 //shoot
 
@@ -523,6 +485,25 @@ public class PlayerController : Singleton<PlayerController>
 
                                     }
                                 }
+                                else //MELEE ATTACKS-------------------------------------------------------------------------------------------------
+                                {
+                                    print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
+
+                                    //update melee attack pattern
+                                    if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
+                                    else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
+
+
+                                    MeleeAttack(meleeFirerate, i);
+
+                                    //MELEE ATTACK
+                                    if (meleeUI != null)
+                                    {
+                                        print("MELEE ATTACK");
+                                        meleeUI.gameObject.SetActive(true);
+
+                                    }
+                                }
 
                             }
                         }
@@ -530,6 +511,86 @@ public class PlayerController : Singleton<PlayerController>
 
                 }
 
+                #region OLD VERSION WITH SEPERATE BUTTONS FOR MELEE AND LONG RANGE
+
+                //if (Input.GetMouseButton(1))
+                //{
+
+                //    for (int i = 0; playerInventory.Count > i; i++)
+                //    {
+                //        //check for primary
+                //        if (playerInventory[i].active)
+                //        {
+                //            //check if primary is projectile
+                //            if (!playerInventory[i].projectile)
+                //            {
+                //                print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
+
+                //                //update melee attack pattern
+                //                if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
+                //                else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
+
+
+                //                MeleeAttack(meleeFirerate, i);
+
+                //                //MELEE ATTACK
+                //                if (meleeUI != null)
+                //                {
+                //                    print("MELEE ATTACK");
+                //                    meleeUI.gameObject.SetActive(true);
+
+                //                }
+
+                //            }
+                //        }
+                //    }
+
+                //}
+ 
+
+
+                //if (Input.GetMouseButton(0))
+                //{
+                //    for (int i = 0; playerInventory.Count > i; i++)
+                //    {
+                //        //check for primary
+                //        if (playerInventory[i].active)
+                //        {
+                //            //check if primary is projectile
+                //            if (playerInventory[i].projectile)
+                //            {
+                //                //shoot
+
+
+                //                //changed to use player stats, the primary attack will just change
+
+                //                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, projectileFirerate, projectileRange);
+                //                //ADD KNOCK BACK
+                //                if (knockbackActive)
+                //                {
+                //                    float timeSinceKnockback = Time.time - knockbackStartTime;
+
+                //                    if (timeSinceKnockback >= knockbackDuration)
+                //                    {
+                //                        knockbackActive = false;
+                //                    }
+                //                    else
+                //                    {
+                //                        float knockbackProgress = timeSinceKnockback / knockbackDuration;
+                //                        var dir = (-firingPoint.transform.forward * knockbackAmount);
+                //                        dir = new Vector3(dir.x, 0, dir.z);
+                //                        controller.Move(dir * Time.deltaTime);
+
+                //                    }
+                //                }
+
+                //            }
+                //        }
+                //    }
+
+                //}
+
+                #endregion
                 #endregion
  
 

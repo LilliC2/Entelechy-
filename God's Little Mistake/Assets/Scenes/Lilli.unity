@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 262.33694, g: 325.04984, b: 430.2193, a: 1}
+  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6590,7 +6590,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[0].dmg
-      value: 1
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[0].dps
@@ -6615,7 +6615,7 @@ PrefabInstance:
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[0].icon
       value: 
-      objectReference: {fileID: 0}
+      objectReference: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[1].icon
       value: 
@@ -6624,6 +6624,10 @@ PrefabInstance:
       propertyPath: playerInventory.Array.data[2].icon
       value: 
       objectReference: {fileID: 21300000, guid: f8fa9027941ad9b4cb1ae4adfa069a16, type: 3}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: playerInventory.Array.data[0].critX
+      value: 1.3
+      objectReference: {fileID: 0}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[0].range
       value: 5
@@ -6710,7 +6714,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[0].critChance
-      value: 2
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[0].meleeSpeed
@@ -6749,12 +6753,20 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: playerInventory.Array.data[0].longRangeSpeed
+      value: 5
+      objectReference: {fileID: 0}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[0].avtarPrefabLeft
       value: 
       objectReference: {fileID: 1830519018957802660, guid: 8430836fde699bd4ebdf5bc34415ab9b, type: 3}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: playerInventory.Array.data[0].meleeAttackType
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[0].projectileSpeed
-      value: 500
+      value: 300
       objectReference: {fileID: 0}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[1].avtarPrefabLeft
@@ -6780,6 +6792,10 @@ PrefabInstance:
       propertyPath: playerInventory.Array.data[0].avtarPrefabRight
       value: 
       objectReference: {fileID: 1830519018957802660, guid: 8430836fde699bd4ebdf5bc34415ab9b, type: 3}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: playerInventory.Array.data[0].hasActiveAbility
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[1].avtarPrefabRight
       value: 
