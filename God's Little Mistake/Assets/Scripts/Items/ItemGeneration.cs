@@ -17,15 +17,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
     // Update is called once per frame
     void Update()
     {
-        //get enemy category
 
-        //get random number
-
-        //pick item from list
-
-        //check game level
-
-        //generate item levelds
     }
 
     public GameObject GenerateItem(string _category)
@@ -48,7 +40,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
         //pick a random possible drop
         int rand = RandomIntBetweenTwoInt(0, possibleDropsIndex.Count);
 
-        Item itemSpawned = _ItemD.itemDataBase[possibleDropsIndex[0]];
+        Item itemSpawned = _ItemD.itemDataBase[possibleDropsIndex[rand]];
 
         //scaling section here
         /*Here we would edit the item values here, so based on level and etc. the prefab of the item would be saved on this too

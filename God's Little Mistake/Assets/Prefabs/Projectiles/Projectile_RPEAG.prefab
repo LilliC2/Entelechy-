@@ -112,9 +112,9 @@ GameObject:
   - component: {fileID: 7351292330556947468}
   - component: {fileID: -5779310085204854185}
   - component: {fileID: -8797842275407018278}
-  - component: {fileID: -5924155822957334706}
+  - component: {fileID: -3662237779706025060}
   m_Layer: 13
-  m_Name: Projectile_MockUp
+  m_Name: Projectile_RPEAG
   m_TagString: Projectile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -129,8 +129,8 @@ Transform:
   m_GameObject: {fileID: 7752005100104120040}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.007, y: 0.507, z: 0.152}
-  m_LocalScale: {x: 0.02398688, y: 0.02398688, z: 0.02398688}
-  m_ConstrainProportionsScale: 1
+  m_LocalScale: {x: 0.07, y: 0.07, z: 0.07}
+  m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 4347991386478800833}
   - {fileID: 430063749668858261}
@@ -247,7 +247,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
---- !u!114 &-5924155822957334706
+--- !u!114 &-3662237779706025060
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -256,12 +256,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 7752005100104120040}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c90cb2e99ab216a4b94ea50dffc89b19, type: 3}
+  m_Script: {fileID: 11500000, guid: 6d73ec8817a57864498cd39085684d4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   explosionAnimOB: {fileID: 4971838325622231401}
   image: {fileID: 215733643793970339}
-  explosionAnim: {fileID: 0}
+  explosionAnim: {fileID: 850369799632515903}
 --- !u!1001 &2135072841477403110
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -350,6 +350,11 @@ PrefabInstance:
 --- !u!4 &430063749668858261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1753775868474349683, guid: ed45cbddeb40a884db678d5a07e7b212, type: 3}
+  m_PrefabInstance: {fileID: 2135072841477403110}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &850369799632515903 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 1615758433893008089, guid: ed45cbddeb40a884db678d5a07e7b212, type: 3}
   m_PrefabInstance: {fileID: 2135072841477403110}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &4971838325622231401 stripped

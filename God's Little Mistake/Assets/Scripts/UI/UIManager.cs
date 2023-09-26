@@ -81,7 +81,7 @@ public class UIManager : Singleton<UIManager>
         popupDmg.text = "DMG: " + _hoverItem.dmg.ToString();
         popupCritX.text = "CritX: " + _hoverItem.critX.ToString();
         popupCritChance.text = "Crit%: " + _hoverItem.critChance.ToString();
-        popupFirerate.text = "Firerate%: " + _hoverItem.fireRate.ToString();
+        popupFirerate.text = "Firerate%: " + _hoverItem.longRangeSpeed.ToString();
 
         var matchItem = SearchForItemMatch(_hoverItem);
 
@@ -189,7 +189,7 @@ public class UIManager : Singleton<UIManager>
         invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
         invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
         invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-        invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
+        invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].longRangeSpeed.ToString();
 
         
     }
@@ -260,7 +260,7 @@ public class UIManager : Singleton<UIManager>
 
         if(slot != -1)
         {
-            print(heldItem.itemName + " is on slot " + slot);
+            //print(heldItem.itemName + " is on slot " + slot);
 
             EquipImage(slot);
 
@@ -343,6 +343,7 @@ public class UIManager : Singleton<UIManager>
 
 
         CheckHeight();
+        _PIA.PassiveAbilityItemCheck();
 
         // (flip) itemFront.transform.localScale = new Vector3(-itemFront.transform.rotation.x, itemFront.transform.rotation.y, itemFront.transform.rotation.z);
 
@@ -375,14 +376,7 @@ public class UIManager : Singleton<UIManager>
                     playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, standard.y, playerAvatar.transform.position.z);
                 }
             }
-        }
-
-
-        //check if item is mean to be tall
-
-        //if yes raise height
-
-        //if no, keep standard
+        } 
 
     }
 

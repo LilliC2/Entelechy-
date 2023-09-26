@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BasicProjectile : GameBehaviour
+public class RPEAGProjectile : GameBehaviour
 {
     [SerializeField]
     GameObject explosionAnimOB;
@@ -21,8 +21,17 @@ public class BasicProjectile : GameBehaviour
     {
         if (collision.collider.CompareTag("Enemy"))
         {
+
+            //get enemies in radius
+            var enemyCol = Physics.OverlapSphere(transform.position, _PIA.RPEAGexplosionRadius, _PIA.enemyMask);
+
+            foreach (var col in enemyCol)
+            {
+                col.gameObject.GetComponent<BaseEnemy>().Hit(_PIA.RPEAGexplosionDmg);
+            }
+
             //explosionAnimOB.SetActive(true);
-            
+
             image.SetActive(false);
             print("play anim");
             //ooze animation

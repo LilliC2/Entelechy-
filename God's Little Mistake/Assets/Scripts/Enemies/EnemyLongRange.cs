@@ -56,9 +56,10 @@ public class EnemyLongRange : GameBehaviour
     // Update is called once per frame
     void Update()
     {
+        agent.speed = enemyStats.stats.speed;
 
         ////check for the sight and attack range
-        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed || BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
         {
             canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
             canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -79,8 +80,6 @@ public class EnemyLongRange : GameBehaviour
         switch (BaseEnemy.enemyState)
         {
             case BaseEnemy.EnemyState.Patrolling:
-
-
 
                 if (!agent.pathPending)
                 {

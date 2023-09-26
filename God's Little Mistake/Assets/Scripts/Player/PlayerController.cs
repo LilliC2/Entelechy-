@@ -4,8 +4,7 @@ using System.Collections.Generic;
 
 public class PlayerController : Singleton<PlayerController>
 {
-    private CharacterController controller;
-    private Vector3 playerVelocity;
+    public CharacterController controller;
     public BearTrap bearTrap;
     public CactusTrap cactusTrap;
 
@@ -69,7 +68,8 @@ public class PlayerController : Singleton<PlayerController>
     public float dps;
     public float projectileRange;
     public float meleeRange;
-    public float firerate;
+    public float meleeFirerate;
+    public float projectileFirerate;
 
     public bool projectile;
     public float projectileSpeed;
@@ -79,7 +79,7 @@ public class PlayerController : Singleton<PlayerController>
 
     [SerializeField]
     int initalSpeedBoost = 3;
-    bool isMoving;
+    public bool isMoving;
     GameObject lastDir;
     Tween speedTween;
 
@@ -103,16 +103,18 @@ public class PlayerController : Singleton<PlayerController>
     private float knockbackStartTime;
 
     [Header("Movement")]
-    bool enableMovement = true;
+    public bool enableMovement = true;
+    public Vector3 move;
 
     [Header("Melee")]
     bool meleeCooDown;
     public GameObject lineHitbox;
     public GameObject coneHitbox;
     MeleeUISwitcher meleeUISwitcher;
-    public enum MeleeHitBox { Line, Cone }
+    public enum MeleeHitBox { Line, Cone, None }
     public MeleeHitBox meleeHitBox;
 
+    public float dashAmount;
 
     private void Start()
     {
@@ -128,16 +130,16 @@ public class PlayerController : Singleton<PlayerController>
 
         CheckForStartingItems();
 
+
     }
 
     void Update()
     {
         //for testing
         if (Input.GetKeyDown(KeyCode.Space))
-            {
-                print("vig");
-                _PE.VignetteFade();
-            }
+        {
+
+        }
 
 
         UpdateMelee();
@@ -152,48 +154,53 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Movement
 
-                Vector3 move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
-
-                if (!canFloat)
+                if(enableMovement)
                 {
-                    move.y -= gravity;
-                }
+                    move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-                controller.Move(move * Time.deltaTime * speed);
-
-
-                #region isMoving Check
-                //find inpus for movement
-                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-                {
-                    if (!isMoving)
+                    if (!canFloat)
                     {
-                        speed = speed + initalSpeedBoost;
-
-                        ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed, 1));
+                        move.y -= gravity;
                     }
 
+                    controller.Move(move * Time.deltaTime * speed);
+
+
+                    #region isMoving Check
+                    //find inpus for movement
+                    if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+                    {
+                        if (!isMoving)
+                        {
+                            speed = speed + initalSpeedBoost;
+
+                            ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed, 1));
+                        }
+
+                    }
+
+
+                    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
+                    else isMoving = false;
+
+                    if (!isMoving)
+                    {
+                        speed = maxSpeed;
+                    }
+
+                    isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
+
                 }
 
 
-                if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
-                else isMoving = false;
 
-                if (!isMoving)
-                {
-                    speed = maxSpeed;
-                }
-
-                isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
-
-                
                 #endregion
 
                 #region Respawn If Fell Off
 
                 //grounded check
 
-                if(isGrounded)
+                if (isGrounded)
                 {
                     lastPosOnGround = lastPos;
                     var col = Physics.OverlapSphere(groundCheck.transform.position, 0.5f, groundMask);
@@ -444,39 +451,6 @@ public class PlayerController : Singleton<PlayerController>
                 #endregion
 
                 #region Attacks
-
-
-                if (Input.GetMouseButton(1))
-                {
-
-                    for (int i = 0; playerInventory.Count > i; i++)
-                    {
-                        //check for primary
-                        if (playerInventory[i].active)
-                        {
-                            //check if primary is projectile
-                            if (!playerInventory[i].projectile && playerInventory[i].segment == Item.Segment.Torso)
-                            {
-                                print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
-
-                                MeleeAttack(firerate, i);
-
-                                //MELEE ATTACK
-                                if (meleeUI != null)
-                                {
-                                    print("MELEE ATTACK");
-                                    meleeUI.gameObject.SetActive(true);
-
-                                }
-
-                            }
-                        }
-                    }
-
-                }
- 
-
-
                 if (Input.GetMouseButton(0))
                 {
                     for (int i = 0; playerInventory.Count > i; i++)
@@ -485,14 +459,14 @@ public class PlayerController : Singleton<PlayerController>
                         if (playerInventory[i].active)
                         {
                             //check if primary is projectile
-                            if (playerInventory[i].projectile)
+                            if (playerInventory[i].projectile) //PROJECTILE ATTACKS------------------------------------------------------------------
                             {
                                 //shoot
 
 
                                 //changed to use player stats, the primary attack will just change
 
-                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, firerate, projectileRange);
+                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, projectileFirerate, projectileRange);
                                 //ADD KNOCK BACK
                                 if (knockbackActive)
                                 {
@@ -511,6 +485,25 @@ public class PlayerController : Singleton<PlayerController>
 
                                     }
                                 }
+                                else //MELEE ATTACKS-------------------------------------------------------------------------------------------------
+                                {
+                                    print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
+
+                                    //update melee attack pattern
+                                    if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
+                                    else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
+
+
+                                    MeleeAttack(meleeFirerate, i);
+
+                                    //MELEE ATTACK
+                                    if (meleeUI != null)
+                                    {
+                                        print("MELEE ATTACK");
+                                        meleeUI.gameObject.SetActive(true);
+
+                                    }
+                                }
 
                             }
                         }
@@ -518,6 +511,86 @@ public class PlayerController : Singleton<PlayerController>
 
                 }
 
+                #region OLD VERSION WITH SEPERATE BUTTONS FOR MELEE AND LONG RANGE
+
+                //if (Input.GetMouseButton(1))
+                //{
+
+                //    for (int i = 0; playerInventory.Count > i; i++)
+                //    {
+                //        //check for primary
+                //        if (playerInventory[i].active)
+                //        {
+                //            //check if primary is projectile
+                //            if (!playerInventory[i].projectile)
+                //            {
+                //                print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
+
+                //                //update melee attack pattern
+                //                if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
+                //                else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
+
+
+                //                MeleeAttack(meleeFirerate, i);
+
+                //                //MELEE ATTACK
+                //                if (meleeUI != null)
+                //                {
+                //                    print("MELEE ATTACK");
+                //                    meleeUI.gameObject.SetActive(true);
+
+                //                }
+
+                //            }
+                //        }
+                //    }
+
+                //}
+ 
+
+
+                //if (Input.GetMouseButton(0))
+                //{
+                //    for (int i = 0; playerInventory.Count > i; i++)
+                //    {
+                //        //check for primary
+                //        if (playerInventory[i].active)
+                //        {
+                //            //check if primary is projectile
+                //            if (playerInventory[i].projectile)
+                //            {
+                //                //shoot
+
+
+                //                //changed to use player stats, the primary attack will just change
+
+                //                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, projectileFirerate, projectileRange);
+                //                //ADD KNOCK BACK
+                //                if (knockbackActive)
+                //                {
+                //                    float timeSinceKnockback = Time.time - knockbackStartTime;
+
+                //                    if (timeSinceKnockback >= knockbackDuration)
+                //                    {
+                //                        knockbackActive = false;
+                //                    }
+                //                    else
+                //                    {
+                //                        float knockbackProgress = timeSinceKnockback / knockbackDuration;
+                //                        var dir = (-firingPoint.transform.forward * knockbackAmount);
+                //                        dir = new Vector3(dir.x, 0, dir.z);
+                //                        controller.Move(dir * Time.deltaTime);
+
+                //                    }
+                //                }
+
+                //            }
+                //        }
+                //    }
+
+                //}
+
+                #endregion
                 #endregion
  
 
@@ -620,6 +693,9 @@ public class PlayerController : Singleton<PlayerController>
                 //check if item is arleady in inventory
             }
         }
+
+        _PIA.PassiveAbilityItemCheck();
+
     }
 
     private Tween TweenSpeed(float endValue,float time)
@@ -673,13 +749,10 @@ public class PlayerController : Singleton<PlayerController>
     public void ChangePrimary(int _inventorySlot)
     {
 
-        //turn off any others in the same segment
+        //turn off any others
         foreach (var item in playerInventory)
         {
-            if(item.segment == playerInventory[_inventorySlot].segment)
-            {
-                item.active = false;
-            }
+            item.active = false;
         }
 
         //check if item is primary
@@ -712,6 +785,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             if(!meleeAnimationCooldown)
             {
+                print("Melee UI is " + meleeUI.name);
                 if(meleeUI != null)
                 {
                     meleeAnimationCooldown = true;
@@ -720,9 +794,9 @@ public class PlayerController : Singleton<PlayerController>
                     //activate animation
                     print("Anim slot " + _index);
                     itemsAnimForward[_index].SetTrigger("Attack");
-                    //itemsAnimBack[_index].SetTrigger("Attack");
-                    //itemsAnimLeftSide[_index].SetTrigger("Attack");
-                    //itemsAnimRightSide[_index].SetTrigger("Attack");
+                    itemsAnimBack[_index].SetTrigger("Attack");
+                    itemsAnimLeftSide[_index].SetTrigger("Attack");
+                    itemsAnimRightSide[_index].SetTrigger("Attack");
                     ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
 
                 }
@@ -737,10 +811,10 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         if(enemy != null)
                         {
-                            enemy.GetComponent<BaseEnemy>().Hit();
+                            enemy.GetComponent<BaseEnemy>().Hit(dmg);
+
                             if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
                         }
-
 
                     }
 
@@ -752,7 +826,7 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
+    public void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
     {
         Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
@@ -764,7 +838,6 @@ public class PlayerController : Singleton<PlayerController>
         if (Physics.Raycast(ray, out hit))
         {
             firingPoint.transform.LookAt(hit.point);
-
 
             if (!projectileShot)
             {
@@ -793,6 +866,27 @@ public class PlayerController : Singleton<PlayerController>
             print("FIRE PROJECTILE");
 
         }
+    }
+
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.CompareTag("Enemy"))
+        {
+
+
+            if (_PIA.ramming)
+            {
+                collision.gameObject.GetComponent<BaseEnemy>().ApplyStun(_PIA.ramHornsStunDuration);
+
+            }
+            if(_PIA.gutpunch)
+            {
+                print("GUT PUNCHED");
+                collision.gameObject.GetComponent<BaseEnemy>().stats.health -= _PIA.humanFistDamage;
+            }
+        }
+        
     }
 
     public void Hit(float _dmg)

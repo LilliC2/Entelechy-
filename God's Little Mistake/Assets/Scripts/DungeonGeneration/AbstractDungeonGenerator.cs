@@ -8,15 +8,13 @@ public abstract class AbstractDungeonGenerator : GameBehaviour
 {
     [SerializeField]
     protected TileMapVisualiser tileMapVisualiser = null;
-    [SerializeField]
-    protected NavigationBaker navigation = null;
+
     [SerializeField]
     protected Vector3 startPos = Vector3.zero;
 
 
     public void GenerateDungeon()
     {
-        navigation = FindObjectOfType<NavigationBaker>();
 
         tileMapVisualiser.Clear();
         RunProceduralGeneration();

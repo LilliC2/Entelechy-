@@ -53,17 +53,21 @@ public class EnemyShortRange : GameBehaviour
     // Update is called once per frame
     void Update()
     {
+        agent.speed = enemyStats.stats.speed;
+
 
         ////check for the sight and attack range
-        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed)
         {
-            canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-            canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            if(BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+            {
+                canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+                canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-            //if cant see player, patrol
-            if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
-            else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
-
+                //if cant see player, patrol
+                if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+                else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+            }
         }
 
         //Visual indicator for health
@@ -140,6 +144,14 @@ public class EnemyShortRange : GameBehaviour
             case BaseEnemy.EnemyState.Die:
 
                 BaseEnemy.Die();
+
+
+                break;
+
+            case BaseEnemy.EnemyState.Charmed:
+                //print("CHAMRED");
+                //agent.isStopped = true;
+                agent.SetDestination(_PIA.enemyLineStart.transform.position);
 
                 break;
         }
