@@ -4,36 +4,54 @@ using UnityEngine;
 
 public class ParralaxEffect : MonoBehaviour
 {
-    float startingPos;
-    float lengthOfSprite;
+    float startingPosX;
+    float startingPosZ;
+    float lengthOfSpriteX;
+    float lengthOfSpriteZ;
     public float amountofParralax; //amount of scroll
     public Camera mainCamera;
 
     // Start is called before the first frame update
     void Start()
     {
-        startingPos = transform.position.x;
-        lengthOfSprite = GetComponentInChildren<SpriteRenderer>().bounds.size.x;
+        startingPosX = transform.position.x;
+        startingPosZ = transform.position.z;
+        lengthOfSpriteX = GetComponentInChildren<SpriteRenderer>().bounds.size.x;
+        lengthOfSpriteZ = GetComponentInChildren<SpriteRenderer>().bounds.size.z;
     }
 
     // Update is called once per frame
     void FixedUpdate()
     {
-        float dist = (mainCamera.transform.position.x * amountofParralax);
+        float distX = (mainCamera.transform.position.x * amountofParralax);
+        float distZ = (mainCamera.transform.position.z * amountofParralax);
         //Vector3 pos = mainCamera.transform.position;
-        float temp = mainCamera.transform.position.x * (1 - amountofParralax);
+        float tempX = mainCamera.transform.position.x * (1 - amountofParralax);
+        float tempZ = mainCamera.transform.position.z * (1 - amountofParralax);
         //float distance = pos.x * amountofParralax;
 
-        transform.position = new Vector3(startingPos + dist, transform.position.y, transform.position.z);
+        transform.position = new Vector3(startingPosX + distX, transform.position.y, transform.position.z);
+        transform.position = new Vector3(transform.position.x, transform.position.y, startingPosZ + distZ); //Z because the spirtes are rotated 90 degrees
 
         //never ending background
-        if (temp > startingPos + (lengthOfSprite))
+        //X
+        if (tempX > startingPosX + (lengthOfSpriteX))
         {
-            startingPos += lengthOfSprite;
+            startingPosX += lengthOfSpriteX;
         }
-        else if (temp < startingPos - (lengthOfSprite))
+        else if (tempX < startingPosX - (lengthOfSpriteX))
         {
-            startingPos -= lengthOfSprite;
+            startingPosX -= lengthOfSpriteX;
+        }
+
+        //Z
+        if (tempZ > startingPosZ + (lengthOfSpriteZ))
+        {
+            startingPosZ += lengthOfSpriteZ;
+        }
+        else if (tempZ < startingPosZ - (lengthOfSpriteZ))
+        {
+            startingPosZ -= lengthOfSpriteZ;
         }
     }
 }
