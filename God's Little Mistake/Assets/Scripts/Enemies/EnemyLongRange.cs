@@ -8,7 +8,11 @@ public class EnemyLongRange : GameBehaviour
 
     [Header ("Enemy Navigation")]
     bool projectileShot;
-    public GameObject firingPoint;
+    GameObject firingPoint;
+    public GameObject firingPointFront;
+    public GameObject firingPointBack;
+    public GameObject firingPointLeft;
+    public GameObject firingPointRight;
     public GameObject player;
     public NavMeshAgent agent;
 
@@ -90,7 +94,6 @@ public class EnemyLongRange : GameBehaviour
             //else agent.isStopped = tru;
 
         }
-        print(canAttack);
 
         //Change sprites based on direction
 
@@ -104,6 +107,7 @@ public class EnemyLongRange : GameBehaviour
             leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
             backOB.transform.GetChild(0).gameObject.SetActive(true);
 
+            firingPoint = firingPointBack;
         }
 
         //if angle is between 46 and 315, right side
@@ -113,6 +117,8 @@ public class EnemyLongRange : GameBehaviour
             rightSideOB.transform.GetChild(0).gameObject.SetActive(true);
             leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
             backOB.transform.GetChild(0).gameObject.SetActive(false);
+
+            firingPoint = firingPointRight;
         }
 
         //if angle is between 316 and 225, forwards
@@ -122,6 +128,8 @@ public class EnemyLongRange : GameBehaviour
             rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
             leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
             backOB.transform.GetChild(0).gameObject.SetActive(false);
+
+            firingPoint = firingPointFront;
         }
 
         //if angle is between 226 and 135, left side
@@ -131,6 +139,8 @@ public class EnemyLongRange : GameBehaviour
             rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
             leftSideOB.transform.GetChild(0).gameObject.SetActive(true);
             backOB.transform.GetChild(0).gameObject.SetActive(false);
+
+            firingPoint = firingPointLeft;
         }
 
 

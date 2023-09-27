@@ -2,14 +2,21 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BubblesAttack : EnemyLongRange
+public class BubblesAttack : GameBehaviour
 {
+    EnemyLongRange ELR;
+
+    private void Start()
+    {
+        ELR = GetComponentInParent<EnemyLongRange>();
+    }
+
     public void Attack()
     {
 
 
         print("Animation played projectile ");
-        FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
+        ELR.FireProjectile(ELR.enemyStats.stats.projectilePF, ELR.enemyStats.stats.projectileSpeed, ELR.enemyStats.stats.fireRate, ELR.enemyStats.stats.range);
 
     }
 }
