@@ -12,6 +12,10 @@ public class EnemyLongRange : GameBehaviour
     public GameObject player;
     public NavMeshAgent agent;
 
+    bool animationPlayed;
+    bool runAway;
+    float runAwaySpeed;
+    float normalSpeed;
 
     public float sightRange = 7;
     public float attackRange;
@@ -60,6 +64,9 @@ public class EnemyLongRange : GameBehaviour
         backAnim = backOB.GetComponentInChildren<Animator>();
         rightSideAnim = rightSideOB.GetComponentInChildren<Animator>();
         leftSideAnim = leftSideOB.GetComponentInChildren<Animator>();
+        
+        normalSpeed = enemyStats.stats.speed;
+        runAwaySpeed = enemyStats.stats.speed*2;
 
         attackRange = enemyStats.stats.range;
         target = SearchWalkPoint();
@@ -74,20 +81,13 @@ public class EnemyLongRange : GameBehaviour
         ////check for the sight and attack range
         if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed || BaseEnemy.enemyState != BaseEnemy.EnemyState.Die) 
         {
-            if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Attacking)
-            {
-                canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-                canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+            canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-                //if cant see player, patrol
-                if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
-                else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
-                if (canAttack) BaseEnemy.enemyState = BaseEnemy.EnemyState.Attacking;
-            }
+            //if cant see player, patrol
+            if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+            else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
             //else agent.isStopped = tru;
-
-
-
 
         }
         print(canAttack);
@@ -141,25 +141,22 @@ public class EnemyLongRange : GameBehaviour
         #region Animating Sprites
 
         //check if walking
-        if(BaseEnemy.enemyState != BaseEnemy.EnemyState.Attacking)
+        if (agent.velocity.magnitude > 0.1f)
         {
-            if (agent.velocity.magnitude > 0.1f)
-            {
-                frontAnim.SetBool("Walking", true);
-                backAnim.SetBool("Walking", true);
-                leftSideAnim.SetBool("Walking", true);
-                rightSideAnim.SetBool("Walking", true);
-            }
-            else
-            {
-                frontAnim.SetBool("Walking", false);
-                backAnim.SetBool("Walking", false);
-                leftSideAnim.SetBool("Walking", false);
-                rightSideAnim.SetBool("Walking", false);
-
-            }
+            frontAnim.SetBool("Walking", true);
+            backAnim.SetBool("Walking", true);
+            leftSideAnim.SetBool("Walking", true);
+            rightSideAnim.SetBool("Walking", true);
         }
-        
+        else
+        {
+            frontAnim.SetBool("Walking", false);
+            backAnim.SetBool("Walking", false);
+            leftSideAnim.SetBool("Walking", false);
+            rightSideAnim.SetBool("Walking", false);
+
+        }
+
 
         #endregion
         //Visual indicator for health
@@ -193,39 +190,73 @@ public class EnemyLongRange : GameBehaviour
                 break;
             case BaseEnemy.EnemyState.Chase:
 
+
                 if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange*2)
                 {
-
+                    //chase player
                     agent.isStopped = false;
+                    enemyStats.stats.speed = normalSpeed;
+                    print("Chase player");
 
+                    runAway = false;
                     agent.SetDestination(player.transform.position);
 
                 }
-                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange*2-1)
+                else if(Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange  && 
+                    Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange +3)
                 {
+                    if(!runAway)
+                    {
+                        frontAnim.SetBool("Walking", false);
+                        backAnim.SetBool("Walking", false);
+                        leftSideAnim.SetBool("Walking", false);
+                        rightSideAnim.SetBool("Walking", false);
 
+                        print("Stop to attack");
+                        agent.isStopped = true;
+
+                        transform.LookAt(player.transform.position);
+                        if (!animationPlayed)
+                        {
+                            animationPlayed = true;
+                            PlayAttackAnimation();
+                            ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
+                        }
+                    }
+
+                    
+
+                }
+                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange)
+                {
+                    runAway = true;
+
+                    enemyStats.stats.speed = runAwaySpeed;
+
+                    print("Back awawy");
+                    //run away from player
                     agent.isStopped = false;
                     Vector3 toPlayer = player.transform.position - transform.position;
-                    Vector3 targetPosition = toPlayer.normalized * -5f;
+                    Vector3 targetPosition = toPlayer.normalized * -10f;
 
                     agent.SetDestination(targetPosition);
 
 
                 }
-                else
-                {
+                //else
+                //{
 
-                    //agent.isStopped = true;
+                //    agent.isStopped = true;
 
 
-                    //orbit player
+                //    orbit player
 
-                    transform.RotateAround(player.transform.position, Vector3.up, 9 * Time.deltaTime);
+                //    transform.RotateAround(player.transform.position, Vector3.up, 9 * Time.deltaTime);
 
-                }
+                //}
 
                 // ATTACK
-
+                
 
 
                 break;
@@ -235,25 +266,24 @@ public class EnemyLongRange : GameBehaviour
 
                 break;
             case BaseEnemy.EnemyState.Attacking:
-                agent.isStopped = true;
 
-                //look at player
-                transform.LookAt(player.transform);
 
-                PlayAttackAnimation();
+                
 
-                FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
-
-                agent.isStopped = false;
-                //target = SearchWalkPoint();
-                //agent.SetDestination(target);
-                //ExecuteAfterSeconds(3, () => BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase);
                 break;
         }
 
 
 
 
+    }
+
+    void ResetAttackAnimation()
+    {
+
+        print("Reset aniamtions");
+        animationPlayed = false;
+        
     }
 
     private Vector3 SearchWalkPoint()
