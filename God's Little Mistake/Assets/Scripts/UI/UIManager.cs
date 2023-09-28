@@ -106,6 +106,7 @@ public class UIManager : Singleton<UIManager>
 
 
 
+
     private void Start()
     {   
         UpdateInventorySlotImages();
