@@ -48,6 +48,7 @@ public class BaseEnemy : GameBehaviour
         //Health Manager
         if (stats.health <= 0)
         {
+            print("Health is 0");
             enemyState = EnemyState.Die;
         }
 
@@ -159,6 +160,8 @@ public class BaseEnemy : GameBehaviour
     {
         if(!died)
         {
+
+            print("Enemy dies");
             died = true;
 
             Destroy(GetComponent<EnemyLongRange>());

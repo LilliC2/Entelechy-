@@ -83,15 +83,19 @@ public class EnemyLongRange : GameBehaviour
         agent.speed = enemyStats.stats.speed;
 
         ////check for the sight and attack range
-        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed || BaseEnemy.enemyState != BaseEnemy.EnemyState.Die) 
+        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed) 
         {
-            canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-            canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+            if(BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+            {
+                canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+                canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-            //if cant see player, patrol
-            if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
-            else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
-            //else agent.isStopped = tru;
+                //if cant see player, patrol
+                if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+                else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+                //else agent.isStopped = tru;
+            }
+
 
         }
 
@@ -253,25 +257,12 @@ public class EnemyLongRange : GameBehaviour
 
 
                 }
-                //else
-                //{
-
-                //    agent.isStopped = true;
-
-
-                //    orbit player
-
-                //    transform.RotateAround(player.transform.position, Vector3.up, 9 * Time.deltaTime);
-
-                //}
-
-                // ATTACK
-                
 
 
                 break;
             case BaseEnemy.EnemyState.Die:
 
+                print("Die state");
                 BaseEnemy.Die();
 
                 break;
