@@ -213,6 +213,11 @@ public class EnemyLongRange : GameBehaviour
                     print("Chase player");
 
                     runAway = false;
+
+                    frontAnim.speed = 1;
+                    backAnim.speed = 1;
+                    leftSideAnim.speed = 1;
+                    rightSideAnim.speed = 1;
                     agent.SetDestination(player.transform.position);
 
                 }
@@ -244,6 +249,11 @@ public class EnemyLongRange : GameBehaviour
                 else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange)
                 {
                     runAway = true;
+
+                    frontAnim.speed = 2;
+                    backAnim.speed = 2;
+                    leftSideAnim.speed = 2;
+                    rightSideAnim.speed = 2;
 
                     enemyStats.stats.speed = runAwaySpeed;
 
