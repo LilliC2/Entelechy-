@@ -22,7 +22,11 @@ public class ItemLook : MonoBehaviour
         {
             rotate = new Vector3(-45f, this.transform.rotation.y, this.transform.rotation.z);
         }
+        else
+        {
+            transform.eulerAngles = rotate;
+        }
 
-        transform.eulerAngles = rotate;
+        
     }
 }

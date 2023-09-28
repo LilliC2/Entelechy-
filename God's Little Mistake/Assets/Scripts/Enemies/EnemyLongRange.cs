@@ -317,6 +317,7 @@ public class EnemyLongRange : GameBehaviour
             bullet.GetComponent<EnemyProjectile>().dmg = enemyStats.stats.dmg;
             bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
+
             Mathf.Clamp(bullet.transform.position.y, 0, 0);
 
             //This will destroy bullet once it exits the range, aka after a certain amount of time
