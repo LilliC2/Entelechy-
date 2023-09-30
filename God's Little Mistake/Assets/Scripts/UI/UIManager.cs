@@ -258,10 +258,11 @@ public class UIManager : Singleton<UIManager>
                 break;  
         }
 
+
         if(slot != -1)
         {
             //print(heldItem.itemName + " is on slot " + slot);
-
+            heldItem.inSlot = slot;
             EquipImage(slot);
 
         }

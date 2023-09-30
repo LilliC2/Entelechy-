@@ -8,6 +8,7 @@ public class Item
     public string itemName;
     public int ID;
     public int lvl;
+    public int inSlot = -1;
     public enum Category { Eyes, Mouth, Horns, Slappies, Punchies, Launchers, Legs, Crawlies, None }
     public Category category;
     public enum Segment {Head, Torso, Legs }
