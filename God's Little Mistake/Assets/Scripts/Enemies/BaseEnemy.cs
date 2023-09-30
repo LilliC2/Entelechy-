@@ -30,19 +30,15 @@ public class BaseEnemy : GameBehaviour
     bool spawnHealPool = false;
     bool died = false;
 
-    public SpriteRenderer image;
+    public SpriteRenderer[] enemySpritesArray;
     public EnemyStats stats;
     public GameObject healPool;
 
     private void Start()
     {
-        image = GetComponentInChildren<SpriteRenderer>();
+        enemySpritesArray = GetComponentsInChildren<SpriteRenderer>();
         enemyRnd = GetComponentInChildren<EnemyRandomisation>();
 
-        string cat = enemyRnd.allCategories[Random.Range(0, enemyRnd.allCategories.Count)];
-
-        stats.category = (EnemyStats.Category)System.Enum.Parse(typeof(EnemyStats.Category), cat);
-        //print("this enemies category is " + cat + " and is set to " + stats.category);
     }
 
     private void Update()
@@ -52,6 +48,7 @@ public class BaseEnemy : GameBehaviour
         //Health Manager
         if (stats.health <= 0)
         {
+            print("Health is 0");
             enemyState = EnemyState.Die;
         }
 
@@ -70,9 +67,14 @@ public class BaseEnemy : GameBehaviour
 
         float H, S, V;
 
-        Color.RGBToHSV(image.color, out H, out S, out V);
+        foreach (var sprite in enemySpritesArray)
+        {
+            Color.RGBToHSV(sprite.color, out H, out S, out V);
 
-        image.color = Color.HSVToRGB(H, currentHPpercent, V);
+            sprite.color = Color.HSVToRGB(H, currentHPpercent, V);
+        }
+
+        
     }
 
     public void Hit(float _dmg)
@@ -158,6 +160,8 @@ public class BaseEnemy : GameBehaviour
     {
         if(!died)
         {
+
+            print("Enemy dies");
             died = true;
 
             Destroy(GetComponent<EnemyLongRange>());
