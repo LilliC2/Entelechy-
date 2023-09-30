@@ -8,10 +8,11 @@ public class EnemyShortRange : GameBehaviour
 
     [Header("Enemy Navigation")]
     bool projectileShot;
-    public GameObject firingPoint;
+    GameObject firingPoint;
     public GameObject player;
     public NavMeshAgent agent;
 
+    bool animationPlayed;
 
     public float sightRange = 7;
     public float attackRange;
@@ -31,8 +32,23 @@ public class EnemyShortRange : GameBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
+    [Header("Enemy Sprites")]
+    public GameObject frontOB;
+    public GameObject backOB;
+    public GameObject rightSideOB;
+    public GameObject leftSideOB;
 
-    BaseEnemy enemyStats;
+    [SerializeField]
+    Animator frontAnim;
+    [SerializeField]
+    Animator backAnim;
+    [SerializeField]
+    Animator rightSideAnim;
+    [SerializeField]
+    Animator leftSideAnim;
+
+
+    public BaseEnemy enemyStats;
     BaseEnemy BaseEnemy;
 
     Vector3 target;
@@ -44,6 +60,11 @@ public class EnemyShortRange : GameBehaviour
         BaseEnemy = GetComponent<BaseEnemy>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
+
+        frontAnim = frontOB.GetComponentInChildren<Animator>();
+        backAnim = backOB.GetComponentInChildren<Animator>();
+        rightSideAnim = rightSideOB.GetComponentInChildren<Animator>();
+        leftSideAnim = leftSideOB.GetComponentInChildren<Animator>();
 
         attackRange = enemyStats.stats.range;
         target = SearchWalkPoint();
@@ -69,6 +90,75 @@ public class EnemyShortRange : GameBehaviour
                 else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
             }
         }
+
+        #region Turning Sprites
+        //if angle is between 136 and 45, backwards
+        var heading = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+        if (heading >= -45 && heading <= 45)
+        {
+            frontOB.transform.GetChild(0).gameObject.SetActive(false);
+            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+            backOB.transform.GetChild(0).gameObject.SetActive(true);
+
+        }
+
+        //if angle is between 46 and 315, right side
+        if (heading >= 46 && heading <= 135)
+        {
+            frontOB.transform.GetChild(0).gameObject.SetActive(false);
+            rightSideOB.transform.GetChild(0).gameObject.SetActive(true);
+            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+            backOB.transform.GetChild(0).gameObject.SetActive(false);
+
+        }
+
+        //if angle is between 316 and 225, forwards
+        if (heading >= 136 && heading >= -135)
+        {
+            frontOB.transform.GetChild(0).gameObject.SetActive(true);
+            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+            backOB.transform.GetChild(0).gameObject.SetActive(false);
+
+        }
+
+        //if angle is between 226 and 135, left side
+        if (heading >= -136 && heading <= -45)
+        {
+            frontOB.transform.GetChild(0).gameObject.SetActive(false);
+            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+            leftSideOB.transform.GetChild(0).gameObject.SetActive(true);
+            backOB.transform.GetChild(0).gameObject.SetActive(false);
+
+        }
+
+
+
+
+        #endregion
+
+        #region Animating Sprites
+
+        //check if walking
+        if (agent.velocity.magnitude > 0.1f)
+        {
+            frontAnim.SetBool("Walking", true);
+            backAnim.SetBool("Walking", true);
+            leftSideAnim.SetBool("Walking", true);
+            rightSideAnim.SetBool("Walking", true);
+        }
+        else
+        {
+            frontAnim.SetBool("Walking", false);
+            backAnim.SetBool("Walking", false);
+            leftSideAnim.SetBool("Walking", false);
+            rightSideAnim.SetBool("Walking", false);
+
+        }
+
+
+        #endregion
 
         //Visual indicator for health
         //HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
@@ -101,43 +191,37 @@ public class EnemyShortRange : GameBehaviour
 
                 if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange)
                 {
+                    print("Chase player");
 
                     agent.isStopped = false;
 
                     agent.SetDestination(player.transform.position);
 
                 }
-                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange-1)
+                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange)
                 {
+                    frontAnim.SetBool("Walking", false);
+                    backAnim.SetBool("Walking", false);
+                    leftSideAnim.SetBool("Walking", false);
+                    rightSideAnim.SetBool("Walking", false);
 
-                    agent.isStopped = false;
-                    Vector3 toPlayer = player.transform.position - transform.position;
-                    Vector3 targetPosition = toPlayer.normalized * -5f;
-
-                    agent.SetDestination(targetPosition);
-
-
-                }
-                else
-                {
-
+                    print("Stop to attack");
                     agent.isStopped = true;
 
+                    transform.LookAt(player.transform.position);
+                    if (!animationPlayed)
+                    {
+                        animationPlayed = true;
+                        PlayAttackAnimation();
+                        //PerformAttack(enemyStats.stats.fireRate);
+                        ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
+                    }
 
-                    //orbit player
-
-                    //transform.RotateAround(player.transform.position, Vector3.up, 9 * Time.deltaTime);
-
-                }
-
-                // ATTACK
-
-                if (canAttack)
-                {
-                    //print("Can Attack");
-                    PerformAttack(enemyStats.stats.fireRate);
+ 
 
                 }
+
+
 
 
                 break;
@@ -161,6 +245,30 @@ public class EnemyShortRange : GameBehaviour
 
     }
 
+    void ResetAttackAnimation()
+    {
+
+        print("Reset aniamtions");
+        animationPlayed = false;
+
+    }
+
+    void PlayAttackAnimation()
+    {
+        print("Attack anim");
+        frontAnim.SetBool("Walking", false);
+        backAnim.SetBool("Walking", false);
+        leftSideAnim.SetBool("Walking", false);
+        rightSideAnim.SetBool("Walking", false);
+
+        if (frontOB.activeSelf == true) frontAnim.SetTrigger("Attack");
+        if (backOB.activeSelf == true) backAnim.SetTrigger("Attack");
+        if (rightSideOB.activeSelf == true) rightSideAnim.SetTrigger("Attack");
+        if (leftSideOB.activeSelf == true) leftSideAnim.SetTrigger("Attack");
+
+
+    }
+
     private Vector3 SearchWalkPoint()
     {
 
@@ -168,95 +276,25 @@ public class EnemyShortRange : GameBehaviour
 
     }
 
-    private void PerformAttack(float _firerate)
+    public void PerformAttack(float _firerate)
     {
         if (!attacking)
         {
-            //print("Attack");
-            //attack shit
 
-            _PC.Hit(enemyStats.stats.dmg);
+            if(canAttack)
+            {
+                print("Attack");
+                //attack shit
 
+                _PC.Hit(enemyStats.stats.dmg);
+                attacking = true;
+                ExecuteAfterSeconds(_firerate, () => attacking = false);
 
-            attacking = true;
-            ExecuteAfterSeconds(_firerate, () => attacking = false);
+            }
+
+            
         }
     }
 
-    //private void Start()
-    //{
-    //    enemyStats = GetComponent<BaseEnemy>();
-    //    BaseEnemy = GetComponent<BaseEnemy>();
-    //    agent = GetComponent<NavMeshAgent>();
-    //    agent.SetDestination(RandomNavSphere());
-    //    player = GameObject.FindGameObjectWithTag("Player");
-    //}
-
-    //private void Update()
-    //{
-    //    if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
-    //    {
-    //        playerInSightRange = Physics.CheckSphere(transform.position, enemyStats.stats.range + 1, whatIsPlayer);
-    //        playerInAttackRange = Physics.CheckSphere(transform.position, enemyStats.stats.range, whatIsPlayer);
-    //        if (playerInSightRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
-    //        if (playerInAttackRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Attacking;
-    //        else if (!playerInSightRange) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
-    //    }
-
-
-
-    //    switch (BaseEnemy.enemyState)
-    //    {
-    //        case BaseEnemy.EnemyState.Patrolling:
-    //            if(agent.remainingDistance <= agent.stoppingDistance)
-    //            {
-    //                walkPointRange = 5;
-    //                agent.SetDestination(RandomNavSphere());
-    //            }
-
-    //            break;
-    //        case BaseEnemy.EnemyState.Chase:
-    //            agent.SetDestination(player.transform.position);
-
-    //            break;
-    //        case BaseEnemy.EnemyState.Attacking:
-
-    //            PerformAttack(enemyStats.stats.fireRate);
-
-
-    //            break;
-    //        case BaseEnemy.EnemyState.Die:
-    //            //death animation etc
-    //            print("Dead");
-    //            BaseEnemy.Die();
-    //            break;
-    //    }
-    //}
-
-
-    //public Vector3 RandomNavSphere()
-    //{
-    //    Vector3 finalPos = Vector3.zero;
-    //    Vector3 randomPos = Random.insideUnitSphere * walkPointRange;
-    //    randomPos += transform.position;
-    //    if(NavMesh.SamplePosition(randomPos, out NavMeshHit hit, walkPointRange, NavMesh.AllAreas))
-    //    {
-    //        print("Get new pos");
-    //        finalPos = hit.position;
-    //    }
-
-    //    return finalPos; 
-    //}
-
-
-
-    ////private void OnDrawGizmos()
-    ////{
-    ////    Gizmos.color = Color.red;
-    ////    Gizmos.DrawWireSphere(transform.position, attackRange);
-    ////    Gizmos.color = Color.yellow;
-    ////    Gizmos.DrawWireSphere(transform.position, enemyStats.stats.range);
-
-    ////}
 
 }
