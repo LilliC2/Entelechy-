@@ -9,6 +9,7 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField]
     AudioSource audioManagerSourceItem;
     public AudioClip[] playerHurtSounds;
+    public AudioClip[] playerDeathSounds;
 
     // Start is called before the first frame update
     void Start()
@@ -23,6 +24,14 @@ public class AudioManager : Singleton<AudioManager>
     public void PlayerHurt()
     {
         var sound = playerHurtSounds[Random.Range(0, playerHurtSounds.Length)];
+
+        audioManagerSourcePlayerHurt.clip = sound;
+        audioManagerSourcePlayerHurt.Play();
+    }
+    
+    public void PlayerDeathScream()
+    {
+        var sound = playerDeathSounds[Random.Range(0, playerDeathSounds.Length)];
 
         audioManagerSourcePlayerHurt.clip = sound;
         audioManagerSourcePlayerHurt.Play();

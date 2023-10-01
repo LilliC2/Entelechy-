@@ -905,6 +905,8 @@ public class PlayerController : Singleton<PlayerController>
             }
             else
             {
+                _AM.PlayerDeathScream();
+
                 _GM.gameState = GameManager.GameState.Dead;
                 DieAnimation();
                 //add particles in die animation too
