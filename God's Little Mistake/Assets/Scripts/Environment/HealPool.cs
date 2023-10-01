@@ -11,11 +11,13 @@ public class HealPool : GameBehaviour
     public float shrinkTime;
     public bool inRange;
 
+    AudioSource audiosource;
 
     private void Start()
     {
         StartCoroutine(ScaleOverTime(shrinkTime));
         StartCoroutine(HealPlayer());
+        audiosource = GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -29,6 +31,9 @@ public class HealPool : GameBehaviour
         if(other.CompareTag("Player"))
         {
             inRange = false;
+
+            //how to add audio fade?
+            audiosource.Stop();
         }
     }
 
@@ -37,6 +42,7 @@ public class HealPool : GameBehaviour
         if(other.CompareTag("Player"))
         {
             inRange = true;
+            audiosource.Play();
         }
     }
 
