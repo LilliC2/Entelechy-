@@ -8,7 +8,6 @@ public class ItemsOnPlayer : Singleton<ItemsOnPlayer>
     public GameObject[] slotsOnPlayerLeft;
     public GameObject[] slotsOnPlayerRight;
     public GameObject[] slotsOnPlayerBack;
-    public GameObject[] slotsOnCanvas;
 
 
 

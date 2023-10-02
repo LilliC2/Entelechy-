@@ -4,18 +4,8 @@ using UnityEngine;
 
 public class EnemyRandomisation : GameBehaviour
 {
-    float rotation;
-    public GameObject[] slots;
 
-    string[] categoryHead = new string[] { "Eyes", "Horns" };
-    string[] categoryTorso = new string[] { "Slappies", "Punchies", "Launchers" };
-    string[] categoryLegs = new string[] { "Legs", "Crawlies"};
-
-    public List<string> categories;
-    public List<string> allCategories = new List<string> { "Eyes", "Horns", "Slappies", "Punchies", "Launchers", "Legs", "Crawlies" };
-
-    public Sprite[] enemySpritesArray;
-    public SpriteRenderer enemySprite;
+    public SpriteRenderer[] enemySpritesArray;
 
     public Color[] hueArray;
     Color colour;
@@ -25,105 +15,16 @@ public class EnemyRandomisation : GameBehaviour
     void Start()
     {
 
-        //
         colour = hueArray[Random.Range(0, hueArray.Length)];
+        //get all sprites in children
 
-        //enemySprite.sprite = enemySpritesArray[Random.Range(0, enemySpritesArray.Length)];
+        enemySpritesArray = GetComponentsInChildren<SpriteRenderer>();
 
-
-        enemySprite.color = colour;
-
-
-        //each enemy needs atleast legs
-
-        //Top slot
-        //HEAD
-        //if (Random.Range(0,2) == 1)
-        //{
-        //    EquipItem(0, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length )]));
-
-        //}
-        
-        //if(Random.Range(0, 2) == 1)
-        //{
-        //    EquipItem(1, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
-
-        //}
-        //if(Random.Range(0, 2) == 1)
-        //{
-        //    EquipItem(2, GenerateItem(categoryHead[Random.Range(0, categoryHead.Length)]));
-
-        //}
-        
-        ////MOUTH
-        //if(Random.Range(0, 2) == 1)
-        //{
-        //    EquipItem(3, GenerateItem("Mouth"));
-
-
-        //}
-
-        ////TORSO
-        //if (Random.Range(0, 2) == 1)
-        //{
-        //    EquipItem(4, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
-
-        //}
-        //if (Random.Range(0, 2) == 1)
-        //{
-        //    EquipItem(5, GenerateItem(categoryTorso[Random.Range(0, categoryTorso.Length)]));
-
-        //}
-
-        ////LEGS
-        //EquipItem(6, GenerateItem(categoryLegs[Random.Range(0,categoryLegs.Length)]));
-
-
-
-    }
-
-    void EquipItem(int _slot, GameObject _prefab)
-    {
-        bool flip = false;
-        switch (_slot)
+        foreach (var sprite in enemySpritesArray)
         {
-
-            case 2:
-                flip = true;
-                break;
-            case 5:
-                flip = true;
-                break;
-            default:
-                rotation = 0;
-                break;
-
-
+            sprite.color = colour;
         }
-        var item = Instantiate(_prefab, slots[_slot].transform);
-        item.transform.localEulerAngles = new Vector3(item.transform.rotation.x, item.transform.rotation.y, rotation);
-        if(flip) item.transform.localScale = new Vector3(-1, 0, -1);
-
-        SpriteRenderer sprite = item.GetComponentInChildren<SpriteRenderer>();
-        sprite.color = colour;
-
     }
 
-    public GameObject GenerateItem(string _category)
-    {
-        GameObject prefab = null;
 
-        categories.Add(_category);
-
-        for (int i = 0; i < _ItemD.itemDataBase.Length; i++)
-        {
-            if (_ItemD.itemDataBase[i].category.ToString() == _category)
-            {
-                //possibleDrops.Add(_ItemD.itemDataBase[i]);
-                prefab = _ItemD.itemDataBase[i].avatarPrefabFrontLeft;
-
-            }
-        }
-        return prefab;
-    }
 }

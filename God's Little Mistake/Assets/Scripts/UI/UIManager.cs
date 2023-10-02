@@ -238,7 +238,7 @@ public class UIManager : Singleton<UIManager>
     }
     public void UpdateLevelext(int _lvl)
     {
-        levelText.text = _lvl.ToString();
+        //levelText.text = "Level " + _lvl.ToString();
     }
 
     #region Inventory Item Stats Popup
@@ -331,7 +331,7 @@ public class UIManager : Singleton<UIManager>
         invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
         invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
         invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-        invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].fireRate.ToString();
+        invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].longRangeSpeed.ToString();
 
         
     }
@@ -357,60 +357,57 @@ public class UIManager : Singleton<UIManager>
         //statsPopUpPanel.SetActive(false);
         isHoldingItem = true;
 
-        int slot = 0;
+        int slot = -1;
 
-        //find segement
-        if (heldItem.segment == Item.Segment.Head)
+        switch(heldItem.segment)
         {
-            //find category
-            if (heldItem.category == Item.Category.Horns)
-            {
-                //check if slot is free
-                if (_AVTAR.slotsOnPlayerFront[0].transform.childCount == 0)
-                    slot = 0;
-            }
-            if (heldItem.category == Item.Category.Eyes)
-            {
-                if (_AVTAR.slotsOnPlayerFront[1].transform.childCount == 0)
-                    slot = 1;
-            }
-            if (heldItem.category == Item.Category.Mouth)
-            {
-                if (_AVTAR.slotsOnPlayerFront[2].transform.childCount == 0)
-                    slot = 2;
-            }
-        }
-        else if (heldItem.segment == Item.Segment.Torso)
-        {
-            if (_AVTAR.slotsOnPlayerFront[3].transform.childCount == 0)
-            {
-                slot = 3;
-            }
-            else if (_AVTAR.slotsOnPlayerFront[4].transform.childCount == 0)
-            {
-                slot = 4;
-            }
+            case Item.Segment.Head:
 
-        }
-        else if (heldItem.segment == Item.Segment.Legs)
-        {
-            if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
-            {
-                slot = 5;
+                switch(heldItem.category)
+                {
+                    case Item.Category.Horns:
+                        if (_AVTAR.slotsOnPlayerFront[0].transform.childCount == 0)
+                            slot = 0;
+                        break;
+                    case Item.Category.Eyes:
+                        if (_AVTAR.slotsOnPlayerFront[1].transform.childCount == 0)
+                            slot = 1;
+                        break;
+                    case Item.Category.Mouth:
+                        if (_AVTAR.slotsOnPlayerFront[2].transform.childCount == 0)
+                            slot = 2;
+                        break;
+                    
+                }
 
-            }
+                break;
+            case Item.Segment.Torso:
+                if (_AVTAR.slotsOnPlayerFront[3].transform.childCount == 0)
+                {
+                    slot = 3;
+                }
+                else if (_AVTAR.slotsOnPlayerFront[4].transform.childCount == 0)
+                {
+                    slot = 4;
+                }
+                break;
+            case Item.Segment.Legs:
+                if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
+                {
+                    slot = 5;
 
+                }
+                break;  
         }
 
-        print(heldItem.itemName + " is on slot " + slot);
 
-        EquipImage(slot);
+        if(slot != -1)
+        {
+            //print(heldItem.itemName + " is on slot " + slot);
+            heldItem.inSlot = slot;
+            EquipImage(slot);
 
-        //check category
-
-        //check if slots in cateogry are free
-
-        //if free then add it
+        }
 
 
     }
@@ -489,6 +486,7 @@ public class UIManager : Singleton<UIManager>
 
 
         CheckHeight();
+        _PIA.PassiveAbilityItemCheck();
 
         // (flip) itemFront.transform.localScale = new Vector3(-itemFront.transform.rotation.x, itemFront.transform.rotation.y, itemFront.transform.rotation.z);
 
@@ -521,14 +519,7 @@ public class UIManager : Singleton<UIManager>
                     playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, standard.y, playerAvatar.transform.position.z);
                 }
             }
-        }
-
-
-        //check if item is mean to be tall
-
-        //if yes raise height
-
-        //if no, keep standard
+        } 
 
     }
 

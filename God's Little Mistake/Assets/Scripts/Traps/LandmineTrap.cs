@@ -2,13 +2,15 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class LandmineTrap : MonoBehaviour
+public class LandmineTrap : GameBehaviour
 {
     public float explosionRadius = 5f;
     public int damageAmount = 50;
     public float explosionDelay = 1f;
 
     public Color triggeredColor = Color.red;
+
+    bool hitPlayer;
 
     private bool exploded = false;
     private SpriteRenderer trapRenderer;
@@ -51,11 +53,13 @@ public class LandmineTrap : MonoBehaviour
                 {
                     if (target.CompareTag("Player"))
                     {
-                        PlayerController playerController = target.GetComponent<PlayerController>();
-                        if (playerController != null)
+                        //ensures that it doesn't include hit colliders in calcuation
+                        if(!hitPlayer)
                         {
-                            playerController.health -= damageAmount;
+                            hitPlayer = true;
+                            _PC.health -= damageAmount;
                         }
+
                     }
                     else if (target.CompareTag("Enemy"))
                     {

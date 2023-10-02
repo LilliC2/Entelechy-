@@ -51,12 +51,15 @@ MonoBehaviour:
     lvl: 0
     category: 8
     segment: 0
+    meleeAttackType: 0
     itemType: 2
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 5
     dps: 5
     fireRate: 0.3
+    meleeSpeed: 0
     critX: 0
     critChance: 0
     range: 5
@@ -77,12 +80,15 @@ MonoBehaviour:
     lvl: 0
     category: 8
     segment: 1
+    meleeAttackType: 0
     itemType: 0
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 5
     dps: 5
     fireRate: 0.3
+    meleeSpeed: 0
     critX: 0
     critChance: 0
     range: 1
@@ -103,12 +109,15 @@ MonoBehaviour:
     lvl: 0
     category: 7
     segment: 2
+    meleeAttackType: 0
     itemType: 2
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 0
     dps: 0
     fireRate: 0
+    meleeSpeed: 0
     critX: 0
     critChance: 0
     range: 0
@@ -129,12 +138,15 @@ MonoBehaviour:
     lvl: 0
     category: 2
     segment: 0
-    itemType: 2
+    meleeAttackType: 0
+    itemType: 0
+    hasActiveAbility: 1
     currencyValue: 0
     active: 0
     dmg: 0
     dps: 0
     fireRate: 0
+    meleeSpeed: 0
     critX: 0
     critChance: 0
     range: 0
@@ -155,12 +167,15 @@ MonoBehaviour:
     lvl: 0
     category: 1
     segment: 0
+    meleeAttackType: 0
     itemType: 2
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 0
     dps: 0
     fireRate: 0
+    meleeSpeed: 0
     critX: 0
     critChance: 2
     range: 0
@@ -179,42 +194,48 @@ MonoBehaviour:
   - itemName: Slug Eye
     ID: 5
     lvl: 0
-    category: 8
+    category: 0
     segment: 0
-    itemType: 2
+    meleeAttackType: 0
+    itemType: 0
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
-    dmg: 0
+    dmg: 25
     dps: 0
     fireRate: 0
-    critX: 0
-    critChance: 2
-    range: 0
+    meleeSpeed: 10
+    critX: 1.2
+    critChance: 5
+    range: 0.3
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 39a38614989899547bb7401eb9884ec2, type: 3}
-    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 2471107043198914699, guid: 6f20769b5548f574486999509cfc286f, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
-    avtarPrefabLeft: {fileID: 0}
-    avtarPrefabRight: {fileID: 0}
-    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabLeft: {fileID: 8630172562931530007, guid: c292bc9ab191c3244950a1a885a6f9ed, type: 3}
+    avtarPrefabRight: {fileID: 8630172562931530007, guid: c292bc9ab191c3244950a1a885a6f9ed, type: 3}
+    avtarPrefabBackLeft: {fileID: 6506642997384734212, guid: c72729dcdde8e3c42b1b9be0940ea76a, type: 3}
     avtarPrefabBackRight: {fileID: 0}
   - itemName: Tripod
     ID: 6
     lvl: 0
     category: 6
     segment: 2
+    meleeAttackType: 2
     itemType: 2
+    hasActiveAbility: 1
     currencyValue: 0
     active: 0
-    dmg: 1
-    dps: 1
-    fireRate: 1
+    dmg: 0
+    dps: 0
+    fireRate: 0
+    meleeSpeed: 10
     critX: 0
-    critChance: 2
+    critChance: 0
     range: 5
     projectile: 0
     projectileSpeed: 5
@@ -231,14 +252,17 @@ MonoBehaviour:
   - itemName: Wolf Arm
     ID: 7
     lvl: 0
-    category: 3
+    category: 8
     segment: 1
+    meleeAttackType: 0
     itemType: 0
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 0
     dps: 0
     fireRate: 0
+    meleeSpeed: 0
     critX: 0
     critChance: 2
     range: 0
@@ -259,13 +283,16 @@ MonoBehaviour:
     lvl: 0
     category: 3
     segment: 1
+    meleeAttackType: 1
     itemType: 0
+    hasActiveAbility: 1
     currencyValue: 0
     active: 0
-    dmg: 0
+    dmg: 37
     dps: 0
-    fireRate: 0
-    critX: 0
+    fireRate: 2
+    meleeSpeed: 3
+    critX: 4
     critChance: 2
     range: 0
     projectile: 0
@@ -285,12 +312,15 @@ MonoBehaviour:
     lvl: 0
     category: 1
     segment: 0
+    meleeAttackType: 0
     itemType: 0
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 1
     dps: 1
     fireRate: 1
+    meleeSpeed: 0
     critX: 0
     critChance: 2
     range: 5
@@ -311,12 +341,15 @@ MonoBehaviour:
     lvl: 0
     category: 6
     segment: 2
+    meleeAttackType: 0
     itemType: 2
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 1
     dps: 1
     fireRate: 1
+    meleeSpeed: 0
     critX: 0
     critChance: 2
     range: 5
@@ -337,12 +370,15 @@ MonoBehaviour:
     lvl: 0
     category: 0
     segment: 0
+    meleeAttackType: 0
     itemType: 2
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 1
     dps: 1
     fireRate: 1
+    meleeSpeed: 0
     critX: 0
     critChance: 2
     range: 5
@@ -363,12 +399,15 @@ MonoBehaviour:
     lvl: 0
     category: 6
     segment: 2
+    meleeAttackType: 0
     itemType: 2
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 1
     dps: 1
     fireRate: 1
+    meleeSpeed: 0
     critX: 0
     critChance: 2
     range: 5
@@ -389,12 +428,15 @@ MonoBehaviour:
     lvl: 0
     category: 1
     segment: 0
+    meleeAttackType: 0
     itemType: 0
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 1
     dps: 1
     fireRate: 1
+    meleeSpeed: 0
     critX: 0
     critChance: 2
     range: 5
@@ -415,12 +457,15 @@ MonoBehaviour:
     lvl: 0
     category: 2
     segment: 0
+    meleeAttackType: 0
     itemType: 2
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 1
     dps: 1
     fireRate: 1
+    meleeSpeed: 0
     critX: 0
     critChance: 2
     range: 5
@@ -435,4 +480,62 @@ MonoBehaviour:
     avtarPrefabLeft: {fileID: 3367084592925445924, guid: cd3f147d38bf461478718e741b9114b2, type: 3}
     avtarPrefabRight: {fileID: 3367084592925445924, guid: cd3f147d38bf461478718e741b9114b2, type: 3}
     avtarPrefabBackLeft: {fileID: 880381823602299727, guid: 77307150fb8706c44b7c5d0662fd0ed3, type: 3}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Slug Legs
+    ID: 15
+    lvl: 0
+    category: 6
+    segment: 2
+    meleeAttackType: 0
+    itemType: 2
+    hasActiveAbility: 0
+    currencyValue: 0
+    active: 0
+    dmg: 5
+    dps: 0
+    fireRate: 0
+    meleeSpeed: 10
+    critX: 0
+    critChance: 0
+    range: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+    avatarPrefabFrontLeft: {fileID: 4826423727113875564, guid: 300843ea423d54e409e27745a21410a9, type: 3}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 3992858970678303184, guid: d1eedbd08fd6baf449f5cab2a53d7f95, type: 3}
+    avtarPrefabRight: {fileID: 3992858970678303184, guid: d1eedbd08fd6baf449f5cab2a53d7f95, type: 3}
+    avtarPrefabBackLeft: {fileID: 8049253966410535709, guid: 85fedc2d5e525aa49a7d864ae4dedf95, type: 3}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Solar Eyes
+    ID: 16
+    lvl: 0
+    category: 0
+    segment: 0
+    meleeAttackType: 0
+    itemType: 0
+    hasActiveAbility: 0
+    currencyValue: 0
+    active: 0
+    dmg: 1
+    dps: 1
+    fireRate: 1
+    meleeSpeed: 0
+    critX: 0
+    critChance: 2
+    range: 5
+    projectile: 1
+    projectileSpeed: 5
+    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: 540a9d10750f152449f211058959489b, type: 3}
+    avatarPrefabFrontLeft: {fileID: 841105728366502030, guid: 86387cc512e80994d9569ca0d6d1812d, type: 3}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 1169385104542466139, guid: 4939ea701f77a0344b84fe600aa7f40f, type: 3}
+    avtarPrefabRight: {fileID: 1169385104542466139, guid: 4939ea701f77a0344b84fe600aa7f40f, type: 3}
+    avtarPrefabBackLeft: {fileID: 1080939457727681299, guid: 518a405904d8c6c4a94e2d4971316f5b, type: 3}
     avtarPrefabBackRight: {fileID: 0}

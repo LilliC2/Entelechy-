@@ -20,15 +20,15 @@ public class DeathScreen : GameBehaviour<DeathScreen>
         {
             Time.timeScale = 0f;
             DeathScreenPanel.SetActive(true);
-            _PC.health = 1;
             
         }
+        else DeathScreenPanel.SetActive(false);
+
     }
 
     public void Respawn()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(currentScene);
+        _GM.Restart();
     }
     public void Menu()
     {

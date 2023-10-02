@@ -4,7 +4,6 @@ using UnityEngine;
 
 public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 {
-    public List<Item> inSceneItemDataBase;
 
     /// <summary>
     /// Adds item to players inventory and removes it from scene
@@ -125,7 +124,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
         //add item to scene and remove from inventory
 
-        var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
+        var item = Instantiate(_IG.itemTemp,_PC.transform.position, Quaternion.identity);
         item.GetComponent<ItemIdentifier>().itemInfo = _PC.playerInventory[_inventoryID];
 
         
@@ -155,11 +154,11 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         
         _PC.dmg += _PC.playerInventory[_inventoryID].dmg;
         _PC.dps += _PC.playerInventory[_inventoryID].dps;
-        _PC.projectileRange += _PC.playerInventory[_inventoryID].range;
+        _PC.projectileRange += _PC.playerInventory[_inventoryID].longRange_range;
         _PC.projectileSpeed += _PC.playerInventory[_inventoryID].projectileSpeed;
 
 
-        _PC.firerate -= _PC.playerInventory[_inventoryID].fireRate;
+        _PC.projectileFirerate -= _PC.playerInventory[_inventoryID].longRangeSpeed;
     }
 
     /// <summary>
@@ -176,9 +175,9 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         
         _PC.dmg -= _PC.playerInventory[_inventoryID].dmg;
         _PC.dps -= _PC.playerInventory[_inventoryID].dps;
-        _PC.projectileRange -= _PC.playerInventory[_inventoryID].range;
+        _PC.projectileRange -= _PC.playerInventory[_inventoryID].longRange_range;
         _PC.projectileSpeed -= _PC.playerInventory[_inventoryID].projectileSpeed;
-        _PC.firerate -= _PC.playerInventory[_inventoryID].fireRate;
+        _PC.projectileFirerate -= _PC.playerInventory[_inventoryID].longRangeSpeed;
     }
 
 

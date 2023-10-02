@@ -6,7 +6,7 @@ public class BaseEnemy : GameBehaviour
 {
     public enum EnemyState
     {
-        Patrolling, Chase, Attacking, Die
+        Patrolling, Chase, Attacking, Die, Stunned, Charmed
     }
 
     public EnemyState enemyState;
@@ -16,6 +16,8 @@ public class BaseEnemy : GameBehaviour
 
     [SerializeField]
     ParticleSystem deathParticles;
+    [SerializeField]
+    GameObject charmedParticles;
 
     [SerializeField]
     Animator explosionAnim;
@@ -28,19 +30,15 @@ public class BaseEnemy : GameBehaviour
     bool spawnHealPool = false;
     bool died = false;
 
-    public SpriteRenderer image;
+    public SpriteRenderer[] enemySpritesArray;
     public EnemyStats stats;
     public GameObject healPool;
 
     private void Start()
     {
-        image = GetComponentInChildren<SpriteRenderer>();
+        enemySpritesArray = GetComponentsInChildren<SpriteRenderer>();
         enemyRnd = GetComponentInChildren<EnemyRandomisation>();
 
-        string cat = enemyRnd.allCategories[Random.Range(0, enemyRnd.allCategories.Count)];
-
-        stats.category = (EnemyStats.Category)System.Enum.Parse(typeof(EnemyStats.Category), cat);
-        //print("this enemies category is " + cat + " and is set to " + stats.category);
     }
 
     private void Update()
@@ -50,8 +48,16 @@ public class BaseEnemy : GameBehaviour
         //Health Manager
         if (stats.health <= 0)
         {
+            print("Health is 0");
             enemyState = EnemyState.Die;
         }
+
+        //turn on charm particles
+        if(enemyState == EnemyState.Charmed)
+        {
+            charmedParticles.SetActive(true);
+        }
+        else charmedParticles.SetActive(false);
 
     }
 
@@ -61,16 +67,33 @@ public class BaseEnemy : GameBehaviour
 
         float H, S, V;
 
-        Color.RGBToHSV(image.color, out H, out S, out V);
+        foreach (var sprite in enemySpritesArray)
+        {
+            Color.RGBToHSV(sprite.color, out H, out S, out V);
 
-        image.color = Color.HSVToRGB(H, currentHPpercent, V);
+            sprite.color = Color.HSVToRGB(H, currentHPpercent, V);
+        }
+
+        
     }
 
-    public void Hit()
+    public void Hit(float _dmg)
     {
+        //check for debuffs
+        if(_PIA.slugEyesEquipped)
+        {
+            if (_PIA.SlugEyes()) ApplySlowness(_PIA.slowDuration, _PIA.slowPercent);
+        }
+
+        if (_PIA.wolfClawsEquipped)
+        {
+            if (_PIA.WolfClaw()) ApplyBleeding(_PIA.bleedDuration, _PIA.bleedTickDmg);
+        }
+
         if (stats.health > 0)
         {
-            stats.health -= _PC.dmg;
+            stats.health -= _dmg;
+
             //print(enemyStats.stats.health);
         }
     }
@@ -82,18 +105,63 @@ public class BaseEnemy : GameBehaviour
         {
             print("hit");
             //Add hit code here;
-            Hit();
+            Hit(_PC.dmg);
 
             //destroy bullet that hit it
             //Destroy(collision.gameObject);
         }
 
     }
+    
+    /// <summary>
+    /// Apply slowness debuff of set percent to enemyfor set duration
+    /// </summary>
+    /// <param name="_duration"></param>
+    /// <param name="_percent"> Perctange as decimal </param>
+    public void ApplySlowness(float _duration, float _percent)
+    {
+        print("Slowed enemy");
+        var speedBefore = stats.speed;
+
+        stats.speed = speedBefore * (1 - _percent);
+        ExecuteAfterSeconds(_duration, () => stats.speed = speedBefore);
+    }
+
+    public void ApplyStun(float _duration)
+    {
+        print("Enemy stunned");
+        var speedBefore = stats.speed;
+        stats.speed = 0;
+
+        ExecuteAfterSeconds(_duration,() => stats.speed = speedBefore);
+
+    }
+
+    public void ApplyBleeding(float _duration, float _dmgPerTick)
+    {
+        bool isbleeding = true;
+        ExecuteAfterSeconds(_duration, () => isbleeding = false);
+        float timer = 0;
+
+        while (isbleeding)
+        {
+            print("is bleeding");
+            timer += Time.deltaTime;
+            if (timer >= 1)
+            {
+                timer = 0;
+                Hit(_dmgPerTick);
+            }
+        }
+    }
+    
 
     public void Die()
     {
         if(!died)
         {
+
+            print("Enemy dies");
             died = true;
 
             Destroy(GetComponent<EnemyLongRange>());
@@ -121,7 +189,6 @@ public class BaseEnemy : GameBehaviour
                         spawnItem = true;
                         GameObject item = Instantiate(_IG.GenerateItem(stats.category.ToString()), gameObject.transform.position, Quaternion.identity);
 
-
                         item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
                         print("Spawning item of " + stats.category.ToString() + " category");
@@ -133,13 +200,19 @@ public class BaseEnemy : GameBehaviour
                     {
                         spawnHealPool = true;
                         Instantiate(healPool, gameObject.transform.position, Quaternion.identity);
-
+                        print("Heal pool spawns");
                     }
+                    break;
+                case 3:
+
+                    //nothing
+                    print("Enemy dies and nothing drops");
+
                     break;
             }
 
 
-            ExecuteAfterSeconds(0.5f, () => Destroy(this.gameObject));
+            ExecuteAfterSeconds(1f, () => Destroy(this.gameObject));
         }
 
         
