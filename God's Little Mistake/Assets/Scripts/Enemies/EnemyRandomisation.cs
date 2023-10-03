@@ -22,7 +22,8 @@ public class EnemyRandomisation : GameBehaviour
 
         foreach (var sprite in enemySpritesArray)
         {
-            sprite.color = colour;
+            if(sprite.CompareTag("Particle")== false) sprite.color = colour;
+
         }
     }
 
