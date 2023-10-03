@@ -23,8 +23,12 @@ public class ItemIdentifier : GameBehaviour
                 //pick up item
                 if (_PC.playerInventory.Count < 5)//invenotry cap number here
                 {
-                    Destroy(gameObject);
+                    _AM.ItemPickUp();
+
                     _UI.CreateItemSelected(itemInfo);
+
+                    ExecuteAfterFrames(3, () => Destroy(gameObject));
+                    
 
                 }  
 

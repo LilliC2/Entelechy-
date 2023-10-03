@@ -897,12 +897,16 @@ public class PlayerController : Singleton<PlayerController>
             health -= _dmg;
             //_PE.ChromaticABFade();
 
+            _AM.PlayerHurt();
+
             if (health > 0)
             {
                 _UI.UpdateHealthText(health);
             }
             else
             {
+                _AM.PlayerDeathScream();
+
                 _GM.gameState = GameManager.GameState.Dead;
                 DieAnimation();
                 //add particles in die animation too
