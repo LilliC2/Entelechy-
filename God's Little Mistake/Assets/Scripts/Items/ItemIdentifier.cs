@@ -12,18 +12,22 @@ public class ItemIdentifier : GameBehaviour
     [Header("Animation")]
     public Animator anim;
     public Animator anim1;
+    public Animator anim2;
 
     public GameObject statPop;
     public GameObject statComp1;
+    public GameObject statComp2;
 
 
     public void Start()
     {
         statPop = GameObject.Find("Stat Popup");
         statComp1 = GameObject.Find("Stat Comp 1");
+        statComp2 = GameObject.Find("Stat Comp 2");
 
         anim = statPop.GetComponent<Animator>();
         anim1 = statComp1.GetComponent<Animator>();
+        anim2 = statComp2.GetComponent<Animator>();
     }
 
     private void Update()
