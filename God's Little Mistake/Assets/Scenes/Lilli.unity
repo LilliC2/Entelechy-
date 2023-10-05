@@ -7245,7 +7245,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: canFloat
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: immortal
@@ -7561,7 +7561,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8134474160589298071, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 1.09
+      value: 4.61
       objectReference: {fileID: 0}
     - target: {fileID: 8134474160589298071, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_LocalPosition.y
@@ -7569,7 +7569,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8134474160589298071, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.9
+      value: 0.63
       objectReference: {fileID: 0}
     - target: {fileID: 8134474160589298071, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_LocalRotation.w
@@ -9775,10 +9775,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Enemy_Short_Range
       objectReference: {fileID: 0}
-    - target: {fileID: 3718395452026233766, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_RootOrder
       value: 16
@@ -9822,10 +9818,6 @@ PrefabInstance:
     - target: {fileID: 6187964606278274162, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6726723524562293976, guid: 5e60b3a92ae3472438a03b79df252971, type: 3}
-      propertyPath: stats.speed
-      value: 1.5
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
@@ -13864,15 +13856,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7372068559689584705, guid: 082a580b07c95cb42885c775fe1283e9, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.07514211
+      value: 0.1252178
       objectReference: {fileID: 0}
     - target: {fileID: 7372068559689584705, guid: 082a580b07c95cb42885c775fe1283e9, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.07514211
+      value: 0.1252178
       objectReference: {fileID: 0}
     - target: {fileID: 7372068559689584705, guid: 082a580b07c95cb42885c775fe1283e9, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.07514211
+      value: 0.1252178
       objectReference: {fileID: 0}
     - target: {fileID: 7372068559689584705, guid: 082a580b07c95cb42885c775fe1283e9, type: 3}
       propertyPath: m_LocalPosition.x
@@ -22908,13 +22900,13 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8555296756167568067}
+  - component: {fileID: 9079410177690563178}
   - component: {fileID: 9079410177690563177}
   - component: {fileID: 5649347621038135711}
   - component: {fileID: 9010982939989602261}
   - component: {fileID: 600454895201484936}
-  - component: {fileID: 9079410177690563178}
   m_Layer: 10
-  m_Name: Enemy_Short_Range (1)
+  m_Name: Enemy_Chompers
   m_TagString: Enemy
   m_Icon: {fileID: 7174288486110832750, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -33797,17 +33789,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   player: {fileID: 0}
   agent: {fileID: 0}
-  sightRange: 7
-  attackRange: 3
+  sightRange: 5
+  attackRange: 5
   canAttack: 0
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 0
   whatIsGround:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 128
   whatIsPlayer:
     serializedVersion: 2
-    m_Bits: 0
+    m_Bits: 64
   frontOB: {fileID: 1792322833248026203}
   backOB: {fileID: 5465188127744409083}
   rightSideOB: {fileID: 612470804901740404}

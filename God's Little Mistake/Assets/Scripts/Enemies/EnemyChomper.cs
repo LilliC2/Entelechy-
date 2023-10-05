@@ -20,8 +20,10 @@ public class EnemyChomper : GameBehaviour
     bool canSee;
     bool attacking = false;
 
+    float jumpSpeed;
+    float normalSpeed;
 
-
+    bool jumpingBack;
     //patrolling
     //patrolling
     public Vector3 walkPoint;
@@ -66,6 +68,9 @@ public class EnemyChomper : GameBehaviour
 
         attackRange = enemyStats.stats.range;
         target = SearchWalkPoint();
+
+        normalSpeed = enemyStats.stats.speed;
+        jumpSpeed = enemyStats.stats.speed*1.5f;
 
     }
 
@@ -165,41 +170,86 @@ public class EnemyChomper : GameBehaviour
         {
             case BaseEnemy.EnemyState.Patrolling:
 
+                enemyStats.stats.speed = normalSpeed;
 
+                agent.isStopped = true;
+
+                gameObject.transform.localEulerAngles = new Vector3(0f, 90f, 0f);
 
                 break;
             case BaseEnemy.EnemyState.Chase:
 
-                if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange)
+                if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange +2)
                 {
                     print("Chase player");
+
+                    enemyStats.stats.speed = normalSpeed;
+
 
                     agent.isStopped = false;
 
                     agent.SetDestination(player.transform.position);
 
                 }
+                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange &&
+                    Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange + 3)
+                {
+
+                    if(!jumpingBack)
+                    {
+                        frontAnim.SetBool("Walking", false);
+                        backAnim.SetBool("Walking", false);
+                        leftSideAnim.SetBool("Walking", false);
+                        rightSideAnim.SetBool("Walking", false);
+
+
+
+                        print("Stop to attack");
+
+                        //agent.isStopped = false;
+
+                        //Vector3 toPlayer = player.transform.position - transform.position;
+                        //Vector3 targetPosition = toPlayer.normalized * -5;
+
+                        //agent.SetDestination(targetPosition);
+
+                        //targetPosition = toPlayer.normalized * 8;
+
+                        //agent.SetDestination(targetPosition);
+
+                        transform.LookAt(player.transform.position);
+                        if (!animationPlayed)
+                        {
+                            agent.isStopped = true;
+                            animationPlayed = true;
+                            PlayAttackAnimation();
+
+                            agent.isStopped = false;
+                            agent.SetDestination(player.transform.position);
+                            enemyStats.stats.speed = jumpSpeed;
+
+                            //PerformAttack(enemyStats.stats.fireRate);
+                            ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
+                        }
+                        
+                    }
+                   
+
+                }
                 else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange)
                 {
-                    frontAnim.SetBool("Walking", false);
-                    backAnim.SetBool("Walking", false);
-                    leftSideAnim.SetBool("Walking", false);
-                    rightSideAnim.SetBool("Walking", false);
 
-                    print("Stop to attack");
-                    agent.isStopped = true;
+                    jumpingBack = true;
 
-                    transform.LookAt(player.transform.position);
-                    if (!animationPlayed)
-                    {
-                        animationPlayed = true;
-                        PlayAttackAnimation();
-                        //PerformAttack(enemyStats.stats.fireRate);
-                        ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
-                    }
+                    enemyStats.stats.speed = normalSpeed;
 
 
+                    print("should go back");
+                    agent.isStopped = false;
+                    Vector3 toPlayer = player.transform.position - transform.position;
+                    Vector3 targetPosition = toPlayer.normalized * -2;
 
+                    agent.SetDestination(targetPosition);
                 }
 
 
