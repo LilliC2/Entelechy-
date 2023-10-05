@@ -29,6 +29,10 @@ public class EnemyChomper : GameBehaviour
     public Vector3 walkPoint;
     public float walkPointRange;
 
+    [SerializeField]
+    GameObject runningParticleGO;
+    [SerializeField]
+    ParticleSystem runningParticle;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
@@ -77,6 +81,8 @@ public class EnemyChomper : GameBehaviour
     // Update is called once per frame
     void Update()
     {
+        runningParticleGO.transform.rotation = gameObject.transform.rotation;
+
         agent.speed = enemyStats.stats.speed;
 
 
@@ -184,6 +190,8 @@ public class EnemyChomper : GameBehaviour
                     print("Chase player");
                     if(!jumpingBack)
                     {
+                        print("Player RUn part");
+                        runningParticle.Play();
                         enemyStats.stats.speed = normalSpeed;
 
 
@@ -201,6 +209,7 @@ public class EnemyChomper : GameBehaviour
 
                     if(!jumpingBack)
                     {
+
                         frontAnim.SetBool("Walking", false);
                         backAnim.SetBool("Walking", false);
                         leftSideAnim.SetBool("Walking", false);
@@ -225,6 +234,7 @@ public class EnemyChomper : GameBehaviour
                         transform.LookAt(player.transform.position);
                         if (!animationPlayed)
                         {
+
                             agent.isStopped = true;
                             animationPlayed = true;
                             PlayAttackAnimation();
@@ -248,6 +258,7 @@ public class EnemyChomper : GameBehaviour
                     if(jumpingBack)
                     {
                         enemyStats.stats.speed = normalSpeed;
+                        runningParticle.Stop();
 
 
                         print("should go back");
