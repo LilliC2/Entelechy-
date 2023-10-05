@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class HUDManager : GameBehaviour
+public class HUDManager : Singleton<HUDManager>
 {
     [Header("Primary Details")]
     public Item inSlot;
@@ -24,6 +24,9 @@ public class HUDManager : GameBehaviour
     public GameObject keyHighlight1;
     public Image cooldownFill1;
     public TMP_Text cooldownText1;
+    public GameObject backgroundGlow1;
+    public GameObject keyGlow1;
+
 
     [Header("Ability Slot 2")]
     public Image invenSlot2;
@@ -32,6 +35,8 @@ public class HUDManager : GameBehaviour
     public GameObject keyHighlight2;
     public Image cooldownFill2;
     public TMP_Text cooldownText2;
+    public GameObject backgroundGlow2;
+    public GameObject keyGlow2;
 
     [Header("Ability Slot 3")]
     public Image invenSlot3;
@@ -40,6 +45,8 @@ public class HUDManager : GameBehaviour
     public GameObject keyHighlight3;
     public Image cooldownFill3;
     public TMP_Text cooldownText3;
+    public GameObject backgroundGlow3;
+    public GameObject keyGlow3;
 
     [Header("Ability Slot 4")]
     public Image invenSlot4;
@@ -48,6 +55,8 @@ public class HUDManager : GameBehaviour
     public GameObject keyHighlight4;
     public Image cooldownFill4;
     public TMP_Text cooldownText4;
+    public GameObject backgroundGlow4;
+    public GameObject keyGlow4;
 
     [Header("Ability Slot 5")]
     public Image invenSlot5;
@@ -56,6 +65,8 @@ public class HUDManager : GameBehaviour
     public GameObject keyHighlight5;
     public Image cooldownFill5;
     public TMP_Text cooldownText5;
+    public GameObject backgroundGlow5;
+    public GameObject keyGlow5;
 
     [Header("Ability Slot 6")]
     public Image invenSlot6;
@@ -64,6 +75,8 @@ public class HUDManager : GameBehaviour
     public GameObject keyHighlight6;
     public Image cooldownFill6;
     public TMP_Text cooldownText6;
+    public GameObject backgroundGlow6;
+    public GameObject keyGlow6;
 
 
     // Start is called before the first frame update
@@ -101,6 +114,21 @@ public class HUDManager : GameBehaviour
         cooldownFill5.fillAmount = 0;
         cooldownFill6.fillAmount = 0;
 
+        //disable background glow by def
+        backgroundGlow1.SetActive(false);
+        backgroundGlow2.SetActive(false);
+        backgroundGlow3.SetActive(false);
+        backgroundGlow4.SetActive(false);
+        backgroundGlow5.SetActive(false);
+        backgroundGlow6.SetActive(false);
+
+        //disable key glow by def
+        keyGlow1.SetActive(false);
+        keyGlow2.SetActive(false);
+        keyGlow3.SetActive(false);
+        keyGlow4.SetActive(false);
+        keyGlow5.SetActive(false);
+        keyGlow6.SetActive(false);
 
     }
 
