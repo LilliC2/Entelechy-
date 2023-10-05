@@ -252,13 +252,14 @@ public class EnemyChomper : GameBehaviour
                 }
                 else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange)
                 {
+                    runningParticle.Stop();
+
                     PauseMotion(1);
                     ExecuteAfterSeconds(1, () => jumpingBack = true);
                     
                     if(jumpingBack)
                     {
                         enemyStats.stats.speed = normalSpeed;
-                        runningParticle.Stop();
 
 
                         print("should go back");
