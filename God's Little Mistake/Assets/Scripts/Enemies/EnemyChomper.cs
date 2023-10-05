@@ -182,13 +182,17 @@ public class EnemyChomper : GameBehaviour
                 if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange +2)
                 {
                     print("Chase player");
+                    if(!jumpingBack)
+                    {
+                        enemyStats.stats.speed = normalSpeed;
 
-                    enemyStats.stats.speed = normalSpeed;
+
+                        agent.isStopped = false;
+
+                        agent.SetDestination(player.transform.position);
+                    }
 
 
-                    agent.isStopped = false;
-
-                    agent.SetDestination(player.transform.position);
 
                 }
                 else if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange &&
@@ -202,6 +206,7 @@ public class EnemyChomper : GameBehaviour
                         leftSideAnim.SetBool("Walking", false);
                         rightSideAnim.SetBool("Walking", false);
 
+                        enemyStats.stats.speed = jumpSpeed;
 
 
                         print("Stop to attack");
@@ -226,7 +231,6 @@ public class EnemyChomper : GameBehaviour
 
                             agent.isStopped = false;
                             agent.SetDestination(player.transform.position);
-                            enemyStats.stats.speed = jumpSpeed;
 
                             //PerformAttack(enemyStats.stats.fireRate);
                             ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
@@ -238,18 +242,24 @@ public class EnemyChomper : GameBehaviour
                 }
                 else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange)
                 {
+                    PauseMotion(1);
+                    ExecuteAfterSeconds(1, () => jumpingBack = true);
+                    
+                    if(jumpingBack)
+                    {
+                        enemyStats.stats.speed = normalSpeed;
 
-                    jumpingBack = true;
 
-                    enemyStats.stats.speed = normalSpeed;
+                        print("should go back");
+                        agent.isStopped = false;
+                        Vector3 toPlayer = player.transform.position - transform.position;
+                        Vector3 targetPosition = toPlayer.normalized * -0.1f;
 
+                        agent.SetDestination(targetPosition);
 
-                    print("should go back");
-                    agent.isStopped = false;
-                    Vector3 toPlayer = player.transform.position - transform.position;
-                    Vector3 targetPosition = toPlayer.normalized * -2;
+                        ExecuteAfterSeconds(3, () => jumpingBack = false);
+                    }
 
-                    agent.SetDestination(targetPosition);
                 }
 
 
@@ -304,6 +314,14 @@ public class EnemyChomper : GameBehaviour
     {
 
         return transform.position + Random.insideUnitSphere * walkPointRange;
+
+    }
+
+    void PauseMotion(float _seconds)
+    {
+        print("pause");
+        agent.isStopped = true;
+        ExecuteAfterSeconds(_seconds, () => agent.isStopped = false);
 
     }
 
