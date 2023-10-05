@@ -625,48 +625,7 @@ public class UIManager : Singleton<UIManager>
 
     #region HUD
 
-    public void HUDBoxHighlightFrame(bool activeItem)
-    {
-        if (activeItem == true)
-        {
-            //highlightFrame.SetActive(True);
-        }
-        else
-        {
-            //highlightFrame.SetActive(False);
-        }
-    }
-
-    public void HUDBoxHighlightKey(bool activeItem)
-    {
-        if (activeItem == true)
-        {
-            //highlightKey.SetActive(True);
-        }
-        else
-        {
-            //highlightKey.SetActive(False);
-        }
-    }
-
-    public void CooldownTextSlot1 (int cooldown_1)
-    {
-        if(cooldown_1 == 0)
-        {
-            //cooldownText1.SetActive(False)
-        }
-        else
-        {
-            //cooldownText1.SetActive(True)
-            //cooldownText1.Text = cooldown_1.ToString(F0)
-        }
-    }
-
-    public void StartCooldownFillSlot1 (int maxValue, int cooldown)
-    {
-        //slider cooldown script here, Set the max value
-        //cooldownFill.FillAmount = cooldown
-    }
+    
 
     #endregion
 
