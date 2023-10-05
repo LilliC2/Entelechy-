@@ -1,16 +1,14 @@
-    using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.AI;
 
-public class EnemyShortRange : GameBehaviour
+public class EnemyChomper : GameBehaviour
 {
-
     [Header("Enemy Navigation")]
     bool projectileShot;
     GameObject firingPoint;
     public GameObject player;
-    public NavMeshAgent agent;
+    public UnityEngine.AI.NavMeshAgent agent;
 
     bool animationPlayed;
 
@@ -58,7 +56,7 @@ public class EnemyShortRange : GameBehaviour
 
         enemyStats = GetComponent<BaseEnemy>();
         BaseEnemy = GetComponent<BaseEnemy>();
-        agent = GetComponent<NavMeshAgent>();
+        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
 
         frontAnim = frontOB.GetComponentInChildren<Animator>();
@@ -80,7 +78,7 @@ public class EnemyShortRange : GameBehaviour
         ////check for the sight and attack range
         if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed)
         {
-            if(BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+            if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
             {
                 canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
                 canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
@@ -169,23 +167,6 @@ public class EnemyShortRange : GameBehaviour
 
 
 
-                if (!agent.pathPending)
-                {
-                    if (agent.remainingDistance <= agent.stoppingDistance)
-                    {
-                        if (!agent.hasPath || agent.velocity.sqrMagnitude == 0f)
-                        {
-                            // Destination reached
-
-                            //new target
-                            target = SearchWalkPoint();
-                        }
-                    }
-                }
-
-
-                agent.SetDestination(target);
-
                 break;
             case BaseEnemy.EnemyState.Chase:
 
@@ -217,7 +198,7 @@ public class EnemyShortRange : GameBehaviour
                         ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
                     }
 
- 
+
 
                 }
 
@@ -281,7 +262,7 @@ public class EnemyShortRange : GameBehaviour
         if (!attacking)
         {
 
-            if(canAttack)
+            if (canAttack)
             {
                 print("Attack");
                 //attack shit
@@ -292,9 +273,7 @@ public class EnemyShortRange : GameBehaviour
 
             }
 
-            
+
         }
     }
-
-    
 }
