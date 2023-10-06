@@ -266,14 +266,13 @@ public class UIManager : Singleton<UIManager>
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot0.sprite = emptySlotSprite;
-                        _HUD.HUDBoxHighlightFrame1(false);
-                        _HUD.HUDBoxHighlightKey1(false);
+                        _HUD.hasItem1 = false;
                     }
                     else
                     {
                         invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
-                        _HUD.HUDBoxHighlightFrame1(true);
-                        _HUD.HUDBoxHighlightKey1(true);
+                        _HUD.hasItem1 = true;
+
                         //pass cooldown here
                     }
                     break;
@@ -282,11 +281,12 @@ public class UIManager : Singleton<UIManager>
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot1.sprite = emptySlotSprite;
+                        _HUD.hasItem2 = false;
                     }
                     else
                     {
                         invenSlot1.sprite = _PC.playerInventory[i].icon; //images for icon
-                        
+                        _HUD.hasItem2 = true;
                     }
                     break;
 
@@ -294,14 +294,12 @@ public class UIManager : Singleton<UIManager>
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot2.sprite = emptySlotSprite;
-                        _HUD.HUDBoxHighlightFrame3(false);
-                        _HUD.HUDBoxHighlightKey3(false);
+                        _HUD.hasItem3 = false;
                     }
                     else
                     {
                         invenSlot2.sprite = _PC.playerInventory[i].icon; //images for icon
-                        _HUD.HUDBoxHighlightFrame3(true);
-                        _HUD.HUDBoxHighlightKey3(true);
+                        _HUD.hasItem3 = true;
                     }
                     break;
 
@@ -309,24 +307,39 @@ public class UIManager : Singleton<UIManager>
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot3.sprite = emptySlotSprite;
+                        _HUD.hasItem4 = false;
                     }
-                    else invenSlot3.sprite = _PC.playerInventory[i].icon; 
+                    else
+                    {
+                        invenSlot3.sprite = _PC.playerInventory[i].icon;
+                        _HUD.hasItem4 = true;
+                    }
                     break;
 
                 case 4:
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot4.sprite = emptySlotSprite;
+                        _HUD.hasItem5 = false;
                     }
-                    else invenSlot4.sprite = _PC.playerInventory[i].icon; 
+                    else
+                    {
+                        invenSlot4.sprite = _PC.playerInventory[i].icon;
+                        _HUD.hasItem5 = true;
+                    }
                     break;
 
                 case 5:
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot5.sprite = emptySlotSprite;
+                        _HUD.hasItem6 = false;
                     }
-                    else invenSlot5.sprite = _PC.playerInventory[i].icon; 
+                    else
+                    {
+                        invenSlot5.sprite = _PC.playerInventory[i].icon;
+                        _HUD.hasItem6 = true;
+                    }
                     break;
 
             }
