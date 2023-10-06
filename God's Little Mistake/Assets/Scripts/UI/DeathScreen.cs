@@ -16,13 +16,6 @@ public class DeathScreen : GameBehaviour<DeathScreen>
     }
     void Update()
     {
-        if(_PC.health <= 0)
-        {
-            Time.timeScale = 0f;
-            DeathScreenPanel.SetActive(true);
-            
-        }
-        else DeathScreenPanel.SetActive(false);
 
     }
 

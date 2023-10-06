@@ -11,6 +11,7 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip[] playerHurtSounds;
     public AudioClip[] playerDeathSounds;
 
+    public AudioClip playerDeathExplosionSound;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,6 +35,12 @@ public class AudioManager : Singleton<AudioManager>
         var sound = playerDeathSounds[Random.Range(0, playerDeathSounds.Length)];
 
         audioManagerSourcePlayerHurt.clip = sound;
+        audioManagerSourcePlayerHurt.Play();
+    }
+
+    public void PlayerDeathExplosion()
+    {
+        audioManagerSourcePlayerHurt.clip = playerDeathExplosionSound;
         audioManagerSourcePlayerHurt.Play();
     }
 }

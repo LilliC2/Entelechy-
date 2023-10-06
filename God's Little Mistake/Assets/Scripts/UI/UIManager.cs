@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
+using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class UIManager : Singleton<UIManager>
@@ -48,6 +49,9 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text invenPopupCritX;
     public TMP_Text invenPopupCritChance;
     public TMP_Text invenPopupFirerate;
+
+    [Header("Game Over")]
+    public GameObject gameOverMenu;
 
     [Header("Missy Height")]
     public GameObject playerAvatar;
@@ -276,9 +280,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void EquipImage(int _slot)
     {
-        bool flip = false;
 
-        if (_slot == 4) flip = true;
 
         //print("Creating item for slot " + _slot);
 
@@ -452,6 +454,27 @@ public class UIManager : Singleton<UIManager>
 
     #endregion
 
+    #region GameOver
+    
+
+    public void Respawn()
+    {
+        gameOverMenu.SetActive(false);
+        _GM.Restart();
+    }
+    public void ReturnToMainMenu()
+    {
+        gameOverMenu.SetActive(false);
+        Time.timeScale = 1f;
+        SceneManager.LoadScene("MainMenu");
+    }
+    public void QuitGame()
+    {
+        Debug.Log("Quit!");
+        Application.Quit();
+    }
+
+    #endregion
     Item SearchForItemMatch(Item _hoverItem)
     {
         Item itemMatchInPlayerInven = null;

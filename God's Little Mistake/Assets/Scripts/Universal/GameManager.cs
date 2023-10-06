@@ -24,22 +24,6 @@ public class GameManager : Singleton<GameManager>
     public GameState gameState;
 
 
-    //generate room
-    //generate mini map
-
-    //find room end condition
-   
-    //if room is kill all enemies
-        /*spawn player in center of the room
-        */
-
-    //if room is find exit
-
-        /*spawn player at beginning of the room
-         * 
-         */
-  
-    // Start is called before the first frame update
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
@@ -56,6 +40,14 @@ public class GameManager : Singleton<GameManager>
             _EM.SpawnEnemiesForLevel();
 
         }
+
+        
+
+    }
+
+    public void GameOver()
+    {
+        _UI.gameOverMenu.SetActive(true);
 
     }
 

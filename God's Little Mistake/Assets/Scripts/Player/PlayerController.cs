@@ -14,6 +14,9 @@ public class PlayerController : Singleton<PlayerController>
 
     #region Animation Variables
     [Header("Animation")]
+    [SerializeField]
+    GameObject playerAvatar;
+
     public Animator baseAnimator;
     public Animator nubsAnimator;
     public GameObject nubsOB;
@@ -43,6 +46,7 @@ public class PlayerController : Singleton<PlayerController>
 
     bool meleeAnimationCooldown;
 
+    public ParticleSystem deathExplosionPS;
 
     Vector3 currentPos;
     Vector3 lastPos;
@@ -574,7 +578,7 @@ public class PlayerController : Singleton<PlayerController>
                 //    }
 
                 //}
- 
+
 
 
                 //if (Input.GetMouseButton(0))
@@ -620,7 +624,8 @@ public class PlayerController : Singleton<PlayerController>
 
                 #endregion
                 #endregion
- 
+
+                if (health <= 0) Die();
 
                 break;
 
@@ -732,31 +737,7 @@ public class PlayerController : Singleton<PlayerController>
         return speedTween;
     }
    
-    //public void CloseSlots()
-    //{
-    //    for (int i = 0; i < slotsAnim.Length; i++)
-    //    {
-    //        if (_AVTAR.slotsOnPlayerFront[i].transform.childCount == 0)
-    //        {
-    //            print("trying to slot");
-    //            slotsAnim[i].SetBool("OpenSlot", false);
-    //            slotsAnim[i].SetBool("CloseSlot", true);
 
-    //        }
-
-
-
-    //        ExecuteAfterSeconds(1, () => ChangeSlots(false));
-    //    }
-    //}
-
-    //void ChangeSlots(bool _bool)
-    //{
-    //    for (int i = 0; i < slotsAnim.Length; i++)
-    //    {
-    //        slotsGO[i].SetActive(_bool);
-    //    }
-    //}
     void UpdateMelee()
     {
         switch (meleeHitBox)
@@ -933,24 +914,37 @@ public class PlayerController : Singleton<PlayerController>
             }
             else
             {
-                _AM.PlayerDeathScream();
-
-                _GM.gameState = GameManager.GameState.Dead;
-                DieAnimation();
-                //add particles in die animation too
+                Die();
             }
         }
         
 
     }
 
+    public void Die()
+    {
+        _AM.PlayerDeathScream();
+
+        _GM.gameState = GameManager.GameState.Dead;
+        DieAnimation();
+
+        ExecuteAfterSeconds(0.5f, () => playerAvatar.SetActive(false));
+        ExecuteAfterSeconds(1, () => _GM.GameOver());
+
+    }
+
     void DieAnimation()
     {
-        //baseAnimator.SetBool("ForwardWalk", false);
-        //baseAnimator.SetBool("SideWalk", false);
-        //nubsAnimator.SetBool("ForwardWalk", false);
-        //nubsAnimator.SetBool("SideWalk", false);
-        //baseAnimator.SetTrigger("DeathTrigger");
+
+        missyRightSideAnim.SetBool("Walking", false);
+        missyLeftSideAnim.SetBool("Walking", false);
+        missyFrontSideAnim.SetBool("Walking", false);
+        missyBackSideAnim.SetBool("Walking", false);
+
+        missyRightSideAnim.SetTrigger("Death 0");
+        missyLeftSideAnim.SetTrigger("Death 0");
+        missyFrontSideAnim.SetTrigger("Death 0");
+        missyBackSideAnim.SetTrigger("Death 0");
     }
 
 
