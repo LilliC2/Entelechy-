@@ -14005,6 +14005,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f8ce59e6d8f70e842bfd6f52c3085c35, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dontDestroy: 0
   inSlot:
     itemName: 
     ID: 0
@@ -14052,6 +14053,9 @@ MonoBehaviour:
   cooldownText1: {fileID: 880923160}
   backgroundGlow1: {fileID: 689966617}
   keyGlow1: {fileID: 1658326651}
+  cooldownTime1: 0
+  cooldownTimer1: 0
+  isCooldown1: 0
   invenSlot2: {fileID: 0}
   frame2: {fileID: 1590104719}
   frameHighlight2: {fileID: 986644197}
@@ -14060,6 +14064,9 @@ MonoBehaviour:
   cooldownText2: {fileID: 1978751683}
   backgroundGlow2: {fileID: 419772579}
   keyGlow2: {fileID: 564096198}
+  cooldownTime2: 0
+  cooldownTimer2: 0
+  isCooldown2: 0
   invenSlot3: {fileID: 0}
   frame3: {fileID: 1523794059}
   frameHighlight3: {fileID: 1514445641}
@@ -21598,12 +21605,16 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4098278439418648072, guid: 6641d9179c51b624882b47370d4ddf22, type: 3}
+      propertyPath: m_FillAmount
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4098278439418648072, guid: 6641d9179c51b624882b47370d4ddf22, type: 3}
       propertyPath: m_FillMethod
       value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 4098278439418648072, guid: 6641d9179c51b624882b47370d4ddf22, type: 3}
       propertyPath: m_FillOrigin
-      value: 0
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 4416664903314991685, guid: 6641d9179c51b624882b47370d4ddf22, type: 3}
       propertyPath: m_AnchorMax.y
@@ -22142,7 +22153,7 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1983022606092218989}
   m_HandleRect: {fileID: 3431136465894219875}
   m_Direction: 0
-  m_Value: 1
+  m_Value: 0
   m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:

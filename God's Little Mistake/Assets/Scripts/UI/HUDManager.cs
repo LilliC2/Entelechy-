@@ -26,6 +26,9 @@ public class HUDManager : Singleton<HUDManager>
     public TMP_Text cooldownText1;
     public GameObject backgroundGlow1;
     public GameObject keyGlow1;
+    public float cooldownTime1;
+    public float cooldownTimer1;
+    public bool isCooldown1=false;
 
 
     [Header("Ability Slot 2")]
@@ -37,6 +40,9 @@ public class HUDManager : Singleton<HUDManager>
     public TMP_Text cooldownText2;
     public GameObject backgroundGlow2;
     public GameObject keyGlow2;
+    public float cooldownTime2;
+    public float cooldownTimer2;
+    public bool isCooldown2 = false;
 
     [Header("Ability Slot 3")]
     public Image invenSlot3;
@@ -130,14 +136,34 @@ public class HUDManager : Singleton<HUDManager>
         keyGlow5.SetActive(false);
         keyGlow6.SetActive(false);
 
+        SetCooldownSlo1(5);
+        SetCooldownSlo2(5);
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        if(Input.GetKeyDown(KeyCode.L))
+        {
+
+            isCooldown1 = true;
+            isCooldown2 = true;
+        }
+
+        if(isCooldown1 == true)
+        {
+            CooldownSlot1();
+        }
+
+        if (isCooldown2 == true)
+        {
+            CooldownSlot2();
+        }
     }
 
+
+    #region Slot 1
     public void HUDBoxHighlightFrame1(bool activeItem)
     {
         if (activeItem == true)
@@ -162,16 +188,28 @@ public class HUDManager : Singleton<HUDManager>
         }
     }
 
-    public void CooldownTextSlot1(int cooldown_1)
+    public void SetCooldownSlo1(int cooldown)
     {
-        if (cooldown_1 == 0)
+        cooldownTime1 = cooldown;
+        cooldownTimer1 = cooldown;
+    }
+
+    public void CooldownSlot1()
+    {
+        cooldownTimer1 -= Time.deltaTime;
+
+        if (cooldownTimer1 < 0)
         {
-            cooldownText1.text = "";
+            isCooldown1 = false;
+            cooldownText1.gameObject.SetActive(false);
+            cooldownFill1.fillAmount = 0;
+            backgroundGlow1.SetActive(true);
         }
         else
         {
-            cooldownText1.text = "";
-            cooldownText1.text = cooldown_1.ToString();
+            cooldownText1.text = Mathf.RoundToInt(cooldownTimer1).ToString();
+            cooldownFill1.fillAmount = cooldownTimer1/cooldownTime1;
+            backgroundGlow1.SetActive(false);
         }
     }
 
@@ -185,4 +223,76 @@ public class HUDManager : Singleton<HUDManager>
 
 
     }
+
+    #endregion
+
+    #region Slot 2
+
+    public void SetCooldownSlo2(int cooldown)
+    {
+        cooldownTime2 = cooldown;
+        cooldownTimer2 = cooldown;
+    }
+
+    public void CooldownSlot2()
+    {
+        cooldownTimer2 -= Time.deltaTime;
+
+        if (cooldownTimer2 < 0)
+        {
+            isCooldown2 = false;
+            cooldownText2.gameObject.SetActive(false);
+            cooldownFill2.fillAmount = 0;
+            backgroundGlow2.SetActive(true);
+        }
+        else
+        {
+            cooldownText2.text = Mathf.RoundToInt(cooldownTimer2).ToString();
+            cooldownFill2.fillAmount = cooldownTimer2 / cooldownTime2;
+            backgroundGlow2.SetActive(false);
+        }
+    }
+
+    #endregion
+
+    #region Slot 3
+
+    public void HUDBoxHighlightFrame3(bool activeItem)
+    {
+        if (activeItem == true)
+        {
+            frameHighlight3.SetActive(true);
+        }
+        else
+        {
+            frameHighlight3.SetActive(false);
+        }
+    }
+
+    public void HUDBoxHighlightKey3(bool activeItem)
+    {
+        if (activeItem == true)
+        {
+            keyHighlight3.SetActive(true);
+        }
+        else
+        {
+            keyHighlight3.SetActive(false);
+        }
+    }
+
+    public void CooldownTextSlot3(int cooldown)
+    {
+        if (cooldown == 0)
+        {
+            cooldownText3.text = "";
+        }
+        else
+        {
+            cooldownText3.text = "";
+            cooldownText3.text = cooldown.ToString();
+        }
+    }
+
+    #endregion
 }

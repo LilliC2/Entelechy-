@@ -266,8 +266,16 @@ public class UIManager : Singleton<UIManager>
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot0.sprite = emptySlotSprite;
+                        _HUD.HUDBoxHighlightFrame1(false);
+                        _HUD.HUDBoxHighlightKey1(false);
                     }
-                    else invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
+                    else
+                    {
+                        invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
+                        _HUD.HUDBoxHighlightFrame1(true);
+                        _HUD.HUDBoxHighlightKey1(true);
+                        //pass cooldown here
+                    }
                     break;
 
                 case 1:
@@ -286,10 +294,14 @@ public class UIManager : Singleton<UIManager>
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot2.sprite = emptySlotSprite;
+                        _HUD.HUDBoxHighlightFrame3(false);
+                        _HUD.HUDBoxHighlightKey3(false);
                     }
                     else
                     {
                         invenSlot2.sprite = _PC.playerInventory[i].icon; //images for icon
+                        _HUD.HUDBoxHighlightFrame3(true);
+                        _HUD.HUDBoxHighlightKey3(true);
                     }
                     break;
 
