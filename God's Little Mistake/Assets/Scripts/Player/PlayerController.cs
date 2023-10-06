@@ -26,6 +26,11 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject missyBack;
     public GameObject missyForward;
 
+    Animator missyLeftSideAnim;
+    Animator missyRightSideAnim;
+    Animator missyFrontSideAnim;
+    Animator missyBackSideAnim;
+
     public GameObject meleeUI;
 
     public List<Animator> itemsAnimForward;
@@ -130,6 +135,10 @@ public class PlayerController : Singleton<PlayerController>
 
         CheckForStartingItems();
 
+        missyBackSideAnim = missyBack.GetComponent<Animator>();
+        missyFrontSideAnim = missyForward.GetComponent<Animator>();
+        missyLeftSideAnim = missyLeftSide.GetComponent<Animator>();
+        missyRightSideAnim = missyRightSide.GetComponent<Animator>();
 
     }
 
@@ -148,9 +157,6 @@ public class PlayerController : Singleton<PlayerController>
         switch (_GM.gameState)
         {
             case GameManager.GameState.Playing:
-
-
-
 
                 #region Movement
 
@@ -178,6 +184,7 @@ public class PlayerController : Singleton<PlayerController>
                         }
 
                     }
+
 
 
                     if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
@@ -245,6 +252,27 @@ public class PlayerController : Singleton<PlayerController>
                 #endregion
 
                 #region Animation
+
+                #region Enable Walking Animation
+
+                if(isMoving)
+                {
+                    missyFrontSideAnim.SetBool("Walking", true);
+                    missyBackSideAnim.SetBool("Walking", true);
+                    missyLeftSideAnim.SetBool("Walking", true);
+                    missyRightSideAnim.SetBool("Walking", true);
+                }
+                else
+                {
+                    missyFrontSideAnim.SetBool("Walking", false);
+                    missyBackSideAnim.SetBool("Walking", false);
+                    missyLeftSideAnim.SetBool("Walking", false);
+                    missyRightSideAnim.SetBool("Walking", false);
+                }
+
+
+
+                #endregion
 
                 #region Legs Animation
 
