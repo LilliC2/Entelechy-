@@ -7,7 +7,7 @@ public class BasicProjectile : GameBehaviour
     [SerializeField]
     GameObject explosionAnimOB;
     [SerializeField]
-    GameObject image;
+    public GameObject image;
     [SerializeField]
     Animator explosionAnim;
     Rigidbody rb;

@@ -861,6 +861,8 @@ public class PlayerController : Singleton<PlayerController>
                 GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
+                bullet.GetComponent<ItemLook>().firingPoint = firingPoint;
+
                 knockbackActive = true;
                 knockbackStartTime = Time.time;
                 Mathf.Clamp(bullet.transform.position.y, 0, 0);
