@@ -20,7 +20,9 @@ public class ItemLook : MonoBehaviour
 
         if(this.tag.Contains("Projectile"))
         {
-            rotate = new Vector3(-45f, this.transform.rotation.y, this.transform.rotation.z);
+            rotate = new Vector3(45f, this.transform.rotation.y, this.transform.rotation.z);
+            transform.eulerAngles = rotate;
+
         }
         else
         {
