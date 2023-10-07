@@ -99,8 +99,6 @@ public class PlayerController : Singleton<PlayerController>
 
 
     [Header("Projectile")]
-    [SerializeField]
-    ParticleSystem spitParticleSystem;
     public GameObject firingPoint;
     public GameObject directional; //is for current melee attack and will probably be removed
     public Vector3 target;
@@ -854,7 +852,8 @@ public class PlayerController : Singleton<PlayerController>
             {
 
                 //particle system
-                spitParticleSystem.Play();
+                var particleSystem = GetComponentInChildren<ParticleSystem>();
+                particleSystem.Play();
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
