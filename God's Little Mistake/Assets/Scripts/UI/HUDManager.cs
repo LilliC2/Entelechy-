@@ -154,12 +154,6 @@ public class HUDManager : Singleton<HUDManager>
         keyGlow5.SetActive(false);
         keyGlow6.SetActive(false);
 
-        SetCooldownSlo1(5);
-        SetCooldownSlo2(6);
-        SetCooldownSlo3(1);
-        SetCooldownSlo4(2);
-        SetCooldownSlo5(9);
-        SetCooldownSlo6(7);
         UpdateSlots();
 
     }
@@ -167,6 +161,7 @@ public class HUDManager : Singleton<HUDManager>
     // Update is called once per frame
     void Update()
     {
+        
         if(Input.GetKeyDown(KeyCode.L))
         {
 
@@ -176,6 +171,14 @@ public class HUDManager : Singleton<HUDManager>
             isCooldown4 = true;
             isCooldown5 = true;
             isCooldown6 = true;
+
+            SetCooldownSlo1(5);
+            SetCooldownSlo2(6);
+            SetCooldownSlo3(1);
+            SetCooldownSlo4(2);
+            SetCooldownSlo5(9);
+            SetCooldownSlo6(7);
+
         }
 
         //Activate the cooldown UIs if the ability is on cooldown
@@ -216,15 +219,15 @@ public class HUDManager : Singleton<HUDManager>
         {
             keyHighlight1.SetActive(true);
             keyGlow1.SetActive(true);
-            if(isCooldown1 != true)
-            {
-                frameHighlight1.SetActive(true);
-                backgroundGlow1.SetActive(true);
-            }
-            else
+            if(isCooldown1)
             {
                 frameHighlight1.SetActive(false);
                 backgroundGlow1.SetActive(false);
+            }
+            else
+            {
+                frameHighlight1.SetActive(true);
+                backgroundGlow1.SetActive(true);
             }
         }
         else
@@ -238,15 +241,15 @@ public class HUDManager : Singleton<HUDManager>
         {
             keyHighlight2.SetActive(true);
             keyGlow2.SetActive(true);
-            if (isCooldown2 != true)
-            {
-                frameHighlight2.SetActive(true);
-                backgroundGlow2.SetActive(true);
-            }
-            else
+            if (isCooldown2)
             {
                 frameHighlight2.SetActive(false);
                 backgroundGlow2.SetActive(false);
+            }
+            else
+            {
+                frameHighlight2.SetActive(true);
+                backgroundGlow2.SetActive(true);
             }
         }
         else
@@ -260,15 +263,15 @@ public class HUDManager : Singleton<HUDManager>
         {
             keyHighlight3.SetActive(true);
             keyGlow3.SetActive(true);
-            if (isCooldown3 != true)
-            {
-                frameHighlight3.SetActive(true);
-                backgroundGlow3.SetActive(true);
-            }
-            else
+            if (isCooldown3)
             {
                 frameHighlight3.SetActive(false);
                 backgroundGlow3.SetActive(false);
+            }
+            else
+            {
+                frameHighlight3.SetActive(true);
+                backgroundGlow3.SetActive(true);
             }
         }
         else
@@ -282,15 +285,15 @@ public class HUDManager : Singleton<HUDManager>
         {
             keyHighlight4.SetActive(true);
             keyGlow4.SetActive(true);
-            if (isCooldown4 != true)
-            {
-                frameHighlight4.SetActive(true);
-                backgroundGlow4.SetActive(true);
-            }
-            else
+            if (isCooldown4)
             {
                 frameHighlight4.SetActive(false);
                 backgroundGlow4.SetActive(false);
+            }
+            else
+            {
+                frameHighlight4.SetActive(true);
+                backgroundGlow4.SetActive(true);
             }
         }
         else
@@ -304,15 +307,15 @@ public class HUDManager : Singleton<HUDManager>
         {
             keyHighlight5.SetActive(true);
             keyGlow5.SetActive(true);
-            if (isCooldown5 != true)
-            {
-                frameHighlight5.SetActive(true);
-                backgroundGlow5.SetActive(true);
-            }
-            else
+            if (isCooldown5)
             {
                 frameHighlight5.SetActive(false);
                 backgroundGlow5.SetActive(false);
+            }
+            else
+            {
+                frameHighlight5.SetActive(true);
+                backgroundGlow5.SetActive(true);
             }
         }
         else
@@ -326,15 +329,15 @@ public class HUDManager : Singleton<HUDManager>
         {
             keyHighlight6.SetActive(true);
             keyGlow6.SetActive(true);
-            if (isCooldown6 != true)
-            {
-                frameHighlight6.SetActive(true);
-                backgroundGlow6.SetActive(true);
-            }
-            else
+            if (isCooldown6)
             {
                 frameHighlight6.SetActive(false);
                 backgroundGlow6.SetActive(false);
+            }
+            else
+            {
+                frameHighlight6.SetActive(true);
+                backgroundGlow6.SetActive(true);
             }
         }
         else
