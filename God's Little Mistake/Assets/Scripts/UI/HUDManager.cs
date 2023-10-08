@@ -211,6 +211,8 @@ public class HUDManager : Singleton<HUDManager>
         {
             CooldownSlot6();
         }
+
+        UpdateSlots();
     }
     public void UpdateSlots()
     {
@@ -359,20 +361,24 @@ public class HUDManager : Singleton<HUDManager>
     {
         cooldownTimer1 -= Time.deltaTime;
 
-        if (cooldownTimer1 < 0)
+        if (hasItem1)
         {
-            isCooldown1 = false;
-            cooldownText1.gameObject.SetActive(false);
-            cooldownFill1.fillAmount = 0;
-            backgroundGlow1.SetActive(true);
-            frameHighlight1.SetActive(true);
-        }
-        else
-        {
-            cooldownText1.text = Mathf.RoundToInt(cooldownTimer1).ToString();
-            cooldownFill1.fillAmount = cooldownTimer1/cooldownTime1;
-            backgroundGlow1.SetActive(false);
-            frameHighlight1.SetActive(false);
+            if (cooldownTimer1 < 0)
+            {
+                isCooldown1 = false;
+                cooldownText1.gameObject.SetActive(false);
+                cooldownFill1.fillAmount = 0;
+                backgroundGlow1.SetActive(true);
+                frameHighlight1.SetActive(true);
+            }
+            else
+            {
+                cooldownText1.gameObject.SetActive(true);
+                cooldownText1.text = Mathf.RoundToInt(cooldownTimer1).ToString();
+                cooldownFill1.fillAmount = cooldownTimer1 / cooldownTime1;
+                backgroundGlow1.SetActive(false);
+                frameHighlight1.SetActive(false);
+            }
         }
     }
 
@@ -390,20 +396,24 @@ public class HUDManager : Singleton<HUDManager>
     {
         cooldownTimer2 -= Time.deltaTime;
 
-        if (cooldownTimer2 < 0)
+        if (hasItem2)
         {
-            isCooldown2 = false;
-            cooldownText2.gameObject.SetActive(false);
-            cooldownFill2.fillAmount = 0;
-            backgroundGlow2.SetActive(true);
-            frameHighlight2.SetActive(true);
-        }
-        else
-        {
-            cooldownText2.text = Mathf.RoundToInt(cooldownTimer2).ToString();
-            cooldownFill2.fillAmount = cooldownTimer2 / cooldownTime2;
-            frameHighlight2.SetActive(true);
-            backgroundGlow2.SetActive(true);
+            if (cooldownTimer2 < 0)
+            {
+                isCooldown2 = false;
+                cooldownText2.gameObject.SetActive(false);
+                cooldownFill2.fillAmount = 0;
+                backgroundGlow2.SetActive(true);
+                frameHighlight2.SetActive(true);
+            }
+            else
+            {
+                cooldownText2.gameObject.SetActive(true);
+                cooldownText2.text = Mathf.RoundToInt(cooldownTimer2).ToString();
+                cooldownFill2.fillAmount = cooldownTimer2 / cooldownTime2;
+                frameHighlight2.SetActive(true);
+                backgroundGlow2.SetActive(true);
+            }
         }
     }
 
@@ -421,20 +431,24 @@ public class HUDManager : Singleton<HUDManager>
     {
         cooldownTimer3 -= Time.deltaTime;
 
-        if (cooldownTimer3 < 0)
+        if (hasItem3)
         {
-            isCooldown3 = false;
-            cooldownText3.gameObject.SetActive(false);
-            cooldownFill3.fillAmount = 0;
-            backgroundGlow3.SetActive(true);
-            frameHighlight3.SetActive(true);
-        }
-        else
-        {
-            cooldownText3.text = Mathf.RoundToInt(cooldownTimer3).ToString();
-            cooldownFill3.fillAmount = cooldownTimer3 / cooldownTime3;
-            backgroundGlow3.SetActive(false);
-            frameHighlight3.SetActive(false);
+            if (cooldownTimer3 < 0)
+            {
+                isCooldown3 = false;
+                cooldownText3.gameObject.SetActive(false);
+                cooldownFill3.fillAmount = 0;
+                backgroundGlow3.SetActive(true);
+                frameHighlight3.SetActive(true);
+            }
+            else
+            {
+                cooldownText3.gameObject.SetActive(true);
+                cooldownText3.text = Mathf.RoundToInt(cooldownTimer3).ToString();
+                cooldownFill3.fillAmount = cooldownTimer3 / cooldownTime3;
+                backgroundGlow3.SetActive(false);
+                frameHighlight3.SetActive(false);
+            }
         }
     }
 
@@ -452,21 +466,26 @@ public class HUDManager : Singleton<HUDManager>
     {
         cooldownTimer4 -= Time.deltaTime;
 
-        if (cooldownTimer4 < 0)
+        if(hasItem4)
         {
-            isCooldown4 = false;
-            cooldownText4.gameObject.SetActive(false);
-            cooldownFill4.fillAmount = 0;
-            backgroundGlow4.SetActive(true);
-            frameHighlight4.SetActive(true);
+            if (cooldownTimer4 < 0)
+            {
+                isCooldown4 = false;
+                cooldownText4.gameObject.SetActive(false);
+                cooldownFill4.fillAmount = 0;
+                backgroundGlow4.SetActive(true);
+                frameHighlight4.SetActive(true);
+            }
+            else
+            {
+                cooldownText4.gameObject.SetActive(true);
+                cooldownText4.text = Mathf.RoundToInt(cooldownTimer4).ToString();
+                cooldownFill4.fillAmount = cooldownTimer4 / cooldownTime4;
+                backgroundGlow4.SetActive(false);
+                frameHighlight4.SetActive(false);
+            }
         }
-        else
-        {
-            cooldownText4.text = Mathf.RoundToInt(cooldownTimer4).ToString();
-            cooldownFill4.fillAmount = cooldownTimer4 / cooldownTime4;
-            backgroundGlow4.SetActive(false);
-            frameHighlight4.SetActive(false);
-        }
+        
     }
 
     #endregion
@@ -483,21 +502,26 @@ public class HUDManager : Singleton<HUDManager>
     {
         cooldownTimer5 -= Time.deltaTime;
 
-        if (cooldownTimer5 < 0)
+        if(hasItem5) 
         {
-            isCooldown5 = false;
-            cooldownText5.gameObject.SetActive(false);
-            cooldownFill5.fillAmount = 0;
-            backgroundGlow5.SetActive(true);
-            frameHighlight5.SetActive(true);
+            if (cooldownTimer5 < 0)
+            {
+                isCooldown5 = false;
+                cooldownText5.gameObject.SetActive(false);
+                cooldownFill5.fillAmount = 0;
+                backgroundGlow5.SetActive(true);
+                frameHighlight5.SetActive(true);
+            }
+            else
+            {
+                cooldownText5.gameObject.SetActive(true);
+                cooldownText5.text = Mathf.RoundToInt(cooldownTimer5).ToString();
+                cooldownFill5.fillAmount = cooldownTimer5 / cooldownTime5;
+                backgroundGlow5.SetActive(false);
+                frameHighlight5.SetActive(false);
+            }
         }
-        else
-        {
-            cooldownText5.text = Mathf.RoundToInt(cooldownTimer5).ToString();
-            cooldownFill5.fillAmount = cooldownTimer5 / cooldownTime5;
-            backgroundGlow5.SetActive(false);
-            frameHighlight5.SetActive(false);
-        }
+        
     }
 
     #endregion
@@ -514,20 +538,24 @@ public class HUDManager : Singleton<HUDManager>
     {
         cooldownTimer6 -= Time.deltaTime;
 
-        if (cooldownTimer6 < 0)
+        if (hasItem6)
         {
-            isCooldown6 = false;
-            cooldownText6.gameObject.SetActive(false);
-            cooldownFill6.fillAmount = 0;
-            backgroundGlow6.SetActive(true);
-            frameHighlight6.SetActive(true);
-        }
-        else
-        {
-            cooldownText6.text = Mathf.RoundToInt(cooldownTimer6).ToString();
-            cooldownFill6.fillAmount = cooldownTimer6 / cooldownTime6;
-            backgroundGlow6.SetActive(false);
-            frameHighlight6.SetActive(false);
+            if (cooldownTimer6 < 0)
+            {
+                isCooldown6 = false;
+                cooldownText6.gameObject.SetActive(false);
+                cooldownFill6.fillAmount = 0;
+                backgroundGlow6.SetActive(true);
+                frameHighlight6.SetActive(true);
+            }
+            else
+            {
+                cooldownText6.gameObject.SetActive(true);
+                cooldownText6.text = Mathf.RoundToInt(cooldownTimer6).ToString();
+                cooldownFill6.fillAmount = cooldownTimer6 / cooldownTime6;
+                backgroundGlow6.SetActive(false);
+                frameHighlight6.SetActive(false);
+            }
         }
     }
 
