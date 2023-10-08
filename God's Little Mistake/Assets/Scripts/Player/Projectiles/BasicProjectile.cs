@@ -24,7 +24,7 @@ public class BasicProjectile : GameBehaviour
             //explosionAnimOB.SetActive(true);
             
             image.SetActive(false);
-            print("play anim");
+            print("Destroy Projectile");
             //ooze animation
             explosionAnim.SetTrigger("Death");
 
