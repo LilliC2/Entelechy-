@@ -4231,6 +4231,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 392999586}
   m_CullTransparentMesh: 1
+--- !u!1 &394036256 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6962014344116802725, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+  m_PrefabInstance: {fileID: 580616133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &396668034
 GameObject:
   m_ObjectHideFlags: 0
@@ -7082,6 +7087,22 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: backHead
+      value: 
+      objectReference: {fileID: 1749777012}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: frontHead
+      value: 
+      objectReference: {fileID: 1478793663}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: sideLHead
+      value: 
+      objectReference: {fileID: 394036256}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: sideRHead
+      value: 
+      objectReference: {fileID: 707176708}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerAvatar
       value: 
       objectReference: {fileID: 1305060598}
@@ -7096,7 +7117,7 @@ PrefabInstance:
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[0].projectilePF
       value: 
-      objectReference: {fileID: 7907207601727694793, guid: 60121dcdb1fddf14aa889329d3325e47, type: 3}
+      objectReference: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[0].projectileSpeed
       value: 100
@@ -7966,66 +7987,6 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[9].dmg
-      value: 10
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[9].critX
-      value: 1.3
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[11].itemType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[7].projectile
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[9].critChance
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[9].projectilePF
-      value: 
-      objectReference: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[9].longRangeSpeed
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[7].meleeAttackType
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[9].meleeAttackType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[9].projectileSpeed
-      value: 300
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[10].meleeAttackType
-      value: 2
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[3].hasActiveAbility
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[9].hasActiveAbility
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[10].hasActiveAbility
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6410986282493780425, guid: 4ca82d772cf4092418d77935cf84c4c6, type: 3}
-      propertyPath: itemDataBase.Array.data[11].hasActiveAbility
-      value: 1
-      objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -8403,6 +8364,11 @@ MonoBehaviour:
   m_PointlightHDType: 0
   m_SpotLightShape: 0
   m_AreaLightShape: 0
+--- !u!1 &707176708 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 830966067456752674, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+  m_PrefabInstance: {fileID: 580616133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &720337785
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15490,6 +15456,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1477953326}
   m_CullTransparentMesh: 1
+--- !u!1 &1478793663 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4557944525660455349, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+  m_PrefabInstance: {fileID: 580616133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1493809151
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -17699,6 +17670,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1734883598}
   m_CullTransparentMesh: 1
+--- !u!1 &1749777012 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8518653405283671155, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+  m_PrefabInstance: {fileID: 580616133}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1772852514
 GameObject:
   m_ObjectHideFlags: 0

@@ -521,7 +521,10 @@ MonoBehaviour:
   cactusTrap: {fileID: 0}
   immortal: 0
   canFloat: 1
-  playerAvatar: {fileID: 0}
+  rotateAmount: 15
+  time: 0.1
+  ease: 31
+  playerAvatar: {fileID: 6141808080627785606}
   baseAnimator: {fileID: 0}
   nubsAnimator: {fileID: 0}
   nubsOB: {fileID: 0}
@@ -548,6 +551,10 @@ MonoBehaviour:
   itemsAnimRightSide: []
   itemsAnimLeftSide: []
   itemsAnimBack: []
+  frontHead: {fileID: 4557944525660455349}
+  backHead: {fileID: 8518653405283671155}
+  sideRHead: {fileID: 830966067456752674}
+  sideLHead: {fileID: 6962014344116802725}
   legsAnimators: []
   deathExplosionPS: {fileID: 1352871868970943719}
   frontPivot: {fileID: 2959915491294817962}
@@ -574,7 +581,7 @@ MonoBehaviour:
   meleeFirerate: 1
   projectileFirerate: 0
   projectile: 0
-  projectileSpeed: 1000
+  projectileSpeed: 500
   projectileKnockback: 5
   projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
   initalSpeedBoost: 3
@@ -600,8 +607,8 @@ MonoBehaviour:
     longRange_range: 0
     melee_range: 0
     projectile: 1
-    projectileSpeed: 300
-    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    projectileSpeed: 100
+    projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
@@ -645,6 +652,7 @@ MonoBehaviour:
   firingPoint: {fileID: 3878720163899182627}
   directional: {fileID: 8976957729933396760}
   target: {x: 0, y: 0, z: 0}
+  spitParticleSystem: {fileID: 6247660118960248555}
   knockbackAmount: 1
   knockbackDuration: 0.5
   enableMovement: 1
@@ -1637,6 +1645,11 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2694244907918319927, guid: d988cd76eba27ed4cb8baf71a4f32a8d, type: 3}
   m_PrefabInstance: {fileID: 1565484192636845590}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &6962014344116802725 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8441923546159655603, guid: d988cd76eba27ed4cb8baf71a4f32a8d, type: 3}
+  m_PrefabInstance: {fileID: 1565484192636845590}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &7563649790187722745 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9029379690829408751, guid: d988cd76eba27ed4cb8baf71a4f32a8d, type: 3}
@@ -2066,6 +2079,11 @@ PrefabInstance:
 --- !u!4 &4365697327280650606 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 868107577209183555, guid: cb015b8c9c907f1419da41920a874fb4, type: 3}
+  m_PrefabInstance: {fileID: 3502166271868249133}
+  m_PrefabAsset: {fileID: 0}
+--- !u!198 &6247660118960248555 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 7362844901715718854, guid: cb015b8c9c907f1419da41920a874fb4, type: 3}
   m_PrefabInstance: {fileID: 3502166271868249133}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &3508023145949175672
@@ -2879,6 +2897,11 @@ MonoBehaviour:
 --- !u!4 &7689953329212753038 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6316724384260174960, guid: e942528d8c973704d984edcf2b31082e, type: 3}
+  m_PrefabInstance: {fileID: 4400492458017763582}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &8518653405283671155 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5416113670720973965, guid: e942528d8c973704d984edcf2b31082e, type: 3}
   m_PrefabInstance: {fileID: 4400492458017763582}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &4411552493864474971
@@ -4165,6 +4188,10 @@ PrefabInstance:
       value: Particle_System_Missy_Death
       objectReference: {fileID: 0}
     - target: {fileID: 1139603478359134849, guid: bc5ad8f385085b24db5eaaaf18ee4628, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 1139603478359134849, guid: bc5ad8f385085b24db5eaaaf18ee4628, type: 3}
       propertyPath: InitialModule.startColor.minMaxState
       value: 1
       objectReference: {fileID: 0}
@@ -4249,6 +4276,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 2100000, guid: cd4702625faf29c40af25d614bead1b7, type: 2}
     - target: {fileID: 3342813733291026552, guid: bc5ad8f385085b24db5eaaaf18ee4628, type: 3}
+      propertyPath: playOnAwake
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3342813733291026552, guid: bc5ad8f385085b24db5eaaaf18ee4628, type: 3}
       propertyPath: InitialModule.startColor.minMaxState
       value: 1
       objectReference: {fileID: 0}
@@ -4278,6 +4309,10 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 9edd18f63d28c6146b9293026624b915, type: 2}
     - target: {fileID: 6893047025232593577, guid: bc5ad8f385085b24db5eaaaf18ee4628, type: 3}
       propertyPath: looping
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6893047025232593577, guid: bc5ad8f385085b24db5eaaaf18ee4628, type: 3}
+      propertyPath: playOnAwake
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 6893047025232593577, guid: bc5ad8f385085b24db5eaaaf18ee4628, type: 3}
@@ -5011,6 +5046,11 @@ Transform:
 --- !u!4 &4352235059911874919 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 6579974362463713794, guid: 915ef13a14e001142886958bd90564e6, type: 3}
+  m_PrefabInstance: {fileID: 7437410459325555557}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &4557944525660455349 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6374826640860668624, guid: 915ef13a14e001142886958bd90564e6, type: 3}
   m_PrefabInstance: {fileID: 7437410459325555557}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &7119577130460466633 stripped
@@ -5875,6 +5915,11 @@ PrefabInstance:
 --- !u!4 &279609644713836414 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 9029379690829408751, guid: d988cd76eba27ed4cb8baf71a4f32a8d, type: 3}
+  m_PrefabInstance: {fileID: 9128677150804907665}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &830966067456752674 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8441923546159655603, guid: d988cd76eba27ed4cb8baf71a4f32a8d, type: 3}
   m_PrefabInstance: {fileID: 9128677150804907665}
   m_PrefabAsset: {fileID: 0}
 --- !u!4 &1866767790486816381 stripped

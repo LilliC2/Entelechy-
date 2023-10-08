@@ -11,6 +11,9 @@ public class PlayerController : Singleton<PlayerController>
     [Header("God Cheats")]
     public bool immortal;
     public bool canFloat;
+    public float rotateAmount;
+    public float time;
+    public Ease ease;
 
     #region Animation Variables
     [Header("Animation")]
@@ -41,6 +44,15 @@ public class PlayerController : Singleton<PlayerController>
     public List<Animator> itemsAnimLeftSide;
     public List<Animator> itemsAnimBack;
 
+    GameObject currentHead;
+    [SerializeField]
+    GameObject frontHead;    
+    [SerializeField]
+    GameObject backHead;    
+    [SerializeField]
+    GameObject sideRHead;
+    [SerializeField]
+    GameObject sideLHead;
 
     public List<Animator> legsAnimators;
 
@@ -146,14 +158,15 @@ public class PlayerController : Singleton<PlayerController>
         missyLeftSideAnim = missyLeftSide.GetComponent<Animator>();
         missyRightSideAnim = missyRightSide.GetComponent<Animator>();
 
+        currentHead = frontHead;
     }
 
     void Update()
     {
         //for testing
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-
+            HeadBobble();
         }
 
 
@@ -306,6 +319,10 @@ public class PlayerController : Singleton<PlayerController>
                 //change for cardinal direction
                 if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
                 {
+
+                    currentHead = backHead;
+
+
                     StopAllAnimations();
 
                     if (lastDir == missyLeftSide)
@@ -322,7 +339,6 @@ public class PlayerController : Singleton<PlayerController>
                         missyForward.SetActive(false);
                         missyLeftSide.SetActive(false);
                         missyRightSide.SetActive(false);
-
 
                     }
 
@@ -348,6 +364,9 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.A)) //FACE LEFT
                 {
+                    currentHead = sideLHead;
+
+
                     StopAllAnimations();
 
                     _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
@@ -389,6 +408,9 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.S)) //FACE FORWARD
                 {
+                    currentHead = frontHead;
+
+
                     StopAllAnimations();
                     //print("Just pressed S. lastDir was " + lastDir.name);
                     if (lastDir == missyLeftSide)
@@ -425,6 +447,9 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.D)) //FACE RIGHT
                 {
+                    currentHead = sideRHead;
+
+
                     StopAllAnimations();
                     _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
 
@@ -634,6 +659,7 @@ public class PlayerController : Singleton<PlayerController>
                 
         }
 
+
         lastPos = transform.position;
 
         //change melee
@@ -739,7 +765,6 @@ public class PlayerController : Singleton<PlayerController>
         return speedTween;
     }
    
-
     void UpdateMelee()
     {
         switch (meleeHitBox)
@@ -880,6 +905,13 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
+    void HeadBobble()
+    {
+        currentHead.transform.DOLocalRotate(new Vector3(0f, 0f, -rotateAmount),time).SetEase(ease);
+        ExecuteAfterSeconds(time, () => currentHead.transform.DOLocalRotate(new Vector3(0f, 0f, rotateAmount), time).SetEase(ease));
+        ExecuteAfterSeconds(time*2, () => currentHead.transform.DOLocalRotate(new Vector3(0f, 0f, 0), time).SetEase(ease));
+
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -905,6 +937,7 @@ public class PlayerController : Singleton<PlayerController>
     {
         if(!immortal)
         {
+            
             print("player has been hit");
             health -= _dmg;
             //_PE.ChromaticABFade();
@@ -913,6 +946,7 @@ public class PlayerController : Singleton<PlayerController>
 
             if (health > 0)
             {
+                HeadBobble();
                 _UI.UpdateHealthText(health);
             }
             else
