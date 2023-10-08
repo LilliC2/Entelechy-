@@ -118,6 +118,7 @@ public class UIManager : Singleton<UIManager>
         playerAvatar = GameObject.FindGameObjectWithTag("Player");
 
         hoverItemStatComp1Animator = statComp1.GetComponent<Animator>();
+        hoverItemStatComp2Animator = statComp2.GetComponent<Animator>();
 
         //Pause Related
         pausePanel.SetActive(false);
