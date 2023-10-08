@@ -314,11 +314,18 @@ public class EnemyLongRange : GameBehaviour
             //Spawn bullet and apply force in the direction of the mouse
             //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
             GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
+
+            print("go1");
+
+
             bullet.GetComponent<EnemyProjectile>().dmg = enemyStats.stats.dmg;
+
+            print("go");
+
+
             bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
             print("Firing point is " + firingPoint);
-            print("go");
 
             bullet.GetComponent<ItemLook>().firingPoint = firingPoint;
 
