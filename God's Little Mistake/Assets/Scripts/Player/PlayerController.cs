@@ -103,6 +103,8 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject directional; //is for current melee attack and will probably be removed
     public Vector3 target;
     bool projectileShot;
+    [SerializeField]
+    ParticleSystem spitParticleSystem;
 
     [Header("Knockback")]
     [SerializeField]
@@ -852,13 +854,14 @@ public class PlayerController : Singleton<PlayerController>
             {
 
                 //particle system
-                var particleSystem = GetComponentInChildren<ParticleSystem>();
-                particleSystem.Play();
+                spitParticleSystem.Play();
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
+
+                bullet.GetComponent<ItemLook>().firingPoint = firingPoint;
 
                 knockbackActive = true;
                 knockbackStartTime = Time.time;

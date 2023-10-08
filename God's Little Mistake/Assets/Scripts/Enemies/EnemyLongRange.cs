@@ -307,7 +307,7 @@ public class EnemyLongRange : GameBehaviour
 
     public void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
     {
-
+        print("Fire projectile");
         if (!projectileShot)
         {
             
@@ -316,6 +316,11 @@ public class EnemyLongRange : GameBehaviour
             GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
             bullet.GetComponent<EnemyProjectile>().dmg = enemyStats.stats.dmg;
             bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
+
+            print("Firing point is " + firingPoint);
+            print("go");
+
+            bullet.GetComponent<ItemLook>().firingPoint = firingPoint;
 
 
             Mathf.Clamp(bullet.transform.position.y, 0, 0);
