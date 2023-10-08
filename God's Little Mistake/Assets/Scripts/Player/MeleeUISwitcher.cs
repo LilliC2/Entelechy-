@@ -21,6 +21,12 @@ public class MeleeUISwitcher : GameBehaviour
             case 8: //HUMAN FIST
                 TurnOffOtherUI(meleeUI[2]);
                 break;
+            case 14: //ANTLER
+                TurnOffOtherUI(meleeUI[3]);
+                break;
+            case 13: //BEAK
+                TurnOffOtherUI(meleeUI[4]);
+                break;
 
         }
 

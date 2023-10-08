@@ -544,26 +544,27 @@ public class PlayerController : Singleton<PlayerController>
 
                                     }
                                 }
-                                else //MELEE ATTACKS-------------------------------------------------------------------------------------------------
+                                
+
+                            }
+                            else //MELEE ATTACKS-------------------------------------------------------------------------------------------------
+                            {
+                                print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
+
+                                //update melee attack pattern
+                                if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
+                                else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
+
+
+                                MeleeAttack(meleeFirerate, i);
+
+                                //MELEE ATTACK
+                                if (meleeUI != null)
                                 {
-                                    print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
+                                    print("MELEE ATTACK");
+                                    meleeUI.gameObject.SetActive(true);
 
-                                    //update melee attack pattern
-                                    if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
-                                    else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
-
-
-                                    MeleeAttack(meleeFirerate, i);
-
-                                    //MELEE ATTACK
-                                    if (meleeUI != null)
-                                    {
-                                        print("MELEE ATTACK");
-                                        meleeUI.gameObject.SetActive(true);
-
-                                    }
                                 }
-
                             }
                         }
                     }
@@ -791,6 +792,8 @@ public class PlayerController : Singleton<PlayerController>
             item.active = false;
         }
 
+        print(_inventorySlot);
+
         //check if item is primary
         if (playerInventory[_inventorySlot].itemType == Item.ItemType.Primary)
         {
@@ -825,12 +828,15 @@ public class PlayerController : Singleton<PlayerController>
                 if(meleeUI != null)
                 {
                     meleeAnimationCooldown = true;
-                    //meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                    meleeUI.GetComponent<Animator>().SetTrigger("Attack");
                     print("Attack count");
                     //activate animation
                     print("Anim slot " + _index);
                     itemsAnimForward[_index].SetTrigger("Attack");
-                    itemsAnimBack[_index].SetTrigger("Attack");
+
+                    if(itemsAnimBack[_index]!= null) itemsAnimBack[_index].SetTrigger("Attack");
+
+
                     itemsAnimLeftSide[_index].SetTrigger("Attack");
                     itemsAnimRightSide[_index].SetTrigger("Attack");
                     ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
