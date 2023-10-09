@@ -28,7 +28,6 @@ public class ItemLook : GameBehaviour
 
             //print("Angle from image " + Mathf.Atan2(y2-y1,x2-x1));
 
-            print(firingPoint);
 
             if (firingPoint.transform.eulerAngles.y > 0 && firingPoint.transform.eulerAngles.y < 180)
             {

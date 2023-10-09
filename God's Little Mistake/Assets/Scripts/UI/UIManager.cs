@@ -684,8 +684,7 @@ public class UIManager : Singleton<UIManager>
 
         foreach (var item in itemMatchInPlayerInven)
         {
-            print("Printing Item list: ");
-            print(item.itemName);
+
         }
         if (itemMatchInPlayerInven.Count == 0) print("No Matches found");
 
