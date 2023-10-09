@@ -6,55 +6,72 @@ public class PauseSlotStats : GameBehaviour
 {
     public int slotNumber;
 
-    public string itemName;
-    public enum Category { Eyes, Mouth, Horns, Slappies, Punchies, Launchers, Legs, Crawlies, None }
-    public Category category;
-    public enum Segment { Head, Torso, Legs }
-    public Segment segment;
-    public enum ItemType { Primary, Secondary, Passive, Symbiote }
-    public ItemType itemType;
+    public Item itemInfo;
 
-    public enum AttackType { Cone, Straight }
-    public AttackType attackType;
+    public UnityEngine.UI.Image itemSprite;
 
-    public float currencyValue;
+    //public string itemName;
+    //public enum Category { Eyes, Mouth, Horns, Slappies, Punchies, Launchers, Legs, Crawlies, None }
+    //public Category category;
+    //public enum Segment { Head, Torso, Legs }
+    //public Segment segment;
+    //public enum ItemType { Primary, Secondary, Passive, Symbiote }
+    //public ItemType itemType;
 
-    public bool active;
+    //public enum AttackType { Cone, Straight }
+    //public AttackType attackType;
 
-    public float dmg;
-    public float dps;
-    public float fireRate;
+    //public float currencyValue;
 
-    public float critX; //crit dmg multipler
-    public float critChance;
-    public float range;
+    //public bool active;
 
-    public bool projectile;
-    public float projectileSpeed;
-    public GameObject projectilePF;
+    //public float dmg;
+    //public float dps;
+    //public float fireRate;
 
-    public bool modifier;
-    public float modifierID;
+    //public float critX; //crit dmg multipler
+    //public float critChance;
+    //public float range;
 
-    public Sprite icon;
-    public GameObject avtarPrefab;
-    public GameObject avtarPrefabLeft;
-    public GameObject avtarPrefabRight;
-    public GameObject avtarPrefabBack;
+    //public bool projectile;
+    //public float projectileSpeed;
+    //public GameObject projectilePF;
+
+    //public bool modifier;
+    //public float modifierID;
+
+    //public Sprite icon;
+    //public GameObject avtarPrefab;
+    //public GameObject avtarPrefabLeft;
+    //public GameObject avtarPrefabRight;
+    //public GameObject avtarPrefabBack;
 
     // Start is called before the first frame update
     void Start()
     {
-        MatchPlayerInventory();
+        MatchPlayerInventory(slotNumber);
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        MatchPlayerInventory(slotNumber);
+        itemSprite.sprite = itemInfo.pauseIcon;
     }
 
-    public void MatchPlayerInventory()
+    public void OnMouseOver()
+    {
+        _PF.UpdateStats(itemInfo);
+        print("Slot" + slotNumber);
+    }
+
+    public void UpdateStats()
+    {
+        _PF.UpdateStats(itemInfo);
+
+    }
+
+    public void MatchPlayerInventory(int i)
     {
         //if (_PC.playerInventory[slotNumber] !=null)
         //{
@@ -67,6 +84,36 @@ public class PauseSlotStats : GameBehaviour
         //    projectileSpeed = _PC.playerInventory[slotNumber].projectileSpeed;
         //    icon = _PC.playerInventory[slotNumber].icon;
         //}
+
+        //itemInfo == _PC.playerInventory[i];
+
+        Item inslot = new();
+
+        foreach (var item in _PC.playerInventory)
+        {
+            if(item.inSlot == i)
+            {
+                itemInfo = item;
+            }
+        }
+
+        //dmg = itemInfo.dmg;
+        //critChance = itemInfo.critChance;
+        //critX = itemInfo.critX;
+        //fireRate = itemInfo.fireRate;
+        //itemName = itemInfo.itemName;
+        //icon = itemInfo.icon;
+
+
+        //foreach (var item in _PC.playerInventory)
+        //{
+        //    if (item.inSlot == 3) itemSlot3 = item;
+        //    if (item.inSlot == 4) itemSlot4 = item;
+        //}
+
+
+
+
 
 
 

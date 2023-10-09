@@ -2,42 +2,56 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UI;
 using UnityEngine.UIElements;
 
-public class PauseFunctionality : GameBehaviour
+public class PauseFunctionality : Singleton<PauseFunctionality>
 {
     [Header("PlayerInventory")] //i dont know if this is needed
-    public int slotNumber1;
-    public int slotNumber2;
-    public int slotNumber3;
-    public int slotNumber4;
-    public int slotNumber5;
-    public int slotNumber6;
+    public GameObject slotNumber1;
+    public GameObject slotNumber2;
+    public UnityEngine.UI.Image slotNumber3;
+    public GameObject slotNumber4;
+    public GameObject slotNumber5;
+    public GameObject slotNumber6;
 
     [Header("TopStats")]
-    public Sprite itemIcon;
-    public Sprite typeIcon;
-    public Sprite effectIcon;
+    public UnityEngine.UI.Image typeIcon;
+    public UnityEngine.UI.Image itemIcon;
+    public UnityEngine.UI.Image effectIcon;
     public TMP_Text itemName;
+
 
     [Header("CoreStats")]
     public TMP_Text itemDamage;
     public TMP_Text itemCritMultiplier;
     public TMP_Text itemCritChance;
     public TMP_Text itemFireRate;
-    public Sprite attackPill;
-    public Sprite attackIcon;
+    public UnityEngine.UI.Image attackPill;
+    public UnityEngine.UI.Image attackIcon;
     public TMP_Text attackText;
-    public Sprite rangePill;
-    public Sprite rangeIcon;
-    public TMP_Text rangeText;
+    public UnityEngine.UI.Image distancePill;
+    public UnityEngine.UI.Image distanceIcon;
+    public TMP_Text distanceText;
 
     [Header("Abilities")]
     public TMP_Text abilityName;
-    public string abilityDescription = "";
+    public TMP_Text abilityDescription;
 
     [Header("Icons")]
+    public Sprite meleeIcon;
+    public Sprite rangeIcon;
+    public Sprite typeCone;
+    public Sprite typeLine;
+    public Sprite typeCircle;
+    public Sprite typeRapid;
+    public Sprite typeLob;
+    public Sprite typeLaser;
+    public Sprite typeCannon;
+
+
+
+
+
     public List<Sprite> itemTypeIcons;
     public List<Sprite> itemEffectIcons;
     public List<Sprite> itemAttackEffects;
@@ -68,22 +82,54 @@ public class PauseFunctionality : GameBehaviour
         //_PC.playerInventory.Clear();
     }
 
-    public void UpdateStats(PauseSlotStats _hoverItem)
+
+    public void UpdateStats(Item _hoverItem)
     {
         itemName.text = _hoverItem.itemName;
         itemDamage.text = _hoverItem.dmg.ToString();
         itemCritMultiplier.text = _hoverItem.critX.ToString();
         itemCritChance.text = _hoverItem.critChance.ToString();
         itemFireRate.text = _hoverItem.fireRate.ToString();
-        itemIcon = _hoverItem.icon;
+        itemIcon.sprite = _hoverItem.icon;
+
+        slotNumber1 = _hoverItem.avatarPrefabFrontLeft;
+        slotNumber2 = _hoverItem.avatarPrefabFrontLeft;
+        slotNumber3.sprite = _hoverItem.pauseIcon;
+        slotNumber4 = _hoverItem.avatarPrefabFrontLeft;
+        slotNumber5 = _hoverItem.avatarPrefabFrontLeft;
+        slotNumber6 = _hoverItem.avatarPrefabFrontLeft;
+
+        if(_hoverItem.segment != Item.Segment.Legs)
+        {
+
+            attackPill.gameObject.SetActive(true);
+            distancePill.gameObject.SetActive(true);
+
+            
 
 
-        //var matchItem = SearchForItemMatch(_hoverItem);
+            if (_hoverItem.projectile == true)
+            {
+                attackIcon.sprite = rangeIcon;
+                attackPill.color = Color.blue;
+                distanceText.text = _hoverItem.longRange_range.ToString();
+            }
+            else
+            {
+                attackIcon.sprite = meleeIcon;
+                attackPill.color = Color.red;
+                distanceText.text = _hoverItem.melee_range.ToString();
 
-        //if (matchItem != null)
-        //    print(matchItem[0]);
-        //else print("no match");
+            }
+        }
+        else
+        {
+            attackPill.gameObject.SetActive(false);
+            distancePill.gameObject.SetActive(false);
+        }
     }
+        
+        
 
     public void FixedUpdate()
     {

@@ -49,6 +49,7 @@ MonoBehaviour:
   - itemName: Tentacle Mouth
     ID: 0
     lvl: 0
+    inSlot: -1
     category: 8
     segment: 0
     meleeAttackType: 0
@@ -58,17 +59,20 @@ MonoBehaviour:
     active: 0
     dmg: 5
     dps: 5
-    fireRate: 0.3
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 0
-    range: 5
+    longRange_range: 0
+    melee_range: 0
     projectile: 1
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 0.3
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 024fc9c35ba18ca428570b98b46bf663, type: 3}
+    pauseIcon: {fileID: 21300000, guid: d1fecb320ab3d5343bc8d42582c8eb0e, type: 3}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -78,6 +82,7 @@ MonoBehaviour:
   - itemName: Crab Slash
     ID: 1
     lvl: 0
+    inSlot: -1
     category: 8
     segment: 1
     meleeAttackType: 0
@@ -87,17 +92,20 @@ MonoBehaviour:
     active: 0
     dmg: 5
     dps: 5
-    fireRate: 0.3
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 0
-    range: 1
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 0.3
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7cc89a56291aab243b1ad54b3d060bd2, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -107,6 +115,7 @@ MonoBehaviour:
   - itemName: Crab Legs
     ID: 2
     lvl: 0
+    inSlot: -1
     category: 7
     segment: 2
     meleeAttackType: 0
@@ -116,17 +125,20 @@ MonoBehaviour:
     active: 0
     dmg: 0
     dps: 0
-    fireRate: 0
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 0
-    range: 0
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: ea2196df04e795d42a8921e12925c8da, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 1560298325294456665, guid: bca41500be45bd94d99af1f2a7bf30ac, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 2277080261972202219, guid: d1bfde49954b61f48817ca1ab3aa570d, type: 3}
@@ -136,6 +148,7 @@ MonoBehaviour:
   - itemName: Ram Horn
     ID: 3
     lvl: 0
+    inSlot: -1
     category: 2
     segment: 0
     meleeAttackType: 0
@@ -145,17 +158,20 @@ MonoBehaviour:
     active: 0
     dmg: 0
     dps: 0
-    fireRate: 0
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 0
-    range: 0
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 9ab6ba619de7e6943afdbb704159502d, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 23005345891561580, guid: f3ada9b1b4ca379448bc2aff2ecddf8a, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 9109683554602771918, guid: 4b5a4333c9f04a84189171d026bdb60a, type: 3}
@@ -165,6 +181,7 @@ MonoBehaviour:
   - itemName: Sabertooth Mouth
     ID: 4
     lvl: 0
+    inSlot: -1
     category: 1
     segment: 0
     meleeAttackType: 0
@@ -174,17 +191,20 @@ MonoBehaviour:
     active: 0
     dmg: 0
     dps: 0
-    fireRate: 0
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 2
-    range: 0
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 3225624940023983247, guid: 2750fd8978d7615429bfc25a67e2af38, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 365269094101784285, guid: 975dc6895c548f84d91060d45d353b4b, type: 3}
@@ -194,6 +214,7 @@ MonoBehaviour:
   - itemName: Slug Eye
     ID: 5
     lvl: 0
+    inSlot: -1
     category: 0
     segment: 0
     meleeAttackType: 0
@@ -203,17 +224,20 @@ MonoBehaviour:
     active: 0
     dmg: 25
     dps: 0
-    fireRate: 0
+    longRangeSpeed: 0
     meleeSpeed: 10
     critX: 1.2
     critChance: 5
-    range: 0.3
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 39a38614989899547bb7401eb9884ec2, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 2471107043198914699, guid: 6f20769b5548f574486999509cfc286f, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 8630172562931530007, guid: c292bc9ab191c3244950a1a885a6f9ed, type: 3}
@@ -223,6 +247,7 @@ MonoBehaviour:
   - itemName: Tripod
     ID: 6
     lvl: 0
+    inSlot: -1
     category: 6
     segment: 2
     meleeAttackType: 2
@@ -232,17 +257,20 @@ MonoBehaviour:
     active: 0
     dmg: 0
     dps: 0
-    fireRate: 0
+    longRangeSpeed: 0
     meleeSpeed: 10
     critX: 0
     critChance: 0
-    range: 5
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 00a1cca442778f14b802193952c053d9, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 273599904979284594, guid: 77403b443ab381040a443808ffe02c80, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 3239956158546672173, guid: 66ab223e6fcf3df4dbecb9428ab8adee, type: 3}
@@ -252,6 +280,7 @@ MonoBehaviour:
   - itemName: Wolf Arm
     ID: 7
     lvl: 0
+    inSlot: -1
     category: 8
     segment: 1
     meleeAttackType: 0
@@ -261,17 +290,20 @@ MonoBehaviour:
     active: 0
     dmg: 0
     dps: 0
-    fireRate: 0
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 2
-    range: 0
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 3510ce532c065904ea34910644fd2f93, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 2385646219633792786, guid: 1bbbaf6896e6bbd4793ae93d524f0998, type: 3}
     avatarPrefabFrontRight: {fileID: 5671305682962102029, guid: 38ce0a6fbdef9224bb5af9cb19d996ec, type: 3}
     avtarPrefabLeft: {fileID: 4236276474041516820, guid: 8ff1c38c6eb24cb429670db06a7dcf22, type: 3}
@@ -281,6 +313,7 @@ MonoBehaviour:
   - itemName: Human Arm
     ID: 8
     lvl: 0
+    inSlot: -1
     category: 3
     segment: 1
     meleeAttackType: 1
@@ -290,17 +323,20 @@ MonoBehaviour:
     active: 0
     dmg: 37
     dps: 0
-    fireRate: 2
+    longRangeSpeed: 0
     meleeSpeed: 3
     critX: 4
     critChance: 2
-    range: 0
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 2
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: f8fa9027941ad9b4cb1ae4adfa069a16, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 3304035445752850085, guid: 63770e382e26a844c908349217336416, type: 3}
     avatarPrefabFrontRight: {fileID: 3304035445752850085, guid: 47c02e76353aa084d8a0530e9293a0d3, type: 3}
     avtarPrefabLeft: {fileID: 3304035445752850085, guid: ddec4422571eaa54887a087a398f8c19, type: 3}
@@ -310,26 +346,30 @@ MonoBehaviour:
   - itemName: Pea Shooter
     ID: 9
     lvl: 0
+    inSlot: -1
     category: 1
     segment: 0
-    meleeAttackType: 0
+    meleeAttackType: 2
     itemType: 0
     hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 1
     dps: 1
-    fireRate: 1
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 2
-    range: 5
+    longRange_range: 0
+    melee_range: 0
     projectile: 1
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 1
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
+    pauseIcon: {fileID: 21300000, guid: f2a27a98533b6a546ad777ec1e2282c8, type: 3}
     avatarPrefabFrontLeft: {fileID: 6396217571161385355, guid: 746fc3a0e458d11469c34d8f7a4b5a4c, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 1830519018957802660, guid: 8430836fde699bd4ebdf5bc34415ab9b, type: 3}
@@ -339,6 +379,7 @@ MonoBehaviour:
   - itemName: Hover
     ID: 10
     lvl: 0
+    inSlot: -1
     category: 6
     segment: 2
     meleeAttackType: 0
@@ -348,17 +389,20 @@ MonoBehaviour:
     active: 0
     dmg: 1
     dps: 1
-    fireRate: 1
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 2
-    range: 5
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 1
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 26ab52217ea1e774884b944c5c860c4a, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 1515133602579431012, guid: 31f2fd7f23e71ff47bbafb78c1299eda, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 1515133602579431012, guid: 31f2fd7f23e71ff47bbafb78c1299eda, type: 3}
@@ -368,6 +412,7 @@ MonoBehaviour:
   - itemName: Big Eyes
     ID: 11
     lvl: 0
+    inSlot: -1
     category: 0
     segment: 0
     meleeAttackType: 0
@@ -377,17 +422,20 @@ MonoBehaviour:
     active: 0
     dmg: 1
     dps: 1
-    fireRate: 1
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 2
-    range: 5
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 1
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 78213a660ae434649a1cce5a02846b1a, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 9171547814619546566, guid: 359a7eb7927572040891a3a1a96caa7a, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 6521519663572596647, guid: 8f67f27a28ff56c43ac7c34a74e91ab2, type: 3}
@@ -397,6 +445,7 @@ MonoBehaviour:
   - itemName: Nubs
     ID: 12
     lvl: 0
+    inSlot: -1
     category: 6
     segment: 2
     meleeAttackType: 0
@@ -406,17 +455,20 @@ MonoBehaviour:
     active: 0
     dmg: 1
     dps: 1
-    fireRate: 1
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 2
-    range: 5
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 1
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: df94ebc9d2b8ee347b7faf84cafb688e, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 4037416830258721223, guid: f8e5a5357d5205b42977b80ed0a00d59, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 1354293937271909763, guid: 6b218fdb74991b1439d2af3aa983991e, type: 3}
@@ -426,6 +478,7 @@ MonoBehaviour:
   - itemName: Chicken Beak
     ID: 13
     lvl: 0
+    inSlot: -1
     category: 1
     segment: 0
     meleeAttackType: 0
@@ -435,17 +488,20 @@ MonoBehaviour:
     active: 0
     dmg: 1
     dps: 1
-    fireRate: 1
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 2
-    range: 5
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 1
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 9bdc47d447b98b34f862c99f0e6ff591, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 6746399273307538296, guid: e1d04f8ecd7742e40b66da4fd27cca07, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 2944755447898596729, guid: 6d922066a28d80e4cbd9aa6957658322, type: 3}
@@ -455,6 +511,7 @@ MonoBehaviour:
   - itemName: Antler
     ID: 14
     lvl: 0
+    inSlot: -1
     category: 2
     segment: 0
     meleeAttackType: 0
@@ -464,17 +521,20 @@ MonoBehaviour:
     active: 0
     dmg: 1
     dps: 1
-    fireRate: 1
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 2
-    range: 5
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 1
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: f74a6c9f5b34cfb4da8a61b517484a52, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 6587079511304155387, guid: 2c532cd1a2a4da646b07e3230dd76a97, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 3367084592925445924, guid: cd3f147d38bf461478718e741b9114b2, type: 3}
@@ -484,6 +544,7 @@ MonoBehaviour:
   - itemName: Slug Legs
     ID: 15
     lvl: 0
+    inSlot: -1
     category: 6
     segment: 2
     meleeAttackType: 0
@@ -493,17 +554,20 @@ MonoBehaviour:
     active: 0
     dmg: 5
     dps: 0
-    fireRate: 0
+    longRangeSpeed: 0
     meleeSpeed: 10
     critX: 0
     critChance: 0
-    range: 0
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 0
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 4826423727113875564, guid: 300843ea423d54e409e27745a21410a9, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 3992858970678303184, guid: d1eedbd08fd6baf449f5cab2a53d7f95, type: 3}
@@ -513,6 +577,7 @@ MonoBehaviour:
   - itemName: Solar Eyes
     ID: 16
     lvl: 0
+    inSlot: -1
     category: 0
     segment: 0
     meleeAttackType: 0
@@ -522,17 +587,20 @@ MonoBehaviour:
     active: 0
     dmg: 1
     dps: 1
-    fireRate: 1
+    longRangeSpeed: 0
     meleeSpeed: 0
     critX: 0
     critChance: 2
-    range: 5
+    longRange_range: 0
+    melee_range: 0
     projectile: 1
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 1
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 540a9d10750f152449f211058959489b, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 841105728366502030, guid: 86387cc512e80994d9569ca0d6d1812d, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 1169385104542466139, guid: 4939ea701f77a0344b84fe600aa7f40f, type: 3}

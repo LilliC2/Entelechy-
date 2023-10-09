@@ -83,53 +83,7 @@ public class ItemIdentifier : GameBehaviour
     {
         print("ENTER");
 
-        //if(itemInfo.inSlot == 3 || itemInfo.inSlot == 4)
-        //{
-
-        //}
-        ////Stats for item mouse is hovering
-        //_UI.statsPopUpPanel.SetActive(true);
-        //_UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-        //_UI.UpdateItemPopUp(itemInfo);
-        //anim.SetTrigger("Open");
-
-        ////search for matches
-        //var matchItemList = _UI.SearchForItemMatch(itemInfo);
-
-        ////Check if there are any matches
-        //if (matchItemList.Count == 0)
-        //    print(matchItemList);
-        //else print("no match");
-
-        ////If there is only one match
-        //if(matchItemList.Count == 1)
-        //{
-        //    //stats for matched item
-        //    print("ITS A MATCH");
-        //    _UI.statComp1.SetActive(true);
-        //    anim1.SetTrigger("Open");
-        //    _UI.arrowComp.SetActive(true);
-        //    _UI.UpdateItemPopUpComp1(matchItemList[0]);
-        //}
-
-        ////If there is two matches
-        //if (matchItemList.Count == 2)
-        //{
-        //    //stats for matched item 1
-        //    print("ITS A MATCH");
-        //    _UI.statComp1.SetActive(true);
-        //    anim1.SetTrigger("Open");
-        //    _UI.arrowComp.SetActive(true);
-        //    _UI.UpdateItemPopUpComp1(matchItemList[0]);
-
-        //    //add in updating ui here for the second one.
-        //    _UI.statComp2.SetActive(true);
-        //    //anim1.SetTrigger("Open");
-        //    _UI.arrowComp.SetActive(true);
-        //    _UI.UpdateItemPopUpComp2(matchItemList[1]);
-        //}
-
-
+        
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         _UI.UpdateItemPopUp(itemInfo);

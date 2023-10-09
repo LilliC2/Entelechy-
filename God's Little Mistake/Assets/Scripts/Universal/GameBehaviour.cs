@@ -16,6 +16,8 @@ public class GameBehaviour : LC.Behaviour //inherits from
     protected static PlayerEffects _PE { get { return PlayerEffects.INSTANCE; } }
     protected static PlayerItemAttacks _PIA { get { return PlayerItemAttacks.INSTANCE; } }
     protected static HUDManager _HUD { get { return HUDManager.INSTANCE; } }
+    protected static PauseFunctionality _PF { get { return PauseFunctionality.INSTANCE; } }
+
 
    
 
