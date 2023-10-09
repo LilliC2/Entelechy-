@@ -13,9 +13,8 @@ public class Item
     public Category category;
     public enum Segment {Head, Torso, Legs }
     public Segment segment;
-    public enum MeleeAttackType {Cone, Line, None, Circle }
-    public enum RangeAttackType { Rapid, Lob, Laser, Cannon}
-    public MeleeAttackType meleeAttackType;
+    public enum AttackType {Cone, Line, None, Circle, Rapid, Lob, Laser, Cannon }
+    public AttackType meleeAttackType;
     public enum ItemType {Primary, Secondary, Passive, Symbiote }
     public ItemType itemType;
 

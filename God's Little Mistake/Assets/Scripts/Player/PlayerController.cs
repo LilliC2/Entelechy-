@@ -490,8 +490,8 @@ public class PlayerController : Singleton<PlayerController>
                                     print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
 
                                     //update melee attack pattern
-                                    if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
-                                    else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
+                                    if (playerInventory[i].meleeAttackType == Item.AttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
+                                    else if (playerInventory[i].meleeAttackType == Item.AttackType.Line) meleeHitBox = MeleeHitBox.Line;
 
 
                                     MeleeAttack(meleeFirerate, i);
@@ -527,8 +527,8 @@ public class PlayerController : Singleton<PlayerController>
                 //                print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
 
                 //                //update melee attack pattern
-                //                if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
-                //                else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
+                //                if (playerInventory[i].meleeAttackType == Item.AttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
+                //                else if (playerInventory[i].meleeAttackType == Item.AttackType.Line) meleeHitBox = MeleeHitBox.Line;
 
 
                 //                MeleeAttack(meleeFirerate, i);
