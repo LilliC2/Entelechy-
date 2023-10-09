@@ -17,14 +17,16 @@ public class ItemIdentifier : GameBehaviour
 
     public GameObject statPop;
 
-
+    bool itemSpawned;
+    bool itemRemoved;
+    bool itemAdd;
 
     public void Start()
     {
         statPop = GameObject.Find("Stat Popup");
-
+            
         selecting = GetComponent<Selecting>();
-        anim = statPop.GetComponent<Animator>();
+        anim = _UI.statsPopUpPanel.GetComponent<Animator>();
         anim1 = _UI.statComp1.GetComponent<Animator>();
         anim2 = _UI.statComp2.GetComponent<Animator>();
     }
@@ -58,7 +60,6 @@ public class ItemIdentifier : GameBehaviour
         {
             if (Input.GetKey(KeyCode.E))
             {
-                print("press e");
                 //check which segment it is
 
                 //check if item is already there
@@ -66,29 +67,46 @@ public class ItemIdentifier : GameBehaviour
 
                 if (itemInSlot)
                 {
-                    print("therse an item in this slot");
+                    if(!itemRemoved)
+                    {
+                        itemRemoved = true;
 
-                    //destroy old item from player avatar
-                    selecting.RemovePreviousItem();
+                        //destroy old item from player avatar
+                        selecting.RemovePreviousItem();
 
-                    print("after removing");
-
-                    //place old item on ground
-                    GameObject item = Instantiate(Resources.Load("Item") as GameObject, gameObject.transform.position, Quaternion.identity);
-                    _UI.statComp1.SetActive(false);
-                    _UI.statComp2.SetActive(false);
+                    }
 
 
-                    item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
-                    item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+                    if(!itemSpawned)
+                    {
+                        itemSpawned = true;
+                        //place old item on ground
+                        var newSpawnPoint = new Vector3(_PC.transform.position.x +3, _PC.transform.position.y, _PC.transform.position.z);
+
+                        GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
+                        _UI.statComp1.SetActive(false);
+                        _UI.statComp2.SetActive(false);
+
+
+                        item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
+                        item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+                    }
+
                 }
 
-                print("CReate new item");
 
-                //equip new items
-                _UI.CreateItemSelected(itemInfo);
+                if(!itemAdd)
+                {
+                    itemAdd = true;
+                    //_ISitemD.AddItemToInventory(itemInfo);
+                    //equip new items
+                    ExecuteAfterFrames(20, () => _UI.CreateItemSelected(itemInfo));
+                    
+                }
 
-                print("new item added");
+
+
+                ExecuteAfterFrames(25, ()=> Destroy(this.gameObject));
             }
         }
     }

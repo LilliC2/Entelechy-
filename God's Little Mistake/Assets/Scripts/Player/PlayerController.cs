@@ -308,6 +308,7 @@ public class PlayerController : Singleton<PlayerController>
                 {
                     foreach (var item in legsAnimators)
                     {
+                        print(item.name);
                         item.SetBool("Walk", true);
                     }
                 }

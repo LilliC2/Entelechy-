@@ -34,14 +34,34 @@ public class Selecting : GameBehaviour
 
         bool isItemInSlot = false;
 
-        foreach (var item in _PC.playerInventory)
+        if (itemIdentifier.itemInfo.segment != Item.Segment.Torso)
         {
-            if (item.category == category)
+            foreach (var item in _PC.playerInventory)
             {
-                previousItem = item;
-                isItemInSlot = true;
+                if (item.category == category)
+                {
+                    previousItem = item;
+                    isItemInSlot = true;
+                }
+            }
+
+        }
+        else
+        {
+            foreach (var item in _PC.playerInventory)
+            {
+                if (item.inSlot == 3)
+                {
+                    if(item.inSlot == 4)
+                    {
+                        previousItem = item;
+                        isItemInSlot = true;
+                    }
+
+                }
             }
         }
+
 
         return isItemInSlot;
     }
@@ -50,10 +70,14 @@ public class Selecting : GameBehaviour
     {
         //remove from player avatar
 
+
         var toDestroyLeft = _AVTAR.slotsOnPlayerLeft[previousItem.inSlot].transform.GetChild(0);
         var toDestroyBack = _AVTAR.slotsOnPlayerBack[previousItem.inSlot].transform.GetChild(0);
         var toDestroyFront = _AVTAR.slotsOnPlayerFront[previousItem.inSlot].transform.GetChild(0);
         var toDestroyRight = _AVTAR.slotsOnPlayerFront[previousItem.inSlot].transform.GetChild(0);
+
+        //print("Destroying: " + toDestroyLeft + ", " + toDestroyBack + ", " + toDestroyFront + ", " + toDestroyRight);
+
 
         Destroy(toDestroyBack.gameObject);
         Destroy(toDestroyLeft.gameObject);
