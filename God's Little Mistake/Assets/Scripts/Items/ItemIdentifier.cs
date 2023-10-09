@@ -83,7 +83,10 @@ public class ItemIdentifier : GameBehaviour
     {
         print("ENTER");
 
+        if(itemInfo.inSlot == 3 || itemInfo.inSlot == 4)
+        {
 
+        }
         //Stats for item mouse is hovering
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);

@@ -22,15 +22,20 @@ public class Selecting : GameBehaviour
         if(scrollDelta > 0)
         {
             selectedItem = _UI.leftArmItem;
+            //Changes item to left here
         }
         if(scrollDelta < 0)
         {
             selectedItem = _UI.rightArmItem;
+            //Changes item to left here
         }
 
-        if(Input.GetKey(KeyCode.E))
-        {
-            _UI.CreateItemSelected(selectedItem);
-        }
+        //if (Input.GetKey(KeyCode.E))
+        //{
+        //    _UI.CreateItemSelected(selectedItem);
+        //}
+
+
+
     }
 }
