@@ -3,12 +3,13 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
-using UnityEngine.SceneManagement;
 using DG.Tweening;
 
 public class UIManager : Singleton<UIManager>
 {
-    
+    public Item leftArmItem;
+    public Item rightArmItem;
+
     [Header("Player Feedback")]
     public TMP_Text hpText;
     public TMP_Text levelText;
@@ -34,6 +35,11 @@ public class UIManager : Singleton<UIManager>
     public Image invenSlot5;
     public Image invenSlot6;
 
+    [Header("Missy Height")]
+    public GameObject playerAvatar;
+    Vector3 standard = new Vector3(0.239999443f, 0.0800049901f, -0.555116713f);
+    Vector3 tall = new Vector3(-0.0209999997f, -0.136000007f, 0.0540000014f);
+
     [Header("Item Hover Over Panel")]
     public GameObject statsPopUpPanel;
     public TMP_Text popupName;
@@ -41,6 +47,12 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text popupCritX;
     public TMP_Text popupCritChance;
     public TMP_Text popupFirerate;
+    public Image popupIcon;
+
+    [Header("Global Scroll UI")]
+    public RectTransform scrollContent;
+    public float scrollSpeed = 10f;
+
 
     [Header("Inventory Pop up")]
     public GameObject invenSegementPopUpPanel;
@@ -49,21 +61,69 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text invenPopupCritX;
     public TMP_Text invenPopupCritChance;
     public TMP_Text invenPopupFirerate;
+    public GameObject topEye;
+    public GameObject middleEye;
+    public GameObject bottomEye;
+    public GameObject attackPill;
+    public TMP_Text attackPillText;
+    public GameObject attackIcon;
+    public GameObject rangePill;
+    public TMP_Text rangePillText;
+    public GameObject rangeIcon;
+    public GameObject itemIcon;
+    public GameObject typeIcon;
 
-    [Header("Game Over")]
-    public GameObject gameOverMenu;
+    [Header("Inventory Comparison1")]
+    public GameObject statComp1;
+    public GameObject arrowComp;
+    public TMP_Text popupName1;
+    public TMP_Text popupDmg1;
+    public TMP_Text popupCritX1;
+    public TMP_Text popupCritChance1;
+    public TMP_Text popupFirerate1;
+    public Image popupIcon1;
 
-    [Header("Missy Height")]
-    public GameObject playerAvatar;
-    Vector3 standard = new Vector3(0.239999443f, 0.0800049901f, -0.555116713f);
-    Vector3 tall = new Vector3(-0.0209999997f, -0.136000007f, 0.0540000014f);
+    [Header("Animation")]
+    public Animator hoverItemAnimator;
+    public Animator hoverItemStatComp1Animator;
+    public Animator hoverItemStatComp2Animator;
+
+    [Header("Pause")]
+    public GameObject pausePanel;
+    public GameObject pauseFunctionalityPanel;
+    public GameObject optionPanel;
+
+
+    [Header("Inventory Comparison2")]
+    public GameObject statComp2;
+    public TMP_Text popupName2;
+    public TMP_Text popupDmg2;
+    public TMP_Text popupCritX2;
+    public TMP_Text popupCritChance2;
+    public TMP_Text popupFirerate2;
+    public Image popupIcon2;
+
+
+
+
 
     private void Start()
-    {
+    {   
         UpdateInventorySlotImages();
         heldItem = null;
         isHoldingItem = false;
+        statsPopUpPanel.SetActive(false);
+        statComp1.SetActive(false);
+        arrowComp.SetActive(false);
         playerAvatar = GameObject.FindGameObjectWithTag("Player");
+
+        hoverItemStatComp1Animator = statComp1.GetComponent<Animator>();
+        hoverItemStatComp2Animator = statComp2.GetComponent<Animator>();
+
+        //Pause Related
+        pausePanel.SetActive(false);
+        optionPanel.SetActive(false);
+
     }
 
     private void Update()
@@ -74,24 +134,103 @@ public class UIManager : Singleton<UIManager>
             else cursor.sprite = defaultCursor;
         }
 
-        
+        float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
+        if (scrollDelta != 0)
+        {
+            Vector3 newPosition = scrollContent.localPosition + Vector3.up * scrollDelta * scrollSpeed;
+            scrollContent.localPosition = newPosition;
+        }
+
+
     }
+
+    #region Pause
+    public void OnPause()
+    {
+        pausePanel.SetActive(true);
+    }
+
+    public void OnResume()
+    {
+        pausePanel.SetActive(false);
+        optionPanel.SetActive(false);
+    }
+
+    public void OptionsOpen()
+    {
+        optionPanel.SetActive(true);
+        pauseFunctionalityPanel.SetActive(false);
+        //change to options panel here
+    }
+
+    public void OptionsClose()
+    {
+        optionPanel.SetActive(false);
+        pauseFunctionalityPanel.SetActive(true);
+        //change to options panel here
+    }
+
+    public void OnExit()
+    {
+        pausePanel.SetActive(false); //temporary
+        //Turn on death panel
+        //Show score, time, etc.
+    }
+
+    
+
+
+    #endregion
 
     public void UpdateItemPopUp(Item _hoverItem)
     {
         //ADD LATER FORMATTING FOR FLOATS
 
         popupName.text = _hoverItem.itemName;
-        popupDmg.text = "DMG: " + _hoverItem.dmg.ToString();
-        popupCritX.text = "CritX: " + _hoverItem.critX.ToString();
-        popupCritChance.text = "Crit%: " + _hoverItem.critChance.ToString();
-        popupFirerate.text = "Firerate%: " + _hoverItem.longRangeSpeed.ToString();
+        popupDmg.text = _hoverItem.dmg.ToString();
+        popupCritX.text = _hoverItem.critX.ToString();
+        popupCritChance.text = _hoverItem.critChance.ToString();
+        popupFirerate.text = _hoverItem.fireRate.ToString();
+        popupIcon.sprite = _hoverItem.icon;
 
+        print("Update pop up");
+
+        //Search for matches to item mouse is hovering over
         var matchItem = SearchForItemMatch(_hoverItem);
 
-        if (matchItem != null)
-            print(matchItem.itemName);
-        else print("no match");
+        //if (matchItem != null)
+        //    print(matchItem[0]);
+        //else print("no match");
+    }
+
+    //For comparison 1
+    public void UpdateItemPopUpComp1(Item _itemInfo)
+    {
+        //ADD LATER FORMATTING FOR FLOATS
+
+        popupName1.text = _itemInfo.itemName;
+        popupDmg1.text = _itemInfo.dmg.ToString();
+        popupCritX1.text = _itemInfo.critX.ToString();
+        popupCritChance1.text = _itemInfo.critChance.ToString();
+        popupFirerate1.text = _itemInfo.fireRate.ToString();
+        popupIcon1.sprite = _itemInfo.icon;
+
+
+
+    }
+    public void UpdateItemPopUpComp2(Item _itemInfo)
+    {
+        //ADD LATER FORMATTING FOR FLOATS
+
+        popupName2.text = _itemInfo.itemName;
+        popupDmg2.text = _itemInfo.dmg.ToString();
+        popupCritX2.text = _itemInfo.critX.ToString();
+        popupCritChance2.text = _itemInfo.critChance.ToString();
+        popupFirerate2.text = _itemInfo.fireRate.ToString();
+        popupIcon2.sprite = _itemInfo.icon;
+
+
+
     }
 
     public void UpdateHealthText(float _hp)
@@ -128,19 +267,27 @@ public class UIManager : Singleton<UIManager>
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot0.sprite = emptySlotSprite;
+                        _HUD.hasItem1 = false;
                     }
-                    else invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
+                    else
+                    {
+                        invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
+                        _HUD.hasItem1 = true;
+
+                        //pass cooldown here
+                    }
                     break;
 
                 case 1:
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot1.sprite = emptySlotSprite;
+                        _HUD.hasItem2 = false;
                     }
                     else
                     {
                         invenSlot1.sprite = _PC.playerInventory[i].icon; //images for icon
-                        
+                        _HUD.hasItem2 = true;
                     }
                     break;
 
@@ -148,10 +295,12 @@ public class UIManager : Singleton<UIManager>
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot2.sprite = emptySlotSprite;
+                        _HUD.hasItem3 = false;
                     }
                     else
                     {
                         invenSlot2.sprite = _PC.playerInventory[i].icon; //images for icon
+                        _HUD.hasItem3 = true;
                     }
                     break;
 
@@ -159,24 +308,39 @@ public class UIManager : Singleton<UIManager>
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot3.sprite = emptySlotSprite;
+                        _HUD.hasItem4 = false;
                     }
-                    else invenSlot3.sprite = _PC.playerInventory[i].icon; 
+                    else
+                    {
+                        invenSlot3.sprite = _PC.playerInventory[i].icon;
+                        _HUD.hasItem4 = true;
+                    }
                     break;
 
                 case 4:
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot4.sprite = emptySlotSprite;
+                        _HUD.hasItem5 = false;
                     }
-                    else invenSlot4.sprite = _PC.playerInventory[i].icon; 
+                    else
+                    {
+                        invenSlot4.sprite = _PC.playerInventory[i].icon;
+                        _HUD.hasItem5 = true;
+                    }
                     break;
 
                 case 5:
                     if (!(i >= -1 && i < _PC.playerInventory.Count))
                     {
                         invenSlot5.sprite = emptySlotSprite;
+                        _HUD.hasItem6 = false;
                     }
-                    else invenSlot5.sprite = _PC.playerInventory[i].icon; 
+                    else
+                    {
+                        invenSlot5.sprite = _PC.playerInventory[i].icon;
+                        _HUD.hasItem6 = true;
+                    }
                     break;
 
             }
@@ -215,7 +379,7 @@ public class UIManager : Singleton<UIManager>
 
         //Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
         //cursor.sprite = itemSprite;
-        
+
         //statsPopUpPanel.SetActive(false);
         isHoldingItem = true;
 
@@ -280,7 +444,9 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void EquipImage(int _slot)
     {
+        bool flip = false;
 
+        if (_slot == 4) flip = true;
 
         //print("Creating item for slot " + _slot);
 
@@ -293,7 +459,7 @@ public class UIManager : Singleton<UIManager>
             if (item == heldItem) itemExsists = true;
         }
 
-        if(itemExsists == false) _ISitemD.AddItemToInventory(heldItem);
+        if (itemExsists == false) _ISitemD.AddItemToInventory(heldItem);
 
 
 
@@ -315,7 +481,7 @@ public class UIManager : Singleton<UIManager>
                 //BACKL
                 var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
                 _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
-                
+
             }
             if (_slot == 3) // LEFT
             {
@@ -328,7 +494,7 @@ public class UIManager : Singleton<UIManager>
                 _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
 
                 //BACKK
-                
+
             }
 
         }
@@ -337,7 +503,7 @@ public class UIManager : Singleton<UIManager>
             //default left
             var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
             _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
-    
+
             var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
             _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
         }
@@ -454,39 +620,104 @@ public class UIManager : Singleton<UIManager>
 
     #endregion
 
-    #region GameOver
-    
 
-    public void Respawn()
+    public List<Item> SearchForItemMatch(Item _hoverItem)
     {
-        gameOverMenu.SetActive(false);
-        _GM.Restart();
-    }
-    public void ReturnToMainMenu()
-    {
-        gameOverMenu.SetActive(false);
-        Time.timeScale = 1f;
-        SceneManager.LoadScene("MainMenu");
-    }
-    public void QuitGame()
-    {
-        Debug.Log("Quit!");
-        Application.Quit();
-    }
+        List<Item> itemMatchInPlayerInven = new();
 
-    #endregion
-    Item SearchForItemMatch(Item _hoverItem)
-    {
-        Item itemMatchInPlayerInven = null;
+        print("Hover item is " + _hoverItem.itemName);
 
         foreach (var item in _PC.playerInventory)
         {
             if(item.segment == _hoverItem.segment)
             {
-                itemMatchInPlayerInven = item;
+                itemMatchInPlayerInven.Add(item);
             }
+
+            //var icon = item.icon;
+
         }
+
+        foreach (var item in itemMatchInPlayerInven)
+        {
+            print("Printing Item list: ");
+            print(item.itemName);
+        }
+        if (itemMatchInPlayerInven.Count == 0) print("No Matches found");
+
 
         return itemMatchInPlayerInven;
     }
+
+    #region HUD
+
+    
+
+    #endregion
+
+
+    #region Indicators
+
+    //public void TopSegmentIndicator()
+    //{
+    //    topEye.SetActive(true);
+    //    topEye.GetComponent<SpriteRenderer>().color = Color.yellow;
+    //    middleEye.SetActive(false);
+    //    bottomEye.SetActive(false);
+    //}
+
+    //public void MiddleSegmentIndicator()
+    //{
+    //    middleEye.SetActive(true);
+    //    middleEye.GetComponent<SpriteRenderer>().color = Color.red;
+    //    topEye.SetActive(false);
+    //    bottomEye.SetActive(false);
+
+    //}
+
+    //public void BottomSegmentIndicator()
+    //{
+    //    bottomEye.SetActive(true);
+    //    bottomEye.GetComponent<SpriteRenderer>().color = Color.red;
+    //    topEye.SetActive(false);
+    //    middleEye.SetActive(false);
+    //}
+
+    //public void AttackPillChange(int num)
+    //{
+    //    attackPill.SetActive(true);
+    //    if (num == 1)
+    //    {
+    //        attackPillText.text = "Melee";
+    //        //attackIcon.SetActive(true); change the icon
+    //        attackPill.GetComponent<SpriteRenderer>().color = Color.red;
+    //    }
+    //    if (num == 2) 
+    //    {
+    //        attackPillText.text = "Range";
+    //        //attackIcon.SetActive(true); change the icon
+    //        attackPill.GetComponent<SpriteRenderer>().color = Color.red;
+    //    }
+    //}
+
+    //public void RangePillChange(int num)
+    //{
+    //    rangePill.SetActive(true);
+    //    attackPillText.text = num.ToString();
+    //}
+
+    //public void ChangeItemIcon()
+    //{
+    //    //Chnage the item icons
+    //}
+
+    //public void ChangeItemType()
+    //{
+    //    //Chnage the type icons
+    //}
+
+    #endregion
+
+
+
 }

@@ -36,6 +36,8 @@ public class Item
     public bool projectile;
     public float projectileSpeed;
     public GameObject projectilePF;
+    public float fireRate;
+
 
     public bool modifier;
     public float modifierID;
@@ -53,7 +55,7 @@ public class Item
 
     public Item()
     {
-
+        
     }
 
 }
