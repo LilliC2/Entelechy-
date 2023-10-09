@@ -2,19 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
-using static UnityEditor.Progress;
 
 public class ItemIdentifier : GameBehaviour
 {
     bool inRange;
     public Item itemInfo;
 
-    Selecting selecting;
-
-    [SerializeField]
-    GameObject itemGO;
-
-    bool isHovering;
 
     [Header("Animation")]
     public Animator anim;
@@ -32,7 +25,6 @@ public class ItemIdentifier : GameBehaviour
         statComp1 = GameObject.Find("Stat Comp 1");
         statComp2 = GameObject.Find("Stat Comp 2");
 
-        selecting = GetComponent<Selecting>();
         anim = statPop.GetComponent<Animator>();
         anim1 = statComp1.GetComponent<Animator>();
         anim2 = statComp2.GetComponent<Animator>();
@@ -40,51 +32,20 @@ public class ItemIdentifier : GameBehaviour
 
     private void Update()
     {
-        if(isHovering)
-        {
-            if (itemInfo.segment == Item.Segment.Torso)
-            {
-                float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
-
-                if (scrollDelta > 0)
-                {
-                    _UI.leftArmItem = itemInfo;
-                    //Changes item to left here
-                }
-                if (scrollDelta < 0)
-                {
-                    _UI.rightArmItem = itemInfo;
-                    //Changes item to left here
-                }
-            }
-        }
-
-        
         if(inRange)
         {
-            if (Input.GetKey(KeyCode.E))
+            if (Input.GetKeyDown(KeyCode.E))
             {
-                //check which segment it is
-
-                //check if item is already there
-                bool itemInSlot = selecting.CheckIfItemIsInSlot();
-
-                if (itemInSlot)
+                
+                //pick up item
+                if (_PC.playerInventory.Count < 5)//invenotry cap number here
                 {
+                    print("Destroy obj");
+                    Destroy(gameObject);
+                    _UI.CreateItemSelected(itemInfo);
 
-                    //destroy old item from player avatar
-                    selecting.RemovePreviousItem();
+                }  
 
-                    //place old item on ground
-                    GameObject item = Instantiate(itemGO, gameObject.transform.position, Quaternion.identity);
-
-                    item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
-                    item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
-                }
-
-
-                //equip new items
-                _UI.CreateItemSelected(itemInfo);
             }
         }
     }
@@ -122,53 +83,96 @@ public class ItemIdentifier : GameBehaviour
     {
         print("ENTER");
 
-        isHovering = true;
+        //if(itemInfo.inSlot == 3 || itemInfo.inSlot == 4)
+        //{
 
-        if(itemInfo.inSlot == 3 || itemInfo.inSlot == 4)
-        {
+        //}
+        ////Stats for item mouse is hovering
+        //_UI.statsPopUpPanel.SetActive(true);
+        //_UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        //_UI.UpdateItemPopUp(itemInfo);
+        //anim.SetTrigger("Open");
 
-        }
-        //Stats for item mouse is hovering
+        ////search for matches
+        //var matchItemList = _UI.SearchForItemMatch(itemInfo);
+
+        ////Check if there are any matches
+        //if (matchItemList.Count == 0)
+        //    print(matchItemList);
+        //else print("no match");
+
+        ////If there is only one match
+        //if(matchItemList.Count == 1)
+        //{
+        //    //stats for matched item
+        //    print("ITS A MATCH");
+        //    _UI.statComp1.SetActive(true);
+        //    anim1.SetTrigger("Open");
+        //    _UI.arrowComp.SetActive(true);
+        //    _UI.UpdateItemPopUpComp1(matchItemList[0]);
+        //}
+
+        ////If there is two matches
+        //if (matchItemList.Count == 2)
+        //{
+        //    //stats for matched item 1
+        //    print("ITS A MATCH");
+        //    _UI.statComp1.SetActive(true);
+        //    anim1.SetTrigger("Open");
+        //    _UI.arrowComp.SetActive(true);
+        //    _UI.UpdateItemPopUpComp1(matchItemList[0]);
+
+        //    //add in updating ui here for the second one.
+        //    _UI.statComp2.SetActive(true);
+        //    //anim1.SetTrigger("Open");
+        //    _UI.arrowComp.SetActive(true);
+        //    _UI.UpdateItemPopUpComp2(matchItemList[1]);
+        //}
+
 
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         _UI.UpdateItemPopUp(itemInfo);
         anim.SetTrigger("Open");
+        _UI.arrowComp.SetActive(true);
 
-        //search for matches
-        var matchItemList = _UI.SearchForItemMatch(itemInfo);
+        Item itemSlot3 = new();
+        Item itemSlot4 = new();
 
-        //Check if there are any matches
-        if (matchItemList.Count == 0)
-            print(matchItemList);
-        else print("no match");
-
-        //If there is only one match
-        if(matchItemList.Count == 1)
+        foreach (var item in _PC.playerInventory)
         {
-            //stats for matched item
-            print("ITS A MATCH");
-            _UI.statComp1.SetActive(true);
-            anim1.SetTrigger("Open");
-            _UI.arrowComp.SetActive(true);
-            _UI.UpdateItemPopUpComp1(matchItemList[0]);
+            if (item.inSlot == 3) itemSlot3 = item;
+            if (item.inSlot == 4) itemSlot4 = item;
         }
 
-        //If there is two matches
-        if (matchItemList.Count == 2)
+        if (itemInfo.segment == Item.Segment.Torso)
         {
-            //stats for matched item 1
-            print("ITS A MATCH");
+            print("Its an arm");
             _UI.statComp1.SetActive(true);
-            anim1.SetTrigger("Open");
-            _UI.arrowComp.SetActive(true);
-            _UI.UpdateItemPopUpComp1(matchItemList[0]);
-
-            //add in updating ui here for the second one.
             _UI.statComp2.SetActive(true);
-            //anim1.SetTrigger("Open");
-            _UI.arrowComp.SetActive(true);
-            _UI.UpdateItemPopUpComp2(matchItemList[1]);
+
+            anim1.SetTrigger("Open");
+            anim2.SetTrigger("Open");
+
+            _UI.UpdateItemPopUpComp1(itemSlot3);
+            _UI.UpdateItemPopUpComp2(itemSlot4);
+        }
+        else
+        {
+            print("its Not an arm");
+            _UI.statComp1.SetActive(true);
+            _UI.statComp2.SetActive(false);
+
+            Item itemMatch = new();
+
+            foreach (var item in _PC.playerInventory)
+            {
+                if (item.category == itemInfo.category) itemMatch = item;
+            }
+
+            anim1.SetTrigger("Open");
+
+            _UI.UpdateItemPopUpComp1(itemMatch);
         }
 
 
@@ -205,8 +209,6 @@ public class ItemIdentifier : GameBehaviour
 
     public void OnMouseExit()
     {
-        isHovering = false;
-
         print("EXIT");
         anim.ResetTrigger("Open");
         anim1.ResetTrigger("Open");

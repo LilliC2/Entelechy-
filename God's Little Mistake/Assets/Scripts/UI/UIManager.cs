@@ -205,6 +205,45 @@ public class UIManager : Singleton<UIManager>
         //else print("no match");
     }
 
+    public void PopupStat(Item _hoverItem)
+    {
+        UpdateItemPopUp(_hoverItem);
+
+        Item itemSlot3 =new();
+        Item itemSlot4 =new();
+
+        foreach (var item in _PC.playerInventory)
+        {
+            if (item.inSlot == 3) itemSlot3 = item;
+            if (item.inSlot == 4) itemSlot4 = item;
+        }
+
+        if(_hoverItem.inSlot == 3 || _hoverItem.inSlot == 4)
+        {
+            statComp1.SetActive(true);
+            statComp2.SetActive(true);
+
+            UpdateItemPopUpComp1(itemSlot3);
+            UpdateItemPopUpComp2(itemSlot4);
+        }
+        else
+        {
+            statComp1.SetActive(true);
+            statComp2.SetActive(false);
+
+            Item itemMatch = new();
+
+            foreach (var item in _PC.playerInventory)
+            {
+                if (item.category == _hoverItem.category) itemMatch = item;
+            }
+
+            UpdateItemPopUpComp1(itemMatch);
+        }
+
+
+    }
+
     //For comparison 1
     public void UpdateItemPopUpComp1(Item _itemInfo)
     {
@@ -216,6 +255,9 @@ public class UIManager : Singleton<UIManager>
         popupCritChance1.text = _itemInfo.critChance.ToString();
         popupFirerate1.text = _itemInfo.fireRate.ToString();
         popupIcon1.sprite = _itemInfo.icon;
+
+        
+
 
 
 
