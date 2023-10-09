@@ -10,6 +10,8 @@ public class UIManager : Singleton<UIManager>
     public Item leftArmItem;
     public Item rightArmItem;
 
+    public GameObject gameOverMenu;
+
     [Header("Player Feedback")]
     public TMP_Text hpText;
     public TMP_Text levelText;
