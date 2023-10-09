@@ -433,7 +433,7 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         //print("delay");
 
-                        ExecuteAfterFrames(4, () => missyForward.SetActive(true));
+                        ExecuteAfterFrames(4, () => missyForward.SetActive(true));  
                         ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
                         ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
                         ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
