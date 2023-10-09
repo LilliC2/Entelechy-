@@ -38,17 +38,23 @@ public class ItemIdentifier : GameBehaviour
 
         if (isHovering)
         {
+            print("we hover");
+
             if (itemInfo.segment == Item.Segment.Torso)
             {
                 float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
+                print(scrollDelta);
 
                 if (scrollDelta > 0)
                 {
+                    print("Left arm");
                     _UI.leftArmItem = itemInfo;
                     //Changes item to left here
                 }
                 if (scrollDelta < 0)
                 {
+                    print("right arm");
+
                     _UI.rightArmItem = itemInfo;
                     //Changes item to left here
                 }
@@ -134,7 +140,7 @@ public class ItemIdentifier : GameBehaviour
     {
         print("ENTER");
 
-
+        isHovering = true;
 
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
@@ -215,6 +221,8 @@ public class ItemIdentifier : GameBehaviour
 
     public void OnMouseExit()
     {
+        isHovering = false;
+
         print("EXIT");
         anim.ResetTrigger("Open");
         anim1.ResetTrigger("Open");

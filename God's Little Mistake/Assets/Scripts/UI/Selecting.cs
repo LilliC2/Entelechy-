@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using Unity.VisualScripting.Antlr3.Runtime.Misc;
 using UnityEngine;
+using static UnityEditor.Progress;
 
 public class Selecting : GameBehaviour
 {
@@ -48,18 +49,28 @@ public class Selecting : GameBehaviour
         }
         else
         {
+            bool slot3 = false;
+            bool slot4 = false;
+
             foreach (var item in _PC.playerInventory)
             {
                 if (item.inSlot == 3)
                 {
-                    if(item.inSlot == 4)
-                    {
-                        previousItem = item;
-                        isItemInSlot = true;
-                    }
+                    slot3 = true;
+                }
+                if (item.inSlot == 4)
+                {
+                    slot4 = true;
+                }
 
+                if (slot3 && slot4)
+                {
+                    previousItem = item;
+                    isItemInSlot = true;
                 }
             }
+
+
         }
 
 
