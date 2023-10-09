@@ -2,12 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using static UnityEditor.Progress;
 
 public class ItemIdentifier : GameBehaviour
 {
     bool inRange;
     public Item itemInfo;
 
+    Selecting selecting;
+
+    [SerializeField]
+    GameObject itemGO;
+
+    bool isHovering;
 
     [Header("Animation")]
     public Animator anim;
@@ -25,6 +32,7 @@ public class ItemIdentifier : GameBehaviour
         statComp1 = GameObject.Find("Stat Comp 1");
         statComp2 = GameObject.Find("Stat Comp 2");
 
+        selecting = GetComponent<Selecting>();
         anim = statPop.GetComponent<Animator>();
         anim1 = statComp1.GetComponent<Animator>();
         anim2 = statComp2.GetComponent<Animator>();
@@ -32,20 +40,51 @@ public class ItemIdentifier : GameBehaviour
 
     private void Update()
     {
+        if(isHovering)
+        {
+            if (itemInfo.segment == Item.Segment.Torso)
+            {
+                float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
+
+                if (scrollDelta > 0)
+                {
+                    _UI.leftArmItem = itemInfo;
+                    //Changes item to left here
+                }
+                if (scrollDelta < 0)
+                {
+                    _UI.rightArmItem = itemInfo;
+                    //Changes item to left here
+                }
+            }
+        }
+
+        
         if(inRange)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKey(KeyCode.E))
             {
-                
-                //pick up item
-                if (_PC.playerInventory.Count < 5)//invenotry cap number here
+                //check which segment it is
+
+                //check if item is already there
+                bool itemInSlot = selecting.CheckIfItemIsInSlot();
+
+                if (itemInSlot)
                 {
-                    print("Destroy obj");
-                    Destroy(gameObject);
-                    _UI.CreateItemSelected(itemInfo);
 
-                }  
+                    //destroy old item from player avatar
+                    selecting.RemovePreviousItem();
 
+                    //place old item on ground
+                    GameObject item = Instantiate(itemGO, gameObject.transform.position, Quaternion.identity);
+
+                    item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
+                    item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+                }
+
+
+                //equip new items
+                _UI.CreateItemSelected(itemInfo);
             }
         }
     }
@@ -83,11 +122,14 @@ public class ItemIdentifier : GameBehaviour
     {
         print("ENTER");
 
+        isHovering = true;
+
         if(itemInfo.inSlot == 3 || itemInfo.inSlot == 4)
         {
 
         }
         //Stats for item mouse is hovering
+
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         _UI.UpdateItemPopUp(itemInfo);
@@ -163,6 +205,8 @@ public class ItemIdentifier : GameBehaviour
 
     public void OnMouseExit()
     {
+        isHovering = false;
+
         print("EXIT");
         anim.ResetTrigger("Open");
         anim1.ResetTrigger("Open");
