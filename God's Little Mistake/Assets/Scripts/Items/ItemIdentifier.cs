@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 using UnityEngine.EventSystems;
 
 public class ItemIdentifier : GameBehaviour
@@ -73,6 +74,8 @@ public class ItemIdentifier : GameBehaviour
 
                 if (itemInSlot)
                 {
+                    print("thers an item in this slot");
+
                     if(!itemRemoved)
                     {
                         itemRemoved = true;
@@ -86,8 +89,14 @@ public class ItemIdentifier : GameBehaviour
                     if(!itemSpawned)
                     {
                         itemSpawned = true;
+
+                        var newSpawnPoint = new Vector3();
+                        NavMeshHit hit;
+                        if (NavMesh.SamplePosition(_PC.transform.position, out hit, 1f, NavMesh.AllAreas))
+                        {
+                            newSpawnPoint = hit.position;
+                        }
                         //place old item on ground
-                        var newSpawnPoint = new Vector3(_PC.transform.position.x +3, _PC.transform.position.y, _PC.transform.position.z);
 
                         GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
                         _UI.statComp1.SetActive(false);
