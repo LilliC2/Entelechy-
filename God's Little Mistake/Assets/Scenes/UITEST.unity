@@ -16541,15 +16541,66 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 4699345213986925883, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 5726170862438145790, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2006058987}
   m_SourcePrefab: {fileID: 100100000, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
 --- !u!4 &2006058980 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8134474160589298071, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
   m_PrefabInstance: {fileID: 2006058979}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &2006058987
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 752765286}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e71f34bf4fc7a439ec90498831f40f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroy: 0
+  slugLeg_trail: {fileID: 0}
+  timeBetweenTrail: 0
+  destroyTime: 0
+  slugEyesEquipped: 0
+  slowDuration: 0
+  slowPercent: 0
+  dashEase: 0
+  dashDuration: 0
+  dashPower: 0
+  tripodCooldownTime: 0
+  humanFistCooldownTime: 0
+  humanFistChargeUpTime: 0
+  humanFistDamage: 0
+  gutpunch: 0
+  enemyLineStart: {fileID: 0}
+  AOEradius: 0
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 0
+  charmDuration: 0
+  bigEyesCooldownTime: 0
+  hoverLegsDuration: 0
+  hoverLegsCooldownTime: 0
+  wolfClawsEquipped: 0
+  bleedDuration: 0
+  bleedTickDmg: 0
+  peaShooerChargeUpTime: 1
+  peaShooerCooldownTime: 3
+  RPEAGexplosionRadius: 1
+  RPEAGexplosionDmg: 1
+  bigPea: {fileID: 7752005100104120040, guid: 69112db8d14a9824082ee96a62147b5b, type: 3}
+  ramHornsCooldownTime: 0
+  ramHornsStunDuration: 0
+  ramming: 0
 --- !u!1001 &2008708164
 PrefabInstance:
   m_ObjectHideFlags: 0

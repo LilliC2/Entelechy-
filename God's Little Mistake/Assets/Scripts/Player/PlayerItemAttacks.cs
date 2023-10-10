@@ -8,6 +8,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
     [Header("Ability")]
     bool isOnCoolDown;
+    int abilitySlot;
 
     [Header("Slug Legs")]
     bool slugLegsEquipped;
@@ -33,10 +34,10 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
     [Header("Tripod")]
     bool tripodLegsEquipped;
-    public float tripodCooldownTime;
+    public int tripodCooldownTime;
 
     [Header("Human Fist")]
-    public float humanFistCooldownTime;
+    public int humanFistCooldownTime;
     public float humanFistChargeUpTime;
     public float humanFistDamage;
     public bool gutpunch;
@@ -47,11 +48,12 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     public int AOEradius;
     public LayerMask enemyMask;
     public float charmDuration;
-    public float bigEyesCooldownTime;
+    public int bigEyesCooldownTime;
 
     [Header("Hover Legs")]
     bool hovering;
     public float hoverLegsDuration;
+    public int hoverLegsCooldownTime;
 
     [Header("Wolf Claw")]
     public bool wolfClawsEquipped;
@@ -61,14 +63,14 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
     [Header("Pea Shooter")]
     public float peaShooerChargeUpTime;
-    public float peaShooerCooldownTime;
+    public int peaShooerCooldownTime;
     public float RPEAGexplosionRadius;
     public float RPEAGexplosionDmg;
     public GameObject bigPea;
 
 
     [Header("Ram Horns")]
-    public float ramHornsCooldownTime;
+    public int ramHornsCooldownTime;
     public float ramHornsStunDuration;
     public bool ramming;
 
@@ -135,9 +137,12 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
                     //check if primary active and has ability
                     if (_PC.playerInventory[i].active && _PC.playerInventory[i].hasActiveAbility)
                     {
+                        abilitySlot = i;
+
                         //tripod dash
                         if (_PC.playerInventory[i].ID == 6)
                         {
+
                             TripodLegs();
 
                         }
@@ -185,6 +190,9 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     void PeaShooter()
     {
         isOnCoolDown = true;
+        //turn on cooldown UI
+        ActivateCooldownUI(abilitySlot, peaShooerCooldownTime);
+
         _PC.enableMovement = true;
 
         _PC.FireProjectile(bigPea, 300, 1, _PC.projectileRange);
@@ -196,9 +204,15 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     void HoverLegs()
     {
         print("HOVERING");
+
+        isOnCoolDown = true;
+        //turn on cooldown UI
+        ActivateCooldownUI(abilitySlot, hoverLegsCooldownTime);
+
         hovering = true;
         _PC.canFloat = true;
         ExecuteAfterSeconds(hoverLegsDuration, () => ResetHover());
+        ExecuteAfterSeconds(hoverLegsCooldownTime, () => isOnCoolDown = false);
 
     }
 
@@ -211,6 +225,8 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     void BigEyes()
     {
         isOnCoolDown = true;
+        //turn on cooldown UI
+        ActivateCooldownUI(abilitySlot, bigEyesCooldownTime);
 
         enemiesCharmed = Physics.OverlapSphere(_PC.transform.position, AOEradius,enemyMask);
         foreach (var collider in enemiesCharmed)
@@ -242,7 +258,8 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
         //Cooldown
         isOnCoolDown = true;
-
+        //turn on cooldown UI
+        ActivateCooldownUI(abilitySlot, humanFistCooldownTime);
 
         //OPTIONAL: Invunerable while dashing
         _PC.immortal = true;
@@ -264,7 +281,8 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
         //Cooldown
         isOnCoolDown = true;
-
+        //turn on cooldown UI
+        ActivateCooldownUI(abilitySlot, ramHornsCooldownTime);
 
         //OPTIONAL: Invunerable while dashing
         _PC.immortal = true;
@@ -283,8 +301,14 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     {
         Dash(5, 0.3f);
 
+
+
         //CoolDown
         isOnCoolDown = true;
+
+        //turn on cooldown UI
+        ActivateCooldownUI(abilitySlot, tripodCooldownTime);
+
 
         //OPTIONAL: Invunerable while dashing
         _PC.immortal = true;
@@ -355,6 +379,51 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
             if (item.ID == 7) wolfClawsEquipped = true;
         }
 
+    }
+
+    void ActivateCooldownUI(int _slot, int _cooldown)
+    {
+        switch(_slot)
+        {
+            case 0:
+
+                _HUD.isCooldown1 = true;
+                _HUD.SetCooldownSlo1(_cooldown);
+
+                break;
+            case 1:
+
+                _HUD.isCooldown2 = true;
+                _HUD.SetCooldownSlo2(_cooldown);
+
+                break;
+            case 2:
+                _HUD.isCooldown3 = true;
+                _HUD.SetCooldownSlo3(_cooldown);
+                break;
+            case 3:
+                _HUD.isCooldown4 = true;
+                _HUD.SetCooldownSlo4(_cooldown);
+                break;
+            case 4:
+
+                _HUD.isCooldown5 = true;
+                _HUD.SetCooldownSlo5(_cooldown);
+
+                break;
+            case 5:
+                _HUD.isCooldown6 = true;
+                _HUD.SetCooldownSlo6(_cooldown);
+                break;
+
+
+                //if(Input.GetKeyDown(KeyCode.E))
+                //{
+                //   
+                //}
+
+                //hit.GameObject.GetComponent<ScriptName>().FunctionName();
+        }
     }
 
 }
