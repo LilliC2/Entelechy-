@@ -92,13 +92,6 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
         itemFireRate.text = _hoverItem.fireRate.ToString();
         itemIcon.sprite = _hoverItem.icon;
 
-        slotNumber1 = _hoverItem.avatarPrefabFrontLeft;
-        slotNumber2 = _hoverItem.avatarPrefabFrontLeft;
-        slotNumber3.sprite = _hoverItem.pauseIcon;
-        slotNumber4 = _hoverItem.avatarPrefabFrontLeft;
-        slotNumber5 = _hoverItem.avatarPrefabFrontLeft;
-        slotNumber6 = _hoverItem.avatarPrefabFrontLeft;
-
         if(_hoverItem.segment != Item.Segment.Legs)
         {
 
@@ -127,6 +120,32 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
             attackPill.gameObject.SetActive(false);
             distancePill.gameObject.SetActive(false);
         }
+
+        if(_hoverItem.meleeAttackType == Item.AttackType.Cone) 
+        {
+            typeIcon.sprite = typeCone;
+        }
+
+        if (_hoverItem.meleeAttackType == Item.AttackType.Line)
+        {
+            typeIcon.sprite = typeLine;
+        }
+
+        if (_hoverItem.meleeAttackType == Item.AttackType.Circle)
+        {
+            typeIcon.sprite = typeCircle;
+        }
+
+        if (_hoverItem.meleeAttackType == Item.AttackType.Rapid)
+        {
+            typeIcon.sprite = typeRapid;
+        }
+
+        if (_hoverItem.meleeAttackType == Item.AttackType.Lob)
+        {
+            typeIcon.sprite = typeLob;
+        }
+
     }
         
         
@@ -134,23 +153,5 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
     public void FixedUpdate()
     {
         
-    }
-
-    public List<Item> SearchForItemMatch(Item _hoverItem)
-    {
-        List<Item> itemMatchInPlayerInven = new();
-
-        print("Hover item is " + _hoverItem.itemName);
-
-        foreach (var item in _PC.playerInventory)
-        {
-            if (item.segment == _hoverItem.segment)
-            {
-                itemMatchInPlayerInven.Add(item);
-            }
-            var icon = item.icon;
-        }
-        return itemMatchInPlayerInven;
-
     }
 }
