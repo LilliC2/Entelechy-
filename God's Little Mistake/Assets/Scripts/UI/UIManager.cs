@@ -318,7 +318,6 @@ public class UIManager : Singleton<UIManager>
                         invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
                         _HUD.hasItem1 = true;
 
-                        //pass cooldown here
                     }
                     break;
 
