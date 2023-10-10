@@ -328,108 +328,6 @@ Transform:
   m_Father: {fileID: 5909200776026954392}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
---- !u!1 &4699345213986925883
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 6717491705621944214}
-  - component: {fileID: 9096610101545261558}
-  - component: {fileID: 7345289649528789806}
-  - component: {fileID: 7638524573296951386}
-  m_Layer: 6
-  m_Name: Canvas
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 1
---- !u!224 &6717491705621944214
-RectTransform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4699345213986925883}
-  m_LocalRotation: {x: 0.38265547, y: -0.011174125, z: 0.004628474, w: 0.923812}
-  m_LocalPosition: {x: 0, y: 0, z: 0.09}
-  m_LocalScale: {x: 0.0060739326, y: 0.006073932, z: 0.0060739326}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 8134474160589298071}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 45, y: -1.386, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.002, y: 0.611}
-  m_SizeDelta: {x: 456, y: 302.1247}
-  m_Pivot: {x: 0.5, y: 0.5}
---- !u!223 &9096610101545261558
-Canvas:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4699345213986925883}
-  m_Enabled: 1
-  serializedVersion: 3
-  m_RenderMode: 2
-  m_Camera: {fileID: 0}
-  m_PlaneDistance: 100
-  m_PixelPerfect: 0
-  m_ReceivesEvents: 1
-  m_OverrideSorting: 0
-  m_OverridePixelPerfect: 0
-  m_SortingBucketNormalizedSize: 0
-  m_VertexColorAlwaysGammaSpace: 0
-  m_AdditionalShaderChannelsFlag: 0
-  m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
-  m_SortingOrder: 0
-  m_TargetDisplay: 0
---- !u!114 &7345289649528789806
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4699345213986925883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0cd44c1031e13a943bb63640046fad76, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_UiScaleMode: 0
-  m_ReferencePixelsPerUnit: 100
-  m_ScaleFactor: 1
-  m_ReferenceResolution: {x: 800, y: 600}
-  m_ScreenMatchMode: 0
-  m_MatchWidthOrHeight: 0
-  m_PhysicalUnit: 3
-  m_FallbackScreenDPI: 96
-  m_DefaultSpriteDPI: 96
-  m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 1
---- !u!114 &7638524573296951386
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4699345213986925883}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: dc42784cf147c0c48a680349fa168899, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_IgnoreReversedGraphics: 1
-  m_BlockingObjects: 0
-  m_BlockingMask:
-    serializedVersion: 2
-    m_Bits: 4294967295
 --- !u!1 &5726170862438145790
 GameObject:
   m_ObjectHideFlags: 0
@@ -445,6 +343,7 @@ GameObject:
   - component: {fileID: 7273157759053612588}
   - component: {fileID: 1508997655176592193}
   - component: {fileID: 5970346812857982695}
+  - component: {fileID: 2443502828407291707}
   m_Layer: 6
   m_Name: Player V5
   m_TagString: Player
@@ -466,7 +365,6 @@ Transform:
   m_Children:
   - {fileID: 8997536729726015319}
   - {fileID: 8737069017744512100}
-  - {fileID: 6717491705621944214}
   - {fileID: 3929966169207576973}
   - {fileID: 1208959169228208098}
   - {fileID: 5909200776026954392}
@@ -590,7 +488,7 @@ MonoBehaviour:
   - itemName: Pea Shooter
     ID: 9
     lvl: 0
-    inSlot: -1
+    inSlot: 0
     category: 1
     segment: 0
     meleeAttackType: 2
@@ -609,6 +507,7 @@ MonoBehaviour:
     projectile: 1
     projectileSpeed: 100
     projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
@@ -621,10 +520,10 @@ MonoBehaviour:
   - itemName: Big Eyes
     ID: 11
     lvl: 0
-    inSlot: -1
+    inSlot: 1
     category: 0
     segment: 0
-    meleeAttackType: 0
+    meleeAttackType: 2
     itemType: 0
     hasActiveAbility: 1
     currencyValue: 0
@@ -637,9 +536,10 @@ MonoBehaviour:
     critChance: 2
     longRange_range: 0
     melee_range: 0
-    projectile: 0
+    projectile: 1
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 78213a660ae434649a1cce5a02846b1a, type: 3}
@@ -831,6 +731,53 @@ TrailRenderer:
   m_Autodestruct: 0
   m_Emitting: 1
   m_ApplyActiveColorSpace: 1
+--- !u!114 &2443502828407291707
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5726170862438145790}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b3e71f34bf4fc7a439ec90498831f40f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroy: 0
+  slugLeg_trail: {fileID: 0}
+  timeBetweenTrail: 0
+  destroyTime: 0
+  slugEyesEquipped: 0
+  slowDuration: 0
+  slowPercent: 0
+  dashEase: 0
+  dashDuration: 0
+  dashPower: 0
+  tripodCooldownTime: 0
+  humanFistCooldownTime: 0
+  humanFistChargeUpTime: 0
+  humanFistDamage: 0
+  gutpunch: 0
+  enemyLineStart: {fileID: 0}
+  AOEradius: 0
+  enemyMask:
+    serializedVersion: 2
+    m_Bits: 0
+  charmDuration: 0
+  bigEyesCooldownTime: 0
+  hoverLegsDuration: 0
+  hoverLegsCooldownTime: 0
+  wolfClawsEquipped: 0
+  bleedDuration: 0
+  bleedTickDmg: 0
+  peaShooerChargeUpTime: 1
+  peaShooerCooldownTime: 3
+  RPEAGexplosionRadius: 1
+  RPEAGexplosionDmg: 1
+  bigPea: {fileID: 7752005100104120040, guid: 69112db8d14a9824082ee96a62147b5b, type: 3}
+  ramHornsCooldownTime: 0
+  ramHornsStunDuration: 0
+  ramming: 0
 --- !u!1 &6141808080627785606
 GameObject:
   m_ObjectHideFlags: 0
