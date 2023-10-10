@@ -4910,6 +4910,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!1 &3718395452026233766
 GameObject:
   m_ObjectHideFlags: 0
@@ -4950,7 +4951,7 @@ Transform:
   - {fileID: 760338279084949348}
   - {fileID: 3003702539939029058}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &8561684140997754689
 MonoBehaviour:
@@ -5002,6 +5003,7 @@ MonoBehaviour:
   enemyRnd: {fileID: 0}
   deathParticles: {fileID: 7399150663291557782}
   charmedParticles: {fileID: 2216817418101589811}
+  shadow: {fileID: 7477617650557043562}
   explosionAnim: {fileID: 7270853253594554690}
   explosionAnimOB: {fileID: 3158669085559816980}
   enemyVisuals: {fileID: 1804661687857463807}
@@ -5127,6 +5129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!1 &4564437846335013201
 GameObject:
   m_ObjectHideFlags: 0
@@ -5224,6 +5227,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!1 &6536500800054082787
 GameObject:
   m_ObjectHideFlags: 0
@@ -5271,6 +5275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!1 &6536526187017871865
 GameObject:
   m_ObjectHideFlags: 0
@@ -10205,6 +10210,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!1001 &530318332374510564
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -10269,6 +10275,11 @@ PrefabInstance:
 --- !u!4 &3003702539939029058 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3383146963444583334, guid: 26bc02a8ddad16b45a668d652cb0208c, type: 3}
+  m_PrefabInstance: {fileID: 530318332374510564}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &7477617650557043562 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 6960810290206976142, guid: 26bc02a8ddad16b45a668d652cb0208c, type: 3}
   m_PrefabInstance: {fileID: 530318332374510564}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &679157078635624425
@@ -10455,6 +10466,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!114 &7276445500377487204
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10653,6 +10665,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!114 &7807427964644416675
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10775,6 +10788,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!114 &7603208713577127330
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -10907,6 +10921,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!114 &3937368336692730694
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11298,6 +11313,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!95 &7270853253594554690 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1615758433893008089, guid: ed45cbddeb40a884db678d5a07e7b212, type: 3}

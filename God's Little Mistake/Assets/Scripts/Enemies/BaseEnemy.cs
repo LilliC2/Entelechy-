@@ -20,6 +20,9 @@ public class BaseEnemy : GameBehaviour
     GameObject charmedParticles;
 
     [SerializeField]
+    GameObject shadow;
+
+    [SerializeField]
     Animator explosionAnim;
     [SerializeField]
     GameObject explosionAnimOB;
@@ -169,6 +172,7 @@ public class BaseEnemy : GameBehaviour
             //turn off collider
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             enemyVisuals.SetActive(false);
+            shadow.SetActive(false);
 
             //run partciles
             deathParticles.Play();
