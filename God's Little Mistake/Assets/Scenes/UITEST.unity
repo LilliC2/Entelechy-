@@ -6001,6 +6001,11 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 6062209154379817469, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
   m_PrefabInstance: {fileID: 571145516}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &575686348 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 7721134875167890316, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+  m_PrefabInstance: {fileID: 2006058979}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &580932622
 GameObject:
   m_ObjectHideFlags: 0
@@ -16468,29 +16473,25 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1239413227}
     m_Modifications:
-    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
-      propertyPath: playerInventory.Array.data[0].icon
-      value: 
-      objectReference: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
-    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
-      propertyPath: playerInventory.Array.data[1].icon
-      value: 
-      objectReference: {fileID: 21300000, guid: 78213a660ae434649a1cce5a02846b1a, type: 3}
-    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
-      propertyPath: playerInventory.Array.data[0].inSlot
-      value: 0
+    - target: {fileID: 2443502828407291707, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: AOEradius
+      value: 3
       objectReference: {fileID: 0}
-    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
-      propertyPath: playerInventory.Array.data[1].inSlot
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
-      propertyPath: playerInventory.Array.data[1].projectile
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
-      propertyPath: playerInventory.Array.data[1].meleeAttackType
+    - target: {fileID: 2443502828407291707, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: charmDuration
       value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443502828407291707, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: enemyLineStart
+      value: 
+      objectReference: {fileID: 575686348}
+    - target: {fileID: 2443502828407291707, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: enemyMask.m_Bits
+      value: 1024
+      objectReference: {fileID: 0}
+    - target: {fileID: 2443502828407291707, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: bigEyesCooldownTime
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5726170862438145790, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_Name
@@ -16541,66 +16542,15 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 4699345213986925883, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5726170862438145790, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2006058987}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
 --- !u!4 &2006058980 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 8134474160589298071, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
   m_PrefabInstance: {fileID: 2006058979}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &2006058987
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 752765286}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b3e71f34bf4fc7a439ec90498831f40f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  dontDestroy: 0
-  slugLeg_trail: {fileID: 0}
-  timeBetweenTrail: 0
-  destroyTime: 0
-  slugEyesEquipped: 0
-  slowDuration: 0
-  slowPercent: 0
-  dashEase: 0
-  dashDuration: 0
-  dashPower: 0
-  tripodCooldownTime: 0
-  humanFistCooldownTime: 0
-  humanFistChargeUpTime: 0
-  humanFistDamage: 0
-  gutpunch: 0
-  enemyLineStart: {fileID: 0}
-  AOEradius: 0
-  enemyMask:
-    serializedVersion: 2
-    m_Bits: 0
-  charmDuration: 0
-  bigEyesCooldownTime: 0
-  hoverLegsDuration: 0
-  hoverLegsCooldownTime: 0
-  wolfClawsEquipped: 0
-  bleedDuration: 0
-  bleedTickDmg: 0
-  peaShooerChargeUpTime: 1
-  peaShooerCooldownTime: 3
-  RPEAGexplosionRadius: 1
-  RPEAGexplosionDmg: 1
-  bigPea: {fileID: 7752005100104120040, guid: 69112db8d14a9824082ee96a62147b5b, type: 3}
-  ramHornsCooldownTime: 0
-  ramHornsStunDuration: 0
-  ramming: 0
 --- !u!1001 &2008708164
 PrefabInstance:
   m_ObjectHideFlags: 0

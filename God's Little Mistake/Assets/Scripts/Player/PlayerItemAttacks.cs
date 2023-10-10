@@ -225,6 +225,15 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     void BigEyes()
     {
         isOnCoolDown = true;
+
+        //play Animation
+        _PC.itemsAnimForward[abilitySlot].SetTrigger("Attack");
+
+        if (_PC.itemsAnimBack[abilitySlot] != null) _PC.itemsAnimBack[abilitySlot].SetTrigger("Attack");
+
+        _PC.itemsAnimLeftSide[abilitySlot].SetTrigger("Attack");
+        _PC.itemsAnimRightSide[abilitySlot].SetTrigger("Attack");
+
         //turn on cooldown UI
         ActivateCooldownUI(abilitySlot, bigEyesCooldownTime);
 
