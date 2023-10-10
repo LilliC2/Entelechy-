@@ -274,6 +274,8 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Enable Walking Animation
 
+                
+
                 if(isMoving)
                 {
                     missyFrontSideAnim.SetBool("Walking", true);

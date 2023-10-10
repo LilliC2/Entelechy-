@@ -12,7 +12,12 @@ public class BaseEnemy : GameBehaviour
     public EnemyState enemyState;
 
     public EnemyRandomisation enemyRnd;
-
+    [Header("Debuff")]
+    public GameObject debuffPanel;
+    public GameObject debuffStun;
+    public GameObject debuffSlow;
+    public GameObject debuffBurn;
+    public GameObject debuffBleed;
 
     [SerializeField]
     ParticleSystem deathParticles;
@@ -43,6 +48,9 @@ public class BaseEnemy : GameBehaviour
 
     private void Update()
     {
+        if (Input.GetKeyDown(KeyCode.K)) ApplySlowness(3, 10);
+
+
         HealthVisualIndicator(stats.health, stats.maxHP);
 
         //Health Manager
@@ -120,6 +128,10 @@ public class BaseEnemy : GameBehaviour
     /// <param name="_percent"> Perctange as decimal </param>
     public void ApplySlowness(float _duration, float _percent)
     {
+        var debuffPopup = Instantiate(debuffSlow, debuffPanel.transform);
+        debuffPopup.GetComponent<DebuffPopup>().durationTimer = _duration;
+        debuffPopup.GetComponent<DebuffPopup>().duration = _duration;
+
         print("Slowed enemy");
         var speedBefore = stats.speed;
 
@@ -129,6 +141,10 @@ public class BaseEnemy : GameBehaviour
 
     public void ApplyStun(float _duration)
     {
+        var debuffPopup = Instantiate(debuffStun, debuffPanel.transform);
+        debuffPopup.GetComponent<DebuffPopup>().durationTimer = _duration;
+        debuffPopup.GetComponent<DebuffPopup>().duration = _duration;
+
         print("Enemy stunned");
         var speedBefore = stats.speed;
         stats.speed = 0;
@@ -139,6 +155,10 @@ public class BaseEnemy : GameBehaviour
 
     public void ApplyBleeding(float _duration, float _dmgPerTick)
     {
+        var debuffPopup = Instantiate(debuffBleed, debuffPanel.transform);
+        debuffPopup.GetComponent<DebuffPopup>().durationTimer = _duration;
+        debuffPopup.GetComponent<DebuffPopup>().duration = _duration;
+
         bool isbleeding = true;
         ExecuteAfterSeconds(_duration, () => isbleeding = false);
         float timer = 0;
