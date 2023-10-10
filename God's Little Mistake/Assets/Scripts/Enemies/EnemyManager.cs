@@ -11,7 +11,7 @@ public class EnemyManager : Singleton<EnemyManager>
     // Start is called before the first frame update
     void Start()
     {
-        enemyTypes = new string[] { "_Short_Range", "_Long_Range" };
+        enemyTypes = new string[] { "_Short_Range", "_Long_Range", "_Chompers" };
     }
 
     // Update is called once per frame
@@ -31,7 +31,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
         foreach (var spawnPoint in spawnPoints)
         {
-            var enemyTypeR = Random.Range(0, 2); // last digit excluded
+            var enemyTypeR = Random.Range(0, enemyTypes.Length); // last digit excluded
 
             //print("Spawn: Enemy" + enemyTypes[enemyTypeR]);
 
