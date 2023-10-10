@@ -16668,6 +16668,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 1239413227}
     m_Modifications:
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: playerInventory.Array.data[0].ID
+      value: 12
+      objectReference: {fileID: 0}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[0].icon
       value: 
       objectReference: {fileID: 21300000, guid: df94ebc9d2b8ee347b7faf84cafb688e, type: 3}
@@ -16676,9 +16680,17 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: playerInventory.Array.data[0].pauseIcon
+      value: 
+      objectReference: {fileID: 1119370961, guid: 2d5bd4262e13ef941bf203477509c272, type: 3}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[1].pauseIcon
       value: 
       objectReference: {fileID: 21300000, guid: 808850d45d2fe84429d723ed93941f81, type: 3}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: playerInventory.Array.data[0].projectileSpeed
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.data[1].longRange_range
       value: 0
@@ -23715,6 +23727,7 @@ MonoBehaviour:
     avtarPrefabBackLeft: {fileID: 0}
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 1549553803099683118}
+  itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
 --- !u!114 &1889428888382494263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -27550,6 +27563,7 @@ MonoBehaviour:
     avtarPrefabBackLeft: {fileID: 0}
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 8743095960684119137}
+  itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
 --- !u!224 &2993657965588519857
 RectTransform:
   m_ObjectHideFlags: 0
@@ -27924,6 +27938,7 @@ MonoBehaviour:
     avtarPrefabBackLeft: {fileID: 0}
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 5871095926933428540}
+  itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
 --- !u!1 &3104865799037680553
 GameObject:
   m_ObjectHideFlags: 0
@@ -29115,6 +29130,7 @@ MonoBehaviour:
     avtarPrefabBackLeft: {fileID: 0}
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 9219967763858885561}
+  itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
 --- !u!222 &3502613768607395486
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -34581,6 +34597,7 @@ MonoBehaviour:
     avtarPrefabBackLeft: {fileID: 0}
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 4329324268410065838}
+  itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
 --- !u!114 &5121188252265549996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38190,6 +38207,7 @@ MonoBehaviour:
     avtarPrefabBackLeft: {fileID: 0}
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 3893767802596468236}
+  itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
 --- !u!222 &6345031585487062583
 CanvasRenderer:
   m_ObjectHideFlags: 0

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class PauseSlotStats : GameBehaviour
 {
@@ -9,6 +10,8 @@ public class PauseSlotStats : GameBehaviour
     public Item itemInfo;
 
     public UnityEngine.UI.Image itemSprite;
+
+    public Sprite itemEmpty;
 
     //public string itemName;
     //public enum Category { Eyes, Mouth, Horns, Slappies, Punchies, Launchers, Legs, Crawlies, None }
@@ -57,6 +60,14 @@ public class PauseSlotStats : GameBehaviour
     {
         MatchPlayerInventory(slotNumber);
         itemSprite.sprite = itemInfo.pauseIcon;
+        if(itemInfo.pauseIcon == null)
+        {
+            itemSprite.sprite = itemEmpty;
+        }
+        else
+        {
+            itemSprite.sprite = itemInfo.pauseIcon;
+        }
     }
 
     public void OnMouseOver()
