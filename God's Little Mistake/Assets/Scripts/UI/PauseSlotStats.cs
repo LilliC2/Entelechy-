@@ -13,6 +13,10 @@ public class PauseSlotStats : GameBehaviour
 
     public Sprite itemEmpty;
 
+    public bool isFlipped = false;
+
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -32,6 +36,11 @@ public class PauseSlotStats : GameBehaviour
         {
             itemSprite.sprite = itemInfo.pauseIcon;
         }
+
+        if(slotNumber == 4 && !isFlipped)
+        {
+            Flip();
+        }
     }
 
     public void OnMouseOver()
@@ -43,6 +52,16 @@ public class PauseSlotStats : GameBehaviour
     public void UpdateStats()
     {
         _PF.UpdateStats(itemInfo);
+
+    }
+
+    public void Flip()
+    {
+        Vector2 spriteLook = gameObject.transform.localScale;
+        spriteLook.x *= -1;
+        gameObject.transform.localScale = spriteLook;
+
+        isFlipped = true;
 
     }
 
