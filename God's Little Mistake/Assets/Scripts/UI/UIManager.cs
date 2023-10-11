@@ -64,14 +64,14 @@ public class UIManager : Singleton<UIManager>
     public GameObject topEye;
     public GameObject middleEye;
     public GameObject bottomEye;
-    public GameObject attackPill;
+    public Image attackPill;
     public TMP_Text attackPillText;
-    public GameObject attackIcon;
-    public GameObject rangePill;
+    public Image attackIcon;
+    public Image rangePill;
     public TMP_Text rangePillText;
-    public GameObject rangeIcon;
-    public GameObject itemIcon;
-    public GameObject typeIcon;
+    public Image rangeIcon;
+    public Image itemIcon;
+    public Image typeIcon;
 
     [Header("Inventory Comparison1")]
     public GameObject statComp1;
@@ -102,6 +102,17 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text popupCritChance2;
     public TMP_Text popupFirerate2;
     public Image popupIcon2;
+
+    [Header("Icons")]
+    public Sprite meleeIcon;
+    public Sprite rangedIcon;
+    public Sprite typeCone;
+    public Sprite typeLine;
+    public Sprite typeCircle;
+    public Sprite typeRapid;
+    public Sprite typeLob;
+    public Sprite typeLaser;
+    public Sprite typeCannon;
 
 
 
@@ -192,6 +203,73 @@ public class UIManager : Singleton<UIManager>
         popupCritChance.text = _hoverItem.critChance.ToString();
         popupFirerate.text = _hoverItem.fireRate.ToString();
         popupIcon.sprite = _hoverItem.icon;
+
+        //segment check
+        if(_hoverItem.segment == Item.Segment.Head)
+        {
+            topEye.SetActive(true);
+            middleEye.SetActive(false);
+            bottomEye.SetActive(false);
+        }
+        if (_hoverItem.segment == Item.Segment.Torso)
+        {
+            topEye.SetActive(false);
+            middleEye.SetActive(true);
+            bottomEye.SetActive(false);
+        }
+        if (_hoverItem.segment == Item.Segment.Legs)
+        {
+            topEye.SetActive(false);
+            middleEye.SetActive(false);
+            bottomEye.SetActive(true);
+        }
+
+        //range or melee check
+        if (_hoverItem.projectile == true)
+        {
+            attackIcon.sprite = rangedIcon;
+            attackPill.color = Color.blue;
+            rangePillText.text = _hoverItem.longRange_range.ToString();
+            attackPillText.text = "Ranged";
+        }
+        else
+        {
+            attackIcon.sprite = meleeIcon;
+            attackPill.color = Color.red;
+            rangePillText.text = _hoverItem.melee_range.ToString();
+            attackPillText.text = "Melee";
+
+        }
+
+        //type check
+        if (_hoverItem.meleeAttackType == Item.AttackType.Line)
+        {
+            typeIcon.sprite = typeLine;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Cone)
+        {
+            typeIcon.sprite = typeCone;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Circle)
+        {
+            typeIcon.sprite = typeCircle;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Rapid)
+        {
+            typeIcon.sprite = typeRapid;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Lob)
+        {
+            typeIcon.sprite = typeLob;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Cannon)
+        {
+            typeIcon.sprite = typeCannon;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Laser)
+        {
+            typeIcon.sprite = typeLaser;
+        }
 
         print("Update pop up");
 

@@ -13515,14 +13515,14 @@ MonoBehaviour:
   topEye: {fileID: 3431538787042851716}
   middleEye: {fileID: 1272590858875142169}
   bottomEye: {fileID: 6378950159389432292}
-  attackPill: {fileID: 6405389544456993028}
+  attackPill: {fileID: 5802719196664453267}
   attackPillText: {fileID: 7774219264952449452}
-  attackIcon: {fileID: 5087120542090779704}
-  rangePill: {fileID: 6128080224345810656}
+  attackIcon: {fileID: 4402217548805551654}
+  rangePill: {fileID: 8432474111084577110}
   rangePillText: {fileID: 5477233912750916494}
-  rangeIcon: {fileID: 7311904325629630895}
-  itemIcon: {fileID: 2567692006687741816}
-  typeIcon: {fileID: 4251549317111117104}
+  rangeIcon: {fileID: 1127449671671051605}
+  itemIcon: {fileID: 6666133908932427454}
+  typeIcon: {fileID: 6055175024795037989}
   statComp1: {fileID: 6462457476284760738}
   arrowComp: {fileID: 1841736159365438061}
   popupName1: {fileID: 1889428888382494263}
@@ -13544,6 +13544,15 @@ MonoBehaviour:
   popupCritChance2: {fileID: 4165651063604450079}
   popupFirerate2: {fileID: 2534518705250739306}
   popupIcon2: {fileID: 6621807588957097977}
+  meleeIcon: {fileID: 0}
+  rangedIcon: {fileID: 0}
+  typeCone: {fileID: 0}
+  typeLine: {fileID: 0}
+  typeCircle: {fileID: 0}
+  typeRapid: {fileID: 0}
+  typeLob: {fileID: 0}
+  typeLaser: {fileID: 0}
+  typeCannon: {fileID: 0}
 --- !u!4 &1520956316
 Transform:
   m_ObjectHideFlags: 0
@@ -24803,6 +24812,7 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 1549553803099683118}
   itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
+  isFlipped: 0
 --- !u!114 &1889428888382494263
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -28639,6 +28649,7 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 8743095960684119137}
   itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
+  isFlipped: 0
 --- !u!224 &2993657965588519857
 RectTransform:
   m_ObjectHideFlags: 0
@@ -29014,6 +29025,7 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 5871095926933428540}
   itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
+  isFlipped: 0
 --- !u!1 &3104865799037680553
 GameObject:
   m_ObjectHideFlags: 0
@@ -30206,6 +30218,7 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 9219967763858885561}
   itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
+  isFlipped: 0
 --- !u!222 &3502613768607395486
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -33401,9 +33414,6 @@ MonoBehaviour:
   typeLob: {fileID: 21300000, guid: ef9fb8c4ce402b94cb63514b68979d01, type: 3}
   typeLaser: {fileID: 21300000, guid: 069df3fe494c38e40ab4e4fb96414710, type: 3}
   typeCannon: {fileID: 21300000, guid: 2e44ba4eb8071f441bd4b51b845a4f3d, type: 3}
-  itemTypeIcons: []
-  itemEffectIcons: []
-  itemAttackEffects: []
 --- !u!222 &4363501909358869832
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -35632,6 +35642,7 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 4329324268410065838}
   itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
+  isFlipped: 0
 --- !u!114 &5121188252265549996
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -37311,9 +37322,6 @@ MonoBehaviour:
   typeLob: {fileID: 0}
   typeLaser: {fileID: 0}
   typeCannon: {fileID: 0}
-  itemTypeIcons: []
-  itemEffectIcons: []
-  itemAttackEffects: []
 --- !u!114 &5802719196664453267
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -39178,6 +39186,7 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   itemSprite: {fileID: 3893767802596468236}
   itemEmpty: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
+  isFlipped: 0
 --- !u!222 &6345031585487062583
 CanvasRenderer:
   m_ObjectHideFlags: 0

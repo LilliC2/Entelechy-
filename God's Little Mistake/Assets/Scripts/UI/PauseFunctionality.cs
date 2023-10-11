@@ -48,14 +48,6 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
     public Sprite typeLaser;
     public Sprite typeCannon;
 
-
-
-
-
-    public List<Sprite> itemTypeIcons;
-    public List<Sprite> itemEffectIcons;
-    public List<Sprite> itemAttackEffects;
-
     // Start is called before the first frame update
     void Start()
     {
@@ -106,13 +98,14 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
                 attackIcon.sprite = rangeIcon;
                 attackPill.color = Color.blue;
                 distanceText.text = _hoverItem.longRange_range.ToString();
+                attackText.text = "Ranged";
             }
             else
             {
                 attackIcon.sprite = meleeIcon;
                 attackPill.color = Color.red;
                 distanceText.text = _hoverItem.melee_range.ToString();
-
+                attackText.text = "Melee";
             }
         }
         else
