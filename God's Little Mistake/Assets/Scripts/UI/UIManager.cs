@@ -197,11 +197,11 @@ public class UIManager : Singleton<UIManager>
     {
         //ADD LATER FORMATTING FOR FLOATS
 
-        popupName.text = _hoverItem.itemName;
-        popupDmg.text = _hoverItem.dmg.ToString();
-        popupCritX.text = _hoverItem.critX.ToString();
-        popupCritChance.text = _hoverItem.critChance.ToString();
-        popupFirerate.text = _hoverItem.fireRate.ToString();
+        invenPopupName.text = _hoverItem.itemName;
+        invenPopupDmg.text = _hoverItem.dmg.ToString();
+        invenPopupCritX.text = _hoverItem.critX.ToString();
+        invenPopupCritChance.text = _hoverItem.critChance.ToString();
+        invenPopupFirerate.text = _hoverItem.fireRate.ToString();
         popupIcon.sprite = _hoverItem.icon;
 
         //segment check
