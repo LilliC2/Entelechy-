@@ -123,8 +123,8 @@ public class UIManager : Singleton<UIManager>
         hoverItemStatComp2Animator = statComp2.GetComponent<Animator>();
 
         //Pause Related
-        pausePanel.SetActive(false);
-        optionPanel.SetActive(false);
+        //pausePanel.SetActive(false);
+        //optionPanel.SetActive(false);
 
     }
 

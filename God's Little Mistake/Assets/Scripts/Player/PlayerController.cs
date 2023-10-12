@@ -827,7 +827,6 @@ public class PlayerController : Singleton<PlayerController>
         {
             if(!meleeAnimationCooldown)
             {
-                print("Melee UI is " + meleeUI.name);
                 if(meleeUI != null)
                 {
                     meleeAnimationCooldown = true;
@@ -955,6 +954,7 @@ public class PlayerController : Singleton<PlayerController>
 
             if (health > 0)
             {
+                _PE.VignetteFade();
                 HeadBobble();
                 _UI.UpdateHealthText(health);
             }
