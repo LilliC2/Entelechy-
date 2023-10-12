@@ -8,6 +8,8 @@ public class BaseEnemy : GameBehaviour
     {
         Patrolling, Chase, Attacking, Die, Stunned, Charmed
     }
+    public EnemyStats stats;
+
 
     public EnemyState enemyState;
 
@@ -19,24 +21,27 @@ public class BaseEnemy : GameBehaviour
     public GameObject debuffBurn;
     public GameObject debuffBleed;
 
+
+    [Header("Particle Systems")]
     [SerializeField]
     ParticleSystem deathParticles;
     [SerializeField]
     GameObject charmedParticles;
 
-    [SerializeField]
-    Animator explosionAnim;
+    [Header("Animation and Visuals")]
+
     [SerializeField]
     GameObject explosionAnimOB;
     [SerializeField]
     GameObject enemyVisuals;
+    public SpriteRenderer[] enemySpritesArray;
+    [SerializeField]
+    GameObject shadow;
 
+    [Header("Children")]
     bool spawnItem = false;
     bool spawnHealPool = false;
     bool died = false;
-
-    public SpriteRenderer[] enemySpritesArray;
-    public EnemyStats stats;
     public GameObject healPool;
 
     private void Start()
@@ -115,8 +120,13 @@ public class BaseEnemy : GameBehaviour
             //Add hit code here;
             Hit(_PC.dmg);
 
+            //play explosion when hit
+            explosionAnimOB.SetActive(true);
+            explosionAnimOB.GetComponent<Animator>().SetTrigger("Boom");
+            ExecuteAfterFrames(30, () => explosionAnimOB.SetActive(false));
+
             //destroy bullet that hit it
-            //Destroy(collision.gameObject);
+            Destroy(collision.gameObject);
         }
 
     }
@@ -189,13 +199,14 @@ public class BaseEnemy : GameBehaviour
             //turn off collider
             gameObject.GetComponent<CapsuleCollider>().enabled = false;
             enemyVisuals.SetActive(false);
+            shadow.SetActive(false);
 
             //run partciles
             deathParticles.Play();
 
             explosionAnimOB.SetActive(true);
             //ooze animation
-            explosionAnim.SetTrigger("Death");
+            explosionAnimOB.GetComponent<Animator>().SetTrigger("Boom");
 
             //eye is for testing
             int rand = Random.Range(0, 4);

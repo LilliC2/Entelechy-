@@ -4,7 +4,7 @@ using System.Collections;
 public class GooTrap : MonoBehaviour
 {
     public float gooSlowdownFactor = 0.5f;
-    public float damageOverTime = 10f;
+    public float damageOverTime = 0.5f;
     public float minSpeedInGoo = 1f;
 
     private bool isInGoo = false;

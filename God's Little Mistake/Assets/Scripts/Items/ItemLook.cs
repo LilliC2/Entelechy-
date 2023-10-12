@@ -12,6 +12,7 @@ public class ItemLook : GameBehaviour
     {
         Vector3 rotate = new Vector3(45f, this.transform.rotation.y, this.transform.rotation.z);
         var projectileScript = GetComponent<BasicProjectile>();
+        
 
 
         if (this.tag.Contains("Projectile"))
@@ -35,9 +36,15 @@ public class ItemLook : GameBehaviour
             }
             else if (firingPoint.transform.eulerAngles.y > 180 && firingPoint.transform.eulerAngles.y < 360)
             {
+                float x;
                 //print("flip it");
                 //flip projectile
-                var x = -projectileScript.image.transform.localScale.x;
+                if(gameObject.name != "Projectile_RPEAG")
+                {
+                    x = -GetComponent<BasicProjectile>().image.transform.localScale.x;
+
+                }
+                else x = -GetComponent<RPEAGProjectile>().image.transform.localScale.x;
                 //print(x);
                 projectileScript.image.transform.localScale = new Vector3(x, projectileScript.image.transform.localScale.y, projectileScript.image.transform.localScale.z);
             }

@@ -85,20 +85,26 @@ public class EnemyChomper : GameBehaviour
 
         agent.speed = enemyStats.stats.speed;
 
-
-        ////check for the sight and attack range
-        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed)
+        //if player isnt dead
+        if(_GM.gameState != GameManager.GameState.Dead)
         {
-            if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+            ////check for the sight and attack range
+            if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed)
             {
-                canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-                canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+                if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+                {
+                    canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+                    canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-                //if cant see player, patrol
-                if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
-                else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+                    //if cant see player, patrol
+                    if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+                    else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+                }
             }
         }
+        //just patrol if player is dead
+        else BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+
 
         #region Turning Sprites
         //if angle is between 136 and 45, backwards

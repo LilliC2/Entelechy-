@@ -10,6 +10,9 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     bool isOnCoolDown;
     int abilitySlot;
 
+    [Header("Animation")]
+    bool chargeUpAnimationStart;
+
     [Header("Slug Legs")]
     bool slugLegsEquipped;
     public GameObject slugLeg_trail;
@@ -170,6 +173,18 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
                         
                         if (_PC.playerInventory[i].ID == 9)
                         {
+                            //start charge up animation
+                            if (!chargeUpAnimationStart)
+                            {
+                                chargeUpAnimationStart = true;
+                                _PC.itemsAnimForward[abilitySlot].SetBool("Charging", true);
+
+                                //if (_PC.itemsAnimBack[abilitySlot] != null) _PC.itemsAnimBack[abilitySlot].SetBool("Charging", true);
+
+                                //_PC.itemsAnimLeftSide[abilitySlot].SetBool("Charging", true);
+                                //_PC.itemsAnimRightSide[abilitySlot].SetBool("Charging", true);
+                            }
+
                             _PC.enableMovement = false;
                             ExecuteAfterSeconds(peaShooerChargeUpTime, () => PeaShooter());
                         }
@@ -189,13 +204,21 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
     void PeaShooter()
     {
+        _PC.itemsAnimForward[abilitySlot].SetBool("Charging", false);
+
+        _PC.itemsAnimLeftSide[abilitySlot].SetBool("Charging", false);
+        _PC.itemsAnimRightSide[abilitySlot].SetBool("Charging", false);
+
+        chargeUpAnimationStart = false;
+
+
         isOnCoolDown = true;
         //turn on cooldown UI
         ActivateCooldownUI(abilitySlot, peaShooerCooldownTime);
 
         _PC.enableMovement = true;
 
-        _PC.FireProjectile(bigPea, 300, 1, _PC.projectileRange);
+        //_PC.FireProjectile(bigPea, 300, 1, _PC.projectileRange);
 
         ExecuteAfterSeconds(peaShooerCooldownTime, () => isOnCoolDown = false);
 
