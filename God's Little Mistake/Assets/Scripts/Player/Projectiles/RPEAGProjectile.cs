@@ -7,14 +7,14 @@ public class RPEAGProjectile : GameBehaviour
     [SerializeField]
     GameObject explosionAnimOB;
     [SerializeField]
-    GameObject image;
+    public GameObject image;
     [SerializeField]
     Animator explosionAnim;
     Rigidbody rb;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        explosionAnim = explosionAnimOB.GetComponent<Animator>();
+        //explosionAnim = explosionAnimOB.GetComponent<Animator>();
     }
 
     private void OnCollisionEnter(Collision collision)
