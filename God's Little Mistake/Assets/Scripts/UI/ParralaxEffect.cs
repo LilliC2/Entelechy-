@@ -14,6 +14,8 @@ public class ParralaxEffect : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        mainCamera = FindAnyObjectByType<Camera>();
+
         startingPosX = transform.position.x;
         startingPosZ = transform.position.z;
         lengthOfSpriteX = GetComponentInChildren<SpriteRenderer>().bounds.size.x;

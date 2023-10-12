@@ -296,5 +296,5 @@ public class EnemyShortRange : GameBehaviour
         }
     }
 
-
+    
 }

@@ -210,7 +210,6 @@ public class EnemyLongRange : GameBehaviour
                     //chase player
                     agent.isStopped = false;
                     enemyStats.stats.speed = normalSpeed;
-                    print("Chase player");
 
                     runAway = false;
 
@@ -231,7 +230,6 @@ public class EnemyLongRange : GameBehaviour
                         leftSideAnim.SetBool("Walking", false);
                         rightSideAnim.SetBool("Walking", false);
 
-                        print("Stop to attack");
                         agent.isStopped = true;
 
                         transform.LookAt(player.transform.position);
@@ -257,7 +255,6 @@ public class EnemyLongRange : GameBehaviour
 
                     enemyStats.stats.speed = runAwaySpeed;
 
-                    print("Back awawy");
                     //run away from player
                     agent.isStopped = false;
                     Vector3 toPlayer = player.transform.position - transform.position;
@@ -272,7 +269,6 @@ public class EnemyLongRange : GameBehaviour
                 break;
             case BaseEnemy.EnemyState.Die:
 
-                print("Die state");
                 BaseEnemy.Die();
 
                 break;
@@ -292,7 +288,6 @@ public class EnemyLongRange : GameBehaviour
     void ResetAttackAnimation()
     {
 
-        print("Reset aniamtions");
         animationPlayed = false;
         
     }
@@ -307,15 +302,18 @@ public class EnemyLongRange : GameBehaviour
 
     public void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
     {
-
         if (!projectileShot)
         {
             
             //Spawn bullet and apply force in the direction of the mouse
             //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
             GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
+
             bullet.GetComponent<EnemyProjectile>().dmg = enemyStats.stats.dmg;
             bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
+
+
+            bullet.GetComponent<ItemLook>().firingPoint = firingPoint;
 
 
             Mathf.Clamp(bullet.transform.position.y, 0, 0);
@@ -333,7 +331,6 @@ public class EnemyLongRange : GameBehaviour
 
     void PlayAttackAnimation()
     {
-        print("Attack anim");
         frontAnim.SetBool("Walking", false);
         backAnim.SetBool("Walking", false);
         leftSideAnim.SetBool("Walking", false);

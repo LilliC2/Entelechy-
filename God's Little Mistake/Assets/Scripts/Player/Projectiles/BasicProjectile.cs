@@ -7,7 +7,7 @@ public class BasicProjectile : GameBehaviour
     [SerializeField]
     GameObject explosionAnimOB;
     [SerializeField]
-    GameObject image;
+    public GameObject image;
     [SerializeField]
     Animator explosionAnim;
     Rigidbody rb;
@@ -24,13 +24,13 @@ public class BasicProjectile : GameBehaviour
             //explosionAnimOB.SetActive(true);
             
             image.SetActive(false);
-            print("play anim");
+            print("Destroy Projectile");
             //ooze animation
             explosionAnim.SetTrigger("Death");
 
 
             rb.velocity = Vector3.zero;
-            ExecuteAfterSeconds(0.1f, () => Destroy(this.gameObject));
+            Destroy(this.gameObject);
 
             //get dmg from enemy
             //Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);

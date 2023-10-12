@@ -62,7 +62,7 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
 
     public void PausingFucntion()
     {
-        _GM.OnPause(); //if needed to be use from the animations
+        //_GM.OnPause(); //if needed to be use from the animations
     }
 
     public void SearchSlot()

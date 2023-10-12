@@ -11,9 +11,15 @@ public class PlayerController : Singleton<PlayerController>
     [Header("God Cheats")]
     public bool immortal;
     public bool canFloat;
+    public float rotateAmount;
+    public float time;
+    public Ease ease;
 
     #region Animation Variables
     [Header("Animation")]
+    [SerializeField]
+    GameObject playerAvatar;
+
     public Animator baseAnimator;
     public Animator nubsAnimator;
     public GameObject nubsOB;
@@ -26,6 +32,11 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject missyBack;
     public GameObject missyForward;
 
+    Animator missyLeftSideAnim;
+    Animator missyRightSideAnim;
+    Animator missyFrontSideAnim;
+    Animator missyBackSideAnim;
+
     public GameObject meleeUI;
 
     public List<Animator> itemsAnimForward;
@@ -33,11 +44,21 @@ public class PlayerController : Singleton<PlayerController>
     public List<Animator> itemsAnimLeftSide;
     public List<Animator> itemsAnimBack;
 
+    GameObject currentHead;
+    [SerializeField]
+    GameObject frontHead;    
+    [SerializeField]
+    GameObject backHead;    
+    [SerializeField]
+    GameObject sideRHead;
+    [SerializeField]
+    GameObject sideLHead;
 
     public List<Animator> legsAnimators;
 
     bool meleeAnimationCooldown;
 
+    public ParticleSystem deathExplosionPS;
 
     Vector3 currentPos;
     Vector3 lastPos;
@@ -94,6 +115,8 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject directional; //is for current melee attack and will probably be removed
     public Vector3 target;
     bool projectileShot;
+    [SerializeField]
+    ParticleSystem spitParticleSystem;
 
     [Header("Knockback")]
     [SerializeField]
@@ -130,15 +153,20 @@ public class PlayerController : Singleton<PlayerController>
 
         CheckForStartingItems();
 
+        missyBackSideAnim = missyBack.GetComponent<Animator>();
+        missyFrontSideAnim = missyForward.GetComponent<Animator>();
+        missyLeftSideAnim = missyLeftSide.GetComponent<Animator>();
+        missyRightSideAnim = missyRightSide.GetComponent<Animator>();
 
+        currentHead = frontHead;
     }
 
     void Update()
     {
         //for testing
-        if (Input.GetKeyDown(KeyCode.Space))
+        if (Input.GetKeyDown(KeyCode.K))
         {
-
+            HeadBobble();
         }
 
 
@@ -148,9 +176,6 @@ public class PlayerController : Singleton<PlayerController>
         switch (_GM.gameState)
         {
             case GameManager.GameState.Playing:
-
-
-
 
                 #region Movement
 
@@ -178,6 +203,7 @@ public class PlayerController : Singleton<PlayerController>
                         }
 
                     }
+
 
 
                     if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
@@ -246,6 +272,29 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Animation
 
+                #region Enable Walking Animation
+
+                
+
+                if(isMoving)
+                {
+                    missyFrontSideAnim.SetBool("Walking", true);
+                    missyBackSideAnim.SetBool("Walking", true);
+                    missyLeftSideAnim.SetBool("Walking", true);
+                    missyRightSideAnim.SetBool("Walking", true);
+                }
+                else
+                {
+                    missyFrontSideAnim.SetBool("Walking", false);
+                    missyBackSideAnim.SetBool("Walking", false);
+                    missyLeftSideAnim.SetBool("Walking", false);
+                    missyRightSideAnim.SetBool("Walking", false);
+                }
+
+
+
+                #endregion
+
                 #region Legs Animation
 
                 //Idle Check
@@ -261,6 +310,7 @@ public class PlayerController : Singleton<PlayerController>
                 {
                     foreach (var item in legsAnimators)
                     {
+                        print(item.name);
                         item.SetBool("Walk", true);
                     }
                 }
@@ -272,6 +322,10 @@ public class PlayerController : Singleton<PlayerController>
                 //change for cardinal direction
                 if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
                 {
+
+                    currentHead = backHead;
+
+
                     StopAllAnimations();
 
                     if (lastDir == missyLeftSide)
@@ -288,7 +342,6 @@ public class PlayerController : Singleton<PlayerController>
                         missyForward.SetActive(false);
                         missyLeftSide.SetActive(false);
                         missyRightSide.SetActive(false);
-
 
                     }
 
@@ -314,6 +367,9 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.A)) //FACE LEFT
                 {
+                    currentHead = sideLHead;
+
+
                     StopAllAnimations();
 
                     _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
@@ -355,6 +411,9 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.S)) //FACE FORWARD
                 {
+                    currentHead = frontHead;
+
+
                     StopAllAnimations();
                     //print("Just pressed S. lastDir was " + lastDir.name);
                     if (lastDir == missyLeftSide)
@@ -376,7 +435,7 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         //print("delay");
 
-                        ExecuteAfterFrames(4, () => missyForward.SetActive(true));
+                        ExecuteAfterFrames(4, () => missyForward.SetActive(true));  
                         ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
                         ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
                         ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
@@ -391,6 +450,9 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 if (Input.GetKeyDown(KeyCode.D)) //FACE RIGHT
                 {
+                    currentHead = sideRHead;
+
+
                     StopAllAnimations();
                     _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
 
@@ -485,26 +547,27 @@ public class PlayerController : Singleton<PlayerController>
 
                                     }
                                 }
-                                else //MELEE ATTACKS-------------------------------------------------------------------------------------------------
+                                
+
+                            }
+                            else //MELEE ATTACKS-------------------------------------------------------------------------------------------------
+                            {
+                                print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
+
+                                //update melee attack pattern
+                                if (playerInventory[i].meleeAttackType == Item.AttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
+                                else if (playerInventory[i].meleeAttackType == Item.AttackType.Line) meleeHitBox = MeleeHitBox.Line;
+
+
+                                MeleeAttack(meleeFirerate, i);
+
+                                //MELEE ATTACK
+                                if (meleeUI != null)
                                 {
-                                    print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
+                                    print("MELEE ATTACK");
+                                    meleeUI.gameObject.SetActive(true);
 
-                                    //update melee attack pattern
-                                    if (playerInventory[i].meleeAttackType == Item.AttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
-                                    else if (playerInventory[i].meleeAttackType == Item.AttackType.Line) meleeHitBox = MeleeHitBox.Line;
-
-
-                                    MeleeAttack(meleeFirerate, i);
-
-                                    //MELEE ATTACK
-                                    if (meleeUI != null)
-                                    {
-                                        print("MELEE ATTACK");
-                                        meleeUI.gameObject.SetActive(true);
-
-                                    }
                                 }
-
                             }
                         }
                     }
@@ -527,8 +590,8 @@ public class PlayerController : Singleton<PlayerController>
                 //                print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
 
                 //                //update melee attack pattern
-                //                if (playerInventory[i].meleeAttackType == Item.AttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
-                //                else if (playerInventory[i].meleeAttackType == Item.AttackType.Line) meleeHitBox = MeleeHitBox.Line;
+                //                if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
+                //                else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
 
 
                 //                MeleeAttack(meleeFirerate, i);
@@ -546,7 +609,7 @@ public class PlayerController : Singleton<PlayerController>
                 //    }
 
                 //}
- 
+
 
 
                 //if (Input.GetMouseButton(0))
@@ -592,12 +655,14 @@ public class PlayerController : Singleton<PlayerController>
 
                 #endregion
                 #endregion
- 
+
+                if (health <= 0) Die();
 
                 break;
 
                 
         }
+
 
         lastPos = transform.position;
 
@@ -704,31 +769,6 @@ public class PlayerController : Singleton<PlayerController>
         return speedTween;
     }
    
-    //public void CloseSlots()
-    //{
-    //    for (int i = 0; i < slotsAnim.Length; i++)
-    //    {
-    //        if (_AVTAR.slotsOnPlayerFront[i].transform.childCount == 0)
-    //        {
-    //            print("trying to slot");
-    //            slotsAnim[i].SetBool("OpenSlot", false);
-    //            slotsAnim[i].SetBool("CloseSlot", true);
-
-    //        }
-
-
-
-    //        ExecuteAfterSeconds(1, () => ChangeSlots(false));
-    //    }
-    //}
-
-    //void ChangeSlots(bool _bool)
-    //{
-    //    for (int i = 0; i < slotsAnim.Length; i++)
-    //    {
-    //        slotsGO[i].SetActive(_bool);
-    //    }
-    //}
     void UpdateMelee()
     {
         switch (meleeHitBox)
@@ -754,6 +794,8 @@ public class PlayerController : Singleton<PlayerController>
         {
             item.active = false;
         }
+
+        print(_inventorySlot);
 
         //check if item is primary
         if (playerInventory[_inventorySlot].itemType == Item.ItemType.Primary)
@@ -789,12 +831,15 @@ public class PlayerController : Singleton<PlayerController>
                 if(meleeUI != null)
                 {
                     meleeAnimationCooldown = true;
-                    //meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                    meleeUI.GetComponent<Animator>().SetTrigger("Attack");
                     print("Attack count");
                     //activate animation
                     print("Anim slot " + _index);
                     itemsAnimForward[_index].SetTrigger("Attack");
-                    itemsAnimBack[_index].SetTrigger("Attack");
+
+                    if(itemsAnimBack[_index]!= null) itemsAnimBack[_index].SetTrigger("Attack");
+
+
                     itemsAnimLeftSide[_index].SetTrigger("Attack");
                     itemsAnimRightSide[_index].SetTrigger("Attack");
                     ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
@@ -843,13 +888,14 @@ public class PlayerController : Singleton<PlayerController>
             {
 
                 //particle system
-                var particleSystem = GetComponentInChildren<ParticleSystem>();
-                particleSystem.Play();
+                spitParticleSystem.Play();
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
+
+                bullet.GetComponent<ItemLook>().firingPoint = firingPoint;
 
                 knockbackActive = true;
                 knockbackStartTime = Time.time;
@@ -868,6 +914,13 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
+    void HeadBobble()
+    {
+        currentHead.transform.DOLocalRotate(new Vector3(0f, 0f, -rotateAmount),time).SetEase(ease);
+        ExecuteAfterSeconds(time, () => currentHead.transform.DOLocalRotate(new Vector3(0f, 0f, rotateAmount), time).SetEase(ease));
+        ExecuteAfterSeconds(time*2, () => currentHead.transform.DOLocalRotate(new Vector3(0f, 0f, 0), time).SetEase(ease));
+
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -883,7 +936,7 @@ public class PlayerController : Singleton<PlayerController>
             if(_PIA.gutpunch)
             {
                 print("GUT PUNCHED");
-                collision.gameObject.GetComponent<BaseEnemy>().stats.health -= _PIA.humanFistDamage;
+                collision.gameObject.GetComponent<BaseEnemy>().Hit(_PIA.humanFistDamage);
             }
         }
         
@@ -893,32 +946,51 @@ public class PlayerController : Singleton<PlayerController>
     {
         if(!immortal)
         {
+            
             print("player has been hit");
             health -= _dmg;
             //_PE.ChromaticABFade();
 
+            _AM.PlayerHurt();
+
             if (health > 0)
             {
+                HeadBobble();
                 _UI.UpdateHealthText(health);
             }
             else
             {
-                _GM.gameState = GameManager.GameState.Dead;
-                DieAnimation();
-                //add particles in die animation too
+                Die();
             }
         }
         
 
     }
 
+    public void Die()
+    {
+        _AM.PlayerDeathScream();
+
+        _GM.gameState = GameManager.GameState.Dead;
+        DieAnimation();
+
+        ExecuteAfterSeconds(0.5f, () => playerAvatar.SetActive(false));
+        ExecuteAfterSeconds(1, () => _GM.GameOver());
+
+    }
+
     void DieAnimation()
     {
-        //baseAnimator.SetBool("ForwardWalk", false);
-        //baseAnimator.SetBool("SideWalk", false);
-        //nubsAnimator.SetBool("ForwardWalk", false);
-        //nubsAnimator.SetBool("SideWalk", false);
-        //baseAnimator.SetTrigger("DeathTrigger");
+
+        missyRightSideAnim.SetBool("Walking", false);
+        missyLeftSideAnim.SetBool("Walking", false);
+        missyFrontSideAnim.SetBool("Walking", false);
+        missyBackSideAnim.SetBool("Walking", false);
+
+        missyRightSideAnim.SetTrigger("Death 0");
+        missyLeftSideAnim.SetTrigger("Death 0");
+        missyFrontSideAnim.SetTrigger("Death 0");
+        missyBackSideAnim.SetTrigger("Death 0");
     }
 
 

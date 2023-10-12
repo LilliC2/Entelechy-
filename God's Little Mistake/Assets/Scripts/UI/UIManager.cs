@@ -10,6 +10,8 @@ public class UIManager : Singleton<UIManager>
     public Item leftArmItem;
     public Item rightArmItem;
 
+    public GameObject gameOverMenu;
+
     [Header("Player Feedback")]
     public TMP_Text hpText;
     public TMP_Text levelText;
@@ -394,7 +396,6 @@ public class UIManager : Singleton<UIManager>
                         invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
                         _HUD.hasItem1 = true;
 
-                        //pass cooldown here
                     }
                     break;
 
@@ -491,16 +492,10 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CreateItemSelected(Item _itemInfo)
     {
+        print("Create item " + _itemInfo.itemName + " " + _itemInfo.ID);
 
-        //print("Create item, in scene id is " + _inSceneId);
         heldItem = _itemInfo;
 
-        //print("in CreateItemSelected ID is " + heldItem.ID);
-
-        //Sprite itemSprite = GameObject.Instantiate(_ISitemD.inSceneItemDataBase[_inSceneId].icon, canvas.transform);
-        //cursor.sprite = itemSprite;
-
-        //statsPopUpPanel.SetActive(false);
         isHoldingItem = true;
 
         int slot = -1;
@@ -513,15 +508,27 @@ public class UIManager : Singleton<UIManager>
                 {
                     case Item.Category.Horns:
                         if (_AVTAR.slotsOnPlayerFront[0].transform.childCount == 0)
+                        {
                             slot = 0;
+                            heldItem.inSlot = slot;
+                        }
                         break;
                     case Item.Category.Eyes:
                         if (_AVTAR.slotsOnPlayerFront[1].transform.childCount == 0)
+                        {
                             slot = 1;
+                            heldItem.inSlot = slot;
+                        }
                         break;
                     case Item.Category.Mouth:
+                        print("itws a mouth");
+
                         if (_AVTAR.slotsOnPlayerFront[2].transform.childCount == 0)
+                        {
+                            print("no childern so its 2");
                             slot = 2;
+                            heldItem.inSlot = slot;
+                        }
                         break;
                     
                 }
@@ -535,12 +542,15 @@ public class UIManager : Singleton<UIManager>
                 else if (_AVTAR.slotsOnPlayerFront[4].transform.childCount == 0)
                 {
                     slot = 4;
+                    heldItem.inSlot = slot;
+
                 }
                 break;
             case Item.Segment.Legs:
                 if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
                 {
                     slot = 5;
+                    heldItem.inSlot = slot;
 
                 }
                 break;  
@@ -549,7 +559,7 @@ public class UIManager : Singleton<UIManager>
 
         if(slot != -1)
         {
-            //print(heldItem.itemName + " is on slot " + slot);
+            print(heldItem.itemName + " is on slot " + slot);
             heldItem.inSlot = slot;
             EquipImage(slot);
 
@@ -564,9 +574,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void EquipImage(int _slot)
     {
-        bool flip = false;
 
-        if (_slot == 4) flip = true;
 
         //print("Creating item for slot " + _slot);
 
@@ -745,7 +753,7 @@ public class UIManager : Singleton<UIManager>
     {
         List<Item> itemMatchInPlayerInven = new();
 
-        print("Hover item is " + _hoverItem.itemName);
+        //print("Hover item is " + _hoverItem.itemName);
 
         foreach (var item in _PC.playerInventory)
         {
@@ -760,8 +768,7 @@ public class UIManager : Singleton<UIManager>
 
         foreach (var item in itemMatchInPlayerInven)
         {
-            print("Printing Item list: ");
-            print(item.itemName);
+
         }
         if (itemMatchInPlayerInven.Count == 0) print("No Matches found");
 
