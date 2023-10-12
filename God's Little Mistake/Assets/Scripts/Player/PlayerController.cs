@@ -60,6 +60,8 @@ public class PlayerController : Singleton<PlayerController>
 
     public ParticleSystem deathExplosionPS;
 
+    public GameObject missyDeathAnim;
+
     Vector3 currentPos;
     Vector3 lastPos;
 
