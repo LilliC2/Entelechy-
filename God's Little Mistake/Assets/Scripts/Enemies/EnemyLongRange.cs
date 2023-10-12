@@ -82,22 +82,30 @@ public class EnemyLongRange : GameBehaviour
     {
         agent.speed = enemyStats.stats.speed;
 
-        ////check for the sight and attack range
-        if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed) 
+        if (_GM.gameState != GameManager.GameState.Dead)
         {
-            if(BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+            ////check for the sight and attack range
+            if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed)
             {
-                canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
-                canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
+                if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+                {
+                    canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
+                    canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
-                //if cant see player, patrol
-                if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
-                else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
-                //else agent.isStopped = tru;
+                    //if cant see player, patrol
+                    if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+                    else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+                    //else agent.isStopped = tru;
+                }
+
+
             }
-
-
         }
+        //just patrol if player is dead
+        else BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+
+
+
 
         //Change sprites based on direction
 
