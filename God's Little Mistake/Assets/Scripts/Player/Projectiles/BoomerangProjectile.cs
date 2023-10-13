@@ -15,6 +15,10 @@ public class BoomerangProjectile : GameBehaviour
     Animator explosionAnim;
     Rigidbody rb;
 
+    bool turn = true;
+
+    Vector3 playerPosWhenThrown;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -25,16 +29,36 @@ public class BoomerangProjectile : GameBehaviour
     {
         totalDistance = _PC.projectileRange;
         halfway = totalDistance / 2;
+
+        playerPosWhenThrown = _PC.transform.position;
+
+        print("total distance: " + totalDistance);
+        print("half distance: " + halfway);
     }
 
     // Update is called once per frame
     void Update()
     {
-        if (Vector3.Distance(_PC.transform.position, gameObject.transform.position) > halfway)
+        if(turn && Vector3.Distance(playerPosWhenThrown, transform.position) > halfway)
         {
-            //turn around
-            gameObject.transform.eulerAngles = Vector3.back;
+            print("we half");
+            turn = false;
         }
+
+        if (!turn)
+        {
+            //travel back
+
+            rb.velocity = Vector3.zero;
+            rb.angularVelocity = Vector3.zero;
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_PC.transform.position.x, _PC.transform.position.y + 1, _PC.transform.position.z), Time.deltaTime * _PC.projectileSpeed/50);
+        }
+        if(!turn && Vector3.Distance(_PC.transform.position, transform.position) < 0.5f)
+        {
+            //Destroy(this.gameObject);
+        }
+
+
     }
 
     private void OnCollisionEnter(Collision collision)

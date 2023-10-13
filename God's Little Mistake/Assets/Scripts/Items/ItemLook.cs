@@ -57,9 +57,9 @@ public class ItemLook : GameBehaviour
                 }
                 else
                 {
-                    x = GetComponent<BasicProjectile>().image.transform.localScale.x;
+                    x = -GetComponent<BasicProjectile>().image.transform.localScale.x;
 
-                    var projectileScript3 = GetComponent<BoomerangProjectile>();
+                    var projectileScript3 = GetComponent<BasicProjectile>();
 
 
                     GetComponent<BasicProjectile>().image.transform.localScale = new Vector3(x, projectileScript3.image.transform.localScale.y, projectileScript3.image.transform.localScale.z);

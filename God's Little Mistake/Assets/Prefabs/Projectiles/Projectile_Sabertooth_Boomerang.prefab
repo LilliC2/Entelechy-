@@ -11,10 +11,10 @@ GameObject:
   - component: {fileID: 2995069844349897666}
   - component: {fileID: 3789948106417740404}
   - component: {fileID: 6508179776684443429}
-  - component: {fileID: 6910550052352890839}
   - component: {fileID: 3227829851280185050}
   - component: {fileID: 3860862713299551001}
   - component: {fileID: 9071110616242923379}
+  - component: {fileID: 9055833975710938956}
   m_Layer: 13
   m_Name: Projectile_Sabertooth_Boomerang
   m_TagString: Projectile
@@ -89,33 +89,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!54 &6910550052352890839
-Rigidbody:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2270622985260862806}
-  serializedVersion: 4
-  m_Mass: 1
-  m_Drag: 0
-  m_AngularDrag: 0.05
-  m_CenterOfMass: {x: 0, y: 0, z: 0}
-  m_InertiaTensor: {x: 1, y: 1, z: 1}
-  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 64
-  m_ImplicitCom: 1
-  m_ImplicitTensor: 1
-  m_UseGravity: 1
-  m_IsKinematic: 0
-  m_Interpolate: 0
-  m_Constraints: 116
-  m_CollisionDetection: 0
 --- !u!65 &3227829851280185050
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -165,6 +138,33 @@ MonoBehaviour:
   explosionAnimOB: {fileID: 2794077385566701362}
   image: {fileID: 8699630553993501692}
   explosionAnim: {fileID: 0}
+--- !u!54 &9055833975710938956
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2270622985260862806}
+  serializedVersion: 4
+  m_Mass: 1
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_CenterOfMass: {x: 0, y: 0, z: 0}
+  m_InertiaTensor: {x: 1, y: 1, z: 1}
+  m_InertiaRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 8256
+  m_ImplicitCom: 1
+  m_ImplicitTensor: 1
+  m_UseGravity: 0
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 116
+  m_CollisionDetection: 0
 --- !u!1001 &4042190009198984226
 PrefabInstance:
   m_ObjectHideFlags: 0

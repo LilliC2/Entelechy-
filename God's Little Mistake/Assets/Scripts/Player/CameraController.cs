@@ -30,7 +30,7 @@ public class CameraController : GameBehaviour
     void Start()
     {
         defaultPOS =  new Vector3(player.transform.position.x, 6, player.transform.position.z + -6);
-        player = GameObject.FindGameObjectWithTag("Player");
+        player = _PC.gameObject;
     }
 
     // Update is called once per frame
