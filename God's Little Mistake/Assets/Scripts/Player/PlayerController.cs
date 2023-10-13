@@ -835,10 +835,7 @@ public class PlayerController : Singleton<PlayerController>
 
     void MeleeAttack(float _firerate, int _index)
     {
-
-
         var inRangeEnemies = GetComponentInChildren<MeleeRangeCheck>().inRangeEnemies;
-
 
         if (!meleeCooDown)
         {
