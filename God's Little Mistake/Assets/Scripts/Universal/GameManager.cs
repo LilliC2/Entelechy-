@@ -16,6 +16,11 @@ public class GameManager : Singleton<GameManager>
     GameObject currentLevel;
     public GameObject endRoomOB;
 
+
+    [Header("Pause and game over")]
+    public bool isPlaying;
+    public bool isPaused;
+
     public enum GameState
     {
         Playing, Pause, Iventory, Dead
@@ -41,15 +46,58 @@ public class GameManager : Singleton<GameManager>
 
         }
 
-        
+        if (gameState == GameState.Playing)
+        {
+            isPlaying = true;
+            isPaused = false;
+        }
+
+
+        if (gameState == GameState.Pause)
+        {
+            isPlaying = false;
+            isPaused = true;
+        }
+
+
+        if (Input.GetKeyDown(KeyCode.Escape) && isPlaying)
+        {
+            OnPause();
+        }
+
+        if (Input.GetKeyDown(KeyCode.Escape) && isPaused)
+        {
+            OnResume();
+        }
+
+        if (gameState == GameState.Dead)
+        {
+
+        }
+
+
 
     }
+
+    public void OnPause()
+    {
+        gameState = GameState.Pause;
+        _UI.OnPause();
+        //Time.timeScale = 0;
+    }
+
+    public void OnResume()
+    {
+        gameState = GameState.Playing;
+        _UI.OnResume();
+        //Time.timeScale = 1;
+    }
+
 
     public void GameOver()
     {
         _UI.PlayTransitionAnimation();
-        Time.timeScale = 1f;
-
+        gameState = GameState.Dead;
 
     }
 
