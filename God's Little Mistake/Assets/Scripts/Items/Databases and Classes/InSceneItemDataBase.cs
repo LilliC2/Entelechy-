@@ -161,6 +161,8 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         _PC.projectileFirerate += _PC.playerInventory[_inventoryID].projectileFirerate;
         _PC.critX += _PC.playerInventory[_inventoryID].critX;
         _PC.critChance += _PC.playerInventory[_inventoryID].critChance;
+        _PC.speed += _PC.playerInventory[_inventoryID].movementSpeed;
+        _PC.maxSpeed += _PC.playerInventory[_inventoryID].movementSpeed;
     }
 
     /// <summary>

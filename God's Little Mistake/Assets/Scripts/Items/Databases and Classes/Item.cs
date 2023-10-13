@@ -36,6 +36,7 @@ public class Item
     public float projectileSpeed;
     public GameObject projectilePF;
 
+    public float movementSpeed;
 
     public bool modifier;
     public float modifierID;
