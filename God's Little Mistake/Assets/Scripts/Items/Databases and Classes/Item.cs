@@ -24,9 +24,8 @@ public class Item
     public bool active;
 
     public float dmg;
-    public float dps;
-    public float longRangeSpeed;
-    public float meleeSpeed;
+    public float projectileFirerate;
+    public float meleeFirerate;
 
     public float critX; //crit dmg multipler
     public float critChance;
@@ -36,7 +35,6 @@ public class Item
     public bool projectile;
     public float projectileSpeed;
     public GameObject projectilePF;
-    public float fireRate;
 
 
     public bool modifier;

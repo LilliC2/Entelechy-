@@ -192,7 +192,7 @@ public class UIManager : Singleton<UIManager>
         popupDmg.text = _hoverItem.dmg.ToString();
         popupCritX.text = _hoverItem.critX.ToString();
         popupCritChance.text = _hoverItem.critChance.ToString();
-        popupFirerate.text = _hoverItem.fireRate.ToString();
+        popupFirerate.text = _hoverItem.meleeFirerate.ToString();
         popupIcon.sprite = _hoverItem.icon;
 
         print("Update pop up");
@@ -253,7 +253,7 @@ public class UIManager : Singleton<UIManager>
         popupDmg1.text = _itemInfo.dmg.ToString();
         popupCritX1.text = _itemInfo.critX.ToString();
         popupCritChance1.text = _itemInfo.critChance.ToString();
-        popupFirerate1.text = _itemInfo.fireRate.ToString();
+        popupFirerate1.text = _itemInfo.meleeFirerate.ToString();
         popupIcon1.sprite = _itemInfo.icon;
 
         
@@ -270,7 +270,7 @@ public class UIManager : Singleton<UIManager>
         popupDmg2.text = _itemInfo.dmg.ToString();
         popupCritX2.text = _itemInfo.critX.ToString();
         popupCritChance2.text = _itemInfo.critChance.ToString();
-        popupFirerate2.text = _itemInfo.fireRate.ToString();
+        popupFirerate2.text = _itemInfo.meleeFirerate.ToString();
         popupIcon2.sprite = _itemInfo.icon;
 
 
@@ -400,7 +400,7 @@ public class UIManager : Singleton<UIManager>
         invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
         invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
         invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-        invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].longRangeSpeed.ToString();
+        invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].projectileFirerate.ToString();
 
         
     }

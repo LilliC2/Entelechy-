@@ -58,9 +58,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 5
-    dps: 5
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 0
     longRange_range: 0
@@ -68,7 +67,6 @@ MonoBehaviour:
     projectile: 1
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 024fc9c35ba18ca428570b98b46bf663, type: 3}
@@ -90,9 +88,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 5
-    dps: 5
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 0
     longRange_range: 0
@@ -100,7 +97,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 7cc89a56291aab243b1ad54b3d060bd2, type: 3}
@@ -122,9 +118,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 0
-    dps: 0
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 0
     longRange_range: 0
@@ -132,7 +127,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: ea2196df04e795d42a8921e12925c8da, type: 3}
@@ -154,9 +148,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 0
-    dps: 0
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 0
     longRange_range: 0
@@ -164,7 +157,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 9ab6ba619de7e6943afdbb704159502d, type: 3}
@@ -181,22 +173,20 @@ MonoBehaviour:
     category: 1
     segment: 0
     meleeAttackType: 0
-    itemType: 2
+    itemType: 0
     hasActiveAbility: 0
     currencyValue: 0
     active: 0
-    dmg: 0
-    dps: 0
-    longRangeSpeed: 0
-    meleeSpeed: 0
-    critX: 0
-    critChance: 2
-    longRange_range: 0
+    dmg: 20
+    projectileFirerate: 0.67
+    meleeFirerate: 0
+    critX: 1.2
+    critChance: 5
+    longRange_range: 12
     melee_range: 0
     projectile: 0
     projectileSpeed: 5
-    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
+    projectilePF: {fileID: 2270622985260862806, guid: 252be8e94cd0cdc49a7f757070716c54, type: 3}
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
@@ -218,9 +208,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 25
-    dps: 0
-    longRangeSpeed: 0
-    meleeSpeed: 10
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 1.2
     critChance: 5
     longRange_range: 0
@@ -228,7 +217,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 39a38614989899547bb7401eb9884ec2, type: 3}
@@ -250,9 +238,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 0
-    dps: 0
-    longRangeSpeed: 0
-    meleeSpeed: 10
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 0
     longRange_range: 0
@@ -260,7 +247,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 00a1cca442778f14b802193952c053d9, type: 3}
@@ -282,9 +268,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 0
-    dps: 0
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 2
     longRange_range: 0
@@ -292,7 +277,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 3510ce532c065904ea34910644fd2f93, type: 3}
@@ -314,9 +298,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 37
-    dps: 0
-    longRangeSpeed: 0
-    meleeSpeed: 3
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 4
     critChance: 2
     longRange_range: 0
@@ -324,7 +307,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: f8fa9027941ad9b4cb1ae4adfa069a16, type: 3}
@@ -346,9 +328,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 10
-    dps: 1
-    longRangeSpeed: 5
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 1.3
     critChance: 5
     longRange_range: 0
@@ -356,7 +337,6 @@ MonoBehaviour:
     projectile: 1
     projectileSpeed: 300
     projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
@@ -378,9 +358,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 1
-    dps: 1
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 2
     longRange_range: 0
@@ -388,7 +367,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 26ab52217ea1e774884b944c5c860c4a, type: 3}
@@ -410,9 +388,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 1
-    dps: 1
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 2
     longRange_range: 0
@@ -420,7 +397,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 78213a660ae434649a1cce5a02846b1a, type: 3}
@@ -442,9 +418,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 1
-    dps: 1
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 2
     longRange_range: 0
@@ -452,7 +427,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: df94ebc9d2b8ee347b7faf84cafb688e, type: 3}
@@ -474,9 +448,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 1
-    dps: 1
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 2
     longRange_range: 0
@@ -484,7 +457,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 9bdc47d447b98b34f862c99f0e6ff591, type: 3}
@@ -506,9 +478,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 1
-    dps: 1
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 2
     longRange_range: 0
@@ -516,7 +487,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: f74a6c9f5b34cfb4da8a61b517484a52, type: 3}
@@ -538,9 +508,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 5
-    dps: 0
-    longRangeSpeed: 0
-    meleeSpeed: 10
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 0
     longRange_range: 0
@@ -548,7 +517,6 @@ MonoBehaviour:
     projectile: 0
     projectileSpeed: 0
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
@@ -570,9 +538,8 @@ MonoBehaviour:
     currencyValue: 0
     active: 0
     dmg: 1
-    dps: 1
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    projectileFirerate: 0
+    meleeFirerate: 0
     critX: 0
     critChance: 2
     longRange_range: 0
@@ -580,7 +547,6 @@ MonoBehaviour:
     projectile: 1
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 540a9d10750f152449f211058959489b, type: 3}

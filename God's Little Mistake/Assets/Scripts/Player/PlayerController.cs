@@ -89,11 +89,12 @@ public class PlayerController : Singleton<PlayerController>
     public float speed;
     public float maxSpeed;
     public float dmg;
-    public float dps;
     public float projectileRange;
     public float meleeRange;
     public float meleeFirerate;
     public float projectileFirerate;
+    public float critX;
+    public float critChance;
 
     public bool projectile;
     public float projectileSpeed;
@@ -914,8 +915,11 @@ public class PlayerController : Singleton<PlayerController>
                 knockbackStartTime = Time.time;
                 Mathf.Clamp(bullet.transform.position.y, 0, 0);
 
-                //This will destroy bullet once it exits the range, aka after a certain amount of time
-                //Destroy(bullet, _range);
+                //This will destroy bullet once it exits the range
+
+                if(Vector3.Distance(transform.position,bullet.transform.position) > projectileRange) Destroy(bullet);
+
+
 
                 //Controls the firerate, player can shoot another bullet after a certain amount of time
                 projectileShot = true;

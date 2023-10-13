@@ -327,7 +327,7 @@ public class EnemyLongRange : GameBehaviour
             Mathf.Clamp(bullet.transform.position.y, 0, 0);
 
             //This will destroy bullet once it exits the range, aka after a certain amount of time
-            Destroy(bullet, _range);
+            if (Vector3.Distance(transform.position, bullet.transform.position) > _range) Destroy(bullet);
 
             //Controls the firerate, player can shoot another bullet after a certain amount of time
             projectileShot = true;

@@ -63,7 +63,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
                 case Item.ItemType.Secondary:
                     break;
                 case Item.ItemType.Passive:
-                    AddPassiveItem(index);
+                    AddItemStats(index);
                     break;
                 case Item.ItemType.Symbiote:
                     break;
@@ -115,7 +115,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
             case Item.ItemType.Secondary:
                 break;
             case Item.ItemType.Passive:
-                RemovePassiveItem(_inventoryID);
+                RemoveItemStats(_inventoryID);
                 break;
             case Item.ItemType.Symbiote:
                 break;
@@ -144,7 +144,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
     /// Add passive item buffs to player stats
     /// </summary>
     /// <param name="_index"></param>
-    public void AddPassiveItem(int _inventoryID)
+    public void AddItemStats(int _inventoryID)
     {
         //if the items ever add HP
         //_PC.health += _PC.playerInventory[_index].health
@@ -153,31 +153,37 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         //_PC.speed += _PC.playerInventory[_index].speed;
         
         _PC.dmg += _PC.playerInventory[_inventoryID].dmg;
-        _PC.dps += _PC.playerInventory[_inventoryID].dps;
         _PC.projectileRange += _PC.playerInventory[_inventoryID].longRange_range;
+        _PC.meleeRange += _PC.playerInventory[_inventoryID].melee_range;
         _PC.projectileSpeed += _PC.playerInventory[_inventoryID].projectileSpeed;
 
-
-        _PC.projectileFirerate -= _PC.playerInventory[_inventoryID].longRangeSpeed;
+        _PC.meleeFirerate += _PC.playerInventory[_inventoryID].meleeFirerate;
+        _PC.projectileFirerate += _PC.playerInventory[_inventoryID].projectileFirerate;
+        _PC.critX += _PC.playerInventory[_inventoryID].critX;
+        _PC.critChance += _PC.playerInventory[_inventoryID].critChance;
     }
 
     /// <summary>
     /// Remove passive item buffs to player stats
     /// </summary>
     /// <param name="_index"></param>
-    public void RemovePassiveItem(int _inventoryID)
+    public void RemoveItemStats(int _inventoryID)
     {
         //if the items ever add HP
         //_PC.health -= _PC.playerInventory[_index].health
 
         //if the items ever add speed
         //_PC.speed -= _PC.playerInventory[_index].speed;
-        
+
         _PC.dmg -= _PC.playerInventory[_inventoryID].dmg;
-        _PC.dps -= _PC.playerInventory[_inventoryID].dps;
         _PC.projectileRange -= _PC.playerInventory[_inventoryID].longRange_range;
+        _PC.meleeRange -= _PC.playerInventory[_inventoryID].melee_range;
         _PC.projectileSpeed -= _PC.playerInventory[_inventoryID].projectileSpeed;
-        _PC.projectileFirerate -= _PC.playerInventory[_inventoryID].longRangeSpeed;
+
+        _PC.meleeFirerate -= _PC.playerInventory[_inventoryID].meleeFirerate;
+        _PC.projectileFirerate += _PC.playerInventory[_inventoryID].projectileFirerate;
+        _PC.critX -= _PC.playerInventory[_inventoryID].critX;
+        _PC.critChance -= _PC.playerInventory[_inventoryID].critChance;
     }
 
 
