@@ -10,7 +10,10 @@ public class UIManager : Singleton<UIManager>
     public Item leftArmItem;
     public Item rightArmItem;
 
+    [Header("Player Feedback")]
     public GameObject gameOverMenu;
+    public Animator gameOverAnim;
+
 
     [Header("Player Feedback")]
     public TMP_Text hpText;
@@ -133,9 +136,14 @@ public class UIManager : Singleton<UIManager>
         hoverItemStatComp1Animator = statComp1.GetComponent<Animator>();
         hoverItemStatComp2Animator = statComp2.GetComponent<Animator>();
 
+        gameOverAnim = gameOverMenu.GetComponent<Animator>();
+
         //Pause Related
-        //pausePanel.SetActive(false);
-        //optionPanel.SetActive(false);
+        pausePanel.SetActive(false);
+        optionPanel.SetActive(false);
+
+        //Game Over Related
+        gameOverMenu.SetActive(false);
 
     }
 
@@ -190,10 +198,13 @@ public class UIManager : Singleton<UIManager>
         //Show score, time, etc.
     }
 
-    
+
 
 
     #endregion
+
+
+    #region Popups
 
     public void UpdateItemPopUp(Item _hoverItem)
     {
@@ -363,6 +374,8 @@ public class UIManager : Singleton<UIManager>
     {
         //levelText.text = "Level " + _lvl.ToString();
     }
+
+    #endregion
 
     #region Inventory Item Stats Popup
 
@@ -778,70 +791,24 @@ public class UIManager : Singleton<UIManager>
 
     #region HUD
 
-    
+
 
     #endregion
 
 
-    #region Indicators
+    #region Game Over
 
-    //public void TopSegmentIndicator()
-    //{
-    //    topEye.SetActive(true);
-    //    topEye.GetComponent<SpriteRenderer>().color = Color.yellow;
-    //    middleEye.SetActive(false);
-    //    bottomEye.SetActive(false);
-    //}
+    public void PlayTransitionAnimation()
+    {
+        gameOverMenu.SetActive(true);
 
-    //public void MiddleSegmentIndicator()
-    //{
-    //    middleEye.SetActive(true);
-    //    middleEye.GetComponent<SpriteRenderer>().color = Color.red;
-    //    topEye.SetActive(false);
-    //    bottomEye.SetActive(false);
+    }
 
-    //}
+    public void PlayLoopAnimation()
+    {
 
-    //public void BottomSegmentIndicator()
-    //{
-    //    bottomEye.SetActive(true);
-    //    bottomEye.GetComponent<SpriteRenderer>().color = Color.red;
-    //    topEye.SetActive(false);
-    //    middleEye.SetActive(false);
-    //}
+    }
 
-    //public void AttackPillChange(int num)
-    //{
-    //    attackPill.SetActive(true);
-    //    if (num == 1)
-    //    {
-    //        attackPillText.text = "Melee";
-    //        //attackIcon.SetActive(true); change the icon
-    //        attackPill.GetComponent<SpriteRenderer>().color = Color.red;
-    //    }
-    //    if (num == 2) 
-    //    {
-    //        attackPillText.text = "Range";
-    //        //attackIcon.SetActive(true); change the icon
-    //        attackPill.GetComponent<SpriteRenderer>().color = Color.red;
-    //    }
-    //}
-
-    //public void RangePillChange(int num)
-    //{
-    //    rangePill.SetActive(true);
-    //    attackPillText.text = num.ToString();
-    //}
-
-    //public void ChangeItemIcon()
-    //{
-    //    //Chnage the item icons
-    //}
-
-    //public void ChangeItemType()
-    //{
-    //    //Chnage the type icons
-    //}
 
     #endregion
 

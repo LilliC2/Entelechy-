@@ -47,7 +47,9 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        _UI.gameOverMenu.SetActive(true);
+        _UI.PlayTransitionAnimation();
+        Time.timeScale = 1f;
+
 
     }
 
