@@ -61,9 +61,7 @@ public class PlayerController : Singleton<PlayerController>
 
     bool meleeAnimationCooldown;
 
-    public ParticleSystem deathExplosionPS;
 
-    public GameObject missyDeathAnim;
 
     Vector3 currentPos;
     Vector3 lastPos;
@@ -111,6 +109,12 @@ public class PlayerController : Singleton<PlayerController>
 
     #endregion
     
+    [Header("Particle Systems")]
+    public ParticleSystem deathExplosionPS;
+    public GameObject missyDeathAnim;
+    [SerializeField]
+    ParticleSystem spitParticleSystem;
+
     [Header("Inventory")]
     public List<Item> playerInventory;
 
@@ -120,8 +124,7 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject directional; //is for current melee attack and will probably be removed
     public Vector3 target;
     bool projectileShot;
-    [SerializeField]
-    ParticleSystem spitParticleSystem;
+
 
     [Header("Knockback")]
     [SerializeField]
@@ -898,7 +901,7 @@ public class PlayerController : Singleton<PlayerController>
             {
 
                 //particle system
-                spitParticleSystem.Play();
+                FiringParticleSystem(_prefab);
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
@@ -920,6 +923,15 @@ public class PlayerController : Singleton<PlayerController>
                 ExecuteAfterSeconds(_firerate, () => projectileShot = false);
             }
             print("FIRE PROJECTILE");
+
+        }
+    }
+
+    void FiringParticleSystem(GameObject _projectile)
+    {
+        if(_projectile.name != "Solar_Laser_Projectile")
+        {
+            spitParticleSystem.Play();
 
         }
     }
