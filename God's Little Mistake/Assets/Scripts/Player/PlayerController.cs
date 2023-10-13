@@ -818,12 +818,12 @@ public class PlayerController : Singleton<PlayerController>
             if(!playerInventory[_inventorySlot].projectile)
             {
                 ////change melee UI
-                //meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
+                meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
                 //meleeUI.gameObject.SetActive(false);
                 ////change ui scale
                 //meleeUI.GetComponentInParent<Transform>().localScale = new Vector3(meleeRange, meleeRange, meleeRange);
 
-                
+                UIrangeIndicator.size = new Vector2(UIrangeIndicator.size.x, meleeRange);
             }
 
             
@@ -832,6 +832,8 @@ public class PlayerController : Singleton<PlayerController>
 
     void MeleeAttack(float _firerate, int _index)
     {
+
+
         var inRangeEnemies = GetComponentInChildren<MeleeRangeCheck>().inRangeEnemies;
 
 
@@ -900,7 +902,7 @@ public class PlayerController : Singleton<PlayerController>
 
             if (!projectileShot)
             {
-
+                print("Fire");
                 //particle system
                 FiringParticleSystem(_prefab);
 
