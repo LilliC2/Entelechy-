@@ -39,14 +39,33 @@ public class ItemLook : GameBehaviour
                 float x;
                 //print("flip it");
                 //flip projectile
-                if(gameObject.name != "Projectile_RPEAG")
+                if (gameObject.name == "Projectile_RPEAG")
+                {
+
+                    x = -GetComponent<RPEAGProjectile>().image.transform.localScale.x;
+                    GetComponent<RPEAGProjectile>().image.transform.localScale = new Vector3(x, projectileScript.image.transform.localScale.y, projectileScript.image.transform.localScale.z);
+
+                }
+                else if (gameObject.name.Contains("Boomerang"))
+                {
+                    x = -GetComponent<BoomerangProjectile>().image.transform.localScale.x;
+
+                    var projectileScript2 = GetComponent<BoomerangProjectile>();
+
+                    projectileScript2.image.transform.localScale = new Vector3(x, projectileScript2.image.transform.localScale.y, projectileScript2.image.transform.localScale.z);
+
+                }
+                else
                 {
                     x = -GetComponent<BasicProjectile>().image.transform.localScale.x;
 
+                    var projectileScript3 = GetComponent<BasicProjectile>();
+
+
+                    GetComponent<BasicProjectile>().image.transform.localScale = new Vector3(x, projectileScript3.image.transform.localScale.y, projectileScript3.image.transform.localScale.z);
+
                 }
-                else x = -GetComponent<RPEAGProjectile>().image.transform.localScale.x;
                 //print(x);
-                projectileScript.image.transform.localScale = new Vector3(x, projectileScript.image.transform.localScale.y, projectileScript.image.transform.localScale.z);
             }
 
         }

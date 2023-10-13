@@ -915,7 +915,7 @@ public class PlayerController : Singleton<PlayerController>
                 Mathf.Clamp(bullet.transform.position.y, 0, 0);
 
                 //This will destroy bullet once it exits the range, aka after a certain amount of time
-                Destroy(bullet, _range);
+                //Destroy(bullet, _range);
 
                 //Controls the firerate, player can shoot another bullet after a certain amount of time
                 projectileShot = true;
