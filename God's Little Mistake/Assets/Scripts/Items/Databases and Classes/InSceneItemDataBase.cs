@@ -11,7 +11,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
     /// <param name="_sceneID"></param>
     public void AddItemToInventory(Item _item)
     {
-        
+        print("Equip item");
 
         //move item to inventory
         if (_PC.playerInventory.Count < 6)
@@ -21,13 +21,6 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
             _UI.statsPopUpPanel.SetActive(false);
             _PC.playerInventory.Add(_item);
             //print("added item");
-
-
-
-            //change items
-            GameObject[] itemsOnGround = GameObject.FindGameObjectsWithTag("Item Drop");
-
-
 
 
             var index = _PC.playerInventory.Count - 1;
@@ -157,8 +150,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         _PC.meleeRange += _PC.playerInventory[_inventoryID].melee_range;
         _PC.projectileSpeed += _PC.playerInventory[_inventoryID].projectileSpeed;
 
-        _PC.meleeFirerate += _PC.playerInventory[_inventoryID].meleeFirerate;
-        _PC.projectileFirerate += _PC.playerInventory[_inventoryID].projectileFirerate;
+        _PC.projectileFirerate += _PC.playerInventory[_inventoryID].firerate;
         _PC.critX += _PC.playerInventory[_inventoryID].critX;
         _PC.critChance += _PC.playerInventory[_inventoryID].critChance;
         _PC.speed += _PC.playerInventory[_inventoryID].movementSpeed;
@@ -182,8 +174,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         _PC.meleeRange -= _PC.playerInventory[_inventoryID].melee_range;
         _PC.projectileSpeed -= _PC.playerInventory[_inventoryID].projectileSpeed;
 
-        _PC.meleeFirerate -= _PC.playerInventory[_inventoryID].meleeFirerate;
-        _PC.projectileFirerate += _PC.playerInventory[_inventoryID].projectileFirerate;
+        _PC.projectileFirerate += _PC.playerInventory[_inventoryID].firerate;
         _PC.critX -= _PC.playerInventory[_inventoryID].critX;
         _PC.critChance -= _PC.playerInventory[_inventoryID].critChance;
     }

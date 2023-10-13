@@ -53,9 +53,9 @@ public class BoomerangProjectile : GameBehaviour
             rb.angularVelocity = Vector3.zero;
             transform.position = Vector3.MoveTowards(transform.position, new Vector3(_PC.transform.position.x, _PC.transform.position.y + 1, _PC.transform.position.z), Time.deltaTime * _PC.projectileSpeed/50);
         }
-        if(!turn && Vector3.Distance(_PC.transform.position, transform.position) < 0.5f)
+        if(!turn && Vector3.Distance(_PC.transform.position, transform.position) < 1.5f)
         {
-            //Destroy(this.gameObject);
+            Destroy(this.gameObject);
         }
 
 

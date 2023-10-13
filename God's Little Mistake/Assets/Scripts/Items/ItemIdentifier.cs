@@ -113,7 +113,7 @@ public class ItemIdentifier : GameBehaviour
                 if(!itemAdd)
                 {
                     itemAdd = true;
-                    //_ISitemD.AddItemToInventory(itemInfo);
+                    _ISitemD.AddItemToInventory(itemInfo);
                     //equip new items
                     ExecuteAfterFrames(20, () => _UI.CreateItemSelected(itemInfo));
                     

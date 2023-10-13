@@ -192,7 +192,7 @@ public class UIManager : Singleton<UIManager>
         popupDmg.text = _hoverItem.dmg.ToString();
         popupCritX.text = _hoverItem.critX.ToString();
         popupCritChance.text = _hoverItem.critChance.ToString();
-        popupFirerate.text = _hoverItem.meleeFirerate.ToString();
+        popupFirerate.text = _hoverItem.firerate.ToString();
         popupIcon.sprite = _hoverItem.icon;
 
         print("Update pop up");
@@ -253,7 +253,7 @@ public class UIManager : Singleton<UIManager>
         popupDmg1.text = _itemInfo.dmg.ToString();
         popupCritX1.text = _itemInfo.critX.ToString();
         popupCritChance1.text = _itemInfo.critChance.ToString();
-        popupFirerate1.text = _itemInfo.meleeFirerate.ToString();
+        popupFirerate1.text = _itemInfo.firerate.ToString();
         popupIcon1.sprite = _itemInfo.icon;
 
         
@@ -262,6 +262,7 @@ public class UIManager : Singleton<UIManager>
 
 
     }
+    
     public void UpdateItemPopUpComp2(Item _itemInfo)
     {
         //ADD LATER FORMATTING FOR FLOATS
@@ -270,7 +271,7 @@ public class UIManager : Singleton<UIManager>
         popupDmg2.text = _itemInfo.dmg.ToString();
         popupCritX2.text = _itemInfo.critX.ToString();
         popupCritChance2.text = _itemInfo.critChance.ToString();
-        popupFirerate2.text = _itemInfo.meleeFirerate.ToString();
+        popupFirerate2.text = _itemInfo.firerate.ToString();
         popupIcon2.sprite = _itemInfo.icon;
 
 
@@ -400,7 +401,7 @@ public class UIManager : Singleton<UIManager>
         invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
         invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
         invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-        invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].projectileFirerate.ToString();
+        invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].firerate.ToString();
 
         
     }
@@ -443,11 +444,8 @@ public class UIManager : Singleton<UIManager>
                         }
                         break;
                     case Item.Category.Mouth:
-                        print("itws a mouth");
-
                         if (_AVTAR.slotsOnPlayerFront[2].transform.childCount == 0)
                         {
-                            print("no childern so its 2");
                             slot = 2;
                             heldItem.inSlot = slot;
                         }
@@ -496,23 +494,6 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void EquipImage(int _slot)
     {
-
-
-        //print("Creating item for slot " + _slot);
-
-        //print("in EquipImage ID is " + heldItem.ID);
-
-
-        var itemExsists = false;
-        foreach (var item in _PC.playerInventory)
-        {
-            if (item == heldItem) itemExsists = true;
-        }
-
-        if (itemExsists == false) _ISitemD.AddItemToInventory(heldItem);
-
-
-
         var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
         var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerRight[_slot].transform);
         _PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());

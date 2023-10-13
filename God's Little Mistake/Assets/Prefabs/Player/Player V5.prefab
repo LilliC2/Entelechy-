@@ -552,8 +552,8 @@ MonoBehaviour:
   isGrounded: 0
   groundMask:
     serializedVersion: 2
-    m_Bits: 0
-  tileLastStoodOn: {fileID: 0}
+    m_Bits: 128
+  tileLastStoodOn: {fileID: 6610708693940312906}
   fallDamage: 0
   health: 100
   maxHP: 100
@@ -566,7 +566,7 @@ MonoBehaviour:
   projectileFirerate: 0
   critX: 0
   critChance: 0
-  projectile: 0
+  projectile: 1
   projectileSpeed: 500
   projectileKnockback: 5
   projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
@@ -576,41 +576,10 @@ MonoBehaviour:
   missyDeathAnim: {fileID: 385511145872987587}
   spitParticleSystem: {fileID: 6247660118960248555}
   playerInventory:
-  - itemName: Sabertooth Mouth
-    ID: 4
+  - itemName: Slug Legs
+    ID: 15
     lvl: 0
-    inSlot: 0
-    category: 1
-    segment: 0
-    meleeAttackType: 0
-    itemType: 0
-    hasActiveAbility: 0
-    currencyValue: 0
-    active: 0
-    dmg: 20
-    projectileFirerate: 0.67
-    meleeFirerate: 0
-    critX: 1.2
-    critChance: 5
-    longRange_range: 12
-    melee_range: 0
-    projectile: 0
-    projectileSpeed: 5
-    projectilePF: {fileID: 2270622985260862806, guid: 252be8e94cd0cdc49a7f757070716c54, type: 3}
-    movementSpeed: 0
-    modifier: 0
-    modifierID: 0
-    icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
-    avatarPrefabFrontLeft: {fileID: 3225624940023983247, guid: 2750fd8978d7615429bfc25a67e2af38, type: 3}
-    avatarPrefabFrontRight: {fileID: 0}
-    avtarPrefabLeft: {fileID: 365269094101784285, guid: 975dc6895c548f84d91060d45d353b4b, type: 3}
-    avtarPrefabRight: {fileID: 365269094101784285, guid: 975dc6895c548f84d91060d45d353b4b, type: 3}
-    avtarPrefabBackLeft: {fileID: 1080939457727681299, guid: 518a405904d8c6c4a94e2d4971316f5b, type: 3}
-    avtarPrefabBackRight: {fileID: 0}
-  - itemName: Nubs
-    ID: 12
-    lvl: 0
-    inSlot: 1
+    inSlot: -1
     category: 6
     segment: 2
     meleeAttackType: 0
@@ -618,25 +587,24 @@ MonoBehaviour:
     hasActiveAbility: 0
     currencyValue: 0
     active: 0
-    dmg: 0
-    projectileFirerate: 0
-    meleeFirerate: 0
+    dmg: 5
+    firerate: 0
     critX: 0
-    critChance: 2
+    critChance: 0
     longRange_range: 0
     melee_range: 0
     projectile: 0
-    projectileSpeed: 5
+    projectileSpeed: 0
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    movementSpeed: 15
+    movementSpeed: 20
     modifier: 0
     modifierID: 0
-    icon: {fileID: 21300000, guid: df94ebc9d2b8ee347b7faf84cafb688e, type: 3}
-    avatarPrefabFrontLeft: {fileID: 4037416830258721223, guid: f8e5a5357d5205b42977b80ed0a00d59, type: 3}
+    icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+    avatarPrefabFrontLeft: {fileID: 4826423727113875564, guid: 300843ea423d54e409e27745a21410a9, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
-    avtarPrefabLeft: {fileID: 1354293937271909763, guid: 6b218fdb74991b1439d2af3aa983991e, type: 3}
-    avtarPrefabRight: {fileID: 1354293937271909763, guid: 6b218fdb74991b1439d2af3aa983991e, type: 3}
-    avtarPrefabBackLeft: {fileID: 1397305912410096892, guid: b0abff0b9da44a64eb6034a316f05721, type: 3}
+    avtarPrefabLeft: {fileID: 3992858970678303184, guid: d1eedbd08fd6baf449f5cab2a53d7f95, type: 3}
+    avtarPrefabRight: {fileID: 3992858970678303184, guid: d1eedbd08fd6baf449f5cab2a53d7f95, type: 3}
+    avtarPrefabBackLeft: {fileID: 8049253966410535709, guid: 85fedc2d5e525aa49a7d864ae4dedf95, type: 3}
     avtarPrefabBackRight: {fileID: 0}
   firingPoint: {fileID: 3878720163899182627}
   directional: {fileID: 8976957729933396760}
@@ -832,19 +800,19 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
-  slugLeg_trail: {fileID: 0}
-  timeBetweenTrail: 0
-  destroyTime: 0
+  slugLeg_trail: {fileID: 407576363337914560, guid: 13b8e7665c8a19e4fb7b2978f8af9b43, type: 3}
+  timeBetweenTrail: 0.2
+  destroyTime: 5
   slugEyesEquipped: 0
-  slowDuration: 0
-  slowPercent: 0
+  slowDuration: 10
+  slowPercent: 30
   dashEase: 0
-  dashDuration: 0
-  dashPower: 0
-  tripodCooldownTime: 0
-  humanFistCooldownTime: 0
-  humanFistChargeUpTime: 0
-  humanFistDamage: 0
+  dashDuration: 1
+  dashPower: 3
+  tripodCooldownTime: 4
+  humanFistCooldownTime: 10
+  humanFistChargeUpTime: 2
+  humanFistDamage: 30
   gutpunch: 0
   enemyLineStart: {fileID: 7721134875167890316}
   AOEradius: 3
@@ -852,19 +820,19 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 1024
   charmDuration: 2
-  bigEyesCooldownTime: 3
-  hoverLegsDuration: 0
-  hoverLegsCooldownTime: 0
+  bigEyesCooldownTime: 20
+  hoverLegsDuration: 5
+  hoverLegsCooldownTime: 20
   wolfClawsEquipped: 0
-  bleedDuration: 0
-  bleedTickDmg: 0
+  bleedDuration: 5
+  bleedTickDmg: 10
   peaShooerChargeUpTime: 1
-  peaShooerCooldownTime: 3
+  peaShooerCooldownTime: 8
   RPEAGexplosionRadius: 1
   RPEAGexplosionDmg: 1
   bigPea: {fileID: 7752005100104120040, guid: 69112db8d14a9824082ee96a62147b5b, type: 3}
-  ramHornsCooldownTime: 0
-  ramHornsStunDuration: 0
+  ramHornsCooldownTime: 6
+  ramHornsStunDuration: 2
   ramming: 0
 --- !u!1 &6141808080627785606
 GameObject:
@@ -3430,9 +3398,13 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 642356691749756311, guid: 924e8531eb3929743820605578ceb155, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 901435749196646412, guid: 924e8531eb3929743820605578ceb155, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 1634377759987474502, guid: 924e8531eb3929743820605578ceb155, type: 3}
       propertyPath: m_Enabled
@@ -3456,15 +3428,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3223705888907367822, guid: 924e8531eb3929743820605578ceb155, type: 3}
       propertyPath: m_VersionIndex
-      value: 2314
+      value: 2320
       objectReference: {fileID: 0}
     - target: {fileID: 4554306535405083514, guid: 924e8531eb3929743820605578ceb155, type: 3}
       propertyPath: m_VersionIndex
-      value: 32
+      value: 38
       objectReference: {fileID: 0}
     - target: {fileID: 4737628075063280771, guid: 924e8531eb3929743820605578ceb155, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4781635701045847157, guid: 924e8531eb3929743820605578ceb155, type: 3}
       propertyPath: m_Name
@@ -3476,7 +3448,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 5643099124270212127, guid: 924e8531eb3929743820605578ceb155, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7090104899219808902, guid: 924e8531eb3929743820605578ceb155, type: 3}
       propertyPath: m_LocalPosition.y

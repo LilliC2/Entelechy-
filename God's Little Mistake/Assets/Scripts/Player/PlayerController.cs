@@ -762,6 +762,9 @@ public class PlayerController : Singleton<PlayerController>
         {
             if(item !=null)
             {
+                print(item.itemName);
+                int index = playerInventory.IndexOf(item);
+                _ISitemD.AddItemStats(index);
                 _UI.CreateItemSelected(item);
                 item.active = true;
 
@@ -919,7 +922,7 @@ public class PlayerController : Singleton<PlayerController>
 
                 //This will destroy bullet once it exits the range
 
-                if(Vector3.Distance(transform.position,bullet.transform.position) > projectileRange) Destroy(bullet);
+                //if(Vector3.Distance(transform.position,bullet.transform.position) > projectileRange) Destroy(bullet);
 
 
 
@@ -959,6 +962,7 @@ public class PlayerController : Singleton<PlayerController>
             if (_PIA.ramming)
             {
                 collision.gameObject.GetComponent<BaseEnemy>().ApplyStun(_PIA.ramHornsStunDuration);
+                collision.gameObject.GetComponent<BaseEnemy>().Hit(_PIA.ramHornsDamage);
 
             }
             if(_PIA.gutpunch)

@@ -10,6 +10,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     bool isOnCoolDown;
     int abilitySlot;
 
+
     [Header("Animation")]
     bool chargeUpAnimationStart;
 
@@ -75,6 +76,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     [Header("Ram Horns")]
     public int ramHornsCooldownTime;
     public float ramHornsStunDuration;
+    public float ramHornsDamage;
     public bool ramming;
 
 
@@ -84,6 +86,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         #region Basic Dash
         if (dashing)
         {
+            print("Dash");
             float timeSinceDash = Time.time - dashStartTime;
 
             //turn off if u dont want trail render
@@ -114,6 +117,8 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         }
 
         #endregion
+
+
 
         #region Passive Abilities
         //SNAIL LEGS
@@ -292,7 +297,6 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         isOnCoolDown = true;
         //turn on cooldown UI
         ActivateCooldownUI(abilitySlot, humanFistCooldownTime);
-
         //OPTIONAL: Invunerable while dashing
         _PC.immortal = true;
         ExecuteAfterSeconds(0.3f, () => FistReset());
@@ -304,10 +308,12 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     {
         _PC.immortal = false;
         gutpunch = false;
+
     }
 
     void RamHorns()
     {
+        print("RAMING");
         Dash(5, 0.3f);
         ramming = true;
 
@@ -360,6 +366,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         dashDuration = _dashDuration;
         dashStartTime = Time.time;
         dashing = true;
+        print("dashing set true");
 
         //start cooldown here
     }

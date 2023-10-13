@@ -24,8 +24,7 @@ public class Item
     public bool active;
 
     public float dmg;
-    public float projectileFirerate;
-    public float meleeFirerate;
+    public float firerate;
 
     public float critX; //crit dmg multipler
     public float critChance;

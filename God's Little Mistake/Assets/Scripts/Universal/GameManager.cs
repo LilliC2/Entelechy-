@@ -74,7 +74,6 @@ public class GameManager : Singleton<GameManager>
         }
 
         //give player tentacle mouth
-        _ISitemD.AddItemToInventory(_ItemD.itemDataBase[9]);
         gameState = GameState.Playing;
     }
 
