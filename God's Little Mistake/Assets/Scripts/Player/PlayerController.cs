@@ -15,6 +15,9 @@ public class PlayerController : Singleton<PlayerController>
     public float time;
     public Ease ease;
 
+    [Header("Temporary")]
+    public SpriteRenderer UIrangeIndicator;
+
     #region Animation Variables
     [Header("Animation")]
     [SerializeField]
@@ -665,6 +668,7 @@ public class PlayerController : Singleton<PlayerController>
                 
         }
 
+        UIrangeIndicator.size = new Vector2(UIrangeIndicator.size.x, meleeRange);
 
         lastPos = transform.position;
 
@@ -809,11 +813,13 @@ public class PlayerController : Singleton<PlayerController>
             //check if melee attack
             if(!playerInventory[_inventorySlot].projectile)
             {
-                //change melee UI
-                meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
-                meleeUI.gameObject.SetActive(false);
-                //change ui scale
-                meleeUI.GetComponentInParent<Transform>().localScale = new Vector3(meleeRange, meleeRange, meleeRange);
+                ////change melee UI
+                //meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
+                //meleeUI.gameObject.SetActive(false);
+                ////change ui scale
+                //meleeUI.GetComponentInParent<Transform>().localScale = new Vector3(meleeRange, meleeRange, meleeRange);
+
+                
             }
 
             
@@ -829,23 +835,26 @@ public class PlayerController : Singleton<PlayerController>
         {
             if(!meleeAnimationCooldown)
             {
-                if(meleeUI != null)
-                {
-                    meleeAnimationCooldown = true;
-                    meleeUI.GetComponent<Animator>().SetTrigger("Attack");
-                    print("Attack count");
-                    //activate animation
-                    print("Anim slot " + _index);
-                    itemsAnimForward[_index].SetTrigger("Attack");
+                meleeAnimationCooldown = true;
+                //meleeUI.GetComponent<Animator>().SetTrigger("Attack");
+                print("Attack count");
+                //activate animation
+                print("Anim slot " + _index);
+                itemsAnimForward[_index].SetTrigger("Attack");
 
-                    if(itemsAnimBack[_index]!= null) itemsAnimBack[_index].SetTrigger("Attack");
+                if (itemsAnimBack[_index] != null) itemsAnimBack[_index].SetTrigger("Attack");
 
 
-                    itemsAnimLeftSide[_index].SetTrigger("Attack");
-                    itemsAnimRightSide[_index].SetTrigger("Attack");
-                    ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
+                itemsAnimLeftSide[_index].SetTrigger("Attack");
+                itemsAnimRightSide[_index].SetTrigger("Attack");
+                ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
 
-                }
+
+                //if(meleeUI != null)
+                //{
+
+
+                //}
 
                 if (inRangeEnemies.Count != 0)
                 {
