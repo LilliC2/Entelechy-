@@ -94,6 +94,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 609035b677042b34f9bd4c25621ebe3b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  stats:
+    category: 6
+    health: 50
+    maxHP: 50
+    speed: 3.5
+    dmg: 10
+    dps: 0
+    fireRate: 0.5
+    range: 2
+    projectile: 1
+    projectileSpeed: 500
+    projectilePF: {fileID: 7907207601727694793, guid: 60121dcdb1fddf14aa889329d3325e47, type: 3}
   enemyState: 1
   enemyRnd: {fileID: 0}
   debuffPanel: {fileID: 5971975279698749588}
@@ -103,23 +115,10 @@ MonoBehaviour:
   debuffBleed: {fileID: 5060103609459310593, guid: a96ad81aa5c212443b532597a04a5e31, type: 3}
   deathParticles: {fileID: 3987647337234535241}
   charmedParticles: {fileID: 4036088911823077232}
-  shadow: {fileID: 3097013843553920799}
-  explosionAnim: {fileID: 2286560920850882740}
   explosionAnimOB: {fileID: 5803421676157354722}
   enemyVisuals: {fileID: 7954641202351820275}
   enemySpritesArray: []
-  stats:
-    category: 7
-    health: 15
-    maxHP: 15
-    speed: 3.5
-    dmg: 6
-    dps: 0
-    fireRate: 1
-    range: 2
-    projectile: 1
-    projectileSpeed: 500
-    projectilePF: {fileID: 7907207601727694793, guid: 60121dcdb1fddf14aa889329d3325e47, type: 3}
+  shadow: {fileID: 3097013843553920799}
   healPool: {fileID: 407576363337914560, guid: 6b03099f3bcc3c940ad7839fa995e050, type: 3}
 --- !u!195 &9168112645038497975
 NavMeshAgent:
@@ -11161,11 +11160,6 @@ PrefabInstance:
 --- !u!4 &1261436063562562078 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1753775868474349683, guid: ed45cbddeb40a884db678d5a07e7b212, type: 3}
-  m_PrefabInstance: {fileID: 709084630079480429}
-  m_PrefabAsset: {fileID: 0}
---- !u!95 &2286560920850882740 stripped
-Animator:
-  m_CorrespondingSourceObject: {fileID: 1615758433893008089, guid: ed45cbddeb40a884db678d5a07e7b212, type: 3}
   m_PrefabInstance: {fileID: 709084630079480429}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &5803421676157354722 stripped
