@@ -121,7 +121,13 @@ public class PlayerController : Singleton<PlayerController>
 
 
     [Header("Projectile")]
-    public GameObject firingPoint;
+    [SerializeField]
+    GameObject firingPointCurrent;
+    public GameObject firingPointDefault;
+
+    [SerializeField]
+    GameObject[] firingPointActive;
+
     public GameObject directional; //is for current melee attack and will probably be removed
     public Vector3 target;
     bool projectileShot;
@@ -150,6 +156,7 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Start()
     {
+        firingPointActive = new GameObject[4];
 
         health = maxHP;
         controller = gameObject.GetComponent<CharacterController>();
@@ -168,6 +175,8 @@ public class PlayerController : Singleton<PlayerController>
         missyRightSideAnim = missyRightSide.GetComponent<Animator>();
 
         currentHead = frontHead;
+
+        firingPointCurrent = firingPointDefault;
     }
 
     void Update()
@@ -326,9 +335,20 @@ public class PlayerController : Singleton<PlayerController>
 
                 #endregion
 
-                #region Swapping Missy Sprites
+                #region Swapping Firing Point
 
-                //change for cardinal direction
+                if (firingPointActive[0] != null && firingPointActive[0].activeInHierarchy) firingPointCurrent = firingPointActive[0];
+                if (firingPointActive[1] != null && firingPointActive[1].activeInHierarchy) firingPointCurrent = firingPointActive[1];
+                if (firingPointActive[2] != null && firingPointActive[2].activeInHierarchy) firingPointCurrent = firingPointActive[2];
+                if (firingPointActive[3] != null && firingPointActive[3].activeInHierarchy) firingPointCurrent = firingPointActive[3];
+
+                if (firingPointCurrent == null) firingPointCurrent = firingPointDefault;
+
+                #endregion
+
+                    #region Swapping Missy Sprites
+
+                    //change for cardinal direction
                 if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
                 {
 
@@ -346,13 +366,16 @@ public class PlayerController : Singleton<PlayerController>
 
                     if(lastDir == missyForward)
                     {
-
+                        
                         missyBack.SetActive(true);
                         missyForward.SetActive(false);
                         missyLeftSide.SetActive(false);
                         missyRightSide.SetActive(false);
+                        //change firing point
+
 
                     }
+
 
                     if (lastDir != missyBack && lastDir != missyForward)
                     {
@@ -397,6 +420,7 @@ public class PlayerController : Singleton<PlayerController>
                         missyForward.SetActive(false);
                         missyBack.SetActive(false);
 
+
                     }
                     else
                     {
@@ -438,6 +462,9 @@ public class PlayerController : Singleton<PlayerController>
                         missyLeftSide.SetActive(false);
                         missyRightSide.SetActive(false);
                         missyBack.SetActive(false);
+
+
+
 
                     }
                     else if (lastDir != missyForward)
@@ -483,6 +510,8 @@ public class PlayerController : Singleton<PlayerController>
                         missyRightSide.SetActive(true);
                         missyBack.SetActive(false);
                         missyLeftSide.SetActive(false);
+
+
                     }
                     else
                     {
@@ -550,7 +579,7 @@ public class PlayerController : Singleton<PlayerController>
                                     else
                                     {
                                         float knockbackProgress = timeSinceKnockback / knockbackDuration;
-                                        var dir = (-firingPoint.transform.forward * knockbackAmount);
+                                        var dir = (-firingPointCurrent.transform.forward * knockbackAmount);
                                         dir = new Vector3(dir.x, 0, dir.z);
                                         controller.Move(dir * Time.deltaTime);
 
@@ -808,7 +837,6 @@ public class PlayerController : Singleton<PlayerController>
             item.active = false;
         }
 
-        print(_inventorySlot);
 
         //check if item is primary
         if (playerInventory[_inventorySlot].itemType == Item.ItemType.Primary)
@@ -827,6 +855,10 @@ public class PlayerController : Singleton<PlayerController>
                 //meleeUI.GetComponentInParent<Transform>().localScale = new Vector3(meleeRange, meleeRange, meleeRange);
 
                 UIrangeIndicator.size = new Vector2(UIrangeIndicator.size.x, meleeRange);
+            }
+            else
+            {
+                FindCurrentFiringPoint(playerInventory[_inventorySlot]);
             }
 
             
@@ -898,7 +930,7 @@ public class PlayerController : Singleton<PlayerController>
 
         if (Physics.Raycast(ray, out hit))
         {
-            firingPoint.transform.LookAt(hit.point);
+            firingPointCurrent.transform.LookAt(hit.point);
 
             if (!projectileShot)
             {
@@ -908,10 +940,10 @@ public class PlayerController : Singleton<PlayerController>
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
-                GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);
+                GameObject bullet = Instantiate(_prefab, firingPointCurrent.transform.position, firingPointCurrent.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
-                bullet.GetComponent<ItemLook>().firingPoint = firingPoint;
+                bullet.GetComponent<ItemLook>().firingPoint = firingPointCurrent;
 
                 knockbackActive = true;
                 knockbackStartTime = Time.time;
@@ -931,6 +963,25 @@ public class PlayerController : Singleton<PlayerController>
             print("FIRE PROJECTILE");
 
         }
+    }
+
+    void FindCurrentFiringPoint(Item _item)
+    {
+        //find slot
+        var slot = _item.inSlot;
+        print("In slot " + slot);
+        //get firing point for each side
+        //put into array
+
+        firingPointActive[0] = _AVTAR.slotsOnPlayerFront[slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
+        firingPointActive[1] = _AVTAR.slotsOnPlayerBack[slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
+        firingPointActive[2] = _AVTAR.slotsOnPlayerLeft [slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
+        firingPointActive[3] = _AVTAR.slotsOnPlayerRight [slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
+
+
+
+
+
     }
 
     void FiringParticleSystem(GameObject _projectile)
