@@ -35,6 +35,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
     float dashStartTime;
     public float dashDuration;
     public float dashPower;
+    public GameObject dashParticles;
 
     [Header("Tripod")]
     bool tripodLegsEquipped;
@@ -86,6 +87,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         #region Basic Dash
         if (dashing)
         {
+            dashParticles.SetActive(true);
             print("Dash");
             float timeSinceDash = Time.time - dashStartTime;
 
@@ -113,7 +115,7 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         {
             //turn off if u dont want trail render
             _PC.GetComponent<TrailRenderer>().enabled = false;
-
+            dashParticles.SetActive(false);
         }
 
         #endregion
