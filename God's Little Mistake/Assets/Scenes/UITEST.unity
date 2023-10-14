@@ -8202,7 +8202,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &852555786
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -17655,6 +17655,18 @@ PrefabInstance:
     m_TransformParent: {fileID: 1239413227}
     m_Modifications:
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: health
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: nubsOB
+      value: 
+      objectReference: {fileID: 752765286}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: immortal
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: playerInventory.Array.size
       value: 6
       objectReference: {fileID: 0}
@@ -18072,6 +18084,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8134474160589298071, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8887581957945303999, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
@@ -39525,8 +39541,8 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 6055288051360085076}
   m_HandleRect: {fileID: 8764107082104739104}
   m_Direction: 0
-  m_Value: 1
-  m_Size: 0.99999994
+  m_Value: 0
+  m_Size: 1
   m_NumberOfSteps: 0
   m_OnValueChanged:
     m_PersistentCalls:

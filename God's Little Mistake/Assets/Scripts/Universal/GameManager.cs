@@ -72,7 +72,12 @@ public class GameManager : Singleton<GameManager>
 
         if (gameState == GameState.Dead)
         {
+            GameOver();
+        }
 
+        if (Input.GetKeyDown(KeyCode.M) && isPlaying)
+        {
+            gameState = GameState.Dead;
         }
 
 
@@ -97,7 +102,6 @@ public class GameManager : Singleton<GameManager>
     public void GameOver()
     {
         _UI.PlayTransitionAnimation();
-        gameState = GameState.Dead;
 
     }
 

@@ -171,6 +171,12 @@ public class PlayerController : Singleton<PlayerController>
             HeadBobble();
         }
 
+        if (health <= 0)
+        {
+            Die();
+            Debug.Log("Die");
+        }
+
 
         UpdateMelee();
         _UI.UpdateHealthText(health);
@@ -658,7 +664,11 @@ public class PlayerController : Singleton<PlayerController>
                 #endregion
                 #endregion
 
-                if (health <= 0) Die();
+                if (health <= 0)
+                {
+                    Die();
+                    Debug.Log("Die");
+                }
 
                 break;
 
@@ -975,6 +985,7 @@ public class PlayerController : Singleton<PlayerController>
 
         _GM.gameState = GameManager.GameState.Dead;
         DieAnimation();
+        print("I Am DEAD");
 
         ExecuteAfterSeconds(0.5f, () => playerAvatar.SetActive(false));
         ExecuteAfterSeconds(1, () => _GM.GameOver());
