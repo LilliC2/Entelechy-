@@ -1,7 +1,7 @@
 using UnityEngine;
 using System.Collections;
 
-public class GooTrap : MonoBehaviour
+public class GooTrap : GameBehaviour
 {
     public float gooSlowdownFactor = 0.5f;
     public float damageOverTime = 0.5f;
@@ -46,6 +46,7 @@ public class GooTrap : MonoBehaviour
             if (playerController.health <= 0f)
             {
                 Debug.Log("Player died in the GooTrap!");
+                _PC.Die();
                 break;
             }
 

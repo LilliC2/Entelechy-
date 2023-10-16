@@ -10,7 +10,10 @@ public class UIManager : Singleton<UIManager>
     public Item leftArmItem;
     public Item rightArmItem;
 
+    [Header("Player Feedback")]
     public GameObject gameOverMenu;
+    public Animator gameOverAnim;
+
 
     [Header("Player Feedback")]
     public TMP_Text hpText;
@@ -66,14 +69,14 @@ public class UIManager : Singleton<UIManager>
     public GameObject topEye;
     public GameObject middleEye;
     public GameObject bottomEye;
-    public GameObject attackPill;
+    public Image attackPill;
     public TMP_Text attackPillText;
-    public GameObject attackIcon;
-    public GameObject rangePill;
+    public Image attackIcon;
+    public Image rangePill;
     public TMP_Text rangePillText;
-    public GameObject rangeIcon;
-    public GameObject itemIcon;
-    public GameObject typeIcon;
+    public Image rangeIcon;
+    public Image itemIcon;
+    public Image typeIcon;
 
     [Header("Inventory Comparison1")]
     public GameObject statComp1;
@@ -105,6 +108,17 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text popupFirerate2;
     public Image popupIcon2;
 
+    [Header("Icons")]
+    public Sprite meleeIcon;
+    public Sprite rangedIcon;
+    public Sprite typeCone;
+    public Sprite typeLine;
+    public Sprite typeCircle;
+    public Sprite typeRapid;
+    public Sprite typeLob;
+    public Sprite typeLaser;
+    public Sprite typeCannon;
+
 
 
 
@@ -122,9 +136,14 @@ public class UIManager : Singleton<UIManager>
         hoverItemStatComp1Animator = statComp1.GetComponent<Animator>();
         hoverItemStatComp2Animator = statComp2.GetComponent<Animator>();
 
+        gameOverAnim = gameOverMenu.GetComponent<Animator>();
+
         //Pause Related
-        //pausePanel.SetActive(false);
-        //optionPanel.SetActive(false);
+        pausePanel.SetActive(false);
+        optionPanel.SetActive(false);
+
+        //Game Over Related
+        gameOverMenu.SetActive(false);
 
     }
 
@@ -179,21 +198,91 @@ public class UIManager : Singleton<UIManager>
         //Show score, time, etc.
     }
 
-    
+
 
 
     #endregion
+
+
+    #region Popups
 
     public void UpdateItemPopUp(Item _hoverItem)
     {
         //ADD LATER FORMATTING FOR FLOATS
 
-        popupName.text = _hoverItem.itemName;
-        popupDmg.text = _hoverItem.dmg.ToString();
-        popupCritX.text = _hoverItem.critX.ToString();
-        popupCritChance.text = _hoverItem.critChance.ToString();
-        popupFirerate.text = _hoverItem.firerate.ToString();
+        invenPopupName.text = _hoverItem.itemName;
+        invenPopupDmg.text = _hoverItem.dmg.ToString();
+        invenPopupCritX.text = _hoverItem.critX.ToString();
+        invenPopupCritChance.text = _hoverItem.critChance.ToString();
+        invenPopupFirerate.text = _hoverItem.fireRate.ToString();
         popupIcon.sprite = _hoverItem.icon;
+
+        //segment check
+        if(_hoverItem.segment == Item.Segment.Head)
+        {
+            topEye.SetActive(true);
+            middleEye.SetActive(false);
+            bottomEye.SetActive(false);
+        }
+        if (_hoverItem.segment == Item.Segment.Torso)
+        {
+            topEye.SetActive(false);
+            middleEye.SetActive(true);
+            bottomEye.SetActive(false);
+        }
+        if (_hoverItem.segment == Item.Segment.Legs)
+        {
+            topEye.SetActive(false);
+            middleEye.SetActive(false);
+            bottomEye.SetActive(true);
+        }
+
+        //range or melee check
+        if (_hoverItem.projectile == true)
+        {
+            attackIcon.sprite = rangedIcon;
+            attackPill.color = Color.blue;
+            rangePillText.text = _hoverItem.longRange_range.ToString();
+            attackPillText.text = "Ranged";
+        }
+        else
+        {
+            attackIcon.sprite = meleeIcon;
+            attackPill.color = Color.red;
+            rangePillText.text = _hoverItem.melee_range.ToString();
+            attackPillText.text = "Melee";
+
+        }
+
+        //type check
+        if (_hoverItem.meleeAttackType == Item.AttackType.Line)
+        {
+            typeIcon.sprite = typeLine;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Cone)
+        {
+            typeIcon.sprite = typeCone;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Circle)
+        {
+            typeIcon.sprite = typeCircle;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Rapid)
+        {
+            typeIcon.sprite = typeRapid;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Lob)
+        {
+            typeIcon.sprite = typeLob;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Cannon)
+        {
+            typeIcon.sprite = typeCannon;
+        }
+        if (_hoverItem.meleeAttackType == Item.AttackType.Laser)
+        {
+            typeIcon.sprite = typeLaser;
+        }
 
         print("Update pop up");
 
@@ -286,6 +375,8 @@ public class UIManager : Singleton<UIManager>
     {
         //levelText.text = "Level " + _lvl.ToString();
     }
+
+    #endregion
 
     #region Inventory Item Stats Popup
 
@@ -681,70 +772,24 @@ public class UIManager : Singleton<UIManager>
 
     #region HUD
 
-    
+
 
     #endregion
 
 
-    #region Indicators
+    #region Game Over
 
-    //public void TopSegmentIndicator()
-    //{
-    //    topEye.SetActive(true);
-    //    topEye.GetComponent<SpriteRenderer>().color = Color.yellow;
-    //    middleEye.SetActive(false);
-    //    bottomEye.SetActive(false);
-    //}
+    public void PlayTransitionAnimation()
+    {
+        gameOverMenu.SetActive(true);
 
-    //public void MiddleSegmentIndicator()
-    //{
-    //    middleEye.SetActive(true);
-    //    middleEye.GetComponent<SpriteRenderer>().color = Color.red;
-    //    topEye.SetActive(false);
-    //    bottomEye.SetActive(false);
+    }
 
-    //}
+    public void PlayLoopAnimation()
+    {
 
-    //public void BottomSegmentIndicator()
-    //{
-    //    bottomEye.SetActive(true);
-    //    bottomEye.GetComponent<SpriteRenderer>().color = Color.red;
-    //    topEye.SetActive(false);
-    //    middleEye.SetActive(false);
-    //}
+    }
 
-    //public void AttackPillChange(int num)
-    //{
-    //    attackPill.SetActive(true);
-    //    if (num == 1)
-    //    {
-    //        attackPillText.text = "Melee";
-    //        //attackIcon.SetActive(true); change the icon
-    //        attackPill.GetComponent<SpriteRenderer>().color = Color.red;
-    //    }
-    //    if (num == 2) 
-    //    {
-    //        attackPillText.text = "Range";
-    //        //attackIcon.SetActive(true); change the icon
-    //        attackPill.GetComponent<SpriteRenderer>().color = Color.red;
-    //    }
-    //}
-
-    //public void RangePillChange(int num)
-    //{
-    //    rangePill.SetActive(true);
-    //    attackPillText.text = num.ToString();
-    //}
-
-    //public void ChangeItemIcon()
-    //{
-    //    //Chnage the item icons
-    //}
-
-    //public void ChangeItemType()
-    //{
-    //    //Chnage the type icons
-    //}
 
     #endregion
 
