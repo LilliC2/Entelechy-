@@ -66,12 +66,12 @@ public class UIManager : Singleton<UIManager>
 
 
     [Header("Inventory Pop up")]
-    public GameObject statsPopUpPanel;
-    public TMP_Text invenPopupName;
-    public TMP_Text invenPopupDmg;
-    public TMP_Text invenPopupCritX;
-    public TMP_Text invenPopupCritChance;
-    public TMP_Text invenPopupFirerate;
+    public GameObject statPop;
+    public TMP_Text popupName;
+    public TMP_Text popupDmg;
+    public TMP_Text popupCritX;
+    public TMP_Text popupCritChance;
+    public TMP_Text popupFirerate;
     public GameObject topEye;
     public GameObject middleEye;
     public GameObject bottomEye;
@@ -81,18 +81,47 @@ public class UIManager : Singleton<UIManager>
     public Image rangePill;
     public TMP_Text rangePillText;
     public Image rangeIcon;
-    public Image itemIcon;
+    public Image popupIcon;
     public Image typeIcon;
+    public GameObject arrowComp;
 
     [Header("Inventory Comparison1")]
     public GameObject statComp1;
-    public GameObject arrowComp;
     public TMP_Text popupName1;
     public TMP_Text popupDmg1;
     public TMP_Text popupCritX1;
     public TMP_Text popupCritChance1;
     public TMP_Text popupFirerate1;
+    public GameObject topEye1;
+    public GameObject middleEye1;
+    public GameObject bottomEye1;
+    public Image attackPill1;
+    public TMP_Text attackPillText1;
+    public Image attackIcon1;
+    public Image rangePill1;
+    public TMP_Text rangePillText1;
+    public Image rangeIco1;
     public Image popupIcon1;
+    public Image typeIcon1;
+
+    [Header("Inventory Comparison2")]
+    public GameObject statComp2;
+    public TMP_Text popupName2;
+    public TMP_Text popupDmg2;
+    public TMP_Text popupCritX2;
+    public TMP_Text popupCritChance2;
+    public TMP_Text popupFirerate2;
+    public GameObject topEye2;
+    public GameObject middleEye2;
+    public GameObject bottomEye2;
+    public Image attackPill2;
+    public TMP_Text attackPillText2;
+    public Image attackIcon2;
+    public Image rangePill2;
+    public TMP_Text rangePillText2;
+    public Image rangeIco2;
+    public Image popupIcon2;
+    public Image typeIcon2;
 
     [Header("Animation")]
     public Animator hoverItemAnimator;
@@ -105,14 +134,6 @@ public class UIManager : Singleton<UIManager>
     public GameObject optionPanel;
 
 
-    [Header("Inventory Comparison2")]
-    public GameObject statComp2;
-    public TMP_Text popupName2;
-    public TMP_Text popupDmg2;
-    public TMP_Text popupCritX2;
-    public TMP_Text popupCritChance2;
-    public TMP_Text popupFirerate2;
-    public Image popupIcon2;
 
     [Header("Icons")]
     public Sprite meleeIcon;
@@ -134,12 +155,12 @@ public class UIManager : Singleton<UIManager>
         UpdateInventorySlotImages();
         heldItem = null;
         isHoldingItem = false;
-        statsPopUpPanel.SetActive(false);
+        statPop.SetActive(false);
         statComp1.SetActive(false);
         arrowComp.SetActive(false);
         playerAvatar = GameObject.FindGameObjectWithTag("Player");
 
-        hoverItemAnimator = statsPopUpPanel.GetComponent<Animator>();
+        hoverItemAnimator = statPop.GetComponent<Animator>();
         hoverItemStatComp1Animator = statComp1.GetComponent<Animator>();
         hoverItemStatComp2Animator = statComp2.GetComponent<Animator>();
 
@@ -220,12 +241,12 @@ public class UIManager : Singleton<UIManager>
     {
         //ADD LATER FORMATTING FOR FLOATS
 
-        invenPopupName.text = _hoverItem.itemName;
-        invenPopupDmg.text = _hoverItem.dmg.ToString();
-        invenPopupCritX.text = _hoverItem.critX.ToString();
-        invenPopupCritChance.text = _hoverItem.critChance.ToString();
-        invenPopupFirerate.text = _hoverItem.firerate.ToString();
-        itemIcon.sprite = _hoverItem.icon;
+        popupName.text = _hoverItem.itemName;
+        popupDmg.text = _hoverItem.dmg.ToString();
+        popupCritX.text = _hoverItem.critX.ToString();
+        popupCritChance.text = _hoverItem.critChance.ToString();
+        popupFirerate.text = _hoverItem.firerate.ToString();
+        popupIcon.sprite = _hoverItem.icon;
 
         //segment check
         if(_hoverItem.segment == Item.Segment.Head)
@@ -355,7 +376,72 @@ public class UIManager : Singleton<UIManager>
         popupFirerate1.text = _itemInfo.firerate.ToString();
         popupIcon1.sprite = _itemInfo.icon;
 
-        
+        //segment check
+        if (_itemInfo.segment == Item.Segment.Head)
+        {
+            topEye1.SetActive(true);
+            middleEye1.SetActive(false);
+            bottomEye1.SetActive(false);
+        }
+        if (_itemInfo.segment == Item.Segment.Torso)
+        {
+            topEye1.SetActive(false);
+            middleEye1.SetActive(true);
+            bottomEye1.SetActive(false);
+        }
+        if (_itemInfo.segment == Item.Segment.Legs)
+        {
+            topEye1.SetActive(false);
+            middleEye1.SetActive(false);
+            bottomEye1.SetActive(true);
+        }
+
+        //range or melee check
+        if (_itemInfo.projectile == true)
+        {
+            attackIcon1.sprite = rangedIcon;
+            attackPill1.color = Color.blue;
+            rangePillText1.text = _itemInfo.longRange_range.ToString();
+            attackPillText1.text = "Ranged";
+        }
+        else
+        {
+            attackIcon1.sprite = meleeIcon;
+            attackPill1.color = Color.red;
+            rangePillText1.text = _itemInfo.melee_range.ToString();
+            attackPillText1.text = "Melee";
+
+        }
+
+        //type check
+        if (_itemInfo.meleeAttackType == Item.AttackType.Line)
+        {
+            typeIcon1.sprite = typeLine;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Cone)
+        {
+            typeIcon1.sprite = typeCone;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Circle)
+        {
+            typeIcon1.sprite = typeCircle;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Rapid)
+        {
+            typeIcon1.sprite = typeRapid;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Lob)
+        {
+            typeIcon1.sprite = typeLob;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Cannon)
+        {
+            typeIcon1.sprite = typeCannon;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Laser)
+        {
+            typeIcon1.sprite = typeLaser;
+        }
 
 
 
@@ -373,6 +459,72 @@ public class UIManager : Singleton<UIManager>
         popupFirerate2.text = _itemInfo.firerate.ToString();
         popupIcon2.sprite = _itemInfo.icon;
 
+        //segment check
+        if (_itemInfo.segment == Item.Segment.Head)
+        {
+            topEye2.SetActive(true);
+            middleEye2.SetActive(false);
+            bottomEye2.SetActive(false);
+        }
+        if (_itemInfo.segment == Item.Segment.Torso)
+        {
+            topEye2.SetActive(false);
+            middleEye2.SetActive(true);
+            bottomEye2.SetActive(false);
+        }
+        if (_itemInfo.segment == Item.Segment.Legs)
+        {
+            topEye2.SetActive(false);
+            middleEye2.SetActive(false);
+            bottomEye2.SetActive(true);
+        }
+
+        //range or melee check
+        if (_itemInfo.projectile == true)
+        {
+            attackIcon2.sprite = rangedIcon;
+            attackPill2.color = Color.blue;
+            rangePillText2.text = _itemInfo.longRange_range.ToString();
+            attackPillText2.text = "Ranged";
+        }
+        else
+        {
+            attackIcon2.sprite = meleeIcon;
+            attackPill2.color = Color.red;
+            rangePillText2.text = _itemInfo.melee_range.ToString();
+            attackPillText2.text = "Melee";
+
+        }
+
+        //type check
+        if (_itemInfo.meleeAttackType == Item.AttackType.Line)
+        {
+            typeIcon2.sprite = typeLine;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Cone)
+        {
+            typeIcon2.sprite = typeCone;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Circle)
+        {
+            typeIcon2.sprite = typeCircle;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Rapid)
+        {
+            typeIcon2.sprite = typeRapid;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Lob)
+        {
+            typeIcon2.sprite = typeLob;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Cannon)
+        {
+            typeIcon2.sprite = typeCannon;
+        }
+        if (_itemInfo.meleeAttackType == Item.AttackType.Laser)
+        {
+            typeIcon2.sprite = typeLaser;
+        }
 
 
     }
@@ -504,11 +656,11 @@ public class UIManager : Singleton<UIManager>
 
     public void InventorySlotHover(int _whichSlot)
     {
-        invenPopupName.text = _PC.playerInventory[_whichSlot].itemName;
-        invenPopupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
-        invenPopupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
-        invenPopupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-        invenPopupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].firerate.ToString();
+        popupName.text = _PC.playerInventory[_whichSlot].itemName;
+        popupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
+        popupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
+        popupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
+        popupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].firerate.ToString();
 
         
     }

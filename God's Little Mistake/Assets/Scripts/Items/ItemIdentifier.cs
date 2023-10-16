@@ -27,7 +27,7 @@ public class ItemIdentifier : GameBehaviour
         statPop = GameObject.Find("Stat Popup");
 
         selecting = GetComponent<Selecting>();
-        anim = _UI.statsPopUpPanel.GetComponent<Animator>();
+        anim = _UI.statPop.GetComponent<Animator>();
         anim1 = _UI.statComp1.GetComponent<Animator>();
         anim2 = _UI.statComp2.GetComponent<Animator>();
     }
@@ -177,8 +177,8 @@ public class ItemIdentifier : GameBehaviour
 
         isHovering = true;
 
-        _UI.statsPopUpPanel.SetActive(true);
-        _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        _UI.statPop.SetActive(true);
+        _UI.statPop.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         _UI.PlayPopupOpen();
         _UI.UpdateItemPopUp(itemInfo);
         //anim.SetTrigger("Open");
@@ -280,7 +280,7 @@ public class ItemIdentifier : GameBehaviour
 
     public void TurnOff()
     {
-        _UI.statsPopUpPanel.SetActive(false);
+        _UI.statPop.SetActive(false);
         _UI.statComp1.SetActive(false);
         _UI.arrowComp.SetActive(false);
     }

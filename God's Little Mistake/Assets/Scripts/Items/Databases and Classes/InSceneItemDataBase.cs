@@ -18,7 +18,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         {
 
 
-            _UI.statsPopUpPanel.SetActive(false);
+            _UI.statPop.SetActive(false);
             //print("added item");
 
 
