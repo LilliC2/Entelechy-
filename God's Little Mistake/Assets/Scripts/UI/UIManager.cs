@@ -214,7 +214,7 @@ public class UIManager : Singleton<UIManager>
         invenPopupDmg.text = _hoverItem.dmg.ToString();
         invenPopupCritX.text = _hoverItem.critX.ToString();
         invenPopupCritChance.text = _hoverItem.critChance.ToString();
-        invenPopupFirerate.text = _hoverItem.fireRate.ToString();
+        invenPopupFirerate.text = _hoverItem.firerate.ToString();
         popupIcon.sprite = _hoverItem.icon;
 
         //segment check

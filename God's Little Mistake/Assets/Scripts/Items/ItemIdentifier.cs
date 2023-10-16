@@ -48,7 +48,7 @@ public class ItemIdentifier : GameBehaviour
 
             }
         }
-    }
+    
 
 
                 if(!itemAdd)
