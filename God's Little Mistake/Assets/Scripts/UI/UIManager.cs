@@ -10,7 +10,12 @@ public class UIManager : Singleton<UIManager>
     public Item leftArmItem;
     public Item rightArmItem;
 
-    [Header("Player Feedback")]
+    [Header("Hover Popup Content")]
+    public GameObject popupContent;
+    public GameObject popupContent1;
+    public GameObject popupContent2;
+
+    [Header("Game Over")]
     public GameObject gameOverMenu;
     public Animator gameOverAnim;
 

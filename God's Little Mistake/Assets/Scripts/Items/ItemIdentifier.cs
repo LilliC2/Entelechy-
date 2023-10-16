@@ -270,6 +270,9 @@ public class ItemIdentifier : GameBehaviour
         _UI.PlayPopupClose();
         _UI.PlayPopup1Close();
         _UI.PlayPopup2Close();
+        _UI.popupContent.SetActive(false);
+        _UI.popupContent1.SetActive(false);
+        _UI.popupContent2.SetActive(false);
         ExecuteAfterSeconds(1, () => TurnOff());
 
 
