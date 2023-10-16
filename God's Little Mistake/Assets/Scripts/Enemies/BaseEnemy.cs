@@ -209,7 +209,9 @@ public class BaseEnemy : GameBehaviour
             explosionAnimOB.GetComponent<Animator>().SetTrigger("Boom");
 
             //eye is for testing
-            int rand = Random.Range(0, 4);
+            int rand = Random.Range(1, 4);
+
+            print("Number gen when enemy dies " + rand);
 
             switch (rand)
             {
@@ -222,6 +224,7 @@ public class BaseEnemy : GameBehaviour
 
                         item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
+                        print(item.name);
                         print("Spawning item of " + stats.category.ToString() + " category");
                     }
 
