@@ -177,6 +177,7 @@ public class PlayerController : Singleton<PlayerController>
         currentHead = frontHead;
 
         firingPointCurrent = firingPointDefault;
+
     }
 
     void Update()
@@ -954,14 +955,12 @@ public class PlayerController : Singleton<PlayerController>
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
                 bullet.GetComponent<ItemLook>().firingPoint = firingPointCurrent;
+                bullet.GetComponent<RangeDetector>().range = _range;
+                bullet.GetComponent<RangeDetector>().positionShotFrom = transform.position;
 
                 knockbackActive = true;
                 knockbackStartTime = Time.time;
                 Mathf.Clamp(bullet.transform.position.y, 0, 0);
-
-                //This will destroy bullet once it exits the range
-
-                //if(Vector3.Distance(transform.position,bullet.transform.position) > projectileRange) Destroy(bullet);
 
 
 
