@@ -51,14 +51,14 @@ public class UIManager : Singleton<UIManager>
     Vector3 standard = new Vector3(0.239999443f, 0.0800049901f, -0.555116713f);
     Vector3 tall = new Vector3(-0.0209999997f, -0.136000007f, 0.0540000014f);
 
-    [Header("Item Hover Over Panel")]
-    public GameObject statsPopUpPanel;
-    public TMP_Text popupName;
-    public TMP_Text popupDmg;
-    public TMP_Text popupCritX;
-    public TMP_Text popupCritChance;
-    public TMP_Text popupFirerate;
-    public Image popupIcon;
+    //[Header("Item Hover Over Panel")]
+    //public GameObject statsPopUpPanel;
+    //public TMP_Text popupName;
+    //public TMP_Text popupDmg;
+    //public TMP_Text popupCritX;
+    //public TMP_Text popupCritChance;
+    //public TMP_Text popupFirerate;
+    //public Image popupIcon;
 
     [Header("Global Scroll UI")]
     public RectTransform scrollContent;
@@ -66,7 +66,7 @@ public class UIManager : Singleton<UIManager>
 
 
     [Header("Inventory Pop up")]
-    public GameObject invenSegementPopUpPanel;
+    public GameObject statsPopUpPanel;
     public TMP_Text invenPopupName;
     public TMP_Text invenPopupDmg;
     public TMP_Text invenPopupCritX;
@@ -225,7 +225,7 @@ public class UIManager : Singleton<UIManager>
         invenPopupCritX.text = _hoverItem.critX.ToString();
         invenPopupCritChance.text = _hoverItem.critChance.ToString();
         invenPopupFirerate.text = _hoverItem.firerate.ToString();
-        popupIcon.sprite = _hoverItem.icon;
+        itemIcon.sprite = _hoverItem.icon;
 
         //segment check
         if(_hoverItem.segment == Item.Segment.Head)
@@ -396,18 +396,18 @@ public class UIManager : Singleton<UIManager>
 
     #region Inventory Item Stats Popup
 
-    public void InvenSegmentPopUp()
-    {
-        var rt = invenSegementPopUpPanel.GetComponent<RectTransform>();
-        //print(rt.anchoredPosition);
-        rt.anchoredPosition = new Vector2(522.75f, -400.00f);
-        //headSegementPopUpPanel.transform.DOMove(new Vector3(234.489014f, -343f, 0), 1); //COULD ADD EASE HERE;
-    }
-    public void InvenSegmentPopDown()
-    {
-        var rt = invenSegementPopUpPanel.GetComponent<RectTransform>();
-        rt.anchoredPosition = new Vector2(522.75f, -561.85f);
-    }
+    //public void InvenSegmentPopUp()
+    //{
+    //    var rt = invenSegementPopUpPanel.GetComponent<RectTransform>();
+    //    //print(rt.anchoredPosition);
+    //    rt.anchoredPosition = new Vector2(522.75f, -400.00f);
+    //    //headSegementPopUpPanel.transform.DOMove(new Vector3(234.489014f, -343f, 0), 1); //COULD ADD EASE HERE;
+    //}
+    //public void InvenSegmentPopDown()
+    //{
+    //    var rt = invenSegementPopUpPanel.GetComponent<RectTransform>();
+    //    rt.anchoredPosition = new Vector2(522.75f, -561.85f);
+    //}
 
     public void UpdateInventorySlotImages()
     {
