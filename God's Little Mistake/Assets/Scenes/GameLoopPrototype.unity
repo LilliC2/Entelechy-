@@ -6573,7 +6573,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-108138
+  m_Name: pb_Mesh-2683924
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2
@@ -8075,7 +8075,7 @@ PrefabInstance:
       objectReference: {fileID: 1522671456}
     - target: {fileID: 142816122189001751, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_VersionIndex
-      value: 59
+      value: 74
       objectReference: {fileID: 0}
     - target: {fileID: 1329582540715064035, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_Mesh
@@ -8083,15 +8083,39 @@ PrefabInstance:
       objectReference: {fileID: 664542110}
     - target: {fileID: 1329582540715064035, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_VersionIndex
-      value: 2341
+      value: 2356
       objectReference: {fileID: 0}
+    - target: {fileID: 1733780655255298849, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: ba0e244361b8641458de016d9e5f1de8, type: 2}
     - target: {fileID: 1824036676938853965, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 664542110}
     - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
-      propertyPath: missyDeathAnim
-      value: 
+      propertyPath: dmg
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: speed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: maxSpeed
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: meleeRange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: projectileRange
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2521461294139426166, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: playerInventory.Array.data[0].attackType
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 5726170862438145790, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_Name
@@ -8109,6 +8133,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1522671456}
+    - target: {fileID: 7785945192233920101, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8134474160589298071, guid: 1e34fea40ac67e1429475945a191a64a, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -10876,7 +10904,7 @@ MonoBehaviour:
     inSlot: -1
     category: 0
     segment: 0
-    meleeAttackType: 0
+    attackType: 0
     itemType: 0
     hasActiveAbility: 0
     currencyValue: 0
@@ -14643,7 +14671,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-108154
+  m_Name: pb_Mesh-2683940
   serializedVersion: 11
   m_SubMeshes:
   - serializedVersion: 2

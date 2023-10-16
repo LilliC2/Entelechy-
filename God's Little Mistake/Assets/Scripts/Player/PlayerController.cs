@@ -148,8 +148,9 @@ public class PlayerController : Singleton<PlayerController>
     bool meleeCooDown;
     public GameObject lineHitbox;
     public GameObject coneHitbox;
+    public GameObject AOEHitbox;
     MeleeUISwitcher meleeUISwitcher;
-    public enum MeleeHitBox { Line, Cone, None }
+    public enum MeleeHitBox { Line, Cone, Circle, None }
     public MeleeHitBox meleeHitBox;
 
     public float dashAmount;
@@ -195,7 +196,6 @@ public class PlayerController : Singleton<PlayerController>
         }
 
 
-        UpdateMelee();
         _UI.UpdateHealthText(health);
 
         switch (_GM.gameState)
@@ -600,8 +600,8 @@ public class PlayerController : Singleton<PlayerController>
                                 print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
 
                                 //update melee attack pattern
-                                if (playerInventory[i].meleeAttackType == Item.AttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
-                                else if (playerInventory[i].meleeAttackType == Item.AttackType.Line) meleeHitBox = MeleeHitBox.Line;
+                                if (playerInventory[i].attackType == Item.AttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
+                                else if (playerInventory[i].attackType == Item.AttackType.Line) meleeHitBox = MeleeHitBox.Line;
 
 
                                 MeleeAttack(meleeFirerate, i);
@@ -822,19 +822,27 @@ public class PlayerController : Singleton<PlayerController>
         return speedTween;
     }
    
-    void UpdateMelee()
+    void UpdateMelee(Item _item)
     {
-        switch (meleeHitBox)
+        switch (_item.attackType)
         {
-            case MeleeHitBox.Line:
+            case Item.AttackType.Line:
                 lineHitbox.SetActive(true);
                 coneHitbox.SetActive(false);
-                lineHitbox.transform.localScale = new Vector3(1, 1, projectileRange);
+                AOEHitbox.SetActive(false);
+                lineHitbox.transform.localScale = new Vector3(1, 1, meleeRange);
                 break;
-            case MeleeHitBox.Cone:
+            case Item.AttackType.Cone:
                 lineHitbox.SetActive(false);
                 coneHitbox.SetActive(true);
-                coneHitbox.transform.localScale = new Vector3(1, 1, projectileRange);
+                AOEHitbox.SetActive(false);
+                coneHitbox.transform.localScale = new Vector3(1, 1, meleeRange);
+                break;
+            case Item.AttackType.Circle:
+                lineHitbox.SetActive(false);
+                coneHitbox.SetActive(false);
+                AOEHitbox.SetActive(true);
+                AOEHitbox.transform.localScale = new Vector3(meleeRange, 1, meleeRange);
                 break;
         }
     }
@@ -859,8 +867,12 @@ public class PlayerController : Singleton<PlayerController>
             //check if melee attack
             if(!playerInventory[_inventorySlot].projectile)
             {
+                //change hit box
+                UpdateMelee(playerInventory[_inventorySlot]);
+
+
                 ////change melee UI
-                meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
+                //meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
                 //meleeUI.gameObject.SetActive(false);
                 ////change ui scale
                 //meleeUI.GetComponentInParent<Transform>().localScale = new Vector3(meleeRange, meleeRange, meleeRange);
