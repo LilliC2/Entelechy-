@@ -457,7 +457,6 @@ Transform:
   - {fileID: 4365697327280650606}
   - {fileID: 4389345911081965957}
   - {fileID: 4728289836933333956}
-  - {fileID: 190188432338004538}
   m_Father: {fileID: 0}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 1.386, z: 0}
@@ -545,7 +544,7 @@ MonoBehaviour:
   rightPivot: {fileID: 8955002853848310032}
   leftPivot: {fileID: 723236186875638846}
   backPivot: {fileID: 3254064356878956034}
-  gravity: 9.8
+  gravity: 3
   lastPosOnGround: {x: 0, y: 0, z: 0}
   groundCheck: {fileID: 6610708693940312906}
   isGrounded: 0
@@ -572,43 +571,13 @@ MonoBehaviour:
   initalSpeedBoost: 3
   isMoving: 0
   deathExplosionPS: {fileID: 1352871868970943719}
-  missyDeathAnim: {fileID: 385511145872987587}
+  missyDeathAnim: {fileID: 0}
   spitParticleSystem: {fileID: 6247660118960248555}
   playerInventory:
-  - itemName: Slug Legs
-    ID: 15
-    lvl: 0
-    inSlot: 0
-    category: 6
-    segment: 2
-    meleeAttackType: 0
-    itemType: 2
-    hasActiveAbility: 0
-    currencyValue: 0
-    active: 0
-    dmg: 5
-    firerate: 0
-    critX: 0
-    critChance: 0
-    longRange_range: 0
-    melee_range: 0
-    projectile: 0
-    projectileSpeed: 0
-    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    movementSpeed: 20
-    modifier: 0
-    modifierID: 0
-    icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
-    avatarPrefabFrontLeft: {fileID: 4826423727113875564, guid: 300843ea423d54e409e27745a21410a9, type: 3}
-    avatarPrefabFrontRight: {fileID: 0}
-    avtarPrefabLeft: {fileID: 3992858970678303184, guid: d1eedbd08fd6baf449f5cab2a53d7f95, type: 3}
-    avtarPrefabRight: {fileID: 3992858970678303184, guid: d1eedbd08fd6baf449f5cab2a53d7f95, type: 3}
-    avtarPrefabBackLeft: {fileID: 8049253966410535709, guid: 85fedc2d5e525aa49a7d864ae4dedf95, type: 3}
-    avtarPrefabBackRight: {fileID: 0}
   - itemName: Pea Shooter
     ID: 9
     lvl: 0
-    inSlot: 1
+    inSlot: -1
     category: 1
     segment: 0
     meleeAttackType: 2
@@ -629,11 +598,43 @@ MonoBehaviour:
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 6396217571161385355, guid: 746fc3a0e458d11469c34d8f7a4b5a4c, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 1830519018957802660, guid: 9c19316aa36ffa8459fbff0aeb2a67b2, type: 3}
     avtarPrefabRight: {fileID: 1830519018957802660, guid: 9c19316aa36ffa8459fbff0aeb2a67b2, type: 3}
     avtarPrefabBackLeft: {fileID: 6396217571161385355, guid: 9d694e1b43faa9d43839f374eff36f01, type: 3}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Nubs
+    ID: 12
+    lvl: 0
+    inSlot: -1
+    category: 6
+    segment: 2
+    meleeAttackType: 0
+    itemType: 2
+    hasActiveAbility: 0
+    currencyValue: 0
+    active: 0
+    dmg: 1
+    firerate: 0
+    critX: 0
+    critChance: 2
+    longRange_range: 0
+    melee_range: 0
+    projectile: 0
+    projectileSpeed: 5
+    projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: df94ebc9d2b8ee347b7faf84cafb688e, type: 3}
+    pauseIcon: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 4037416830258721223, guid: f8e5a5357d5205b42977b80ed0a00d59, type: 3}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 1354293937271909763, guid: 6b218fdb74991b1439d2af3aa983991e, type: 3}
+    avtarPrefabRight: {fileID: 1354293937271909763, guid: 6b218fdb74991b1439d2af3aa983991e, type: 3}
+    avtarPrefabBackLeft: {fileID: 1397305912410096892, guid: b0abff0b9da44a64eb6034a316f05721, type: 3}
     avtarPrefabBackRight: {fileID: 0}
   firingPointCurrent: {fileID: 0}
   firingPointDefault: {fileID: 3878720163899182627}
@@ -840,7 +841,7 @@ MonoBehaviour:
   dashEase: 0
   dashDuration: 1
   dashPower: 5
-  dashParticles: {fileID: 0}
+  dashParticles: {fileID: 4550051124399910869}
   tripodCooldownTime: 4
   humanFistCooldownTime: 10
   humanFistChargeUpTime: 2
@@ -1485,6 +1486,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 21bd2f6b5be82854daf6687c29f73b7e, type: 3}
+--- !u!1 &4550051124399910869 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4124950085100735442, guid: 21bd2f6b5be82854daf6687c29f73b7e, type: 3}
+  m_PrefabInstance: {fileID: 440160191340389383}
+  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5594100508849763122 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 5456673462754924341, guid: 21bd2f6b5be82854daf6687c29f73b7e, type: 3}
@@ -4394,101 +4400,6 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3094723583773338716, guid: 03c6b5034a9b8244285a08f138bb4e06, type: 3}
   m_PrefabInstance: {fileID: 5488366444615472086}
   m_PrefabAsset: {fileID: 0}
---- !u!1001 &5546756758836176415
-PrefabInstance:
-  m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    serializedVersion: 3
-    m_TransformParent: {fileID: 8134474160589298071}
-    m_Modifications:
-    - target: {fileID: 5306249413736002524, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_Name
-      value: Missy_Death
-      objectReference: {fileID: 0}
-    - target: {fileID: 5306249413736002524, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_IsActive
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_RootOrder
-      value: 66
-      objectReference: {fileID: 0}
-    - target: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: -0.01999967
-      objectReference: {fileID: 0}
-    - target: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.74
-      objectReference: {fileID: 0}
-    - target: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.74
-      objectReference: {fileID: 0}
-    - target: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7195950759926796952, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      propertyPath: m_ApplyRootMotion
-      value: 1
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-    m_RemovedGameObjects: []
-    m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 5306249413736002524, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 4043214431229028362}
-  m_SourcePrefab: {fileID: 100100000, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
---- !u!4 &190188432338004538 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 5645726939706051621, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-  m_PrefabInstance: {fileID: 5546756758836176415}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &385511145872987587 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 5306249413736002524, guid: 3bc2a60192c98674eb12574999c60442, type: 3}
-  m_PrefabInstance: {fileID: 5546756758836176415}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4043214431229028362
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 385511145872987587}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  firingPoint: {fileID: 0}
 --- !u!1001 &5579775716824483406
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -6,9 +6,9 @@ using UnityEngine.EventSystems;
 public class ItemIdentifier : GameBehaviour
 {
     bool inRange;
-    bool itemAdd;
     public Item itemInfo;
-
+    Selecting selecting;
+    bool isHovering;
 
     [Header("Animation")]
     public Animator anim;
@@ -16,56 +16,140 @@ public class ItemIdentifier : GameBehaviour
     public Animator anim2;
 
     public GameObject statPop;
-    public GameObject statComp1;
-    public GameObject statComp2;
+
+    bool itemSpawned;
+    bool itemRemoved = false;
+    bool itemAdd;
 
 
     public void Start()
     {
         statPop = GameObject.Find("Stat Popup");
-        statComp1 = GameObject.Find("Stat Comp 1");
-        statComp2 = GameObject.Find("Stat Comp 2");
 
-        anim = statPop.GetComponent<Animator>();
-        anim1 = statComp1.GetComponent<Animator>();
-        anim2 = statComp2.GetComponent<Animator>();
+        selecting = GetComponent<Selecting>();
+        anim = _UI.statsPopUpPanel.GetComponent<Animator>();
+        anim1 = _UI.statComp1.GetComponent<Animator>();
+        anim2 = _UI.statComp2.GetComponent<Animator>();
     }
 
     private void Update()
     {
-        if(inRange)
+        //check if selected item is arms!!!
+
+
+        if (isHovering)
         {
-            if (Input.GetKeyDown(KeyCode.E))
+            print("we hover");
+
+            if (itemInfo.segment == Item.Segment.Torso)
             {
-                
-                //pick up item
-                if (_PC.playerInventory.Count < 5)//invenotry cap number here
+                float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
+                print(scrollDelta);
+
+                if (scrollDelta > 0)
                 {
-                    print("Destroy obj");
-                    Destroy(gameObject);
-                    _UI.CreateItemSelected(itemInfo);
+                    print("Left arm");
+                    _UI.leftArmItem = itemInfo;
+                    //Changes item to left here
+                }
+                if (scrollDelta < 0)
+                {
+                    print("right arm");
 
-                }  
-
+                    _UI.rightArmItem = itemInfo;
+                    //Changes item to left here
+                }
             }
         }
-    
 
 
-                if(!itemAdd)
+        if (inRange)
+        {
+            if (Input.GetKey(KeyCode.E))
+            {
+                //check which segment it is
+
+                //check if item is already there
+                bool itemInSlot = selecting.CheckIfItemIsInSlot();
+
+                if (itemInSlot)
+                {
+                    print("thers an item in this slot");
+
+                    if (!itemRemoved)
+                    {
+                        itemRemoved = true;
+
+                        bool itemOnPlayer = false;
+                        int index = -1;
+
+                        for (int i = 0; i < _PC.playerInventory.Count; i++)
+                        {
+                            if (itemInfo.segment == _PC.playerInventory[i].segment)
+                            {
+                                itemOnPlayer = true;
+                                index = i;
+                            }
+                        }
+                        if (itemOnPlayer && index != -1)
+                        {
+
+                            //remove item
+                            selecting.RemovePreviousItem();
+
+
+                            if (!itemSpawned)
+                            {
+                                itemSpawned = true;
+
+                                var newSpawnPoint = new Vector3();
+                                UnityEngine.AI.NavMeshHit hit;
+                                if (UnityEngine.AI.NavMesh.SamplePosition(_PC.transform.position, out hit, 1f, UnityEngine.AI.NavMesh.AllAreas))
+                                {
+                                    newSpawnPoint = hit.position;
+                                }
+                                //place old item on ground
+
+                                GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
+                                _UI.statComp1.SetActive(false);
+                                _UI.statComp2.SetActive(false);
+
+
+                                item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
+                                item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+                            }
+                        }
+                    }
+
+
+                }
+
+
+                if (!itemAdd)
                 {
                     itemAdd = true;
-                    _ISitemD.AddItemToInventory(itemInfo);
+                    
                     //equip new items
                     ExecuteAfterFrames(20, () => _UI.CreateItemSelected(itemInfo));
-                    
+
+                    //do check to see if another item of the same is equipped
+                    bool alreadyEquipped = false    ;
+
+                    for (int i = 0; i < _PC.playerInventory.Count; i++)
+                    {
+                        if (itemInfo == _PC.playerInventory[i]) alreadyEquipped = true;
+                    }
+                    if(!alreadyEquipped) ExecuteAfterFrames(10, () => _ISitemD.AddItemToInventory(itemInfo));
+
+
+
                 }
 
 
 
-                ExecuteAfterFrames(25, ()=> Destroy(this.gameObject));
-            
-        
+                ExecuteAfterFrames(25, () => Destroy(this.gameObject));
+            }
+        }
     }
 
     private void OnTriggerEnter(Collider other)
@@ -74,7 +158,7 @@ public class ItemIdentifier : GameBehaviour
         {
             print("player");
             inRange = true;
-            
+
         }
     }
 
@@ -87,21 +171,12 @@ public class ItemIdentifier : GameBehaviour
         }
     }
 
-    //public void OnMouseEnter()
-    //{
-    //    print("ENTER");
-    //    _UI.statsPopUpPanel.SetActive(true);
-    //    _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-    //    _UI.UpdateItemPopUp(itemInfo);
-    //    anim.SetTrigger("Open");
-
-    //}
-
     public void OnMouseOver()
     {
         print("ENTER");
 
-        
+        isHovering = true;
+
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         _UI.UpdateItemPopUp(itemInfo);
@@ -181,6 +256,8 @@ public class ItemIdentifier : GameBehaviour
 
     public void OnMouseExit()
     {
+        isHovering = false;
+
         print("EXIT");
         anim.ResetTrigger("Open");
         anim1.ResetTrigger("Open");
@@ -213,5 +290,4 @@ public class ItemIdentifier : GameBehaviour
     //            break;
     //    }
     //}
-            
 }

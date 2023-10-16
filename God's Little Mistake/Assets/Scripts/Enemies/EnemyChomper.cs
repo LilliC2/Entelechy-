@@ -196,7 +196,7 @@ public class EnemyChomper : GameBehaviour
                     print("Chase player");
                     if(!jumpingBack)
                     {
-                        print("Player RUn part");
+                        //print("Player RUn part");
                         runningParticle.Play();
                         enemyStats.stats.speed = normalSpeed;
 

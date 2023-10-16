@@ -24,7 +24,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6787832192589604173}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 206.18956, y: 99.69409, z: -1.7817383}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
@@ -45,6 +45,72 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
+  leftArmItem:
+    itemName: 
+    ID: 0
+    lvl: 0
+    inSlot: -1
+    category: 0
+    segment: 0
+    meleeAttackType: 0
+    itemType: 0
+    hasActiveAbility: 0
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critX: 0
+    critChance: 0
+    longRange_range: 0
+    melee_range: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 0}
+    pauseIcon: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  rightArmItem:
+    itemName: 
+    ID: 0
+    lvl: 0
+    inSlot: -1
+    category: 0
+    segment: 0
+    meleeAttackType: 0
+    itemType: 0
+    hasActiveAbility: 0
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critX: 0
+    critChance: 0
+    longRange_range: 0
+    melee_range: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 0}
+    pauseIcon: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  gameOverMenu: {fileID: 0}
+  gameOverAnim: {fileID: 0}
   hpText: {fileID: 0}
   levelText: {fileID: 0}
   defaultCursor: {fileID: 21300000, guid: 5173b9a6d0ba5e94c935a8597ac166c2, type: 3}
@@ -56,23 +122,28 @@ MonoBehaviour:
     itemName: 
     ID: 0
     lvl: 0
+    inSlot: -1
     category: 0
     segment: 0
+    meleeAttackType: 0
     itemType: 0
+    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 0
-    dps: 0
-    fireRate: 0
+    firerate: 0
     critX: 0
     critChance: 0
-    range: 0
+    longRange_range: 0
+    melee_range: 0
     projectile: 0
     projectileSpeed: 0
     projectilePF: {fileID: 0}
+    movementSpeed: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 0}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -88,16 +159,60 @@ MonoBehaviour:
   invenSlot4: {fileID: 0}
   invenSlot5: {fileID: 0}
   invenSlot6: {fileID: 0}
+  playerAvatar: {fileID: 0}
   statsPopUpPanel: {fileID: 0}
   popupName: {fileID: 0}
   popupDmg: {fileID: 0}
   popupCritX: {fileID: 0}
   popupCritChance: {fileID: 0}
   popupFirerate: {fileID: 0}
+  popupIcon: {fileID: 0}
+  scrollContent: {fileID: 0}
+  scrollSpeed: 100
   invenSegementPopUpPanel: {fileID: 0}
   invenPopupName: {fileID: 0}
   invenPopupDmg: {fileID: 0}
   invenPopupCritX: {fileID: 0}
   invenPopupCritChance: {fileID: 0}
   invenPopupFirerate: {fileID: 0}
-  playerAvatar: {fileID: 0}
+  topEye: {fileID: 0}
+  middleEye: {fileID: 0}
+  bottomEye: {fileID: 0}
+  attackPill: {fileID: 0}
+  attackPillText: {fileID: 0}
+  attackIcon: {fileID: 0}
+  rangePill: {fileID: 0}
+  rangePillText: {fileID: 0}
+  rangeIcon: {fileID: 0}
+  itemIcon: {fileID: 0}
+  typeIcon: {fileID: 0}
+  statComp1: {fileID: 0}
+  arrowComp: {fileID: 0}
+  popupName1: {fileID: 0}
+  popupDmg1: {fileID: 0}
+  popupCritX1: {fileID: 0}
+  popupCritChance1: {fileID: 0}
+  popupFirerate1: {fileID: 0}
+  popupIcon1: {fileID: 0}
+  hoverItemAnimator: {fileID: 0}
+  hoverItemStatComp1Animator: {fileID: 0}
+  hoverItemStatComp2Animator: {fileID: 0}
+  pausePanel: {fileID: 0}
+  pauseFunctionalityPanel: {fileID: 0}
+  optionPanel: {fileID: 0}
+  statComp2: {fileID: 0}
+  popupName2: {fileID: 0}
+  popupDmg2: {fileID: 0}
+  popupCritX2: {fileID: 0}
+  popupCritChance2: {fileID: 0}
+  popupFirerate2: {fileID: 0}
+  popupIcon2: {fileID: 0}
+  meleeIcon: {fileID: 0}
+  rangedIcon: {fileID: 0}
+  typeCone: {fileID: 0}
+  typeLine: {fileID: 0}
+  typeCircle: {fileID: 0}
+  typeRapid: {fileID: 0}
+  typeLob: {fileID: 0}
+  typeLaser: {fileID: 0}
+  typeCannon: {fileID: 0}

@@ -211,6 +211,8 @@ public class BaseEnemy : GameBehaviour
             //eye is for testing
             int rand = Random.Range(0, 4);
 
+            print("Number gen when enemy dies " + rand);
+
             switch (rand)
             {
                 case 1:
@@ -222,6 +224,7 @@ public class BaseEnemy : GameBehaviour
 
                         item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
+                        print(item.name);
                         print("Spawning item of " + stats.category.ToString() + " category");
                     }
 
