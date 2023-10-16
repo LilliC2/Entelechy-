@@ -10,6 +10,7 @@ public class PauseSlotStats : GameBehaviour
     public Item itemInfo;
 
     public UnityEngine.UI.Image itemSprite;
+    //public UnityEngine.UI.Image itemSlot;
 
     public Sprite itemEmpty;
 
