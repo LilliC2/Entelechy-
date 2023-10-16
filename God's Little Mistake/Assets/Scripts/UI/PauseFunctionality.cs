@@ -81,7 +81,7 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
         itemDamage.text = _hoverItem.dmg.ToString();
         itemCritMultiplier.text = _hoverItem.critX.ToString();
         itemCritChance.text = _hoverItem.critChance.ToString();
-        itemFireRate.text = _hoverItem.fireRate.ToString();
+        itemFireRate.text = _hoverItem.firerate.ToString();
         itemIcon.sprite = _hoverItem.icon;
 
         if(_hoverItem.segment != Item.Segment.Legs)

@@ -7,6 +7,7 @@ public class ItemIdentifier : GameBehaviour
 {
     bool inRange;
     public Item itemInfo;
+    bool itemAdd;
 
 
     [Header("Animation")]
@@ -32,40 +33,35 @@ public class ItemIdentifier : GameBehaviour
 
     private void Update()
     {
-        if(inRange)
+        if (inRange)
         {
             if (Input.GetKeyDown(KeyCode.E))
             {
-                
+
                 //pick up item
-                if (_PC.playerInventory.Count < 5)//invenotry cap number here
-                {
-                    print("Destroy obj");
-                    Destroy(gameObject);
-                    _UI.CreateItemSelected(itemInfo);
+                //if (_PC.playerInventory.Count < 5)//invenotry cap number here
+                //{
+                //    print("Destroy obj");
+                //    Destroy(gameObject);
+                //    _UI.CreateItemSelected(itemInfo);
 
-                }  
+                //}
 
-            }
-        }
-    
-
-
-                if(!itemAdd)
+                if (!itemAdd)
                 {
                     itemAdd = true;
                     _ISitemD.AddItemToInventory(itemInfo);
                     //equip new items
                     ExecuteAfterFrames(20, () => _UI.CreateItemSelected(itemInfo));
-                    
+
                 }
+                ExecuteAfterFrames(25, () => Destroy(this.gameObject));
 
 
-
-                ExecuteAfterFrames(25, ()=> Destroy(this.gameObject));
             }
         }
     }
+
 
     private void OnTriggerEnter(Collider other)
     {
@@ -73,7 +69,7 @@ public class ItemIdentifier : GameBehaviour
         {
             print("player");
             inRange = true;
-            
+
         }
     }
 
@@ -86,21 +82,21 @@ public class ItemIdentifier : GameBehaviour
         }
     }
 
-    //public void OnMouseEnter()
-    //{
-    //    print("ENTER");
-    //    _UI.statsPopUpPanel.SetActive(true);
-    //    _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-    //    _UI.UpdateItemPopUp(itemInfo);
-    //    anim.SetTrigger("Open");
+    public void OnMouseEnter()
+    {
+        print("ENTER");
+        _UI.statsPopUpPanel.SetActive(true);
+        _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        _UI.UpdateItemPopUp(itemInfo);
+        anim.SetTrigger("Open");
 
-    //}
+    }
 
     public void OnMouseOver()
     {
         print("ENTER");
 
-        
+
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         _UI.UpdateItemPopUp(itemInfo);
@@ -175,8 +171,8 @@ public class ItemIdentifier : GameBehaviour
 
 
 
-        //}
     }
+
 
     public void OnMouseExit()
     {
@@ -212,5 +208,5 @@ public class ItemIdentifier : GameBehaviour
     //            break;
     //    }
     //}
-            
 }
+        
