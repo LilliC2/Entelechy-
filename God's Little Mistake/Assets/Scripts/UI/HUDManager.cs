@@ -30,6 +30,7 @@ public class HUDManager : Singleton<HUDManager>
     public float cooldownTimer1;
     public bool isCooldown1=false;
     public bool hasItem1=false;
+    public bool isPrimary1=false;
 
 
     [Header("Ability Slot 2")]
@@ -45,6 +46,8 @@ public class HUDManager : Singleton<HUDManager>
     public float cooldownTimer2;
     public bool isCooldown2 = false;
     public bool hasItem2 = false;
+    public bool isPrimary2 = false;
+
 
     [Header("Ability Slot 3")]
     public Image invenSlot3;
@@ -59,6 +62,8 @@ public class HUDManager : Singleton<HUDManager>
     public float cooldownTimer3;
     public bool isCooldown3 = false;
     public bool hasItem3 = false;
+    public bool isPrimary3 = false;
+
 
     [Header("Ability Slot 4")]
     public Image invenSlot4;
@@ -73,6 +78,8 @@ public class HUDManager : Singleton<HUDManager>
     public float cooldownTimer4;
     public bool isCooldown4 = false;
     public bool hasItem4 = false;
+    public bool isPrimary4 = false;
+
 
     [Header("Ability Slot 5")]
     public Image invenSlot5;
@@ -87,6 +94,8 @@ public class HUDManager : Singleton<HUDManager>
     public float cooldownTimer5;
     public bool isCooldown5 = false;
     public bool hasItem5 = false;
+    public bool isPrimary5 = false;
+
 
     [Header("Ability Slot 6")]
     public Image invenSlot6;
@@ -101,6 +110,8 @@ public class HUDManager : Singleton<HUDManager>
     public float cooldownTimer6;
     public bool isCooldown6 = false;
     public bool hasItem6 = false;
+    public bool isPrimary6 = false;
+
 
 
     // Start is called before the first frame update
@@ -219,8 +230,7 @@ public class HUDManager : Singleton<HUDManager>
         //Slot 1
         if (hasItem1)
         {
-            keyHighlight1.SetActive(true);
-            keyGlow1.SetActive(true);
+            
             if(isCooldown1)
             {
                 frameHighlight1.SetActive(false);
@@ -231,18 +241,31 @@ public class HUDManager : Singleton<HUDManager>
                 frameHighlight1.SetActive(true);
                 backgroundGlow1.SetActive(true);
             }
+
+            if(isPrimary1)
+            {
+                keyHighlight1.SetActive(true);
+                keyGlow1.SetActive(true);
+            }
+            else
+            {
+                keyHighlight1.SetActive(false);
+                keyGlow1.SetActive(false);
+            }
+
+            
+
         }
-        else
-        {
-            keyHighlight1.SetActive(false);
-            keyGlow1.SetActive(false);
-        }
+        //else
+        //{
+        //    keyHighlight1.SetActive(false);
+        //    keyGlow1.SetActive(false);
+        //}
 
         //Slot 2
         if (hasItem2)
         {
-            keyHighlight2.SetActive(true);
-            keyGlow2.SetActive(true);
+            
             if (isCooldown2)
             {
                 frameHighlight2.SetActive(false);
@@ -253,18 +276,29 @@ public class HUDManager : Singleton<HUDManager>
                 frameHighlight2.SetActive(true);
                 backgroundGlow2.SetActive(true);
             }
+
+            if (isPrimary2)
+            {
+                keyHighlight2.SetActive(true);
+                keyGlow2.SetActive(true);
+            }
+            else
+            {
+                keyHighlight2.SetActive(false);
+                keyGlow2.SetActive(false);
+            }
         }
-        else
-        {
-            keyHighlight2.SetActive(false);
-            keyGlow2.SetActive(false);
-        }
+        //else
+        //{
+        //    keyHighlight2.SetActive(false);
+        //    keyGlow2.SetActive(false);
+        //}
 
         //Slot 3
         if (hasItem3)
         {
-            keyHighlight3.SetActive(true);
-            keyGlow3.SetActive(true);
+            //keyHighlight3.SetActive(true);
+            //keyGlow3.SetActive(true);
             if (isCooldown3)
             {
                 frameHighlight3.SetActive(false);
@@ -275,18 +309,29 @@ public class HUDManager : Singleton<HUDManager>
                 frameHighlight3.SetActive(true);
                 backgroundGlow3.SetActive(true);
             }
+
+            if (isPrimary3)
+            {
+                keyHighlight3.SetActive(true);
+                keyGlow3.SetActive(true);
+            }
+            else
+            {
+                keyHighlight3.SetActive(false);
+                keyGlow3.SetActive(false);
+            }
         }
-        else
-        {
-            keyHighlight3.SetActive(false);
-            keyGlow3.SetActive(false);
-        }
+        //else
+        //{
+        //    keyHighlight3.SetActive(false);
+        //    keyGlow3.SetActive(false);
+        //}
 
         //Slot4
         if (hasItem4)
         {
-            keyHighlight4.SetActive(true);
-            keyGlow4.SetActive(true);
+            //keyHighlight4.SetActive(true);
+            //keyGlow4.SetActive(true);
             if (isCooldown4)
             {
                 frameHighlight4.SetActive(false);
@@ -297,18 +342,28 @@ public class HUDManager : Singleton<HUDManager>
                 frameHighlight4.SetActive(true);
                 backgroundGlow4.SetActive(true);
             }
+            if (isPrimary4)
+            {
+                keyHighlight4.SetActive(true);
+                keyGlow4.SetActive(true);
+            }
+            else
+            {
+                keyHighlight4.SetActive(false);
+                keyGlow4.SetActive(false);
+            }
         }
-        else
-        {
-            keyHighlight4.SetActive(false);
-            keyGlow4.SetActive(false);
-        }
+        //else
+        //{
+        //    keyHighlight4.SetActive(false);
+        //    keyGlow4.SetActive(false);
+        //}
 
         //Slot5
         if (hasItem5)
         {
-            keyHighlight5.SetActive(true);
-            keyGlow5.SetActive(true);
+            //keyHighlight5.SetActive(true);
+            //keyGlow5.SetActive(true);
             if (isCooldown5)
             {
                 frameHighlight5.SetActive(false);
@@ -319,18 +374,29 @@ public class HUDManager : Singleton<HUDManager>
                 frameHighlight5.SetActive(true);
                 backgroundGlow5.SetActive(true);
             }
+
+            if (isPrimary5)
+            {
+                keyHighlight5.SetActive(true);
+                keyGlow5.SetActive(true);
+            }
+            else
+            {
+                keyHighlight5.SetActive(false);
+                keyGlow5.SetActive(false);
+            }
         }
-        else
-        {
-            keyHighlight5.SetActive(false);
-            keyGlow5.SetActive(false);
-        }
+        //else
+        //{
+        //    keyHighlight5.SetActive(false);
+        //    keyGlow5.SetActive(false);
+        //}
 
         //Slot6
         if (hasItem6)
         {
-            keyHighlight6.SetActive(true);
-            keyGlow6.SetActive(true);
+            //keyHighlight6.SetActive(true);
+            //keyGlow6.SetActive(true);
             if (isCooldown6)
             {
                 frameHighlight6.SetActive(false);
@@ -341,12 +407,23 @@ public class HUDManager : Singleton<HUDManager>
                 frameHighlight6.SetActive(true);
                 backgroundGlow6.SetActive(true);
             }
+
+            if (isPrimary6)
+            {
+                keyHighlight6.SetActive(true);
+                keyGlow6.SetActive(true);
+            }
+            else
+            {
+                keyHighlight6.SetActive(false);
+                keyGlow6.SetActive(false);
+            }
         }
-        else
-        {
-            keyHighlight6.SetActive(false);
-            keyGlow6.SetActive(false);
-        }
+        //else
+        //{
+        //    keyHighlight6.SetActive(false);
+        //    keyGlow6.SetActive(false);
+        //}
     }
 
     #region Slot 1

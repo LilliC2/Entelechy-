@@ -7806,6 +7806,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
+  - {fileID: 1093205747}
   - {fileID: 648257243}
   - {fileID: 1667151533}
   m_Father: {fileID: 884743350}
@@ -8491,7 +8492,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1269287197}
-  - {fileID: 1093205747}
   - {fileID: 743822796}
   m_Father: {fileID: 688458994}
   m_RootOrder: -1
@@ -10923,6 +10923,7 @@ MonoBehaviour:
   cooldownTimer1: 0
   isCooldown1: 0
   hasItem1: 0
+  isPrimary1: 0
   invenSlot2: {fileID: 232051715}
   frame2: {fileID: 890321956}
   frameHighlight2: {fileID: 890321955}
@@ -10935,6 +10936,7 @@ MonoBehaviour:
   cooldownTimer2: 0
   isCooldown2: 0
   hasItem2: 0
+  isPrimary2: 0
   invenSlot3: {fileID: 232051714}
   frame3: {fileID: 890321949}
   frameHighlight3: {fileID: 890321948}
@@ -10947,6 +10949,7 @@ MonoBehaviour:
   cooldownTimer3: 0
   isCooldown3: 0
   hasItem3: 0
+  isPrimary3: 0
   invenSlot4: {fileID: 232051713}
   frame4: {fileID: 890321942}
   frameHighlight4: {fileID: 890321941}
@@ -10959,6 +10962,7 @@ MonoBehaviour:
   cooldownTimer4: 0
   isCooldown4: 0
   hasItem4: 0
+  isPrimary4: 0
   invenSlot5: {fileID: 232051712}
   frame5: {fileID: 890321935}
   frameHighlight5: {fileID: 890321934}
@@ -10971,6 +10975,7 @@ MonoBehaviour:
   cooldownTimer5: 0
   isCooldown5: 0
   hasItem5: 0
+  isPrimary5: 0
   invenSlot6: {fileID: 232051711}
   frame6: {fileID: 890321928}
   frameHighlight6: {fileID: 890321927}
@@ -10983,6 +10988,7 @@ MonoBehaviour:
   cooldownTimer6: 0
   isCooldown6: 0
   hasItem6: 0
+  isPrimary6: 0
 --- !u!1 &1093205746
 GameObject:
   m_ObjectHideFlags: 0
@@ -11014,12 +11020,12 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1881168657}
-  m_Father: {fileID: 884743350}
+  m_Father: {fileID: 743822796}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 90}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 45.352066, y: -51.67745}
+  m_AnchoredPosition: {x: -110.14786, y: 99.54257}
   m_SizeDelta: {x: 19, y: 32}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1093205748
@@ -13059,7 +13065,7 @@ PrefabInstance:
     - target: {fileID: 6241059122993911884, guid: 1a954ff5843d345429a9fe3196b1cfb9, type: 3}
       propertyPath: invenPopupName
       value: 
-      objectReference: {fileID: 336382444}
+      objectReference: {fileID: 1675854071}
     - target: {fileID: 6241059122993911884, guid: 1a954ff5843d345429a9fe3196b1cfb9, type: 3}
       propertyPath: popupFirerate1
       value: 
@@ -13103,7 +13109,7 @@ PrefabInstance:
     - target: {fileID: 6241059122993911884, guid: 1a954ff5843d345429a9fe3196b1cfb9, type: 3}
       propertyPath: invenSegementPopUpPanel
       value: 
-      objectReference: {fileID: 398585188}
+      objectReference: {fileID: 884743349}
     - target: {fileID: 6241059122993911884, guid: 1a954ff5843d345429a9fe3196b1cfb9, type: 3}
       propertyPath: pauseFunctionalityPanel
       value: 
@@ -19138,7 +19144,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1881168657
 RectTransform:
   m_ObjectHideFlags: 0

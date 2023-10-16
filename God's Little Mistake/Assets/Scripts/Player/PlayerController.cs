@@ -723,32 +723,68 @@ public class PlayerController : Singleton<PlayerController>
         if (Input.GetKeyDown(KeyCode.Alpha1))
         {
             ChangePrimary(0);
+            _HUD.isPrimary1 = true;
+            _HUD.isPrimary2 = false;
+            _HUD.isPrimary3 = false;
+            _HUD.isPrimary4 = false;
+            _HUD.isPrimary5 = false;
+            _HUD.isPrimary6 = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
         {
             print("Chaning primary");
             ChangePrimary(1);
+            _HUD.isPrimary1 = false;
+            _HUD.isPrimary2 = true;
+            _HUD.isPrimary3 = false;
+            _HUD.isPrimary4 = false;
+            _HUD.isPrimary5 = false;
+            _HUD.isPrimary6 = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
         {
             ChangePrimary(2);
+            _HUD.isPrimary1 = false;
+            _HUD.isPrimary2 = false;
+            _HUD.isPrimary3 = true;
+            _HUD.isPrimary4 = false;
+            _HUD.isPrimary5 = false;
+            _HUD.isPrimary6 = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
         {
             ChangePrimary(3);
+            _HUD.isPrimary1 = false;
+            _HUD.isPrimary2 = false;
+            _HUD.isPrimary3 = false;
+            _HUD.isPrimary4 = true;
+            _HUD.isPrimary5 = false;
+            _HUD.isPrimary6 = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
         {
             ChangePrimary(4);
+            _HUD.isPrimary1 = false;
+            _HUD.isPrimary2 = false;
+            _HUD.isPrimary3 = false;
+            _HUD.isPrimary4 = false;
+            _HUD.isPrimary5 = true;
+            _HUD.isPrimary6 = false;
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha6))
         {
             ChangePrimary(5);
+            _HUD.isPrimary1 = false;
+            _HUD.isPrimary2 = false;
+            _HUD.isPrimary3 = false;
+            _HUD.isPrimary4 = false;
+            _HUD.isPrimary5 = false;
+            _HUD.isPrimary6 = true;
         }
 
 

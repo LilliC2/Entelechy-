@@ -180,7 +180,8 @@ public class ItemIdentifier : GameBehaviour
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
         _UI.UpdateItemPopUp(itemInfo);
-        anim.SetTrigger("Open");
+        //anim.SetTrigger("Open");
+        _UI.PlayPopupOpen();
         _UI.arrowComp.SetActive(true);
 
         Item itemSlot3 = new();
@@ -198,8 +199,10 @@ public class ItemIdentifier : GameBehaviour
             _UI.statComp1.SetActive(true);
             _UI.statComp2.SetActive(true);
 
-            anim1.SetTrigger("Open");
-            anim2.SetTrigger("Open");
+            _UI.PlayPopup1Open();
+            _UI.PlayPopup2Open();
+            //anim1.SetTrigger("Open");
+            //anim2.SetTrigger("Open");
 
             _UI.UpdateItemPopUpComp1(itemSlot3);
             _UI.UpdateItemPopUpComp2(itemSlot4);
@@ -216,8 +219,8 @@ public class ItemIdentifier : GameBehaviour
             {
                 if (item.category == itemInfo.category) itemMatch = item;
             }
-
-            anim1.SetTrigger("Open");
+            _UI.PlayPopup1Open();
+            //anim1.SetTrigger("Open");
 
             _UI.UpdateItemPopUpComp1(itemMatch);
         }
@@ -259,10 +262,14 @@ public class ItemIdentifier : GameBehaviour
         isHovering = false;
 
         print("EXIT");
-        anim.ResetTrigger("Open");
-        anim1.ResetTrigger("Open");
-        anim.SetTrigger("Close");
-        anim1.SetTrigger("Close");
+        //anim.ResetTrigger("Open");
+        //anim1.ResetTrigger("Open");
+        //anim.SetTrigger("Close");
+        //anim1.SetTrigger("Close");
+
+        _UI.PlayPopupClose();
+        _UI.PlayPopup1Close();
+        _UI.PlayPopup2Close();
         ExecuteAfterSeconds(1, () => TurnOff());
 
 

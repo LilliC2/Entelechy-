@@ -133,6 +133,7 @@ public class UIManager : Singleton<UIManager>
         arrowComp.SetActive(false);
         playerAvatar = GameObject.FindGameObjectWithTag("Player");
 
+        hoverItemAnimator = statsPopUpPanel.GetComponent<Animator>();
         hoverItemStatComp1Animator = statComp1.GetComponent<Animator>();
         hoverItemStatComp2Animator = statComp2.GetComponent<Animator>();
 
@@ -771,8 +772,36 @@ public class UIManager : Singleton<UIManager>
         return itemMatchInPlayerInven;
     }
 
-    #region HUD
+    #region Popup animaions
 
+    public void PlayPopupOpen()
+    {
+        hoverItemAnimator.SetTrigger("Open");
+    }
+    public void PlayPopupClose()
+    {
+        hoverItemAnimator.SetTrigger("Close");
+    }
+
+    public void PlayPopup1Open()
+    {
+        hoverItemStatComp1Animator.SetTrigger("Open");
+    }
+
+    public void PlayPopup1Close()
+    {
+        hoverItemStatComp1Animator.SetTrigger("Close");
+    }
+
+    public void PlayPopup2Open()
+    {
+        hoverItemStatComp2Animator.SetTrigger("Open");
+    }
+
+    public void PlayPopup2Close()
+    {
+        hoverItemStatComp2Animator.SetTrigger("Close");
+    }
 
 
     #endregion
