@@ -179,9 +179,9 @@ public class ItemIdentifier : GameBehaviour
 
         _UI.statsPopUpPanel.SetActive(true);
         _UI.statsPopUpPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        _UI.PlayPopupOpen();
         _UI.UpdateItemPopUp(itemInfo);
         //anim.SetTrigger("Open");
-        _UI.PlayPopupOpen();
         _UI.arrowComp.SetActive(true);
 
         Item itemSlot3 = new();
