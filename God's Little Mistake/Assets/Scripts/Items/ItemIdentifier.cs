@@ -6,6 +6,7 @@ using UnityEngine.EventSystems;
 public class ItemIdentifier : GameBehaviour
 {
     bool inRange;
+    bool itemAdd;
     public Item itemInfo;
 
 
@@ -63,8 +64,8 @@ public class ItemIdentifier : GameBehaviour
 
 
                 ExecuteAfterFrames(25, ()=> Destroy(this.gameObject));
-            }
-        }
+            
+        
     }
 
     private void OnTriggerEnter(Collider other)
