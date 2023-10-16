@@ -637,4 +637,13 @@ public class HUDManager : Singleton<HUDManager>
     }
 
     #endregion
+
+    public void UpdatePrimaryDetauls(int slot)
+    {
+        primaryName.text = _PC.playerInventory[slot].itemName.ToString();
+        damageValue.text = _PC.playerInventory[slot].dmg.ToString();
+        critChanceValue.text = _PC.playerInventory[slot].critChance.ToString();
+        critMultiplierValue.text = _PC.playerInventory[slot].critX.ToString();
+        firerateValue.text = _PC.playerInventory[slot].firerate.ToString();
+    }
 }

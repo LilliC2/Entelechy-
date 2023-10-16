@@ -731,6 +731,8 @@ public class PlayerController : Singleton<PlayerController>
             _HUD.isPrimary4 = false;
             _HUD.isPrimary5 = false;
             _HUD.isPrimary6 = false;
+            _HUD.UpdatePrimaryDetauls(0);
+
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha2))
@@ -743,6 +745,8 @@ public class PlayerController : Singleton<PlayerController>
             _HUD.isPrimary4 = false;
             _HUD.isPrimary5 = false;
             _HUD.isPrimary6 = false;
+            _HUD.UpdatePrimaryDetauls(1);
+
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha3))
@@ -754,6 +758,8 @@ public class PlayerController : Singleton<PlayerController>
             _HUD.isPrimary4 = false;
             _HUD.isPrimary5 = false;
             _HUD.isPrimary6 = false;
+            _HUD.UpdatePrimaryDetauls(2);
+
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha4))
@@ -765,6 +771,8 @@ public class PlayerController : Singleton<PlayerController>
             _HUD.isPrimary4 = true;
             _HUD.isPrimary5 = false;
             _HUD.isPrimary6 = false;
+            _HUD.UpdatePrimaryDetauls(3);
+
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha5))
@@ -776,6 +784,8 @@ public class PlayerController : Singleton<PlayerController>
             _HUD.isPrimary4 = false;
             _HUD.isPrimary5 = true;
             _HUD.isPrimary6 = false;
+            _HUD.UpdatePrimaryDetauls(4);
+
         }
 
         if (Input.GetKeyDown(KeyCode.Alpha6))
@@ -787,6 +797,7 @@ public class PlayerController : Singleton<PlayerController>
             _HUD.isPrimary4 = false;
             _HUD.isPrimary5 = false;
             _HUD.isPrimary6 = true;
+            _HUD.UpdatePrimaryDetauls(5);
         }
 
 
