@@ -95,21 +95,21 @@ public class GameManager : Singleton<GameManager>
     {
         gameState = GameState.Pause;
         _UI.OnPause();
-        //Time.timeScale = 0;
+        Time.timeScale = 0;
     }
 
     public void OnResume()
     {
         gameState = GameState.Playing;
         _UI.OnResume();
-        //Time.timeScale = 1;
+        Time.timeScale = 1;
     }
 
 
     public void GameOver()
     {
         _UI.PlayTransitionAnimation();
-
+        Time.timeScale = 0;
     }
 
     public void Restart()
