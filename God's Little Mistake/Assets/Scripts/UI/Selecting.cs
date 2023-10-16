@@ -96,6 +96,7 @@ public class Selecting : GameBehaviour
         Destroy(toDestroyFront.gameObject);
 
         //remove from player inventory
-        _PC.playerInventory.Remove(previousItem);
+        var index = _PC.playerInventory.IndexOf(previousItem);
+        _ISitemD.RemoveItemFromInventory(index);
     }
 }

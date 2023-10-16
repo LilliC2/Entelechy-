@@ -19,13 +19,15 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
 
 
             _UI.statsPopUpPanel.SetActive(false);
-            _PC.playerInventory.Add(_item);
             //print("added item");
 
 
             var index = _PC.playerInventory.Count - 1;
 
             //print("Item ID in additem is " + index);
+
+            if(_item != null) _PC.playerInventory.Add(_item);
+
 
             _UI.UpdateInventorySlotImages();
 
@@ -34,6 +36,9 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
             {
                 //calls apprioriate function
                 case Item.ItemType.Primary:
+
+                    AddItemStats(index);
+
 
                     //if primary and no other primarys are there, add this one
                     bool canAutoAddPrimary = true;
@@ -57,6 +62,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
                     break;
                 case Item.ItemType.Passive:
                     AddItemStats(index);
+
                     break;
                 case Item.ItemType.Symbiote:
                     break;
@@ -76,56 +82,8 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
     /// <param name="_inventoryID"></param>
     public void RemoveItemFromInventory(int _inventoryID)
     {
-        //remove item from player canvas
-        for (int i = 0; i < _AVTAR.slotsOnPlayerFront.Length; i++)
-        {
-            //check if slot hhas child
-            if (_AVTAR.slotsOnPlayerFront[i].transform.childCount != 0)
-            {
-                //check if item equipped is the item
-                var obj = _AVTAR.slotsOnPlayerFront[i].transform.GetChild(0);
-                if (obj.name.Contains(_inventoryID.ToString()))
-                {
-                    _PC.itemsAnimForward.Remove(obj.GetComponentInChildren<Animator>());
-                    _PC.itemsAnimLeftSide.Remove(obj.GetComponentInChildren<Animator>());
-                    _PC.itemsAnimRightSide.Remove(obj.GetComponentInChildren<Animator>());
-                    _PC.itemsAnimBack.Remove(obj.GetComponentInChildren<Animator>());
-
-                    Destroy(obj.gameObject);
-                }
-            }
-        }
-
-        //check if its passive, secondary, primary or symbiote
-        switch (_PC.playerInventory[_inventoryID].itemType)
-        {
-            //calls apprioriate function
-            case Item.ItemType.Primary:
-
-                //makes sure if previously active, it removes itself
-
-                break;
-            case Item.ItemType.Secondary:
-                break;
-            case Item.ItemType.Passive:
-                RemoveItemStats(_inventoryID);
-                break;
-            case Item.ItemType.Symbiote:
-                break;
-        }
-
-
-        //add item to scene and remove from inventory
-
-        var item = Instantiate(_IG.itemTemp,_PC.transform.position, Quaternion.identity);
-        item.GetComponent<ItemIdentifier>().itemInfo = _PC.playerInventory[_inventoryID];
-
-        
-        
-        item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
-
-        
-
+        _PC.playerInventory.Remove(_PC.playerInventory[_inventoryID]);
+        RemoveItemStats(_inventoryID);
         _UI.UpdateInventorySlotImages();
         //WHEN CURRENCY IS ADDED, PLAYER WOULD GAIN CURRENCY HERE
 

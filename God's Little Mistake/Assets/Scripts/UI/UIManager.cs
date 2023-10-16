@@ -508,6 +508,7 @@ public class UIManager : Singleton<UIManager>
     {
         print("Create item " + _itemInfo.itemName + " " + _itemInfo.ID);
 
+
         heldItem = _itemInfo;
 
         isHoldingItem = true;

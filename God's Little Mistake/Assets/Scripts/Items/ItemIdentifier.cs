@@ -18,7 +18,7 @@ public class ItemIdentifier : GameBehaviour
     public GameObject statPop;
 
     bool itemSpawned;
-    bool itemRemoved;
+    bool itemRemoved = false;
     bool itemAdd;
 
 
@@ -80,32 +80,47 @@ public class ItemIdentifier : GameBehaviour
                     {
                         itemRemoved = true;
 
-                        //destroy old item from player avatar
-                        selecting.RemovePreviousItem();
+                        bool itemOnPlayer = false;
+                        int index = -1;
 
-                    }
-
-
-                    if (!itemSpawned)
-                    {
-                        itemSpawned = true;
-
-                        var newSpawnPoint = new Vector3();
-                        UnityEngine.AI.NavMeshHit hit;
-                        if (UnityEngine.AI.NavMesh.SamplePosition(_PC.transform.position, out hit, 1f, UnityEngine.AI.NavMesh.AllAreas))
+                        for (int i = 0; i < _PC.playerInventory.Count; i++)
                         {
-                            newSpawnPoint = hit.position;
+                            if (itemInfo.segment == _PC.playerInventory[i].segment)
+                            {
+                                itemOnPlayer = true;
+                                index = i;
+                            }
                         }
-                        //place old item on ground
+                        if (itemOnPlayer && index != -1)
+                        {
 
-                        GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
-                        _UI.statComp1.SetActive(false);
-                        _UI.statComp2.SetActive(false);
+                            //remove item
+                            selecting.RemovePreviousItem();
 
 
-                        item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
-                        item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+                            if (!itemSpawned)
+                            {
+                                itemSpawned = true;
+
+                                var newSpawnPoint = new Vector3();
+                                UnityEngine.AI.NavMeshHit hit;
+                                if (UnityEngine.AI.NavMesh.SamplePosition(_PC.transform.position, out hit, 1f, UnityEngine.AI.NavMesh.AllAreas))
+                                {
+                                    newSpawnPoint = hit.position;
+                                }
+                                //place old item on ground
+
+                                GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
+                                _UI.statComp1.SetActive(false);
+                                _UI.statComp2.SetActive(false);
+
+
+                                item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
+                                item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+                            }
+                        }
                     }
+
 
                 }
 
@@ -113,9 +128,20 @@ public class ItemIdentifier : GameBehaviour
                 if (!itemAdd)
                 {
                     itemAdd = true;
-                    //_ISitemD.AddItemToInventory(itemInfo);
+                    
                     //equip new items
                     ExecuteAfterFrames(20, () => _UI.CreateItemSelected(itemInfo));
+
+                    //do check to see if another item of the same is equipped
+                    bool alreadyEquipped = false    ;
+
+                    for (int i = 0; i < _PC.playerInventory.Count; i++)
+                    {
+                        if (itemInfo == _PC.playerInventory[i]) alreadyEquipped = true;
+                    }
+                    if(!alreadyEquipped) ExecuteAfterFrames(10, () => _ISitemD.AddItemToInventory(itemInfo));
+
+
 
                 }
 

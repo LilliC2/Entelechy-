@@ -209,7 +209,7 @@ public class BaseEnemy : GameBehaviour
             explosionAnimOB.GetComponent<Animator>().SetTrigger("Boom");
 
             //eye is for testing
-            int rand = Random.Range(1, 4);
+            int rand = Random.Range(0, 4);
 
             print("Number gen when enemy dies " + rand);
 
