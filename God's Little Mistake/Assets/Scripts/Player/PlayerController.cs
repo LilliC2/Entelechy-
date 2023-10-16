@@ -161,6 +161,7 @@ public class PlayerController : Singleton<PlayerController>
         health = maxHP;
         controller = gameObject.GetComponent<CharacterController>();
         _UI.UpdateHealthText(health);
+        _UI.UpdateHealthBar(health, maxHP);
         lastPos = transform.position;
 
         groundCheck = GameObject.Find("GroundCheck");
@@ -196,6 +197,7 @@ public class PlayerController : Singleton<PlayerController>
 
         UpdateMelee();
         _UI.UpdateHealthText(health);
+        _UI.UpdateHealthBar(health, maxHP);
 
         switch (_GM.gameState)
         {
@@ -1084,6 +1086,7 @@ public class PlayerController : Singleton<PlayerController>
                 _PE.VignetteFade();
                 HeadBobble();
                 _UI.UpdateHealthText(health);
+                _UI.UpdateHealthBar(health, maxHP);
             }
             else
             {

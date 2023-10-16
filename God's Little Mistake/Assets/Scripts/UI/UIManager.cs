@@ -23,6 +23,7 @@ public class UIManager : Singleton<UIManager>
     [Header("Player Feedback")]
     public TMP_Text hpText;
     public TMP_Text levelText;
+    public Image healhBar;
 
     [Header("Equip")]
     public Sprite defaultCursor;
@@ -150,6 +151,9 @@ public class UIManager : Singleton<UIManager>
 
         //Game Over Related
         gameOverMenu.SetActive(false);
+
+        //healthbar related
+        healhBar.fillAmount = 1;
 
     }
 
@@ -376,6 +380,12 @@ public class UIManager : Singleton<UIManager>
     public void UpdateHealthText(float _hp)
     {
         hpText.text = _hp.ToString("F0"); //removes any decimals
+    }
+
+    public void UpdateHealthBar(float _currentHp, float _maxHp)
+    {
+        healhBar.fillAmount = _currentHp / _maxHp;
+        Debug.Log(_currentHp / _maxHp);
     }
     public void UpdateLevelext(int _lvl)
     {
