@@ -32,7 +32,7 @@ public class SlugLegs : GameBehaviour
 
     void FindEnemies()
     {
-        var col = Physics.OverlapSphere(transform.position, 2, enemy);
+        var col = Physics.OverlapSphere(transform.position, 0.5f, enemy);
         if (col.Length != 0)
         {
             foreach (var enemy in col)
