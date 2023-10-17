@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: -5779310085204854185}
   - component: {fileID: -8797842275407018278}
   - component: {fileID: -5265163353043661583}
+  - component: {fileID: -3498613293740952736}
   m_Layer: 0
   m_Name: Projectile_Enemy_Attack_Spit
   m_TagString: EnemyProjectile
@@ -119,6 +120,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!54 &-5265163353043661583
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -146,3 +148,16 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 116
   m_CollisionDetection: 0
+--- !u!114 &-3498613293740952736
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7752005100104120040}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0b532dbb82a018f4c8fda5cab3ddc4d6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  range: 0

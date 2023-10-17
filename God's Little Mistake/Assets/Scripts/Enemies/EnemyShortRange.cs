@@ -92,9 +92,11 @@ public class EnemyShortRange : GameBehaviour
                     else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
                 }
             }
+
         }
         //just patrol if player is dead
         else BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+
 
         #region Turning Sprites
         //if angle is between 136 and 45, backwards

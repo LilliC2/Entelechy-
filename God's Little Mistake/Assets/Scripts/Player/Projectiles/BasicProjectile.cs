@@ -17,6 +17,10 @@ public class BasicProjectile : GameBehaviour
         explosionAnim = explosionAnimOB.GetComponent<Animator>();
     }
 
+    private void Update()
+    {
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Enemy"))

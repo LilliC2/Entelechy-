@@ -97,7 +97,7 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
             {
                 attackIcon.sprite = rangeIcon;
                 attackPill.color = Color.blue;
-                distanceText.text = _hoverItem.longRange_range.ToString();
+                distanceText.text = _hoverItem.projectile_range.ToString();
                 attackText.text = "Ranged";
             }
             else
@@ -114,27 +114,27 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
             distancePill.gameObject.SetActive(false);
         }
 
-        if(_hoverItem.meleeAttackType == Item.AttackType.Cone) 
+        if(_hoverItem.attackType == Item.AttackType.Cone) 
         {
             typeIcon.sprite = typeCone;
         }
 
-        if (_hoverItem.meleeAttackType == Item.AttackType.Line)
+        if (_hoverItem.attackType == Item.AttackType.Line)
         {
             typeIcon.sprite = typeLine;
         }
 
-        if (_hoverItem.meleeAttackType == Item.AttackType.Circle)
+        if (_hoverItem.attackType == Item.AttackType.Circle)
         {
             typeIcon.sprite = typeCircle;
         }
 
-        if (_hoverItem.meleeAttackType == Item.AttackType.Rapid)
+        if (_hoverItem.attackType == Item.AttackType.Rapid)
         {
             typeIcon.sprite = typeRapid;
         }
 
-        if (_hoverItem.meleeAttackType == Item.AttackType.Lob)
+        if (_hoverItem.attackType == Item.AttackType.Lob)
         {
             typeIcon.sprite = typeLob;
         }

@@ -273,7 +273,7 @@ public class UIManager : Singleton<UIManager>
         {
             attackIcon.sprite = rangedIcon;
             attackPill.color = Color.blue;
-            rangePillText.text = _hoverItem.longRange_range.ToString();
+            rangePillText.text = _hoverItem.projectile_range.ToString();
             attackPillText.text = "Ranged";
         }
         else
@@ -286,31 +286,31 @@ public class UIManager : Singleton<UIManager>
         }
 
         //type check
-        if (_hoverItem.meleeAttackType == Item.AttackType.Line)
+        if (_hoverItem.attackType == Item.AttackType.Line)
         {
             typeIcon.sprite = typeLine;
         }
-        if (_hoverItem.meleeAttackType == Item.AttackType.Cone)
+        if (_hoverItem.attackType == Item.AttackType.Cone)
         {
             typeIcon.sprite = typeCone;
         }
-        if (_hoverItem.meleeAttackType == Item.AttackType.Circle)
+        if (_hoverItem.attackType == Item.AttackType.Circle)
         {
             typeIcon.sprite = typeCircle;
         }
-        if (_hoverItem.meleeAttackType == Item.AttackType.Rapid)
+        if (_hoverItem.attackType == Item.AttackType.Rapid)
         {
             typeIcon.sprite = typeRapid;
         }
-        if (_hoverItem.meleeAttackType == Item.AttackType.Lob)
+        if (_hoverItem.attackType == Item.AttackType.Lob)
         {
             typeIcon.sprite = typeLob;
         }
-        if (_hoverItem.meleeAttackType == Item.AttackType.Cannon)
+        if (_hoverItem.attackType == Item.AttackType.Cannon)
         {
             typeIcon.sprite = typeCannon;
         }
-        if (_hoverItem.meleeAttackType == Item.AttackType.Laser)
+        if (_hoverItem.attackType == Item.AttackType.Laser)
         {
             typeIcon.sprite = typeLaser;
         }

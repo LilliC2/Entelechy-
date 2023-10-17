@@ -14,7 +14,7 @@ public class Item
     public enum Segment {Head, Torso, Legs }
     public Segment segment;
     public enum AttackType {Cone, Line, None, Circle, Rapid, Lob, Laser, Cannon }
-    public AttackType meleeAttackType;
+    public AttackType attackType;
     public enum ItemType {Primary, Secondary, Passive, Symbiote }
     public ItemType itemType;
 
@@ -28,7 +28,7 @@ public class Item
 
     public float critX; //crit dmg multipler
     public float critChance;
-    public float longRange_range;
+    public float projectile_range;
     public float melee_range;
 
     public bool projectile;
