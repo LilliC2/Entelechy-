@@ -1030,6 +1030,7 @@ public class PlayerController : Singleton<PlayerController>
 
             if (_PIA.ramming)
             {
+                print("Ramming hit someone");
                 collision.gameObject.GetComponent<BaseEnemy>().ApplyStun(_PIA.ramHornsStunDuration);
                 collision.gameObject.GetComponent<BaseEnemy>().Hit(_PIA.ramHornsDamage);
 
