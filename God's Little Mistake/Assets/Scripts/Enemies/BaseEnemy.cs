@@ -68,6 +68,7 @@ public class BaseEnemy : GameBehaviour
         //turn on charm particles
         if(enemyState == EnemyState.Charmed)
         {
+            print("Charmed"!);
             charmedParticles.SetActive(true);
         }
         else charmedParticles.SetActive(false);
