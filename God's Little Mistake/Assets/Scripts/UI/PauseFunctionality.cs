@@ -97,7 +97,7 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
             {
                 attackIcon.sprite = rangeIcon;
                 attackPill.color = Color.blue;
-                distanceText.text = _hoverItem.longRange_range.ToString();
+                distanceText.text = _hoverItem.projectile_range.ToString();
                 attackText.text = "Ranged";
             }
             else

@@ -242,7 +242,7 @@ public class UIManager : Singleton<UIManager>
         {
             attackIcon.sprite = rangedIcon;
             attackPill.color = Color.blue;
-            rangePillText.text = _hoverItem.longRange_range.ToString();
+            rangePillText.text = _hoverItem.projectile_range.ToString();
             attackPillText.text = "Ranged";
         }
         else

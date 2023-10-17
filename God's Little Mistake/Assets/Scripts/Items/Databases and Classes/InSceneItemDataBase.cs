@@ -22,12 +22,15 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
             //print("added item");
 
 
-            var index = _PC.playerInventory.Count - 1;
 
             //print("Item ID in additem is " + index);
 
             if(_item != null) _PC.playerInventory.Add(_item);
 
+            var index = _PC.playerInventory.IndexOf(_item);
+
+
+            AddItemStats(index);
 
             _UI.UpdateInventorySlotImages();
 
@@ -37,7 +40,6 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
                 //calls apprioriate function
                 case Item.ItemType.Primary:
 
-                    AddItemStats(index);
 
 
                     //if primary and no other primarys are there, add this one
@@ -61,7 +63,6 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
                 case Item.ItemType.Secondary:
                     break;
                 case Item.ItemType.Passive:
-                    AddItemStats(index);
 
                     break;
                 case Item.ItemType.Symbiote:
@@ -104,7 +105,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         //_PC.speed += _PC.playerInventory[_index].speed;
         
         _PC.dmg += _PC.playerInventory[_inventoryID].dmg;
-        _PC.projectileRange += _PC.playerInventory[_inventoryID].longRange_range;
+        _PC.projectileRange += _PC.playerInventory[_inventoryID].projectile_range;
         _PC.meleeRange += _PC.playerInventory[_inventoryID].melee_range;
         _PC.projectileSpeed += _PC.playerInventory[_inventoryID].projectileSpeed;
 
@@ -128,7 +129,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         //_PC.speed -= _PC.playerInventory[_index].speed;
 
         _PC.dmg -= _PC.playerInventory[_inventoryID].dmg;
-        _PC.projectileRange -= _PC.playerInventory[_inventoryID].longRange_range;
+        _PC.projectileRange -= _PC.playerInventory[_inventoryID].projectile_range;
         _PC.meleeRange -= _PC.playerInventory[_inventoryID].melee_range;
         _PC.projectileSpeed -= _PC.playerInventory[_inventoryID].projectileSpeed;
 

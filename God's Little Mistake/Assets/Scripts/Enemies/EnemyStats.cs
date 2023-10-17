@@ -13,7 +13,7 @@ public class EnemyStats
     //public CategoryLegs categoryLegs;
 
     public enum Category { Eyes, Mouth, Horns, Slappies, Punchies, Launchers, Legs, Crawlies, None }
-    public Category category;
+    public Category[] category;
 
     public float health;
     public float maxHP;

@@ -31,11 +31,29 @@ public class EnemyManager : Singleton<EnemyManager>
 
         foreach (var spawnPoint in spawnPoints)
         {
-            var enemyTypeR = Random.Range(0, enemyTypes.Length); // last digit excluded
+            //var enemyTypeR = Random.Range(0, enemyTypes.Length); // last digit excluded
+
+            var r = Random.Range(0, 8);
+
+            //chompers
+            if(r <= 4)
+            {
+                GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[2], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
+
+            }
+            else if(r >4 && r <=7)
+            {
+                GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[1], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
+
+            }
+            else
+            {
+                GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[0], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
+
+            }
 
             //print("Spawn: Enemy" + enemyTypes[enemyTypeR]);
 
-            GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[enemyTypeR], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
 
             //spawn enemies at appropriate level
 
