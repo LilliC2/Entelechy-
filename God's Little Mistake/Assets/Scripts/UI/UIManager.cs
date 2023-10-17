@@ -401,7 +401,7 @@ public class UIManager : Singleton<UIManager>
         {
             attackIcon1.sprite = rangedIcon;
             attackPill1.color = Color.blue;
-            rangePillText1.text = _itemInfo.longRange_range.ToString();
+            rangePillText1.text = _itemInfo.projectile_range.ToString();
             attackPillText1.text = "Ranged";
         }
         else
@@ -414,31 +414,31 @@ public class UIManager : Singleton<UIManager>
         }
 
         //type check
-        if (_itemInfo.meleeAttackType == Item.AttackType.Line)
+        if (_itemInfo.attackType == Item.AttackType.Line)
         {
             typeIcon1.sprite = typeLine;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Cone)
+        if (_itemInfo.attackType == Item.AttackType.Cone)
         {
             typeIcon1.sprite = typeCone;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Circle)
+        if (_itemInfo.attackType == Item.AttackType.Circle)
         {
             typeIcon1.sprite = typeCircle;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Rapid)
+        if (_itemInfo.attackType == Item.AttackType.Rapid)
         {
             typeIcon1.sprite = typeRapid;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Lob)
+        if (_itemInfo.attackType == Item.AttackType.Lob)
         {
             typeIcon1.sprite = typeLob;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Cannon)
+        if (_itemInfo.attackType == Item.AttackType.Cannon)
         {
             typeIcon1.sprite = typeCannon;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Laser)
+        if (_itemInfo.attackType == Item.AttackType.Laser)
         {
             typeIcon1.sprite = typeLaser;
         }
@@ -484,7 +484,7 @@ public class UIManager : Singleton<UIManager>
         {
             attackIcon2.sprite = rangedIcon;
             attackPill2.color = Color.blue;
-            rangePillText2.text = _itemInfo.longRange_range.ToString();
+            rangePillText2.text = _itemInfo.projectile_range.ToString();
             attackPillText2.text = "Ranged";
         }
         else
@@ -497,31 +497,31 @@ public class UIManager : Singleton<UIManager>
         }
 
         //type check
-        if (_itemInfo.meleeAttackType == Item.AttackType.Line)
+        if (_itemInfo.attackType == Item.AttackType.Line)
         {
             typeIcon2.sprite = typeLine;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Cone)
+        if (_itemInfo.attackType == Item.AttackType.Cone)
         {
             typeIcon2.sprite = typeCone;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Circle)
+        if (_itemInfo.attackType == Item.AttackType.Circle)
         {
             typeIcon2.sprite = typeCircle;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Rapid)
+        if (_itemInfo.attackType == Item.AttackType.Rapid)
         {
             typeIcon2.sprite = typeRapid;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Lob)
+        if (_itemInfo.attackType == Item.AttackType.Lob)
         {
             typeIcon2.sprite = typeLob;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Cannon)
+        if (_itemInfo.attackType == Item.AttackType.Cannon)
         {
             typeIcon2.sprite = typeCannon;
         }
-        if (_itemInfo.meleeAttackType == Item.AttackType.Laser)
+        if (_itemInfo.attackType == Item.AttackType.Laser)
         {
             typeIcon2.sprite = typeLaser;
         }

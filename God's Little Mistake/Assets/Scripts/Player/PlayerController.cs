@@ -241,10 +241,18 @@ public class PlayerController : Singleton<PlayerController>
                         speed = maxSpeed;
                     }
 
-                    isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
+
+                }
+                else
+                {
+                    move = new Vector3(0, 0, 0);
+                    move.y -= gravity;
+
+                    controller.Move(move * Time.deltaTime * speed);
 
                 }
 
+                isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
 
 
                 #endregion
@@ -259,6 +267,7 @@ public class PlayerController : Singleton<PlayerController>
                     var col = Physics.OverlapSphere(groundCheck.transform.position, 0.5f, groundMask);
                     if (col.Length != 0) tileLastStoodOn = col[0].gameObject;
                     fallDamage = true;
+                    enableMovement = true;
 
 
                 }
@@ -266,9 +275,14 @@ public class PlayerController : Singleton<PlayerController>
                 {
                     if(transform.position.y < -3)
                     {
+                        enableMovement = false;
+                        //remove control
 
                         //find closest tile, put player above
                         Vector3 targetPos = new Vector3(tileLastStoodOn.transform.position.x, 4, tileLastStoodOn.transform.position.z);
+
+
+
                         print("Put on ground");
 
                         //player lose health when fall off
@@ -279,9 +293,10 @@ public class PlayerController : Singleton<PlayerController>
                             health = (health / 2) - 1;
                             print("Taken fall damage");
                             ExecuteAfterSeconds(1, () => transform.position = targetPos);
+                            
+
 
                         }
-
                     }
                     
                 }
