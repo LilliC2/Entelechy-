@@ -21,14 +21,35 @@ public class DebuffPopup : GameBehaviour
     // Update is called once per frame
     void Update()
     {
-        UpdateDebuffBar(totalDuration, currentDuration);
+
+        if(isActive == true)
+        {
+            //UpdateDebuffBar(totalDuration, currentDuration);
+            if (currentDuration > 0)
+            {
+                currentDuration -= Time.deltaTime;
+                fill.fillAmount = currentDuration / totalDuration;
+                Debug.Log(fill.fillAmount);
+            }
+            if (currentDuration <= 0)
+            {
+                isActive = false;
+                Destroy(gameObject);
+            }
+
+        }
     }
 
     //call this function with the duration of the debuff on current duration and max duration
     void UpdateDebuffBar(float _maxDuration, float _currentDuration)
     {
-        _currentDuration -= Time.deltaTime;
-        fill.fillAmount = _currentDuration / _maxDuration;
+        
+        if(currentDuration > 0) 
+        {
+            _currentDuration -= Time.deltaTime;
+            fill.fillAmount = _currentDuration / _maxDuration;
+            Debug.Log(fill.fillAmount);
+        }
         if(_currentDuration <= 0)
         {
             isActive = false;

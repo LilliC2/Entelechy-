@@ -21,6 +21,12 @@ public class BaseEnemy : GameBehaviour
     public GameObject debuffBurn;
     public GameObject debuffBleed;
 
+    [Header("Debuff Check")]
+    public bool isStunned = false;
+    public bool isSlowed = false;
+    public bool isBurned = false;
+    public bool isBleeding = false;
+
 
     [Header("Particle Systems")]
     [SerializeField]
@@ -139,15 +145,35 @@ public class BaseEnemy : GameBehaviour
     /// <param name="_percent"> Perctange as decimal </param>
     public void ApplySlowness(float _duration, float _percent)
     {
+        //var debuffPopup = Instantiate(debuffSlow, debuffPanel.transform);
+        //debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
+        //debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
+
+        //print("Slowed enemy");
+        //var speedBefore = stats.speed;
+
+        //stats.speed = speedBefore * (1 - _percent);
+        //ExecuteAfterSeconds(_duration, () => stats.speed = speedBefore);
+
         var debuffPopup = Instantiate(debuffSlow, debuffPanel.transform);
-        debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
-        debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
+        if (!isSlowed)
+        {
+            debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
+            debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
 
-        print("Slowed enemy");
-        var speedBefore = stats.speed;
+            print("Slowed enemy");
+            var speedBefore = stats.speed;
 
-        stats.speed = speedBefore * (1 - _percent);
-        ExecuteAfterSeconds(_duration, () => stats.speed = speedBefore);
+            stats.speed = speedBefore * (1 - _percent);
+            ExecuteAfterSeconds(_duration, () => stats.speed = speedBefore);
+            isSlowed = true;
+        }
+        else
+        {
+            Destroy(debuffPopup.gameObject);
+            isSlowed= true;
+        }
+
     }
 
     public void ApplyStun(float _duration)
