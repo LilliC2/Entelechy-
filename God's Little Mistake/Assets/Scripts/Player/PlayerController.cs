@@ -339,23 +339,22 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Legs Animation
 
-                //Idle Check
-                if (transform.position == lastPos)
-                {
-                    foreach (var item in legsAnimators)
-                    {
-                        item.SetBool("Walk", false);
-                    }
+                ////Idle Check
+                //if (transform.position == lastPos)
+                //{
+                //    foreach (var item in legsAnimators)
+                //    {
+                //        item.SetBool("Walking", false);
+                //    }
 
-                }
-                else
-                {
-                    foreach (var item in legsAnimators)
-                    {
-                        print(item.name);
-                        item.SetBool("Walk", true);
-                    }
-                }
+                //}
+                //else
+                //{
+                //    foreach (var item in legsAnimators)
+                //    {
+                //        item.SetBool("Walking", true);
+                //    }
+                //}
 
                 #endregion
 

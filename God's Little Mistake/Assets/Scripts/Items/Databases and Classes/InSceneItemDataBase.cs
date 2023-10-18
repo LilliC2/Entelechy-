@@ -133,9 +133,11 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
         _PC.meleeRange -= _PC.playerInventory[_inventoryID].melee_range;
         _PC.projectileSpeed -= _PC.playerInventory[_inventoryID].projectileSpeed;
 
-        _PC.projectileFirerate += _PC.playerInventory[_inventoryID].firerate;
+        _PC.projectileFirerate -= _PC.playerInventory[_inventoryID].firerate;
         _PC.critX -= _PC.playerInventory[_inventoryID].critX;
         _PC.critChance -= _PC.playerInventory[_inventoryID].critChance;
+        _PC.speed -= _PC.playerInventory[_inventoryID].movementSpeed;
+        _PC.maxSpeed -= _PC.playerInventory[_inventoryID].movementSpeed;
     }
 
 

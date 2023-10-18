@@ -84,7 +84,7 @@ public class Selecting : GameBehaviour
 
         var toDestroyLeft = _AVTAR.slotsOnPlayerLeft[previousItem.inSlot].transform.GetChild(0);
         var toDestroyBack = _AVTAR.slotsOnPlayerBack[previousItem.inSlot].transform.GetChild(0);
-        var toDestroyFront = _AVTAR.slotsOnPlayerFront[previousItem.inSlot].transform.GetChild(0);
+        var toDestroyFront = _AVTAR.slotsOnPlayerRight[previousItem.inSlot].transform.GetChild(0);
         var toDestroyRight = _AVTAR.slotsOnPlayerFront[previousItem.inSlot].transform.GetChild(0);
 
         //print("Destroying: " + toDestroyLeft + ", " + toDestroyBack + ", " + toDestroyFront + ", " + toDestroyRight);

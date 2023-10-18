@@ -139,7 +139,7 @@ public class ItemIdentifier : GameBehaviour
                     {
                         if (itemInfo == _PC.playerInventory[i]) alreadyEquipped = true;
                     }
-                    if(!alreadyEquipped) ExecuteAfterFrames(10, () => _ISitemD.AddItemToInventory(itemInfo));
+                    if(!alreadyEquipped) ExecuteAfterFrames(15, () => _ISitemD.AddItemToInventory(itemInfo));
 
 
 
