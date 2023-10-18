@@ -172,6 +172,9 @@ public class GameManager : Singleton<GameManager>
             var controls = Instantiate(Resources.Load("ControlsPrefab", typeof(GameObject)), new Vector3(levelStartRoom.position.x, 0.05f, levelStartRoom.position.z), Quaternion.Euler(new Vector3(90f,0f,0f)), levelParent) as GameObject;
         }
 
+        _RP.RandomiseEnvionmentProps();
+
+
         //move end room trigger
         endRoomOB.transform.position = levelEndRoom.position;
 
