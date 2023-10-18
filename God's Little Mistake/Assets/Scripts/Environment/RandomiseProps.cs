@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class RandomiseProps : GameBehaviour
+public class RandomiseProps : Singleton<RandomiseProps>
 {
     public GameObject[] props;
 
@@ -16,15 +16,14 @@ public class RandomiseProps : GameBehaviour
 
     // Start is called before the first frame update
     void Start()
-    {
-        RandomiseEnvionmentProps();
-        
+    {        
 
     }
 
 
     public void RandomiseEnvionmentProps()
     {
+        print("random");
         if (isSpawningProps)
         {
             for (int i = 0; i < numOfPropsSpawns; i++)
