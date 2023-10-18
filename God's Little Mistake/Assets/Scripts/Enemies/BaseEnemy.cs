@@ -178,38 +178,84 @@ public class BaseEnemy : GameBehaviour
 
     public void ApplyStun(float _duration)
     {
+        //var debuffPopup = Instantiate(debuffStun, debuffPanel.transform);
+        //debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
+        //debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
+
+        //print("Enemy stunned");
+        //var speedBefore = stats.speed;
+        //stats.speed = 0;
+
+        //ExecuteAfterSeconds(_duration,() => stats.speed = speedBefore);
+
         var debuffPopup = Instantiate(debuffStun, debuffPanel.transform);
-        debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
-        debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
 
-        print("Enemy stunned");
-        var speedBefore = stats.speed;
-        stats.speed = 0;
+        if(!isStunned)
+        {
+            debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
+            debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
 
-        ExecuteAfterSeconds(_duration,() => stats.speed = speedBefore);
+            print("Enemy stunned");
+            var speedBefore = stats.speed;
+            stats.speed = 0;
+
+            ExecuteAfterSeconds(_duration, () => stats.speed = speedBefore);
+        }
+        else
+        {
+            Destroy(debuffPopup.gameObject);
+            isStunned = true;
+        }
 
     }
 
     public void ApplyBleeding(float _duration, float _dmgPerTick)
     {
         var debuffPopup = Instantiate(debuffBleed, debuffPanel.transform);
-        debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
-        debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
+        //debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
+        //debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
 
-        bool isbleeding = true;
-        ExecuteAfterSeconds(_duration, () => isbleeding = false);
-        float timer = 0;
+        //bool isbleeding = true;
+        //ExecuteAfterSeconds(_duration, () => isbleeding = false);
+        //float timer = 0;
 
-        while (isbleeding)
+        //while (isbleeding)
+        //{
+        //    print("is bleeding");
+        //    timer += Time.deltaTime;
+        //    if (timer >= 1)
+        //    {
+        //        timer = 0;
+        //        Hit(_dmgPerTick);
+        //    }
+        //}
+
+        if(!isBleeding)
         {
-            print("is bleeding");
-            timer += Time.deltaTime;
-            if (timer >= 1)
+            debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
+            debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
+
+            bool isbleeding = true;
+            ExecuteAfterSeconds(_duration, () => isbleeding = false);
+            float timer = 0;
+
+            while (isbleeding)
             {
-                timer = 0;
-                Hit(_dmgPerTick);
+                print("is bleeding");
+                timer += Time.deltaTime;
+                if (timer >= 1)
+                {
+                    timer = 0;
+                    Hit(_dmgPerTick);
+                }
             }
         }
+        else
+        {
+            Destroy(debuffPopup.gameObject);
+            isBleeding = true;
+        }
+
     }
     
 
