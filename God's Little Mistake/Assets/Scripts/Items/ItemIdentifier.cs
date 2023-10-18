@@ -111,9 +111,12 @@ public class ItemIdentifier : GameBehaviour
                                 //place old item on ground
 
                                 GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
+                                item.GetComponent<ItemIdentifier>().enabled = false;
+                                
                                 _UI.statComp1.SetActive(false);
                                 _UI.statComp2.SetActive(false);
 
+                                ExecuteAfterFrames(5, () => item.GetComponent<ItemIdentifier>().enabled = true);
 
                                 item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
                                 item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
