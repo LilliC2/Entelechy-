@@ -55,7 +55,17 @@ public class ItemLook : GameBehaviour
                     projectileScript2.image.transform.localScale = new Vector3(x, projectileScript2.image.transform.localScale.y, projectileScript2.image.transform.localScale.z);
 
                 }
-                else
+                else if (gameObject.name.Contains("Enemy"))
+                {
+                    x = -GetComponent<EnemyProjectile>().image.transform.localScale.x;
+
+                    var projectileScript3 = GetComponent<EnemyProjectile>();
+
+
+                    GetComponent<EnemyProjectile>().image.transform.localScale = new Vector3(x, projectileScript3.image.transform.localScale.y, projectileScript3.image.transform.localScale.z);
+
+                
+                }else
                 {
                     x = -GetComponent<BasicProjectile>().image.transform.localScale.x;
 

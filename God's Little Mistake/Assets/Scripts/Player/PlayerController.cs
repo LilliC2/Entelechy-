@@ -1113,9 +1113,8 @@ public class PlayerController : Singleton<PlayerController>
         {
             
             print("player has been hit");
-            health -= _dmg;
             //_PE.ChromaticABFade();
-
+            health -= _dmg;
             _AM.PlayerHurt();
 
             if (health > 0)

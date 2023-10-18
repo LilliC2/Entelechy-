@@ -27,6 +27,8 @@ public class EnemyLongRange : GameBehaviour
     bool canAttack;
     bool canSee;
 
+    float projectileRange;
+
     ////patrolling
     public Vector3 walkPoint;
     public float walkPointRange;
@@ -74,7 +76,8 @@ public class EnemyLongRange : GameBehaviour
 
         attackRange = enemyStats.stats.range;
         target = SearchWalkPoint();
-
+        
+        projectileRange = enemyStats.stats.range +2;
     }
 
     // Update is called once per frame
@@ -322,8 +325,9 @@ public class EnemyLongRange : GameBehaviour
 
 
             bullet.GetComponent<ItemLook>().firingPoint = firingPoint;
-            bullet.GetComponent<RangeDetector>().range = _range;
+            bullet.GetComponent<RangeDetector>().range = projectileRange;
             bullet.GetComponent<RangeDetector>().positionShotFrom = transform.position;
+            bullet.GetComponent<EnemyProjectile>().dmg = enemyStats.stats.dmg;
 
 
 

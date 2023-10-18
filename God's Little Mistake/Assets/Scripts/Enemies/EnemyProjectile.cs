@@ -6,6 +6,11 @@ public class EnemyProjectile : GameBehaviour
 {
     public float dmg;
     bool hit = false;
+    public GameObject image;
+    private void Start()
+    {
+
+    }
 
     private void OnCollisionEnter(Collision collision)
     {
