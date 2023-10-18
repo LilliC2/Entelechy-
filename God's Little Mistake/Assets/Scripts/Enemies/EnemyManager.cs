@@ -41,7 +41,7 @@ public class EnemyManager : Singleton<EnemyManager>
                 GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[2], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
 
             }
-            else if(r >4 && r <=7)
+            else if(r >4 && r <=6)
             {
                 GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[1], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
 

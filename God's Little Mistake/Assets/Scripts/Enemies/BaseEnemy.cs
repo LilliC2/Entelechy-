@@ -140,8 +140,8 @@ public class BaseEnemy : GameBehaviour
     public void ApplySlowness(float _duration, float _percent)
     {
         var debuffPopup = Instantiate(debuffSlow, debuffPanel.transform);
-        debuffPopup.GetComponent<DebuffPopup>().durationTimer = _duration;
-        debuffPopup.GetComponent<DebuffPopup>().duration = _duration;
+        debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
+        debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
 
         print("Slowed enemy");
         var speedBefore = stats.speed;
@@ -153,8 +153,8 @@ public class BaseEnemy : GameBehaviour
     public void ApplyStun(float _duration)
     {
         var debuffPopup = Instantiate(debuffStun, debuffPanel.transform);
-        debuffPopup.GetComponent<DebuffPopup>().durationTimer = _duration;
-        debuffPopup.GetComponent<DebuffPopup>().duration = _duration;
+        debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
+        debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
 
         print("Enemy stunned");
         var speedBefore = stats.speed;
@@ -167,8 +167,8 @@ public class BaseEnemy : GameBehaviour
     public void ApplyBleeding(float _duration, float _dmgPerTick)
     {
         var debuffPopup = Instantiate(debuffBleed, debuffPanel.transform);
-        debuffPopup.GetComponent<DebuffPopup>().durationTimer = _duration;
-        debuffPopup.GetComponent<DebuffPopup>().duration = _duration;
+        debuffPopup.GetComponent<DebuffPopup>().totalDuration = _duration;
+        debuffPopup.GetComponent<DebuffPopup>().currentDuration = _duration;
 
         bool isbleeding = true;
         ExecuteAfterSeconds(_duration, () => isbleeding = false);

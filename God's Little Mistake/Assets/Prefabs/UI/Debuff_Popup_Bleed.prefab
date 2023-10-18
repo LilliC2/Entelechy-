@@ -88,6 +88,7 @@ GameObject:
   - component: {fileID: 7526215237941394151}
   - component: {fileID: 8901608619743658162}
   - component: {fileID: 1660428399126338645}
+  - component: {fileID: 7413253346317673538}
   m_Layer: 5
   m_Name: Debuff_Popup_Bleed
   m_TagString: Untagged
@@ -170,9 +171,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53f5db62143168c45b3eac45813e0451, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  durationTimer: 0
-  duration: 0
+  totalDuration: 0
+  currentDuration: 0
   fill: {fileID: 3930084703201920457}
+  isActive: 0
+--- !u!114 &7413253346317673538
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5060103609459310593}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 01ce4728cbf294a41a0105966b3412bf, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  firingPoint: {fileID: 0}
 --- !u!1 &5232529111563210365
 GameObject:
   m_ObjectHideFlags: 0
@@ -320,7 +335,7 @@ MonoBehaviour:
   m_PreserveAspect: 1
   m_FillCenter: 1
   m_FillMethod: 0
-  m_FillAmount: 1
+  m_FillAmount: 0.974
   m_FillClockwise: 1
   m_FillOrigin: 0
   m_UseSpriteMesh: 0

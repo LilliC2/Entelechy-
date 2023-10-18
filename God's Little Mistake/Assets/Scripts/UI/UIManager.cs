@@ -538,6 +538,7 @@ public class UIManager : Singleton<UIManager>
     {
         healhBar.fillAmount = _currentHp / _maxHp;
         Debug.Log(_currentHp / _maxHp);
+        Debug.Log(_currentHp / _maxHp);
     }
     public void UpdateLevelext(int _lvl)
     {

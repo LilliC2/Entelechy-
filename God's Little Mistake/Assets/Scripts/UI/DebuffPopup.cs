@@ -6,8 +6,8 @@ using UnityEngine.UI;
 
 public class DebuffPopup : GameBehaviour
 {
-    public float durationTimer;
-    public float duration;
+    public float totalDuration;
+    public float currentDuration;
     [SerializeField]
     Image fill;
     public bool isActive;
@@ -21,11 +21,7 @@ public class DebuffPopup : GameBehaviour
     // Update is called once per frame
     void Update()
     {
-        //durationTimer -= Time.deltaTime;
-
-        //fill.fillAmount = durationTimer / durationTimer;
-
-        //if (fill.fillAmount <= 0) Destroy(this.gameObject);
+        UpdateDebuffBar(totalDuration, currentDuration);
     }
 
     //call this function with the duration of the debuff on current duration and max duration
