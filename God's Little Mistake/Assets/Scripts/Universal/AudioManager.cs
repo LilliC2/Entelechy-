@@ -7,6 +7,8 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField]
     AudioSource audioManagerSourcePlayerHurt;
     [SerializeField]
+    AudioSource audioManagerSourcePlayerDead;
+    [SerializeField]
     AudioSource audioManagerSourceItem;
     public AudioClip[] playerHurtSounds;
     public AudioClip[] playerDeathSounds;
@@ -40,7 +42,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void PlayerDeathExplosion()
     {
-        audioManagerSourcePlayerHurt.clip = playerDeathExplosionSound;
-        audioManagerSourcePlayerHurt.Play();
+        audioManagerSourcePlayerDead.clip = playerDeathExplosionSound;
+        audioManagerSourcePlayerDead.Play();
     }
 }

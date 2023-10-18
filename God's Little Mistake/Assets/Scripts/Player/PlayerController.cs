@@ -115,6 +115,8 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject missyDeathAnim;
     [SerializeField]
     ParticleSystem spitParticleSystem;
+    public ParticleSystem missyHitParticle;
+    public ParticleSystem landingPS;
 
     [Header("Inventory")]
     public List<Item> playerInventory;
@@ -154,6 +156,9 @@ public class PlayerController : Singleton<PlayerController>
     public MeleeHitBox meleeHitBox;
 
     public float dashAmount;
+
+    //audio
+    bool playedDeathSound = false;
 
     private void Start()
     {
@@ -293,10 +298,14 @@ public class PlayerController : Singleton<PlayerController>
                             health = (health / 2) - 1;
                             print("Taken fall damage");
                             ExecuteAfterSeconds(1, () => transform.position = targetPos);
+                            ExecuteAfterSeconds(1.3f, () => landingPS.Play()); 
+                            ExecuteAfterSeconds(1.5f, () => RespawnAfterFallingCheck(targetPos)); 
+
                             
 
 
                         }
+                        
                     }
                     
                 }
@@ -820,6 +829,15 @@ public class PlayerController : Singleton<PlayerController>
         #endregion
     }
 
+    void RespawnAfterFallingCheck(Vector3 _targetPos)
+    {
+        if (!fallDamage && !isGrounded)
+        {
+            transform.position = _targetPos;
+            ExecuteAfterSeconds(1.3f, () => landingPS.Play());
+
+        }
+    }
     void StopAllAnimations()
     {
         //foreach (var animator in itemsAnimForward)
@@ -1119,6 +1137,7 @@ public class PlayerController : Singleton<PlayerController>
 
             if (health > 0)
             {
+                missyHitParticle.Play();
                 _PE.VignetteFade();
                 HeadBobble();
                 _UI.UpdateHealthText(health);
@@ -1135,14 +1154,20 @@ public class PlayerController : Singleton<PlayerController>
 
     public void Die()
     {
-        _AM.PlayerDeathScream();
+        if(!playedDeathSound)
+        {
+            playedDeathSound = true;
+            _AM.PlayerDeathScream();
+
+        }
+
 
         _GM.gameState = GameManager.GameState.Dead;
         DieAnimation();
         print("I Am DEAD");
 
-        ExecuteAfterSeconds(0.5f, () => playerAvatar.SetActive(false));
-        ExecuteAfterSeconds(1, () => _GM.GameOver());
+        //ExecuteAfterSeconds(0.5f, () => playerAvatar.SetActive(false));
+        //ExecuteAfterSeconds(4, () => _GM.GameOver());
 
     }
 

@@ -82,10 +82,10 @@ public class GameManager : Singleton<GameManager>
             isPaused = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.M) && isPlaying)
-        {
-            gameState = GameState.Dead;
-        }
+        //if (Input.GetKeyDown(KeyCode.M) && isPlaying)
+        //{
+        //    gameState = GameState.Dead;
+        //}
 
 
 
@@ -108,8 +108,9 @@ public class GameManager : Singleton<GameManager>
 
     public void GameOver()
     {
-        _UI.PlayTransitionAnimation();
-        Time.timeScale = 0;
+        ExecuteAfterSeconds(1.5f,() =>_UI.PlayTransitionAnimation());
+        ExecuteAfterSeconds(1.5f,() => Time.timeScale = 0);
+        
     }
 
     public void Restart()
