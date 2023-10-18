@@ -22,6 +22,8 @@ public class DebuffPopup : GameBehaviour
     void Update()
     {
         UpdateDebuffBar(totalDuration, currentDuration);
+        fill.fillAmount = 1;
+        fill.fillAmount = 1;
     }
 
     //call this function with the duration of the debuff on current duration and max duration

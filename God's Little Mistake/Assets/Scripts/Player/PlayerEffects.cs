@@ -22,7 +22,18 @@ public class PlayerEffects : Singleton<PlayerEffects>
     bool resetSpeedVig = true;
 
 
+    private void Start()
+    {
+        //make sure it starts at 0
+        VolumeProfile profile = GetComponent<Volume>().sharedProfile;
+        profile.TryGet<Vignette>(out var vig);
+        if (vig != null)
+        {
+            print("vig");
+            vig.intensity.value = 0;
 
+        }
+    }
 
     private void Update()
     {

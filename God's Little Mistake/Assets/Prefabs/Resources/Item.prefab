@@ -33,7 +33,7 @@ Transform:
   m_Children:
   - {fileID: 6239656377623510023}
   m_Father: {fileID: 0}
-  m_RootOrder: -1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!135 &6149075988073239519
 SphereCollider:
@@ -75,39 +75,35 @@ MonoBehaviour:
     inSlot: -1
     category: 1
     segment: 0
-    meleeAttackType: 0
+    attackType: 0
     itemType: 0
     hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 1
-    dps: 1
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    firerate: 0
     critX: 0
     critChance: 2
-    longRange_range: 0
+    projectile_range: 0
     melee_range: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
-    fireRate: 0
+    movementSpeed: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 21300000, guid: 9bdc47d447b98b34f862c99f0e6ff591, type: 3}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 6746399273307538296, guid: e1d04f8ecd7742e40b66da4fd27cca07, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 2944755447898596729, guid: 6d922066a28d80e4cbd9aa6957658322, type: 3}
     avtarPrefabRight: {fileID: 2944755447898596729, guid: 6d922066a28d80e4cbd9aa6957658322, type: 3}
     avtarPrefabBackLeft: {fileID: 1080939457727681299, guid: 518a405904d8c6c4a94e2d4971316f5b, type: 3}
     avtarPrefabBackRight: {fileID: 0}
-  itemGO: {fileID: 5956623696610171656}
   anim: {fileID: 0}
   anim1: {fileID: 0}
   anim2: {fileID: 0}
   statPop: {fileID: 0}
-  statComp1: {fileID: 0}
-  statComp2: {fileID: 0}
 --- !u!114 &7089329513668198043
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -127,26 +123,25 @@ MonoBehaviour:
     inSlot: -1
     category: 0
     segment: 0
-    meleeAttackType: 0
+    attackType: 0
     itemType: 0
     hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 0
-    dps: 0
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    firerate: 0
     critX: 0
     critChance: 0
-    longRange_range: 0
+    projectile_range: 0
     melee_range: 0
     projectile: 0
     projectileSpeed: 0
     projectilePF: {fileID: 0}
-    fireRate: 0
+    movementSpeed: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 0}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -161,26 +156,25 @@ MonoBehaviour:
     inSlot: -1
     category: 0
     segment: 0
-    meleeAttackType: 0
+    attackType: 0
     itemType: 0
     hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 0
-    dps: 0
-    longRangeSpeed: 0
-    meleeSpeed: 0
+    firerate: 0
     critX: 0
     critChance: 0
-    longRange_range: 0
+    projectile_range: 0
     melee_range: 0
     projectile: 0
     projectileSpeed: 0
     projectilePF: {fileID: 0}
-    fireRate: 0
+    movementSpeed: 0
     modifier: 0
     modifierID: 0
     icon: {fileID: 0}
+    pauseIcon: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -197,6 +191,8 @@ GameObject:
   m_Component:
   - component: {fileID: 6239656377623510023}
   - component: {fileID: 2474645652190830804}
+  - component: {fileID: 5931871254631659864}
+  - component: {fileID: 8265300854398088814}
   m_Layer: 0
   m_Name: Plane
   m_TagString: Untagged
@@ -239,7 +235,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 257
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -271,3 +267,42 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &5931871254631659864
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504357115592238806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColor: {r: 0.4392157, g: 0.972549, b: 0.7294118, a: 1}
+  glowBrightness: 3.5
+  outlineWidth: 10
+  alphaThreshold: 0
+  drawOutside: 0
+  enableInstancing: 0
+--- !u!95 &8265300854398088814
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8504357115592238806}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: 2d6d47e8c061666459e6d4999a8ea576, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0
