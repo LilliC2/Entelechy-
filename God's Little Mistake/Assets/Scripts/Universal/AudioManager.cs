@@ -8,12 +8,19 @@ public class AudioManager : Singleton<AudioManager>
     AudioSource audioManagerSourcePlayerHurt;
     [SerializeField]
     AudioSource audioManagerSourcePlayerDead;
-    [SerializeField]
-    AudioSource audioManagerSourceItem;
+    public AudioSource audioManagerSourceItem;
+    public AudioSource playerProjectileAudioSource;
     public AudioClip[] playerHurtSounds;
     public AudioClip[] playerDeathSounds;
 
+    public AudioSource playerMovement;
+
     public AudioClip playerDeathExplosionSound;
+    public AudioClip playerSquishyStep;
+    public AudioClip playerHover;
+    public AudioClip playerSlugLegs;
+    public AudioClip playerPeaShoot;
+    public AudioClip playerBlink;
     public AudioSource playerThud;
     // Start is called before the first frame update
     void Start()
@@ -54,7 +61,7 @@ public class AudioManager : Singleton<AudioManager>
 
     public void SingleStep(AudioSource _audioSource)
     {
-        VaryPitch(_audioSource);
+        //VaryPitch(_audioSource);
         _audioSource.Play();
     }
 }

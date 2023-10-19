@@ -334,6 +334,12 @@ public class PlayerController : Singleton<PlayerController>
                     missyBackSideAnim.SetBool("Walking", true);
                     missyLeftSideAnim.SetBool("Walking", true);
                     missyRightSideAnim.SetBool("Walking", true);
+
+                    foreach (var item in legsAnimators)
+                    {
+                        item.SetBool("Walking", true);
+                    }
+
                 }
                 else
                 {
@@ -341,6 +347,11 @@ public class PlayerController : Singleton<PlayerController>
                     missyBackSideAnim.SetBool("Walking", false);
                     missyLeftSideAnim.SetBool("Walking", false);
                     missyRightSideAnim.SetBool("Walking", false);
+
+                    foreach (var item in legsAnimators)
+                    {
+                        item.SetBool("Walking", false);
+                    }
                 }
 
 
@@ -349,22 +360,15 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Legs Animation
 
-                ////Idle Check
-                //if (transform.position == lastPos)
-                //{
-                //    foreach (var item in legsAnimators)
-                //    {
-                //        item.SetBool("Walking", false);
-                //    }
-
-                //}
-                //else
-                //{
-                //    foreach (var item in legsAnimators)
-                //    {
-                //        item.SetBool("Walking", true);
-                //    }
-                //}
+                //Idle Check
+                if (transform.position == lastPos)
+                {
+                    
+                }
+                else
+                {
+                    
+                }
 
                 #endregion
 
