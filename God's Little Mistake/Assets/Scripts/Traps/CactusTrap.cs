@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class CactusTrap : MonoBehaviour
+public class CactusTrap : GameBehaviour
 {
-    public PlayerController playerController;
+    PlayerController playerController;
     public float damageOnCollision = 2f;
     public float knockbackForce = 5f;
     public float knockbackDuration = 0.5f;
@@ -17,14 +17,17 @@ public class CactusTrap : MonoBehaviour
     private SpriteRenderer spriteRenderer;
     private Sprite originalSprite;
 
+    AudioSource audioSource;
     private void Start()
     {
         GameObject playerObject = GameObject.FindGameObjectWithTag("Player");
 
+        audioSource = GetComponent<AudioSource>();
+
         if (playerObject != null)
         {
-            playerController = playerObject.GetComponent<PlayerController>();
-            characterController = playerObject.GetComponent<CharacterController>();
+            playerController = _PC;
+            characterController = _PC.controller;
         }
 
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -55,6 +58,9 @@ public class CactusTrap : MonoBehaviour
     {
         if (collision.gameObject.CompareTag("Player"))
         {
+            //play sound
+            audioSource.Play();
+
             playerController.health -= damageOnCollision;
             knockbackDirection = collision.gameObject.transform.position - transform.position;
             knockbackDirection.y = 0f;

@@ -14,6 +14,7 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip[] playerDeathSounds;
 
     public AudioClip playerDeathExplosionSound;
+    public AudioSource playerThud;
     // Start is called before the first frame update
     void Start()
     {

@@ -298,7 +298,8 @@ public class PlayerController : Singleton<PlayerController>
                             health = (health / 2) - 1;
                             print("Taken fall damage");
                             ExecuteAfterSeconds(1, () => transform.position = targetPos);
-                            ExecuteAfterSeconds(1.3f, () => landingPS.Play()); 
+                            ExecuteAfterSeconds(1.3f, () => landingPS.Play());
+                            ExecuteAfterSeconds(1.3f, () => _AM.playerThud.Play());
                             ExecuteAfterSeconds(1.5f, () => RespawnAfterFallingCheck(targetPos)); 
 
                             
@@ -835,6 +836,7 @@ public class PlayerController : Singleton<PlayerController>
         {
             transform.position = _targetPos;
             ExecuteAfterSeconds(1.3f, () => landingPS.Play());
+            ExecuteAfterSeconds(1.3f, () => _AM.playerThud.Play());
 
         }
     }
