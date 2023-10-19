@@ -46,4 +46,15 @@ public class AudioManager : Singleton<AudioManager>
         audioManagerSourcePlayerDead.clip = playerDeathExplosionSound;
         audioManagerSourcePlayerDead.Play();
     }
+
+    public void VaryPitch(AudioSource _audioSource)
+    {
+        _audioSource.pitch = Random.Range(128 - 30, 128 + 30);
+    }
+
+    public void SingleStep(AudioSource _audioSource)
+    {
+        VaryPitch(_audioSource);
+        _audioSource.Play();
+    }
 }
