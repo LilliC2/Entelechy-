@@ -15,7 +15,7 @@ public class GameManager : Singleton<GameManager>
     Transform levelStartRoom;
     GameObject currentLevel;
     public GameObject endRoomOB;
-
+    public GameObject itemPF;
 
     [Header("Pause and game over")]
     public bool isPlaying;
@@ -186,7 +186,11 @@ public class GameManager : Singleton<GameManager>
         //add in controls
         if(dungeonLevel == 1)
         {
-            var controls = Instantiate(Resources.Load("ControlsPrefab", typeof(GameObject)), new Vector3(levelStartRoom.position.x, 0.05f, levelStartRoom.position.z), Quaternion.Euler(new Vector3(90f,0f,0f)), levelParent) as GameObject;
+            var controls = Instantiate(Resources.Load("ControlsPrefab", typeof(GameObject)), new Vector3(levelStartRoom.position.x, 0.02f, levelStartRoom.position.z), Quaternion.Euler(new Vector3(90f,0f,0f)), levelParent) as GameObject;
+            var startingItem = Instantiate(itemPF, new Vector3(levelStartRoom.position.x, 0.02f, levelStartRoom.position.z-2.5f), Quaternion.Euler(new Vector3(0f,0f,0f)), levelParent) as GameObject;
+
+            startingItem.GetComponent<ItemIdentifier>().itemInfo = _ItemD.itemDataBase[9]; //set as peashooter
+        
         }
 
         _RP.RandomiseEnvionmentProps();
