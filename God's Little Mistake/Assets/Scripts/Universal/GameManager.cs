@@ -22,7 +22,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Pause and game over")]
     public bool isPlaying;
     public bool isPaused;
-    public string urlToOpen = "https://www.instagram.com/nlmgame/";
+    //public string urlToOpen = "https://www.instagram.com/nlmgame/";
     public Image fadeImage;
     public float fadeOutTime = 1.0f;
 
@@ -133,7 +133,7 @@ public class GameManager : Singleton<GameManager>
 
     public void FeedbackLink()
     {
-        Application.OpenURL("https://www.instagram.com/nlmgame/");
+        Application.OpenURL("https://forms.gle/TQJNc4cRzDxJzh9i9");
     }
 
     public void Restart()
