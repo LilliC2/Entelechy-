@@ -4,17 +4,58 @@ using UnityEngine;
 
 public class EndLevelTrigger : GameBehaviour
 {
+
+    Animator doorAnimator;
+
     bool inRange;
+
+
+    bool popped;
+
+    private void Start()
+    {
+        doorAnimator = GetComponentInChildren<Animator>();
+    }
+
     private void FixedUpdate()
     {
         if(inRange)
         {
+
+            if(!popped)
+            {
+                doorAnimator.SetBool("Prime", true);
+            }
+
             print("Reached end of level. Press E to spawn new level");
             if (Input.GetKeyDown(KeyCode.E))
             {
-                _GM.readyForGeneration = true;
+
+                if(!popped)
+                {
+                    doorAnimator.SetBool("Popped", true);
+                    popped = true;
+                }
+                else
+                {
+                    _GM.readyForGeneration = true;
+
+                }
+
             }
         }
+        else
+        {
+            if(!popped) doorAnimator.SetBool("Prime", false);
+
+        }
+    }
+
+    public void ResetDoor()
+    {
+        popped = false;
+        doorAnimator.SetBool("Prime", false);
+        doorAnimator.SetBool("Popped", false);
     }
 
     // Start is called before the first frame update

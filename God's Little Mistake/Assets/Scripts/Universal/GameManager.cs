@@ -196,6 +196,7 @@ public class GameManager : Singleton<GameManager>
         _RP.RandomiseEnvionmentProps();
 
 
+        endRoomOB.GetComponent<EndLevelTrigger>().ResetDoor(); //reset animations
         //move end room trigger
         endRoomOB.transform.position = levelEndRoom.position;
 
