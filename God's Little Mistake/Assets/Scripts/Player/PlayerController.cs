@@ -595,6 +595,8 @@ public class PlayerController : Singleton<PlayerController>
                         //check for primary
                         if (playerInventory[i].active)
                         {
+
+
                             //check if primary is projectile
                             if (playerInventory[i].projectile) //PROJECTILE ATTACKS------------------------------------------------------------------
                             {
@@ -973,6 +975,19 @@ public class PlayerController : Singleton<PlayerController>
 
             
         }
+    }
+
+
+    public Item FindCurrentActive()
+    {
+        Item currentActiveItem = new();
+
+        foreach (var item in playerInventory)
+        {
+            if (item.active) currentActiveItem = item;
+        }
+
+        return currentActiveItem;
     }
 
     void MeleeAttack(float _firerate, int _index)

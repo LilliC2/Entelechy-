@@ -21,6 +21,9 @@ public class PlayerEffects : Singleton<PlayerEffects>
     public float speedVig;
     bool resetSpeedVig = true;
 
+    [Header("Big Eye Particle")]
+    public GameObject bigEyePS;
+
 
     private void Start()
     {

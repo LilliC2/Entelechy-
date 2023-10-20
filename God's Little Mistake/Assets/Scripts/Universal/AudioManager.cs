@@ -9,7 +9,7 @@ public class AudioManager : Singleton<AudioManager>
     [SerializeField]
     AudioSource audioManagerSourcePlayerDead;
     public AudioSource audioManagerSourceItem;
-    public AudioSource playerProjectileAudioSource;
+    public AudioSource playerAttackAudioSource;
     public AudioClip[] playerHurtSounds;
     public AudioClip[] playerDeathSounds;
 
@@ -21,6 +21,9 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip playerSlugLegs;
     public AudioClip playerPeaShoot;
     public AudioClip playerBlink;
+    public AudioClip playerSparkle;
+    public AudioClip playerBigEyesExplosion;
+    public AudioClip playerSlugEyes;
     public AudioSource playerThud;
     // Start is called before the first frame update
     void Start()

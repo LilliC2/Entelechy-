@@ -23,11 +23,28 @@ public class PlayerAudioFunctions : GameBehaviour
         _AM.playerMovement.clip = _AM.playerSlugLegs;
         _AM.playerMovement.Play();
     }
+    public void BigEyesBlink()
+    {
+        _AM.playerAttackAudioSource.clip = _AM.playerBlink;
+        _AM.playerAttackAudioSource.Play();
+    }
+    public void BigEyesSparkle()
+    {
+        _AM.playerAttackAudioSource.clip = _AM.playerSparkle;
+        _AM.playerAttackAudioSource.Play();
+    }
+    public void SlugEyes()
+    {
+        _AM.playerAttackAudioSource.clip = _AM.playerSlugEyes;
+        _AM.playerAttackAudioSource.Play();
+    }
     
+
+
     public void PeaShootSound()
     {
 
-        _AM.playerProjectileAudioSource.clip = _AM.playerPeaShoot;
-        _AM.playerProjectileAudioSource.Play();
+        _AM.playerAttackAudioSource.clip = _AM.playerPeaShoot;
+        _AM.playerAttackAudioSource.Play();
     }
 }
