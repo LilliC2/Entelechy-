@@ -23,7 +23,7 @@ public class RandomiseProps : Singleton<RandomiseProps>
 
     public void RandomiseEnvionmentProps()
     {
-        print("random");
+        //print("random");
         if (isSpawningProps)
         {
             for (int i = 0; i < numOfPropsSpawns; i++)

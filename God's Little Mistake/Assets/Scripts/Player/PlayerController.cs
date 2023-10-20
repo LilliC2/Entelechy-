@@ -189,11 +189,6 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
-        //for testing
-        if (Input.GetKeyDown(KeyCode.K))
-        {
-            HeadBobble();
-        }
 
         if (health <= 0)
         {
@@ -629,11 +624,12 @@ public class PlayerController : Singleton<PlayerController>
                             }
                             else //MELEE ATTACKS-------------------------------------------------------------------------------------------------
                             {
-                                print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
+                                //print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
 
                                 //update melee attack pattern
                                 if (playerInventory[i].attackType == Item.AttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
                                 else if (playerInventory[i].attackType == Item.AttackType.Line) meleeHitBox = MeleeHitBox.Line;
+                                else if (playerInventory[i].attackType == Item.AttackType.Circle) meleeHitBox = MeleeHitBox.Circle;
 
 
                                 MeleeAttack(meleeFirerate, i);
@@ -641,7 +637,7 @@ public class PlayerController : Singleton<PlayerController>
                                 //MELEE ATTACK
                                 if (meleeUI != null)
                                 {
-                                    print("MELEE ATTACK");
+                                    //print("MELEE ATTACK");
                                     meleeUI.gameObject.SetActive(true);
 
                                 }
@@ -1000,9 +996,9 @@ public class PlayerController : Singleton<PlayerController>
             {
                 meleeAnimationCooldown = true;
                 //meleeUI.GetComponent<Animator>().SetTrigger("Attack");
-                print("Attack count");
+                //print("Attack count");
                 //activate animation
-                print("Anim slot " + _index);
+                //print("Anim slot " + _index);
                 itemsAnimForward[_index].SetTrigger("Attack");
 
                 if (itemsAnimBack[_index] != null) itemsAnimBack[_index].SetTrigger("Attack");

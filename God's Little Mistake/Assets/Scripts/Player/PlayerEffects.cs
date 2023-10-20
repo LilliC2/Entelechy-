@@ -32,7 +32,6 @@ public class PlayerEffects : Singleton<PlayerEffects>
         profile.TryGet<Vignette>(out var vig);
         if (vig != null)
         {
-            print("vig");
             vig.intensity.value = 0;
 
         }

@@ -675,7 +675,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CreateItemSelected(Item _itemInfo)
     {
-        print("Create item " + _itemInfo.itemName + " " + _itemInfo.ID);
+        //print("Create item " + _itemInfo.itemName + " " + _itemInfo.ID);
 
 
         heldItem = _itemInfo;
