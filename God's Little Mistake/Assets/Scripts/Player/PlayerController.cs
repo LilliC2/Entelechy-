@@ -334,6 +334,12 @@ public class PlayerController : Singleton<PlayerController>
                     missyBackSideAnim.SetBool("Walking", true);
                     missyLeftSideAnim.SetBool("Walking", true);
                     missyRightSideAnim.SetBool("Walking", true);
+
+                    foreach (var item in legsAnimators)
+                    {
+                        item.SetBool("Walking", true);
+                    }
+
                 }
                 else
                 {
@@ -341,6 +347,11 @@ public class PlayerController : Singleton<PlayerController>
                     missyBackSideAnim.SetBool("Walking", false);
                     missyLeftSideAnim.SetBool("Walking", false);
                     missyRightSideAnim.SetBool("Walking", false);
+
+                    foreach (var item in legsAnimators)
+                    {
+                        item.SetBool("Walking", false);
+                    }
                 }
 
 
@@ -349,22 +360,15 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Legs Animation
 
-                ////Idle Check
-                //if (transform.position == lastPos)
-                //{
-                //    foreach (var item in legsAnimators)
-                //    {
-                //        item.SetBool("Walking", false);
-                //    }
-
-                //}
-                //else
-                //{
-                //    foreach (var item in legsAnimators)
-                //    {
-                //        item.SetBool("Walking", true);
-                //    }
-                //}
+                //Idle Check
+                if (transform.position == lastPos)
+                {
+                    
+                }
+                else
+                {
+                    
+                }
 
                 #endregion
 
@@ -591,6 +595,8 @@ public class PlayerController : Singleton<PlayerController>
                         //check for primary
                         if (playerInventory[i].active)
                         {
+
+
                             //check if primary is projectile
                             if (playerInventory[i].projectile) //PROJECTILE ATTACKS------------------------------------------------------------------
                             {
@@ -969,6 +975,19 @@ public class PlayerController : Singleton<PlayerController>
 
             
         }
+    }
+
+
+    public Item FindCurrentActive()
+    {
+        Item currentActiveItem = new();
+
+        foreach (var item in playerInventory)
+        {
+            if (item.active) currentActiveItem = item;
+        }
+
+        return currentActiveItem;
     }
 
     void MeleeAttack(float _firerate, int _index)
