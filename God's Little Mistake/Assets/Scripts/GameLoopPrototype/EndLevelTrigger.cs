@@ -34,7 +34,8 @@ public class EndLevelTrigger : GameBehaviour
                 if(!popped)
                 {
                     doorAnimator.SetBool("Popped", true);
-                    popped = true;
+                    ExecuteAfterSeconds(1, () => popped = true);
+                    
                 }
                 else
                 {
@@ -50,6 +51,7 @@ public class EndLevelTrigger : GameBehaviour
 
         }
     }
+
 
     public void ResetDoor()
     {

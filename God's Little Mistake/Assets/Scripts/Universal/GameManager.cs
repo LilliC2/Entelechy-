@@ -205,7 +205,7 @@ public class GameManager : Singleton<GameManager>
 
         endRoomOB.GetComponent<EndLevelTrigger>().ResetDoor(); //reset animations
         //move end room trigger
-        endRoomOB.transform.position = levelEndRoom.position;
+        endRoomOB.transform.position = new Vector3(levelEndRoom.position.x, 0.5f, levelEndRoom.position.z);
 
         //move player to room
         player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z);
