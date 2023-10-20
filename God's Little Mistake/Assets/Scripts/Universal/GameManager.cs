@@ -2,6 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using DG.Tweening;
 
 public class GameManager : Singleton<GameManager>
 {
@@ -21,6 +23,9 @@ public class GameManager : Singleton<GameManager>
     public bool isPlaying;
     public bool isPaused;
     public string urlToOpen = "https://www.instagram.com/nlmgame/";
+    public Image fadeImage;
+    public float fadeOutTime = 1.0f;
+
 
     public enum GameState
     {
@@ -33,6 +38,8 @@ public class GameManager : Singleton<GameManager>
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
+
+        fadeImage.DOFade(0f, fadeOutTime);
     }
 
 
@@ -121,12 +128,12 @@ public class GameManager : Singleton<GameManager>
 
     public void ToTitle()
     {
-        SceneManager.LoadScene("Title");
+        SceneManager.LoadScene("TitleScreen");
     }
 
     public void FeedbackLink()
     {
-        Application.OpenURL(urlToOpen);
+        Application.OpenURL("https://www.instagram.com/nlmgame/");
     }
 
     public void Restart()
