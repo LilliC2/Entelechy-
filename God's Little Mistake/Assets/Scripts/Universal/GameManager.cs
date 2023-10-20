@@ -20,6 +20,7 @@ public class GameManager : Singleton<GameManager>
     [Header("Pause and game over")]
     public bool isPlaying;
     public bool isPaused;
+    public string urlToOpen = "https://www.instagram.com/nlmgame/";
 
     public enum GameState
     {
@@ -111,6 +112,21 @@ public class GameManager : Singleton<GameManager>
         ExecuteAfterSeconds(1.5f,() =>_UI.PlayTransitionAnimation());
         ExecuteAfterSeconds(1.5f,() => Time.timeScale = 0);
         
+    }
+
+    public void QuitGame()
+    {
+        Application.Quit();
+    }
+
+    public void ToTitle()
+    {
+        SceneManager.LoadScene("Title");
+    }
+
+    public void FeedbackLink()
+    {
+        Application.OpenURL(urlToOpen);
     }
 
     public void Restart()
