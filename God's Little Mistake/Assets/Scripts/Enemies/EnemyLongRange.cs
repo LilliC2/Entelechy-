@@ -6,6 +6,7 @@ using UnityEngine.AI;
 public class EnemyLongRange : GameBehaviour
 {
 
+
     [Header ("Enemy Navigation")]
     bool projectileShot;
     GameObject firingPoint;
@@ -35,7 +36,7 @@ public class EnemyLongRange : GameBehaviour
     public LayerMask whatIsGround, whatIsPlayer;
 
     public BaseEnemy enemyStats;
-    BaseEnemy BaseEnemy;
+    BaseEnemy baseEnemy;
     Vector3 target;
 
     [Header("Enemy Sprites")]
@@ -62,7 +63,7 @@ public class EnemyLongRange : GameBehaviour
         //enemySightRange = _ED.enemies[0].range + 0.5f;
         //player = GameObject.Find("Player");
         enemyStats = GetComponent<BaseEnemy>();
-        BaseEnemy = GetComponent<BaseEnemy>();
+        baseEnemy = GetComponent<BaseEnemy>();
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -83,21 +84,25 @@ public class EnemyLongRange : GameBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (agent.velocity.magnitude > 0.5f) baseEnemy.walking.Play();
+
+
         agent.speed = enemyStats.stats.speed;
 
         if (_GM.gameState != GameManager.GameState.Dead)
         {
             ////check for the sight and attack range
-            if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed)
+            if (baseEnemy.enemyState != BaseEnemy.EnemyState.Charmed)
             {
-                if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+                if (baseEnemy.enemyState != BaseEnemy.EnemyState.Die)
                 {
                     canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
                     canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
                     //if cant see player, patrol
-                    if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
-                    else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+                    if (!canSee) baseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+                    else if (canSee) baseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
                     //else agent.isStopped = tru;
                 }
 
@@ -105,7 +110,7 @@ public class EnemyLongRange : GameBehaviour
             }
         }
         //just patrol if player is dead
-        else BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+        else baseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
 
 
 
@@ -191,7 +196,7 @@ public class EnemyLongRange : GameBehaviour
         firingPoint.transform.LookAt(player.transform.position);
 
 
-        switch (BaseEnemy.enemyState)
+        switch (baseEnemy.enemyState)
         {
             case BaseEnemy.EnemyState.Patrolling:
 
@@ -280,7 +285,8 @@ public class EnemyLongRange : GameBehaviour
                 break;
             case BaseEnemy.EnemyState.Die:
 
-                BaseEnemy.Die();
+                baseEnemy.death.Play();
+                baseEnemy.Die();
 
                 break;
             case BaseEnemy.EnemyState.Attacking:
@@ -315,7 +321,7 @@ public class EnemyLongRange : GameBehaviour
     {
         if (!projectileShot)
         {
-            
+            baseEnemy.attack.Play();
             //Spawn bullet and apply force in the direction of the mouse
             //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
             GameObject bullet = Instantiate(_prefab, firingPoint.transform.position, firingPoint.transform.rotation);

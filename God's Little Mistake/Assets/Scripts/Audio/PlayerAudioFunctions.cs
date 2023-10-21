@@ -27,7 +27,8 @@ public class PlayerAudioFunctions : GameBehaviour
     {
         _AM.playerAttackAudioSource.clip = _AM.playerBlink;
         _AM.playerAttackAudioSource.Play();
-    }
+    } 
+
     public void BigEyesSparkle()
     {
         _AM.playerAttackAudioSource.clip = _AM.playerSparkle;

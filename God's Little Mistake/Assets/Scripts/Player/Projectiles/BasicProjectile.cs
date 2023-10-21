@@ -11,6 +11,8 @@ public class BasicProjectile : GameBehaviour
     [SerializeField]
     Animator explosionAnim;
     Rigidbody rb;
+    [SerializeField]
+    AudioSource explosionSound;
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -26,7 +28,9 @@ public class BasicProjectile : GameBehaviour
         if (collision.collider.CompareTag("Enemy"))
         {
             //explosionAnimOB.SetActive(true);
-            
+
+            if(explosionSound != null) explosionSound.Play();
+
             image.SetActive(false);
             print("Destroy Projectile");
             //ooze animation
