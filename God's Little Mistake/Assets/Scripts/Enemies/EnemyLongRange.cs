@@ -285,7 +285,6 @@ public class EnemyLongRange : GameBehaviour
                 break;
             case BaseEnemy.EnemyState.Die:
 
-                baseEnemy.death.Play();
                 baseEnemy.Die();
 
                 break;

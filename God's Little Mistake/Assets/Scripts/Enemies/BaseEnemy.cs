@@ -273,7 +273,7 @@ public class BaseEnemy : GameBehaviour
     {
         if(!died)
         {
-
+            death.Play();
             print("Enemy dies");
             died = true;
 
