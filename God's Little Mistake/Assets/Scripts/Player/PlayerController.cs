@@ -185,6 +185,10 @@ public class PlayerController : Singleton<PlayerController>
 
         firingPointCurrent = firingPointDefault;
 
+
+        //put at start
+        ExecuteAfterSeconds(2, () => transform.position = new Vector3(_GM.levelStartRoom.position.x, 0, _GM.levelStartRoom.position.z));
+        
     }
 
     void Update()
