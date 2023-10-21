@@ -38,6 +38,8 @@ public class GameManager : Singleton<GameManager>
     {
         player = GameObject.FindGameObjectWithTag("Player");
         fadeImage.fillAmount = 1;
+        gameState = GameState.Playing;
+        Time.timeScale = 1.0f;
 
     }
 

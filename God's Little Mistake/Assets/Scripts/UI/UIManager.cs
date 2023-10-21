@@ -134,6 +134,7 @@ public class UIManager : Singleton<UIManager>
     public GameObject pausePanel;
     public GameObject pauseFunctionalityPanel;
     public GameObject optionPanel;
+    public GameObject ingameUI;
 
 
 
@@ -202,12 +203,14 @@ public class UIManager : Singleton<UIManager>
     public void OnPause()
     {
         pausePanel.SetActive(true);
+        ingameUI.SetActive(false);
     }
 
     public void OnResume()
     {
         pausePanel.SetActive(false);
         optionPanel.SetActive(false);
+        ingameUI.SetActive(true);
     }
 
     public void OptionsOpen()
@@ -226,7 +229,9 @@ public class UIManager : Singleton<UIManager>
 
     public void OnExit()
     {
-        pausePanel.SetActive(false); //temporary
+        pausePanel.SetActive(false);
+        ingameUI.SetActive(true);
+        //temporary
         //Turn on death panel
         //Show score, time, etc.
     }
