@@ -39,7 +39,7 @@ public class EndLevelTrigger : GameBehaviour
                 }
                 else
                 {
-                    _GM.readyForGeneration = true;
+                    ExecuteAfterSeconds(1, () => _GM.readyForGeneration = true);
 
                 }
 

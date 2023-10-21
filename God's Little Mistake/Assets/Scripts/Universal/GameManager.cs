@@ -163,14 +163,17 @@ public class GameManager : Singleton<GameManager>
 
     void GenerateLevel()
     {
+
         readyForGeneration = false;
+
+        fadeImage.DOFade(0f, fadeOutTime);
 
         //increase dungeon lvl
         dungeonLevel++;
         print("Dungeon Level " + dungeonLevel);
 
         //update UI
-        _UI.UpdateLevelext(dungeonLevel);
+        _UI.dungeonLevel.text = "Level " + dungeonLevel.ToString();
         //clear dungeon
         ClearPreviousLevel();
 

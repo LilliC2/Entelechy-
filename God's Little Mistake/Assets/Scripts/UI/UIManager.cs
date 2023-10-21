@@ -10,6 +10,8 @@ public class UIManager : Singleton<UIManager>
     public Item leftArmItem;
     public Item rightArmItem;
 
+    public TMP_Text dungeonLevel;
+
     [Header("Hover Popup Content")]
     public GameObject popupContent;
     public GameObject popupContent1;
@@ -236,6 +238,7 @@ public class UIManager : Singleton<UIManager>
 
 
     #region Popups
+
 
     public void UpdateItemPopUp(Item _hoverItem)
     {
