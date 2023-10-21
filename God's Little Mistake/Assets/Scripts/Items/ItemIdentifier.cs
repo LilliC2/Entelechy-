@@ -130,6 +130,8 @@ public class ItemIdentifier : GameBehaviour
 
                 if (!itemAdd)
                 {
+
+                    _AM.ItemPickUp();
                     itemAdd = true;
                     
                     //equip new items

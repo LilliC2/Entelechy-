@@ -53,7 +53,7 @@ public class EnemyChomper : GameBehaviour
 
 
     public BaseEnemy enemyStats;
-    BaseEnemy BaseEnemy;
+    BaseEnemy baseEnemy;
 
     Vector3 target;
 
@@ -61,7 +61,7 @@ public class EnemyChomper : GameBehaviour
     {
 
         enemyStats = GetComponent<BaseEnemy>();
-        BaseEnemy = GetComponent<BaseEnemy>();
+        baseEnemy = GetComponent<BaseEnemy>();
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
 
@@ -81,6 +81,9 @@ public class EnemyChomper : GameBehaviour
     // Update is called once per frame
     void Update()
     {
+
+        if (agent.velocity.magnitude > 0.5f) baseEnemy.walking.Play();
+
         runningParticleGO.transform.rotation = gameObject.transform.rotation;
 
         agent.speed = enemyStats.stats.speed;
@@ -89,21 +92,21 @@ public class EnemyChomper : GameBehaviour
         if(_GM.gameState != GameManager.GameState.Dead)
         {
             ////check for the sight and attack range
-            if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Charmed)
+            if (baseEnemy.enemyState != BaseEnemy.EnemyState.Charmed)
             {
-                if (BaseEnemy.enemyState != BaseEnemy.EnemyState.Die)
+                if (baseEnemy.enemyState != BaseEnemy.EnemyState.Die)
                 {
                     canSee = Physics.CheckSphere(transform.position, sightRange, whatIsPlayer);
                     canAttack = Physics.CheckSphere(transform.position, attackRange, whatIsPlayer);
 
                     //if cant see player, patrol
-                    if (!canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
-                    else if (canSee) BaseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
+                    if (!canSee) baseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+                    else if (canSee) baseEnemy.enemyState = BaseEnemy.EnemyState.Chase;
                 }
             }
         }
         //just patrol if player is dead
-        else BaseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
+        else baseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
 
 
         #region Turning Sprites
@@ -178,7 +181,7 @@ public class EnemyChomper : GameBehaviour
         //Visual indicator for health
         //HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
 
-        switch (BaseEnemy.enemyState)
+        switch (baseEnemy.enemyState)
         {
             case BaseEnemy.EnemyState.Patrolling:
 
@@ -286,7 +289,7 @@ public class EnemyChomper : GameBehaviour
                 break;
             case BaseEnemy.EnemyState.Die:
 
-                BaseEnemy.Die();
+                baseEnemy.Die();
 
 
                 break;
@@ -350,6 +353,8 @@ public class EnemyChomper : GameBehaviour
 
             if (canAttack)
             {
+                baseEnemy.attack.Play();
+
                 print("Attack");
                 //attack shit
 

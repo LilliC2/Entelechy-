@@ -4,6 +4,14 @@ using UnityEngine;
 
 public class BaseEnemy : GameBehaviour
 {
+
+    [Header("Audio")]
+    public AudioSource death;
+    public AudioSource attack;
+    public AudioSource hurt;
+    public AudioSource walking;
+
+
     public enum EnemyState
     {
         Patrolling, Chase, Attacking, Die, Stunned, Charmed
@@ -99,6 +107,8 @@ public class BaseEnemy : GameBehaviour
 
     public void Hit(float _dmg)
     {
+        hurt.Play();
+
         //check for debuffs
         if(_PIA.slugEyesEquipped)
         {
@@ -263,7 +273,7 @@ public class BaseEnemy : GameBehaviour
     {
         if(!died)
         {
-
+            death.Play();
             print("Enemy dies");
             died = true;
 
