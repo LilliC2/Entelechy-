@@ -102,13 +102,28 @@ public class ItemIdentifier : GameBehaviour
                             {
                                 itemSpawned = true;
 
+                                var newSpawnPoint = new Vector3();
+                                UnityEngine.AI.NavMeshHit hit;
+                                if (UnityEngine.AI.NavMesh.SamplePosition(_PC.transform.position, out hit, 1f, UnityEngine.AI.NavMesh.AllAreas))
+                                {
+                                    newSpawnPoint = hit.position;
+                                }
+                                //place old item on ground
 
-                                ExecuteAfterSeconds(2, () => SpawnItem());
+                                GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
+                                item.GetComponent<ItemIdentifier>().enabled = false;
+                                
+                                _UI.statComp1.SetActive(false);
+                                _UI.statComp2.SetActive(false);
 
+                                ExecuteAfterFrames(5, () => item.GetComponent<ItemIdentifier>().enabled = true);
 
+                                item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
+                                item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
                             }
                         }
                     }
+
 
                 }
 
@@ -142,29 +157,6 @@ public class ItemIdentifier : GameBehaviour
         }
     }
 
-
-    void SpawnItem()
-    {
-        var newSpawnPoint = new Vector3();
-        UnityEngine.AI.NavMeshHit hit;
-        if (UnityEngine.AI.NavMesh.SamplePosition(_PC.transform.position, out hit, 1f, UnityEngine.AI.NavMesh.AllAreas))
-        {
-            newSpawnPoint = hit.position;
-        }
-        //place old item on ground
-
-
-        GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
-        item.GetComponent<ItemIdentifier>().enabled = false;
-
-        _UI.statComp1.SetActive(false);
-        _UI.statComp2.SetActive(false);
-
-        ExecuteAfterFrames(5, () => item.GetComponent<ItemIdentifier>().enabled = true);
-
-        item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
-        item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
-    }
     private void OnTriggerEnter(Collider other)
     {
         if (other.tag == "Player")

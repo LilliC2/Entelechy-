@@ -30,13 +30,17 @@ public class EndLevelTrigger : GameBehaviour
             print("Reached end of level. Press E to spawn new level");
             if (Input.GetKeyDown(KeyCode.E))
             {
+
                 if(!popped)
                 {
-                    popped = true;
                     doorAnimator.SetBool("Popped", true);
+                    ExecuteAfterSeconds(1, () => popped = true);
+                    
+                }
+                else
+                {
+                    ExecuteAfterSeconds(1, () => _GM.readyForGeneration = true);
 
-                    _GM.readyForGeneration = true;
-                    ExecuteAfterSeconds(2, () => popped = false);
                 }
 
             }

@@ -14,7 +14,7 @@ public class GameManager : Singleton<GameManager>
     public bool readyForGeneration = true;
     public int dungeonLevel;
     public Transform levelParent;
-    public Transform levelStartRoom;
+    Transform levelStartRoom;
     GameObject currentLevel;
     public GameObject endRoomOB;
     public GameObject itemPF;
@@ -36,13 +36,10 @@ public class GameManager : Singleton<GameManager>
 
     void Start()
     {
-        dungeonLevel = 0;
-
-        Time.timeScale = 1;
         player = GameObject.FindGameObjectWithTag("Player");
         fadeImage.fillAmount = 1;
         gameState = GameState.Playing;
-        readyForGeneration = true;
+        Time.timeScale = 1.0f;
 
     }
 
@@ -135,7 +132,6 @@ public class GameManager : Singleton<GameManager>
         SceneManager.LoadScene("TitleScreen");
     }
 
-
     public void FeedbackLink()
     {
         Application.OpenURL("https://forms.gle/TQJNc4cRzDxJzh9i9");
@@ -172,6 +168,7 @@ public class GameManager : Singleton<GameManager>
 
         readyForGeneration = false;
 
+        fadeImage.DOFade(0f, fadeOutTime);
 
         //increase dungeon lvl
         dungeonLevel++;
@@ -211,15 +208,12 @@ public class GameManager : Singleton<GameManager>
 
         
         }
-        else fadeImage.DOFade(0f, fadeOutTime);
-
 
         _RP.RandomiseEnvionmentProps();
 
         endRoomOB.GetComponent<EndLevelTrigger>().ResetDoor(); //reset animations
         //move end room trigger
         endRoomOB.transform.position = new Vector3(levelEndRoom.position.x, 0.5f, levelEndRoom.position.z);
-        levelStartRoom = currentLevel.transform.Find("BeginningRoom");
 
         //move player to room
         player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z);
