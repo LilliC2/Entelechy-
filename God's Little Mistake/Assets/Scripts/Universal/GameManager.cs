@@ -11,7 +11,7 @@ public class GameManager : Singleton<GameManager>
     GameObject player;
 
     [Header("Dungeon Generation")]
-    public bool readyForGeneration = true;
+    public bool readyForGeneration;
     public int dungeonLevel;
     public Transform levelParent;
     Transform levelStartRoom;
@@ -40,6 +40,9 @@ public class GameManager : Singleton<GameManager>
         fadeImage.fillAmount = 1;
         gameState = GameState.Playing;
         Time.timeScale = 1.0f;
+
+        GenerateLevel();
+        readyForGeneration = false;
 
     }
 
@@ -203,15 +206,15 @@ public class GameManager : Singleton<GameManager>
 
             startingItem.GetComponent<ItemIdentifier>().itemInfo = _ItemD.itemDataBase[9]; //set as peashooter
 
-            ExecuteAfterSeconds(0.5f, () => player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z));
-            ExecuteAfterSeconds(0.5f, () => fadeImage.DOFade(0f, fadeOutTime));
+            //ExecuteAfterSeconds(0.5f, () => player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z));
+            //ExecuteAfterSeconds(0.5f, () => fadeImage.DOFade(0f, fadeOutTime));
 
         
         }
 
         _RP.RandomiseEnvionmentProps();
 
-        endRoomOB.GetComponent<EndLevelTrigger>().ResetDoor(); //reset animations
+        //endRoomOB.GetComponent<EndLevelTrigger>().ResetDoor(); //reset animations
         //move end room trigger
         endRoomOB.transform.position = new Vector3(levelEndRoom.position.x, 0.5f, levelEndRoom.position.z);
 
