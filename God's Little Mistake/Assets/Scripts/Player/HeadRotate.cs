@@ -31,12 +31,5 @@ public class HeadRotate : GameBehaviour
         transform.eulerAngles = new Vector3(45,0 ,-directional);
     }
 
-    Vector2 FindRotation()
-    {
-        Vector3 mousePosition = Input.mousePosition;
-        mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
-        Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
 
-        return direction;
-    }
 }

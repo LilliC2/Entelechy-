@@ -1083,7 +1083,6 @@ public class PlayerController : Singleton<PlayerController>
                 GameObject bullet = Instantiate(_prefab, firingPointCurrent.transform.position, firingPointCurrent.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
-                bullet.GetComponent<ItemLook>().firingPoint = firingPointCurrent;
                 bullet.GetComponent<RangeDetector>().range = _range;
                 bullet.GetComponent<RangeDetector>().positionShotFrom = transform.position;
 

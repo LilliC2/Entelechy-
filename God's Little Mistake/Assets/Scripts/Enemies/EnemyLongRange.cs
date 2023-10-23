@@ -329,7 +329,6 @@ public class EnemyLongRange : GameBehaviour
             bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
 
-            bullet.GetComponent<ItemLook>().firingPoint = firingPoint;
             bullet.GetComponent<RangeDetector>().range = projectileRange;
             bullet.GetComponent<RangeDetector>().positionShotFrom = transform.position;
             bullet.GetComponent<EnemyProjectile>().dmg = enemyStats.stats.dmg;
