@@ -95,7 +95,7 @@ public class ItemIdentifier : GameBehaviour
                         {
 
                             //remove item
-                            selecting.RemovePreviousItem();
+                            //selecting.RemovePreviousItem();
 
 
                             if (!itemSpawned)

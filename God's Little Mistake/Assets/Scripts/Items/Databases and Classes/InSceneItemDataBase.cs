@@ -56,7 +56,7 @@ public class InSceneItemDataBase : Singleton<InSceneItemDataBase>
                             }
                         }
                     }
-                   if(canAutoAddPrimary) _PC.ChangePrimary(index);
+                   //if(canAutoAddPrimary) _PC.ChangePrimary(index);
 
 
                     break;
