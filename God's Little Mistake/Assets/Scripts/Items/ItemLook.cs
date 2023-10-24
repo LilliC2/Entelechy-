@@ -17,8 +17,8 @@ public class ItemLook : GameBehaviour
 
         if (this.tag.Contains("Projectile"))
         {
-            rotate = new Vector3(45f, this.transform.rotation.y, this.transform.rotation.z);
-            transform.eulerAngles = rotate;
+            //rotate = new Vector3(45f, this.transform.rotation.y, this.transform.rotation.z);
+            //transform.eulerAngles = rotate;
 
             //print("Angle of firing point " + _PC.firingPoint.transform.eulerAngles);
 
@@ -65,14 +65,17 @@ public class ItemLook : GameBehaviour
                     GetComponent<EnemyProjectile>().image.transform.localScale = new Vector3(x, projectileScript3.image.transform.localScale.y, projectileScript3.image.transform.localScale.z);
 
                 
-                }else
+                }
+                else
                 {
                     x = -GetComponent<BasicProjectile>().image.transform.localScale.x;
 
-                    var projectileScript3 = GetComponent<BasicProjectile>();
+                    //var projectileScript3 = GetComponent<BasicProjectile>();
 
 
-                    GetComponent<BasicProjectile>().image.transform.localScale = new Vector3(x, projectileScript3.image.transform.localScale.y, projectileScript3.image.transform.localScale.z);
+                    //GetComponent<BasicProjectile>().image.transform.localScale = new Vector3(x, projectileScript3.image.transform.localScale.y, projectileScript3.image.transform.localScale.z);
+
+
 
                 }
                 //print(x);
@@ -91,7 +94,12 @@ public class ItemLook : GameBehaviour
 
         if(!this.tag.Contains("Projectile"))
         {
-            transform.eulerAngles = rotate;
+            //transform.eulerAngles = rotate;
+            Vector3 mousePosition = Input.mousePosition;
+            mousePosition = Camera.main.ScreenToWorldPoint(mousePosition);
+            Vector2 direction = new Vector2(mousePosition.x - transform.position.x, mousePosition.y - transform.position.y);
+            //print("direction " + direction);
+            transform.up = direction;
         }
         else
         {

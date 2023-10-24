@@ -17,6 +17,7 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Temporary")]
     public SpriteRenderer UIrangeIndicator;
+    public RectTransform screenCenter;
 
     #region Animation Variables
     [Header("Animation")]
@@ -189,7 +190,7 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
-
+        //RotateHead();
         if (health <= 0)
         {
             Die();
@@ -832,6 +833,23 @@ public class PlayerController : Singleton<PlayerController>
         #endregion
     }
 
+    //void RotateHead()
+    //{
+    //    //get angle of mouse from player position aka center of screen
+
+    //    var mousePosOnScreen = Input.mousePosition;
+        
+
+    //    print("Mouse pos on screen is " + mousePosOnScreen);
+    //    var angle = Vector2.Angle(new Vector2(transform.position.x, transform.position.y), mousePosOnScreen);
+
+    //    print("Angle is " + angle);
+        
+
+
+    //    //rotate head rotate local z
+    //}
+
     void RespawnAfterFallingCheck(Vector3 _targetPos)
     {
         if (!fallDamage && !isGrounded)
@@ -966,6 +984,7 @@ public class PlayerController : Singleton<PlayerController>
             }
             else
             {
+                print(playerInventory[_inventorySlot].itemName + " slot is " + playerInventory[_inventorySlot].inSlot);
                 FindCurrentFiringPoint(playerInventory[_inventorySlot]);
             }
 
@@ -1158,7 +1177,7 @@ public class PlayerController : Singleton<PlayerController>
             {
                 missyHitParticle.Play();
                 _PE.VignetteFade();
-                HeadBobble();
+                //HeadBobble();
                 _UI.UpdateHealthText(health);
                 _UI.UpdateHealthBar(health, maxHP);
             }
