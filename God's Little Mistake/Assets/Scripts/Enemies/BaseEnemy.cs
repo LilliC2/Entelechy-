@@ -303,12 +303,12 @@ public class BaseEnemy : GameBehaviour
                     if (!spawnItem)
                     {
                         spawnItem = true;
-                        GameObject item = Instantiate(_IG.GenerateItem(stats.category), gameObject.transform.position, Quaternion.identity);
+                        GameObject item = Instantiate(_IG.GenerateItem(stats.segments), gameObject.transform.position, Quaternion.identity);
 
                         item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
                         print(item.name);
-                        print("Spawning item of " + stats.category.ToString() + " category");
+                        print("Spawning item of " + stats.segments.ToString() + " category");
                     }
 
                     break;

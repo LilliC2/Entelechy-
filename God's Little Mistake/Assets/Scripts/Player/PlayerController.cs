@@ -15,6 +15,12 @@ public class PlayerController : Singleton<PlayerController>
     public float time;
     public Ease ease;
 
+    [Header("Inventory")]
+    public Item headItem;
+    public Item torsoItem;
+    public Item legItem;
+
+
     [Header("Temporary")]
     public SpriteRenderer UIrangeIndicator;
 
@@ -118,8 +124,7 @@ public class PlayerController : Singleton<PlayerController>
     public ParticleSystem missyHitParticle;
     public ParticleSystem landingPS;
 
-    [Header("Inventory")]
-    public List<Item> playerInventory;
+    
 
 
     [Header("Projectile")]
@@ -215,10 +220,13 @@ public class PlayerController : Singleton<PlayerController>
                         move.y -= gravity;
                     }
 
-                    controller.Move(move * Time.deltaTime * speed);
+                    controller.Move(move * Time.deltaTime * legItem.movementSpeed);
 
 
                     #region isMoving Check
+
+                    if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) isMoving = false;
+
                     //find inpus for movement
                     if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
                     {
@@ -230,11 +238,6 @@ public class PlayerController : Singleton<PlayerController>
                         }
 
                     }
-
-
-
-                    if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
-                    else isMoving = false;
 
                     if (!isMoving)
                     {
@@ -248,7 +251,7 @@ public class PlayerController : Singleton<PlayerController>
                     move = new Vector3(0, 0, 0);
                     move.y -= gravity;
 
-                    controller.Move(move * Time.deltaTime * speed);
+                    controller.Move(move * Time.deltaTime * legItem.movementSpeed);
 
                 }
 
@@ -323,31 +326,31 @@ public class PlayerController : Singleton<PlayerController>
 
                 
 
-                if(isMoving)
-                {
-                    missyFrontSideAnim.SetBool("Walking", true);
-                    missyBackSideAnim.SetBool("Walking", true);
-                    missyLeftSideAnim.SetBool("Walking", true);
-                    missyRightSideAnim.SetBool("Walking", true);
+                //if(isMoving)
+                //{
+                //    missyFrontSideAnim.SetBool("Walking", true);
+                //    missyBackSideAnim.SetBool("Walking", true);
+                //    missyLeftSideAnim.SetBool("Walking", true);
+                //    missyRightSideAnim.SetBool("Walking", true);
 
-                    foreach (var item in legsAnimators)
-                    {
-                        item.SetBool("Walking", true);
-                    }
+                //    foreach (var item in legsAnimators)
+                //    {
+                //        item.SetBool("Walking", true);
+                //    }
 
-                }
-                else
-                {
-                    missyFrontSideAnim.SetBool("Walking", false);
-                    missyBackSideAnim.SetBool("Walking", false);
-                    missyLeftSideAnim.SetBool("Walking", false);
-                    missyRightSideAnim.SetBool("Walking", false);
+                //}
+                //else
+                //{
+                //    missyFrontSideAnim.SetBool("Walking", false);
+                //    missyBackSideAnim.SetBool("Walking", false);
+                //    missyLeftSideAnim.SetBool("Walking", false);
+                //    missyRightSideAnim.SetBool("Walking", false);
 
-                    foreach (var item in legsAnimators)
-                    {
-                        item.SetBool("Walking", false);
-                    }
-                }
+                //    foreach (var item in legsAnimators)
+                //    {
+                //        item.SetBool("Walking", false);
+                //    }
+                //}
 
 
 
@@ -436,7 +439,6 @@ public class PlayerController : Singleton<PlayerController>
 
                     StopAllAnimations();
 
-                    _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
 
                     if(lastDir == missyForward)
                     {
@@ -522,7 +524,6 @@ public class PlayerController : Singleton<PlayerController>
 
 
                     StopAllAnimations();
-                    _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
 
 
                     if (lastDir == missyForward)
@@ -583,150 +584,110 @@ public class PlayerController : Singleton<PlayerController>
                 #endregion
 
                 #region Attacks
+
                 if (Input.GetMouseButton(0))
                 {
-                    for (int i = 0; playerInventory.Count > i; i++)
+                    if(headItem.itemName == "NULL")
                     {
-                        //check for primary
-                        if (playerInventory[i].active)
+                        FireProjectile(headItem.projectilePF, headItem.projectileSpeed, headItem.firerate, headItem.projectile_range);
+                        //ADD KNOCK BACK
+                        if (knockbackActive)
                         {
+                            float timeSinceKnockback = Time.time - knockbackStartTime;
 
-
-                            //check if primary is projectile
-                            if (playerInventory[i].projectile) //PROJECTILE ATTACKS------------------------------------------------------------------
+                            if (timeSinceKnockback >= knockbackDuration)
                             {
-                                //shoot
-
-
-                                //changed to use player stats, the primary attack will just change
-
-                                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, projectileFirerate, projectileRange);
-                                //ADD KNOCK BACK
-                                if (knockbackActive)
-                                {
-                                    float timeSinceKnockback = Time.time - knockbackStartTime;
-
-                                    if (timeSinceKnockback >= knockbackDuration)
-                                    {
-                                        knockbackActive = false;
-                                    }
-                                    else
-                                    {
-                                        float knockbackProgress = timeSinceKnockback / knockbackDuration;
-                                        var dir = (-firingPointCurrent.transform.forward * knockbackAmount);
-                                        dir = new Vector3(dir.x, 0, dir.z);
-                                        controller.Move(dir * Time.deltaTime);
-
-                                    }
-                                }
-                                
+                                knockbackActive = false;
+                            }
+                            else
+                            {
+                                float knockbackProgress = timeSinceKnockback / knockbackDuration;
+                                var dir = (-firingPointCurrent.transform.forward * knockbackAmount);
+                                dir = new Vector3(dir.x, 0, dir.z);
+                                controller.Move(dir * Time.deltaTime);
 
                             }
-                            else //MELEE ATTACKS-------------------------------------------------------------------------------------------------
+                        }
+                    }
+                    //if no head item, torso attack is also bound to m0
+                    if(headItem.itemName == "NULL" && torsoItem.itemName != "NULL")
+                    {
+                        FireProjectile(torsoItem.projectilePF, torsoItem.projectileSpeed, torsoItem.firerate, torsoItem.projectile_range);
+                        //ADD KNOCK BACK
+                        if (knockbackActive)
+                        {
+                            float timeSinceKnockback = Time.time - knockbackStartTime;
+
+                            if (timeSinceKnockback >= knockbackDuration)
                             {
-                                //print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
+                                knockbackActive = false;
+                            }
+                            else
+                            {
+                                float knockbackProgress = timeSinceKnockback / knockbackDuration;
+                                var dir = (-firingPointCurrent.transform.forward * knockbackAmount);
+                                dir = new Vector3(dir.x, 0, dir.z);
+                                controller.Move(dir * Time.deltaTime);
 
-                                //update melee attack pattern
-                                if (playerInventory[i].attackType == Item.AttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
-                                else if (playerInventory[i].attackType == Item.AttackType.Line) meleeHitBox = MeleeHitBox.Line;
-                                else if (playerInventory[i].attackType == Item.AttackType.Circle) meleeHitBox = MeleeHitBox.Circle;
+                            }
+                        }
+                    }
+                }
 
+                if (Input.GetMouseButton(1))
+                {
+                    if (headItem.itemName != "NULL" && torsoItem.itemName == "NULL")
+                    {
+                        FireProjectile(headItem.projectilePF, headItem.projectileSpeed, headItem.firerate, headItem.projectile_range);
+                        //ADD KNOCK BACK
+                        if (knockbackActive)
+                        {
+                            float timeSinceKnockback = Time.time - knockbackStartTime;
 
-                                MeleeAttack(meleeFirerate, i);
+                            if (timeSinceKnockback >= knockbackDuration)
+                            {
+                                knockbackActive = false;
+                            }
+                            else
+                            {
+                                float knockbackProgress = timeSinceKnockback / knockbackDuration;
+                                var dir = (-firingPointCurrent.transform.forward * knockbackAmount);
+                                dir = new Vector3(dir.x, 0, dir.z);
+                                controller.Move(dir * Time.deltaTime);
 
-                                //MELEE ATTACK
-                                if (meleeUI != null)
-                                {
-                                    //print("MELEE ATTACK");
-                                    meleeUI.gameObject.SetActive(true);
+                            }
+                        }
+                    }
+                    //if no head item, torso attack is also bound to m0
+                    if (torsoItem.itemName != "NULL")
+                    {
+                        FireProjectile(torsoItem.projectilePF, torsoItem.projectileSpeed, torsoItem.firerate, torsoItem.projectile_range);
+                        //ADD KNOCK BACK
+                        if (knockbackActive)
+                        {
+                            float timeSinceKnockback = Time.time - knockbackStartTime;
 
-                                }
+                            if (timeSinceKnockback >= knockbackDuration)
+                            {
+                                knockbackActive = false;
+                            }
+                            else
+                            {
+                                float knockbackProgress = timeSinceKnockback / knockbackDuration;
+                                var dir = (-firingPointCurrent.transform.forward * knockbackAmount);
+                                dir = new Vector3(dir.x, 0, dir.z);
+                                controller.Move(dir * Time.deltaTime);
+
                             }
                         }
                     }
 
+
                 }
 
-                #region OLD VERSION WITH SEPERATE BUTTONS FOR MELEE AND LONG RANGE
-
-                //if (Input.GetMouseButton(1))
-                //{
-
-                //    for (int i = 0; playerInventory.Count > i; i++)
-                //    {
-                //        //check for primary
-                //        if (playerInventory[i].active)
-                //        {
-                //            //check if primary is projectile
-                //            if (!playerInventory[i].projectile)
-                //            {
-                //                print("Attack with item in slot " + i + " which is " + playerInventory[i].itemName);
-
-                //                //update melee attack pattern
-                //                if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Cone) meleeHitBox = MeleeHitBox.Cone;
-                //                else if (playerInventory[i].meleeAttackType == Item.MeleeAttackType.Line) meleeHitBox = MeleeHitBox.Line;
-
-
-                //                MeleeAttack(meleeFirerate, i);
-
-                //                //MELEE ATTACK
-                //                if (meleeUI != null)
-                //                {
-                //                    print("MELEE ATTACK");
-                //                    meleeUI.gameObject.SetActive(true);
-
-                //                }
-
-                //            }
-                //        }
-                //    }
-
-                //}
 
 
 
-                //if (Input.GetMouseButton(0))
-                //{
-                //    for (int i = 0; playerInventory.Count > i; i++)
-                //    {
-                //        //check for primary
-                //        if (playerInventory[i].active)
-                //        {
-                //            //check if primary is projectile
-                //            if (playerInventory[i].projectile)
-                //            {
-                //                //shoot
-
-
-                //                //changed to use player stats, the primary attack will just change
-
-                //                FireProjectile(playerInventory[i].projectilePF, projectileSpeed, projectileFirerate, projectileRange);
-                //                //ADD KNOCK BACK
-                //                if (knockbackActive)
-                //                {
-                //                    float timeSinceKnockback = Time.time - knockbackStartTime;
-
-                //                    if (timeSinceKnockback >= knockbackDuration)
-                //                    {
-                //                        knockbackActive = false;
-                //                    }
-                //                    else
-                //                    {
-                //                        float knockbackProgress = timeSinceKnockback / knockbackDuration;
-                //                        var dir = (-firingPoint.transform.forward * knockbackAmount);
-                //                        dir = new Vector3(dir.x, 0, dir.z);
-                //                        controller.Move(dir * Time.deltaTime);
-
-                //                    }
-                //                }
-
-                //            }
-                //        }
-                //    }
-
-                //}
-
-                #endregion
                 #endregion
 
                 if (health <= 0)
@@ -747,89 +708,89 @@ public class PlayerController : Singleton<PlayerController>
         //change melee
 
         //change primary
-        #region Primary Change Inputs
+        //#region Primary Change Inputs
 
-        if (Input.GetKeyDown(KeyCode.Alpha1))
-        {
-            ChangePrimary(0);
-            _HUD.isPrimary1 = true;
-            _HUD.isPrimary2 = false;
-            _HUD.isPrimary3 = false;
-            _HUD.isPrimary4 = false;
-            _HUD.isPrimary5 = false;
-            _HUD.isPrimary6 = false;
-            _HUD.UpdatePrimaryDetauls(0);
+        //if (Input.GetKeyDown(KeyCode.Alpha1))
+        //{
+        //    ChangePrimary(0);
+        //    _HUD.isPrimary1 = true;
+        //    _HUD.isPrimary2 = false;
+        //    _HUD.isPrimary3 = false;
+        //    _HUD.isPrimary4 = false;
+        //    _HUD.isPrimary5 = false;
+        //    _HUD.isPrimary6 = false;
+        //    _HUD.UpdatePrimaryDetauls(0);
 
-        }
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Alpha2))
-        {
-            print("Chaning primary");
-            ChangePrimary(1);
-            _HUD.isPrimary1 = false;
-            _HUD.isPrimary2 = true;
-            _HUD.isPrimary3 = false;
-            _HUD.isPrimary4 = false;
-            _HUD.isPrimary5 = false;
-            _HUD.isPrimary6 = false;
-            _HUD.UpdatePrimaryDetauls(1);
+        //if (Input.GetKeyDown(KeyCode.Alpha2))
+        //{
+        //    print("Chaning primary");
+        //    ChangePrimary(1);
+        //    _HUD.isPrimary1 = false;
+        //    _HUD.isPrimary2 = true;
+        //    _HUD.isPrimary3 = false;
+        //    _HUD.isPrimary4 = false;
+        //    _HUD.isPrimary5 = false;
+        //    _HUD.isPrimary6 = false;
+        //    _HUD.UpdatePrimaryDetauls(1);
 
-        }
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Alpha3))
-        {
-            ChangePrimary(2);
-            _HUD.isPrimary1 = false;
-            _HUD.isPrimary2 = false;
-            _HUD.isPrimary3 = true;
-            _HUD.isPrimary4 = false;
-            _HUD.isPrimary5 = false;
-            _HUD.isPrimary6 = false;
-            _HUD.UpdatePrimaryDetauls(2);
+        //if (Input.GetKeyDown(KeyCode.Alpha3))
+        //{
+        //    ChangePrimary(2);
+        //    _HUD.isPrimary1 = false;
+        //    _HUD.isPrimary2 = false;
+        //    _HUD.isPrimary3 = true;
+        //    _HUD.isPrimary4 = false;
+        //    _HUD.isPrimary5 = false;
+        //    _HUD.isPrimary6 = false;
+        //    _HUD.UpdatePrimaryDetauls(2);
 
-        }
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Alpha4))
-        {
-            ChangePrimary(3);
-            _HUD.isPrimary1 = false;
-            _HUD.isPrimary2 = false;
-            _HUD.isPrimary3 = false;
-            _HUD.isPrimary4 = true;
-            _HUD.isPrimary5 = false;
-            _HUD.isPrimary6 = false;
-            _HUD.UpdatePrimaryDetauls(3);
+        //if (Input.GetKeyDown(KeyCode.Alpha4))
+        //{
+        //    ChangePrimary(3);
+        //    _HUD.isPrimary1 = false;
+        //    _HUD.isPrimary2 = false;
+        //    _HUD.isPrimary3 = false;
+        //    _HUD.isPrimary4 = true;
+        //    _HUD.isPrimary5 = false;
+        //    _HUD.isPrimary6 = false;
+        //    _HUD.UpdatePrimaryDetauls(3);
 
-        }
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Alpha5))
-        {
-            ChangePrimary(4);
-            _HUD.isPrimary1 = false;
-            _HUD.isPrimary2 = false;
-            _HUD.isPrimary3 = false;
-            _HUD.isPrimary4 = false;
-            _HUD.isPrimary5 = true;
-            _HUD.isPrimary6 = false;
-            _HUD.UpdatePrimaryDetauls(4);
+        //if (Input.GetKeyDown(KeyCode.Alpha5))
+        //{
+        //    ChangePrimary(4);
+        //    _HUD.isPrimary1 = false;
+        //    _HUD.isPrimary2 = false;
+        //    _HUD.isPrimary3 = false;
+        //    _HUD.isPrimary4 = false;
+        //    _HUD.isPrimary5 = true;
+        //    _HUD.isPrimary6 = false;
+        //    _HUD.UpdatePrimaryDetauls(4);
 
-        }
+        //}
 
-        if (Input.GetKeyDown(KeyCode.Alpha6))
-        {
-            ChangePrimary(5);
-            _HUD.isPrimary1 = false;
-            _HUD.isPrimary2 = false;
-            _HUD.isPrimary3 = false;
-            _HUD.isPrimary4 = false;
-            _HUD.isPrimary5 = false;
-            _HUD.isPrimary6 = true;
-            _HUD.UpdatePrimaryDetauls(5);
-        }
+        //if (Input.GetKeyDown(KeyCode.Alpha6))
+        //{
+        //    ChangePrimary(5);
+        //    _HUD.isPrimary1 = false;
+        //    _HUD.isPrimary2 = false;
+        //    _HUD.isPrimary3 = false;
+        //    _HUD.isPrimary4 = false;
+        //    _HUD.isPrimary5 = false;
+        //    _HUD.isPrimary6 = true;
+        //    _HUD.UpdatePrimaryDetauls(5);
+        //}
 
 
 
-        #endregion
+        //#endregion
     }
 
     void RespawnAfterFallingCheck(Vector3 _targetPos)
@@ -866,38 +827,48 @@ public class PlayerController : Singleton<PlayerController>
     public void UpdateLegAnimators()
     {
 
-        legsAnimators.Clear();
+        //legsAnimators.Clear();
 
-        for (int i = 0; i < playerInventory.Count; i++)
-        {
-            if (playerInventory[i].segment == Item.Segment.Legs)
-            {
-                legsAnimators.Add(itemsAnimBack[i]);
-                legsAnimators.Add(itemsAnimForward[i]);
-                legsAnimators.Add(itemsAnimLeftSide[i]);
-                legsAnimators.Add(itemsAnimRightSide[i]);
-            }
-        }
+        //for (int i = 0; i < playerInventory.Count; i++)
+        //{
+        //    if (playerInventory[i].segment == Item.Segment.Legs)
+        //    {
+        //        legsAnimators.Add(itemsAnimBack[i]);
+        //        legsAnimators.Add(itemsAnimForward[i]);
+        //        legsAnimators.Add(itemsAnimLeftSide[i]);
+        //        legsAnimators.Add(itemsAnimRightSide[i]);
+        //    }
+        //}
 
     }
 
     void CheckForStartingItems()
     {
-        foreach (var item in playerInventory)
-        {
-            if(item !=null)
-            {
-                print(item.itemName);
-                int index = playerInventory.IndexOf(item);
-                _ISitemD.AddItemStats(index);
-                _UI.CreateItemSelected(item);
-                item.active = true;
 
-                //check if item is arleady in inventory
-            }
+        if(headItem.itemName != "NULL")
+        {
+            print("Head item is: " + legItem.itemName);
+
+            _UI.CreateItemSelected(headItem);
+            headItem.active = true;
+        }
+        if(torsoItem.itemName != "NULL")
+        {
+            print("Torso item is: " + legItem.itemName);
+
+
+            _UI.CreateItemSelected(torsoItem);
+            torsoItem.active = true;
+        }
+        if(legItem.itemName != "NULL")
+        {
+            print("Leg item is: " + legItem.itemName);
+
+            _UI.CreateItemSelected(legItem);
+            legItem.active = true;
         }
 
-        _PIA.PassiveAbilityItemCheck();
+        //_PIA.PassiveAbilityItemCheck();
 
     }
 
@@ -932,59 +903,7 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    public void ChangePrimary(int _inventorySlot)
-    {
 
-        //turn off any others
-        foreach (var item in playerInventory)
-        {
-            item.active = false;
-        }
-
-
-        //check if item is primary
-        if (playerInventory[_inventorySlot].itemType == Item.ItemType.Primary)
-        {
-            //if yes activate
-            playerInventory[_inventorySlot].active = true;
-
-
-            //check if melee attack
-            if(!playerInventory[_inventorySlot].projectile)
-            {
-                //change hit box
-                UpdateMelee(playerInventory[_inventorySlot]);
-
-
-                ////change melee UI
-                //meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
-                //meleeUI.gameObject.SetActive(false);
-                ////change ui scale
-                //meleeUI.GetComponentInParent<Transform>().localScale = new Vector3(meleeRange, meleeRange, meleeRange);
-
-                UIrangeIndicator.size = new Vector2(UIrangeIndicator.size.x, meleeRange);
-            }
-            else
-            {
-                FindCurrentFiringPoint(playerInventory[_inventorySlot]);
-            }
-
-            
-        }
-    }
-
-
-    public Item FindCurrentActive()
-    {
-        Item currentActiveItem = new();
-
-        foreach (var item in playerInventory)
-        {
-            if (item.active) currentActiveItem = item;
-        }
-
-        return currentActiveItem;
-    }
 
     void MeleeAttack(float _firerate, int _index)
     {
@@ -1084,24 +1003,24 @@ public class PlayerController : Singleton<PlayerController>
         }
     }
 
-    void FindCurrentFiringPoint(Item _item)
-    {
-        //find slot
-        var slot = _item.inSlot;
-        print("In slot " + slot);
-        //get firing point for each side
-        //put into array
+    //void FindCurrentFiringPoint(Item _item)
+    //{
+    //    //find slot
+    //    var slot = _item.inSlot;
+    //    print("In slot " + slot);
+    //    //get firing point for each side
+    //    //put into array
 
-        firingPointActive[0] = _AVTAR.slotsOnPlayerFront[slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
-        firingPointActive[1] = _AVTAR.slotsOnPlayerBack[slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
-        firingPointActive[2] = _AVTAR.slotsOnPlayerLeft [slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
-        firingPointActive[3] = _AVTAR.slotsOnPlayerRight [slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
-
-
+    //    firingPointActive[0] = _AVTAR.slotsOnPlayerFront[slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
+    //    firingPointActive[1] = _AVTAR.slotsOnPlayerBack[slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
+    //    firingPointActive[2] = _AVTAR.slotsOnPlayerLeft [slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
+    //    firingPointActive[3] = _AVTAR.slotsOnPlayerRight [slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
 
 
 
-    }
+
+
+    //}
 
     void FiringParticleSystem(GameObject _projectile)
     {

@@ -157,10 +157,6 @@ public class GameManager : Singleton<GameManager>
         _PC.health = 100;
         _PC.maxHP = 100;
 
-        for (int i = 0; i < _PC.playerInventory.Count; i++)
-        {
-            if (_PC.playerInventory[i] != null) _ISitemD.RemoveItemFromInventory(i);
-        }
 
         //give player tentacle mouth
         gameState = GameState.Playing;

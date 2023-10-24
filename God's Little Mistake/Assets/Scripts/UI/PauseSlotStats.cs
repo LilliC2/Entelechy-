@@ -68,50 +68,21 @@ public class PauseSlotStats : GameBehaviour
 
     public void MatchPlayerInventory(int i)
     {
-        //if (_PC.playerInventory[slotNumber] !=null)
-        //{
-        //    itemName = _PC.playerInventory[slotNumber].itemName;
-        //    dmg = _PC.playerInventory[slotNumber].dmg;
-        //    critChance = _PC.playerInventory[slotNumber].critChance;
-        //    critX = _PC.playerInventory[slotNumber].critX;
-        //    fireRate = _PC.playerInventory[slotNumber].fireRate;
-        //    projectile = _PC.playerInventory[slotNumber].projectile;
-        //    projectileSpeed = _PC.playerInventory[slotNumber].projectileSpeed;
-        //    icon = _PC.playerInventory[slotNumber].icon;
-        //}
-
-        //itemInfo == _PC.playerInventory[i];
 
         Item inslot = new();
 
-        foreach (var item in _PC.playerInventory)
+        switch(i)
         {
-            if(item.inSlot == i)
-            {
-                itemInfo = item;
-            }
+            case 0:
+                inslot = _PC.headItem;
+                break;
+            case 1:
+                inslot = _PC.torsoItem;
+                break;
+            case 2:
+                inslot = _PC.legItem;
+                break;
         }
-
-        //dmg = itemInfo.dmg;
-        //critChance = itemInfo.critChance;
-        //critX = itemInfo.critX;
-        //fireRate = itemInfo.fireRate;
-        //itemName = itemInfo.itemName;
-        //icon = itemInfo.icon;
-
-
-        //foreach (var item in _PC.playerInventory)
-        //{
-        //    if (item.inSlot == 3) itemSlot3 = item;
-        //    if (item.inSlot == 4) itemSlot4 = item;
-        //}
-
-
-
-
-
-
-
 
     }
 }

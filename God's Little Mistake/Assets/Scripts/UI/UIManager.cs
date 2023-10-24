@@ -325,49 +325,34 @@ public class UIManager : Singleton<UIManager>
 
         print("Update pop up");
 
-        //Search for matches to item mouse is hovering over
-        var matchItem = SearchForItemMatch(_hoverItem);
-
-        //if (matchItem != null)
-        //    print(matchItem[0]);
-        //else print("no match");
+ 
     }
 
     public void PopupStat(Item _hoverItem)
     {
         UpdateItemPopUp(_hoverItem);
+        statComp1.SetActive(true);
+        statComp2.SetActive(false);
 
-        Item itemSlot3 =new();
-        Item itemSlot4 =new();
+        Item itemMatch = new();
 
-        foreach (var item in _PC.playerInventory)
+        switch (_hoverItem.segment)
         {
-            if (item.inSlot == 3) itemSlot3 = item;
-            if (item.inSlot == 4) itemSlot4 = item;
+            case Item.Segment.Head:
+                itemMatch = _PC.headItem;
+                break;
+            case Item.Segment.Torso:
+                itemMatch = _PC.torsoItem;
+
+                break;
+            case Item.Segment.Legs:
+                itemMatch = _PC.legItem;
+
+                break;
+
         }
 
-        if(_hoverItem.inSlot == 3 || _hoverItem.inSlot == 4)
-        {
-            statComp1.SetActive(true);
-            statComp2.SetActive(true);
-
-            UpdateItemPopUpComp1(itemSlot3);
-            UpdateItemPopUpComp2(itemSlot4);
-        }
-        else
-        {
-            statComp1.SetActive(true);
-            statComp2.SetActive(false);
-
-            Item itemMatch = new();
-
-            foreach (var item in _PC.playerInventory)
-            {
-                if (item.category == _hoverItem.category) itemMatch = item;
-            }
-
-            UpdateItemPopUpComp1(itemMatch);
-        }
+        UpdateItemPopUpComp1(itemMatch);
 
 
     }
@@ -572,106 +557,76 @@ public class UIManager : Singleton<UIManager>
 
     public void UpdateInventorySlotImages()
     {
-        for (int i = 0; 7 > i; i++)
+        //head item
+        if(_PC.headItem !=null)
         {
-            switch (i)
-            {
-                case 0:
-                    if (!(i >= -1 && i < _PC.playerInventory.Count))
-                    {
-                        invenSlot0.sprite = emptySlotSprite;
-                        _HUD.hasItem1 = false;
-                    }
-                    else
-                    {
-                        invenSlot0.sprite = _PC.playerInventory[i].icon; //images for icon
-                        _HUD.hasItem1 = true;
-
-                    }
-                    break;
-
-                case 1:
-                    if (!(i >= -1 && i < _PC.playerInventory.Count))
-                    {
-                        invenSlot1.sprite = emptySlotSprite;
-                        _HUD.hasItem2 = false;
-                    }
-                    else
-                    {
-                        invenSlot1.sprite = _PC.playerInventory[i].icon; //images for icon
-                        _HUD.hasItem2 = true;
-                    }
-                    break;
-
-                case 2:
-                    if (!(i >= -1 && i < _PC.playerInventory.Count))
-                    {
-                        invenSlot2.sprite = emptySlotSprite;
-                        _HUD.hasItem3 = false;
-                    }
-                    else
-                    {
-                        invenSlot2.sprite = _PC.playerInventory[i].icon; //images for icon
-                        _HUD.hasItem3 = true;
-                    }
-                    break;
-
-                case 3:
-                    if (!(i >= -1 && i < _PC.playerInventory.Count))
-                    {
-                        invenSlot3.sprite = emptySlotSprite;
-                        _HUD.hasItem4 = false;
-                    }
-                    else
-                    {
-                        invenSlot3.sprite = _PC.playerInventory[i].icon;
-                        _HUD.hasItem4 = true;
-                    }
-                    break;
-
-                case 4:
-                    if (!(i >= -1 && i < _PC.playerInventory.Count))
-                    {
-                        invenSlot4.sprite = emptySlotSprite;
-                        _HUD.hasItem5 = false;
-                    }
-                    else
-                    {
-                        invenSlot4.sprite = _PC.playerInventory[i].icon;
-                        _HUD.hasItem5 = true;
-                    }
-                    break;
-
-                case 5:
-                    if (!(i >= -1 && i < _PC.playerInventory.Count))
-                    {
-                        invenSlot5.sprite = emptySlotSprite;
-                        _HUD.hasItem6 = false;
-                    }
-                    else
-                    {
-                        invenSlot5.sprite = _PC.playerInventory[i].icon;
-                        _HUD.hasItem6 = true;
-                    }
-                    break;
-
-            }
-
-
+            invenSlot0.sprite = _PC.headItem.icon; //images for icon
+            _HUD.hasItem1 = true;
+        }
+        else
+        {
+            invenSlot0.sprite = emptySlotSprite;
+            _HUD.hasItem1 = false;
         }
 
+        //torso item
+        if (_PC.torsoItem != null)
+        {
+            invenSlot1.sprite = _PC.torsoItem.icon; //images for icon
+            _HUD.hasItem2 = true;
+        }
+        else
+        {
+            invenSlot1.sprite = emptySlotSprite;
+            _HUD.hasItem2 = false;
+        }
+        
+        //leg item
+        if (_PC.legItem != null)
+        {
+            invenSlot2.sprite = _PC.legItem.icon; //images for icon
+            _HUD.hasItem3 = true;
+        }
+        else
+        {
+            invenSlot2.sprite = emptySlotSprite;
+            _HUD.hasItem3 = false;
+        }
 
     }
 
     public void InventorySlotHover(int _whichSlot)
     {
-        popupName.text = _PC.playerInventory[_whichSlot].itemName;
-        popupDmg.text = "Dmg: " + _PC.playerInventory[_whichSlot].dmg.ToString();
-        popupCritX.text = "CritX: " + _PC.playerInventory[_whichSlot].critX.ToString();
-        popupCritChance.text = "Crit%: " + _PC.playerInventory[_whichSlot].critChance.ToString();
-        popupFirerate.text = "Firerate%: " + _PC.playerInventory[_whichSlot].firerate.ToString();
 
-        
+        switch(_whichSlot)
+        {
+            case 0:
+                popupName.text = _PC.headItem.itemName;
+                popupDmg.text = "Dmg: " + _PC.headItem.dmg.ToString();
+                popupCritX.text = "CritX: " + _PC.headItem.critX.ToString();
+                popupCritChance.text = "Crit%: " + _PC.headItem.critChance.ToString();
+                popupFirerate.text = "Firerate%: " + _PC.headItem.firerate.ToString();
+
+                break;
+            case 1:
+                popupName.text = _PC.torsoItem.itemName;
+                popupDmg.text = "Dmg: " + _PC.torsoItem.dmg.ToString();
+                popupCritX.text = "CritX: " + _PC.torsoItem.critX.ToString();
+                popupCritChance.text = "Crit%: " + _PC.torsoItem.critChance.ToString();
+                popupFirerate.text = "Firerate%: " + _PC.torsoItem.firerate.ToString();
+
+                break;
+            case 2:
+                popupName.text = _PC.legItem.itemName;
+                popupDmg.text = "Dmg: " + _PC.legItem.dmg.ToString();
+                popupCritX.text = "CritX: " + _PC.legItem.critX.ToString();
+                popupCritChance.text = "Crit%: " + _PC.legItem.critChance.ToString();
+                popupFirerate.text = "Firerate%: " + _PC.legItem.firerate.ToString();
+
+                break;
+        }
+
+  
     }
 
     #endregion
@@ -683,7 +638,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void CreateItemSelected(Item _itemInfo)
     {
-        //print("Create item " + _itemInfo.itemName + " " + _itemInfo.ID);
+        print("Create item " + _itemInfo.itemName + " " + _itemInfo.ID);
 
 
         heldItem = _itemInfo;
@@ -692,64 +647,23 @@ public class UIManager : Singleton<UIManager>
 
         int slot = -1;
 
-        switch(heldItem.segment)
+        switch (_itemInfo.segment)
         {
             case Item.Segment.Head:
-
-                switch(heldItem.category)
-                {
-                    case Item.Category.Horns:
-                        if (_AVTAR.slotsOnPlayerFront[0].transform.childCount == 0)
-                        {
-                            slot = 0;
-                            heldItem.inSlot = slot;
-                        }
-                        break;
-                    case Item.Category.Eyes:
-                        if (_AVTAR.slotsOnPlayerFront[1].transform.childCount == 0)
-                        {
-                            slot = 1;
-                            heldItem.inSlot = slot;
-                        }
-                        break;
-                    case Item.Category.Mouth:
-                        if (_AVTAR.slotsOnPlayerFront[2].transform.childCount == 0)
-                        {
-                            slot = 2;
-                            heldItem.inSlot = slot;
-                        }
-                        break;
-                    
-                }
-
+                slot = 0;
                 break;
             case Item.Segment.Torso:
-                if (_AVTAR.slotsOnPlayerFront[3].transform.childCount == 0)
-                {
-                    slot = 3;
-                }
-                else if (_AVTAR.slotsOnPlayerFront[4].transform.childCount == 0)
-                {
-                    slot = 4;
-                    heldItem.inSlot = slot;
-
-                }
+                slot = 1;
                 break;
             case Item.Segment.Legs:
-                if (_AVTAR.slotsOnPlayerFront[5].transform.childCount == 0)
-                {
-                    slot = 5;
-                    heldItem.inSlot = slot;
+                slot = 2;
+                break;
 
-                }
-                break;  
         }
 
-
-        if(slot != -1)
+        if (slot != -1)
         {
             print(heldItem.itemName + " is on slot " + slot);
-            heldItem.inSlot = slot;
             EquipImage(slot);
 
         }
@@ -768,50 +682,16 @@ public class UIManager : Singleton<UIManager>
         _PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());
         _PC.itemsAnimRightSide.Add(itemRightSide.GetComponentInChildren<Animator>());
 
-        //if torso piece make sure its correct
+        //default left
+        var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
+        _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
 
-        if (heldItem.segment == Item.Segment.Torso)
-        {
-            if (_slot == 4) //  RIGHT
-            {
-                //FRONT
-                var itemFront = Instantiate(heldItem.avatarPrefabFrontRight, _AVTAR.slotsOnPlayerFront[_slot].transform);
-                _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
-
-                //BACKL
-                var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
-                _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
-
-            }
-            if (_slot == 3) // LEFT
-            {
-                //FRONT
-                var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
-                _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
-
-
-                var itemBackSide = Instantiate(heldItem.avtarPrefabBackRight, _AVTAR.slotsOnPlayerBack[_slot].transform);
-                _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
-
-                //BACKK
-
-            }
-
-        }
-        else
-        {
-            //default left
-            var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
-            _PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
-
-            var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
-            _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
-        }
+        var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
+        _PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
 
         if (heldItem.segment == Item.Segment.Legs) _PC.UpdateLegAnimators();
 
 
-        CheckHeight();
         _PIA.PassiveAbilityItemCheck();
 
         // (flip) itemFront.transform.localScale = new Vector3(-itemFront.transform.rotation.x, itemFront.transform.rotation.y, itemFront.transform.rotation.z);
@@ -827,126 +707,10 @@ public class UIManager : Singleton<UIManager>
     }
 
 
-    public void CheckHeight()
-    {
-        //find leg item
-        for (int i = 0; i < _PC.playerInventory.Count; i++)
-        {
-            if (_PC.playerInventory[i].segment == Item.Segment.Legs)
-            {
-                //6 tripod legs, 10 hoover
-                if (_PC.playerInventory[i].ID == 10 || _PC.playerInventory[i].ID == 6)
-                {
-                    print("Go taller");
-                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, tall.y, playerAvatar.transform.position.z);
-                }
-                else
-                {
-                    playerAvatar.transform.position = new Vector3(playerAvatar.transform.position.x, standard.y, playerAvatar.transform.position.z);
-                }
-            }
-        } 
 
-    }
-
-    /// <summary>
-    /// Checks whether held item can be placed on slot that is hovered over
-    /// </summary>
-    /// <param name="_slot"></param>
-    //public void CheckSlotHover(int _slot)
-    //{
-
-    //    if (cursor.sprite != defaultCursor && cursor.sprite != cursorClick)
-    //    {
-    //        print(heldItem.itemName);
-
-    //        if (_AVTAR.slotsOnPlayer[_slot].transform.childCount == 0) //check if child object is there
-    //        {
-    //            //check right segment if slot from 1 to 2 the head etc. 
-
-    //            if (_AVTAR.slotsOnPlayer[_slot].name.Contains(heldItem.segment.ToString()))
-    //            {
-    //                canEquip = true;
-    //            }
-    //            else
-    //            {
-    //                canEquip = false;
-    //                //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
-    //            }
-    //        }
-    //        else
-    //        {
-    //            canEquip = false;
-    //            //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.red;
-    //        }
-    //    }
-    //}
-
-    //public void DropHeldItem()
-    //{
-
-    //    print("Drop held item");
-    //    //change cursor
-    //    cursor.sprite = defaultCursor;
-
-    //    //create item on player
-    //    var item = Instantiate(_IG.itemTemp, GameObject.Find("Player").transform.position, Quaternion.identity);
-    //    _ISitemD.inSceneItemDataBase.Add(heldItem);
-
-    //    item.GetComponent<ItemIdentifier>().id = heldItem.inSceneID;
-    //    var id = item.GetComponent<ItemIdentifier>().id;
-
-    //    print("item dropping id = " + id);
-    //    print(_ISitemD.inSceneItemDataBase[id].icon.name);
-    //    //ERROR
-    //    item.GetComponentInChildren<SpriteRenderer>().sprite = _ISitemD.inSceneItemDataBase[id].icon;
-
-    //    //add to scene array
-    //    int index = _ISitemD.inSceneItemDataBase.Count - 1;
-    //    _ISitemD.inSceneItemDataBase[index].inSceneID = index;
-
-    //    heldItem = null;
-    //    isHoldingItem = false;
-    //}
-
-    /// <summary>
-    /// Changes colour of slots when mouse exits hover
-    /// </summary>
-    /// <param name="_slot"></param>
-    //public void CheckSlotHoverExit(int _slot)
-    //{
-    //    //_AVTAR.slotsOnCanvas[_slot].GetComponent<Image>().color = Color.yellow;
-    //}
 
     #endregion
 
-
-    public List<Item> SearchForItemMatch(Item _hoverItem)
-    {
-        List<Item> itemMatchInPlayerInven = new();
-
-        //print("Hover item is " + _hoverItem.itemName);
-
-        foreach (var item in _PC.playerInventory)
-        {
-            if(item.segment == _hoverItem.segment)
-            {
-                itemMatchInPlayerInven.Add(item);
-            }
-
-            //var icon = item.icon;
-
-        }
-
-        foreach (var item in itemMatchInPlayerInven)
-        {
-
-        }
-        if (itemMatchInPlayerInven.Count == 0) print("No Matches found");
-
-
-        return itemMatchInPlayerInven;
-    }
 
     #region Popup animaions
 

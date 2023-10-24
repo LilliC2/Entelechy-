@@ -20,7 +20,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
 
     }
 
-    public GameObject GenerateItem(EnemyStats.Category[] _categories)
+    public GameObject GenerateItem(EnemyStats.Segment[] _segment)
     {
 
         //create list of all possible item drops
@@ -29,13 +29,13 @@ public class ItemGeneration : Singleton<ItemGeneration>
 
         for(int i = 0; i < _ItemD.itemDataBase.Length; i++)
         {
-            for (int y = 0; y < _categories.Length; y++)
+            for (int y = 0; y < _segment.Length; y++)
             {
-                if (_ItemD.itemDataBase[i].category.ToString() == _categories[y].ToString())
+                if (_ItemD.itemDataBase[i].segment.ToString() == _segment[y].ToString())
                 {
                     //possibleDrops.Add(_ItemD.itemDataBase[i]);
                     possibleDropsIndex.Add(i);
-                    print("Item added to possible drops CATEGORY: " + _categories[y] + i);
+                    print("Item added to possible drops CATEGORY: " + _segment[y] + i);
                 }
             }
 

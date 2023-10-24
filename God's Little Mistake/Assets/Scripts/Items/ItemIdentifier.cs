@@ -69,62 +69,56 @@ public class ItemIdentifier : GameBehaviour
             {
                 //check which segment it is
 
-                //check if item is already there
-                bool itemInSlot = selecting.CheckIfItemIsInSlot();
 
-                if (itemInSlot)
+                bool itemOnPlayer = false;
+                //determine if there is already an item of that segment equipped
+
+                switch (itemInfo.segment)
                 {
-                    print("thers an item in this slot");
+                    case Item.Segment.Head:
+                        if (_PC.headItem != null) itemOnPlayer = true;
 
-                    if (!itemRemoved)
+                        break;
+                    case Item.Segment.Torso:
+                        if (_PC.torsoItem != null) itemOnPlayer = true;
+
+                        break;
+                    case Item.Segment.Legs:
+                        if (_PC.legItem != null) itemOnPlayer = true;
+
+                        break;
+
+                }
+
+                if (itemOnPlayer)
+                {
+                    //remove item
+                    selecting.RemovePreviousItem();
+
+                    //spawn old item on ground
+                    if (!itemSpawned)
                     {
-                        itemRemoved = true;
+                        itemSpawned = true;
 
-                        bool itemOnPlayer = false;
-                        int index = -1;
-
-                        for (int i = 0; i < _PC.playerInventory.Count; i++)
+                        var newSpawnPoint = new Vector3();
+                        UnityEngine.AI.NavMeshHit hit;
+                        if (UnityEngine.AI.NavMesh.SamplePosition(_PC.transform.position, out hit, 1f, UnityEngine.AI.NavMesh.AllAreas))
                         {
-                            if (itemInfo.segment == _PC.playerInventory[i].segment)
-                            {
-                                itemOnPlayer = true;
-                                index = i;
-                            }
+                            newSpawnPoint = hit.position;
                         }
-                        if (itemOnPlayer && index != -1)
-                        {
+                        //place old item on ground
 
-                            //remove item
-                            selecting.RemovePreviousItem();
+                        GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
+                        item.GetComponent<ItemIdentifier>().enabled = false;
 
+                        _UI.statComp1.SetActive(false);
+                        _UI.statComp2.SetActive(false);
 
-                            if (!itemSpawned)
-                            {
-                                itemSpawned = true;
+                        ExecuteAfterFrames(5, () => item.GetComponent<ItemIdentifier>().enabled = true);
 
-                                var newSpawnPoint = new Vector3();
-                                UnityEngine.AI.NavMeshHit hit;
-                                if (UnityEngine.AI.NavMesh.SamplePosition(_PC.transform.position, out hit, 1f, UnityEngine.AI.NavMesh.AllAreas))
-                                {
-                                    newSpawnPoint = hit.position;
-                                }
-                                //place old item on ground
-
-                                GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
-                                item.GetComponent<ItemIdentifier>().enabled = false;
-                                
-                                _UI.statComp1.SetActive(false);
-                                _UI.statComp2.SetActive(false);
-
-                                ExecuteAfterFrames(5, () => item.GetComponent<ItemIdentifier>().enabled = true);
-
-                                item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
-                                item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
-                            }
-                        }
+                        item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
+                        item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
                     }
-
-
                 }
 
 
@@ -140,11 +134,23 @@ public class ItemIdentifier : GameBehaviour
                     //do check to see if another item of the same is equipped
                     bool alreadyEquipped = false    ;
 
-                    for (int i = 0; i < _PC.playerInventory.Count; i++)
+                    switch (itemInfo.segment)
                     {
-                        if (itemInfo == _PC.playerInventory[i]) alreadyEquipped = true;
+                        case Item.Segment.Head:
+                            if (_PC.headItem != null) alreadyEquipped = true;
+
+                            break;
+                        case Item.Segment.Torso:
+                            if (_PC.torsoItem != null) alreadyEquipped = true;
+
+                            break;
+                        case Item.Segment.Legs:
+                            if (_PC.legItem != null) alreadyEquipped = true;
+
+                            break;
+
                     }
-                    if(!alreadyEquipped) ExecuteAfterFrames(15, () => _ISitemD.AddItemToInventory(itemInfo));
+                    if (!alreadyEquipped) ExecuteAfterFrames(15, () => _ISitemD.AddItemToInventory(itemInfo));
 
 
 
@@ -189,46 +195,32 @@ public class ItemIdentifier : GameBehaviour
         //anim.SetTrigger("Open");
         _UI.arrowComp.SetActive(true);
 
-        Item itemSlot3 = new();
-        Item itemSlot4 = new();
+        print("its Not an arm");
+        _UI.statComp1.SetActive(true);
+        _UI.statComp2.SetActive(false);
 
-        foreach (var item in _PC.playerInventory)
+        Item itemMatch = new();
+
+        switch (itemInfo.segment)
         {
-            if (item.inSlot == 3) itemSlot3 = item;
-            if (item.inSlot == 4) itemSlot4 = item;
+            case Item.Segment.Head:
+                if (_PC.headItem != null) itemMatch = _PC.headItem;
+
+                break;
+            case Item.Segment.Torso:
+                if (_PC.torsoItem != null) itemMatch = _PC.torsoItem;
+
+                break;
+            case Item.Segment.Legs:
+                if (_PC.legItem != null) itemMatch = _PC.legItem;
+
+                break;
+
         }
+        _UI.PlayPopup1Open();
+        //anim1.SetTrigger("Open");
 
-        if (itemInfo.segment == Item.Segment.Torso)
-        {
-            print("Its an arm");
-            _UI.statComp1.SetActive(true);
-            _UI.statComp2.SetActive(true);
-
-            _UI.PlayPopup1Open();
-            _UI.PlayPopup2Open();
-            //anim1.SetTrigger("Open");
-            //anim2.SetTrigger("Open");
-
-            _UI.UpdateItemPopUpComp1(itemSlot3);
-            _UI.UpdateItemPopUpComp2(itemSlot4);
-        }
-        else
-        {
-            print("its Not an arm");
-            _UI.statComp1.SetActive(true);
-            _UI.statComp2.SetActive(false);
-
-            Item itemMatch = new();
-
-            foreach (var item in _PC.playerInventory)
-            {
-                if (item.category == itemInfo.category) itemMatch = item;
-            }
-            _UI.PlayPopup1Open();
-            //anim1.SetTrigger("Open");
-
-            _UI.UpdateItemPopUpComp1(itemMatch);
-        }
+        _UI.UpdateItemPopUpComp1(itemMatch);
 
 
         //var match = _UI.SearchForItemMatch(itemInfo);

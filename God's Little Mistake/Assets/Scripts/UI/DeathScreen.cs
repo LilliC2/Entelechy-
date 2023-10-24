@@ -21,7 +21,7 @@ public class DeathScreen : GameBehaviour<DeathScreen>
 
     public void Respawn()
     {
-        _GM.Restart();
+        
     }
     public void Menu()
     {

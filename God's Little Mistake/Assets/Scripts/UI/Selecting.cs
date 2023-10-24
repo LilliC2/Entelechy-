@@ -27,65 +27,36 @@ public class Selecting : GameBehaviour
 
     }
 
-    public bool CheckIfItemIsInSlot()
-    {
-        var category = itemIdentifier.itemInfo.category;
-
-        print("hover item cat is " + category);
-
-        bool isItemInSlot = false;
-
-        if (itemIdentifier.itemInfo.segment != Item.Segment.Torso)
-        {
-            foreach (var item in _PC.playerInventory)
-            {
-                if (item.category == category)
-                {
-                    previousItem = item;
-                    isItemInSlot = true;
-                }
-            }
-
-        }
-        else
-        {
-            bool slot3 = false;
-            bool slot4 = false;
-
-            foreach (var item in _PC.playerInventory)
-            {
-                if (item.inSlot == 3)
-                {
-                    slot3 = true;
-                }
-                if (item.inSlot == 4)
-                {
-                    slot4 = true;
-                }
-
-                if (slot3 && slot4)
-                {
-                    previousItem = item;
-                    isItemInSlot = true;
-                }
-            }
-
-
-        }
-
-
-        return isItemInSlot;
-    }
+    
 
     public void RemovePreviousItem()
     {
         //remove from player avatar
+        int inSlot = -1;
+
+        switch (previousItem.segment)
+        {
+            case Item.Segment.Head:
+                inSlot = 0;
+
+                break;
+            case Item.Segment.Torso:
+                inSlot = 1;
 
 
-        var toDestroyLeft = _AVTAR.slotsOnPlayerLeft[previousItem.inSlot].transform.GetChild(0);
-        var toDestroyBack = _AVTAR.slotsOnPlayerBack[previousItem.inSlot].transform.GetChild(0);
-        var toDestroyFront = _AVTAR.slotsOnPlayerRight[previousItem.inSlot].transform.GetChild(0);
-        var toDestroyRight = _AVTAR.slotsOnPlayerFront[previousItem.inSlot].transform.GetChild(0);
+                break;
+            case Item.Segment.Legs:
+                inSlot = 2;
+
+
+                break;
+
+        }
+
+        var toDestroyLeft = _AVTAR.slotsOnPlayerLeft[inSlot].transform.GetChild(0);
+        var toDestroyBack = _AVTAR.slotsOnPlayerBack[inSlot].transform.GetChild(0);
+        var toDestroyFront = _AVTAR.slotsOnPlayerRight[inSlot].transform.GetChild(0);
+        var toDestroyRight = _AVTAR.slotsOnPlayerFront[inSlot].transform.GetChild(0);
 
         //print("Destroying: " + toDestroyLeft + ", " + toDestroyBack + ", " + toDestroyFront + ", " + toDestroyRight);
 
@@ -95,10 +66,6 @@ public class Selecting : GameBehaviour
         Destroy(toDestroyRight.gameObject);
         Destroy(toDestroyFront.gameObject);
 
-        //remove from player inventory
-        var index = _PC.playerInventory.IndexOf(previousItem);
-        _ISitemD.RemoveItemStats(index);
-        _PC.playerInventory.Remove(previousItem);
-        _UI.UpdateInventorySlotImages();
+        _ISitemD.RemoveItemFromInventory(previousItem);
     }
 }

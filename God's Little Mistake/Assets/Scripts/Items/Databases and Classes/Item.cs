@@ -8,15 +8,12 @@ public class Item
     public string itemName;
     public int ID;
     public int lvl;
-    public int inSlot = -1;
-    public enum Category { Eyes, Mouth, Horns, Slappies, Punchies, Launchers, Legs, Crawlies, None }
-    public Category category;
+
     public enum Segment {Head, Torso, Legs }
     public Segment segment;
     public enum AttackType {Cone, Line, None, Circle, Rapid, Lob, Laser, Cannon }
     public AttackType attackType;
-    public enum ItemType {Primary, Secondary, Passive, Symbiote }
-    public ItemType itemType;
+
 
     public bool hasActiveAbility;
     public float currencyValue;

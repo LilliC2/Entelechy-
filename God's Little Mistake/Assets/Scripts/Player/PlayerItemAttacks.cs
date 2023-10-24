@@ -138,72 +138,72 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
 
         #region Button Activated Abilities
 
-        if (Input.GetKeyDown(KeyCode.Space))
-        {
-            if (!isOnCoolDown)
-            {
-                for (int i = 0; i < _PC.playerInventory.Count; i++)
-                {
-                    //check if primary active and has ability
-                    if (_PC.playerInventory[i].active && _PC.playerInventory[i].hasActiveAbility)
-                    {
-                        abilitySlot = i;
+        //if (Input.GetKeyDown(KeyCode.Space))
+        //{
+        //    if (!isOnCoolDown)
+        //    {
+        //        for (int i = 0; i < _PC.playerInventory.Count; i++)
+        //        {
+        //            //check if primary active and has ability
+        //            if (_PC.playerInventory[i].active && _PC.playerInventory[i].hasActiveAbility)
+        //            {
+        //                abilitySlot = i;
 
-                        //tripod dash
-                        if (_PC.playerInventory[i].ID == 6)
-                        {
+        //                //tripod dash
+        //                if (_PC.playerInventory[i].ID == 6)
+        //                {
 
-                            TripodLegs();
+        //                    TripodLegs();
 
-                        }
+        //                }
 
-                        if (_PC.playerInventory[i].ID == 3)
-                        {
-                            RamHorns();
-                        }
+        //                if (_PC.playerInventory[i].ID == 3)
+        //                {
+        //                    RamHorns();
+        //                }
                         
-                        if (_PC.playerInventory[i].ID == 11)
-                        {
-                            BigEyes();
-                        }
+        //                if (_PC.playerInventory[i].ID == 11)
+        //                {
+        //                    BigEyes();
+        //                }
                         
-                        if (_PC.playerInventory[i].ID == 10)
-                        {
-                            HoverLegs();
-                        }
+        //                if (_PC.playerInventory[i].ID == 10)
+        //                {
+        //                    HoverLegs();
+        //                }
                         
-                        if (_PC.playerInventory[i].ID == 8)
-                        {
-                            _PC.enableMovement = false;
-                            ExecuteAfterSeconds(humanFistChargeUpTime, () => HumanFist());
-                        }
+        //                if (_PC.playerInventory[i].ID == 8)
+        //                {
+        //                    _PC.enableMovement = false;
+        //                    ExecuteAfterSeconds(humanFistChargeUpTime, () => HumanFist());
+        //                }
                         
-                        if (_PC.playerInventory[i].ID == 9)
-                        {
-                            //start charge up animation
-                            if (!chargeUpAnimationStart)
-                            {
-                                chargeUpAnimationStart = true;
-                                _PC.itemsAnimForward[abilitySlot].SetBool("Charging", true);
+        //                if (_PC.playerInventory[i].ID == 9)
+        //                {
+        //                    //start charge up animation
+        //                    if (!chargeUpAnimationStart)
+        //                    {
+        //                        chargeUpAnimationStart = true;
+        //                        _PC.itemsAnimForward[abilitySlot].SetBool("Charging", true);
 
-                                //if (_PC.itemsAnimBack[abilitySlot] != null) _PC.itemsAnimBack[abilitySlot].SetBool("Charging", true);
+        //                        //if (_PC.itemsAnimBack[abilitySlot] != null) _PC.itemsAnimBack[abilitySlot].SetBool("Charging", true);
 
-                                //_PC.itemsAnimLeftSide[abilitySlot].SetBool("Charging", true);
-                                //_PC.itemsAnimRightSide[abilitySlot].SetBool("Charging", true);
-                            }
+        //                        //_PC.itemsAnimLeftSide[abilitySlot].SetBool("Charging", true);
+        //                        //_PC.itemsAnimRightSide[abilitySlot].SetBool("Charging", true);
+        //                    }
 
-                            _PC.enableMovement = false;
-                            ExecuteAfterSeconds(peaShooerChargeUpTime, () => PeaShooter());
-                        }
-
-
-                    }
-                }
+        //                    _PC.enableMovement = false;
+        //                    ExecuteAfterSeconds(peaShooerChargeUpTime, () => PeaShooter());
+        //                }
 
 
-            }
+        //            }
+        //        }
 
-        }
+
+        //    }
+
+        //}
 
 
         #endregion
@@ -412,13 +412,13 @@ public class PlayerItemAttacks : Singleton<PlayerItemAttacks>
         slugEyesEquipped = false;
         tripodLegsEquipped = false;
         wolfClawsEquipped = false;
-        //check if slug legs are on player
-        foreach (var item in _PC.playerInventory)
-        {
-            if (item.ID == 15) slugLegsEquipped = true;
-            if (item.ID == 5) slugEyesEquipped = true;
-            if (item.ID == 7) wolfClawsEquipped = true;
-        }
+        ////check if slug legs are on player
+        //foreach (var item in _PC.playerInventory)
+        //{
+        //    if (item.ID == 15) slugLegsEquipped = true;
+        //    if (item.ID == 5) slugEyesEquipped = true;
+        //    if (item.ID == 7) wolfClawsEquipped = true;
+        //}
 
     }
 
