@@ -381,189 +381,189 @@ public class PlayerController : Singleton<PlayerController>
 
                     #region Swapping Missy Sprites
 
-                    //change for cardinal direction
-                if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
-                {
+                //    //change for cardinal direction
+                //if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
+                //{
 
-                    currentHead = backHead;
+                //    currentHead = backHead;
 
 
-                    StopAllAnimations();
+                //    StopAllAnimations();
 
-                    if (lastDir == missyLeftSide)
-                    {
-                        leftPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
+                //    if (lastDir == missyLeftSide)
+                //    {
+                //        leftPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
 
-                    }
-                    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
+                //    }
+                //    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
 
-                    if(lastDir == missyForward)
-                    {
+                //    if(lastDir == missyForward)
+                //    {
                         
-                        missyBack.SetActive(true);
-                        missyForward.SetActive(false);
-                        missyLeftSide.SetActive(false);
-                        missyRightSide.SetActive(false);
-                        //change firing point
+                //        missyBack.SetActive(true);
+                //        missyForward.SetActive(false);
+                //        missyLeftSide.SetActive(false);
+                //        missyRightSide.SetActive(false);
+                //        //change firing point
 
 
-                    }
+                //    }
 
 
-                    if (lastDir != missyBack && lastDir != missyForward)
-                    {
+                //    if (lastDir != missyBack && lastDir != missyForward)
+                //    {
 
                        
 
-                        missyForward.SetActive(false);
+                //        missyForward.SetActive(false);
 
-                        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
-                        ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
-                        ExecuteAfterFrames(4, () => missyBack.SetActive(true));
-                        ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                    }
-
-
-
-
-                    lastDir = missyBack;
-
-                }
-                if (Input.GetKeyDown(KeyCode.A)) //FACE LEFT
-                {
-                    currentHead = sideLHead;
-
-
-                    StopAllAnimations();
-
-                    _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
-
-                    if(lastDir == missyForward)
-                    {
-                        frontPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
-
-                    }
-                    if( lastDir == missyBack) backPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
-
-                    if(lastDir == missyRightSide)
-                    {
-                        missyLeftSide.SetActive(true);
-                        missyRightSide.SetActive(false);
-                        missyForward.SetActive(false);
-                        missyBack.SetActive(false);
-
-
-                    }
-                    else
-                    {
-                        missyRightSide.SetActive(false);
-
-                        //WAIT UNTIL TWEEN ANIMATION IS DONE BEFORE CHANGING
-                        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
-                        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(true));
-                        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
-
-                        //RESET PIVOTS
-                        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-
-                    }
-
-
-                    lastDir = missyLeftSide;
-
-
-                }
-                if (Input.GetKeyDown(KeyCode.S)) //FACE FORWARD
-                {
-                    currentHead = frontHead;
-
-
-                    StopAllAnimations();
-                    //print("Just pressed S. lastDir was " + lastDir.name);
-                    if (lastDir == missyLeftSide)
-                    {
-                        leftPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
-
-                    }
-                    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
-
-                    if(lastDir == missyBack)
-                    {
-                        missyForward.SetActive(true);
-                        missyLeftSide.SetActive(false);
-                        missyRightSide.SetActive(false);
-                        missyBack.SetActive(false);
+                //        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
+                //        ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
+                //        ExecuteAfterFrames(4, () => missyBack.SetActive(true));
+                //        ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //    }
 
 
 
 
-                    }
-                    else if (lastDir != missyForward)
-                    {
-                        //print("delay");
+                //    lastDir = missyBack;
 
-                        ExecuteAfterFrames(4, () => missyForward.SetActive(true));  
-                        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
-                        ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
-                        ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        missyBack.SetActive(false);
-
-                    }
+                //}
+                //if (Input.GetKeyDown(KeyCode.A)) //FACE LEFT
+                //{
+                //    currentHead = sideLHead;
 
 
+                //    StopAllAnimations();
 
-                    lastDir = missyForward;
-                }
-                if (Input.GetKeyDown(KeyCode.D)) //FACE RIGHT
-                {
-                    currentHead = sideRHead;
+                //    _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
+
+                //    if(lastDir == missyForward)
+                //    {
+                //        frontPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
+
+                //    }
+                //    if( lastDir == missyBack) backPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
+
+                //    if(lastDir == missyRightSide)
+                //    {
+                //        missyLeftSide.SetActive(true);
+                //        missyRightSide.SetActive(false);
+                //        missyForward.SetActive(false);
+                //        missyBack.SetActive(false);
 
 
-                    StopAllAnimations();
-                    _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
+                //    }
+                //    else
+                //    {
+                //        missyRightSide.SetActive(false);
+
+                //        //WAIT UNTIL TWEEN ANIMATION IS DONE BEFORE CHANGING
+                //        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
+                //        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(true));
+                //        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
+
+                //        //RESET PIVOTS
+                //        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+
+                //    }
 
 
-                    if (lastDir == missyForward)
-                    {
-                        frontPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
+                //    lastDir = missyLeftSide;
 
-                    }
-                    if (lastDir == missyBack)
-                    {
-                        backPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
-                    }
+
+                //}
+                //if (Input.GetKeyDown(KeyCode.S)) //FACE FORWARD
+                //{
+                //    currentHead = frontHead;
+
+
+                //    StopAllAnimations();
+                //    //print("Just pressed S. lastDir was " + lastDir.name);
+                //    if (lastDir == missyLeftSide)
+                //    {
+                //        leftPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
+
+                //    }
+                //    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
+
+                //    if(lastDir == missyBack)
+                //    {
+                //        missyForward.SetActive(true);
+                //        missyLeftSide.SetActive(false);
+                //        missyRightSide.SetActive(false);
+                //        missyBack.SetActive(false);
+
+
+
+
+                //    }
+                //    else if (lastDir != missyForward)
+                //    {
+                //        //print("delay");
+
+                //        ExecuteAfterFrames(4, () => missyForward.SetActive(true));  
+                //        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
+                //        ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
+                //        ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        missyBack.SetActive(false);
+
+                //    }
+
+
+
+                //    lastDir = missyForward;
+                //}
+                //if (Input.GetKeyDown(KeyCode.D)) //FACE RIGHT
+                //{
+                //    currentHead = sideRHead;
+
+
+                //    StopAllAnimations();
+                //    _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
+
+
+                //    if (lastDir == missyForward)
+                //    {
+                //        frontPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
+
+                //    }
+                //    if (lastDir == missyBack)
+                //    {
+                //        backPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
+                //    }
                     
 
-                    if(lastDir == missyLeftSide)
-                    {
-                        missyForward.SetActive(false);
-                        missyRightSide.SetActive(true);
-                        missyBack.SetActive(false);
-                        missyLeftSide.SetActive(false);
+                //    if(lastDir == missyLeftSide)
+                //    {
+                //        missyForward.SetActive(false);
+                //        missyRightSide.SetActive(true);
+                //        missyBack.SetActive(false);
+                //        missyLeftSide.SetActive(false);
 
 
-                    }
-                    else
-                    {
-                        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
+                //    }
+                //    else
+                //    {
+                //        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
 
-                        ExecuteAfterFrames(4, () => missyRightSide.SetActive(true));
-                        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
+                //        ExecuteAfterFrames(4, () => missyRightSide.SetActive(true));
+                //        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
 
-                        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        missyLeftSide.SetActive(false);
+                //        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        missyLeftSide.SetActive(false);
 
-                    }
-
-
-                    lastDir = missyRightSide;
+                //    }
 
 
-                }
+                //    lastDir = missyRightSide;
+
+
+                //}
 
                 #endregion
                 #endregion
