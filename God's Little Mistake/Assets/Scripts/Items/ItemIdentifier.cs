@@ -108,8 +108,13 @@ public class ItemIdentifier : GameBehaviour
                         }
                         //place old item on ground
 
+<<<<<<< HEAD
                         GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
                         item.GetComponent<ItemIdentifier>().enabled = false;
+=======
+                            //remove item
+                            //selecting.RemovePreviousItem();
+>>>>>>> NLM-372-Sprite-Flip-Prototype-Implementation
 
                         _UI.statComp1.SetActive(false);
                         _UI.statComp2.SetActive(false);

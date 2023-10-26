@@ -23,6 +23,7 @@ public class PlayerController : Singleton<PlayerController>
 
     [Header("Temporary")]
     public SpriteRenderer UIrangeIndicator;
+    public RectTransform screenCenter;
 
     #region Animation Variables
     [Header("Animation")]
@@ -194,7 +195,7 @@ public class PlayerController : Singleton<PlayerController>
 
     void Update()
     {
-
+        //RotateHead();
         if (health <= 0)
         {
             Die();
@@ -383,187 +384,196 @@ public class PlayerController : Singleton<PlayerController>
 
                     #region Swapping Missy Sprites
 
-                    //change for cardinal direction
-                if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
-                {
+                //    //change for cardinal direction
+                //if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
+                //{
 
-                    currentHead = backHead;
+                //    currentHead = backHead;
 
 
-                    StopAllAnimations();
+                //    StopAllAnimations();
 
-                    if (lastDir == missyLeftSide)
-                    {
-                        leftPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
+                //    if (lastDir == missyLeftSide)
+                //    {
+                //        leftPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
 
-                    }
-                    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
+                //    }
+                //    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
 
-                    if(lastDir == missyForward)
-                    {
+                //    if(lastDir == missyForward)
+                //    {
                         
-                        missyBack.SetActive(true);
-                        missyForward.SetActive(false);
-                        missyLeftSide.SetActive(false);
-                        missyRightSide.SetActive(false);
-                        //change firing point
+                //        missyBack.SetActive(true);
+                //        missyForward.SetActive(false);
+                //        missyLeftSide.SetActive(false);
+                //        missyRightSide.SetActive(false);
+                //        //change firing point
 
 
-                    }
+                //    }
 
 
-                    if (lastDir != missyBack && lastDir != missyForward)
-                    {
+                //    if (lastDir != missyBack && lastDir != missyForward)
+                //    {
 
                        
 
-                        missyForward.SetActive(false);
+                //        missyForward.SetActive(false);
 
-                        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
-                        ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
-                        ExecuteAfterFrames(4, () => missyBack.SetActive(true));
-                        ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                    }
-
-
+                //        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
+                //        ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
+                //        ExecuteAfterFrames(4, () => missyBack.SetActive(true));
+                //        ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //    }
 
 
-                    lastDir = missyBack;
-
-                }
-                if (Input.GetKeyDown(KeyCode.A)) //FACE LEFT
-                {
-                    currentHead = sideLHead;
 
 
+                //    lastDir = missyBack;
+
+                //}
+                //if (Input.GetKeyDown(KeyCode.A)) //FACE LEFT
+                //{
+                //    currentHead = sideLHead;
+
+
+                //    StopAllAnimations();
+
+<<<<<<< HEAD
+=======
+                //    _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
+>>>>>>> NLM-372-Sprite-Flip-Prototype-Implementation
+
+                //    if(lastDir == missyForward)
+                //    {
+                //        frontPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
+
+                //    }
+                //    if( lastDir == missyBack) backPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
+
+                //    if(lastDir == missyRightSide)
+                //    {
+                //        missyLeftSide.SetActive(true);
+                //        missyRightSide.SetActive(false);
+                //        missyForward.SetActive(false);
+                //        missyBack.SetActive(false);
+
+
+                //    }
+                //    else
+                //    {
+                //        missyRightSide.SetActive(false);
+
+                //        //WAIT UNTIL TWEEN ANIMATION IS DONE BEFORE CHANGING
+                //        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
+                //        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(true));
+                //        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
+
+                //        //RESET PIVOTS
+                //        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+
+                //    }
+
+
+                //    lastDir = missyLeftSide;
+
+
+                //}
+                //if (Input.GetKeyDown(KeyCode.S)) //FACE FORWARD
+                //{
+                //    currentHead = frontHead;
+
+
+                //    StopAllAnimations();
+                //    //print("Just pressed S. lastDir was " + lastDir.name);
+                //    if (lastDir == missyLeftSide)
+                //    {
+                //        leftPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
+
+                //    }
+                //    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
+
+                //    if(lastDir == missyBack)
+                //    {
+                //        missyForward.SetActive(true);
+                //        missyLeftSide.SetActive(false);
+                //        missyRightSide.SetActive(false);
+                //        missyBack.SetActive(false);
+
+
+
+
+                //    }
+                //    else if (lastDir != missyForward)
+                //    {
+                //        //print("delay");
+
+                //        ExecuteAfterFrames(4, () => missyForward.SetActive(true));  
+                //        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
+                //        ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
+                //        ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        missyBack.SetActive(false);
+
+                //    }
+
+
+
+                //    lastDir = missyForward;
+                //}
+                //if (Input.GetKeyDown(KeyCode.D)) //FACE RIGHT
+                //{
+                //    currentHead = sideRHead;
+
+
+<<<<<<< HEAD
                     StopAllAnimations();
+=======
+                //    StopAllAnimations();
+                //    _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
+>>>>>>> NLM-372-Sprite-Flip-Prototype-Implementation
 
 
-                    if(lastDir == missyForward)
-                    {
-                        frontPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
+                //    if (lastDir == missyForward)
+                //    {
+                //        frontPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
 
-                    }
-                    if( lastDir == missyBack) backPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
-
-                    if(lastDir == missyRightSide)
-                    {
-                        missyLeftSide.SetActive(true);
-                        missyRightSide.SetActive(false);
-                        missyForward.SetActive(false);
-                        missyBack.SetActive(false);
-
-
-                    }
-                    else
-                    {
-                        missyRightSide.SetActive(false);
-
-                        //WAIT UNTIL TWEEN ANIMATION IS DONE BEFORE CHANGING
-                        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
-                        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(true));
-                        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
-
-                        //RESET PIVOTS
-                        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-
-                    }
-
-
-                    lastDir = missyLeftSide;
-
-
-                }
-                if (Input.GetKeyDown(KeyCode.S)) //FACE FORWARD
-                {
-                    currentHead = frontHead;
-
-
-                    StopAllAnimations();
-                    //print("Just pressed S. lastDir was " + lastDir.name);
-                    if (lastDir == missyLeftSide)
-                    {
-                        leftPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
-
-                    }
-                    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
-
-                    if(lastDir == missyBack)
-                    {
-                        missyForward.SetActive(true);
-                        missyLeftSide.SetActive(false);
-                        missyRightSide.SetActive(false);
-                        missyBack.SetActive(false);
-
-
-
-
-                    }
-                    else if (lastDir != missyForward)
-                    {
-                        //print("delay");
-
-                        ExecuteAfterFrames(4, () => missyForward.SetActive(true));  
-                        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
-                        ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
-                        ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        missyBack.SetActive(false);
-
-                    }
-
-
-
-                    lastDir = missyForward;
-                }
-                if (Input.GetKeyDown(KeyCode.D)) //FACE RIGHT
-                {
-                    currentHead = sideRHead;
-
-
-                    StopAllAnimations();
-
-
-                    if (lastDir == missyForward)
-                    {
-                        frontPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
-
-                    }
-                    if (lastDir == missyBack)
-                    {
-                        backPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
-                    }
+                //    }
+                //    if (lastDir == missyBack)
+                //    {
+                //        backPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
+                //    }
                     
 
-                    if(lastDir == missyLeftSide)
-                    {
-                        missyForward.SetActive(false);
-                        missyRightSide.SetActive(true);
-                        missyBack.SetActive(false);
-                        missyLeftSide.SetActive(false);
+                //    if(lastDir == missyLeftSide)
+                //    {
+                //        missyForward.SetActive(false);
+                //        missyRightSide.SetActive(true);
+                //        missyBack.SetActive(false);
+                //        missyLeftSide.SetActive(false);
 
 
-                    }
-                    else
-                    {
-                        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
+                //    }
+                //    else
+                //    {
+                //        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
 
-                        ExecuteAfterFrames(4, () => missyRightSide.SetActive(true));
-                        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
+                //        ExecuteAfterFrames(4, () => missyRightSide.SetActive(true));
+                //        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
 
-                        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                        missyLeftSide.SetActive(false);
+                //        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
+                //        missyLeftSide.SetActive(false);
 
-                    }
-
-
-                    lastDir = missyRightSide;
+                //    }
 
 
-                }
+                //    lastDir = missyRightSide;
+
+
+                //}
 
                 #endregion
                 #endregion
@@ -793,6 +803,23 @@ public class PlayerController : Singleton<PlayerController>
         //#endregion
     }
 
+    //void RotateHead()
+    //{
+    //    //get angle of mouse from player position aka center of screen
+
+    //    var mousePosOnScreen = Input.mousePosition;
+        
+
+    //    print("Mouse pos on screen is " + mousePosOnScreen);
+    //    var angle = Vector2.Angle(new Vector2(transform.position.x, transform.position.y), mousePosOnScreen);
+
+    //    print("Angle is " + angle);
+        
+
+
+    //    //rotate head rotate local z
+    //}
+
     void RespawnAfterFallingCheck(Vector3 _targetPos)
     {
         if (!fallDamage && !isGrounded)
@@ -904,6 +931,60 @@ public class PlayerController : Singleton<PlayerController>
     }
 
 
+<<<<<<< HEAD
+=======
+        //turn off any others
+        foreach (var item in playerInventory)
+        {
+            item.active = false;
+        }
+
+
+        //check if item is primary
+        if (playerInventory[_inventorySlot].itemType == Item.ItemType.Primary)
+        {
+            //if yes activate
+            playerInventory[_inventorySlot].active = true;
+
+
+            //check if melee attack
+            if(!playerInventory[_inventorySlot].projectile)
+            {
+                //change hit box
+                UpdateMelee(playerInventory[_inventorySlot]);
+
+
+                ////change melee UI
+                //meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
+                //meleeUI.gameObject.SetActive(false);
+                ////change ui scale
+                //meleeUI.GetComponentInParent<Transform>().localScale = new Vector3(meleeRange, meleeRange, meleeRange);
+
+                UIrangeIndicator.size = new Vector2(UIrangeIndicator.size.x, meleeRange);
+            }
+            else
+            {
+                print(playerInventory[_inventorySlot].itemName + " slot is " + playerInventory[_inventorySlot].inSlot);
+                FindCurrentFiringPoint(playerInventory[_inventorySlot]);
+            }
+
+            
+        }
+    }
+
+
+    public Item FindCurrentActive()
+    {
+        Item currentActiveItem = new();
+
+        foreach (var item in playerInventory)
+        {
+            if (item.active) currentActiveItem = item;
+        }
+
+        return currentActiveItem;
+    }
+>>>>>>> NLM-372-Sprite-Flip-Prototype-Implementation
 
     void MeleeAttack(float _firerate, int _index)
     {
@@ -1077,7 +1158,7 @@ public class PlayerController : Singleton<PlayerController>
             {
                 missyHitParticle.Play();
                 _PE.VignetteFade();
-                HeadBobble();
+                //HeadBobble();
                 _UI.UpdateHealthText(health);
                 _UI.UpdateHealthBar(health, maxHP);
             }
