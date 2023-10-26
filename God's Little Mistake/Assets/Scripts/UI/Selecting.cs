@@ -53,18 +53,18 @@ public class Selecting : GameBehaviour
 
         }
 
-        var toDestroyLeft = _AVTAR.slotsOnPlayerLeft[inSlot].transform.GetChild(0);
-        var toDestroyBack = _AVTAR.slotsOnPlayerBack[inSlot].transform.GetChild(0);
-        var toDestroyFront = _AVTAR.slotsOnPlayerRight[inSlot].transform.GetChild(0);
-        var toDestroyRight = _AVTAR.slotsOnPlayerFront[inSlot].transform.GetChild(0);
+        //var toDestroyLeft = _AVTAR.slotsOnPlayerLeft[inSlot].transform.GetChild(0);
+        //var toDestroyBack = _AVTAR.slotsOnPlayerBack[inSlot].transform.GetChild(0);
+        //var toDestroyFront = _AVTAR.slotsOnPlayerRight[inSlot].transform.GetChild(0);
+        //var toDestroyRight = _AVTAR.slotsOnPlayerFront[inSlot].transform.GetChild(0);
 
-        //print("Destroying: " + toDestroyLeft + ", " + toDestroyBack + ", " + toDestroyFront + ", " + toDestroyRight);
+        ////print("Destroying: " + toDestroyLeft + ", " + toDestroyBack + ", " + toDestroyFront + ", " + toDestroyRight);
 
 
-        Destroy(toDestroyBack.gameObject);
-        Destroy(toDestroyLeft.gameObject);
-        Destroy(toDestroyRight.gameObject);
-        Destroy(toDestroyFront.gameObject);
+        //Destroy(toDestroyBack.gameObject);
+        //Destroy(toDestroyLeft.gameObject);
+        //Destroy(toDestroyRight.gameObject);
+        //Destroy(toDestroyFront.gameObject);
 
         _IM.RemoveItemFromInventory(previousItem);
     }
