@@ -66,6 +66,6 @@ public class Selecting : GameBehaviour
         Destroy(toDestroyRight.gameObject);
         Destroy(toDestroyFront.gameObject);
 
-        _ISitemD.RemoveItemFromInventory(previousItem);
+        _IM.RemoveItemFromInventory(previousItem);
     }
 }

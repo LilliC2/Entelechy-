@@ -76,15 +76,15 @@ public class ItemIdentifier : GameBehaviour
                 switch (itemInfo.segment)
                 {
                     case Item.Segment.Head:
-                        if (_PC.headItem != null) itemOnPlayer = true;
+                        if (_PC.headItem.itemName != "NULL") itemOnPlayer = true;
 
                         break;
                     case Item.Segment.Torso:
-                        if (_PC.torsoItem != null) itemOnPlayer = true;
+                        if (_PC.torsoItem.itemName != "NULL") itemOnPlayer = true;
 
                         break;
                     case Item.Segment.Legs:
-                        if (_PC.legItem != null) itemOnPlayer = true;
+                        if (_PC.legItem.itemName != "NULL") itemOnPlayer = true;
 
                         break;
 
@@ -108,21 +108,18 @@ public class ItemIdentifier : GameBehaviour
                         }
                         //place old item on ground
 
-<<<<<<< HEAD
                         GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
                         item.GetComponent<ItemIdentifier>().enabled = false;
-=======
                             //remove item
                             //selecting.RemovePreviousItem();
->>>>>>> NLM-372-Sprite-Flip-Prototype-Implementation
 
-                        _UI.statComp1.SetActive(false);
-                        _UI.statComp2.SetActive(false);
+                    //    _UI.statComp1.SetActive(false);
+                    //    _UI.statComp2.SetActive(false);
 
-                        ExecuteAfterFrames(5, () => item.GetComponent<ItemIdentifier>().enabled = true);
+                    //    ExecuteAfterFrames(5, () => item.GetComponent<ItemIdentifier>().enabled = true);
 
-                        item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
-                        item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+                    //    item.GetComponent<ItemIdentifier>().itemInfo = selecting.previousItem;
+                    //    item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
                     }
                 }
 
@@ -142,20 +139,20 @@ public class ItemIdentifier : GameBehaviour
                     switch (itemInfo.segment)
                     {
                         case Item.Segment.Head:
-                            if (_PC.headItem != null) alreadyEquipped = true;
+                            if (_PC.headItem.itemName != "NULL") alreadyEquipped = true;
 
                             break;
                         case Item.Segment.Torso:
-                            if (_PC.torsoItem != null) alreadyEquipped = true;
+                            if (_PC.torsoItem.itemName != "NULL") alreadyEquipped = true;
 
                             break;
                         case Item.Segment.Legs:
-                            if (_PC.legItem != null) alreadyEquipped = true;
+                            if (_PC.legItem.itemName != "NULL") alreadyEquipped = true;
 
                             break;
 
                     }
-                    if (!alreadyEquipped) ExecuteAfterFrames(15, () => _ISitemD.AddItemToInventory(itemInfo));
+                    if (!alreadyEquipped) ExecuteAfterFrames(15, () => _IM.AddItemToInventory(itemInfo));
 
 
 

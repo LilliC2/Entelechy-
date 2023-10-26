@@ -9,8 +9,8 @@ public class DeathSplat : GameBehaviour
         _PC.enableMovement = false;
         _AM.PlayerDeathExplosion();
         _PC.GetComponent<BoxCollider>().enabled = false;
-        _PC.deathExplosionPS.Play();
-        _PC.missyDeathAnim.SetActive(true);
+        _PE.deathExplosionPS.Play();
+        _PE.missyDeathAnim.SetActive(true);
         
     }
 

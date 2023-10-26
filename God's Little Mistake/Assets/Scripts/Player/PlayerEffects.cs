@@ -8,18 +8,22 @@ using DG.Tweening;
 
 public class PlayerEffects : Singleton<PlayerEffects>
 {
-    [Header("Chromatic Abberation")]
-    public Volume chromaticAbVC;
-    public float speedCA;
-    Tween speedTween;
-    public bool chromABbool = false;
-    bool resetSpeedCA = true;
+
+
+    [Header("Player Particle Systems")]
+    public ParticleSystem deathExplosionPS;
+    public GameObject missyDeathAnim;
+    public ParticleSystem missyHitParticle;
+    public ParticleSystem landingPS;
 
     [Header("Chromatic Abberation")]
     public Volume vignetteVC;
     public bool vigABbool = false;
     public float speedVig;
     bool resetSpeedVig = true;
+
+    [Header("Pea Shooter Particle")]
+    public ParticleSystem peaShooterPS;
 
     [Header("Big Eye Particle")]
     public GameObject bigEyePS;
@@ -39,23 +43,7 @@ public class PlayerEffects : Singleton<PlayerEffects>
 
     private void Update()
     {
-        if(chromABbool)
-        {
-            resetSpeedCA = true;
 
-            VolumeProfile profile = GetComponent<Volume>().sharedProfile;
-
-            //get volume profile reference
-            profile.TryGet<ChromaticAberration>(out var chromab);
-            if(chromab != null)
-            {
-                print("CHRROM");
-                chromab.intensity.value = speedCA;
-                CATweenSpeed(0, 0.5f);
-                ExecuteAfterSeconds(0.5f, () => chromABbool = false);
-            }
-                
-        }
         
         if(vigABbool)
         {
@@ -87,23 +75,7 @@ public class PlayerEffects : Singleton<PlayerEffects>
         }
     }
 
-    public void ChromaticABFade()
-    {
-        print("Add");
 
-        chromABbool = true;
-        if(resetSpeedCA)
-        {
-            resetSpeedCA = false;
-            speedCA = 1;
-        }
-    }
-
-    private Tween CATweenSpeed(float endValue, float time)
-    {
-        var speedTween = DOTween.To(() => speedCA, (x) => speedCA = x, endValue, time);
-        return speedTween;
-    }
     
     private Tween VigTweenSpeed(float endValue, float time)
     {

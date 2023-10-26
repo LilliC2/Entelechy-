@@ -14,7 +14,7 @@ public class RPEAG : GameBehaviour
     public void FireProjectile()
     {
         playerAudioFunctions.PeaShootSound();
-        _PC.FireProjectile(_PIA.bigPea, 300, 1, _PC.projectileRange);
+        //_PC.FireProjectile(_PIA.bigPea, 300, 1, _PC.projectileRange);
     }
 
 

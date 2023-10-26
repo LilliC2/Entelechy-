@@ -11,11 +11,7 @@ public class Item
 
     public enum Segment {Head, Torso, Legs }
     public Segment segment;
-    public enum AttackType {Cone, Line, None, Circle, Rapid, Lob, Laser, Cannon }
-    public AttackType attackType;
 
-
-    public bool hasActiveAbility;
     public float currencyValue;
 
     public bool active;
@@ -23,10 +19,8 @@ public class Item
     public float dmg;
     public float firerate;
 
-    public float critX; //crit dmg multipler
     public float critChance;
-    public float projectile_range;
-    public float melee_range;
+    public float projectileRange;
 
     public bool projectile;
     public float projectileSpeed;

@@ -79,7 +79,7 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
     {
         itemName.text = _hoverItem.itemName;
         itemDamage.text = _hoverItem.dmg.ToString();
-        itemCritMultiplier.text = _hoverItem.critX.ToString();
+        //itemCritMultiplier.text = _hoverItem.critX.ToString();
         itemCritChance.text = _hoverItem.critChance.ToString();
         itemFireRate.text = _hoverItem.firerate.ToString();
         itemIcon.sprite = _hoverItem.icon;
@@ -97,14 +97,14 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
             {
                 attackIcon.sprite = rangeIcon;
                 attackPill.color = Color.blue;
-                distanceText.text = _hoverItem.projectile_range.ToString();
+                distanceText.text = _hoverItem.projectileRange.ToString();
                 attackText.text = "Ranged";
             }
             else
             {
                 attackIcon.sprite = meleeIcon;
                 attackPill.color = Color.red;
-                distanceText.text = _hoverItem.melee_range.ToString();
+                distanceText.text = _hoverItem.projectileRange.ToString();
                 attackText.text = "Melee";
             }
         }
@@ -114,30 +114,30 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
             distancePill.gameObject.SetActive(false);
         }
 
-        if(_hoverItem.attackType == Item.AttackType.Cone) 
-        {
-            typeIcon.sprite = typeCone;
-        }
+        //if(_hoverItem.attackType == Item.AttackType.Cone) 
+        //{
+        //    typeIcon.sprite = typeCone;
+        //}
 
-        if (_hoverItem.attackType == Item.AttackType.Line)
-        {
-            typeIcon.sprite = typeLine;
-        }
+        //if (_hoverItem.attackType == Item.AttackType.Line)
+        //{
+        //    typeIcon.sprite = typeLine;
+        //}
 
-        if (_hoverItem.attackType == Item.AttackType.Circle)
-        {
-            typeIcon.sprite = typeCircle;
-        }
+        //if (_hoverItem.attackType == Item.AttackType.Circle)
+        //{
+        //    typeIcon.sprite = typeCircle;
+        //}
 
-        if (_hoverItem.attackType == Item.AttackType.Rapid)
-        {
-            typeIcon.sprite = typeRapid;
-        }
+        //if (_hoverItem.attackType == Item.AttackType.Rapid)
+        //{
+        //    typeIcon.sprite = typeRapid;
+        //}
 
-        if (_hoverItem.attackType == Item.AttackType.Lob)
-        {
-            typeIcon.sprite = typeLob;
-        }
+        //if (_hoverItem.attackType == Item.AttackType.Lob)
+        //{
+        //    typeIcon.sprite = typeLob;
+        //}
 
     }
         

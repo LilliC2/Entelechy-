@@ -200,7 +200,7 @@ public class GameManager : Singleton<GameManager>
             var controls = Instantiate(Resources.Load("ControlsPrefab", typeof(GameObject)), new Vector3(levelStartRoom.position.x, 0.02f, levelStartRoom.position.z), Quaternion.Euler(new Vector3(90f,0f,0f)), levelParent) as GameObject;
             var startingItem = Instantiate(itemPF, new Vector3(levelStartRoom.position.x, 0.02f, levelStartRoom.position.z-2.5f), Quaternion.Euler(new Vector3(0f,0f,0f)), levelParent) as GameObject;
 
-            startingItem.GetComponent<ItemIdentifier>().itemInfo = _ItemD.itemDataBase[9]; //set as peashooter
+            startingItem.GetComponent<ItemIdentifier>().itemInfo = _IM.itemDataBase[0]; //set as peashooter
 
             //ExecuteAfterSeconds(0.5f, () => player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z));
             //ExecuteAfterSeconds(0.5f, () => fadeImage.DOFade(0f, fadeOutTime));

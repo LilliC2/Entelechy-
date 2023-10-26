@@ -109,16 +109,16 @@ public class BaseEnemy : GameBehaviour
     {
         hurt.Play();
 
-        //check for debuffs
-        if(_PIA.slugEyesEquipped)
-        {
-            if (_PIA.SlugEyes()) ApplySlowness(_PIA.slowDuration, _PIA.slowPercent);
-        }
+        ////check for debuffs
+        //if(_PIA.slugEyesEquipped)
+        //{
+        //    if (_PIA.SlugEyes()) ApplySlowness(_PIA.slowDuration, _PIA.slowPercent);
+        //}
 
-        if (_PIA.wolfClawsEquipped)
-        {
-            if (_PIA.WolfClaw()) ApplyBleeding(_PIA.bleedDuration, _PIA.bleedTickDmg);
-        }
+        //if (_PIA.wolfClawsEquipped)
+        //{
+        //    if (_PIA.WolfClaw()) ApplyBleeding(_PIA.bleedDuration, _PIA.bleedTickDmg);
+        //}
 
         if (stats.health > 0)
         {
@@ -135,7 +135,7 @@ public class BaseEnemy : GameBehaviour
         {
             print("hit");
             //Add hit code here;
-            Hit(_PC.dmg);
+            //Hit(_PC.dmg);
 
             //play explosion when hit
             explosionAnimOB.SetActive(true);

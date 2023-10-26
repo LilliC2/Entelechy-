@@ -27,11 +27,11 @@ public class ItemGeneration : Singleton<ItemGeneration>
         //List<Item> possibleDrops;
         possibleDropsIndex = new List<int>();
 
-        for(int i = 0; i < _ItemD.itemDataBase.Length; i++)
+        for(int i = 0; i < _IM.itemDataBase.Length; i++)
         {
             for (int y = 0; y < _segment.Length; y++)
             {
-                if (_ItemD.itemDataBase[i].segment.ToString() == _segment[y].ToString())
+                if (_IM.itemDataBase[i].segment.ToString() == _segment[y].ToString())
                 {
                     //possibleDrops.Add(_ItemD.itemDataBase[i]);
                     possibleDropsIndex.Add(i);
@@ -45,7 +45,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
         //pick a random possible drop
         int rand = RandomIntBetweenTwoInt(0, possibleDropsIndex.Count);
 
-        Item itemSpawned = _ItemD.itemDataBase[possibleDropsIndex[rand]];
+        Item itemSpawned = _IM.itemDataBase[possibleDropsIndex[rand]];
 
         //scaling section here
         /*Here we would edit the item values here, so based on level and etc. the prefab of the item would be saved on this too

@@ -20,65 +20,38 @@ public class PlayerController : Singleton<PlayerController>
     public Item torsoItem;
     public Item legItem;
 
+    public GameObject headFiringPoint;
+    public GameObject torsoFiringPoint;
+
+    [Header("Movement")]
+    bool isMoving;
+    public bool enableMovement = true;
+    public Vector3 move;
+    public float speed;
+    public float maxSpeed;
+    public GameObject directional; //is for current melee attack and will probably be removed
+
+
+    [SerializeField]
+    int initalSpeedBoost = 3;
+    GameObject lastDir;
+    Tween speedTween;
 
     [Header("Temporary")]
     public SpriteRenderer UIrangeIndicator;
-    public RectTransform screenCenter;
 
-    #region Animation Variables
     [Header("Animation")]
-    [SerializeField]
     GameObject playerAvatar;
-
-    public Animator baseAnimator;
-    public Animator nubsAnimator;
-    public GameObject nubsOB;
-
-    public Animator[] slotsAnim;
-    public GameObject[] slotsGO;
-
-    public GameObject missyLeftSide;
-    public GameObject missyRightSide;
-    public GameObject missyBack;
-    public GameObject missyForward;
-
-    Animator missyLeftSideAnim;
-    Animator missyRightSideAnim;
-    Animator missyFrontSideAnim;
-    Animator missyBackSideAnim;
-
-    public GameObject meleeUI;
-
-    public List<Animator> itemsAnimForward;
-    public List<Animator> itemsAnimRightSide;
-    public List<Animator> itemsAnimLeftSide;
-    public List<Animator> itemsAnimBack;
-
-    GameObject currentHead;
-    [SerializeField]
-    GameObject frontHead;    
-    [SerializeField]
-    GameObject backHead;    
-    [SerializeField]
-    GameObject sideRHead;
-    [SerializeField]
-    GameObject sideLHead;
-
-    public List<Animator> legsAnimators;
-
-    bool meleeAnimationCooldown;
-
-
-
     Vector3 currentPos;
     Vector3 lastPos;
 
-    public GameObject frontPivot;
-    public GameObject rightPivot;
-    public GameObject leftPivot;
-    public GameObject backPivot;
-    #endregion
 
+    [Header("Knockback")]
+    [SerializeField]
+    float knockbackAmount;
+    bool knockbackActive;
+    public float knockbackDuration = 0.5f;
+    private float knockbackStartTime;
 
     [Header("Physics")]
     public float gravity = 9.8f;
@@ -89,78 +62,13 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject tileLastStoodOn;
     public bool fallDamage;
 
-    #region Player Variables
     [Header("Player Stats")]
     public float health;
     public float maxHP;
-    public float speed;
-    public float maxSpeed;
-    public float dmg;
-    public float projectileRange;
-    public float meleeRange;
-    public float meleeFirerate;
-    public float projectileFirerate;
-    public float critX;
-    public float critChance;
-
-    public bool projectile;
-    public float projectileSpeed;
-    public float projectileKnockback;
-    public GameObject projectilePF;
+ 
 
 
-    [SerializeField]
-    int initalSpeedBoost = 3;
-    public bool isMoving;
-    GameObject lastDir;
-    Tween speedTween;
-
-    #endregion
-    
-    [Header("Particle Systems")]
-    public ParticleSystem deathExplosionPS;
-    public GameObject missyDeathAnim;
-    [SerializeField]
-    ParticleSystem spitParticleSystem;
-    public ParticleSystem missyHitParticle;
-    public ParticleSystem landingPS;
-
-    
-
-
-    [Header("Projectile")]
-    [SerializeField]
-    GameObject firingPointCurrent;
-    public GameObject firingPointDefault;
-
-    [SerializeField]
-    GameObject[] firingPointActive;
-
-    public GameObject directional; //is for current melee attack and will probably be removed
-    public Vector3 target;
-    bool projectileShot;
-
-
-    [Header("Knockback")]
-    [SerializeField]
-    float knockbackAmount;
-    bool knockbackActive;
-    public float knockbackDuration = 0.5f;
-    private float knockbackStartTime;
-
-    [Header("Movement")]
-    public bool enableMovement = true;
-    public Vector3 move;
-
-    [Header("Melee")]
-    bool meleeCooDown;
-    public GameObject lineHitbox;
-    public GameObject coneHitbox;
-    public GameObject AOEHitbox;
-    MeleeUISwitcher meleeUISwitcher;
-    public enum MeleeHitBox { Line, Cone, Circle, None }
-    public MeleeHitBox meleeHitBox;
-
+  
     public float dashAmount;
 
     //audio
@@ -168,7 +76,6 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Start()
     {
-        firingPointActive = new GameObject[4];
 
         health = maxHP;
         controller = gameObject.GetComponent<CharacterController>();
@@ -178,18 +85,8 @@ public class PlayerController : Singleton<PlayerController>
 
         groundCheck = GameObject.Find("GroundCheck");
 
-        meleeUISwitcher = GetComponent<MeleeUISwitcher>();
-
         CheckForStartingItems();
 
-        missyBackSideAnim = missyBack.GetComponent<Animator>();
-        missyFrontSideAnim = missyForward.GetComponent<Animator>();
-        missyLeftSideAnim = missyLeftSide.GetComponent<Animator>();
-        missyRightSideAnim = missyRightSide.GetComponent<Animator>();
-
-        currentHead = frontHead;
-
-        firingPointCurrent = firingPointDefault;
 
     }
 
@@ -297,7 +194,7 @@ public class PlayerController : Singleton<PlayerController>
                             health = (health / 2) - 1;
                             print("Taken fall damage");
                             ExecuteAfterSeconds(1, () => transform.position = targetPos);
-                            ExecuteAfterSeconds(1.3f, () => landingPS.Play());
+                            ExecuteAfterSeconds(1.3f, () => _PE.landingPS.Play());
                             ExecuteAfterSeconds(1.3f, () => _AM.playerThud.Play());
                             ExecuteAfterSeconds(1.5f, () => RespawnAfterFallingCheck(targetPos)); 
 
@@ -323,259 +220,12 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Animation
 
-                #region Enable Walking Animation
+                var horizontal = Input.GetAxis("Horizontal");
+                var vertical = Input.GetAxis("Vertical");
 
-                
 
-                //if(isMoving)
-                //{
-                //    missyFrontSideAnim.SetBool("Walking", true);
-                //    missyBackSideAnim.SetBool("Walking", true);
-                //    missyLeftSideAnim.SetBool("Walking", true);
-                //    missyRightSideAnim.SetBool("Walking", true);
+                if ((horizontal < 0 || horizontal > 0) || (vertical < 0 || vertical > 0)) isMoving = true;
 
-                //    foreach (var item in legsAnimators)
-                //    {
-                //        item.SetBool("Walking", true);
-                //    }
-
-                //}
-                //else
-                //{
-                //    missyFrontSideAnim.SetBool("Walking", false);
-                //    missyBackSideAnim.SetBool("Walking", false);
-                //    missyLeftSideAnim.SetBool("Walking", false);
-                //    missyRightSideAnim.SetBool("Walking", false);
-
-                //    foreach (var item in legsAnimators)
-                //    {
-                //        item.SetBool("Walking", false);
-                //    }
-                //}
-
-
-
-                #endregion
-
-                #region Legs Animation
-
-                //Idle Check
-                if (transform.position == lastPos)
-                {
-                    
-                }
-                else
-                {
-                    
-                }
-
-                #endregion
-
-                #region Swapping Firing Point
-
-                if (firingPointActive[0] != null && firingPointActive[0].activeInHierarchy) firingPointCurrent = firingPointActive[0];
-                if (firingPointActive[1] != null && firingPointActive[1].activeInHierarchy) firingPointCurrent = firingPointActive[1];
-                if (firingPointActive[2] != null && firingPointActive[2].activeInHierarchy) firingPointCurrent = firingPointActive[2];
-                if (firingPointActive[3] != null && firingPointActive[3].activeInHierarchy) firingPointCurrent = firingPointActive[3];
-
-                if (firingPointCurrent == null) firingPointCurrent = firingPointDefault;
-
-                #endregion
-
-                    #region Swapping Missy Sprites
-
-                //    //change for cardinal direction
-                //if (Input.GetKeyDown(KeyCode.W)) //FACING BACK
-                //{
-
-                //    currentHead = backHead;
-
-
-                //    StopAllAnimations();
-
-                //    if (lastDir == missyLeftSide)
-                //    {
-                //        leftPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
-
-                //    }
-                //    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
-
-                //    if(lastDir == missyForward)
-                //    {
-                        
-                //        missyBack.SetActive(true);
-                //        missyForward.SetActive(false);
-                //        missyLeftSide.SetActive(false);
-                //        missyRightSide.SetActive(false);
-                //        //change firing point
-
-
-                //    }
-
-
-                //    if (lastDir != missyBack && lastDir != missyForward)
-                //    {
-
-                       
-
-                //        missyForward.SetActive(false);
-
-                //        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
-                //        ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
-                //        ExecuteAfterFrames(4, () => missyBack.SetActive(true));
-                //        ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                //        ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                //    }
-
-
-
-
-                //    lastDir = missyBack;
-
-                //}
-                //if (Input.GetKeyDown(KeyCode.A)) //FACE LEFT
-                //{
-                //    currentHead = sideLHead;
-
-
-                //    StopAllAnimations();
-
-<<<<<<< HEAD
-=======
-                //    _AVTAR.slotsOnPlayerLeft[3].SetActive(false); //turn off left side
->>>>>>> NLM-372-Sprite-Flip-Prototype-Implementation
-
-                //    if(lastDir == missyForward)
-                //    {
-                //        frontPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
-
-                //    }
-                //    if( lastDir == missyBack) backPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
-
-                //    if(lastDir == missyRightSide)
-                //    {
-                //        missyLeftSide.SetActive(true);
-                //        missyRightSide.SetActive(false);
-                //        missyForward.SetActive(false);
-                //        missyBack.SetActive(false);
-
-
-                //    }
-                //    else
-                //    {
-                //        missyRightSide.SetActive(false);
-
-                //        //WAIT UNTIL TWEEN ANIMATION IS DONE BEFORE CHANGING
-                //        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
-                //        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(true));
-                //        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
-
-                //        //RESET PIVOTS
-                //        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                //        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-
-                //    }
-
-
-                //    lastDir = missyLeftSide;
-
-
-                //}
-                //if (Input.GetKeyDown(KeyCode.S)) //FACE FORWARD
-                //{
-                //    currentHead = frontHead;
-
-
-                //    StopAllAnimations();
-                //    //print("Just pressed S. lastDir was " + lastDir.name);
-                //    if (lastDir == missyLeftSide)
-                //    {
-                //        leftPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
-
-                //    }
-                //    if (lastDir == missyRightSide) rightPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
-
-                //    if(lastDir == missyBack)
-                //    {
-                //        missyForward.SetActive(true);
-                //        missyLeftSide.SetActive(false);
-                //        missyRightSide.SetActive(false);
-                //        missyBack.SetActive(false);
-
-
-
-
-                //    }
-                //    else if (lastDir != missyForward)
-                //    {
-                //        //print("delay");
-
-                //        ExecuteAfterFrames(4, () => missyForward.SetActive(true));  
-                //        ExecuteAfterFrames(4, () => missyLeftSide.SetActive(false));
-                //        ExecuteAfterFrames(4, () => missyRightSide.SetActive(false));
-                //        ExecuteAfterFrames(1, () => leftPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                //        ExecuteAfterFrames(1, () => rightPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                //        missyBack.SetActive(false);
-
-                //    }
-
-
-
-                //    lastDir = missyForward;
-                //}
-                //if (Input.GetKeyDown(KeyCode.D)) //FACE RIGHT
-                //{
-                //    currentHead = sideRHead;
-
-
-<<<<<<< HEAD
-                    StopAllAnimations();
-=======
-                //    StopAllAnimations();
-                //    _AVTAR.slotsOnPlayerRight[4].SetActive(false); //turn off right side
->>>>>>> NLM-372-Sprite-Flip-Prototype-Implementation
-
-
-                //    if (lastDir == missyForward)
-                //    {
-                //        frontPivot.transform.DORotate(new Vector3(0, -50, 0), 0.05f);
-
-                //    }
-                //    if (lastDir == missyBack)
-                //    {
-                //        backPivot.transform.DORotate(new Vector3(0, 50, 0), 0.05f);
-                //    }
-                    
-
-                //    if(lastDir == missyLeftSide)
-                //    {
-                //        missyForward.SetActive(false);
-                //        missyRightSide.SetActive(true);
-                //        missyBack.SetActive(false);
-                //        missyLeftSide.SetActive(false);
-
-
-                //    }
-                //    else
-                //    {
-                //        ExecuteAfterFrames(4, () => missyForward.SetActive(false));
-
-                //        ExecuteAfterFrames(4, () => missyRightSide.SetActive(true));
-                //        ExecuteAfterFrames(4, () => missyBack.SetActive(false));
-
-                //        ExecuteAfterFrames(1, () => frontPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                //        ExecuteAfterFrames(1, () => backPivot.transform.DORotate(new Vector3(0, 0, 0), 0.5f));
-                //        missyLeftSide.SetActive(false);
-
-                //    }
-
-
-                //    lastDir = missyRightSide;
-
-
-                //}
-
-                #endregion
                 #endregion
 
                 #region Rotate Firing Point
@@ -597,277 +247,146 @@ public class PlayerController : Singleton<PlayerController>
 
                 if (Input.GetMouseButton(0))
                 {
-                    if(headItem.itemName == "NULL")
+                    if (headItem.itemName == "NULL")
                     {
-                        FireProjectile(headItem.projectilePF, headItem.projectileSpeed, headItem.firerate, headItem.projectile_range);
+                        //call appriopriate attack from attack script
+
+
                         //ADD KNOCK BACK
-                        if (knockbackActive)
+                        //    if (knockbackActive)
+                        //    {
+                        //        float timeSinceKnockback = Time.time - knockbackStartTime;
+
+                        //        if (timeSinceKnockback >= knockbackDuration)
+                        //        {
+                        //            knockbackActive = false;
+                        //        }
+                        //        else
+                        //        {
+                        //            float knockbackProgress = timeSinceKnockback / knockbackDuration;
+                        //            var dir = (-directional.transform.forward * knockbackAmount);
+                        //            dir = new Vector3(dir.x, 0, dir.z);
+                        //            controller.Move(dir * Time.deltaTime);
+
+                        //        }
+                        //    }
+                        //}
+                        //if no head item, torso attack is also bound to m0
+                        if (headItem.itemName == "NULL" && torsoItem.itemName != "NULL")
                         {
-                            float timeSinceKnockback = Time.time - knockbackStartTime;
+                            //call appriopriate attack from attack script
 
-                            if (timeSinceKnockback >= knockbackDuration)
-                            {
-                                knockbackActive = false;
-                            }
-                            else
-                            {
-                                float knockbackProgress = timeSinceKnockback / knockbackDuration;
-                                var dir = (-firingPointCurrent.transform.forward * knockbackAmount);
-                                dir = new Vector3(dir.x, 0, dir.z);
-                                controller.Move(dir * Time.deltaTime);
+                            //ADD KNOCK BACK
+                            //if (knockbackActive)
+                            //{
+                            //    float timeSinceKnockback = Time.time - knockbackStartTime;
 
-                            }
+                            //    if (timeSinceKnockback >= knockbackDuration)
+                            //    {
+                            //        knockbackActive = false;
+                            //    }
+                            //    else
+                            //    {
+                            //        float knockbackProgress = timeSinceKnockback / knockbackDuration;
+                            //        var dir = (-directional.transform.forward * knockbackAmount);
+                            //        dir = new Vector3(dir.x, 0, dir.z);
+                            //        controller.Move(dir * Time.deltaTime);
+
+                            //    }
+                            //}
                         }
                     }
-                    //if no head item, torso attack is also bound to m0
-                    if(headItem.itemName == "NULL" && torsoItem.itemName != "NULL")
+
+                    if (Input.GetMouseButton(1))
                     {
-                        FireProjectile(torsoItem.projectilePF, torsoItem.projectileSpeed, torsoItem.firerate, torsoItem.projectile_range);
-                        //ADD KNOCK BACK
-                        if (knockbackActive)
+                        if (headItem.itemName != "NULL" && torsoItem.itemName == "NULL")
                         {
-                            float timeSinceKnockback = Time.time - knockbackStartTime;
 
-                            if (timeSinceKnockback >= knockbackDuration)
-                            {
-                                knockbackActive = false;
-                            }
-                            else
-                            {
-                                float knockbackProgress = timeSinceKnockback / knockbackDuration;
-                                var dir = (-firingPointCurrent.transform.forward * knockbackAmount);
-                                dir = new Vector3(dir.x, 0, dir.z);
-                                controller.Move(dir * Time.deltaTime);
+                            
 
-                            }
+
+                            //call appriopriate attack from attack script
+
+                            //ADD KNOCK BACK
+                            //    if (knockbackActive)
+                            //    {
+                            //        float timeSinceKnockback = Time.time - knockbackStartTime;
+
+                            //        if (timeSinceKnockback >= knockbackDuration)
+                            //        {
+                            //            knockbackActive = false;
+                            //        }
+                            //        else
+                            //        {
+                            //            float knockbackProgress = timeSinceKnockback / knockbackDuration;
+                            //            var dir = (-directional.transform.forward * knockbackAmount);
+                            //            dir = new Vector3(dir.x, 0, dir.z);
+                            //            controller.Move(dir * Time.deltaTime);
+
+                            //        }
+                            //    }
                         }
+                        //if no head item, torso attack is also bound to m0
+                        if (torsoItem.itemName != "NULL")
+                        {
+                            //call appriopriate attack from attack script
+                            
+                        //ADD KNOCK BACK
+                            //if (knockbackActive)
+                            //{
+                            //    float timeSinceKnockback = Time.time - knockbackStartTime;
+
+                            //    if (timeSinceKnockback >= knockbackDuration)
+                            //    {
+                            //        knockbackActive = false;
+                            //    }
+                            //    else
+                            //    {
+                            //        float knockbackProgress = timeSinceKnockback / knockbackDuration;
+                            //        var dir = (-directional.transform.forward * knockbackAmount);
+                            //        dir = new Vector3(dir.x, 0, dir.z);
+                            //        controller.Move(dir * Time.deltaTime);
+
+                            //    }
+                            //}
+                        }
+
+
                     }
+
+
+
+
+                    #endregion
+
+                    if (health <= 0)
+                    {
+                        Die();
+                        Debug.Log("Die");
+                    }
+
                 }
-
-                if (Input.GetMouseButton(1))
-                {
-                    if (headItem.itemName != "NULL" && torsoItem.itemName == "NULL")
-                    {
-                        FireProjectile(headItem.projectilePF, headItem.projectileSpeed, headItem.firerate, headItem.projectile_range);
-                        //ADD KNOCK BACK
-                        if (knockbackActive)
-                        {
-                            float timeSinceKnockback = Time.time - knockbackStartTime;
-
-                            if (timeSinceKnockback >= knockbackDuration)
-                            {
-                                knockbackActive = false;
-                            }
-                            else
-                            {
-                                float knockbackProgress = timeSinceKnockback / knockbackDuration;
-                                var dir = (-firingPointCurrent.transform.forward * knockbackAmount);
-                                dir = new Vector3(dir.x, 0, dir.z);
-                                controller.Move(dir * Time.deltaTime);
-
-                            }
-                        }
-                    }
-                    //if no head item, torso attack is also bound to m0
-                    if (torsoItem.itemName != "NULL")
-                    {
-                        FireProjectile(torsoItem.projectilePF, torsoItem.projectileSpeed, torsoItem.firerate, torsoItem.projectile_range);
-                        //ADD KNOCK BACK
-                        if (knockbackActive)
-                        {
-                            float timeSinceKnockback = Time.time - knockbackStartTime;
-
-                            if (timeSinceKnockback >= knockbackDuration)
-                            {
-                                knockbackActive = false;
-                            }
-                            else
-                            {
-                                float knockbackProgress = timeSinceKnockback / knockbackDuration;
-                                var dir = (-firingPointCurrent.transform.forward * knockbackAmount);
-                                dir = new Vector3(dir.x, 0, dir.z);
-                                controller.Move(dir * Time.deltaTime);
-
-                            }
-                        }
-                    }
-
-
-                }
-
-
-
-
-                #endregion
-
-                if (health <= 0)
-                {
-                    Die();
-                    Debug.Log("Die");
-                }
-
                 break;
 
-                
         }
 
-        UIrangeIndicator.size = new Vector2(UIrangeIndicator.size.x, meleeRange);
 
         lastPos = transform.position;
 
-        //change melee
-
-        //change primary
-        //#region Primary Change Inputs
-
-        //if (Input.GetKeyDown(KeyCode.Alpha1))
-        //{
-        //    ChangePrimary(0);
-        //    _HUD.isPrimary1 = true;
-        //    _HUD.isPrimary2 = false;
-        //    _HUD.isPrimary3 = false;
-        //    _HUD.isPrimary4 = false;
-        //    _HUD.isPrimary5 = false;
-        //    _HUD.isPrimary6 = false;
-        //    _HUD.UpdatePrimaryDetauls(0);
-
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Alpha2))
-        //{
-        //    print("Chaning primary");
-        //    ChangePrimary(1);
-        //    _HUD.isPrimary1 = false;
-        //    _HUD.isPrimary2 = true;
-        //    _HUD.isPrimary3 = false;
-        //    _HUD.isPrimary4 = false;
-        //    _HUD.isPrimary5 = false;
-        //    _HUD.isPrimary6 = false;
-        //    _HUD.UpdatePrimaryDetauls(1);
-
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Alpha3))
-        //{
-        //    ChangePrimary(2);
-        //    _HUD.isPrimary1 = false;
-        //    _HUD.isPrimary2 = false;
-        //    _HUD.isPrimary3 = true;
-        //    _HUD.isPrimary4 = false;
-        //    _HUD.isPrimary5 = false;
-        //    _HUD.isPrimary6 = false;
-        //    _HUD.UpdatePrimaryDetauls(2);
-
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Alpha4))
-        //{
-        //    ChangePrimary(3);
-        //    _HUD.isPrimary1 = false;
-        //    _HUD.isPrimary2 = false;
-        //    _HUD.isPrimary3 = false;
-        //    _HUD.isPrimary4 = true;
-        //    _HUD.isPrimary5 = false;
-        //    _HUD.isPrimary6 = false;
-        //    _HUD.UpdatePrimaryDetauls(3);
-
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Alpha5))
-        //{
-        //    ChangePrimary(4);
-        //    _HUD.isPrimary1 = false;
-        //    _HUD.isPrimary2 = false;
-        //    _HUD.isPrimary3 = false;
-        //    _HUD.isPrimary4 = false;
-        //    _HUD.isPrimary5 = true;
-        //    _HUD.isPrimary6 = false;
-        //    _HUD.UpdatePrimaryDetauls(4);
-
-        //}
-
-        //if (Input.GetKeyDown(KeyCode.Alpha6))
-        //{
-        //    ChangePrimary(5);
-        //    _HUD.isPrimary1 = false;
-        //    _HUD.isPrimary2 = false;
-        //    _HUD.isPrimary3 = false;
-        //    _HUD.isPrimary4 = false;
-        //    _HUD.isPrimary5 = false;
-        //    _HUD.isPrimary6 = true;
-        //    _HUD.UpdatePrimaryDetauls(5);
-        //}
-
-
-
-        //#endregion
+   
     }
-
-    //void RotateHead()
-    //{
-    //    //get angle of mouse from player position aka center of screen
-
-    //    var mousePosOnScreen = Input.mousePosition;
-        
-
-    //    print("Mouse pos on screen is " + mousePosOnScreen);
-    //    var angle = Vector2.Angle(new Vector2(transform.position.x, transform.position.y), mousePosOnScreen);
-
-    //    print("Angle is " + angle);
-        
-
-
-    //    //rotate head rotate local z
-    //}
 
     void RespawnAfterFallingCheck(Vector3 _targetPos)
     {
         if (!fallDamage && !isGrounded)
         {
             transform.position = _targetPos;
-            ExecuteAfterSeconds(1.3f, () => landingPS.Play());
+            ExecuteAfterSeconds(1.3f, () => _PE.landingPS.Play());
             ExecuteAfterSeconds(1.3f, () => _AM.playerThud.Play());
 
         }
     }
-    void StopAllAnimations()
-    {
-        //foreach (var animator in itemsAnimForward)
-        //{
-        //    animator.StopPlayback();
-        //}
-        //foreach (var animator in itemsAnimBack)
-        //{
-        //    if(animator.)
-        //    animator.StopPlayback();
-        //}
-        //foreach (var animator in itemsAnimLeftSide)
-        //{
-        //    animator.StopPlayback();
-        //}
-        //foreach (var animator in itemsAnimRightSide)
-        //{
-        //    animator.StopPlayback();
-        //}
-    }
 
-    public void UpdateLegAnimators()
-    {
-
-        //legsAnimators.Clear();
-
-        //for (int i = 0; i < playerInventory.Count; i++)
-        //{
-        //    if (playerInventory[i].segment == Item.Segment.Legs)
-        //    {
-        //        legsAnimators.Add(itemsAnimBack[i]);
-        //        legsAnimators.Add(itemsAnimForward[i]);
-        //        legsAnimators.Add(itemsAnimLeftSide[i]);
-        //        legsAnimators.Add(itemsAnimRightSide[i]);
-        //    }
-        //}
-
-    }
 
     void CheckForStartingItems()
     {
@@ -904,221 +423,7 @@ public class PlayerController : Singleton<PlayerController>
         speedTween = DOTween.To(() => speed, (x) => speed = x, endValue, time);
         return speedTween;
     }
-   
-    void UpdateMelee(Item _item)
-    {
-        switch (_item.attackType)
-        {
-            case Item.AttackType.Line:
-                lineHitbox.SetActive(true);
-                coneHitbox.SetActive(false);
-                AOEHitbox.SetActive(false);
-                lineHitbox.transform.localScale = new Vector3(1, 1, meleeRange);
-                break;
-            case Item.AttackType.Cone:
-                lineHitbox.SetActive(false);
-                coneHitbox.SetActive(true);
-                AOEHitbox.SetActive(false);
-                coneHitbox.transform.localScale = new Vector3(1, 1, meleeRange);
-                break;
-            case Item.AttackType.Circle:
-                lineHitbox.SetActive(false);
-                coneHitbox.SetActive(false);
-                AOEHitbox.SetActive(true);
-                AOEHitbox.transform.localScale = new Vector3(meleeRange, 1, meleeRange);
-                break;
-        }
-    }
 
-
-<<<<<<< HEAD
-=======
-        //turn off any others
-        foreach (var item in playerInventory)
-        {
-            item.active = false;
-        }
-
-
-        //check if item is primary
-        if (playerInventory[_inventorySlot].itemType == Item.ItemType.Primary)
-        {
-            //if yes activate
-            playerInventory[_inventorySlot].active = true;
-
-
-            //check if melee attack
-            if(!playerInventory[_inventorySlot].projectile)
-            {
-                //change hit box
-                UpdateMelee(playerInventory[_inventorySlot]);
-
-
-                ////change melee UI
-                //meleeUISwitcher.SwitchMeleeUI(playerInventory[_inventorySlot].ID);
-                //meleeUI.gameObject.SetActive(false);
-                ////change ui scale
-                //meleeUI.GetComponentInParent<Transform>().localScale = new Vector3(meleeRange, meleeRange, meleeRange);
-
-                UIrangeIndicator.size = new Vector2(UIrangeIndicator.size.x, meleeRange);
-            }
-            else
-            {
-                print(playerInventory[_inventorySlot].itemName + " slot is " + playerInventory[_inventorySlot].inSlot);
-                FindCurrentFiringPoint(playerInventory[_inventorySlot]);
-            }
-
-            
-        }
-    }
-
-
-    public Item FindCurrentActive()
-    {
-        Item currentActiveItem = new();
-
-        foreach (var item in playerInventory)
-        {
-            if (item.active) currentActiveItem = item;
-        }
-
-        return currentActiveItem;
-    }
->>>>>>> NLM-372-Sprite-Flip-Prototype-Implementation
-
-    void MeleeAttack(float _firerate, int _index)
-    {
-        var inRangeEnemies = GetComponentInChildren<MeleeRangeCheck>().inRangeEnemies;
-
-        if (!meleeCooDown)
-        {
-            if(!meleeAnimationCooldown)
-            {
-                meleeAnimationCooldown = true;
-                //meleeUI.GetComponent<Animator>().SetTrigger("Attack");
-                //print("Attack count");
-                //activate animation
-                //print("Anim slot " + _index);
-                itemsAnimForward[_index].SetTrigger("Attack");
-
-                if (itemsAnimBack[_index] != null) itemsAnimBack[_index].SetTrigger("Attack");
-
-
-                itemsAnimLeftSide[_index].SetTrigger("Attack");
-                itemsAnimRightSide[_index].SetTrigger("Attack");
-                ExecuteAfterSeconds(_firerate, () => meleeAnimationCooldown = false);
-
-
-                //if(meleeUI != null)
-                //{
-
-
-                //}
-
-                if (inRangeEnemies.Count != 0)
-                {
-
-                    // add that enemey gets it, do with foreach in list, get enemy component then run hit script;
-                    print("Enemies in range of melee attack" + inRangeEnemies[0]);
-
-                    foreach (var enemy in inRangeEnemies)
-                    {
-                        if(enemy != null)
-                        {
-                            enemy.GetComponent<BaseEnemy>().Hit(dmg);
-
-                            if (enemy.GetComponent<BaseEnemy>().stats.health < 0) inRangeEnemies.Remove(enemy);
-                        }
-
-                    }
-
-                    print("melee attack");
-                    meleeCooDown = true;
-                    ExecuteAfterSeconds(_firerate, () => meleeCooDown = false);
-                }
-            }
-        }
-    }
-
-    public void FireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
-    {
-        Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
-        Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
-        Vector3 flatAimTarget = screenPoint + cursorRay / Mathf.Abs(cursorRay.y) * Mathf.Abs(screenPoint.y - transform.position.y);
-
-        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
-        RaycastHit hit;
-
-        if (Physics.Raycast(ray, out hit))
-        {
-            firingPointCurrent.transform.LookAt(hit.point);
-
-            if (!projectileShot)
-            {
-                print("Fire");
-                //particle system
-                FiringParticleSystem(_prefab);
-
-                //Spawn bullet and apply force in the direction of the mouse
-                //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
-                GameObject bullet = Instantiate(_prefab, firingPointCurrent.transform.position, firingPointCurrent.transform.rotation);
-                bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
-
-                bullet.GetComponent<ItemLook>().firingPoint = firingPointCurrent;
-                bullet.GetComponent<RangeDetector>().range = _range;
-                bullet.GetComponent<RangeDetector>().positionShotFrom = transform.position;
-
-                knockbackActive = true;
-                knockbackStartTime = Time.time;
-                Mathf.Clamp(bullet.transform.position.y, 0, 0);
-
-
-
-                //Controls the firerate, player can shoot another bullet after a certain amount of time
-                projectileShot = true;
-
-                ExecuteAfterSeconds(_firerate, () => projectileShot = false);
-            }
-            print("FIRE PROJECTILE");
-
-        }
-    }
-
-    //void FindCurrentFiringPoint(Item _item)
-    //{
-    //    //find slot
-    //    var slot = _item.inSlot;
-    //    print("In slot " + slot);
-    //    //get firing point for each side
-    //    //put into array
-
-    //    firingPointActive[0] = _AVTAR.slotsOnPlayerFront[slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
-    //    firingPointActive[1] = _AVTAR.slotsOnPlayerBack[slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
-    //    firingPointActive[2] = _AVTAR.slotsOnPlayerLeft [slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
-    //    firingPointActive[3] = _AVTAR.slotsOnPlayerRight [slot].transform.GetChild(0).gameObject.transform.Find("FiringPoint").gameObject;
-
-
-
-
-
-    //}
-
-    void FiringParticleSystem(GameObject _projectile)
-    {
-        if(_projectile.name != "Solar_Laser_Projectile")
-        {
-            spitParticleSystem.Play();
-
-        }
-    }
-
-    void HeadBobble()
-    {
-        currentHead.transform.DOLocalRotate(new Vector3(0f, 0f, -rotateAmount),time).SetEase(ease);
-        ExecuteAfterSeconds(time, () => currentHead.transform.DOLocalRotate(new Vector3(0f, 0f, rotateAmount), time).SetEase(ease));
-        ExecuteAfterSeconds(time*2, () => currentHead.transform.DOLocalRotate(new Vector3(0f, 0f, 0), time).SetEase(ease));
-
-    }
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -1156,7 +461,7 @@ public class PlayerController : Singleton<PlayerController>
 
             if (health > 0)
             {
-                missyHitParticle.Play();
+                _PE.missyHitParticle.Play();
                 _PE.VignetteFade();
                 //HeadBobble();
                 _UI.UpdateHealthText(health);
@@ -1182,7 +487,6 @@ public class PlayerController : Singleton<PlayerController>
 
 
         _GM.gameState = GameManager.GameState.Dead;
-        DieAnimation();
         print("I Am DEAD");
 
         //ExecuteAfterSeconds(0.5f, () => playerAvatar.SetActive(false));
@@ -1190,21 +494,7 @@ public class PlayerController : Singleton<PlayerController>
 
     }
 
-    void DieAnimation()
-    {
-
-        missyRightSideAnim.SetBool("Walking", false);
-        missyLeftSideAnim.SetBool("Walking", false);
-        missyFrontSideAnim.SetBool("Walking", false);
-        missyBackSideAnim.SetBool("Walking", false);
-
-        missyRightSideAnim.SetTrigger("Death 0");
-        missyLeftSideAnim.SetTrigger("Death 0");
-        missyFrontSideAnim.SetTrigger("Death 0");
-        missyBackSideAnim.SetTrigger("Death 0");
-    }
-
-
+        
 }
 
 
