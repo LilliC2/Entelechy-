@@ -160,6 +160,10 @@ public class PlayerController : Singleton<PlayerController>
     //audio
     bool playedDeathSound = false;
 
+    [Header("CardinalDirections")]
+    public bool enableCardinalMovement = false;
+    public float cardinalSpeed = 1f;
+
     private void Start()
     {
         firingPointActive = new GameObject[4];
@@ -206,17 +210,24 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Movement
 
-                if(enableMovement)
+                if (enableCardinalMovement)
                 {
-                    move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+                    //move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-                    if (!canFloat)
+                    float horizontalInput = Input.GetAxis("Horizontal");
+                    float verticalInput = Input.GetAxis("Vertical");
+
+                    Vector3 cardinalDirection = Vector3.zero;
+
+                    if (Mathf.Abs(horizontalInput) > Mathf.Abs(verticalInput))
                     {
-                        move.y -= gravity;
+                        cardinalDirection = new Vector3(horizontalInput, 0, 0).normalized;
                     }
-
-                    controller.Move(move * Time.deltaTime * speed);
-
+                    else
+                    {
+                        cardinalDirection = new Vector3(0, 0, verticalInput).normalized;
+                    }
+                    move = cardinalDirection * cardinalSpeed;
 
                     #region isMoving Check
                     //find inpus for movement
@@ -231,8 +242,6 @@ public class PlayerController : Singleton<PlayerController>
 
                     }
 
-
-
                     if (Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.D)) isMoving = true;
                     else isMoving = false;
 
@@ -240,9 +249,8 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         speed = maxSpeed;
                     }
-
-
                 }
+
                 else
                 {
                     move = new Vector3(0, 0, 0);
@@ -250,10 +258,16 @@ public class PlayerController : Singleton<PlayerController>
 
                     controller.Move(move * Time.deltaTime * speed);
 
+                    move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+
+                    if (!canFloat)
+                    {
+                        move.y -= gravity;
+                    }
+
                 }
-
+                controller.Move(move * Time.deltaTime * speed);
                 isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
-
 
                 #endregion
 
@@ -736,7 +750,6 @@ public class PlayerController : Singleton<PlayerController>
                 }
 
                 break;
-
                 
         }
 
