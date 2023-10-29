@@ -169,6 +169,8 @@ MonoBehaviour:
   image: {fileID: 3774905614166515943}
   explosionAnim: {fileID: 0}
   explosionSound: {fileID: 1221330813449595208}
+  initialDamage: 50
+  damageDecayRate: 0.5
 --- !u!114 &7203876690098025589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -181,7 +183,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0b532dbb82a018f4c8fda5cab3ddc4d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  range: 0
+  range: 5
   positionShotFrom: {x: 0, y: 0, z: 0}
 --- !u!82 &296095155406730445
 AudioSource:

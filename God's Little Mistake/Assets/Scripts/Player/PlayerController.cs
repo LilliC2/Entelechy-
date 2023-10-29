@@ -247,11 +247,12 @@ public class PlayerController : Singleton<PlayerController>
 
                 if (Input.GetMouseButton(0))
                 {
-                    if (headItem.itemName == "NULL")
+                    if (headItem.itemName != "NULL")
                     {
                         //call appriopriate attack from attack script
+                        _PA.CallAttack(headItem);
 
-
+                        
                         //ADD KNOCK BACK
                         //    if (knockbackActive)
                         //    {
@@ -302,7 +303,8 @@ public class PlayerController : Singleton<PlayerController>
                         if (headItem.itemName != "NULL" && torsoItem.itemName == "NULL")
                         {
 
-                            
+                            _PA.CallAttack(headItem);
+
 
 
                             //call appriopriate attack from attack script

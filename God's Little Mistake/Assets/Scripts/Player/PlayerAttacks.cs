@@ -1,7 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-public class PlayerAttacks : GameBehaviour
+public class PlayerAttacks : Singleton<PlayerAttacks>
 {
 
 
@@ -44,7 +44,7 @@ public class PlayerAttacks : GameBehaviour
     public void PeaShooterAttack()
     {
         _PE.peaShooterPS.Play();
-        BasicFireProjectile(peaShooterProjectile, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange);
+        BasicFireProjectile(_IM.itemDataBase[0].projectilePF, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange);
 
     }
 
@@ -72,9 +72,9 @@ public class PlayerAttacks : GameBehaviour
                 GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
-                bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
+                //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
                 bullet.GetComponent<RangeDetector>().range = _range;
-                bullet.GetComponent<RangeDetector>().positionShotFrom = transform.position;
+                bullet.GetComponent<RangeDetector>().positionShotFrom = _PC.transform.position;
 
                 //knockbackActive = true;
                 //knockbackStartTime = Time.time;

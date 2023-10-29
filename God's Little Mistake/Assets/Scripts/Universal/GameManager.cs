@@ -54,7 +54,6 @@ public class GameManager : Singleton<GameManager>
         {
             print("Generate new level");
             GenerateLevel();
-            _EM.SpawnEnemiesForLevel();
 
         }
 
@@ -93,12 +92,6 @@ public class GameManager : Singleton<GameManager>
             isPlaying = false;
             isPaused = false;
         }
-
-        //if (Input.GetKeyDown(KeyCode.M) && isPlaying)
-        //{
-        //    gameState = GameState.Dead;
-        //}
-
 
 
     }
@@ -216,8 +209,11 @@ public class GameManager : Singleton<GameManager>
 
         //move player to room
         player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z);
-        print("Player is at " + player.transform.position);
-        print("Spawan is at " + new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z));
+        //print("Player is at " + player.transform.position);
+        //print("Spawan is at " + new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z));
+
+        _EM.SpawnEnemiesForLevel();
+
     }
 
     void ClearPreviousLevel()

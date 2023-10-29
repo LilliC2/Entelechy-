@@ -31,26 +31,28 @@ public class EnemyManager : Singleton<EnemyManager>
 
         foreach (var spawnPoint in spawnPoints)
         {
+            print(spawnPoint.name);
             //var enemyTypeR = Random.Range(0, enemyTypes.Length); // last digit excluded
 
-            var r = Random.Range(0, 8);
+            //var r = Random.Range(0, 8);
+            GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[1], typeof(GameObject)), spawnPoint.transform.position,new Quaternion(0, 0, 0,0)) as GameObject;
 
             //chompers
-            if(r <= 4)
-            {
-                GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[2], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
+            //if(r <= 4)
+            //{
+            //    GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[2], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
 
-            }
-            else if(r >4 && r <=6)
-            {
-                GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[1], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
+            //}
+            //else if(r >4 && r <=6)
+            //{
+            //    GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[1], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
 
-            }
-            else
-            {
-                GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[0], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
+            //}
+            //else
+            //{
+            //    GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[0], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
 
-            }
+            //}
 
             //print("Spawn: Enemy" + enemyTypes[enemyTypeR]);
 

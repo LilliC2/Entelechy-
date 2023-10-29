@@ -21,6 +21,8 @@ public class PlayerEffects : Singleton<PlayerEffects>
     public bool vigABbool = false;
     public float speedVig;
     bool resetSpeedVig = true;
+    [SerializeReference]
+    VolumeProfile profile;
 
     [Header("Pea Shooter Particle")]
     public ParticleSystem peaShooterPS;
@@ -32,7 +34,6 @@ public class PlayerEffects : Singleton<PlayerEffects>
     private void Start()
     {
         //make sure it starts at 0
-        VolumeProfile profile = GetComponent<Volume>().sharedProfile;
         profile.TryGet<Vignette>(out var vig);
         if (vig != null)
         {
@@ -49,7 +50,6 @@ public class PlayerEffects : Singleton<PlayerEffects>
         {
             resetSpeedVig = true;
 
-            VolumeProfile profile = GetComponent<Volume>().sharedProfile;
 
             //get volume profile reference
             profile.TryGet<Vignette>(out var vig);

@@ -18,6 +18,7 @@ public class GameBehaviour : LC.Behaviour //inherits from
     protected static AudioManager _AM { get { return AudioManager.INSTANCE; } }
     protected static PauseFunctionality _PF { get { return PauseFunctionality.INSTANCE; } }
     protected static RandomiseProps _RP { get { return RandomiseProps.INSTANCE; } }
+    protected static PlayerAttacks _PA { get { return PlayerAttacks.INSTANCE; } }
 
    
 
