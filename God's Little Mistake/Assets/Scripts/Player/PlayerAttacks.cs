@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-
 public class PlayerAttacks : GameBehaviour
 {
 
@@ -17,13 +16,13 @@ public class PlayerAttacks : GameBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+
     }
 
     public void CallAttack(Item _item)
@@ -35,9 +34,9 @@ public class PlayerAttacks : GameBehaviour
                 PeaShooterAttack();
 
                 break;
-        
-        
-        
+
+
+
         }
 
     }
@@ -45,7 +44,7 @@ public class PlayerAttacks : GameBehaviour
     public void PeaShooterAttack()
     {
         _PE.peaShooterPS.Play();
-        BasicFireProjectile(peaShooterProjectile,_IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange);
+        BasicFireProjectile(peaShooterProjectile, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange);
 
     }
 
