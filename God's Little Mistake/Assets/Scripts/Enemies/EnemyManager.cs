@@ -31,7 +31,6 @@ public class EnemyManager : Singleton<EnemyManager>
 
         foreach (var spawnPoint in spawnPoints)
         {
-            print(spawnPoint.name);
             //var enemyTypeR = Random.Range(0, enemyTypes.Length); // last digit excluded
 
             //var r = Random.Range(0, 8);
