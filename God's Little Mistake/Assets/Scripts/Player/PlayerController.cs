@@ -245,7 +245,7 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Attacks
 
-                if (Input.GetMouseButton(0))
+                if (Input.GetMouseButtonDown(0))
                 {
                     if (headItem.itemName != "NULL")
                     {
@@ -298,7 +298,7 @@ public class PlayerController : Singleton<PlayerController>
                         }
                     }
 
-                    if (Input.GetMouseButton(1))
+                    if (Input.GetMouseButtonDown(1))
                     {
                         if (headItem.itemName != "NULL" && torsoItem.itemName == "NULL")
                         {

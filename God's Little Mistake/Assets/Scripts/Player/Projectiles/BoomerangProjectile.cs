@@ -27,13 +27,11 @@ public class BoomerangProjectile : GameBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        //totalDistance = _PC.projectileRange;
+        totalDistance = _IM.itemDataBase[2].projectileRange*2;
         halfway = totalDistance / 2;
 
         playerPosWhenThrown = _PC.transform.position;
 
-        print("total distance: " + totalDistance);
-        print("half distance: " + halfway);
     }
 
     // Update is called once per frame
@@ -51,13 +49,13 @@ public class BoomerangProjectile : GameBehaviour
 
             rb.velocity = Vector3.zero;
             rb.angularVelocity = Vector3.zero;
-            //transform.position = Vector3.MoveTowards(transform.position, new Vector3(_PC.transform.position.x, _PC.transform.position.y + 1, _PC.transform.position.z), Time.deltaTime * _PC.projectileSpeed/50);
+            transform.position = Vector3.MoveTowards(transform.position, new Vector3(_PC.transform.position.x, _PC.transform.position.y + 1, _PC.transform.position.z), Time.deltaTime * _IM.itemDataBase[2].projectileSpeed / 50);
         }
         if(!turn && Vector3.Distance(_PC.transform.position, transform.position) < 1.5f)
         {
-            Destroy(this.gameObject);
+            _PA.returned = true;
+            Destroy(gameObject);
         }
-
 
     }
 
@@ -67,14 +65,16 @@ public class BoomerangProjectile : GameBehaviour
         {
             //explosionAnimOB.SetActive(true);
 
-            image.SetActive(false);
-            print("Destroy Projectile");
-            //ooze animation
-            explosionAnim.SetTrigger("Death");
+            //image.SetActive(false);
+            //print("Destroy Projectile");
+            ////ooze animation
+            //explosionAnim.SetTrigger("Death");
 
 
-            rb.velocity = Vector3.zero;
-            Destroy(this.gameObject);
+            //rb.velocity = Vector3.zero;
+            //Destroy(this.gameObject);
+
+            collision.gameObject.GetComponent<BaseEnemy>().Hit(_IM.itemDataBase[2].dmg);
 
             //get dmg from enemy
             //Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);

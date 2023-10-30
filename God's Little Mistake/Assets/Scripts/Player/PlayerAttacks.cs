@@ -9,9 +9,8 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     public Vector3 target;
     bool projectileShot;
 
-    [Header("Pea Shooter Projectile")]
-    public GameObject peaShooterProjectile;
-
+    [Header("Sabertooth Projectile")]
+    public bool returned = true;
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +33,14 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 PeaShooterAttack();
 
                 break;
+            
+            case 2: //Sabertooth
+
+                print("Saberooth");
+
+                SabertoothAttack();
+
+                break;
 
 
 
@@ -48,6 +55,17 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     }
 
+    public void SabertoothAttack()
+    {
+        if(returned)
+        {
+            returned = false;
+            BasicFireProjectile(_IM.itemDataBase[2].projectilePF, _IM.itemDataBase[2].projectileSpeed, _IM.itemDataBase[2].firerate, _IM.itemDataBase[2].projectileRange);
+            ExecuteAfterSeconds(1, () => returned = true);
+        }
+        
+
+    }
 
     public void BasicFireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
     {
