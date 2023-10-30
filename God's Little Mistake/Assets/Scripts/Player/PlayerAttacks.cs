@@ -55,6 +55,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     }
 
+
+
+
     public void SabertoothAttack()
     {
         if(returned)
@@ -64,6 +67,24 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             ExecuteAfterSeconds(1, () => returned = true);
         }
         
+
+    }
+
+    public void BasicLobProjectile(float _range, float _projectileSpeed)
+    {
+
+        //get target position
+        var x = _range * Mathf.Cos(_PC.directional.transform.rotation.y * Mathf.Deg2Rad);
+        var y = _range * Mathf.Sign(_PC.directional.transform.rotation.y * Mathf.Deg2Rad);
+        Vector3 targetPos = _PC.transform.position;
+        targetPos.x += x;
+        targetPos.y += y;
+
+        //https://gamedev.stackexchange.com/questions/114522/how-can-i-launch-a-gameobject-at-a-target-if-i-am-given-everything-except-for-it
+
+        float gSquared = Physics.gravity.sqrMagnitude;
+        float b = _projectileSpeed * _projectileSpeed + Vector3.Dot(targetPos, Physics.gravity);
+
 
     }
 

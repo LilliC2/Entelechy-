@@ -237,8 +237,8 @@ public class PlayerController : Singleton<PlayerController>
                     Vector3 targetPos = new Vector3(hit.point.x, this.transform.position.y, hit.point.z);
 
                     directional.transform.LookAt(targetPos);
-                    Mathf.Clamp(directional.transform.rotation.x, 0, 0);
-                    Mathf.Clamp(directional.transform.rotation.z, 0, 0);
+                    //Mathf.Clamp(directional.transform.rotation.x, 0, 0);
+                    //Mathf.Clamp(directional.transform.rotation.z, 0, 0);
                 }
 
                 #endregion
