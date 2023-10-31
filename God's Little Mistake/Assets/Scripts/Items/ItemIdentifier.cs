@@ -190,16 +190,20 @@ public class ItemIdentifier : GameBehaviour
 
         isHovering = true;
 
-        _UI.statPop.SetActive(true);
-        _UI.statPop.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-        _UI.PlayPopupOpen();
-        _UI.UpdateItemPopUp(itemInfo);
-        //anim.SetTrigger("Open");
-        _UI.arrowComp.SetActive(true);
+        _PM.popupPanel.SetActive(true);
+        _PM.popupPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        _PM.UpdateItemPopUp(itemInfo);
 
-        print("its Not an arm");
-        _UI.statComp1.SetActive(true);
-        _UI.statComp2.SetActive(false);
+        //_UI.statPop.SetActive(true);
+        //_UI.statPop.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+        //_UI.PlayPopupOpen();
+        //_UI.UpdateItemPopUp(itemInfo);
+        ////anim.SetTrigger("Open");
+        //_UI.arrowComp.SetActive(true);
+
+        //print("its Not an arm");
+        //_UI.statComp1.SetActive(true);
+        //_UI.statComp2.SetActive(false);
 
         Item itemMatch = new();
 
@@ -219,10 +223,10 @@ public class ItemIdentifier : GameBehaviour
                 break;
 
         }
-        _UI.PlayPopup1Open();
-        //anim1.SetTrigger("Open");
+        //_UI.PlayPopup1Open();
+        ////anim1.SetTrigger("Open");
 
-        _UI.UpdateItemPopUpComp1(itemMatch);
+        //_UI.UpdateItemPopUpComp1(itemMatch);
 
 
         //var match = _UI.SearchForItemMatch(itemInfo);
@@ -266,13 +270,15 @@ public class ItemIdentifier : GameBehaviour
         //anim.SetTrigger("Close");
         //anim1.SetTrigger("Close");
 
-        _UI.PlayPopupClose();
-        _UI.PlayPopup1Close();
-        _UI.PlayPopup2Close();
-        _UI.popupContent.SetActive(false);
-        _UI.popupContent.SetActive(false);
-        _UI.popupContent2.SetActive(false);
-        ExecuteAfterSeconds(1, () => TurnOff());
+        _PM.popupPanel.SetActive(false);
+
+        //_UI.PlayPopupClose();
+        //_UI.PlayPopup1Close();
+        //_UI.PlayPopup2Close();
+        //_UI.popupContent.SetActive(false);
+        //_UI.popupContent.SetActive(false);
+        //_UI.popupContent2.SetActive(false);
+        //ExecuteAfterSeconds(1, () => TurnOff());
 
 
     }
