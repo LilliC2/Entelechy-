@@ -29,6 +29,7 @@ public class PopupManager : Singleton<PopupManager>
     public GameObject headGlow;
     public GameObject torsoGlow;
     public GameObject legsGlow;
+    public Image holdFill;
 
     [Header("Comparison Pop up")]
     public GameObject popupPanel2;
@@ -58,6 +59,8 @@ public class PopupManager : Singleton<PopupManager>
     {
         popupPanel.SetActive(false);
         popupPanel2.SetActive(false);
+        critGood.SetActive(false);
+        critBad.SetActive(false);
     }
 
     // Update is called once per frame
@@ -83,6 +86,47 @@ public class PopupManager : Singleton<PopupManager>
             headGlow.SetActive(true);
             torsoGlow.SetActive(false);
             legsGlow.SetActive(false);
+
+            //Check if player has an item on the slot
+            if(_PC.headItem != null)
+            {
+                popupPanel2.SetActive(true);
+                damagePanel2.SetActive(true);
+                damageText2.text = _PC.headItem.dmg.ToString();
+                critPanel2.SetActive(true);
+                damageText2.text = _PC.headItem.critChance.ToString();
+                speedPanel2.SetActive(false);
+
+                //set glow indicator
+                headGlow2.SetActive(true);
+                torsoGlow2.SetActive(false);
+                legsGlow2.SetActive(false);
+
+                if(_hoverItem.dmg < _PC.headItem.dmg)
+                {
+                    critBad.SetActive(true);
+                    critGood.SetActive(false);
+                }
+
+                if (_hoverItem.dmg == _PC.headItem.dmg)
+                {
+                    critBad.SetActive(false);
+                    critGood.SetActive(false);
+                }
+
+                if (_hoverItem.dmg > _PC.headItem.dmg)
+                {
+                    critBad.SetActive(false);
+                    critGood.SetActive(true);
+                }
+
+
+            }
+            else
+            {
+                popupPanel2.SetActive(false);
+            }
+
         }
 
         if (_hoverItem.segment == Item.Segment.Torso)
@@ -97,6 +141,26 @@ public class PopupManager : Singleton<PopupManager>
             headGlow.SetActive(false);
             torsoGlow.SetActive(true);
             legsGlow.SetActive(false);
+
+            //Check if player has an item on the slot
+            if (_PC.torsoItem != null)
+            {
+                popupPanel2.SetActive(true);
+                damagePanel2.SetActive(true);
+                damageText2.text = _PC.torsoItem.dmg.ToString();
+                critPanel2.SetActive(true);
+                damageText2.text = _PC.torsoItem.critChance.ToString();
+                speedPanel2.SetActive(false);
+
+                //set glow indicator
+                headGlow2.SetActive(false);
+                torsoGlow2.SetActive(true);
+                legsGlow2.SetActive(false);
+            }
+            else
+            {
+                popupPanel2.SetActive(false);
+            }
         }
 
         if (_hoverItem.segment == Item.Segment.Legs)
@@ -109,9 +173,33 @@ public class PopupManager : Singleton<PopupManager>
             headGlow.SetActive(false);
             torsoGlow.SetActive(false);
             legsGlow.SetActive(true);
+
+            //Check if player has an item on the slot
+            if (_PC.legItem != null)
+            {
+                popupPanel2.SetActive(true);
+                damagePanel2.SetActive(true);
+                damageText2.text = _PC.legItem.dmg.ToString();
+                critPanel2.SetActive(true);
+                damageText2.text = _PC.legItem.critChance.ToString();
+                speedPanel2.SetActive(false);
+
+                //set glow indicator
+                headGlow2.SetActive(false);
+                torsoGlow2.SetActive(false);
+                legsGlow2.SetActive(true);
+            }
+            else
+            {
+                popupPanel2.SetActive(false);
+            }
         }
 
+        
+
     }
+
+
 
     //public void UpdateItemPopUp(Item _hoverItem)
     //{
