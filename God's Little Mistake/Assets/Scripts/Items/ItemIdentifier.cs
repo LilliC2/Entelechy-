@@ -172,6 +172,9 @@ public class ItemIdentifier : GameBehaviour
             print("player");
             inRange = true;
 
+            _PM.popupPanel.SetActive(true);
+            _PM.popupPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+            _PM.UpdateItemPopUp(itemInfo);
         }
     }
 
@@ -181,107 +184,109 @@ public class ItemIdentifier : GameBehaviour
         {
             print("player");
             inRange = false;
-        }
-    }
-
-    public void OnMouseOver()
-    {
-        print("ENTER");
-
-        isHovering = true;
-
-        _PM.popupPanel.SetActive(true);
-        _PM.popupPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-        _PM.UpdateItemPopUp(itemInfo);
-
-        //_UI.statPop.SetActive(true);
-        //_UI.statPop.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-        //_UI.PlayPopupOpen();
-        //_UI.UpdateItemPopUp(itemInfo);
-        ////anim.SetTrigger("Open");
-        //_UI.arrowComp.SetActive(true);
-
-        //print("its Not an arm");
-        //_UI.statComp1.SetActive(true);
-        //_UI.statComp2.SetActive(false);
-
-        Item itemMatch = new();
-
-        switch (itemInfo.segment)
-        {
-            case Item.Segment.Head:
-                if (_PC.headItem != null) itemMatch = _PC.headItem;
-
-                break;
-            case Item.Segment.Torso:
-                if (_PC.torsoItem != null) itemMatch = _PC.torsoItem;
-
-                break;
-            case Item.Segment.Legs:
-                if (_PC.legItem != null) itemMatch = _PC.legItem;
-
-                break;
-
-        }
-        //_UI.PlayPopup1Open();
-        ////anim1.SetTrigger("Open");
-
-        //_UI.UpdateItemPopUpComp1(itemMatch);
-
-
-        //var match = _UI.SearchForItemMatch(itemInfo);
-
-
-        //foreach (var item in match)
-        //{
-        //    if (item != null)
-        //    {
-        //        print("ITS A MATCH");
-        //        _UI.statComp1.SetActive(true);
-        //        anim1.SetTrigger("Open");
-        //        _UI.arrowComp.SetActive(true);
-        //        _UI.UpdateItemPopUpComp1(itemInfo);
-        //    }
-        //}
-
-        //foreach (var item in _PC.playerInventory)
-        //{
-        //    if (item.segment == itemInfo.segment)
-        //    {
-        //        print("ITS A MATCH");
-        //        _UI.statComp1.SetActive(true);
-        //        anim1.SetTrigger("Open");
-        //        _UI.arrowComp.SetActive(true);
-        //        _UI.UpdateItemPopUpComp1(itemInfo);
-        //    }
-
-
-
-        //}
-    }
-
-    public void OnMouseExit()
-    {
-        isHovering = false;
-
-        print("EXIT");
-        //anim.ResetTrigger("Open");
-        //anim1.ResetTrigger("Open");
-        //anim.SetTrigger("Close");
-        //anim1.SetTrigger("Close");
 
         _PM.popupPanel.SetActive(false);
-
-        //_UI.PlayPopupClose();
-        //_UI.PlayPopup1Close();
-        //_UI.PlayPopup2Close();
-        //_UI.popupContent.SetActive(false);
-        //_UI.popupContent.SetActive(false);
-        //_UI.popupContent2.SetActive(false);
-        //ExecuteAfterSeconds(1, () => TurnOff());
-
-
+        }
     }
+
+    //public void OnMouseOver()
+    //{
+    //    print("ENTER");
+
+    //    isHovering = true;
+
+    //    _PM.popupPanel.SetActive(true);
+    //    _PM.popupPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+    //    _PM.UpdateItemPopUp(itemInfo);
+
+    //    //_UI.statPop.SetActive(true);
+    //    //_UI.statPop.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+    //    //_UI.PlayPopupOpen();
+    //    //_UI.UpdateItemPopUp(itemInfo);
+    //    ////anim.SetTrigger("Open");
+    //    //_UI.arrowComp.SetActive(true);
+
+    //    //print("its Not an arm");
+    //    //_UI.statComp1.SetActive(true);
+    //    //_UI.statComp2.SetActive(false);
+
+    //    Item itemMatch = new();
+
+    //    switch (itemInfo.segment)
+    //    {
+    //        case Item.Segment.Head:
+    //            if (_PC.headItem != null) itemMatch = _PC.headItem;
+
+    //            break;
+    //        case Item.Segment.Torso:
+    //            if (_PC.torsoItem != null) itemMatch = _PC.torsoItem;
+
+    //            break;
+    //        case Item.Segment.Legs:
+    //            if (_PC.legItem != null) itemMatch = _PC.legItem;
+
+    //            break;
+
+    //    }
+    //    //_UI.PlayPopup1Open();
+    //    ////anim1.SetTrigger("Open");
+
+    //    //_UI.UpdateItemPopUpComp1(itemMatch);
+
+
+    //    //var match = _UI.SearchForItemMatch(itemInfo);
+
+
+    //    //foreach (var item in match)
+    //    //{
+    //    //    if (item != null)
+    //    //    {
+    //    //        print("ITS A MATCH");
+    //    //        _UI.statComp1.SetActive(true);
+    //    //        anim1.SetTrigger("Open");
+    //    //        _UI.arrowComp.SetActive(true);
+    //    //        _UI.UpdateItemPopUpComp1(itemInfo);
+    //    //    }
+    //    //}
+
+    //    //foreach (var item in _PC.playerInventory)
+    //    //{
+    //    //    if (item.segment == itemInfo.segment)
+    //    //    {
+    //    //        print("ITS A MATCH");
+    //    //        _UI.statComp1.SetActive(true);
+    //    //        anim1.SetTrigger("Open");
+    //    //        _UI.arrowComp.SetActive(true);
+    //    //        _UI.UpdateItemPopUpComp1(itemInfo);
+    //    //    }
+
+
+
+    //    //}
+    //}
+
+    //public void OnMouseExit()
+    //{
+    //    isHovering = false;
+
+    //    print("EXIT");
+    //    //anim.ResetTrigger("Open");
+    //    //anim1.ResetTrigger("Open");
+    //    //anim.SetTrigger("Close");
+    //    //anim1.SetTrigger("Close");
+
+    //    _PM.popupPanel.SetActive(false);
+
+    //    //_UI.PlayPopupClose();
+    //    //_UI.PlayPopup1Close();
+    //    //_UI.PlayPopup2Close();
+    //    //_UI.popupContent.SetActive(false);
+    //    //_UI.popupContent.SetActive(false);
+    //    //_UI.popupContent2.SetActive(false);
+    //    //ExecuteAfterSeconds(1, () => TurnOff());
+
+
+    //}
 
     public void TurnOff()
     {
