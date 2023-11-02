@@ -41,6 +41,14 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 SabertoothAttack();
 
                 break;
+                
+            case 3: //Sabertooth
+
+                print("Lob");
+
+                BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].projectilePF);
+
+                break;
 
 
 
@@ -70,20 +78,17 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     }
 
-    public void BasicLobProjectile(float _range, float _projectileSpeed)
+    public void BasicLobProjectile(float _range, float _projectileSpeed, GameObject _prefab)
     {
 
-        //get target position
-        var x = _range * Mathf.Cos(_PC.directional.transform.rotation.y * Mathf.Deg2Rad);
-        var y = _range * Mathf.Sign(_PC.directional.transform.rotation.y * Mathf.Deg2Rad);
-        Vector3 targetPos = _PC.transform.position;
-        targetPos.x += x;
-        targetPos.y += y;
+        GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
 
-        //https://gamedev.stackexchange.com/questions/114522/how-can-i-launch-a-gameobject-at-a-target-if-i-am-given-everything-except-for-it
+        //Py =0
+        //Px = _range
+        //A = launch point
+        //H = max vertical displacement
+        //g = -17 m/s2
 
-        float gSquared = Physics.gravity.sqrMagnitude;
-        float b = _projectileSpeed * _projectileSpeed + Vector3.Dot(targetPos, Physics.gravity);
 
 
     }
