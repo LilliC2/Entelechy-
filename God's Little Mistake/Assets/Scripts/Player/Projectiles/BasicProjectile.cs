@@ -14,17 +14,31 @@ public class BasicProjectile : GameBehaviour
     [SerializeField]
     AudioSource explosionSound;
 
-    public float initialDamage = 50f; 
-    public float damageDecayRate = 0.5f;
+    public float initialDamage;
+    public float maxDistance = 10.0f; 
+    private Vector3 startPosition;
+
 
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
         explosionAnim = explosionAnimOB.GetComponent<Animator>();
+        startPosition = transform.position;
     }
 
     private void Update()
     {
+        // Calculate the distance traveled
+        float distanceTraveled = Vector3.Distance(startPosition, transform.position);
+
+        // Calculate the damage based on distance
+        float currentDamage = initialDamage * (1.0f - distanceTraveled / maxDistance);
+
+        // Ensure damage doesn't go below 0
+        currentDamage = Mathf.Max(currentDamage, 0.0f);
+
+        // Debug.Log the damage for testing purposes
+        Debug.Log("Damage dealt: " + currentDamage);
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -32,11 +46,10 @@ public class BasicProjectile : GameBehaviour
         if (collision.collider.CompareTag("Enemy"))
         {
 
-            // how much damage falls off
-            float currentDamage = initialDamage * (1.0f - damageDecayRate);
-
-            // so it doesnt do 0 damage
+            float distanceTraveled = Vector3.Distance(startPosition, transform.position);
+            float currentDamage = initialDamage * (1.0f - distanceTraveled / maxDistance);
             currentDamage = Mathf.Max(currentDamage, 0.0f);
+
             Debug.Log("Damage dealt: " + currentDamage);
 
             //explosionAnimOB.SetActive(true);
