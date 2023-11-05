@@ -54,6 +54,12 @@ public class PopupManager : Singleton<PopupManager>
     public GameObject torsoGlow2;
     public GameObject legsGlow2;
 
+    [Header("Comparison Pop up")]
+    public Image holdEFill;
+    public float startTimer;
+    public float holdTimer = 2f;
+    public bool isTiming;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -61,12 +67,53 @@ public class PopupManager : Singleton<PopupManager>
         popupPanel2.SetActive(false);
         critGood.SetActive(false);
         critBad.SetActive(false);
+        isTiming = false;
+        holdEFill.fillAmount = 0;
     }
 
     // Update is called once per frame
     void Update()
     {
-        
+        //if (Input.GetKeyDown(KeyCode.E))
+        //{
+        //    startTimer = Time.time;
+        //}
+
+        //if (Input.GetKey(KeyCode.E))
+        //{
+        //    if (startTimer + holdTimer >= Time.time)
+        //        Debug.Log("It Works Great!");
+        //    holdEFill.fillAmount = startTimer / holdTimer;
+        //}
+        //else
+        //{
+        //    holdEFill.fillAmount = 1;
+        //}
+
+        if(Input.GetKeyDown(KeyCode.E))
+        {
+            isTiming = true;
+        }
+
+        if (Input.GetKeyUp(KeyCode.E))
+        {
+            isTiming = false;
+            holdEFill.fillAmount = 0;
+            startTimer = 0;
+        }
+
+        if (isTiming)
+        {
+            startTimer += Time.deltaTime;
+            holdEFill.fillAmount = startTimer / holdTimer;
+
+            if(startTimer > holdTimer)
+            {
+                isTiming = false;
+                holdEFill.fillAmount = 1;
+                startTimer = 0;
+            }
+        }
     }
 
     public void UpdateItemPopUp(Item _hoverItem)
