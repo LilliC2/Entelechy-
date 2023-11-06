@@ -50,6 +50,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 break;
 
+            case 4: //Squito
+
+                SquitoAttack();
+
+                break;
+
 
 
         }
@@ -60,6 +66,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     {
         _PE.peaShooterPS.Play();
         BasicFireProjectile(_IM.itemDataBase[0].projectilePF, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange);
+
+    }
+    
+    public void SquitoAttack()
+    {
+        BasicFireProjectile(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange);
 
     }
 

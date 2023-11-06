@@ -245,7 +245,7 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Attacks
 
-                if (Input.GetButtonDown("Fire1"))
+                if (Input.GetButton("Fire1"))
                 {
                     if (headItem.itemName != "NULL")
                     {
@@ -265,7 +265,7 @@ public class PlayerController : Singleton<PlayerController>
 
                 }
 
-                if (Input.GetButtonDown("Fire2"))
+                if (Input.GetButton("Fire2"))
                 {
                     if (torsoItem.itemName != "NULL")
                     {
