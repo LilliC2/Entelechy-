@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAbilities : GameBehaviour
+public class PlayerAbilities : Singleton<PlayerAbilities>
 {
 
     public int tripodCooldownTime;
@@ -68,9 +68,10 @@ public class PlayerAbilities : GameBehaviour
         }
 
         #endregion
+
     }
 
-    void CallAbility(Item _item)
+    public void CallAbility(Item _item)
     {
         if(!isOnCoolDown)
         {
@@ -87,7 +88,16 @@ public class PlayerAbilities : GameBehaviour
 
     public void NubsAbility()
     {
+        isOnCoolDown = true;
         Dash(3, 0.3f);
+
+        ////OPTIONAL: Invunerable while dashing
+        _PC.immortal = true;
+        ExecuteAfterSeconds(0.3f, () => _PC.immortal = false);
+
+        ActivateCooldownUI(nubsCooldownTime);
+        ExecuteAfterSeconds(nubsCooldownTime, () => isOnCoolDown = false);
+
     }
 
     public void TripodAbility()

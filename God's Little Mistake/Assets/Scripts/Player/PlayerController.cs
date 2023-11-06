@@ -250,14 +250,14 @@ public class PlayerController : Singleton<PlayerController>
                     if (headItem.itemName != "NULL")
                     {
                         //call appriopriate attack from attack script
-                        _PA.CallAttack(headItem);
+                        _PAtk.CallAttack(headItem);
 
                     }
                     //if no head item, torso attack is also bound to m0
                     if (headItem.itemName == "NULL" && torsoItem.itemName != "NULL")
                     {
 
-                        _PA.CallAttack(torsoItem);
+                        _PAtk.CallAttack(torsoItem);
 
 
                     }
@@ -270,20 +270,21 @@ public class PlayerController : Singleton<PlayerController>
                     if (torsoItem.itemName != "NULL")
                     {
                         //call appriopriate attack from attack script
-                        _PA.CallAttack(torsoItem);
+                        _PAtk.CallAttack(torsoItem);
 
                     }
                     //if no head item, torso attack is also bound to m0
                     if (torsoItem.itemName == "NULL" && headItem.itemName != "NULL")
                     {
 
-                        _PA.CallAttack(headItem);
+                        _PAtk.CallAttack(headItem);
 
 
                     }
 
 
                 }
+                #endregion
 
                 if (health <= 0)
                 {
@@ -293,13 +294,23 @@ public class PlayerController : Singleton<PlayerController>
 
                 lastPos = transform.position;
 
-                break;
+                #region Ability
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    _PAbl.CallAbility(legItem);
+                }
 
                 #endregion
 
- 
+                break;
+
+
+
 
         }
+
+
     }
 
         

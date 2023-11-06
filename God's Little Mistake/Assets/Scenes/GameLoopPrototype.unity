@@ -4043,6 +4043,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.ID
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.ID
       value: 0
       objectReference: {fileID: 0}
@@ -4052,7 +4056,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.ID
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.icon
@@ -4060,7 +4064,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.dmg
-      value: 20
+      value: 60
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.icon
@@ -4070,6 +4074,10 @@ PrefabInstance:
       propertyPath: headFiringPoint
       value: 
       objectReference: {fileID: 575509827}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: headItem.segment
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoFiringPoint
       value: 
@@ -4088,11 +4096,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: deb623ef3ada87f4092553f9f2938cb0, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.firerate
-      value: 1
+      value: 0.016666668
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.itemName
-      value: Lob
+      value: Squito
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.critChance
@@ -4108,7 +4116,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.critChance
-      value: 17
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.projectile
@@ -4125,7 +4133,7 @@ PrefabInstance:
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.projectilePF
       value: 
-      objectReference: {fileID: 1753417278855635134, guid: 3c79b25e1dc54074ab1e23e354351e05, type: 3}
+      objectReference: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.projectileRange
       value: 5
@@ -4136,11 +4144,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.projectileRange
-      value: 5
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.projectileSpeed
-      value: 700
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 3564803423564108524, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: m_RootOrder
@@ -5687,6 +5695,30 @@ MonoBehaviour:
     projectile: 1
     projectileSpeed: 700
     projectilePF: {fileID: 1753417278855635134, guid: 3c79b25e1dc54074ab1e23e354351e05, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
+    pauseIcon: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Squito
+    ID: 4
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 60
+    firerate: 2
+    critChance: 30
+    projectileRange: 10
+    projectile: 1
+    projectileSpeed: 3000
+    projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
     movementSpeed: 0
     modifier: 0
     modifierID: 0
