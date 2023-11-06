@@ -46,7 +46,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 print("Lob");
 
-                BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].projectilePF);
+                BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF);
 
                 break;
 
@@ -83,14 +83,24 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
         GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
 
-        //Py =0
-        //Px = _range
-        //A = launch point
-        //H = max vertical displacement
-        //g = -17 m/s2
+        bullet.GetComponent<CurveProjectile>().Shoot();
+
+        //bullet.GetComponent<CurveProjectile>().angle = _PC.directional.transform.rotation.y;
 
 
 
+    }
+
+    Vector3 CalculateTarget(Vector3 _originalPos, float _distance, float _angle)
+    {
+        // Convert the angle from degrees to radians
+        float angleInRadians = _angle * Mathf.Deg2Rad;
+
+        // Calculate the new position
+        float newX = _originalPos.x + _distance * Mathf.Cos(angleInRadians);
+        float newY = _originalPos.y + _distance * Mathf.Sin(angleInRadians);
+
+        return new Vector3(newX, newY, _originalPos.z);
     }
 
     public void BasicFireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
