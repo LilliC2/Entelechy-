@@ -21,6 +21,15 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
     public float dashDuration;
     public float dashPower;
 
+    [Header("Basic Dash")]
+    bool spawnedTrail;
+    [SerializeField]
+    GameObject slugLeg_trail;
+    bool spawningSlugTrail;
+    [SerializeField]
+    float timeBetweenTrail;
+    [SerializeField]
+    int slugCooldownTime;
 
     bool isOnCoolDown;
 
@@ -69,6 +78,19 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
 
         #endregion
 
+        #region Slug Trail
+        if(spawningSlugTrail)
+        {
+            if (!spawnedTrail)
+            {
+                spawnedTrail = true;
+                GameObject trail = Instantiate(slugLeg_trail, _PC.transform.position, Quaternion.identity);
+                ExecuteAfterSeconds(timeBetweenTrail, () => spawnedTrail = false);
+            }
+        }
+        
+
+        #endregion
     }
 
     public void CallAbility(Item _item)
@@ -83,6 +105,11 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
                     break;
                 case 5:
                     TripodAbility();
+
+                    break;
+                
+                case 6:
+                    SlugAbility();
 
                     break;
             }
@@ -122,9 +149,17 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
         ExecuteAfterSeconds(tripodCooldownTime, () => isOnCoolDown = false);
     }
 
-    public void SlugLegs()
+    public void SlugAbility()
     {
+        isOnCoolDown = true;
+        ActivateCooldownUI(slugCooldownTime);
 
+
+        spawningSlugTrail = true;
+        ExecuteAfterSeconds(slugCooldownTime, () => isOnCoolDown = false);
+
+        ExecuteAfterSeconds(5, () => spawningSlugTrail = false);
+  
     }
 
     void HoverAbility()

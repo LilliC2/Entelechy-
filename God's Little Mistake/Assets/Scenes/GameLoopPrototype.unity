@@ -973,6 +973,9 @@ MonoBehaviour:
   dashEase: 0
   dashDuration: 0
   dashPower: 0
+  slugLeg_trail: {fileID: 407576363337914560, guid: 13b8e7665c8a19e4fb7b2978f8af9b43, type: 3}
+  timeBetweenTrail: 0.5
+  slugCooldownTime: 5
 --- !u!114 &861438006 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4210229933422567471, guid: b91119e8c48623347bb2a5f842a39fef, type: 3}
@@ -4143,7 +4146,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: legItem.ID
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.ID
@@ -4153,6 +4156,10 @@ PrefabInstance:
       propertyPath: headItem.dmg
       value: 10
       objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.ID
       value: 4
@@ -4178,6 +4185,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.itemName
+      value: Slug Legs
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoFiringPoint
       value: 
       objectReference: {fileID: 2113221676}
@@ -4189,6 +4200,10 @@ PrefabInstance:
       propertyPath: headItem.itemName
       value: Pea Shooter
       objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.pauseIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 5789cd456c8a56149a671a4f49fcdec5, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.pauseIcon
       value: 
@@ -4225,6 +4240,10 @@ PrefabInstance:
       propertyPath: headItem.projectilePF
       value: 
       objectReference: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.movementSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.movementSpeed
       value: 0
@@ -5853,6 +5872,30 @@ MonoBehaviour:
     modifierID: 0
     icon: {fileID: 21300000, guid: 00a1cca442778f14b802193952c053d9, type: 3}
     pauseIcon: {fileID: 21300000, guid: 26c1a1497086fba4bb74694bddf81abc, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Slug Legs
+    ID: 6
+    lvl: 0
+    segment: 2
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 3
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 5789cd456c8a56149a671a4f49fcdec5, type: 3}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
