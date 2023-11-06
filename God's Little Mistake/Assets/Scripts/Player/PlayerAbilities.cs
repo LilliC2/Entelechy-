@@ -81,6 +81,10 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
                     NubsAbility();
 
                     break;
+                case 5:
+                    TripodAbility();
+
+                    break;
             }
         }
 

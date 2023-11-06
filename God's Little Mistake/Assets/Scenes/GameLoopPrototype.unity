@@ -921,6 +921,58 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3978244213157156265, guid: b91119e8c48623347bb2a5f842a39fef, type: 3}
   m_PrefabInstance: {fileID: 5226408723961275394}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &861033340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 861033341}
+  - component: {fileID: 861033342}
+  m_Layer: 0
+  m_Name: PlayerAbilities
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &861033341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861033340}
+  m_LocalRotation: {x: -0, y: -0.012097381, z: -0, w: 0.99992687}
+  m_LocalPosition: {x: 6.147299, y: 0, z: 14.65301}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6395560922312577132}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &861033342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861033340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12ce1b7426206b40847d01adc4913eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroy: 0
+  tripodCooldownTime: 8
+  nubsCooldownTime: 5
+  hoverLegsDuration: 5
+  hoverLegsCooldownTime: 10
+  dashEase: 0
+  dashDuration: 0
+  dashPower: 0
 --- !u!114 &861438006 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4210229933422567471, guid: b91119e8c48623347bb2a5f842a39fef, type: 3}
@@ -1621,6 +1673,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1245421905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1245421906}
+  - component: {fileID: 1245421907}
+  m_Layer: 0
+  m_Name: PlayerAttacks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1245421906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245421905}
+  m_LocalRotation: {x: -0, y: -0.012097381, z: -0, w: 0.99992687}
+  m_LocalPosition: {x: 6.147299, y: 0, z: 14.65301}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6395560922312577132}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1245421907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245421905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1b7251435dbb54585a097b128855a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroy: 0
+  target: {x: 0, y: 0, z: 0}
+  returned: 1
 --- !u!224 &1275990157 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3278808240569788657, guid: a96ad81aa5c212443b532597a04a5e31, type: 3}
@@ -4229,6 +4328,12 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3564803423564108524, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1245421906}
+    - targetCorrespondingSourceObject: {fileID: 3564803423564108524, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 861033341}
     - targetCorrespondingSourceObject: {fileID: 2419880325677089805, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 2113221677}
@@ -5724,6 +5829,30 @@ MonoBehaviour:
     modifierID: 0
     icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
     pauseIcon: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Tripod
+    ID: 5
+    lvl: 0
+    segment: 2
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 8
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: 00a1cca442778f14b802193952c053d9, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 26c1a1497086fba4bb74694bddf81abc, type: 3}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
