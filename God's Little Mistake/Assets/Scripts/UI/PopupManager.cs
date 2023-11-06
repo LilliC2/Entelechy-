@@ -59,6 +59,7 @@ public class PopupManager : Singleton<PopupManager>
     public float startTimer;
     public float holdTimer = 2f;
     public bool isTiming;
+    public Image glowingHold;
 
     // Start is called before the first frame update
     void Start()
@@ -90,13 +91,14 @@ public class PopupManager : Singleton<PopupManager>
         //    holdEFill.fillAmount = 1;
         //}
 
-        if(Input.GetKeyDown(KeyCode.E))
+        if (Input.GetKeyDown(KeyCode.E))
         {
             isTiming = true;
         }
 
         if (Input.GetKeyUp(KeyCode.E))
         {
+
             isTiming = false;
             holdEFill.fillAmount = 0;
             startTimer = 0;
@@ -107,7 +109,7 @@ public class PopupManager : Singleton<PopupManager>
             startTimer += Time.deltaTime;
             holdEFill.fillAmount = startTimer / holdTimer;
 
-            if(startTimer > holdTimer)
+            if (startTimer > holdTimer)
             {
                 isTiming = false;
                 holdEFill.fillAmount = 1;
