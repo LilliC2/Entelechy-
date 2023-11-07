@@ -2,56 +2,42 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.UIElements;
+using UnityEngine.UI;
 
 public class PauseFunctionality : Singleton<PauseFunctionality>
 {
-    [Header("PlayerInventory")] //i dont know if this is needed
-    public GameObject slotNumber1;
-    public GameObject slotNumber2;
-    public UnityEngine.UI.Image slotNumber3;
-    public GameObject slotNumber4;
-    public GameObject slotNumber5;
-    public GameObject slotNumber6;
+    [Header("PlayerInventory")]
+    public Image slotNumber1;
+    public Image slotNumber2;
+    public Image slotNumber3;
+    public Animator anim;
+    public GameObject pausePanel;
 
     [Header("TopStats")]
-    public UnityEngine.UI.Image typeIcon;
-    public UnityEngine.UI.Image itemIcon;
-    public UnityEngine.UI.Image effectIcon;
+    public Image itemIcon;
     public TMP_Text itemName;
 
 
     [Header("CoreStats")]
-    public TMP_Text itemDamage;
-    public TMP_Text itemCritMultiplier;
-    public TMP_Text itemCritChance;
-    public TMP_Text itemFireRate;
-    public UnityEngine.UI.Image attackPill;
-    public UnityEngine.UI.Image attackIcon;
-    public TMP_Text attackText;
-    public UnityEngine.UI.Image distancePill;
-    public UnityEngine.UI.Image distanceIcon;
-    public TMP_Text distanceText;
+    public TMP_Text damageValue;
+    public TMP_Text critValue;
+    public TMP_Text speedValue;
+
 
     [Header("Abilities")]
     public TMP_Text abilityName;
+    public TMP_Text cdValue;
     public TMP_Text abilityDescription;
 
-    [Header("Icons")]
-    public Sprite meleeIcon;
-    public Sprite rangeIcon;
-    public Sprite typeCone;
-    public Sprite typeLine;
-    public Sprite typeCircle;
-    public Sprite typeRapid;
-    public Sprite typeLob;
-    public Sprite typeLaser;
-    public Sprite typeCannon;
+    public enum ItemType { Attack, Movement}
+    public ItemType itemType;
 
     // Start is called before the first frame update
     void Start()
     {
-        
+        anim = pausePanel.GetComponent<Animator>();
+        UpdateStats(_PC.headItem);
+
     }
 
     // Update is called once per frame
@@ -60,84 +46,53 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
         
     }
 
-    public void PausingFucntion()
+    public void ChangeType()
     {
-        //_GM.OnPause(); //if needed to be use from the animations
-    }
+        switch(itemType)
+        {
+            case ItemType.Attack:
+                //play transition for attacks
+                //anim.SetBool("IsMove", false);
+                break;
 
-    public void SearchSlot()
-    {
-        //_AVTAR.slotsOnCanvas[slotNumber];
-
-        //_PC.playerInventory.(slotNumber)
-
-        //_PC.playerInventory.Clear();
+            case ItemType.Movement:
+                //play transition for movements
+                //anim.SetBool("IsMove", true);
+                break;
+        }
     }
 
 
     public void UpdateStats(Item _hoverItem)
     {
         itemName.text = _hoverItem.itemName;
-        itemDamage.text = _hoverItem.dmg.ToString();
-        //itemCritMultiplier.text = _hoverItem.critX.ToString();
-        itemCritChance.text = _hoverItem.critChance.ToString();
-        itemFireRate.text = _hoverItem.firerate.ToString();
         itemIcon.sprite = _hoverItem.icon;
 
-        if(_hoverItem.segment != Item.Segment.Legs)
+        if(_hoverItem.segment == Item.Segment.Legs)
         {
+            itemType = ItemType.Movement;
+            speedValue.text = _hoverItem.movementSpeed.ToString();
+            Debug.Log("isLegs");
+            anim.Play("Pause_Movement");
 
-            attackPill.gameObject.SetActive(true);
-            distancePill.gameObject.SetActive(true);
-
-            
-
-
-            if (_hoverItem.projectile == true)
-            {
-                attackIcon.sprite = rangeIcon;
-                attackPill.color = Color.blue;
-                distanceText.text = _hoverItem.projectileRange.ToString();
-                attackText.text = "Ranged";
-            }
-            else
-            {
-                attackIcon.sprite = meleeIcon;
-                attackPill.color = Color.red;
-                distanceText.text = _hoverItem.projectileRange.ToString();
-                attackText.text = "Melee";
-            }
+            damageValue.text = "";
+            critValue.text = damageValue.text = "";
+            //Ability name change here
+            //Ability description change here
+            //Ability cooldown change here
         }
         else
         {
-            attackPill.gameObject.SetActive(false);
-            distancePill.gameObject.SetActive(false);
+            itemType = ItemType.Attack;
+            damageValue.text = _hoverItem.dmg.ToString();
+            critValue.text = _hoverItem.critChance.ToString();
+            Debug.Log("isNotLegs");
+            anim.Play("Pause_Attack");
+
+            speedValue.text = "";
+
+
         }
-
-        //if(_hoverItem.attackType == Item.AttackType.Cone) 
-        //{
-        //    typeIcon.sprite = typeCone;
-        //}
-
-        //if (_hoverItem.attackType == Item.AttackType.Line)
-        //{
-        //    typeIcon.sprite = typeLine;
-        //}
-
-        //if (_hoverItem.attackType == Item.AttackType.Circle)
-        //{
-        //    typeIcon.sprite = typeCircle;
-        //}
-
-        //if (_hoverItem.attackType == Item.AttackType.Rapid)
-        //{
-        //    typeIcon.sprite = typeRapid;
-        //}
-
-        //if (_hoverItem.attackType == Item.AttackType.Lob)
-        //{
-        //    typeIcon.sprite = typeLob;
-        //}
 
     }
         
