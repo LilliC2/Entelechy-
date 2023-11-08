@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class PlayerAbilities : GameBehaviour
+public class PlayerAbilities : Singleton<PlayerAbilities>
 {
 
     public int tripodCooldownTime;
@@ -21,6 +21,15 @@ public class PlayerAbilities : GameBehaviour
     public float dashDuration;
     public float dashPower;
 
+    [Header("Basic Dash")]
+    bool spawnedTrail;
+    [SerializeField]
+    GameObject slugLeg_trail;
+    bool spawningSlugTrail;
+    [SerializeField]
+    float timeBetweenTrail;
+    [SerializeField]
+    int slugCooldownTime;
 
     bool isOnCoolDown;
 
@@ -68,9 +77,23 @@ public class PlayerAbilities : GameBehaviour
         }
 
         #endregion
+
+        #region Slug Trail
+        if(spawningSlugTrail)
+        {
+            if (!spawnedTrail)
+            {
+                spawnedTrail = true;
+                GameObject trail = Instantiate(slugLeg_trail, _PC.transform.position, Quaternion.identity);
+                ExecuteAfterSeconds(timeBetweenTrail, () => spawnedTrail = false);
+            }
+        }
+        
+
+        #endregion
     }
 
-    void CallAbility(Item _item)
+    public void CallAbility(Item _item)
     {
         if(!isOnCoolDown)
         {
@@ -80,6 +103,15 @@ public class PlayerAbilities : GameBehaviour
                     NubsAbility();
 
                     break;
+                case 5:
+                    TripodAbility();
+
+                    break;
+                
+                case 6:
+                    SlugAbility();
+
+                    break;
             }
         }
 
@@ -87,7 +119,16 @@ public class PlayerAbilities : GameBehaviour
 
     public void NubsAbility()
     {
+        isOnCoolDown = true;
         Dash(3, 0.3f);
+
+        ////OPTIONAL: Invunerable while dashing
+        _PC.immortal = true;
+        ExecuteAfterSeconds(0.3f, () => _PC.immortal = false);
+
+        ActivateCooldownUI(nubsCooldownTime);
+        ExecuteAfterSeconds(nubsCooldownTime, () => isOnCoolDown = false);
+
     }
 
     public void TripodAbility()
@@ -108,9 +149,17 @@ public class PlayerAbilities : GameBehaviour
         ExecuteAfterSeconds(tripodCooldownTime, () => isOnCoolDown = false);
     }
 
-    public void SlugLegs()
+    public void SlugAbility()
     {
+        isOnCoolDown = true;
+        ActivateCooldownUI(slugCooldownTime);
 
+
+        spawningSlugTrail = true;
+        ExecuteAfterSeconds(slugCooldownTime, () => isOnCoolDown = false);
+
+        ExecuteAfterSeconds(5, () => spawningSlugTrail = false);
+  
     }
 
     void HoverAbility()

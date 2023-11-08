@@ -109,7 +109,7 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Movement
 
-                if(enableMovement)
+                if (enableMovement)
                 {
                     move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
@@ -174,7 +174,7 @@ public class PlayerController : Singleton<PlayerController>
                 }
                 else
                 {
-                    if(transform.position.y < -3)
+                    if (transform.position.y < -3)
                     {
                         enableMovement = false;
                         //remove control
@@ -196,15 +196,15 @@ public class PlayerController : Singleton<PlayerController>
                             ExecuteAfterSeconds(1, () => transform.position = targetPos);
                             ExecuteAfterSeconds(1.3f, () => _PE.landingPS.Play());
                             ExecuteAfterSeconds(1.3f, () => _AM.playerThud.Play());
-                            ExecuteAfterSeconds(1.5f, () => RespawnAfterFallingCheck(targetPos)); 
+                            ExecuteAfterSeconds(1.5f, () => RespawnAfterFallingCheck(targetPos));
 
-                            
+
 
 
                         }
-                        
+
                     }
-                    
+
                 }
 
                 //while grounded lastPosGrounded = lastPos;
@@ -237,146 +237,87 @@ public class PlayerController : Singleton<PlayerController>
                     Vector3 targetPos = new Vector3(hit.point.x, this.transform.position.y, hit.point.z);
 
                     directional.transform.LookAt(targetPos);
-                    Mathf.Clamp(directional.transform.rotation.x, 0, 0);
-                    Mathf.Clamp(directional.transform.rotation.z, 0, 0);
+                    //Mathf.Clamp(directional.transform.rotation.x, 0, 0);
+                    //Mathf.Clamp(directional.transform.rotation.z, 0, 0);
                 }
 
                 #endregion
 
                 #region Attacks
 
-                if (Input.GetMouseButtonDown(0))
+                if (Input.GetButton("Fire1"))
                 {
                     if (headItem.itemName != "NULL")
                     {
                         //call appriopriate attack from attack script
-                        _PA.CallAttack(headItem);
+                        _PAtk.CallAttack(headItem);
 
-                        
-                        //ADD KNOCK BACK
-                        //    if (knockbackActive)
-                        //    {
-                        //        float timeSinceKnockback = Time.time - knockbackStartTime;
-
-                        //        if (timeSinceKnockback >= knockbackDuration)
-                        //        {
-                        //            knockbackActive = false;
-                        //        }
-                        //        else
-                        //        {
-                        //            float knockbackProgress = timeSinceKnockback / knockbackDuration;
-                        //            var dir = (-directional.transform.forward * knockbackAmount);
-                        //            dir = new Vector3(dir.x, 0, dir.z);
-                        //            controller.Move(dir * Time.deltaTime);
-
-                        //        }
-                        //    }
-                        //}
-                        //if no head item, torso attack is also bound to m0
-                        if (headItem.itemName == "NULL" && torsoItem.itemName != "NULL")
-                        {
-                            //call appriopriate attack from attack script
-
-                            //ADD KNOCK BACK
-                            //if (knockbackActive)
-                            //{
-                            //    float timeSinceKnockback = Time.time - knockbackStartTime;
-
-                            //    if (timeSinceKnockback >= knockbackDuration)
-                            //    {
-                            //        knockbackActive = false;
-                            //    }
-                            //    else
-                            //    {
-                            //        float knockbackProgress = timeSinceKnockback / knockbackDuration;
-                            //        var dir = (-directional.transform.forward * knockbackAmount);
-                            //        dir = new Vector3(dir.x, 0, dir.z);
-                            //        controller.Move(dir * Time.deltaTime);
-
-                            //    }
-                            //}
-                        }
                     }
-
-                    if (Input.GetMouseButtonDown(1))
+                    //if no head item, torso attack is also bound to m0
+                    if (headItem.itemName == "NULL" && torsoItem.itemName != "NULL")
                     {
-                        if (headItem.itemName != "NULL" && torsoItem.itemName == "NULL")
-                        {
 
-                            _PA.CallAttack(headItem);
-
-
-
-                            //call appriopriate attack from attack script
-
-                            //ADD KNOCK BACK
-                            //    if (knockbackActive)
-                            //    {
-                            //        float timeSinceKnockback = Time.time - knockbackStartTime;
-
-                            //        if (timeSinceKnockback >= knockbackDuration)
-                            //        {
-                            //            knockbackActive = false;
-                            //        }
-                            //        else
-                            //        {
-                            //            float knockbackProgress = timeSinceKnockback / knockbackDuration;
-                            //            var dir = (-directional.transform.forward * knockbackAmount);
-                            //            dir = new Vector3(dir.x, 0, dir.z);
-                            //            controller.Move(dir * Time.deltaTime);
-
-                            //        }
-                            //    }
-                        }
-                        //if no head item, torso attack is also bound to m0
-                        if (torsoItem.itemName != "NULL")
-                        {
-                            //call appriopriate attack from attack script
-                            
-                        //ADD KNOCK BACK
-                            //if (knockbackActive)
-                            //{
-                            //    float timeSinceKnockback = Time.time - knockbackStartTime;
-
-                            //    if (timeSinceKnockback >= knockbackDuration)
-                            //    {
-                            //        knockbackActive = false;
-                            //    }
-                            //    else
-                            //    {
-                            //        float knockbackProgress = timeSinceKnockback / knockbackDuration;
-                            //        var dir = (-directional.transform.forward * knockbackAmount);
-                            //        dir = new Vector3(dir.x, 0, dir.z);
-                            //        controller.Move(dir * Time.deltaTime);
-
-                            //    }
-                            //}
-                        }
+                        _PAtk.CallAttack(torsoItem);
 
 
                     }
 
-
-
-
-                    #endregion
-
-                    if (health <= 0)
-                    {
-                        Die();
-                        Debug.Log("Die");
-                    }
 
                 }
+
+                if (Input.GetButton("Fire2"))
+                {
+                    if (torsoItem.itemName != "NULL")
+                    {
+                        //call appriopriate attack from attack script
+                        _PAtk.CallAttack(torsoItem);
+
+                    }
+                    //if no head item, torso attack is also bound to m0
+                    if (torsoItem.itemName == "NULL" && headItem.itemName != "NULL")
+                    {
+
+                        _PAtk.CallAttack(headItem);
+
+
+                    }
+
+
+                }
+                #endregion
+
+                if (health <= 0)
+                {
+                    Die();
+                    Debug.Log("Die");
+                }
+
+                lastPos = transform.position;
+
+                #region Ability
+
+                if (Input.GetKeyDown(KeyCode.Space))
+                {
+                    _PAbl.CallAbility(legItem);
+                }
+
+                #endregion
+
                 break;
+
+
+
 
         }
 
 
-        lastPos = transform.position;
+    }
+
+        
+
+
 
    
-    }
 
     void RespawnAfterFallingCheck(Vector3 _targetPos)
     {

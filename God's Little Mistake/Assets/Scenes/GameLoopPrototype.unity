@@ -911,11 +911,71 @@ RectTransform:
   m_CorrespondingSourceObject: {fileID: 1360524891284075043, guid: b91119e8c48623347bb2a5f842a39fef, type: 3}
   m_PrefabInstance: {fileID: 5226408723961275394}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &781556823 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 2419880325677089805, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+  m_PrefabInstance: {fileID: 4433524347404704497}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &794644092 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 3978244213157156265, guid: b91119e8c48623347bb2a5f842a39fef, type: 3}
   m_PrefabInstance: {fileID: 5226408723961275394}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &861033340
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 861033341}
+  - component: {fileID: 861033342}
+  m_Layer: 0
+  m_Name: PlayerAbilities
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &861033341
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861033340}
+  m_LocalRotation: {x: -0, y: -0.012097381, z: -0, w: 0.99992687}
+  m_LocalPosition: {x: 6.147299, y: 0, z: 14.65301}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6395560922312577132}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &861033342
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 861033340}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d12ce1b7426206b40847d01adc4913eb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroy: 0
+  tripodCooldownTime: 8
+  nubsCooldownTime: 5
+  hoverLegsDuration: 5
+  hoverLegsCooldownTime: 10
+  dashEase: 0
+  dashDuration: 0
+  dashPower: 0
+  slugLeg_trail: {fileID: 407576363337914560, guid: 13b8e7665c8a19e4fb7b2978f8af9b43, type: 3}
+  timeBetweenTrail: 0.5
+  slugCooldownTime: 5
 --- !u!114 &861438006 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 4210229933422567471, guid: b91119e8c48623347bb2a5f842a39fef, type: 3}
@@ -1616,6 +1676,53 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1 &1245421905
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1245421906}
+  - component: {fileID: 1245421907}
+  m_Layer: 0
+  m_Name: PlayerAttacks
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1245421906
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245421905}
+  m_LocalRotation: {x: -0, y: -0.012097381, z: -0, w: 0.99992687}
+  m_LocalPosition: {x: 6.147299, y: 0, z: 14.65301}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6395560922312577132}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1245421907
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1245421905}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: eb1b7251435dbb54585a097b128855a0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroy: 0
+  target: {x: 0, y: 0, z: 0}
+  returned: 1
 --- !u!224 &1275990157 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 3278808240569788657, guid: a96ad81aa5c212443b532597a04a5e31, type: 3}
@@ -3272,6 +3379,37 @@ MonoBehaviour:
   m_FirstSelected: {fileID: 0}
   m_sendNavigationEvents: 1
   m_DragThreshold: 10
+--- !u!1 &2113221676
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2113221677}
+  m_Layer: 0
+  m_Name: TorsoFiringPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2113221677
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2113221676}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -0, y: 0.272, z: -0.139}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 781556823}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2122586879 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 6412460785867567743, guid: b91119e8c48623347bb2a5f842a39fef, type: 3}
@@ -4007,15 +4145,35 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.ID
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.ID
-      value: 2
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.dmg
-      value: 20
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoItem.ID
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoItem.dmg
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoItem.icon
       value: 
       objectReference: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
@@ -4023,40 +4181,92 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 575509827}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: headItem.segment
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.itemName
+      value: Slug Legs
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoFiringPoint
+      value: 
+      objectReference: {fileID: 2113221676}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.firerate
-      value: 1
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.itemName
-      value: Sabertooth
+      value: Pea Shooter
       objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.pauseIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 5789cd456c8a56149a671a4f49fcdec5, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.pauseIcon
       value: 
-      objectReference: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+      objectReference: {fileID: 21300000, guid: deb623ef3ada87f4092553f9f2938cb0, type: 3}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoItem.firerate
+      value: 0.016666668
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoItem.itemName
+      value: Squito
+      objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.critChance
-      value: 17
+      value: 30
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.projectile
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoItem.pauseIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoItem.critChance
+      value: 30
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoItem.projectile
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.projectilePF
       value: 
-      objectReference: {fileID: 2270622985260862806, guid: 252be8e94cd0cdc49a7f757070716c54, type: 3}
+      objectReference: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.movementSpeed
+      value: 3
+      objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.movementSpeed
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoItem.projectilePF
+      value: 
+      objectReference: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.projectileRange
       value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.projectileSpeed
-      value: 500
+      value: 1000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoItem.projectileRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: torsoItem.projectileSpeed
+      value: 3000
       objectReference: {fileID: 0}
     - target: {fileID: 3564803423564108524, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: m_RootOrder
@@ -4136,7 +4346,16 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
-    m_AddedGameObjects: []
+    m_AddedGameObjects:
+    - targetCorrespondingSourceObject: {fileID: 3564803423564108524, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      insertIndex: 0
+      addedObject: {fileID: 1245421906}
+    - targetCorrespondingSourceObject: {fileID: 3564803423564108524, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 861033341}
+    - targetCorrespondingSourceObject: {fileID: 2419880325677089805, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2113221677}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
 --- !u!4 &4773842738850918369
@@ -5581,6 +5800,102 @@ MonoBehaviour:
     modifierID: 0
     icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
     pauseIcon: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Lob
+    ID: 3
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 20
+    firerate: 1
+    critChance: 17
+    projectileRange: 5
+    projectile: 1
+    projectileSpeed: 700
+    projectilePF: {fileID: 1753417278855635134, guid: 3c79b25e1dc54074ab1e23e354351e05, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
+    pauseIcon: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Squito
+    ID: 4
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 60
+    firerate: 2
+    critChance: 30
+    projectileRange: 10
+    projectile: 1
+    projectileSpeed: 3000
+    projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
+    pauseIcon: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Tripod
+    ID: 5
+    lvl: 0
+    segment: 2
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 8
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: 00a1cca442778f14b802193952c053d9, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 26c1a1497086fba4bb74694bddf81abc, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Slug Legs
+    ID: 6
+    lvl: 0
+    segment: 2
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 3
+    modifier: 0
+    modifierID: 0
+    icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 5789cd456c8a56149a671a4f49fcdec5, type: 3}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}

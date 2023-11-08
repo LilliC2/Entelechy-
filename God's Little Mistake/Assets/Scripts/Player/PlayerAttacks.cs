@@ -41,6 +41,20 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 SabertoothAttack();
 
                 break;
+                
+            case 3: //Sabertooth
+
+                print("Lob");
+
+                BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF);
+
+                break;
+
+            case 4: //Squito
+
+                SquitoAttack();
+
+                break;
 
 
 
@@ -57,6 +71,15 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         _FDM.leftFireTotal = _IM.itemDataBase[0].firerate;
 
     }
+    
+    public void SquitoAttack()
+    {
+        BasicFireProjectile(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange);
+
+    }
+
+
+
 
     public void SabertoothAttack()
     {
@@ -73,6 +96,31 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         }
         
 
+    }
+
+    public void BasicLobProjectile(float _range, float _projectileSpeed, GameObject _prefab)
+    {
+
+        GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+
+        bullet.GetComponent<CurveProjectile>().Shoot();
+
+        //bullet.GetComponent<CurveProjectile>().angle = _PC.directional.transform.rotation.y;
+
+
+
+    }
+
+    Vector3 CalculateTarget(Vector3 _originalPos, float _distance, float _angle)
+    {
+        // Convert the angle from degrees to radians
+        float angleInRadians = _angle * Mathf.Deg2Rad;
+
+        // Calculate the new position
+        float newX = _originalPos.x + _distance * Mathf.Cos(angleInRadians);
+        float newY = _originalPos.y + _distance * Mathf.Sin(angleInRadians);
+
+        return new Vector3(newX, newY, _originalPos.z);
     }
 
     public void BasicFireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
