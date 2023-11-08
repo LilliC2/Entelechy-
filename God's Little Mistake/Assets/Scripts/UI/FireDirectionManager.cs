@@ -9,6 +9,7 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     [Header("Head Fire")]
     public bool leftHasFired;
     public bool leftHasHeat;
+    public bool leftFireFilling;
     public GameObject leftFillObject;
     public Image leftFirerate;
     public Image leftOverheat;
@@ -22,6 +23,7 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     [Header("Torso Fire")]
     public bool rightHasFired;
     public bool rightHasHeat;
+    public bool rightFireFilling;
     public GameObject rightFillObject;
     public Image rightFirerate;
     public Image rightOverheat;
@@ -67,6 +69,7 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
             if (leftFireCurrent < leftFireTotal)
             {
                 leftMouseDis.SetActive(true);
+                //leftFireFilling = true;
                 leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
                 leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
             }
@@ -74,6 +77,7 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
             {
                 leftMouseDis.SetActive(false);
                 leftHasFired = false; // Set to false only when it reaches the total
+                //leftFireFilling = false;
             }
         }
 
@@ -85,13 +89,15 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
             if (rightFireCurrent < rightFireTotal)
             {
                 rightMouseDis.SetActive(true);
+                //rightFireFilling = true;
                 rightFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
-                leftFirerate.fillAmount = rightFireCurrent / rightFireTotal;
+                rightFirerate.fillAmount = rightFireCurrent / rightFireTotal;
             }
             else
             {
                 rightMouseDis.SetActive(false);
                 rightHasFired = false; // Set to false only when it reaches the total
+                //rightFireFilling = false;
             }
         }
 
