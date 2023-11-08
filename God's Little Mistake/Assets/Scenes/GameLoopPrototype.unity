@@ -1721,6 +1721,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
+  angle: 45
+  power: 50
   target: {x: 0, y: 0, z: 0}
   returned: 1
 --- !u!224 &1275990157 stripped
@@ -4162,7 +4164,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.ID
-      value: 4
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.icon
@@ -4170,7 +4172,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.dmg
-      value: 60
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.icon
@@ -4210,11 +4212,11 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: deb623ef3ada87f4092553f9f2938cb0, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.firerate
-      value: 0.016666668
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.itemName
-      value: Squito
+      value: Lob
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.critChance
@@ -4230,7 +4232,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.critChance
-      value: 30
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.projectile
@@ -4251,7 +4253,7 @@ PrefabInstance:
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.projectilePF
       value: 
-      objectReference: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+      objectReference: {fileID: 1753417278855635134, guid: 3c79b25e1dc54074ab1e23e354351e05, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.projectileRange
       value: 5
@@ -4262,11 +4264,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.projectileRange
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.projectileSpeed
-      value: 3000
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 3564803423564108524, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: m_RootOrder

@@ -5,6 +5,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 {
 
 
+    [Header("Lob Projectile")]
+    [SerializeField]
+    float angle;
+    [SerializeField]
+    float power;
+
     [Header("Projectile")]
     public Vector3 target;
     bool projectileShot;
@@ -44,13 +50,14 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 
             case 3: //Sabertooth
 
-                print("Lob");
 
                 BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF);
 
                 break;
 
             case 4: //Squito
+
+                print("Lob");
 
                 SquitoAttack();
 
@@ -93,12 +100,18 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     public void BasicLobProjectile(float _range, float _projectileSpeed, GameObject _prefab)
     {
 
-        GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
-
-        bullet.GetComponent<CurveProjectile>().Shoot();
+        print("lobbed");
+        //bullet.GetComponent<CurveProjectile>().Shoot();
 
         //bullet.GetComponent<CurveProjectile>().angle = _PC.directional.transform.rotation.y;
 
+
+
+        GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
+
+        print(_PC.directional.transform.forward);
+
+        bullet.GetComponent<Rigidbody>().AddForce(power * _PC.directional.transform.forward ,ForceMode.Impulse);
 
 
     }
