@@ -27,9 +27,6 @@ public class ItemIdentifier : GameBehaviour
         statPop = GameObject.Find("Stat Popup");
 
         selecting = GetComponent<Selecting>();
-        anim = _UI.statPop.GetComponent<Animator>();
-        anim1 = _UI.statComp1.GetComponent<Animator>();
-        anim2 = _UI.statComp2.GetComponent<Animator>();
     }
 
     private void Update()
@@ -49,14 +46,14 @@ public class ItemIdentifier : GameBehaviour
                 if (scrollDelta > 0)
                 {
                     print("Left arm");
-                    _UI.leftArmItem = itemInfo;
+                    //_UI.leftArmItem = itemInfo;
                     //Changes item to left here
                 }
                 if (scrollDelta < 0)
                 {
                     print("right arm");
 
-                    _UI.rightArmItem = itemInfo;
+                    //_UI.rightArmItem = itemInfo;
                     //Changes item to left here
                 }
             }
@@ -288,12 +285,7 @@ public class ItemIdentifier : GameBehaviour
 
     //}
 
-    public void TurnOff()
-    {
-        _UI.statPop.SetActive(false);
-        _UI.statComp1.SetActive(false);
-        _UI.arrowComp.SetActive(false);
-    }
+
 
     //public void InfoSwitch()
     //{

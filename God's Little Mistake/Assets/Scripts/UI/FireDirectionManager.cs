@@ -13,6 +13,7 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     public Image leftFirerate;
     public Image leftOverheat;
     public GameObject leftMouseHeat;
+    public GameObject leftMouseDis;
     public float leftFireCurrent;
     public float leftFireTotal;
     public float leftHeatCurrent;
@@ -25,6 +26,7 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     public Image rightFirerate;
     public Image rightOverheat;
     public GameObject rightMouseHeat;
+    public GameObject rightMouseDis;
     public float rightFireCurrent;
     public float rightFireTotal;
     public float rightHeatCurrent;
@@ -50,6 +52,8 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
         //disbale overheat mouse indicator
         leftMouseHeat.SetActive(false);
         rightMouseHeat.SetActive(false);
+        leftMouseDis.SetActive(false);
+        rightMouseDis.SetActive(false);
     }
 
     // Update is called once per frame
@@ -62,11 +66,13 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
 
             if (leftFireCurrent < leftFireTotal)
             {
+                leftMouseDis.SetActive(true);
                 leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
                 leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
             }
             else
             {
+                leftMouseDis.SetActive(false);
                 leftHasFired = false; // Set to false only when it reaches the total
             }
         }
@@ -78,11 +84,13 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
 
             if (rightFireCurrent < rightFireTotal)
             {
+                rightMouseDis.SetActive(true);
                 rightFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
                 leftFirerate.fillAmount = rightFireCurrent / rightFireTotal;
             }
             else
             {
+                rightMouseDis.SetActive(false);
                 rightHasFired = false; // Set to false only when it reaches the total
             }
         }
