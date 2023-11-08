@@ -11,6 +11,7 @@ public class UIManager : Singleton<UIManager>
     public Item rightArmItem;
 
     public TMP_Text dungeonLevel;
+    public Animator levelAnim;
 
     [Header("Hover Popup Content")]
     public GameObject popupContent;
@@ -194,6 +195,30 @@ public class UIManager : Singleton<UIManager>
         {
             Vector3 newPosition = scrollContent.localPosition + Vector3.up * scrollDelta * scrollSpeed;
             scrollContent.localPosition = newPosition;
+        }
+
+        if(Input.GetKeyDown(KeyCode.A))
+        {
+            levelAnim.ResetTrigger("Reset");
+            levelAnim.SetTrigger("AClick");
+        }
+
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            levelAnim.ResetTrigger("AClick");
+            levelAnim.SetTrigger("Reset");
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            levelAnim.ResetTrigger("Reset");
+            levelAnim.SetTrigger("DClick");
+        }
+
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            levelAnim.ResetTrigger("DClick");
+            levelAnim.SetTrigger("Reset");
         }
 
 

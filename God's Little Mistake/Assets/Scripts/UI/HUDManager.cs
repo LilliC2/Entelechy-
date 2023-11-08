@@ -65,54 +65,6 @@ public class HUDManager : Singleton<HUDManager>
     public bool isPrimary3 = false;
 
 
-    [Header("Ability Slot 4")]
-    public Image invenSlot4;
-    public Image frame4;
-    public GameObject frameHighlight4;
-    public GameObject keyHighlight4;
-    public Image cooldownFill4;
-    public TMP_Text cooldownText4;
-    public GameObject backgroundGlow4;
-    public GameObject keyGlow4;
-    public float cooldownTime4;
-    public float cooldownTimer4;
-    public bool isCooldown4 = false;
-    public bool hasItem4 = false;
-    public bool isPrimary4 = false;
-
-
-    [Header("Ability Slot 5")]
-    public Image invenSlot5;
-    public Image frame5;
-    public GameObject frameHighlight5;
-    public GameObject keyHighlight5;
-    public Image cooldownFill5;
-    public TMP_Text cooldownText5;
-    public GameObject backgroundGlow5;
-    public GameObject keyGlow5;
-    public float cooldownTime5;
-    public float cooldownTimer5;
-    public bool isCooldown5 = false;
-    public bool hasItem5 = false;
-    public bool isPrimary5 = false;
-
-
-    [Header("Ability Slot 6")]
-    public Image invenSlot6;
-    public Image frame6;
-    public GameObject frameHighlight6;
-    public GameObject keyHighlight6;
-    public Image cooldownFill6;
-    public TMP_Text cooldownText6;
-    public GameObject backgroundGlow6;
-    public GameObject keyGlow6;
-    public float cooldownTime6;
-    public float cooldownTimer6;
-    public bool isCooldown6 = false;
-    public bool hasItem6 = false;
-    public bool isPrimary6 = false;
-
-
 
     // Start is called before the first frame update
     void Start()
@@ -121,49 +73,31 @@ public class HUDManager : Singleton<HUDManager>
         frameHighlight1.SetActive(false);
         frameHighlight2.SetActive(false);
         frameHighlight3.SetActive(false);
-        frameHighlight4.SetActive(false);
-        frameHighlight5.SetActive(false);
-        frameHighlight6.SetActive(false);
 
         //turning off key highlight by def
         keyHighlight1.SetActive(false);
         keyHighlight2.SetActive(false);
         keyHighlight3.SetActive(false);
-        keyHighlight4.SetActive(false);
-        keyHighlight5.SetActive(false);
-        keyHighlight6.SetActive(false);
 
         //turning off text cooldwon by def
         cooldownText1.text = "";
         cooldownText2.text = "";
         cooldownText3.text = "";
-        cooldownText4.text = "";
-        cooldownText5.text = "";
-        cooldownText6.text = "";
 
         //fill 0 by def
         cooldownFill1.fillAmount = 0;
         cooldownFill2.fillAmount = 0;
         cooldownFill3.fillAmount = 0;
-        cooldownFill4.fillAmount = 0;
-        cooldownFill5.fillAmount = 0;
-        cooldownFill6.fillAmount = 0;
 
         //disable background glow by def
         backgroundGlow1.SetActive(false);
         backgroundGlow2.SetActive(false);
         backgroundGlow3.SetActive(false);
-        backgroundGlow4.SetActive(false);
-        backgroundGlow5.SetActive(false);
-        backgroundGlow6.SetActive(false);
 
         //disable key glow by def
         keyGlow1.SetActive(false);
         keyGlow2.SetActive(false);
         keyGlow3.SetActive(false);
-        keyGlow4.SetActive(false);
-        keyGlow5.SetActive(false);
-        keyGlow6.SetActive(false);
 
         UpdateSlots();
 
@@ -179,16 +113,12 @@ public class HUDManager : Singleton<HUDManager>
             isCooldown1 = true;
             isCooldown2 = true;
             isCooldown3 = true;
-            isCooldown4 = true;
-            isCooldown5 = true;
-            isCooldown6 = true;
+
 
             SetCooldownSlo1(5);
             SetCooldownSlo2(6);
             SetCooldownSlo3(1);
-            SetCooldownSlo4(2);
-            SetCooldownSlo5(9);
-            SetCooldownSlo6(7);
+
 
         }
 
@@ -206,21 +136,6 @@ public class HUDManager : Singleton<HUDManager>
         if (isCooldown3 == true)
         {
             CooldownSlot3();
-        }
-
-        if (isCooldown4 == true)
-        {
-            CooldownSlot4();
-        }
-
-        if (isCooldown5 == true)
-        {
-            CooldownSlot5();
-        }
-
-        if (isCooldown6 == true)
-        {
-            CooldownSlot6();
         }
 
         UpdateSlots();
@@ -252,15 +167,7 @@ public class HUDManager : Singleton<HUDManager>
                 keyHighlight1.SetActive(false);
                 keyGlow1.SetActive(false);
             }
-
-            
-
         }
-        //else
-        //{
-        //    keyHighlight1.SetActive(false);
-        //    keyGlow1.SetActive(false);
-        //}
 
         //Slot 2
         if (hasItem2)
@@ -288,17 +195,10 @@ public class HUDManager : Singleton<HUDManager>
                 keyGlow2.SetActive(false);
             }
         }
-        //else
-        //{
-        //    keyHighlight2.SetActive(false);
-        //    keyGlow2.SetActive(false);
-        //}
 
         //Slot 3
         if (hasItem3)
         {
-            //keyHighlight3.SetActive(true);
-            //keyGlow3.SetActive(true);
             if (isCooldown3)
             {
                 frameHighlight3.SetActive(false);
@@ -321,109 +221,6 @@ public class HUDManager : Singleton<HUDManager>
                 keyGlow3.SetActive(false);
             }
         }
-        //else
-        //{
-        //    keyHighlight3.SetActive(false);
-        //    keyGlow3.SetActive(false);
-        //}
-
-        //Slot4
-        if (hasItem4)
-        {
-            //keyHighlight4.SetActive(true);
-            //keyGlow4.SetActive(true);
-            if (isCooldown4)
-            {
-                frameHighlight4.SetActive(false);
-                backgroundGlow4.SetActive(false);
-            }
-            else
-            {
-                frameHighlight4.SetActive(true);
-                backgroundGlow4.SetActive(true);
-            }
-            if (isPrimary4)
-            {
-                keyHighlight4.SetActive(true);
-                keyGlow4.SetActive(true);
-            }
-            else
-            {
-                keyHighlight4.SetActive(false);
-                keyGlow4.SetActive(false);
-            }
-        }
-        //else
-        //{
-        //    keyHighlight4.SetActive(false);
-        //    keyGlow4.SetActive(false);
-        //}
-
-        //Slot5
-        if (hasItem5)
-        {
-            //keyHighlight5.SetActive(true);
-            //keyGlow5.SetActive(true);
-            if (isCooldown5)
-            {
-                frameHighlight5.SetActive(false);
-                backgroundGlow5.SetActive(false);
-            }
-            else
-            {
-                frameHighlight5.SetActive(true);
-                backgroundGlow5.SetActive(true);
-            }
-
-            if (isPrimary5)
-            {
-                keyHighlight5.SetActive(true);
-                keyGlow5.SetActive(true);
-            }
-            else
-            {
-                keyHighlight5.SetActive(false);
-                keyGlow5.SetActive(false);
-            }
-        }
-        //else
-        //{
-        //    keyHighlight5.SetActive(false);
-        //    keyGlow5.SetActive(false);
-        //}
-
-        //Slot6
-        if (hasItem6)
-        {
-            //keyHighlight6.SetActive(true);
-            //keyGlow6.SetActive(true);
-            if (isCooldown6)
-            {
-                frameHighlight6.SetActive(false);
-                backgroundGlow6.SetActive(false);
-            }
-            else
-            {
-                frameHighlight6.SetActive(true);
-                backgroundGlow6.SetActive(true);
-            }
-
-            if (isPrimary6)
-            {
-                keyHighlight6.SetActive(true);
-                keyGlow6.SetActive(true);
-            }
-            else
-            {
-                keyHighlight6.SetActive(false);
-                keyGlow6.SetActive(false);
-            }
-        }
-        //else
-        //{
-        //    keyHighlight6.SetActive(false);
-        //    keyGlow6.SetActive(false);
-        //}
     }
 
     #region Slot 1
@@ -531,119 +328,4 @@ public class HUDManager : Singleton<HUDManager>
 
     #endregion
 
-    #region Slot 4
-
-    public void SetCooldownSlo4(int cooldown)
-    {
-        cooldownTime4 = cooldown;
-        cooldownTimer4 = cooldown;
-    }
-
-    public void CooldownSlot4()
-    {
-        cooldownTimer4 -= Time.deltaTime;
-
-        if(hasItem4)
-        {
-            if (cooldownTimer4 < 0)
-            {
-                isCooldown4 = false;
-                cooldownText4.gameObject.SetActive(false);
-                cooldownFill4.fillAmount = 0;
-                backgroundGlow4.SetActive(true);
-                frameHighlight4.SetActive(true);
-            }
-            else
-            {
-                cooldownText4.gameObject.SetActive(true);
-                cooldownText4.text = Mathf.RoundToInt(cooldownTimer4).ToString();
-                cooldownFill4.fillAmount = cooldownTimer4 / cooldownTime4;
-                backgroundGlow4.SetActive(false);
-                frameHighlight4.SetActive(false);
-            }
-        }
-        
-    }
-
-    #endregion
-
-    #region Slot 5
-
-    public void SetCooldownSlo5(int cooldown)
-    {
-        cooldownTime5 = cooldown;
-        cooldownTimer5 = cooldown;
-    }
-
-    public void CooldownSlot5()
-    {
-        cooldownTimer5 -= Time.deltaTime;
-
-        if(hasItem5) 
-        {
-            if (cooldownTimer5 < 0)
-            {
-                isCooldown5 = false;
-                cooldownText5.gameObject.SetActive(false);
-                cooldownFill5.fillAmount = 0;
-                backgroundGlow5.SetActive(true);
-                frameHighlight5.SetActive(true);
-            }
-            else
-            {
-                cooldownText5.gameObject.SetActive(true);
-                cooldownText5.text = Mathf.RoundToInt(cooldownTimer5).ToString();
-                cooldownFill5.fillAmount = cooldownTimer5 / cooldownTime5;
-                backgroundGlow5.SetActive(false);
-                frameHighlight5.SetActive(false);
-            }
-        }
-        
-    }
-
-    #endregion
-
-    #region Slot 6
-
-    public void SetCooldownSlo6(int cooldown)
-    {
-        cooldownTime6 = cooldown;
-        cooldownTimer6 = cooldown;
-    }
-
-    public void CooldownSlot6()
-    {
-        cooldownTimer6 -= Time.deltaTime;
-
-        if (hasItem6)
-        {
-            if (cooldownTimer6 < 0)
-            {
-                isCooldown6 = false;
-                cooldownText6.gameObject.SetActive(false);
-                cooldownFill6.fillAmount = 0;
-                backgroundGlow6.SetActive(true);
-                frameHighlight6.SetActive(true);
-            }
-            else
-            {
-                cooldownText6.gameObject.SetActive(true);
-                cooldownText6.text = Mathf.RoundToInt(cooldownTimer6).ToString();
-                cooldownFill6.fillAmount = cooldownTimer6 / cooldownTime6;
-                backgroundGlow6.SetActive(false);
-                frameHighlight6.SetActive(false);
-            }
-        }
-    }
-
-    #endregion
-
-    //public void UpdatePrimaryDetauls(int slot)
-    //{
-    //    primaryName.text = _PC.playerInventory[slot].itemName.ToString();
-    //    damageValue.text = _PC.playerInventory[slot].dmg.ToString();
-    //    critChanceValue.text = _PC.playerInventory[slot].critChance.ToString();
-    //    critMultiplierValue.text = _PC.playerInventory[slot].critX.ToString();
-    //    firerateValue.text = _PC.playerInventory[slot].firerate.ToString();
-    //}
 }
