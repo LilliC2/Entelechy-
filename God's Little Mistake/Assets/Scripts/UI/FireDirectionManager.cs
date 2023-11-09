@@ -156,6 +156,28 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
         }
     }
 
+    IEnumerator LeftFilling(float firerate)
+    {
+        Debug.Log(firerate);
+        // Reset the current value
+        leftFireTotal = firerate;
+        leftFireCurrent = 0;
+        leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
+        if (leftFireCurrent < leftFireTotal)
+        {
+            leftMouseDis.SetActive(true);
+            //leftFireFilling = true;
+            leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
+        }
+        else
+        {
+            leftMouseDis.SetActive(false);
+            //leftHasFired = false; // Set to false only when it reaches the total
+            //leftFireFilling = false;
+        }
+        yield return new WaitForSeconds(1);
+    }
+
     //public void LeftFirerateUpdate()
     //{
     //    //leftFireCurrent = 0; // Reset the current value
