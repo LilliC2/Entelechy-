@@ -137,23 +137,23 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
 
     public void LeftFill(float firerate)
     {
-
+        Debug.Log(firerate);
         // Reset the current value
-        firerate = leftFireTotal;
+        leftFireTotal = firerate;
         leftFireCurrent = 0;
-            if (leftFireCurrent < leftFireTotal)
-            {
-                leftMouseDis.SetActive(true);
-                //leftFireFilling = true;
-                leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
-                leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
-            }
-            else
-            {
-                leftMouseDis.SetActive(false);
-                //leftHasFired = false; // Set to false only when it reaches the total
-                //leftFireFilling = false;
-            }
+        leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
+        if (leftFireCurrent < leftFireTotal)
+        {
+           leftMouseDis.SetActive(true);
+           //leftFireFilling = true;
+           leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
+        }
+        else
+        {
+           leftMouseDis.SetActive(false);
+           //leftHasFired = false; // Set to false only when it reaches the total
+           //leftFireFilling = false;
+        }
     }
 
     //public void LeftFirerateUpdate()
