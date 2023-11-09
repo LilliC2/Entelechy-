@@ -251,9 +251,9 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         //call appriopriate attack from attack script
                         _PAtk.CallAttack(headItem);
-                        _FDM.leftHasFired = true;
-                        _FDM.leftFireCurrent = 0;
-                        _FDM.leftFireTotal = _IM.itemDataBase[headItem.ID].firerate;
+                        //_FDM.leftHasFired = true;
+                        //_FDM.leftFireCurrent = 0;
+                        //_FDM.leftFireTotal = _IM.itemDataBase[headItem.ID].firerate;
 
                     }
                     //if no head item, torso attack is also bound to m0
@@ -261,9 +261,9 @@ public class PlayerController : Singleton<PlayerController>
                     {
 
                         _PAtk.CallAttack(torsoItem);
-                        _FDM.leftHasFired = true;
-                        _FDM.leftFireCurrent = 0;
-                        _FDM.leftFireTotal = _IM.itemDataBase[headItem.ID].firerate;
+                        //_FDM.leftHasFired = true;
+                        //_FDM.leftFireCurrent = 0;
+                        //_FDM.leftFireTotal = _IM.itemDataBase[headItem.ID].firerate;
 
                     }
 
@@ -276,9 +276,9 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         //call appriopriate attack from attack script
                         _PAtk.CallAttack(torsoItem);
-                        _FDM.rightHasFired = true;
-                        _FDM.rightFireCurrent = 0;
-                        _FDM.rightFireTotal = _IM.itemDataBase[torsoItem.ID].firerate;
+                        //_FDM.rightHasFired = true;
+                        //_FDM.rightFireCurrent = 0;
+                        //_FDM.rightFireTotal = _IM.itemDataBase[torsoItem.ID].firerate;
 
                     }
                     //if no head item, torso attack is also bound to m0
@@ -286,9 +286,9 @@ public class PlayerController : Singleton<PlayerController>
                     {
 
                         _PAtk.CallAttack(headItem);
-                        _FDM.rightHasFired = true;
-                        _FDM.rightFireCurrent = 0;
-                        _FDM.rightFireTotal = _IM.itemDataBase[torsoItem.ID].firerate;
+                        //_FDM.rightHasFired = true;
+                        //_FDM.rightFireCurrent = 0;
+                        //_FDM.rightFireTotal = _IM.itemDataBase[torsoItem.ID].firerate;
 
 
                     }

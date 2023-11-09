@@ -64,7 +64,7 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
         //Left firerate fill
         if (leftHasFired)
         {
-             // Reset the current value
+            // Reset the current value
 
             if (leftFireCurrent < leftFireTotal)
             {
@@ -135,20 +135,41 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
         }
     }
 
-    public void LeftFirerateUpdate()
+    public void LeftFill(float firerate)
     {
-        //leftFireCurrent = 0; // Reset the current value
 
-        if (leftFireCurrent < leftFireTotal)
-        {
-            leftFireCurrent -= Time.deltaTime; // Increment by Time.deltaTime for a linear increase
-            leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
-        }
-        else
-        {
-            leftHasFired = false; // Set to false only when it reaches the total
-        }
+        // Reset the current value
+        firerate = leftFireTotal;
+        leftFireCurrent = 0;
+            if (leftFireCurrent < leftFireTotal)
+            {
+                leftMouseDis.SetActive(true);
+                //leftFireFilling = true;
+                leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
+                leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
+            }
+            else
+            {
+                leftMouseDis.SetActive(false);
+                //leftHasFired = false; // Set to false only when it reaches the total
+                //leftFireFilling = false;
+            }
     }
+
+    //public void LeftFirerateUpdate()
+    //{
+    //    //leftFireCurrent = 0; // Reset the current value
+
+    //    if (leftFireCurrent < leftFireTotal)
+    //    {
+    //        leftFireCurrent -= Time.deltaTime; // Increment by Time.deltaTime for a linear increase
+    //        leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
+    //    }
+    //    else
+    //    {
+    //        leftHasFired = false; // Set to false only when it reaches the total
+    //    }
+    //}
 
 
 }

@@ -66,18 +66,19 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     {
         _PE.peaShooterPS.Play();
         BasicFireProjectile(_IM.itemDataBase[0].projectilePF, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange);
-        //_FDM.leftHasFired = true;
-        //_FDM.leftFireCurrent = 0;
+        _FDM.leftHasFired = true;
+        _FDM.leftFireCurrent = 0;
         //_FDM.leftFireTotal = _IM.itemDataBase[0].firerate;
+        _FDM.leftFireTotal = 0.01f;
 
     }
     
     public void SquitoAttack()
     {
         BasicFireProjectile(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange);
-        //_FDM.rightHasFired = true;
-        //_FDM.rightFireCurrent = 0;
-        //_FDM.rightFireTotal = _IM.itemDataBase[4].firerate;
+        _FDM.rightHasFired = true;
+        _FDM.rightFireCurrent = 0;
+        _FDM.rightFireTotal = _IM.itemDataBase[4].firerate;
     }
 
 
@@ -88,11 +89,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         if(returned)
         {
             returned = false;
-            //_FDM.leftFillObject.SetActive(false);
             BasicFireProjectile(_IM.itemDataBase[2].projectilePF, _IM.itemDataBase[2].projectileSpeed, _IM.itemDataBase[2].firerate, _IM.itemDataBase[2].projectileRange);
             ExecuteAfterSeconds(1, () => returned = true);
-            //_FDM.leftFillObject.SetActive(true);
-            _FDM.leftHasFired = true;
+            _FDM.leftFillObject.SetActive(true);
             _FDM.leftFireCurrent = 0;
             _FDM.leftFireTotal = _IM.itemDataBase[2].firerate;
         }
