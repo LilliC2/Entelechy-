@@ -42,6 +42,8 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
         rightHasFired = false;
         leftHasHeat = false;
         rightHasHeat = false;
+        leftFireFilling = false;
+        rightFireFilling = false;
 
         //Set firerate fill to full
         leftFirerate.fillAmount = 1;
@@ -61,44 +63,56 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     // Update is called once per frame
     void Update()
     {
-        //Left firerate fill
-        if (leftHasFired)
-        {
-            // Reset the current value
+        
 
-            if (leftFireCurrent < leftFireTotal)
-            {
-                leftMouseDis.SetActive(true);
-                //leftFireFilling = true;
-                leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
-                leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
-            }
-            else
-            {
-                leftMouseDis.SetActive(false);
-                leftHasFired = false; // Set to false only when it reaches the total
-                //leftFireFilling = false;
-            }
+
+
+        //Left firerate fill
+        if (leftHasFired && !leftFireFilling)
+        {
+            StartCoroutine(ProcessLeftFire());
+            //// Reset the current value
+            //leftFireFilling = true;
+
+            //if (leftFireCurrent < leftFireTotal)
+            //{
+            //    leftMouseDis.SetActive(true);
+            //    //leftFireFilling = true;
+            //    leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
+            //    leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
+            //}
+            //else
+            //{
+            //    leftMouseDis.SetActive(false);
+            //    leftHasFired = false; // Set to false only when it reaches the total
+            //    //leftFireFilling = false;
+            //}
+            //leftFireFilling = false;
+
         }
 
         //Right firerate fill
-        if (rightHasFired)
+        if (rightHasFired && !rightFireFilling)
         {
-            // Reset the current value
+            StartCoroutine(ProcessRightFire());
+            //// Reset the current value
+            //rightFireFilling = true;
 
-            if (rightFireCurrent < rightFireTotal)
-            {
-                rightMouseDis.SetActive(true);
-                //rightFireFilling = true;
-                rightFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
-                rightFirerate.fillAmount = rightFireCurrent / rightFireTotal;
-            }
-            else
-            {
-                rightMouseDis.SetActive(false);
-                rightHasFired = false; // Set to false only when it reaches the total
-                //rightFireFilling = false;
-            }
+            //if (rightFireCurrent < rightFireTotal)
+            //{
+            //    rightMouseDis.SetActive(true);
+            //    //rightFireFilling = true;
+            //    rightFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
+            //    rightFirerate.fillAmount = rightFireCurrent / rightFireTotal;
+            //}
+            //else
+            //{
+            //    rightMouseDis.SetActive(false);
+            //    rightHasFired = false; // Set to false only when it reaches the total
+            //    //rightFireFilling = false;
+            //}
+            //rightFireFilling = false;
+
         }
 
         //Left overheat fill
@@ -135,63 +149,44 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
         }
     }
 
-    public void LeftFill(float firerate)
-    {
-        Debug.Log(firerate);
-        // Reset the current value
-        leftFireTotal = firerate;
-        leftFireCurrent = 0;
-        leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
-        if (leftFireCurrent < leftFireTotal)
-        {
-           leftMouseDis.SetActive(true);
-           //leftFireFilling = true;
-           leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
-        }
-        else
-        {
-           leftMouseDis.SetActive(false);
-           //leftHasFired = false; // Set to false only when it reaches the total
-           //leftFireFilling = false;
-        }
-    }
 
-    IEnumerator LeftFilling(float firerate)
+    public IEnumerator ProcessLeftFire()
     {
-        Debug.Log(firerate);
-        // Reset the current value
-        leftFireTotal = firerate;
-        leftFireCurrent = 0;
-        leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
-        if (leftFireCurrent < leftFireTotal)
+        leftFireFilling = true;
+
+        while (leftFireCurrent < leftFireTotal)
         {
             leftMouseDis.SetActive(true);
-            //leftFireFilling = true;
+            leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
             leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
+            yield return null;
         }
-        else
-        {
-            leftMouseDis.SetActive(false);
-            //leftHasFired = false; // Set to false only when it reaches the total
-            //leftFireFilling = false;
-        }
-        yield return new WaitForSeconds(1);
+
+        leftMouseDis.SetActive(false);
+        leftHasFired = false; // Set to false only when it reaches the total
+
+        leftFireFilling = false;
+
     }
 
-    //public void LeftFirerateUpdate()
-    //{
-    //    //leftFireCurrent = 0; // Reset the current value
+    public IEnumerator ProcessRightFire()
+    {
+        rightFireFilling = true;
 
-    //    if (leftFireCurrent < leftFireTotal)
-    //    {
-    //        leftFireCurrent -= Time.deltaTime; // Increment by Time.deltaTime for a linear increase
-    //        leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
-    //    }
-    //    else
-    //    {
-    //        leftHasFired = false; // Set to false only when it reaches the total
-    //    }
-    //}
+        while (rightFireCurrent < rightFireTotal)
+        {
+            rightMouseDis.SetActive(true);
+            rightFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
+            rightFirerate.fillAmount = rightFireCurrent / rightFireTotal;
+            yield return null;
+        }
+
+        rightMouseDis.SetActive(false);
+        rightHasFired = false; // Set to false only when it reaches the total
+
+        rightFireFilling = false;
+
+    }
 
 
 }

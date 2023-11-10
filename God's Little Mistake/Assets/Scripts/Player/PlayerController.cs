@@ -251,11 +251,13 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         //call appriopriate attack from attack script
                         _PAtk.CallAttack(headItem);
-                        _FDM.leftHasFired = true;
-                        _FDM.leftFireCurrent = 0;
-                        _FDM.leftFireTotal = _IM.itemDataBase[headItem.ID].firerate;
-                        //_FDM.LeftFill(headItem.firerate);
-
+                        if(_FDM.leftFireFilling ==  false)
+                        {
+                            _FDM.leftHasFired = true;
+                            _FDM.leftFireCurrent = 0;
+                            _FDM.leftFireTotal = _IM.itemDataBase[headItem.ID].firerate;
+                        }
+                        
                     }
                     //if no head item, torso attack is also bound to m0
                     if (headItem.itemName == "NULL" && torsoItem.itemName != "NULL")
@@ -265,7 +267,6 @@ public class PlayerController : Singleton<PlayerController>
                         _FDM.leftHasFired = true;
                         _FDM.leftFireCurrent = 0;
                         _FDM.leftFireTotal = _IM.itemDataBase[headItem.ID].firerate;
-                        //_FDM.LeftFill(headItem.firerate);
 
                     }
 
@@ -278,9 +279,13 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         //call appriopriate attack from attack script
                         _PAtk.CallAttack(torsoItem);
-                        _FDM.rightHasFired = true;
-                        _FDM.rightFireCurrent = 0;
-                        _FDM.rightFireTotal = _IM.itemDataBase[torsoItem.ID].firerate;
+                        if (_FDM.rightFireFilling == false)
+                        {
+                            _FDM.rightHasFired = true;
+                            _FDM.rightFireCurrent = 0;
+                            _FDM.rightFireTotal = _IM.itemDataBase[torsoItem.ID].firerate;
+                        }
+
 
                     }
                     //if no head item, torso attack is also bound to m0
