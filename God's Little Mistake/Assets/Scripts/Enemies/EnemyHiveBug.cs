@@ -35,6 +35,17 @@ public class EnemyHiveBug : MonoBehaviour
         }
     }
 
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.collider.CompareTag("Player"))
+        {
+            GetComponent<BaseEnemy>().Hit(10f);
+
+            Debug.Log("got hit");
+        }
+    }
+
+    
     private IEnumerator Patrol()
     {
         while (true)
