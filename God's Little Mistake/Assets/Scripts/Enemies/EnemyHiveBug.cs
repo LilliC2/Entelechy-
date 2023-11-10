@@ -80,6 +80,7 @@ public class EnemyHiveBug : MonoBehaviour
         }
     }
 
+
     private bool IsPlayerInRange()
     {
         GameObject player = GameObject.FindGameObjectWithTag(playerTag);
