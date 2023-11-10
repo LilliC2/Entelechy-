@@ -250,27 +250,14 @@ public class PlayerController : Singleton<PlayerController>
                     if (headItem.itemName != "NULL")
                     {
                         //call appriopriate attack from attack script
-                        _PAtk.CallAttack(headItem);
-                        if(_FDM.leftFireFilling ==  false)
-                        {
-                            _FDM.leftHasFired = true;
-                            _FDM.leftFireCurrent = 0;
-                            _FDM.leftFireTotal = _IM.itemDataBase[headItem.ID].firerate;
-                        }
-                        
+                        _PAtk.CallAttack(headItem);              
                     }
                     //if no head item, torso attack is also bound to m0
                     if (headItem.itemName == "NULL" && torsoItem.itemName != "NULL")
                     {
 
                         _PAtk.CallAttack(torsoItem);
-                        _FDM.leftHasFired = true;
-                        _FDM.leftFireCurrent = 0;
-                        _FDM.leftFireTotal = _IM.itemDataBase[headItem.ID].firerate;
-
                     }
-
-
                 }
 
                 if (Input.GetButton("Fire2"))
@@ -279,25 +266,12 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         //call appriopriate attack from attack script
                         _PAtk.CallAttack(torsoItem);
-                        if (_FDM.rightFireFilling == false)
-                        {
-                            _FDM.rightHasFired = true;
-                            _FDM.rightFireCurrent = 0;
-                            _FDM.rightFireTotal = _IM.itemDataBase[torsoItem.ID].firerate;
-                        }
-
-
                     }
                     //if no head item, torso attack is also bound to m0
                     if (torsoItem.itemName == "NULL" && headItem.itemName != "NULL")
                     {
 
                         _PAtk.CallAttack(headItem);
-                        _FDM.rightHasFired = true;
-                        _FDM.rightFireCurrent = 0;
-                        _FDM.rightFireTotal = _IM.itemDataBase[torsoItem.ID].firerate;
-
-
                     }
 
 
