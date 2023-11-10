@@ -5,9 +5,9 @@ using UnityEngine;
 public class EnemyHiveSpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
-    public float spawnInterval = 3.0f; 
-    public int maxEnemyCount = 5; 
-    public EnemyHiveBug existingEnemy; 
+    public float spawnInterval = 3.0f;
+    public int maxEnemyCount = 5;
+    public EnemyHiveBug existingEnemy;
 
     private int currentEnemyCount = 0;
 
@@ -22,10 +22,8 @@ public class EnemyHiveSpawner : MonoBehaviour
         {
             if (currentEnemyCount < maxEnemyCount)
             {
-                for (int i = currentEnemyCount; i < maxEnemyCount; i++)
-                {
-                    SpawnEnemy();
-                }
+                // Spawn one enemy at a time.
+                SpawnEnemy();
             }
             yield return new WaitForSeconds(spawnInterval);
         }
@@ -35,8 +33,16 @@ public class EnemyHiveSpawner : MonoBehaviour
     {
         if (existingEnemy != null)
         {
-            GameObject newEnemy = Instantiate(enemyPrefab, existingEnemy.transform.position, Quaternion.identity);
-            newEnemy.GetComponent<EnemyHiveBug>().spawner = this;
+            // Spawn enemy at the position of the spawner.
+            GameObject newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+
+            // Set the spawner reference in the spawned enemy.
+            EnemyHiveBug enemyScript = newEnemy.GetComponent<EnemyHiveBug>();
+            if (enemyScript != null)
+            {
+                enemyScript.spawner = this;
+            }
+
             currentEnemyCount++;
         }
     }
