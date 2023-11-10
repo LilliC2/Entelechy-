@@ -37,15 +37,14 @@ public class EnemyHiveBug : MonoBehaviour
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (collision.collider.CompareTag("Player"))
+        if (collision.collider.CompareTag("Projectile"))
         {
-            GetComponent<BaseEnemy>().Hit(10f);
+            // Call the Hit function on the BaseEnemy script with a default or placeholder damage value.
+            GetComponent<BaseEnemy>().Hit(50f);
 
-            Debug.Log("got hit");
+            // Other actions...
         }
     }
-
-    
     private IEnumerator Patrol()
     {
         while (true)
