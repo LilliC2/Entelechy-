@@ -677,25 +677,7 @@ public class UIManager : Singleton<UIManager>
     /// <param name="_slot"></param>
     public void EquipImage(int _slot)
     {
-        //var itemLeftSide = Instantiate(heldItem.avtarPrefabLeft, _AVTAR.slotsOnPlayerLeft[_slot].transform);
-        //var itemRightSide = Instantiate(heldItem.avtarPrefabRight, _AVTAR.slotsOnPlayerRight[_slot].transform);
-        ////_PC.itemsAnimLeftSide.Add(itemLeftSide.GetComponentInChildren<Animator>());
-        ////_PC.itemsAnimRightSide.Add(itemRightSide.GetComponentInChildren<Animator>());
-
-        ////default left
-        //var itemFront = Instantiate(heldItem.avatarPrefabFrontLeft, _AVTAR.slotsOnPlayerFront[_slot].transform);
-        ////_PC.itemsAnimForward.Add(itemFront.GetComponentInChildren<Animator>());
-
-        //var itemBackSide = Instantiate(heldItem.avtarPrefabBackLeft, _AVTAR.slotsOnPlayerBack[_slot].transform);
-        ////_PC.itemsAnimBack.Add(itemBackSide.GetComponentInChildren<Animator>());
-
-
-
-        //_PIA.PassiveAbilityItemCheck();
-
-        // (flip) itemFront.transform.localScale = new Vector3(-itemFront.transform.rotation.x, itemFront.transform.rotation.y, itemFront.transform.rotation.z);
-
-        //FOR ALL OTHER ITEMS
+        _EI.EquipItem(heldItem);
 
         cursor.sprite = defaultCursor;
         heldItem = null;

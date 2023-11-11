@@ -23,6 +23,11 @@ public class PlayerController : Singleton<PlayerController>
     public GameObject headFiringPoint;
     public GameObject torsoFiringPoint;
 
+    [Header("Sprites")] //this will be changed to prefabs when they are animated
+    public SpriteRenderer headSprite;
+    public SpriteRenderer torsoSprite;
+    public SpriteRenderer legSprite;
+
     [Header("Movement")]
     bool isMoving;
     public bool enableMovement = true;
@@ -336,14 +341,14 @@ public class PlayerController : Singleton<PlayerController>
 
         if(headItem.itemName != "NULL")
         {
-            print("Head item is: " + legItem.itemName);
+            print("Head item is: " + headItem.itemName);
 
             _UI.CreateItemSelected(headItem);
             headItem.active = true;
         }
         if(torsoItem.itemName != "NULL")
         {
-            print("Torso item is: " + legItem.itemName);
+            print("Torso item is: " + torsoItem.itemName);
 
 
             _UI.CreateItemSelected(torsoItem);

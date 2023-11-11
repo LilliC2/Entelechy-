@@ -105,6 +105,19 @@ public class BaseEnemy : GameBehaviour
         
     }
 
+    public void FlipSprite(float _directionHeading)
+    {
+        if(_directionHeading >=0 && _directionHeading <= 180)
+        {
+            enemyVisuals.transform.localScale = new Vector3(-1, 1, 1);
+        }
+        else
+        {
+            enemyVisuals.transform.localScale = new Vector3(1, 1, 1);
+
+        }
+    }
+
     public void Hit(float _dmg)
     {
         hurt.Play();

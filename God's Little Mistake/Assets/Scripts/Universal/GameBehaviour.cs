@@ -20,6 +20,7 @@ public class GameBehaviour : LC.Behaviour //inherits from
     protected static RandomiseProps _RP { get { return RandomiseProps.INSTANCE; } }
     protected static PlayerAttacks _PAtk { get { return PlayerAttacks.INSTANCE; } }
     protected static PlayerAbilities _PAbl { get { return PlayerAbilities.INSTANCE; } }
+    protected static EquippingItems _EI { get { return EquippingItems.INSTANCE; } }
 
    
 

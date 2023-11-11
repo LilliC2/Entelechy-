@@ -120,48 +120,52 @@ public class EnemyLongRange : GameBehaviour
         #region Turning Sprites
         //if angle is between 136 and 45, backwards
         var heading = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-        if(heading >= -45 && heading <=45)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(false);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            backOB.transform.GetChild(0).gameObject.SetActive(true);
 
-            firingPoint = firingPointBack;
-        }
+        baseEnemy.FlipSprite(heading);
+        firingPoint = firingPointFront;
 
-        //if angle is between 46 and 315, right side
-        if(heading >= 46 && heading <= 135)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(false);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(true);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            backOB.transform.GetChild(0).gameObject.SetActive(false);
+        //if(heading >= -45 && heading <=45)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(true);
 
-            firingPoint = firingPointRight;
-        }
+        //    firingPoint = firingPointBack;
+        //}
 
-        //if angle is between 316 and 225, forwards
-        if (heading >= 136 && heading >= -135)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(true);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            backOB.transform.GetChild(0).gameObject.SetActive(false);
+        ////if angle is between 46 and 315, right side
+        //if(heading >= 46 && heading <= 135)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(true);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
 
-            firingPoint = firingPointFront;
-        }
+        //    firingPoint = firingPointRight;
+        //}
 
-        //if angle is between 226 and 135, left side
-        if (heading >= -136 && heading <= -45)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(false);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(true);
-            backOB.transform.GetChild(0).gameObject.SetActive(false);
+        ////if angle is between 316 and 225, forwards
+        //if (heading >= 136 && heading >= -135)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(true);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
 
-            firingPoint = firingPointLeft;
-        }
+        //    firingPoint = firingPointFront;
+        //}
+
+        ////if angle is between 226 and 135, left side
+        //if (heading >= -136 && heading <= -45)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(true);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
+
+        //    firingPoint = firingPointLeft;
+        //}
 
 
 
