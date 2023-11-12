@@ -23,6 +23,7 @@ public class GameBehaviour : LC.Behaviour //inherits from
     protected static FireDirectionManager _FDM { get { return FireDirectionManager.INSTANCE; } }
     protected static PlayerAttacks _PAtk { get { return PlayerAttacks.INSTANCE; } }
     protected static PlayerAbilities _PAbl { get { return PlayerAbilities.INSTANCE; } }
+    protected static EquippingItems _EI { get { return EquippingItems.INSTANCE; } }
 
    
 
