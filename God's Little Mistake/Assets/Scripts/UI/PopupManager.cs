@@ -54,7 +54,7 @@ public class PopupManager : Singleton<PopupManager>
     public GameObject torsoGlow2;
     public GameObject legsGlow2;
 
-    [Header("Comparison Pop up")]
+    [Header("Hold E")]
     public Image holdEFill;
     public float startTimer;
     public float holdTimer = 2f;
@@ -75,22 +75,6 @@ public class PopupManager : Singleton<PopupManager>
     // Update is called once per frame
     void Update()
     {
-        //if (Input.GetKeyDown(KeyCode.E))
-        //{
-        //    startTimer = Time.time;
-        //}
-
-        //if (Input.GetKey(KeyCode.E))
-        //{
-        //    if (startTimer + holdTimer >= Time.time)
-        //        Debug.Log("It Works Great!");
-        //    holdEFill.fillAmount = startTimer / holdTimer;
-        //}
-        //else
-        //{
-        //    holdEFill.fillAmount = 1;
-        //}
-
         if (Input.GetKeyDown(KeyCode.E))
         {
             isTiming = true;
@@ -205,6 +189,24 @@ public class PopupManager : Singleton<PopupManager>
                 headGlow2.SetActive(false);
                 torsoGlow2.SetActive(true);
                 legsGlow2.SetActive(false);
+
+                if (_hoverItem.dmg < _PC.torsoItem.dmg)
+                {
+                    critBad.SetActive(true);
+                    critGood.SetActive(false);
+                }
+
+                if (_hoverItem.dmg == _PC.torsoItem.dmg)
+                {
+                    critBad.SetActive(false);
+                    critGood.SetActive(false);
+                }
+
+                if (_hoverItem.dmg > _PC.torsoItem.dmg)
+                {
+                    critBad.SetActive(false);
+                    critGood.SetActive(true);
+                }
             }
             else
             {
@@ -247,59 +249,4 @@ public class PopupManager : Singleton<PopupManager>
         
 
     }
-
-
-
-    //public void UpdateItemPopUp(Item _hoverItem)
-    //{
-    //    //ADD LATER FORMATTING FOR FLOATS
-
-    //    popupName.text = _hoverItem.itemName;
-    //    popupDmg.text = _hoverItem.dmg.ToString();
-    //    //popupCritX.text = _hoverItem.critX.ToString();
-    //    popupCritChance.text = _hoverItem.critChance.ToString();
-    //    popupFirerate.text = _hoverItem.firerate.ToString();
-    //    popupIcon.sprite = _hoverItem.icon;
-
-    //    //segment check
-    //    if (_hoverItem.segment == Item.Segment.Head)
-    //    {
-    //        topEye.SetActive(true);
-    //        middleEye.SetActive(false);
-    //        bottomEye.SetActive(false);
-    //    }
-    //    if (_hoverItem.segment == Item.Segment.Torso)
-    //    {
-    //        topEye.SetActive(false);
-    //        middleEye.SetActive(true);
-    //        bottomEye.SetActive(false);
-    //    }
-    //    if (_hoverItem.segment == Item.Segment.Legs)
-    //    {
-    //        topEye.SetActive(false);
-    //        middleEye.SetActive(false);
-    //        bottomEye.SetActive(true);
-    //    }
-
-    //    //range or melee check
-    //    if (_hoverItem.projectile == true)
-    //    {
-    //        attackIcon.sprite = rangedIcon;
-    //        attackPill.color = Color.blue;
-    //        rangePillText.text = _hoverItem.projectileRange.ToString();
-    //        attackPillText.text = "Ranged";
-    //    }
-    //    else
-    //    {
-    //        attackIcon.sprite = meleeIcon;
-    //        attackPill.color = Color.red;
-    //        rangePillText.text = _hoverItem.projectileRange.ToString();
-    //        attackPillText.text = "Melee";
-
-    //    }
-
-    //    print("Update pop up");
-
-
-    //}
 }
