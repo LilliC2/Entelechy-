@@ -6,10 +6,8 @@ public class EnemyHiveSpawner : MonoBehaviour
 {
     public GameObject enemyPrefab;
     public float spawnInterval = 3.0f;
-    public int maxEnemyCount = 5;
-    public EnemyHiveBug existingEnemy;
-
-    private int currentEnemyCount = 0;
+    public string playerTag = "Player";
+    public float activationRange = 10.0f;
 
     private void Start()
     {
@@ -20,9 +18,8 @@ public class EnemyHiveSpawner : MonoBehaviour
     {
         while (true)
         {
-            if (currentEnemyCount < maxEnemyCount)
+            if (IsPlayerInRange())
             {
-                // Spawn one enemy at a time.
                 SpawnEnemy();
             }
             yield return new WaitForSeconds(spawnInterval);
@@ -31,24 +28,18 @@ public class EnemyHiveSpawner : MonoBehaviour
 
     private void SpawnEnemy()
     {
-        if (existingEnemy != null)
-        {
-            // Spawn enemy at the position of the spawner.
-            GameObject newEnemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
-
-            // Set the spawner reference in the spawned enemy.
-            EnemyHiveBug enemyScript = newEnemy.GetComponent<EnemyHiveBug>();
-            if (enemyScript != null)
-            {
-                enemyScript.spawner = this;
-            }
-
-            currentEnemyCount++;
-        }
+        // Spawn enemy at the position of the spawner.
+        Instantiate(enemyPrefab, transform.position, Quaternion.identity);
     }
 
-    public void OnEnemyDeath()
+    private bool IsPlayerInRange()
     {
-        currentEnemyCount--;
+        GameObject player = GameObject.FindGameObjectWithTag(playerTag);
+        if (player != null)
+        {
+            float distance = Vector3.Distance(transform.position, player.transform.position);
+            return distance <= activationRange;
+        }
+        return false;
     }
 }

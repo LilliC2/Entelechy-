@@ -102,11 +102,4 @@ public class EnemyHiveBug : MonoBehaviour
         return false;
     }
 
-    private void OnDestroy()
-    {
-        if (spawner != null)
-        {
-            spawner.OnEnemyDeath();
-        }
-    }
 }

@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 8012655854322564633}
   - component: {fileID: 8668190524535657456}
   m_Layer: 0
-  m_Name: HiveBug_Static
+  m_Name: Enemy_HiveBug
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -382,6 +382,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   enemyPrefab: {fileID: 5079491755651806207, guid: e7b221ef61f95484297af4876148e4e0, type: 3}
-  spawnInterval: 3
-  maxEnemyCount: 5
-  existingEnemy: {fileID: 7135454800593415681}
+  spawnInterval: 2
+  playerTag: Player
+  activationRange: 10
