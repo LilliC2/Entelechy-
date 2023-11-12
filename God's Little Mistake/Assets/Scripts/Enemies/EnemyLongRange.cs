@@ -57,6 +57,9 @@ public class EnemyLongRange : GameBehaviour
     [SerializeField]
     Animator leftSideAnim;
 
+    Vector3 prevDest; 
+    Vector3 currentDest; 
+
     void Start()
     {
         //enemyRange = _ED.enemies[0].range;
@@ -79,6 +82,8 @@ public class EnemyLongRange : GameBehaviour
         target = SearchWalkPoint();
         
         projectileRange = enemyStats.stats.range +2;
+
+
     }
 
     // Update is called once per frame
@@ -119,9 +124,7 @@ public class EnemyLongRange : GameBehaviour
 
         #region Turning Sprites
         //if angle is between 136 and 45, backwards
-        var heading = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
 
-        baseEnemy.FlipSprite(heading);
         firingPoint = firingPointFront;
 
         //if(heading >= -45 && heading <=45)
@@ -220,6 +223,10 @@ public class EnemyLongRange : GameBehaviour
 
 
                 agent.SetDestination(target);
+                baseEnemy.FlipSprite(agent.destination);
+
+                //change destination
+
 
                 break;
             case BaseEnemy.EnemyState.Chase:
@@ -238,6 +245,7 @@ public class EnemyLongRange : GameBehaviour
                     leftSideAnim.speed = 1;
                     rightSideAnim.speed = 1;
                     agent.SetDestination(player.transform.position);
+                    //change destination
 
                 }
                 else if(Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange  && 
@@ -281,6 +289,7 @@ public class EnemyLongRange : GameBehaviour
                     Vector3 targetPosition = toPlayer.normalized * -10f;
 
                     agent.SetDestination(targetPosition);
+                    //change destination
 
 
                 }
