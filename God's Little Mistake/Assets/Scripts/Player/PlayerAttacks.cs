@@ -51,7 +51,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 break;
                 
-            case 3: //Sabertooth
+            case 3: //Antlers
 
 
                 BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF, _IM.itemDataBase[3].firerate);
@@ -90,9 +90,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         BasicFireProjectile(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange);
         if (_FDM.rightFireFilling == false)
         {
-            _FDM.rightHasFired = true;
-            _FDM.rightFireCurrent = 0;
-            _FDM.rightFireTotal = _IM.itemDataBase[4].firerate;
+            _FDM.leftHasFired = true;
+            _FDM.leftFireCurrent = 0;
+            _FDM.leftFireTotal = _IM.itemDataBase[4].firerate;
         }
     }
 
@@ -124,8 +124,13 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         //bullet.GetComponent<CurveProjectile>().Shoot();
 
         //bullet.GetComponent<CurveProjectile>().angle = _PC.directional.transform.rotation.y;
-
-        if(!projectileShot2)
+        if (_FDM.leftFireFilling == false)
+        {
+            _FDM.leftHasFired = true;
+            _FDM.leftFireCurrent = 0;
+            _FDM.leftFireTotal = _IM.itemDataBase[3].firerate;
+        }
+        if (!projectileShot2)
         {
             GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
 
