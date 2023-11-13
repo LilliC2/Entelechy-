@@ -111,20 +111,16 @@ public class BaseEnemy : GameBehaviour
         if(enemyVisuals.transform.localScale.x < 0) positive = false;
         else if (enemyVisuals.transform.localScale.x > 0) positive = true;
 
-        print(_destination + "Destintation");
-        print(gameObject.transform.localPosition.x + "GO");
         if (_destination.x > gameObject.transform.localPosition.x)
         {
 
             if(positive == false) enemyVisuals.transform.localScale = new Vector3(-enemyVisuals.transform.localScale.x, enemyVisuals.transform.localScale.y, enemyVisuals.transform.localScale.z);
 
 
-            print("dest is greater");
 
         }
         if (_destination.x < gameObject.transform.localPosition.x)
         {
-            print("dest is lesser");
 
             if (positive) enemyVisuals.transform.localScale = new Vector3(-enemyVisuals.transform.localScale.x, enemyVisuals.transform.localScale.y, enemyVisuals.transform.localScale.z);
 
@@ -169,7 +165,6 @@ public class BaseEnemy : GameBehaviour
             ExecuteAfterFrames(30, () => explosionAnimOB.SetActive(false));
 
             //destroy bullet that hit it
-            Destroy(collision.gameObject);
         }
 
     }

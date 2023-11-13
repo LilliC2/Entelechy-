@@ -2,9 +2,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class BearTrap : MonoBehaviour
+public class BearTrap : GameBehaviour
 {
-    public PlayerController playerController;
     public float damageOnCollision = 5f;
     public Sprite triggeredSprite;
     private bool isTrapActive = true;
@@ -13,28 +12,29 @@ public class BearTrap : MonoBehaviour
 
     private void Start()
     {
-        playerController = FindObjectOfType<PlayerController>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+
+        ExecuteAfterSeconds(6f, () => Destroy(gameObject));
     }
 
     private void OnCollisionEnter(Collision collision)
     {
-        if (isTrapActive && collision.gameObject.CompareTag("Player"))
+        if (isTrapActive && collision.gameObject.CompareTag("Enemy"))
         {
             isTrapActive = false;
-            playerController.health -= damageOnCollision;
+            var baseEn = collision.gameObject.GetComponent<BaseEnemy>();
+
+            baseEn.Hit(damageOnCollision);
+            var speed = baseEn.stats.speed;
+            baseEn.stats.speed = 0;
+            ExecuteAfterSeconds(2f, () => baseEn.stats.speed = speed);
+            ExecuteAfterSeconds(2f, () => Destroy(gameObject));
+
+
 
             spriteRenderer.sprite = triggeredSprite;
 
-            playerController.GetComponent<CharacterController>().enabled = false;
-            StartCoroutine(EnableMovementAfterDelay(2f));
         }
-    }
 
-    private IEnumerator EnableMovementAfterDelay(float delay)
-    {
-        yield return new WaitForSeconds(delay);
-        playerController.GetComponent<CharacterController>().enabled = true;
-        Destroy(gameObject);
     }
 }

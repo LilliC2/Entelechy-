@@ -13,7 +13,10 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     [Header("Projectile")]
     public Vector3 target;
-    public bool projectileShot;
+
+    bool projectileShot;
+    bool projectileShot2;
+
 
     [Header("Sabertooth Projectile")]
     public bool returned = true;
@@ -51,7 +54,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             case 3: //Sabertooth
 
 
-                BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF);
+                BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF, _IM.itemDataBase[3].firerate);
 
                 break;
 
@@ -114,7 +117,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     }
 
-    public void BasicLobProjectile(float _range, float _projectileSpeed, GameObject _prefab)
+    public void BasicLobProjectile(float _range, float _projectileSpeed, GameObject _prefab, float _firerate)
     {
 
         print("lobbed");
@@ -122,13 +125,21 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
         //bullet.GetComponent<CurveProjectile>().angle = _PC.directional.transform.rotation.y;
 
+        if(!projectileShot2)
+        {
+            GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
+
+            print(_PC.directional.transform.forward);
+
+            _PC.torsoFiringPoint.transform.localEulerAngles = new(-angle, _PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
 
 
-        GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
+            bullet.GetComponent<Rigidbody>().AddForce(power * _PC.torsoFiringPoint.transform.forward, ForceMode.Impulse);
 
-        print(_PC.directional.transform.forward);
+            projectileShot2 = true;
 
-        bullet.GetComponent<Rigidbody>().AddForce(power * _PC.directional.transform.forward ,ForceMode.Impulse);
+            ExecuteAfterSeconds(_firerate, () => projectileShot2 = false);
+        }
 
 
     }

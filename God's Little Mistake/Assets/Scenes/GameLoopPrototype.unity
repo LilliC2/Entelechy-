@@ -700,6 +700,11 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 3941953282811711069, guid: b91119e8c48623347bb2a5f842a39fef, type: 3}
   m_PrefabInstance: {fileID: 5226408723961275394}
   m_PrefabAsset: {fileID: 0}
+--- !u!4 &541351100 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4123651346653165176, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+  m_PrefabInstance: {fileID: 4433524347404704497}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &575509827 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 681476338368817041, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
@@ -910,11 +915,6 @@ MonoBehaviour:
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 1360524891284075043, guid: b91119e8c48623347bb2a5f842a39fef, type: 3}
   m_PrefabInstance: {fileID: 5226408723961275394}
-  m_PrefabAsset: {fileID: 0}
---- !u!4 &781556823 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 2419880325677089805, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
-  m_PrefabInstance: {fileID: 4433524347404704497}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &794644092 stripped
 GameObject:
@@ -1727,7 +1727,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   dontDestroy: 0
   angle: 45
-  power: 50
+  power: 5
   target: {x: 0, y: 0, z: 0}
   returned: 1
 --- !u!212 &1257084782 stripped
@@ -3414,12 +3414,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2113221676}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0, y: 0.272, z: -0.139}
+  m_LocalRotation: {x: -0, y: -0.012097381, z: -0, w: 0.99992687}
+  m_LocalPosition: {x: 0.0015250789, y: 0.25800002, z: -0.13868095}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
-  m_Father: {fileID: 781556823}
+  m_Father: {fileID: 541351100}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2122586879 stripped
@@ -4162,11 +4162,11 @@ PrefabInstance:
       objectReference: {fileID: 1116426407}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: legItem.ID
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.ID
-      value: 4
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoSprite
@@ -4174,12 +4174,12 @@ PrefabInstance:
       objectReference: {fileID: 1257084782}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.dmg
-      value: 60
+      value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: legItem.icon
       value: 
-      objectReference: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+      objectReference: {fileID: 21300000, guid: df94ebc9d2b8ee347b7faf84cafb688e, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.ID
       value: 3
@@ -4206,7 +4206,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: legItem.itemName
-      value: Slug Legs
+      value: Nubs
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoFiringPoint
@@ -4214,16 +4214,16 @@ PrefabInstance:
       objectReference: {fileID: 2113221676}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.firerate
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.itemName
-      value: Squito
+      value: Sabertooth
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: legItem.pauseIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 5789cd456c8a56149a671a4f49fcdec5, type: 3}
+      objectReference: {fileID: 21300000, guid: 1996e7bad503a8043a91173215a2d91b, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.pauseIcon
       value: 
@@ -4238,7 +4238,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.critChance
-      value: 30
+      value: 17
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.projectile
@@ -4259,10 +4259,10 @@ PrefabInstance:
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.projectilePF
       value: 
-      objectReference: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+      objectReference: {fileID: 2270622985260862806, guid: 252be8e94cd0cdc49a7f757070716c54, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: legItem.movementSpeed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.movementSpeed
@@ -4274,11 +4274,11 @@ PrefabInstance:
       objectReference: {fileID: 1753417278855635134, guid: 3c79b25e1dc54074ab1e23e354351e05, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.projectileRange
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.projectileSpeed
-      value: 3000
+      value: 700
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.projectileRange
@@ -4373,8 +4373,8 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 3564803423564108524, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       insertIndex: -1
       addedObject: {fileID: 861033341}
-    - targetCorrespondingSourceObject: {fileID: 2419880325677089805, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
-      insertIndex: -1
+    - targetCorrespondingSourceObject: {fileID: 4123651346653165176, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      insertIndex: 0
       addedObject: {fileID: 2113221677}
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}

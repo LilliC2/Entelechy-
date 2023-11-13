@@ -45,7 +45,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
         //pick a random possible drop
         int rand = RandomIntBetweenTwoInt(0, possibleDropsIndex.Count);
 
-        Item itemSpawned = _IM.itemDataBase[possibleDropsIndex[rand]];
+        //Item itemSpawned = _IM.itemDataBase[possibleDropsIndex[rand]];
 
         //scaling section here
         /*Here we would edit the item values here, so based on level and etc. the prefab of the item would be saved on this too
@@ -57,7 +57,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
         //give item inscene id
 
         //give item script inscene id
-        itemTemp.GetComponentInChildren<ItemIdentifier>().itemInfo = itemSpawned;
+        //itemTemp.GetComponentInChildren<ItemIdentifier>().itemInfo = itemSpawned;
         
         
 
