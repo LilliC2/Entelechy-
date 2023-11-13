@@ -165,7 +165,6 @@ public class BaseEnemy : GameBehaviour
             ExecuteAfterFrames(30, () => explosionAnimOB.SetActive(false));
 
             //destroy bullet that hit it
-            Destroy(collision.gameObject);
         }
 
     }
