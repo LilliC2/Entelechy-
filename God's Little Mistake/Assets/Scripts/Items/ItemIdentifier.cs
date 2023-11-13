@@ -35,6 +35,8 @@ public class ItemIdentifier : GameBehaviour
         statPop = GameObject.Find("Stat Popup");
 
         selecting = GetComponent<Selecting>();
+        isTiming = false;
+
     }
 
     private void Update()
@@ -48,7 +50,7 @@ public class ItemIdentifier : GameBehaviour
                 isTiming = true;
             }
 
-            if (Input.GetKeyDown(KeyCode.E))
+            if (Input.GetKeyUp(KeyCode.E))
             {
                 isTiming = false;
             }
@@ -57,7 +59,6 @@ public class ItemIdentifier : GameBehaviour
             {
                 //turn on holdding timer
                 startTimer += Time.deltaTime;
-                holdEFill.fillAmount = startTimer / holdTimer;
 
                 if (startTimer > holdTimer)
                 {
@@ -141,98 +142,31 @@ public class ItemIdentifier : GameBehaviour
 
             }
 
-            //if (inRange)
-            //{
-            //    if (Input.GetKey(KeyCode.E))
-            //    {
-            //        //check which segment it is
+        }
+        
+    }
 
+    private void OnTriggerStay(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            print("player");
+            inRange = true;
+            _PM.popupPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
 
-            //        bool itemOnPlayer = false;
-            //        //determine if there is already an item of that segment equipped
-
-            //        switch (itemInfo.segment)
-            //        {
-            //            case Item.Segment.Head:
-            //                if (_PC.headItem.itemName != "NULL") itemOnPlayer = true;
-
-            //                break;
-            //            case Item.Segment.Torso:
-            //                if (_PC.torsoItem.itemName != "NULL") itemOnPlayer = true;
-
-            //                break;
-            //            case Item.Segment.Legs:
-            //                if (_PC.legItem.itemName != "NULL") itemOnPlayer = true;
-
-            //                break;
-
-            //        }
-
-            //        if (itemOnPlayer)
-            //        {
-            //            //remove item
-            //            selecting.RemovePreviousItem();
-
-            //            //spawn old item on ground
-            //            if (!itemSpawned)
-            //            {
-            //                itemSpawned = true;
-
-            //                var newSpawnPoint = new Vector3();
-            //                UnityEngine.AI.NavMeshHit hit;
-            //                if (UnityEngine.AI.NavMesh.SamplePosition(_PC.transform.position, out hit, 1f, UnityEngine.AI.NavMesh.AllAreas))
-            //                {
-            //                    newSpawnPoint = hit.position;
-            //                }
-            //                //place old item on ground
-
-            //                GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
-            //                item.GetComponent<ItemIdentifier>().enabled = false;
-            //            }
-            //        }
-
-
-            //        if (!itemAdd)
-            //        {
-
-            //            _AM.ItemPickUp();
-            //            itemAdd = true;
-
+            _PM.popupPanel.SetActive(true);
         }
     }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            print("player");
+            inRange = false;
+
+        _PM.popupPanel.SetActive(false);
+        }
+    }
+
 }
-
-    //public void OnMouseExit()
-    //{
-    //    isHovering = false;
-
-    //    print("EXIT");
-
-
-    //    _UI.PlayPopupClose();
-    //    _UI.PlayPopup1Close();
-    //    _UI.PlayPopup2Close();
-    //    _UI.popupContent.SetActive(false);
-    //    _UI.popupContent.SetActive(false);
-    //    _UI.popupContent2.SetActive(false);
-    //    ExecuteAfterSeconds(1, () => TurnOff());
-
-
-    //        _PM.popupPanel.SetActive(true);
-    //        _PM.popupPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-    //        _PM.UpdateItemPopUp(itemInfo);
-    //    }
-    //}
-
-    //private void OnTriggerExit(Collider other)
-    //{
-    //    if (other.tag == "Player")
-    //    {
-    //        print("player");
-    //        inRange = false;
-
-    //    _PM.popupPanel.SetActive(false);
-    //    }
-    //}
-
-
