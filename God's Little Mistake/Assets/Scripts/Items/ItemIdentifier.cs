@@ -39,34 +39,7 @@ public class ItemIdentifier : GameBehaviour
 
     private void Update()
     {
-        //check if selected item is arms!!!
-
-
-        if (isHovering)
-        {
-            print("we hover");
-
-            if (itemInfo.segment == Item.Segment.Torso)
-            {
-                float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
-                print(scrollDelta);
-
-                if (scrollDelta > 0)
-                {
-                    print("Left arm");
-                    //_UI.leftArmItem = itemInfo;
-                    //Changes item to left here
-                }
-                if (scrollDelta < 0)
-                {
-                    print("right arm");
-
-                    //_UI.rightArmItem = itemInfo;
-                    //Changes item to left here
-                }
-            }
-        }
-
+   
 
         if (inRange)
         {
@@ -90,22 +63,33 @@ public class ItemIdentifier : GameBehaviour
                 {
                     //check which segment it is
 
+                Item prevItem = new();
+                bool itemOnPlayer = false;
+                //determine if there is already an item of that segment equipped
 
-                    bool itemOnPlayer = false;
-                    //determine if there is already an item of that segment equipped
+                switch (itemInfo.segment)
+                {
+                    case Item.Segment.Head:
+                        if (_PC.headItem.itemName != "NULL")
+                        {
+                            itemOnPlayer = true;
+                            prevItem = _PC.headItem;
+                        }
+                        break;
+                    case Item.Segment.Torso:
+                        if (_PC.torsoItem.itemName != "NULL")
+                        {
+                            itemOnPlayer = true;
+                            prevItem = _PC.torsoItem;
+                        }
 
-                    switch (itemInfo.segment)
-                    {
-                        case Item.Segment.Head:
-                            if (_PC.headItem.itemName != "NULL") itemOnPlayer = true;
-
-                            break;
-                        case Item.Segment.Torso:
-                            if (_PC.torsoItem.itemName != "NULL") itemOnPlayer = true;
-
-                            break;
-                        case Item.Segment.Legs:
-                            if (_PC.legItem.itemName != "NULL") itemOnPlayer = true;
+                        break;
+                    case Item.Segment.Legs:
+                        if (_PC.legItem.itemName != "NULL")
+                        {
+                            itemOnPlayer = true;
+                            prevItem = _PC.legItem;
+                        }
 
                             break;
 
@@ -129,44 +113,30 @@ public class ItemIdentifier : GameBehaviour
                             }
                             //place old item on ground
 
-                            GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
-                            item.GetComponent<ItemIdentifier>().enabled = false;
-                        }
+                        GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
+                        item.GetComponent<ItemIdentifier>().itemInfo = prevItem;
                     }
+                }
 
 
                     if (!itemAdd)
                     {
 
-                        _AM.ItemPickUp();
-                        itemAdd = true;
+                    _AM.ItemPickUp();
+                    itemAdd = true;
+                    
+                    //equip new items
+                    _UI.CreateItemSelected(itemInfo);
 
-                        //equip new items
-                        ExecuteAfterFrames(20, () => _UI.CreateItemSelected(itemInfo));
+                    _IM.AddItemToInventory(itemInfo);
 
-                        //do check to see if another item of the same is equipped
-                        bool alreadyEquipped = false;
 
-                        switch (itemInfo.segment)
-                        {
-                            case Item.Segment.Head:
-                                if (_PC.headItem.itemName != "NULL") alreadyEquipped = true;
 
-                                break;
-                            case Item.Segment.Torso:
-                                if (_PC.torsoItem.itemName != "NULL") alreadyEquipped = true;
-
-                                break;
-                            case Item.Segment.Legs:
-                                if (_PC.legItem.itemName != "NULL") alreadyEquipped = true;
-
-                                break;
-
-                        }
-                        if (!alreadyEquipped) ExecuteAfterFrames(15, () => _IM.AddItemToInventory(itemInfo));
-                    }
                 }
-                ExecuteAfterFrames(25, () => Destroy(this.gameObject));
+
+
+
+                Destroy(this.gameObject);
             }
 
         }
@@ -228,42 +198,23 @@ public class ItemIdentifier : GameBehaviour
             //            _AM.ItemPickUp();
             //            itemAdd = true;
 
-            //            //equip new items
-            //            ExecuteAfterFrames(20, () => _UI.CreateItemSelected(itemInfo));
-
-            //            //do check to see if another item of the same is equipped
-            //            bool alreadyEquipped = false;
-
-            //            switch (itemInfo.segment)
-            //            {
-            //                case Item.Segment.Head:
-            //                    if (_PC.headItem.itemName != "NULL") alreadyEquipped = true;
-
-            //                    break;
-            //                case Item.Segment.Torso:
-            //                    if (_PC.torsoItem.itemName != "NULL") alreadyEquipped = true;
-
-            //                    break;
-            //                case Item.Segment.Legs:
-            //                    if (_PC.legItem.itemName != "NULL") alreadyEquipped = true;
-
-            //                    break;
-
-            //            }
-            //            if (!alreadyEquipped) ExecuteAfterFrames(15, () => _IM.AddItemToInventory(itemInfo));
-            //        }
-            //        ExecuteAfterFrames(25, () => Destroy(this.gameObject));
-            //    }
-            //}
-        
     }
 
-    private void OnTriggerStay(Collider other)
+    public void OnMouseExit()
     {
-        if (other.tag == "Player")
-        {
-            print("player");
-            inRange = true;
+        isHovering = false;
+
+        print("EXIT");
+
+
+        _UI.PlayPopupClose();
+        _UI.PlayPopup1Close();
+        _UI.PlayPopup2Close();
+        _UI.popupContent.SetActive(false);
+        _UI.popupContent.SetActive(false);
+        _UI.popupContent2.SetActive(false);
+        ExecuteAfterSeconds(1, () => TurnOff());
+
 
             _PM.popupPanel.SetActive(true);
             _PM.popupPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
@@ -281,4 +232,5 @@ public class ItemIdentifier : GameBehaviour
         _PM.popupPanel.SetActive(false);
         }
     }
+
 }
