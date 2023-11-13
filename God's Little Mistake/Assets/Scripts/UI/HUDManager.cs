@@ -145,7 +145,7 @@ public class HUDManager : Singleton<HUDManager>
         //Slot 1
         if (hasItem1)
         {
-            
+            keyGlow1.SetActive(true);
             if(isCooldown1)
             {
                 frameHighlight1.SetActive(false);
@@ -157,22 +157,13 @@ public class HUDManager : Singleton<HUDManager>
                 backgroundGlow1.SetActive(true);
             }
 
-            if(isPrimary1)
-            {
-                keyHighlight1.SetActive(true);
-                keyGlow1.SetActive(true);
-            }
-            else
-            {
-                keyHighlight1.SetActive(false);
-                keyGlow1.SetActive(false);
-            }
+
         }
 
         //Slot 2
         if (hasItem2)
         {
-            
+            keyGlow2.SetActive(true);
             if (isCooldown2)
             {
                 frameHighlight2.SetActive(false);
@@ -183,22 +174,12 @@ public class HUDManager : Singleton<HUDManager>
                 frameHighlight2.SetActive(true);
                 backgroundGlow2.SetActive(true);
             }
-
-            if (isPrimary2)
-            {
-                keyHighlight2.SetActive(true);
-                keyGlow2.SetActive(true);
-            }
-            else
-            {
-                keyHighlight2.SetActive(false);
-                keyGlow2.SetActive(false);
-            }
         }
 
         //Slot 3
         if (hasItem3)
         {
+            keyGlow3.SetActive(true);
             if (isCooldown3)
             {
                 frameHighlight3.SetActive(false);
@@ -208,17 +189,6 @@ public class HUDManager : Singleton<HUDManager>
             {
                 frameHighlight3.SetActive(true);
                 backgroundGlow3.SetActive(true);
-            }
-
-            if (isPrimary3)
-            {
-                keyHighlight3.SetActive(true);
-                keyGlow3.SetActive(true);
-            }
-            else
-            {
-                keyHighlight3.SetActive(false);
-                keyGlow3.SetActive(false);
             }
         }
     }

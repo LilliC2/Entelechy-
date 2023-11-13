@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 262.33694, g: 325.04984, b: 430.2193, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -989,6 +989,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
+  angle: 0
+  power: 0
   target: {x: 0, y: 0, z: 0}
   projectileShot: 0
   returned: 1
@@ -1061,10 +1063,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: NewUIManager
       objectReference: {fileID: 0}
-    - target: {fileID: 1302563486106096456, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 1929078
-      objectReference: {fileID: 0}
     - target: {fileID: 1435742250951138396, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1081,29 +1079,25 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 2108864354568749014, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 1929078
+    - target: {fileID: 3960233043116802210, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.83
       objectReference: {fileID: 0}
-    - target: {fileID: 3113376990164848644, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: slotNumber
+    - target: {fileID: 3960233043116802210, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960233043116802210, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.83
+      objectReference: {fileID: 0}
+    - target: {fileID: 3960233043116802210, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
       value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 3774387843182811881, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 4010856979464433773, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 126.647
-      objectReference: {fileID: 0}
-    - target: {fileID: 4010856979464433773, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -22.227
       objectReference: {fileID: 0}
     - target: {fileID: 4076752611186672341, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4808131214550480543, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1129,89 +1123,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 5592779554184873135, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 1929078
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656171826321508681, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656171826321508681, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656171826321508681, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656171826321508681, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656171826321508681, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5656171826321508681, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5953466813296960774, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5953466813296960774, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5953466813296960774, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5953466813296960774, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5953466813296960774, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 5953466813296960774, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
+    - target: {fileID: 6046853601115914684, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
+      propertyPath: m_text
+      value: '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
+        tempor.'
       objectReference: {fileID: 0}
     - target: {fileID: 6046853601115914684, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_fontColor32.rgba
-      value: 1929078
+      propertyPath: m_fontSize
+      value: 45
       objectReference: {fileID: 0}
-    - target: {fileID: 6637644065447943393, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637644065447943393, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637644065447943393, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637644065447943393, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637644065447943393, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_AnchoredPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6637644065447943393, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 6651532975469181701, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 6046853601115914684, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
+      propertyPath: m_fontSizeBase
+      value: 45
       objectReference: {fileID: 0}
     - target: {fileID: 7118842886283665283, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
       propertyPath: m_AnchorMax.y
@@ -1313,6 +1236,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 7941208128909437206, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 8015540345932927623, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -1329,29 +1256,12 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 8104744119649196425, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_SizeDelta.y
-      value: 84.309
-      objectReference: {fileID: 0}
-    - target: {fileID: 8104744119649196425, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_AnchoredPosition.y
-      value: -13.76
-      objectReference: {fileID: 0}
-    - target: {fileID: 8323310573116889497, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
-    - target: {fileID: 8344973599689089095, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_Sprite
-      value: 
-      objectReference: {fileID: 21300000, guid: 01b9b549d55e52e4b90b9e09ce0bea70, type: 3}
-    - target: {fileID: 8778550468775368478, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
-      propertyPath: m_IsActive
-      value: 0
+    - target: {fileID: 8500202106504337111, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects:
-    - {fileID: 8219900440879870005, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
+    m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ad1fb033bedd30b4da6244d07c40ec9c, type: 3}
@@ -2840,7 +2750,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: legItem.ID
-      value: 6
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.ID
@@ -2853,7 +2763,7 @@ PrefabInstance:
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: legItem.icon
       value: 
-      objectReference: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+      objectReference: {fileID: 21300000, guid: df94ebc9d2b8ee347b7faf84cafb688e, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.ID
       value: 4
@@ -2880,7 +2790,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: legItem.itemName
-      value: Slug Legs
+      value: Nubs
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoFiringPoint
@@ -2897,7 +2807,7 @@ PrefabInstance:
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: legItem.pauseIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 5789cd456c8a56149a671a4f49fcdec5, type: 3}
+      objectReference: {fileID: 21300000, guid: 1996e7bad503a8043a91173215a2d91b, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.pauseIcon
       value: 
@@ -2919,6 +2829,10 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.abilityName
+      value: Fart
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.pauseIcon
       value: 
       objectReference: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
@@ -2936,7 +2850,7 @@ PrefabInstance:
       objectReference: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: legItem.movementSpeed
-      value: 3
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.movementSpeed
@@ -2946,6 +2860,10 @@ PrefabInstance:
       propertyPath: torsoItem.projectilePF
       value: 
       objectReference: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.cooldownAbility
+      value: 5
+      objectReference: {fileID: 0}
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: headItem.projectileRange
       value: 5
@@ -2961,6 +2879,11 @@ PrefabInstance:
     - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: torsoItem.projectileSpeed
       value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 3458020039010367357, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
+      propertyPath: legItem.abilityDescription
+      value: Missy rips a big one, pushing 'em forward and becomes immortal for a
+        sec.
       objectReference: {fileID: 0}
     - target: {fileID: 3564803423564108524, guid: 72dc0fe247a947048925c9e5942b364f, type: 3}
       propertyPath: m_RootOrder
@@ -3114,8 +3037,12 @@ MonoBehaviour:
     movementSpeed: 0
     modifier: 0
     modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
     icon: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
     pauseIcon: {fileID: 21300000, guid: deb623ef3ada87f4092553f9f2938cb0, type: 3}
+    staticTempSprite: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -3138,8 +3065,13 @@ MonoBehaviour:
     movementSpeed: 5
     modifier: 0
     modifierID: 0
+    cooldownAbility: 5
+    abilityName: Fart
+    abilityDescription: Missy rips a big one, pushing 'em forward and becomes immortal
+      for a sec.
     icon: {fileID: 21300000, guid: df94ebc9d2b8ee347b7faf84cafb688e, type: 3}
     pauseIcon: {fileID: 21300000, guid: 1996e7bad503a8043a91173215a2d91b, type: 3}
+    staticTempSprite: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -3162,8 +3094,12 @@ MonoBehaviour:
     movementSpeed: 0
     modifier: 0
     modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
     icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
     pauseIcon: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    staticTempSprite: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -3186,8 +3122,12 @@ MonoBehaviour:
     movementSpeed: 0
     modifier: 0
     modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
     icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
     pauseIcon: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    staticTempSprite: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -3210,8 +3150,12 @@ MonoBehaviour:
     movementSpeed: 0
     modifier: 0
     modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
     icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
     pauseIcon: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    staticTempSprite: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -3234,8 +3178,12 @@ MonoBehaviour:
     movementSpeed: 8
     modifier: 0
     modifierID: 0
+    cooldownAbility: 8
+    abilityName: Dash
+    abilityDescription: Missy dashes forward really-really-really quickly.
     icon: {fileID: 21300000, guid: 00a1cca442778f14b802193952c053d9, type: 3}
     pauseIcon: {fileID: 21300000, guid: 26c1a1497086fba4bb74694bddf81abc, type: 3}
+    staticTempSprite: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -3258,8 +3206,13 @@ MonoBehaviour:
     movementSpeed: 3
     modifier: 0
     modifierID: 0
+    cooldownAbility: 8
+    abilityName: Slug Trail
+    abilityDescription: Create a sticky and slimy muscus behind Missy, slowing enemis
+      but makes Missy go faest.
     icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
     pauseIcon: {fileID: 21300000, guid: 5789cd456c8a56149a671a4f49fcdec5, type: 3}
+    staticTempSprite: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
