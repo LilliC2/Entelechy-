@@ -92,6 +92,7 @@ public class EnemyLongRange : GameBehaviour
 
         if (agent.velocity.magnitude > 0.5f) baseEnemy.walking.Play();
 
+        baseEnemy.FlipSprite(agent.destination);
 
         agent.speed = enemyStats.stats.speed;
 
@@ -223,7 +224,6 @@ public class EnemyLongRange : GameBehaviour
 
 
                 agent.SetDestination(target);
-                baseEnemy.FlipSprite(agent.destination);
 
                 //change destination
 

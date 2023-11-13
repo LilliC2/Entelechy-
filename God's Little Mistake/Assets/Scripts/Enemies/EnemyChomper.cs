@@ -65,10 +65,10 @@ public class EnemyChomper : GameBehaviour
         agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-        frontAnim = frontOB.GetComponentInChildren<Animator>();
-        backAnim = backOB.GetComponentInChildren<Animator>();
-        rightSideAnim = rightSideOB.GetComponentInChildren<Animator>();
-        leftSideAnim = leftSideOB.GetComponentInChildren<Animator>();
+        //frontAnim = frontOB.GetComponentInChildren<Animator>();
+        //backAnim = backOB.GetComponentInChildren<Animator>();
+        //rightSideAnim = rightSideOB.GetComponentInChildren<Animator>();
+        //leftSideAnim = leftSideOB.GetComponentInChildren<Animator>();
 
         attackRange = enemyStats.stats.range;
         target = SearchWalkPoint();
@@ -81,6 +81,7 @@ public class EnemyChomper : GameBehaviour
     // Update is called once per frame
     void Update()
     {
+        baseEnemy.FlipSprite(agent.destination);
 
         if (agent.velocity.magnitude > 0.5f) baseEnemy.walking.Play();
 
@@ -109,71 +110,71 @@ public class EnemyChomper : GameBehaviour
         else baseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
 
 
-        #region Turning Sprites
-        //if angle is between 136 and 45, backwards
-        var heading = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-        if (heading >= -45 && heading <= 45)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(false);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            backOB.transform.GetChild(0).gameObject.SetActive(true);
+        //#region Turning Sprites
+        ////if angle is between 136 and 45, backwards
+        //var heading = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+        //if (heading >= -45 && heading <= 45)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(true);
 
-        }
+        //}
 
-        //if angle is between 46 and 315, right side
-        if (heading >= 46 && heading <= 135)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(false);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(true);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            backOB.transform.GetChild(0).gameObject.SetActive(false);
+        ////if angle is between 46 and 315, right side
+        //if (heading >= 46 && heading <= 135)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(true);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
 
-        }
+        //}
 
-        //if angle is between 316 and 225, forwards
-        if (heading >= 136 && heading >= -135)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(true);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            backOB.transform.GetChild(0).gameObject.SetActive(false);
+        ////if angle is between 316 and 225, forwards
+        //if (heading >= 136 && heading >= -135)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(true);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
 
-        }
+        //}
 
-        //if angle is between 226 and 135, left side
-        if (heading >= -136 && heading <= -45)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(false);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(true);
-            backOB.transform.GetChild(0).gameObject.SetActive(false);
+        ////if angle is between 226 and 135, left side
+        //if (heading >= -136 && heading <= -45)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(true);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
 
-        }
-
-
+        //}
 
 
-        #endregion
+
+
+        //#endregion
 
         #region Animating Sprites
 
-        //check if walking
-        if (agent.velocity.magnitude > 0.1f)
-        {
-            frontAnim.SetBool("Walking", true);
-            backAnim.SetBool("Walking", true);
-            leftSideAnim.SetBool("Walking", true);
-            rightSideAnim.SetBool("Walking", true);
-        }
-        else
-        {
-            frontAnim.SetBool("Walking", false);
-            backAnim.SetBool("Walking", false);
-            leftSideAnim.SetBool("Walking", false);
-            rightSideAnim.SetBool("Walking", false);
+        ////check if walking
+        //if (agent.velocity.magnitude > 0.1f)
+        //{
+        //    frontAnim.SetBool("Walking", true);
+        //    backAnim.SetBool("Walking", true);
+        //    leftSideAnim.SetBool("Walking", true);
+        //    rightSideAnim.SetBool("Walking", true);
+        //}
+        //else
+        //{
+        //    frontAnim.SetBool("Walking", false);
+        //    backAnim.SetBool("Walking", false);
+        //    leftSideAnim.SetBool("Walking", false);
+        //    rightSideAnim.SetBool("Walking", false);
 
-        }
+        //}
 
 
         #endregion
@@ -219,10 +220,10 @@ public class EnemyChomper : GameBehaviour
                     if(!jumpingBack)
                     {
 
-                        frontAnim.SetBool("Walking", false);
-                        backAnim.SetBool("Walking", false);
-                        leftSideAnim.SetBool("Walking", false);
-                        rightSideAnim.SetBool("Walking", false);
+                        //frontAnim.SetBool("Walking", false);
+                        //backAnim.SetBool("Walking", false);
+                        //leftSideAnim.SetBool("Walking", false);
+                        //rightSideAnim.SetBool("Walking", false);
 
                         enemyStats.stats.speed = jumpSpeed;
 
@@ -246,13 +247,13 @@ public class EnemyChomper : GameBehaviour
 
                             agent.isStopped = true;
                             animationPlayed = true;
-                            PlayAttackAnimation();
+                            //PlayAttackAnimation();
 
                             agent.isStopped = false;
                             agent.SetDestination(player.transform.position);
 
                             //PerformAttack(enemyStats.stats.fireRate);
-                            ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
+                            //ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
                         }
                         
                     }
