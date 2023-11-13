@@ -5,9 +5,16 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 {
 
 
+    [Header("Lob Projectile")]
+    [SerializeField]
+    float angle;
+    [SerializeField]
+    float power;
+
     [Header("Projectile")]
     public Vector3 target;
     bool projectileShot;
+    bool projectileShot2;
 
     [Header("Sabertooth Projectile")]
     public bool returned = true;
@@ -41,6 +48,21 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 SabertoothAttack();
 
                 break;
+                
+            case 3: //Sabertooth
+
+
+                BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF, _IM.itemDataBase[3].firerate);
+
+                break;
+
+            case 4: //Squito
+
+                print("Lob");
+
+                SquitoAttack();
+
+                break;
 
 
 
@@ -54,6 +76,15 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         BasicFireProjectile(_IM.itemDataBase[0].projectilePF, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange);
 
     }
+    
+    public void SquitoAttack()
+    {
+        BasicFireProjectile(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange);
+
+    }
+
+
+
 
     public void SabertoothAttack()
     {
@@ -65,6 +96,45 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         }
         
 
+    }
+
+    public void BasicLobProjectile(float _range, float _projectileSpeed, GameObject _prefab, float _firerate)
+    {
+
+        print("lobbed");
+        //bullet.GetComponent<CurveProjectile>().Shoot();
+
+        //bullet.GetComponent<CurveProjectile>().angle = _PC.directional.transform.rotation.y;
+
+        if(!projectileShot2)
+        {
+            GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
+
+            print(_PC.directional.transform.forward);
+
+            _PC.torsoFiringPoint.transform.localEulerAngles = new(-angle, _PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
+
+
+            bullet.GetComponent<Rigidbody>().AddForce(power * _PC.torsoFiringPoint.transform.forward, ForceMode.Impulse);
+
+            projectileShot2 = true;
+
+            ExecuteAfterSeconds(_firerate, () => projectileShot2 = false);
+        }
+
+
+    }
+
+    Vector3 CalculateTarget(Vector3 _originalPos, float _distance, float _angle)
+    {
+        // Convert the angle from degrees to radians
+        float angleInRadians = _angle * Mathf.Deg2Rad;
+
+        // Calculate the new position
+        float newX = _originalPos.x + _distance * Mathf.Cos(angleInRadians);
+        float newY = _originalPos.y + _distance * Mathf.Sin(angleInRadians);
+
+        return new Vector3(newX, newY, _originalPos.z);
     }
 
     public void BasicFireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)

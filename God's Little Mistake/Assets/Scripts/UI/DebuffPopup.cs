@@ -29,7 +29,7 @@ public class DebuffPopup : GameBehaviour
             {
                 currentDuration -= Time.deltaTime;
                 fill.fillAmount = currentDuration / totalDuration;
-                Debug.Log(fill.fillAmount);
+                //Debug.Log(fill.fillAmount);
             }
             if (currentDuration <= 0)
             {

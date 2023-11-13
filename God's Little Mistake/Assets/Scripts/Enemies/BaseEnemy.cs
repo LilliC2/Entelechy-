@@ -70,7 +70,7 @@ public class BaseEnemy : GameBehaviour
         if (Input.GetKeyDown(KeyCode.K)) ApplySlowness(3, 10);
 
 
-        HealthVisualIndicator(stats.health, stats.maxHP);
+        //HealthVisualIndicator(stats.health, stats.maxHP);
 
         //Health Manager
         if (stats.health <= 0)
@@ -103,6 +103,28 @@ public class BaseEnemy : GameBehaviour
         }
 
         
+    }
+
+    public void FlipSprite(Vector3 _destination)
+    {
+        bool positive = new();
+        if(enemyVisuals.transform.localScale.x < 0) positive = false;
+        else if (enemyVisuals.transform.localScale.x > 0) positive = true;
+
+        if (_destination.x > gameObject.transform.localPosition.x)
+        {
+
+            if(positive == false) enemyVisuals.transform.localScale = new Vector3(-enemyVisuals.transform.localScale.x, enemyVisuals.transform.localScale.y, enemyVisuals.transform.localScale.z);
+
+
+
+        }
+        if (_destination.x < gameObject.transform.localPosition.x)
+        {
+
+            if (positive) enemyVisuals.transform.localScale = new Vector3(-enemyVisuals.transform.localScale.x, enemyVisuals.transform.localScale.y, enemyVisuals.transform.localScale.z);
+
+        }
     }
 
     public void Hit(float _dmg)

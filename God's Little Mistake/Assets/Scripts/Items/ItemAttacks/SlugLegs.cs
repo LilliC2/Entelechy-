@@ -43,6 +43,26 @@ public class SlugLegs : GameBehaviour
             }
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if(other.tag == "Player")
+        {
+            print("speed uup");
+            _PC.legItem.movementSpeed = 10;
+
+        }
+    }
+
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            _PC.legItem.movementSpeed = 3;
+
+        }
+    }
+
     private Tween TweenValue(float endValue, float time)
     {
         var speedTween = DOTween.To(() => alpha, (x) => alpha = x, endValue, time);

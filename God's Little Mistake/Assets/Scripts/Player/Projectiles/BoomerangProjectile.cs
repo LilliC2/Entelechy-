@@ -53,7 +53,7 @@ public class BoomerangProjectile : GameBehaviour
         }
         if(!turn && Vector3.Distance(_PC.transform.position, transform.position) < 1.5f)
         {
-            _PA.returned = true;
+            _PAtk.returned = true;
             Destroy(gameObject);
         }
 

@@ -34,6 +34,9 @@ public class Item
     [Header("Animation")]
     public Sprite icon;
     public Sprite pauseIcon;
+
+    public Sprite staticTempSprite;
+
     public GameObject avatarPrefabFrontLeft;
     public GameObject avatarPrefabFrontRight;
 
