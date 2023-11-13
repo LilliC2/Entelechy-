@@ -8,7 +8,6 @@ public class ItemIdentifier : GameBehaviour
 {
     bool inRange;
     public Item itemInfo;
-    Selecting selecting;
     bool isHovering;
 
     [Header("Animation")]
@@ -34,7 +33,6 @@ public class ItemIdentifier : GameBehaviour
     {
         statPop = GameObject.Find("Stat Popup");
 
-        selecting = GetComponent<Selecting>();
         isTiming = false;
 
     }
@@ -99,7 +97,6 @@ public class ItemIdentifier : GameBehaviour
                     if (itemOnPlayer)
                     {
                         //remove item
-                        selecting.RemovePreviousItem();
 
                         //spawn old item on ground
                         if (!itemSpawned)
