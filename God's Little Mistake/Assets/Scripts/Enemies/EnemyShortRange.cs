@@ -61,10 +61,6 @@ public class EnemyShortRange : GameBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-        frontAnim = frontOB.GetComponentInChildren<Animator>();
-        backAnim = backOB.GetComponentInChildren<Animator>();
-        rightSideAnim = rightSideOB.GetComponentInChildren<Animator>();
-        leftSideAnim = leftSideOB.GetComponentInChildren<Animator>();
 
         attackRange = enemyStats.stats.range;
         target = SearchWalkPoint();
@@ -148,28 +144,7 @@ public class EnemyShortRange : GameBehaviour
 
         #endregion
 
-        #region Animating Sprites
-
-        //check if walking
-        if (agent.velocity.magnitude > 0.1f)
-        {
-            frontAnim.SetBool("Walking", true);
-            backAnim.SetBool("Walking", true);
-            leftSideAnim.SetBool("Walking", true);
-            rightSideAnim.SetBool("Walking", true);
-        }
-        else
-        {
-            frontAnim.SetBool("Walking", false);
-            backAnim.SetBool("Walking", false);
-            leftSideAnim.SetBool("Walking", false);
-            rightSideAnim.SetBool("Walking", false);
-
-        }
-
-
-        #endregion
-
+       
         //Visual indicator for health
         //HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
 
