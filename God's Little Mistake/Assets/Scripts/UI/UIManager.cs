@@ -7,15 +7,9 @@ using DG.Tweening;
 
 public class UIManager : Singleton<UIManager>
 {
-    public Item leftArmItem;
-    public Item rightArmItem;
-
+    [Header("Dungeon Level")]
     public TMP_Text dungeonLevel;
-
-    [Header("Hover Popup Content")]
-    public GameObject popupContent;
-    public GameObject popupContent1;
-    public GameObject popupContent2;
+    public Animator levelAnim;
 
     [Header("Game Over")]
     public GameObject gameOverMenu;
@@ -44,91 +38,11 @@ public class UIManager : Singleton<UIManager>
     public Image invenSlot1;
     public Image invenSlot2;
     public Image invenSlot3;
-    public Image invenSlot4;
-    public Image invenSlot5;
-    public Image invenSlot6;
 
     [Header("Missy Height")]
     public GameObject playerAvatar;
     Vector3 standard = new Vector3(0.239999443f, 0.0800049901f, -0.555116713f);
     Vector3 tall = new Vector3(-0.0209999997f, -0.136000007f, 0.0540000014f);
-
-    //[Header("Item Hover Over Panel")]
-    //public GameObject statsPopUpPanel;
-    //public TMP_Text popupName;
-    //public TMP_Text popupDmg;
-    //public TMP_Text popupCritX;
-    //public TMP_Text popupCritChance;
-    //public TMP_Text popupFirerate;
-    //public Image popupIcon;
-
-    [Header("Global Scroll UI")]
-    public RectTransform scrollContent;
-    public float scrollSpeed = 10f;
-
-
-    [Header("Inventory Pop up")]
-    public GameObject statPop;
-    public TMP_Text popupName;
-    public TMP_Text popupDmg;
-    public TMP_Text popupCritX;
-    public TMP_Text popupCritChance;
-    public TMP_Text popupFirerate;
-    public GameObject topEye;
-    public GameObject middleEye;
-    public GameObject bottomEye;
-    public Image attackPill;
-    public TMP_Text attackPillText;
-    public Image attackIcon;
-    public Image rangePill;
-    public TMP_Text rangePillText;
-    public Image rangeIcon;
-    public Image popupIcon;
-    public Image typeIcon;
-    public GameObject arrowComp;
-
-    [Header("Inventory Comparison1")]
-    public GameObject statComp1;
-    public TMP_Text popupName1;
-    public TMP_Text popupDmg1;
-    public TMP_Text popupCritX1;
-    public TMP_Text popupCritChance1;
-    public TMP_Text popupFirerate1;
-    public GameObject topEye1;
-    public GameObject middleEye1;
-    public GameObject bottomEye1;
-    public Image attackPill1;
-    public TMP_Text attackPillText1;
-    public Image attackIcon1;
-    public Image rangePill1;
-    public TMP_Text rangePillText1;
-    public Image rangeIco1;
-    public Image popupIcon1;
-    public Image typeIcon1;
-
-    [Header("Inventory Comparison2")]
-    public GameObject statComp2;
-    public TMP_Text popupName2;
-    public TMP_Text popupDmg2;
-    public TMP_Text popupCritX2;
-    public TMP_Text popupCritChance2;
-    public TMP_Text popupFirerate2;
-    public GameObject topEye2;
-    public GameObject middleEye2;
-    public GameObject bottomEye2;
-    public Image attackPill2;
-    public TMP_Text attackPillText2;
-    public Image attackIcon2;
-    public Image rangePill2;
-    public TMP_Text rangePillText2;
-    public Image rangeIco2;
-    public Image popupIcon2;
-    public Image typeIcon2;
-
-    [Header("Animation")]
-    public Animator hoverItemAnimator;
-    public Animator hoverItemStatComp1Animator;
-    public Animator hoverItemStatComp2Animator;
 
     [Header("Pause")]
     public GameObject pausePanel;
@@ -136,36 +50,19 @@ public class UIManager : Singleton<UIManager>
     public GameObject optionPanel;
     public GameObject ingameUI;
 
-
-
-    [Header("Icons")]
-    public Sprite meleeIcon;
-    public Sprite rangedIcon;
-    public Sprite typeCone;
-    public Sprite typeLine;
-    public Sprite typeCircle;
-    public Sprite typeRapid;
-    public Sprite typeLob;
-    public Sprite typeLaser;
-    public Sprite typeCannon;
-
-
-
-
-
     private void Start()
     {   
         UpdateInventorySlotImages();
         heldItem = null;
         isHoldingItem = false;
-        statPop.SetActive(false);
-        statComp1.SetActive(false);
-        arrowComp.SetActive(false);
+        //statPop.SetActive(false);
+        //statComp1.SetActive(false);
+        //arrowComp.SetActive(false);
         playerAvatar = GameObject.FindGameObjectWithTag("Player");
 
-        hoverItemAnimator = statPop.GetComponent<Animator>();
-        hoverItemStatComp1Animator = statComp1.GetComponent<Animator>();
-        hoverItemStatComp2Animator = statComp2.GetComponent<Animator>();
+        //hoverItemAnimator = statPop.GetComponent<Animator>();
+        //hoverItemStatComp1Animator = statComp1.GetComponent<Animator>();
+        //hoverItemStatComp2Animator = statComp2.GetComponent<Animator>();
 
         gameOverAnim = gameOverMenu.GetComponent<Animator>();
 
@@ -189,11 +86,28 @@ public class UIManager : Singleton<UIManager>
             else cursor.sprite = defaultCursor;
         }
 
-        float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
-        if (scrollDelta != 0)
+        if(Input.GetKeyDown(KeyCode.A))
         {
-            Vector3 newPosition = scrollContent.localPosition + Vector3.up * scrollDelta * scrollSpeed;
-            scrollContent.localPosition = newPosition;
+            levelAnim.ResetTrigger("Reset");
+            levelAnim.SetTrigger("AClick");
+        }
+
+        if (Input.GetKeyUp(KeyCode.A))
+        {
+            levelAnim.ResetTrigger("AClick");
+            levelAnim.SetTrigger("Reset");
+        }
+
+        if (Input.GetKeyDown(KeyCode.D))
+        {
+            levelAnim.ResetTrigger("Reset");
+            levelAnim.SetTrigger("DClick");
+        }
+
+        if (Input.GetKeyUp(KeyCode.D))
+        {
+            levelAnim.ResetTrigger("DClick");
+            levelAnim.SetTrigger("Reset");
         }
 
 
@@ -245,282 +159,282 @@ public class UIManager : Singleton<UIManager>
     #region Popups
 
 
-    public void UpdateItemPopUp(Item _hoverItem)
-    {
-        //ADD LATER FORMATTING FOR FLOATS
+    //public void UpdateItemPopUp(Item _hoverItem)
+    //{
+    //    //ADD LATER FORMATTING FOR FLOATS
 
-        popupName.text = _hoverItem.itemName;
-        popupDmg.text = _hoverItem.dmg.ToString();
-        //popupCritX.text = _hoverItem.critX.ToString();
-        popupCritChance.text = _hoverItem.critChance.ToString();
-        popupFirerate.text = _hoverItem.firerate.ToString();
-        popupIcon.sprite = _hoverItem.icon;
+    //    popupName.text = _hoverItem.itemName;
+    //    popupDmg.text = _hoverItem.dmg.ToString();
+    //    //popupCritX.text = _hoverItem.critX.ToString();
+    //    popupCritChance.text = _hoverItem.critChance.ToString();
+    //    popupFirerate.text = _hoverItem.firerate.ToString();
+    //    popupIcon.sprite = _hoverItem.icon;
 
-        //segment check
-        if(_hoverItem.segment == Item.Segment.Head)
-        {
-            topEye.SetActive(true);
-            middleEye.SetActive(false);
-            bottomEye.SetActive(false);
-        }
-        if (_hoverItem.segment == Item.Segment.Torso)
-        {
-            topEye.SetActive(false);
-            middleEye.SetActive(true);
-            bottomEye.SetActive(false);
-        }
-        if (_hoverItem.segment == Item.Segment.Legs)
-        {
-            topEye.SetActive(false);
-            middleEye.SetActive(false);
-            bottomEye.SetActive(true);
-        }
+    //    //segment check
+    //    if(_hoverItem.segment == Item.Segment.Head)
+    //    {
+    //        topEye.SetActive(true);
+    //        middleEye.SetActive(false);
+    //        bottomEye.SetActive(false);
+    //    }
+    //    if (_hoverItem.segment == Item.Segment.Torso)
+    //    {
+    //        topEye.SetActive(false);
+    //        middleEye.SetActive(true);
+    //        bottomEye.SetActive(false);
+    //    }
+    //    if (_hoverItem.segment == Item.Segment.Legs)
+    //    {
+    //        topEye.SetActive(false);
+    //        middleEye.SetActive(false);
+    //        bottomEye.SetActive(true);
+    //    }
 
-        //range or melee check
-        if (_hoverItem.projectile == true)
-        {
-            attackIcon.sprite = rangedIcon;
-            attackPill.color = Color.blue;
-            rangePillText.text = _hoverItem.projectileRange.ToString();
-            attackPillText.text = "Ranged";
-        }
-        else
-        {
-            attackIcon.sprite = meleeIcon;
-            attackPill.color = Color.red;
-            rangePillText.text = _hoverItem.projectileRange.ToString();
-            attackPillText.text = "Melee";
+    //    //range or melee check
+    //    if (_hoverItem.projectile == true)
+    //    {
+    //        attackIcon.sprite = rangedIcon;
+    //        attackPill.color = Color.blue;
+    //        rangePillText.text = _hoverItem.projectileRange.ToString();
+    //        attackPillText.text = "Ranged";
+    //    }
+    //    else
+    //    {
+    //        attackIcon.sprite = meleeIcon;
+    //        attackPill.color = Color.red;
+    //        rangePillText.text = _hoverItem.projectileRange.ToString();
+    //        attackPillText.text = "Melee";
 
-        }
+    //    }
 
-        ////type check
-        //if (_hoverItem.attackType == Item.AttackType.Line)
-        //{
-        //    typeIcon.sprite = typeLine;
-        //}
-        //if (_hoverItem.attackType == Item.AttackType.Cone)
-        //{
-        //    typeIcon.sprite = typeCone;
-        //}
-        //if (_hoverItem.attackType == Item.AttackType.Circle)
-        //{
-        //    typeIcon.sprite = typeCircle;
-        //}
-        //if (_hoverItem.attackType == Item.AttackType.Rapid)
-        //{
-        //    typeIcon.sprite = typeRapid;
-        //}
-        //if (_hoverItem.attackType == Item.AttackType.Lob)
-        //{
-        //    typeIcon.sprite = typeLob;
-        //}
-        //if (_hoverItem.attackType == Item.AttackType.Cannon)
-        //{
-        //    typeIcon.sprite = typeCannon;
-        //}
-        //if (_hoverItem.attackType == Item.AttackType.Laser)
-        //{
-        //    typeIcon.sprite = typeLaser;
-        //}
+    //    ////type check
+    //    //if (_hoverItem.attackType == Item.AttackType.Line)
+    //    //{
+    //    //    typeIcon.sprite = typeLine;
+    //    //}
+    //    //if (_hoverItem.attackType == Item.AttackType.Cone)
+    //    //{
+    //    //    typeIcon.sprite = typeCone;
+    //    //}
+    //    //if (_hoverItem.attackType == Item.AttackType.Circle)
+    //    //{
+    //    //    typeIcon.sprite = typeCircle;
+    //    //}
+    //    //if (_hoverItem.attackType == Item.AttackType.Rapid)
+    //    //{
+    //    //    typeIcon.sprite = typeRapid;
+    //    //}
+    //    //if (_hoverItem.attackType == Item.AttackType.Lob)
+    //    //{
+    //    //    typeIcon.sprite = typeLob;
+    //    //}
+    //    //if (_hoverItem.attackType == Item.AttackType.Cannon)
+    //    //{
+    //    //    typeIcon.sprite = typeCannon;
+    //    //}
+    //    //if (_hoverItem.attackType == Item.AttackType.Laser)
+    //    //{
+    //    //    typeIcon.sprite = typeLaser;
+    //    //}
 
-        print("Update pop up");
+    //    print("Update pop up");
 
  
-    }
+    //}
 
-    public void PopupStat(Item _hoverItem)
-    {
-        UpdateItemPopUp(_hoverItem);
-        statComp1.SetActive(true);
-        statComp2.SetActive(false);
+    //public void PopupStat(Item _hoverItem)
+    //{
+    //    UpdateItemPopUp(_hoverItem);
+    //    statComp1.SetActive(true);
+    //    statComp2.SetActive(false);
 
-        Item itemMatch = new Item();
+    //    Item itemMatch = new Item();
 
-        switch (_hoverItem.segment)
-        {
-            case Item.Segment.Head:
-                itemMatch = _PC.headItem;
-                break;
-            case Item.Segment.Torso:
-                itemMatch = _PC.torsoItem;
+    //    switch (_hoverItem.segment)
+    //    {
+    //        case Item.Segment.Head:
+    //            itemMatch = _PC.headItem;
+    //            break;
+    //        case Item.Segment.Torso:
+    //            itemMatch = _PC.torsoItem;
 
-                break;
-            case Item.Segment.Legs:
-                itemMatch = _PC.legItem;
+    //            break;
+    //        case Item.Segment.Legs:
+    //            itemMatch = _PC.legItem;
 
-                break;
+    //            break;
 
-        }
+    //    }
 
-        UpdateItemPopUpComp1(itemMatch);
-
-
-    }
-
-    //For comparison 1
-    public void UpdateItemPopUpComp1(Item _itemInfo)
-    {
-        //ADD LATER FORMATTING FOR FLOATS
-
-        popupName1.text = _itemInfo.itemName;
-        popupDmg1.text = _itemInfo.dmg.ToString();
-        //popupCritX1.text = _itemInfo.critX.ToString();
-        popupCritChance1.text = _itemInfo.critChance.ToString();
-        popupFirerate1.text = _itemInfo.firerate.ToString();
-        popupIcon1.sprite = _itemInfo.icon;
-
-        //segment check
-        if (_itemInfo.segment == Item.Segment.Head)
-        {
-            topEye1.SetActive(true);
-            middleEye1.SetActive(false);
-            bottomEye1.SetActive(false);
-        }
-        if (_itemInfo.segment == Item.Segment.Torso)
-        {
-            topEye1.SetActive(false);
-            middleEye1.SetActive(true);
-            bottomEye1.SetActive(false);
-        }
-        if (_itemInfo.segment == Item.Segment.Legs)
-        {
-            topEye1.SetActive(false);
-            middleEye1.SetActive(false);
-            bottomEye1.SetActive(true);
-        }
-
-        //range or melee check
-        if (_itemInfo.projectile == true)
-        {
-            attackIcon1.sprite = rangedIcon;
-            attackPill1.color = Color.blue;
-            rangePillText1.text = _itemInfo.projectileRange.ToString();
-            attackPillText1.text = "Ranged";
-        }
-        else
-        {
-            attackIcon1.sprite = meleeIcon;
-            attackPill1.color = Color.red;
-            rangePillText1.text = _itemInfo.projectileRange.ToString();
-            attackPillText1.text = "Melee";
-
-        }
-
-        ////type check
-        //if (_itemInfo.attackType == Item.AttackType.Line)
-        //{
-        //    typeIcon1.sprite = typeLine;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Cone)
-        //{
-        //    typeIcon1.sprite = typeCone;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Circle)
-        //{
-        //    typeIcon1.sprite = typeCircle;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Rapid)
-        //{
-        //    typeIcon1.sprite = typeRapid;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Lob)
-        //{
-        //    typeIcon1.sprite = typeLob;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Cannon)
-        //{
-        //    typeIcon1.sprite = typeCannon;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Laser)
-        //{
-        //    typeIcon1.sprite = typeLaser;
-        //}
+    //    UpdateItemPopUpComp1(itemMatch);
 
 
+    //}
+
+    ////For comparison 1
+    //public void UpdateItemPopUpComp1(Item _itemInfo)
+    //{
+    //    //ADD LATER FORMATTING FOR FLOATS
+
+    //    popupName1.text = _itemInfo.itemName;
+    //    popupDmg1.text = _itemInfo.dmg.ToString();
+    //    //popupCritX1.text = _itemInfo.critX.ToString();
+    //    popupCritChance1.text = _itemInfo.critChance.ToString();
+    //    popupFirerate1.text = _itemInfo.firerate.ToString();
+    //    popupIcon1.sprite = _itemInfo.icon;
+
+    //    //segment check
+    //    if (_itemInfo.segment == Item.Segment.Head)
+    //    {
+    //        topEye1.SetActive(true);
+    //        middleEye1.SetActive(false);
+    //        bottomEye1.SetActive(false);
+    //    }
+    //    if (_itemInfo.segment == Item.Segment.Torso)
+    //    {
+    //        topEye1.SetActive(false);
+    //        middleEye1.SetActive(true);
+    //        bottomEye1.SetActive(false);
+    //    }
+    //    if (_itemInfo.segment == Item.Segment.Legs)
+    //    {
+    //        topEye1.SetActive(false);
+    //        middleEye1.SetActive(false);
+    //        bottomEye1.SetActive(true);
+    //    }
+
+    //    //range or melee check
+    //    if (_itemInfo.projectile == true)
+    //    {
+    //        attackIcon1.sprite = rangedIcon;
+    //        attackPill1.color = Color.blue;
+    //        rangePillText1.text = _itemInfo.projectileRange.ToString();
+    //        attackPillText1.text = "Ranged";
+    //    }
+    //    else
+    //    {
+    //        attackIcon1.sprite = meleeIcon;
+    //        attackPill1.color = Color.red;
+    //        rangePillText1.text = _itemInfo.projectileRange.ToString();
+    //        attackPillText1.text = "Melee";
+
+    //    }
+
+    //    ////type check
+    //    //if (_itemInfo.attackType == Item.AttackType.Line)
+    //    //{
+    //    //    typeIcon1.sprite = typeLine;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Cone)
+    //    //{
+    //    //    typeIcon1.sprite = typeCone;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Circle)
+    //    //{
+    //    //    typeIcon1.sprite = typeCircle;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Rapid)
+    //    //{
+    //    //    typeIcon1.sprite = typeRapid;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Lob)
+    //    //{
+    //    //    typeIcon1.sprite = typeLob;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Cannon)
+    //    //{
+    //    //    typeIcon1.sprite = typeCannon;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Laser)
+    //    //{
+    //    //    typeIcon1.sprite = typeLaser;
+    //    //}
 
 
-    }
+
+
+    //}
     
-    public void UpdateItemPopUpComp2(Item _itemInfo)
-    {
-        //ADD LATER FORMATTING FOR FLOATS
+    //public void UpdateItemPopUpComp2(Item _itemInfo)
+    //{
+    //    //ADD LATER FORMATTING FOR FLOATS
 
-        popupName2.text = _itemInfo.itemName;
-        popupDmg2.text = _itemInfo.dmg.ToString();
-        //popupCritX2.text = _itemInfo.critX.ToString();
-        popupCritChance2.text = _itemInfo.critChance.ToString();
-        popupFirerate2.text = _itemInfo.firerate.ToString();
-        popupIcon2.sprite = _itemInfo.icon;
+    //    popupName2.text = _itemInfo.itemName;
+    //    popupDmg2.text = _itemInfo.dmg.ToString();
+    //    //popupCritX2.text = _itemInfo.critX.ToString();
+    //    popupCritChance2.text = _itemInfo.critChance.ToString();
+    //    popupFirerate2.text = _itemInfo.firerate.ToString();
+    //    popupIcon2.sprite = _itemInfo.icon;
 
-        //segment check
-        if (_itemInfo.segment == Item.Segment.Head)
-        {
-            topEye2.SetActive(true);
-            middleEye2.SetActive(false);
-            bottomEye2.SetActive(false);
-        }
-        if (_itemInfo.segment == Item.Segment.Torso)
-        {
-            topEye2.SetActive(false);
-            middleEye2.SetActive(true);
-            bottomEye2.SetActive(false);
-        }
-        if (_itemInfo.segment == Item.Segment.Legs)
-        {
-            topEye2.SetActive(false);
-            middleEye2.SetActive(false);
-            bottomEye2.SetActive(true);
-        }
+    //    //segment check
+    //    if (_itemInfo.segment == Item.Segment.Head)
+    //    {
+    //        topEye2.SetActive(true);
+    //        middleEye2.SetActive(false);
+    //        bottomEye2.SetActive(false);
+    //    }
+    //    if (_itemInfo.segment == Item.Segment.Torso)
+    //    {
+    //        topEye2.SetActive(false);
+    //        middleEye2.SetActive(true);
+    //        bottomEye2.SetActive(false);
+    //    }
+    //    if (_itemInfo.segment == Item.Segment.Legs)
+    //    {
+    //        topEye2.SetActive(false);
+    //        middleEye2.SetActive(false);
+    //        bottomEye2.SetActive(true);
+    //    }
 
-        //range or melee check
-        if (_itemInfo.projectile == true)
-        {
-            attackIcon2.sprite = rangedIcon;
-            attackPill2.color = Color.blue;
-            rangePillText2.text = _itemInfo.projectileRange.ToString();
-            attackPillText2.text = "Ranged";
-        }
-        else
-        {
-            attackIcon2.sprite = meleeIcon;
-            attackPill2.color = Color.red;
-            rangePillText2.text = _itemInfo.projectileRange.ToString();
-            attackPillText2.text = "Melee";
+    //    //range or melee check
+    //    if (_itemInfo.projectile == true)
+    //    {
+    //        attackIcon2.sprite = rangedIcon;
+    //        attackPill2.color = Color.blue;
+    //        rangePillText2.text = _itemInfo.projectileRange.ToString();
+    //        attackPillText2.text = "Ranged";
+    //    }
+    //    else
+    //    {
+    //        attackIcon2.sprite = meleeIcon;
+    //        attackPill2.color = Color.red;
+    //        rangePillText2.text = _itemInfo.projectileRange.ToString();
+    //        attackPillText2.text = "Melee";
 
-        }
+    //    }
 
-        ////type check
-        //if (_itemInfo.attackType == Item.AttackType.Line)
-        //{
-        //    typeIcon2.sprite = typeLine;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Cone)
-        //{
-        //    typeIcon2.sprite = typeCone;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Circle)
-        //{
-        //    typeIcon2.sprite = typeCircle;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Rapid)
-        //{
-        //    typeIcon2.sprite = typeRapid;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Lob)
-        //{
-        //    typeIcon2.sprite = typeLob;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Cannon)
-        //{
-        //    typeIcon2.sprite = typeCannon;
-        //}
-        //if (_itemInfo.attackType == Item.AttackType.Laser)
-        //{
-        //    typeIcon2.sprite = typeLaser;
-        //}
+    //    ////type check
+    //    //if (_itemInfo.attackType == Item.AttackType.Line)
+    //    //{
+    //    //    typeIcon2.sprite = typeLine;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Cone)
+    //    //{
+    //    //    typeIcon2.sprite = typeCone;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Circle)
+    //    //{
+    //    //    typeIcon2.sprite = typeCircle;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Rapid)
+    //    //{
+    //    //    typeIcon2.sprite = typeRapid;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Lob)
+    //    //{
+    //    //    typeIcon2.sprite = typeLob;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Cannon)
+    //    //{
+    //    //    typeIcon2.sprite = typeCannon;
+    //    //}
+    //    //if (_itemInfo.attackType == Item.AttackType.Laser)
+    //    //{
+    //    //    typeIcon2.sprite = typeLaser;
+    //    //}
 
 
-    }
+    //}
 
     public void UpdateHealthText(float _hp)
     {
@@ -595,39 +509,39 @@ public class UIManager : Singleton<UIManager>
 
     }
 
-    public void InventorySlotHover(int _whichSlot)
-    {
+    //public void InventorySlotHover(int _whichSlot)
+    //{
 
-        switch(_whichSlot)
-        {
-            case 0:
-                popupName.text = _PC.headItem.itemName;
-                popupDmg.text = "Dmg: " + _PC.headItem.dmg.ToString();
-                //popupCritX.text = "CritX: " + _PC.headItem.critX.ToString();
-                popupCritChance.text = "Crit%: " + _PC.headItem.critChance.ToString();
-                popupFirerate.text = "Firerate%: " + _PC.headItem.firerate.ToString();
+    //    switch(_whichSlot)
+    //    {
+    //        case 0:
+    //            popupName.text = _PC.headItem.itemName;
+    //            popupDmg.text = "Dmg: " + _PC.headItem.dmg.ToString();
+    //            //popupCritX.text = "CritX: " + _PC.headItem.critX.ToString();
+    //            popupCritChance.text = "Crit%: " + _PC.headItem.critChance.ToString();
+    //            popupFirerate.text = "Firerate%: " + _PC.headItem.firerate.ToString();
 
-                break;
-            case 1:
-                popupName.text = _PC.torsoItem.itemName;
-                popupDmg.text = "Dmg: " + _PC.torsoItem.dmg.ToString();
-                //popupCritX.text = "CritX: " + _PC.torsoItem.critX.ToString();
-                popupCritChance.text = "Crit%: " + _PC.torsoItem.critChance.ToString();
-                popupFirerate.text = "Firerate%: " + _PC.torsoItem.firerate.ToString();
+    //            break;
+    //        case 1:
+    //            popupName.text = _PC.torsoItem.itemName;
+    //            popupDmg.text = "Dmg: " + _PC.torsoItem.dmg.ToString();
+    //            //popupCritX.text = "CritX: " + _PC.torsoItem.critX.ToString();
+    //            popupCritChance.text = "Crit%: " + _PC.torsoItem.critChance.ToString();
+    //            popupFirerate.text = "Firerate%: " + _PC.torsoItem.firerate.ToString();
 
-                break;
-            case 2:
-                popupName.text = _PC.legItem.itemName;
-                popupDmg.text = "Dmg: " + _PC.legItem.dmg.ToString();
-                //popupCritX.text = "CritX: " + _PC.legItem.critX.ToString();
-                popupCritChance.text = "Crit%: " + _PC.legItem.critChance.ToString();
-                popupFirerate.text = "Firerate%: " + _PC.legItem.firerate.ToString();
+    //            break;
+    //        case 2:
+    //            popupName.text = _PC.legItem.itemName;
+    //            popupDmg.text = "Dmg: " + _PC.legItem.dmg.ToString();
+    //            //popupCritX.text = "CritX: " + _PC.legItem.critX.ToString();
+    //            popupCritChance.text = "Crit%: " + _PC.legItem.critChance.ToString();
+    //            popupFirerate.text = "Firerate%: " + _PC.legItem.firerate.ToString();
 
-                break;
-        }
+    //            break;
+    //    }
 
   
-    }
+    //}
 
     #endregion
 
@@ -698,34 +612,34 @@ public class UIManager : Singleton<UIManager>
 
     #region Popup animaions
 
-    public void PlayPopupOpen()
-    {
-        hoverItemAnimator.SetTrigger("Open");
-    }
-    public void PlayPopupClose()
-    {
-        hoverItemAnimator.SetTrigger("Close");
-    }
+    //public void PlayPopupOpen()
+    //{
+    //    hoverItemAnimator.SetTrigger("Open");
+    //}
+    //public void PlayPopupClose()
+    //{
+    //    hoverItemAnimator.SetTrigger("Close");
+    //}
 
-    public void PlayPopup1Open()
-    {
-        hoverItemStatComp1Animator.SetTrigger("Open");
-    }
+    //public void PlayPopup1Open()
+    //{
+    //    hoverItemStatComp1Animator.SetTrigger("Open");
+    //}
 
-    public void PlayPopup1Close()
-    {
-        hoverItemStatComp1Animator.SetTrigger("Close");
-    }
+    //public void PlayPopup1Close()
+    //{
+    //    hoverItemStatComp1Animator.SetTrigger("Close");
+    //}
 
-    public void PlayPopup2Open()
-    {
-        hoverItemStatComp2Animator.SetTrigger("Open");
-    }
+    //public void PlayPopup2Open()
+    //{
+    //    hoverItemStatComp2Animator.SetTrigger("Open");
+    //}
 
-    public void PlayPopup2Close()
-    {
-        hoverItemStatComp2Animator.SetTrigger("Close");
-    }
+    //public void PlayPopup2Close()
+    //{
+    //    hoverItemStatComp2Animator.SetTrigger("Close");
+    //}
 
 
     #endregion

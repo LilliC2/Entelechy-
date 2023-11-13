@@ -255,19 +255,14 @@ public class PlayerController : Singleton<PlayerController>
                     if (headItem.itemName != "NULL")
                     {
                         //call appriopriate attack from attack script
-                        _PAtk.CallAttack(headItem);
-
+                        _PAtk.CallAttack(headItem);              
                     }
                     //if no head item, torso attack is also bound to m0
                     if (headItem.itemName == "NULL" && torsoItem.itemName != "NULL")
                     {
 
                         _PAtk.CallAttack(torsoItem);
-
-
                     }
-
-
                 }
 
                 if (Input.GetButton("Fire2"))
@@ -276,15 +271,12 @@ public class PlayerController : Singleton<PlayerController>
                     {
                         //call appriopriate attack from attack script
                         _PAtk.CallAttack(torsoItem);
-
                     }
                     //if no head item, torso attack is also bound to m0
                     if (torsoItem.itemName == "NULL" && headItem.itemName != "NULL")
                     {
 
                         _PAtk.CallAttack(headItem);
-
-
                     }
 
 

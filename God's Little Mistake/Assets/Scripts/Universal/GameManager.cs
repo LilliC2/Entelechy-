@@ -167,7 +167,7 @@ public class GameManager : Singleton<GameManager>
         print("Dungeon Level " + dungeonLevel);
 
         //update UI
-        _UI.dungeonLevel.text = "Level " + dungeonLevel.ToString();
+        _UI.dungeonLevel.text = dungeonLevel.ToString();
         //clear dungeon
         ClearPreviousLevel();
 

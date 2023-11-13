@@ -53,7 +53,7 @@ public class BasicProjectile : GameBehaviour
             Destroy(this.gameObject);
 
             //get dmg from enemy
-            collision.collider.gameObject.GetComponent<BaseEnemy>().Hit(_PC.headItem.dmg);
+            collision.collider.gameObject.GetComponent<BaseEnemy>().Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);
         }
     }
 }
