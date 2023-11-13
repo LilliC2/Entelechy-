@@ -298,14 +298,28 @@ public class BaseEnemy : GameBehaviour
             explosionAnimOB.GetComponent<Animator>().SetTrigger("Boom");
 
             //eye is for testing
-            int rand = 1;//Random.Range(0, 4);
+            int rand = Random.Range(0, 6);
 
             print("Number gen when enemy dies " + rand);
 
             switch (rand)
             {
+  
                 case 1:
+                    if(!spawnHealPool)
+                    {
+                        spawnHealPool = true;
+                        Instantiate(healPool, gameObject.transform.position, Quaternion.identity);
+                        print("Heal pool spawns");
+                    }
+                    break;
+                case 2:
 
+                    //nothing
+                    print("Enemy dies and nothing drops");
+
+                    break;
+                default:
                     if (!spawnItem)
                     {
                         spawnItem = true;
@@ -315,21 +329,6 @@ public class BaseEnemy : GameBehaviour
 
                         print(item.name);
                     }
-
-                    break;
-                case 2:
-                    if(!spawnHealPool)
-                    {
-                        spawnHealPool = true;
-                        Instantiate(healPool, gameObject.transform.position, Quaternion.identity);
-                        print("Heal pool spawns");
-                    }
-                    break;
-                case 3:
-
-                    //nothing
-                    print("Enemy dies and nothing drops");
-
                     break;
             }
 
