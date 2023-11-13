@@ -241,10 +241,7 @@ public class EnemyLongRange : GameBehaviour
                 {
                     if(!runAway)
                     {
-                        frontAnim.SetBool("Walking", false);
-                        backAnim.SetBool("Walking", false);
-                        leftSideAnim.SetBool("Walking", false);
-                        rightSideAnim.SetBool("Walking", false);
+
 
                         agent.isStopped = true;
 
@@ -253,6 +250,7 @@ public class EnemyLongRange : GameBehaviour
                         {
                             animationPlayed = true;
                             //PlayAttackAnimation();
+                            FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
                             ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
                         }
                     }
@@ -321,6 +319,8 @@ public class EnemyLongRange : GameBehaviour
     {
         if (!projectileShot)
         {
+
+            print("i shot");
             baseEnemy.attack.Play();
             //Spawn bullet and apply force in the direction of the mouse
             //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
