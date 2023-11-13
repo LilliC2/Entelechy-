@@ -90,9 +90,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         BasicFireProjectile(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange);
         if (_FDM.rightFireFilling == false)
         {
-            _FDM.leftHasFired = true;
-            _FDM.leftFireCurrent = 0;
-            _FDM.leftFireTotal = _IM.itemDataBase[4].firerate;
+            _FDM.rightHasFired = true;
+            _FDM.rightFireCurrent = 0;
+            _FDM.rightFireTotal = _IM.itemDataBase[4].firerate;
         }
     }
 
