@@ -70,6 +70,7 @@ public class EnemyShortRange : GameBehaviour
     // Update is called once per frame
     void Update()
     {
+        baseEnemy.FlipSprite(agent.destination);
 
         if (agent.velocity.magnitude > 0.5f) baseEnemy.walking.Play();
 
@@ -97,54 +98,54 @@ public class EnemyShortRange : GameBehaviour
         else baseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
 
 
-        #region Turning Sprites
-        //if angle is between 136 and 45, backwards
-        var heading = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-        if (heading >= -45 && heading <= 45)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(false);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            backOB.transform.GetChild(0).gameObject.SetActive(true);
+        //#region Turning Sprites
+        ////if angle is between 136 and 45, backwards
+        //var heading = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
+        //if (heading >= -45 && heading <= 45)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(true);
 
-        }
+        //}
 
-        //if angle is between 46 and 315, right side
-        if (heading >= 46 && heading <= 135)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(false);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(true);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            backOB.transform.GetChild(0).gameObject.SetActive(false);
+        ////if angle is between 46 and 315, right side
+        //if (heading >= 46 && heading <= 135)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(true);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
 
-        }
+        //}
 
-        //if angle is between 316 and 225, forwards
-        if (heading >= 136 && heading >= -135)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(true);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            backOB.transform.GetChild(0).gameObject.SetActive(false);
+        ////if angle is between 316 and 225, forwards
+        //if (heading >= 136 && heading >= -135)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(true);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
 
-        }
+        //}
 
-        //if angle is between 226 and 135, left side
-        if (heading >= -136 && heading <= -45)
-        {
-            frontOB.transform.GetChild(0).gameObject.SetActive(false);
-            rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-            leftSideOB.transform.GetChild(0).gameObject.SetActive(true);
-            backOB.transform.GetChild(0).gameObject.SetActive(false);
+        ////if angle is between 226 and 135, left side
+        //if (heading >= -136 && heading <= -45)
+        //{
+        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
+        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(true);
+        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
 
-        }
-
-
+        //}
 
 
-        #endregion
 
-       
+
+        //#endregion
+
+
         //Visual indicator for health
         //HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
 
@@ -202,7 +203,7 @@ public class EnemyShortRange : GameBehaviour
                         ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
                     }
 
- 
+
 
                 }
 
@@ -266,7 +267,7 @@ public class EnemyShortRange : GameBehaviour
         if (!attacking)
         {
 
-            if(canAttack)
+            if (canAttack)
             {
                 baseEnemy.attack.Play();
 
@@ -279,9 +280,9 @@ public class EnemyShortRange : GameBehaviour
 
             }
 
-            
+
         }
     }
 
-    
+
 }

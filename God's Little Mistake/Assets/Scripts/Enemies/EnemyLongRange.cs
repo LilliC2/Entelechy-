@@ -39,13 +39,6 @@ public class EnemyLongRange : GameBehaviour
     BaseEnemy baseEnemy;
     Vector3 target;
 
-    [Header("Enemy Sprites")]
-    public GameObject frontOB;
-    public GameObject backOB;
-    public GameObject rightSideOB;
-    public GameObject leftSideOB;
-
-    [SerializeField]
 
     Animator frontAnim;
     [SerializeField]
@@ -70,11 +63,6 @@ public class EnemyLongRange : GameBehaviour
         agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-        frontAnim = frontOB.GetComponentInChildren<Animator>();
-        backAnim = backOB.GetComponentInChildren<Animator>();
-        rightSideAnim = rightSideOB.GetComponentInChildren<Animator>();
-        leftSideAnim = leftSideOB.GetComponentInChildren<Animator>();
-        
         normalSpeed = enemyStats.stats.speed;
         runAwaySpeed = enemyStats.stats.speed*2;
 
@@ -264,7 +252,7 @@ public class EnemyLongRange : GameBehaviour
                         if (!animationPlayed)
                         {
                             animationPlayed = true;
-                            PlayAttackAnimation();
+                            //PlayAttackAnimation();
                             ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
                         }
                     }
@@ -361,20 +349,20 @@ public class EnemyLongRange : GameBehaviour
     }
 
 
-    void PlayAttackAnimation()
-    {
-        frontAnim.SetBool("Walking", false);
-        backAnim.SetBool("Walking", false);
-        leftSideAnim.SetBool("Walking", false);
-        rightSideAnim.SetBool("Walking", false);
+    //void PlayAttackAnimation()
+    //{
+    //    frontAnim.SetBool("Walking", false);
+    //    backAnim.SetBool("Walking", false);
+    //    leftSideAnim.SetBool("Walking", false);
+    //    rightSideAnim.SetBool("Walking", false);
 
-        if (frontOB.activeSelf == true) frontAnim.SetTrigger("Attack");
-        if(backOB.activeSelf == true) backAnim.SetTrigger("Attack");
-        if(rightSideOB.activeSelf == true) rightSideAnim.SetTrigger("Attack");
-        if(leftSideOB.activeSelf == true) leftSideAnim.SetTrigger("Attack");
+    //    if (frontOB.activeSelf == true) frontAnim.SetTrigger("Attack");
+    //    if(backOB.activeSelf == true) backAnim.SetTrigger("Attack");
+    //    if(rightSideOB.activeSelf == true) rightSideAnim.SetTrigger("Attack");
+    //    if(leftSideOB.activeSelf == true) leftSideAnim.SetTrigger("Attack");
 
 
-    }
+    //}
 
     //visualise sight range
     //private void OnDrawGizmosSelected()
