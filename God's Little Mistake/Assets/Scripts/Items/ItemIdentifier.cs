@@ -165,11 +165,6 @@ public class ItemIdentifier : GameBehaviour
                         }
                         if (!alreadyEquipped) ExecuteAfterFrames(15, () => _IM.AddItemToInventory(itemInfo));
                     }
-
-
-
-
-
                 }
                 ExecuteAfterFrames(25, () => Destroy(this.gameObject));
             }
