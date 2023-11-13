@@ -39,7 +39,7 @@ public class ItemIdentifier : GameBehaviour
 
     private void Update()
     {
-   
+
 
         if (inRange)
         {
@@ -63,33 +63,33 @@ public class ItemIdentifier : GameBehaviour
                 {
                     //check which segment it is
 
-                Item prevItem = new();
-                bool itemOnPlayer = false;
-                //determine if there is already an item of that segment equipped
+                    Item prevItem = new();
+                    bool itemOnPlayer = false;
+                    //determine if there is already an item of that segment equipped
 
-                switch (itemInfo.segment)
-                {
-                    case Item.Segment.Head:
-                        if (_PC.headItem.itemName != "NULL")
-                        {
-                            itemOnPlayer = true;
-                            prevItem = _PC.headItem;
-                        }
-                        break;
-                    case Item.Segment.Torso:
-                        if (_PC.torsoItem.itemName != "NULL")
-                        {
-                            itemOnPlayer = true;
-                            prevItem = _PC.torsoItem;
-                        }
+                    switch (itemInfo.segment)
+                    {
+                        case Item.Segment.Head:
+                            if (_PC.headItem.itemName != "NULL")
+                            {
+                                itemOnPlayer = true;
+                                prevItem = _PC.headItem;
+                            }
+                            break;
+                        case Item.Segment.Torso:
+                            if (_PC.torsoItem.itemName != "NULL")
+                            {
+                                itemOnPlayer = true;
+                                prevItem = _PC.torsoItem;
+                            }
 
-                        break;
-                    case Item.Segment.Legs:
-                        if (_PC.legItem.itemName != "NULL")
-                        {
-                            itemOnPlayer = true;
-                            prevItem = _PC.legItem;
-                        }
+                            break;
+                        case Item.Segment.Legs:
+                            if (_PC.legItem.itemName != "NULL")
+                            {
+                                itemOnPlayer = true;
+                                prevItem = _PC.legItem;
+                            }
 
                             break;
 
@@ -113,33 +113,33 @@ public class ItemIdentifier : GameBehaviour
                             }
                             //place old item on ground
 
-                        GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
-                        item.GetComponent<ItemIdentifier>().itemInfo = prevItem;
+                            GameObject item = Instantiate(Resources.Load("Item") as GameObject, newSpawnPoint, Quaternion.identity);
+                            item.GetComponent<ItemIdentifier>().itemInfo = prevItem;
+                        }
                     }
-                }
 
 
                     if (!itemAdd)
                     {
 
-                    _AM.ItemPickUp();
-                    itemAdd = true;
-                    
-                    //equip new items
-                    _UI.CreateItemSelected(itemInfo);
+                        _AM.ItemPickUp();
+                        itemAdd = true;
 
-                    _IM.AddItemToInventory(itemInfo);
+                        //equip new items
+                        _UI.CreateItemSelected(itemInfo);
+
+                        _IM.AddItemToInventory(itemInfo);
 
 
 
+                    }
+
+
+
+                    Destroy(this.gameObject);
                 }
 
-
-
-                Destroy(this.gameObject);
             }
-
-        }
 
             //if (inRange)
             //{
@@ -198,39 +198,41 @@ public class ItemIdentifier : GameBehaviour
             //            _AM.ItemPickUp();
             //            itemAdd = true;
 
-    }
-
-    public void OnMouseExit()
-    {
-        isHovering = false;
-
-        print("EXIT");
-
-
-        _UI.PlayPopupClose();
-        _UI.PlayPopup1Close();
-        _UI.PlayPopup2Close();
-        _UI.popupContent.SetActive(false);
-        _UI.popupContent.SetActive(false);
-        _UI.popupContent2.SetActive(false);
-        ExecuteAfterSeconds(1, () => TurnOff());
-
-
-            _PM.popupPanel.SetActive(true);
-            _PM.popupPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-            _PM.UpdateItemPopUp(itemInfo);
         }
     }
-
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.tag == "Player")
-        {
-            print("player");
-            inRange = false;
-
-        _PM.popupPanel.SetActive(false);
-        }
-    }
-
 }
+
+    //public void OnMouseExit()
+    //{
+    //    isHovering = false;
+
+    //    print("EXIT");
+
+
+    //    _UI.PlayPopupClose();
+    //    _UI.PlayPopup1Close();
+    //    _UI.PlayPopup2Close();
+    //    _UI.popupContent.SetActive(false);
+    //    _UI.popupContent.SetActive(false);
+    //    _UI.popupContent2.SetActive(false);
+    //    ExecuteAfterSeconds(1, () => TurnOff());
+
+
+    //        _PM.popupPanel.SetActive(true);
+    //        _PM.popupPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
+    //        _PM.UpdateItemPopUp(itemInfo);
+    //    }
+    //}
+
+    //private void OnTriggerExit(Collider other)
+    //{
+    //    if (other.tag == "Player")
+    //    {
+    //        print("player");
+    //        inRange = false;
+
+    //    _PM.popupPanel.SetActive(false);
+    //    }
+    //}
+
+
