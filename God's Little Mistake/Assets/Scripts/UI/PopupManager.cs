@@ -219,6 +219,7 @@ public class PopupManager : Singleton<PopupManager>
             damagePanel.SetActive(false);
             critPanel.SetActive(false);
             speedPanel.SetActive(true);
+            speedText.text = _hoverItem.movementSpeed.ToString();
 
             //set glow indicator
             headGlow.SetActive(false);
@@ -228,12 +229,11 @@ public class PopupManager : Singleton<PopupManager>
             //Check if player has an item on the slot
             if (_PC.legItem != null)
             {
-                popupPanel2.SetActive(true);
-                damagePanel2.SetActive(true);
-                damageText2.text = _PC.legItem.dmg.ToString();
-                critPanel2.SetActive(true);
-                damageText2.text = _PC.legItem.critChance.ToString();
-                speedPanel2.SetActive(false);
+                speedPanel2.SetActive(true);
+                speedText2.text = _PC.legItem.movementSpeed.ToString();
+                critPanel2.SetActive(false);
+                damagePanel2.SetActive(false);
+
 
                 //set glow indicator
                 headGlow2.SetActive(false);
@@ -243,6 +243,24 @@ public class PopupManager : Singleton<PopupManager>
             else
             {
                 popupPanel2.SetActive(false);
+            }
+
+            if (_hoverItem.movementSpeed > _PC.torsoItem.movementSpeed)
+            {
+                speedBad.SetActive(false);
+                speedGood.SetActive(true);
+            }
+
+            if (_hoverItem.movementSpeed < _PC.torsoItem.movementSpeed)
+            {
+                speedBad.SetActive(true);
+                speedGood.SetActive(false);
+            }
+
+            if (_hoverItem.movementSpeed == _PC.torsoItem.movementSpeed)
+            {
+                speedBad.SetActive(false);
+                speedGood.SetActive(false);
             }
         }
 

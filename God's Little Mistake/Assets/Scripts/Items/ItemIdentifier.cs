@@ -153,7 +153,7 @@ public class ItemIdentifier : GameBehaviour
             print("player");
             inRange = true;
             _PM.popupPanel.transform.position = Camera.main.WorldToScreenPoint(gameObject.transform.position);
-
+            _PM.UpdateItemPopUp(itemInfo);
             _PM.popupPanel.SetActive(true);
         }
     }
