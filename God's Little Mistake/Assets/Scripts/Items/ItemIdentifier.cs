@@ -34,34 +34,7 @@ public class ItemIdentifier : GameBehaviour
 
     private void Update()
     {
-        //check if selected item is arms!!!
-
-
-        if (isHovering)
-        {
-            print("we hover");
-
-            if (itemInfo.segment == Item.Segment.Torso)
-            {
-                float scrollDelta = Input.GetAxis("Mouse ScrollWheel");
-                print(scrollDelta);
-
-                if (scrollDelta > 0)
-                {
-                    print("Left arm");
-                    _UI.leftArmItem = itemInfo;
-                    //Changes item to left here
-                }
-                if (scrollDelta < 0)
-                {
-                    print("right arm");
-
-                    _UI.rightArmItem = itemInfo;
-                    //Changes item to left here
-                }
-            }
-        }
-
+   
 
         if (inRange)
         {
@@ -207,35 +180,6 @@ public class ItemIdentifier : GameBehaviour
         _UI.UpdateItemPopUpComp1(itemMatch);
 
 
-        //var match = _UI.SearchForItemMatch(itemInfo);
-
-
-        //foreach (var item in match)
-        //{
-        //    if (item != null)
-        //    {
-        //        print("ITS A MATCH");
-        //        _UI.statComp1.SetActive(true);
-        //        anim1.SetTrigger("Open");
-        //        _UI.arrowComp.SetActive(true);
-        //        _UI.UpdateItemPopUpComp1(itemInfo);
-        //    }
-        //}
-
-        //foreach (var item in _PC.playerInventory)
-        //{
-        //    if (item.segment == itemInfo.segment)
-        //    {
-        //        print("ITS A MATCH");
-        //        _UI.statComp1.SetActive(true);
-        //        anim1.SetTrigger("Open");
-        //        _UI.arrowComp.SetActive(true);
-        //        _UI.UpdateItemPopUpComp1(itemInfo);
-        //    }
-
-
-
-        //}
     }
 
     public void OnMouseExit()
@@ -243,10 +187,7 @@ public class ItemIdentifier : GameBehaviour
         isHovering = false;
 
         print("EXIT");
-        //anim.ResetTrigger("Open");
-        //anim1.ResetTrigger("Open");
-        //anim.SetTrigger("Close");
-        //anim1.SetTrigger("Close");
+
 
         _UI.PlayPopupClose();
         _UI.PlayPopup1Close();
@@ -266,19 +207,4 @@ public class ItemIdentifier : GameBehaviour
         _UI.arrowComp.SetActive(false);
     }
 
-    //public void InfoSwitch()
-    //{
-    //    switch (itemInfo.segment)
-    //    {
-    //        case (Item.Segment.Head):
-    //            _UI.TopSegmentIndicator();
-    //            break;
-    //        case (Item.Segment.Torso):
-    //            _UI.MiddleSegmentIndicator();
-    //            break;
-    //        case (Item.Segment.Legs):
-    //            _UI.BottomSegmentIndicator();
-    //            break;
-    //    }
-    //}
 }
