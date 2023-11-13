@@ -131,16 +131,6 @@ public class BaseEnemy : GameBehaviour
     {
         hurt.Play();
 
-        ////check for debuffs
-        //if(_PIA.slugEyesEquipped)
-        //{
-        //    if (_PIA.SlugEyes()) ApplySlowness(_PIA.slowDuration, _PIA.slowPercent);
-        //}
-
-        //if (_PIA.wolfClawsEquipped)
-        //{
-        //    if (_PIA.WolfClaw()) ApplyBleeding(_PIA.bleedDuration, _PIA.bleedTickDmg);
-        //}
 
         if (stats.health > 0)
         {
@@ -155,16 +145,11 @@ public class BaseEnemy : GameBehaviour
     {
         if (collision.collider.CompareTag("Projectile"))
         {
-            print("hit");
-            //Add hit code here;
-            //Hit(_PC.dmg);
-
             //play explosion when hit
             explosionAnimOB.SetActive(true);
             explosionAnimOB.GetComponent<Animator>().SetTrigger("Boom");
             ExecuteAfterFrames(30, () => explosionAnimOB.SetActive(false));
 
-            //destroy bullet that hit it
         }
 
     }
@@ -313,7 +298,7 @@ public class BaseEnemy : GameBehaviour
             explosionAnimOB.GetComponent<Animator>().SetTrigger("Boom");
 
             //eye is for testing
-            int rand = Random.Range(0, 4);
+            int rand = 1;//Random.Range(0, 4);
 
             print("Number gen when enemy dies " + rand);
 
@@ -324,12 +309,11 @@ public class BaseEnemy : GameBehaviour
                     if (!spawnItem)
                     {
                         spawnItem = true;
-                        GameObject item = Instantiate(_IG.GenerateItem(stats.segments), gameObject.transform.position, Quaternion.identity);
+                        GameObject item = Instantiate(_IG.GenerateItem(), gameObject.transform.position, Quaternion.identity);
 
                         item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
                         print(item.name);
-                        print("Spawning item of " + stats.segments.ToString() + " category");
                     }
 
                     break;

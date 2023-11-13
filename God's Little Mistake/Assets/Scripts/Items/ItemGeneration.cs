@@ -20,32 +20,18 @@ public class ItemGeneration : Singleton<ItemGeneration>
 
     }
 
-    public GameObject GenerateItem(EnemyStats.Segment[] _segment)
+    public GameObject GenerateItem()
     {
 
         //create list of all possible item drops
         //List<Item> possibleDrops;
-        possibleDropsIndex = new List<int>();
-
-        for(int i = 0; i < _IM.itemDataBase.Length; i++)
-        {
-            for (int y = 0; y < _segment.Length; y++)
-            {
-                if (_IM.itemDataBase[i].segment.ToString() == _segment[y].ToString())
-                {
-                    //possibleDrops.Add(_ItemD.itemDataBase[i]);
-                    possibleDropsIndex.Add(i);
-                    print("Item added to possible drops CATEGORY: " + _segment[y] + i);
-                }
-            }
-
-            
-        }
+        
+        
 
         //pick a random possible drop
-        int rand = RandomIntBetweenTwoInt(0, possibleDropsIndex.Count);
+        int rand = Random.Range(0, _IM.itemDataBase.Length);
 
-        //Item itemSpawned = _IM.itemDataBase[possibleDropsIndex[rand]];
+        Item itemSpawned = _IM.itemDataBase[rand];
 
         //scaling section here
         /*Here we would edit the item values here, so based on level and etc. the prefab of the item would be saved on this too
@@ -57,7 +43,7 @@ public class ItemGeneration : Singleton<ItemGeneration>
         //give item inscene id
 
         //give item script inscene id
-        //itemTemp.GetComponentInChildren<ItemIdentifier>().itemInfo = itemSpawned;
+        itemTemp.GetComponentInChildren<ItemIdentifier>().itemInfo = itemSpawned;
         
         
 
