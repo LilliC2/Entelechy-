@@ -75,10 +75,75 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 break;
 
+            case 8: //LMG Porcupine
+
+                print("LMG");
+
+                LMGAttack(_IM.itemDataBase[8].projectilePF, _IM.itemDataBase[8].projectileSpeed, _IM.itemDataBase[8].firerate, _IM.itemDataBase[8].projectileRange);
+
+                break;
+
 
 
         }
 
+    }
+
+    public void LMGAttack(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
+    {
+        Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
+        Vector3 flatAimTarget = screenPoint + cursorRay / Mathf.Abs(cursorRay.y) * Mathf.Abs(screenPoint.y - transform.position.y);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            _PC.headFiringPoint.transform.LookAt(hit.point);
+
+            if (!projectileShot3)
+            {
+                print("Fire");
+                //particle system
+
+                //Spawn bullet and apply force in the direction of the mouse
+                //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
+                GameObject bullet1 = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                GameObject bullet2 = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                GameObject bullet3 = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+
+                bullet1.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
+                bullet2.GetComponent<Rigidbody>().AddRelativeForce(Vector3.right * _projectileSpeed);
+                bullet3.GetComponent<Rigidbody>().AddRelativeForce(Vector3.left * _projectileSpeed);
+
+                //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
+                bullet1.GetComponent<RangeDetector>().range = _range;
+                bullet1.GetComponent<RangeDetector>().positionShotFrom = _PC.transform.position;
+                
+                bullet2.GetComponent<RangeDetector>().range = _range;
+                bullet2.GetComponent<RangeDetector>().positionShotFrom = _PC.transform.position;
+                                
+                bullet3.GetComponent<RangeDetector>().range = _range;
+                bullet3.GetComponent<RangeDetector>().positionShotFrom = _PC.transform.position;
+
+
+                //knockbackActive = true;
+                //knockbackStartTime = Time.time;
+                Mathf.Clamp(bullet1.transform.position.y, 0, 0);
+                Mathf.Clamp(bullet2.transform.position.y, 0, 0);
+                Mathf.Clamp(bullet3.transform.position.y, 0, 0);
+
+
+
+                //Controls the firerate, player can shoot another bullet after a certain amount of time
+                projectileShot3 = true;
+
+                ExecuteAfterSeconds(_firerate, () => projectileShot3 = false);
+            }
+            print("FIRE PROJECTILE");
+
+        }
     }
 
     public void RocketAttack()
