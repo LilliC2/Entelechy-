@@ -82,6 +82,14 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 LMGAttack(_IM.itemDataBase[8].projectilePF, _IM.itemDataBase[8].projectileSpeed, _IM.itemDataBase[8].firerate, _IM.itemDataBase[8].projectileRange);
 
                 break;
+            
+            case 9: //Shotgun
+
+                print("Shotgun");
+
+                ShotgunAttack(_IM.itemDataBase[9].projectilePF, _IM.itemDataBase[9].projectileSpeed, _IM.itemDataBase[9].firerate, _IM.itemDataBase[9].projectileRange);
+
+                break;
 
 
 
@@ -145,6 +153,48 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
         }
     }
+
+    public void ShotgunAttack(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
+    {
+        Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
+        Vector3 flatAimTarget = screenPoint + cursorRay / Mathf.Abs(cursorRay.y) * Mathf.Abs(screenPoint.y - transform.position.y);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            _PC.headFiringPoint.transform.LookAt(hit.point);
+
+            if (!projectileShot3)
+            {
+                print("Fire");
+                //particle system
+
+                //Spawn bullet and apply force in the direction of the mouse
+                //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
+
+                for (int i = 0; i < 10; i++)
+                {
+                    GameObject bullet1 = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                    bullet1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-2,2),Vector3.forward.y, Vector3.forward.z) * _projectileSpeed);
+                    bullet1.GetComponent<RangeDetector>().range = _range;
+                    Mathf.Clamp(bullet1.transform.position.y, 0, 0);
+
+                }
+
+
+                //Controls the firerate, player can shoot another bullet after a certain amount of time
+                projectileShot3 = true;
+
+                ExecuteAfterSeconds(_firerate, () => projectileShot3 = false);
+            }
+            print("FIRE PROJECTILE");
+
+        }
+    }
+
 
     public void RocketAttack()
     {
