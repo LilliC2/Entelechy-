@@ -174,17 +174,26 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
+                List<GameObject> bulletInstances = new List<GameObject>();
 
                 for (int i = 0; i < 10; i++)
                 {
-                    GameObject bullet1 = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
-                    bullet1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-2,2),Vector3.forward.y, Vector3.forward.z) * _projectileSpeed);
-                    bullet1.GetComponent<RangeDetector>().range = _range;
-                    Mathf.Clamp(bullet1.transform.position.y, 0, 0);
+                    GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                    //bullet1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-2,2),Vector3.forward.y, Vector3.forward.z) * _projectileSpeed);
+                    //bullet1.GetComponent<RangeDetector>().range = _range;
+                    //Mathf.Clamp(bullet1.transform.position.y, 0, 0);
 
+                    bulletInstances.Add(bullet);
+                    print("Make bullet");
                 }
 
-
+                foreach (var bullet in bulletInstances)
+                {
+                    bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-0.2f, 0.2f), Vector3.forward.y, Vector3.forward.z) * _projectileSpeed);
+                    bullet.GetComponent<RangeDetector>().range = _range;
+                    bullet.GetComponent<RangeDetector>().positionShotFrom = _PC.torsoFiringPoint.transform.position;
+                    Mathf.Clamp(bullet.transform.position.y, 0, 0);
+                }
                 //Controls the firerate, player can shoot another bullet after a certain amount of time
                 projectileShot3 = true;
 
