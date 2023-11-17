@@ -19,12 +19,15 @@ public class GameManager : Singleton<GameManager>
     public GameObject endRoomOB;
     public GameObject itemPF;
 
+    public bool isLevelCleared;
+
     [Header("Pause and game over")]
     public bool isPlaying;
     public bool isPaused;
     //public string urlToOpen = "https://www.instagram.com/nlmgame/";
     public Image fadeImage;
     public float fadeOutTime = 1.0f;
+
 
 
     public enum GameState

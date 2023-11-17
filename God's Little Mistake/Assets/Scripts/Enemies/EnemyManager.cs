@@ -8,6 +8,9 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public GameObject[] spawnPoints;
 
+    public List<GameObject> enemiesSpawned;
+
+
     // Start is called before the first frame update
     void Start()
     {
@@ -17,7 +20,10 @@ public class EnemyManager : Singleton<EnemyManager>
     // Update is called once per frame
     void Update()
     {
-
+        if(enemiesSpawned.Count == 0)
+        {
+            _GM.isLevelCleared = true;
+        }
     }
 
     public void SpawnEnemiesForLevel()
@@ -60,6 +66,7 @@ public class EnemyManager : Singleton<EnemyManager>
 
             GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[type], typeof(GameObject)), spawnPoint.transform.position, new Quaternion(0, 0, 0, 0)) as GameObject;
 
+            enemiesSpawned.Add(enemy);
         }
 
     }

@@ -333,6 +333,9 @@ public class BaseEnemy : GameBehaviour
             }
 
 
+            //remove from list
+            _EM.enemiesSpawned.Remove(this.gameObject);
+
             ExecuteAfterSeconds(1f, () => Destroy(this.gameObject));
         }
 
