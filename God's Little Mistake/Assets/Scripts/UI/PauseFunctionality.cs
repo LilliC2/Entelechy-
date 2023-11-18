@@ -28,6 +28,7 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
     public TMP_Text abilityName;
     public TMP_Text cooldownAbility;
     public TMP_Text abilityDescription;
+    public GameObject cdIndicator;
 
     public enum ItemType { Attack, Movement}
     public ItemType itemType;
@@ -80,6 +81,7 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
             abilityDescription.text = _hoverItem.abilityDescription.ToString();
             abilityName.text = _hoverItem.abilityName.ToString();
             cooldownAbility.text = _hoverItem.cooldownAbility.ToString();
+            cdIndicator.SetActive(true);
             //Ability name change here
             //Ability description change here
             //Ability cooldown change here
@@ -95,7 +97,11 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
             speedValue.text = "";
             cooldownAbility.text = "";
 
+            cdIndicator.SetActive(false);
 
+            abilityDescription.text = _hoverItem.abilityDescription.ToString();
+            abilityName.text = _hoverItem.abilityName.ToString();
+            cooldownAbility.text = _hoverItem.cooldownAbility.ToString();
 
         }
 
