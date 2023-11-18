@@ -63,31 +63,10 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     // Update is called once per frame
     void Update()
     {
-        
-
-
-
         //Left firerate fill
         if (leftHasFired && !leftFireFilling)
         {
             StartCoroutine(ProcessLeftFire());
-            //// Reset the current value
-            //leftFireFilling = true;
-
-            //if (leftFireCurrent < leftFireTotal)
-            //{
-            //    leftMouseDis.SetActive(true);
-            //    //leftFireFilling = true;
-            //    leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
-            //    leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
-            //}
-            //else
-            //{
-            //    leftMouseDis.SetActive(false);
-            //    leftHasFired = false; // Set to false only when it reaches the total
-            //    //leftFireFilling = false;
-            //}
-            //leftFireFilling = false;
 
         }
 
@@ -95,24 +74,6 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
         if (rightHasFired && !rightFireFilling)
         {
             StartCoroutine(ProcessRightFire());
-            //// Reset the current value
-            //rightFireFilling = true;
-
-            //if (rightFireCurrent < rightFireTotal)
-            //{
-            //    rightMouseDis.SetActive(true);
-            //    //rightFireFilling = true;
-            //    rightFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
-            //    rightFirerate.fillAmount = rightFireCurrent / rightFireTotal;
-            //}
-            //else
-            //{
-            //    rightMouseDis.SetActive(false);
-            //    rightHasFired = false; // Set to false only when it reaches the total
-            //    //rightFireFilling = false;
-            //}
-            //rightFireFilling = false;
-
         }
 
         //Left overheat fill
@@ -147,6 +108,20 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
             }
 
         }
+    }
+
+    public void SetLeftAttack(float firerate)
+    {
+        leftHasFired = true;
+        leftFireCurrent = 0;
+        leftFireTotal = firerate;
+    }
+
+    public void SetRightAttack(float firerate)
+    {
+        rightHasFired = true;
+        rightFireCurrent = 0;
+        rightFireTotal = firerate;
     }
 
 
