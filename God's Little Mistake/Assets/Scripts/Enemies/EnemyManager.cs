@@ -11,7 +11,7 @@ public class EnemyManager : Singleton<EnemyManager>
     // Start is called before the first frame update
     void Start()
     {
-        enemyTypes = new string[] { "_Short_Range", "_Long_Range", "_Chompers" };
+        enemyTypes = new string[] { "_Long_Range", "_Chompers", "_Bullet_Sponge", "_HiveBug",  };
     }
 
     // Update is called once per frame
@@ -33,31 +33,32 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             //var enemyTypeR = Random.Range(0, enemyTypes.Length); // last digit excluded
 
-            //var r = Random.Range(0, 8);
-            GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[1], typeof(GameObject)), spawnPoint.transform.position,new Quaternion(0, 0, 0,0)) as GameObject;
+            var r = Random.Range(0.0f, 1.0f);
+            int type = 0;
 
-            //chompers
-            //if(r <= 4)
-            //{
-            //    GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[2], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
+            //bubbles 40%
+            if(r>= 0.0f && r<= 40.0f)
+            {
+                type = 0;
+            }
+            //chompe 40
+            else if(r>= 40.0f && r<= 80.0f)
+            {
+                type = 1;
+            }
+            //hive 15
+            else if(r>= 80.0f && r<= 95.0f)
+            {
+                type = 2;
+            }
+            //sponge 5
+            else if(r>= 95 && r<= 1f)
+            {
+                type = 2;
+            }
 
-            //}
-            //else if(r >4 && r <=6)
-            //{
-            //    GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[1], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
 
-            //}
-            //else
-            //{
-            //    GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[0], typeof(GameObject)), spawnPoint.transform.position, Quaternion.identity) as GameObject;
-
-            //}
-
-            //print("Spawn: Enemy" + enemyTypes[enemyTypeR]);
-
-
-            //spawn enemies at appropriate level
-
+            GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[type], typeof(GameObject)), spawnPoint.transform.position, new Quaternion(0, 0, 0, 0)) as GameObject;
 
         }
 
