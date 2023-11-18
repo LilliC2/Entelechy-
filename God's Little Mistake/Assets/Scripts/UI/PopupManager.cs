@@ -123,6 +123,9 @@ public class PopupManager : Singleton<PopupManager>
             //Check if player has an item on the slot
             if(_PC.headItem != null)
             {
+                ItemName2.text = _PC.headItem.itemName;
+                ItemIcon2.sprite = _PC.headItem.icon;
+
                 popupPanel2.SetActive(true);
                 damagePanel2.SetActive(true);
                 damageText2.text = _PC.headItem.dmg.ToString();
@@ -178,6 +181,9 @@ public class PopupManager : Singleton<PopupManager>
             //Check if player has an item on the slot
             if (_PC.torsoItem != null)
             {
+                ItemName2.text = _PC.torsoItem.itemName;
+                ItemIcon2.sprite = _PC.torsoItem.icon;
+
                 popupPanel2.SetActive(true);
                 damagePanel2.SetActive(true);
                 damageText2.text = _PC.torsoItem.dmg.ToString();
@@ -229,6 +235,9 @@ public class PopupManager : Singleton<PopupManager>
             //Check if player has an item on the slot
             if (_PC.legItem != null)
             {
+                ItemName2.text = _PC.legItem.itemName;
+                ItemIcon2.sprite = _PC.legItem.icon;
+
                 speedPanel2.SetActive(true);
                 speedText2.text = _PC.legItem.movementSpeed.ToString();
                 critPanel2.SetActive(false);

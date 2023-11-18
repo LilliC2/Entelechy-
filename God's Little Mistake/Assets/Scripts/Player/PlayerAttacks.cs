@@ -243,9 +243,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     public void SquitoAttack()
     {
         BasicFireProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange);
-        if (_FDM.rightFireFilling == false)
+        if (_FDM.leftFireFilling == false)
         {
-            _FDM.SetRightAttack(_IM.itemDataBase[4].firerate);
+            _FDM.SetLeftAttack(_IM.itemDataBase[4].firerate);
         }
     }
 

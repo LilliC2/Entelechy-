@@ -1,0 +1,328 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &6251100959696299533
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3383252627262109231}
+  - component: {fileID: 7455442518472495796}
+  m_Layer: 0
+  m_Name: ItemDatabse V2
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3383252627262109231
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6251100959696299533}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7455442518472495796
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6251100959696299533}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be817fdf5188e9e43baba6ceff269d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroy: 0
+  itemDataBase:
+  - itemName: Pea Shooter
+    ID: 0
+    lvl: 0
+    segment: 0
+    currencyValue: 0
+    active: 0
+    dmg: 10
+    firerate: 0.25
+    critChance: 30
+    projectileRange: 5
+    projectile: 1
+    projectileSpeed: 1000
+    projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
+    icon: {fileID: 21300000, guid: a94957cc034c6c9488a50e960575d3b7, type: 3}
+    pauseIcon: {fileID: 21300000, guid: deb623ef3ada87f4092553f9f2938cb0, type: 3}
+    staticTempSprite: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Nubs
+    ID: 1
+    lvl: 0
+    segment: 2
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 5
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
+    icon: {fileID: 21300000, guid: df94ebc9d2b8ee347b7faf84cafb688e, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 1996e7bad503a8043a91173215a2d91b, type: 3}
+    staticTempSprite: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Sabertooth
+    ID: 2
+    lvl: 0
+    segment: 0
+    currencyValue: 0
+    active: 0
+    dmg: 20
+    firerate: 1
+    critChance: 17
+    projectileRange: 5
+    projectile: 1
+    projectileSpeed: 700
+    projectilePF: {fileID: 2270622985260862806, guid: 252be8e94cd0cdc49a7f757070716c54, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
+    icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
+    pauseIcon: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    staticTempSprite: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Lob
+    ID: 3
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 20
+    firerate: 1
+    critChance: 17
+    projectileRange: 5
+    projectile: 1
+    projectileSpeed: 700
+    projectilePF: {fileID: 1753417278855635134, guid: 3c79b25e1dc54074ab1e23e354351e05, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
+    icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
+    pauseIcon: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    staticTempSprite: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Squito
+    ID: 4
+    lvl: 0
+    segment: 0
+    currencyValue: 0
+    active: 0
+    dmg: 60
+    firerate: 2
+    critChance: 30
+    projectileRange: 10
+    projectile: 1
+    projectileSpeed: 3000
+    projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
+    icon: {fileID: 21300000, guid: f44d0cd95b154d64b8b378ed5e27a240, type: 3}
+    pauseIcon: {fileID: 21300000, guid: baaaf379cd7ecbc428afcd69decd26bb, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: ef4c89ceea6e71e4ca80af1de32b6f24, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Tripod
+    ID: 5
+    lvl: 0
+    segment: 2
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 8
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
+    icon: {fileID: 21300000, guid: 00a1cca442778f14b802193952c053d9, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 26c1a1497086fba4bb74694bddf81abc, type: 3}
+    staticTempSprite: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Slug Legs
+    ID: 6
+    lvl: 0
+    segment: 2
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 3
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
+    icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 5789cd456c8a56149a671a4f49fcdec5, type: 3}
+    staticTempSprite: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Eyeball Rocket Launcher
+    ID: 7
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 45
+    firerate: 2
+    critChance: 10
+    projectileRange: 8
+    projectile: 0
+    projectileSpeed: 800
+    projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+    movementSpeed: 3
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
+    icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 5789cd456c8a56149a671a4f49fcdec5, type: 3}
+    staticTempSprite: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Porcupine LMG
+    ID: 8
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 2
+    firerate: 0.5
+    critChance: 5
+    projectileRange: 6
+    projectile: 0
+    projectileSpeed: 2000
+    projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+    movementSpeed: 3
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
+    icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 5789cd456c8a56149a671a4f49fcdec5, type: 3}
+    staticTempSprite: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Teeth Shotgun
+    ID: 9
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 5
+    firerate: 2
+    critChance: 18
+    projectileRange: 3.5
+    projectile: 1
+    projectileSpeed: 500
+    projectilePF: {fileID: 8524524292363796634, guid: ac411dc545c0dfd4b80d828a2b68e9d9, type: 3}
+    movementSpeed: 3
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
+    icon: {fileID: 21300000, guid: 70fbc9f0d5aee1b41b39c4bcff65d7b2, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 5789cd456c8a56149a671a4f49fcdec5, type: 3}
+    staticTempSprite: {fileID: 0}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
