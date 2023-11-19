@@ -52,7 +52,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 break;
                 
-            case 3: //Sabertooth
+            case 3: //Antlers
 
 
                 BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF, _IM.itemDataBase[3].firerate);
@@ -148,8 +148,15 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 projectileShot3 = true;
 
                 ExecuteAfterSeconds(_firerate, () => projectileShot3 = false);
+
             }
             print("FIRE PROJECTILE");
+
+
+            if (_FDM.rightFireFilling == false)
+            {
+                _FDM.SetRightAttack(_IM.itemDataBase[8].firerate);
+            }
 
         }
     }
@@ -201,6 +208,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             }
             print("FIRE PROJECTILE");
 
+
+            if (_FDM.rightFireFilling == false)
+            {
+                _FDM.SetRightAttack(_IM.itemDataBase[9].firerate);
+            }
+
         }
     }
 
@@ -208,6 +221,11 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     public void RocketAttack()
     {
         BasicFireProjectileTorso(_IM.itemDataBase[7].projectilePF, _IM.itemDataBase[7].projectileSpeed, _IM.itemDataBase[7].firerate, _IM.itemDataBase[7].projectileRange);
+
+        if (_FDM.rightFireFilling == false)
+        {
+            _FDM.SetRightAttack(_IM.itemDataBase[7].firerate);
+        }
 
     }
 
@@ -217,9 +235,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         BasicFireProjectileHead(_IM.itemDataBase[0].projectilePF, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange);
         if (_FDM.leftFireFilling == false)
         {
-            _FDM.leftHasFired = true;
-            _FDM.leftFireCurrent = 0;
-            _FDM.leftFireTotal = _IM.itemDataBase[0].firerate;
+            _FDM.SetLeftAttack(_IM.itemDataBase[0].firerate);
         }
 
     }
@@ -227,11 +243,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     public void SquitoAttack()
     {
         BasicFireProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange);
-        if (_FDM.rightFireFilling == false)
+        if (_FDM.leftFireFilling == false)
         {
-            _FDM.rightHasFired = true;
-            _FDM.rightFireCurrent = 0;
-            _FDM.rightFireTotal = _IM.itemDataBase[4].firerate;
+            _FDM.SetLeftAttack(_IM.itemDataBase[4].firerate);
         }
     }
 
@@ -247,9 +261,8 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             ExecuteAfterSeconds(1, () => returned = true);
             if (_FDM.leftFireFilling == false)
             {
-                _FDM.leftHasFired = true;
-                _FDM.leftFireCurrent = 0;
-                _FDM.leftFireTotal = _IM.itemDataBase[2].firerate;
+                _FDM.SetLeftAttack(_IM.itemDataBase[2].firerate);
+
             }
         }
         
@@ -263,8 +276,11 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         //bullet.GetComponent<CurveProjectile>().Shoot();
 
         //bullet.GetComponent<CurveProjectile>().angle = _PC.directional.transform.rotation.y;
-
-        if(!projectileShot2)
+        if (_FDM.leftFireFilling == false)
+        {
+            _FDM.SetLeftAttack(_IM.itemDataBase[3].firerate);
+        }
+        if (!projectileShot2)
         {
             GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
 
