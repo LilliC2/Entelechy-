@@ -19,12 +19,15 @@ public class GameManager : Singleton<GameManager>
     public GameObject endRoomOB;
     public GameObject itemPF;
 
+    public bool isLevelCleared;
+
     [Header("Pause and game over")]
     public bool isPlaying;
     public bool isPaused;
     //public string urlToOpen = "https://www.instagram.com/nlmgame/";
     public Image fadeImage;
     public float fadeOutTime = 1.0f;
+
 
 
     public enum GameState
@@ -50,7 +53,7 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if (readyForGeneration && SceneManager.GetActiveScene().name == "GameLoopPrototype")
+        if (readyForGeneration)
         {
             print("Generate new level");
             GenerateLevel();

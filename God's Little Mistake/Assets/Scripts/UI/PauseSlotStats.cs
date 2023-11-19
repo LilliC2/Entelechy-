@@ -28,7 +28,6 @@ public class PauseSlotStats : GameBehaviour
     void Update()
     {
         MatchPlayerInventory(slotNumber);
-        itemSprite.sprite = itemInfo.pauseIcon;
         if(itemInfo.pauseIcon == null)
         {
             itemSprite.sprite = itemEmpty;
