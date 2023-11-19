@@ -52,13 +52,9 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
         switch(itemType)
         {
             case ItemType.Attack:
-                //play transition for attacks
-                //anim.SetBool("IsMove", false);
                 break;
 
             case ItemType.Movement:
-                //play transition for movements
-                //anim.SetBool("IsMove", true);
                 break;
         }
     }
@@ -72,45 +68,37 @@ public class PauseFunctionality : Singleton<PauseFunctionality>
         if(_hoverItem.segment == Item.Segment.Legs)
         {
             itemType = ItemType.Movement;
-            speedValue.text = _hoverItem.movementSpeed.ToString();
             Debug.Log("isLegs");
             anim.Play("Pause_Movement");
 
+            //Data Value
+            speedValue.text = _hoverItem.movementSpeed.ToString();
             damageValue.text = "";
-            critValue.text = damageValue.text = "";
+            critValue.text = "";
+
+            //Ability & Descriptions
+            cdIndicator.SetActive(true);
             abilityDescription.text = _hoverItem.abilityDescription.ToString();
             abilityName.text = _hoverItem.abilityName.ToString();
             cooldownAbility.text = _hoverItem.cooldownAbility.ToString();
-            cdIndicator.SetActive(true);
-            //Ability name change here
-            //Ability description change here
-            //Ability cooldown change here
         }
         else
         {
             itemType = ItemType.Attack;
-            damageValue.text = _hoverItem.dmg.ToString();
-            critValue.text = _hoverItem.critChance.ToString();
             Debug.Log("isNotLegs");
             anim.Play("Pause_Attack");
 
+            //Data Value
+            damageValue.text = _hoverItem.dmg.ToString();
+            critValue.text = _hoverItem.critChance.ToString();
             speedValue.text = "";
-            cooldownAbility.text = "";
 
+            //Ability & Descriptions
             cdIndicator.SetActive(false);
-
             abilityDescription.text = _hoverItem.abilityDescription.ToString();
             abilityName.text = _hoverItem.abilityName.ToString();
-            cooldownAbility.text = _hoverItem.cooldownAbility.ToString();
-
+            cooldownAbility.text = "";
         }
 
-    }
-        
-        
-
-    public void FixedUpdate()
-    {
-        
     }
 }
