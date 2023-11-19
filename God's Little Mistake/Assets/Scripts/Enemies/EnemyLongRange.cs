@@ -262,10 +262,10 @@ public class EnemyLongRange : GameBehaviour
                 {
                     runAway = true;
 
-                    frontAnim.speed = 2;
-                    backAnim.speed = 2;
-                    leftSideAnim.speed = 2;
-                    rightSideAnim.speed = 2;
+                    //frontAnim.speed = 2;
+                    //backAnim.speed = 2;
+                    //leftSideAnim.speed = 2;
+                    //rightSideAnim.speed = 2;
 
                     enemyStats.stats.speed = runAwaySpeed;
 

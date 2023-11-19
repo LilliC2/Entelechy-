@@ -186,10 +186,7 @@ public class EnemyShortRange : GameBehaviour
                 }
                 else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange)
                 {
-                    frontAnim.SetBool("Walking", false);
-                    backAnim.SetBool("Walking", false);
-                    leftSideAnim.SetBool("Walking", false);
-                    rightSideAnim.SetBool("Walking", false);
+
 
                     print("Stop to attack");
                     agent.isStopped = true;
@@ -241,16 +238,16 @@ public class EnemyShortRange : GameBehaviour
 
     void PlayAttackAnimation()
     {
-        print("Attack anim");
-        frontAnim.SetBool("Walking", false);
-        backAnim.SetBool("Walking", false);
-        leftSideAnim.SetBool("Walking", false);
-        rightSideAnim.SetBool("Walking", false);
+        //print("Attack anim");
+        //frontAnim.SetBool("Walking", false);
+        //backAnim.SetBool("Walking", false);
+        //leftSideAnim.SetBool("Walking", false);
+        //rightSideAnim.SetBool("Walking", false);
 
-        if (frontOB.activeSelf == true) frontAnim.SetTrigger("Attack");
-        if (backOB.activeSelf == true) backAnim.SetTrigger("Attack");
-        if (rightSideOB.activeSelf == true) rightSideAnim.SetTrigger("Attack");
-        if (leftSideOB.activeSelf == true) leftSideAnim.SetTrigger("Attack");
+        //if (frontOB.activeSelf == true) frontAnim.SetTrigger("Attack");
+        //if (backOB.activeSelf == true) backAnim.SetTrigger("Attack");
+        //if (rightSideOB.activeSelf == true) rightSideAnim.SetTrigger("Attack");
+        //if (leftSideOB.activeSelf == true) leftSideAnim.SetTrigger("Attack");
 
 
     }

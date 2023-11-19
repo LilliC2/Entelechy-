@@ -129,7 +129,7 @@ public class BaseEnemy : GameBehaviour
 
     public void Hit(float _dmg)
     {
-        hurt.Play();
+        //  hurt.Play();
 
 
         if (stats.health > 0)
@@ -279,7 +279,7 @@ public class BaseEnemy : GameBehaviour
     {
         if(!died)
         {
-            death.Play();
+            //death.Play();
             print("Enemy dies");
             died = true;
 

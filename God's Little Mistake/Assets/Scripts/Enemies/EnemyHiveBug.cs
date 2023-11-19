@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
 
-public class EnemyHiveBug : MonoBehaviour
+public class EnemyHiveBug : GameBehaviour
 {
     public string playerTag = "Player";
     public float patrolSpeed = 2.0f;
@@ -16,6 +16,9 @@ public class EnemyHiveBug : MonoBehaviour
 
     public EnemyHiveSpawner spawner;
 
+    public BaseEnemy enemyStats;
+    BaseEnemy baseEnemy;
+
     private void Start()
     {
         agent = GetComponent<NavMeshAgent>();
@@ -23,6 +26,9 @@ public class EnemyHiveBug : MonoBehaviour
         agent.angularSpeed = 0;
         EnsureCorrectRotation();
         StartCoroutine(Patrol());
+
+        enemyStats = GetComponent<BaseEnemy>();
+        baseEnemy = GetComponent<BaseEnemy>();
     }
 
     private void EnsureCorrectRotation()
@@ -70,24 +76,56 @@ public class EnemyHiveBug : MonoBehaviour
 
     private void Update()
     {
-        EnsureCorrectRotation();
-
-        if (IsPlayerInRange())
+        if (_GM.gameState != GameManager.GameState.Dead)
         {
-            Vector3 playerPosition = GameObject.FindGameObjectWithTag(playerTag).transform.position;
-            Vector3 directionToPlayer = transform.position - playerPosition;
 
-            if (directionToPlayer.magnitude < avoidanceRange)
+
+            switch (baseEnemy.enemyState)
             {
-                Vector3 avoidancePosition = transform.position + directionToPlayer.normalized * avoidanceRange;
-                agent.SetDestination(avoidancePosition);
-                isPlayerInRange = true;
+                case BaseEnemy.EnemyState.Patrolling:
+                    EnsureCorrectRotation();
+
+                    if (IsPlayerInRange())
+                    {
+                        Vector3 playerPosition = GameObject.FindGameObjectWithTag(playerTag).transform.position;
+                        Vector3 directionToPlayer = transform.position - playerPosition;
+
+                        if (directionToPlayer.magnitude < avoidanceRange)
+                        {
+                            Vector3 avoidancePosition = transform.position + directionToPlayer.normalized * avoidanceRange;
+                            agent.SetDestination(avoidancePosition);
+                            isPlayerInRange = true;
+                        }
+                        else
+                        {
+                            isPlayerInRange = false;
+                        }
+                    }
+                    break;
+
+                case BaseEnemy.EnemyState.Die:
+                    StopAllCoroutines();
+
+                    baseEnemy.Die();
+
+
+                    break;
+
+                case BaseEnemy.EnemyState.Charmed:
+                    //print("CHAMRED");
+                    //agent.isStopped = true;
+                    agent.SetDestination(_PIA.enemyLineStart.transform.position);
+
+                    break;
             }
-            else
-            {
-                isPlayerInRange = false;
-            }
+
+           
+
+
         }
+
+
+       
     }
 
 

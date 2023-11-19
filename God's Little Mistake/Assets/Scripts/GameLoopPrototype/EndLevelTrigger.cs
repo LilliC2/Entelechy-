@@ -26,7 +26,7 @@ public class EndLevelTrigger : GameBehaviour
                 if (_GM.isLevelCleared == true)
                 {
 
-
+                    print("new level");
 
                     _GM.readyForGeneration = true;
 
@@ -36,37 +36,7 @@ public class EndLevelTrigger : GameBehaviour
             
            
         }
-        //if(inRange)
-        //{
 
-        //    if(!popped)
-        //    {
-        //        doorAnimator.SetBool("Prime", true);
-        //    }
-
-        //    print("Reached end of level. Press E to spawn new level");
-        //    if (Input.GetKeyDown(KeyCode.E))
-        //    {
-
-        //        if(!popped)
-        //        {
-        //            doorAnimator.SetBool("Popped", true);
-        //            ExecuteAfterSeconds(1, () => popped = true);
-                    
-        //        }
-        //        else
-        //        {
-        //            ExecuteAfterSeconds(1, () => _GM.readyForGeneration = true);
-
-        //        }
-
-        //    }
-        //}
-        //else
-        //{
-        //    if(!popped) doorAnimator.SetBool("Prime", false);
-
-        //}
     }
 
 
