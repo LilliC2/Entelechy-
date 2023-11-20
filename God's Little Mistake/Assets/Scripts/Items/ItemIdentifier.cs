@@ -162,7 +162,9 @@ public class ItemIdentifier : GameBehaviour
             print("player");
             inRange = false;
 
-        _PM.popupPanel.SetActive(false);
+            _PM.popupPanel1.SetActive(false);
+            _PM.popupPanel2.SetActive(false);
+            _PM.popupPanel.SetActive(false);
         }
     }
 
