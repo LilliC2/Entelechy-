@@ -129,7 +129,7 @@ public class PopupManager : Singleton<PopupManager>
             UpdateComparison();
         }
 
-        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKey(KeyCode.RightShift) || Input.GetKey(KeyCode.Tab))
+        if (Input.GetKeyUp(KeyCode.LeftShift) || Input.GetKeyUp(KeyCode.RightShift) || Input.GetKeyUp(KeyCode.Tab))
         {
             popupPanel2.SetActive(false);
         }
