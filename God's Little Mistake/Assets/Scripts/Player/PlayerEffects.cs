@@ -30,6 +30,11 @@ public class PlayerEffects : Singleton<PlayerEffects>
     [Header("Big Eye Particle")]
     public GameObject bigEyePS;
 
+    [Header("Squito Particle")]
+    public ParticleSystem squitoPS;
+
+    [Header("Sabertooth Particle")]
+    public ParticleSystem sabertoothPS;
 
     private void Start()
     {

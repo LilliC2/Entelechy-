@@ -231,8 +231,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     public void PeaShooterAttack()
     {
-        _PE.peaShooterPS.Play();
-        BasicFireProjectileHead(_IM.itemDataBase[0].projectilePF, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange);
+        BasicFireProjectileHead(_IM.itemDataBase[0].projectilePF, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange, _PE.peaShooterPS);
         if (_FDM.leftFireFilling == false)
         {
             _FDM.SetLeftAttack(_IM.itemDataBase[0].firerate);
@@ -242,7 +241,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     
     public void SquitoAttack()
     {
-        BasicFireProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange);
+        BasicFireProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange,_PE.squitoPS);
         if (_FDM.leftFireFilling == false)
         {
             _FDM.SetLeftAttack(_IM.itemDataBase[4].firerate);
@@ -257,7 +256,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         if(returned)
         {
             returned = false;
-            BasicFireProjectileHead(_IM.itemDataBase[2].projectilePF, _IM.itemDataBase[2].projectileSpeed, _IM.itemDataBase[2].firerate, _IM.itemDataBase[2].projectileRange);
+            BasicFireProjectileHead(_IM.itemDataBase[2].projectilePF, _IM.itemDataBase[2].projectileSpeed, _IM.itemDataBase[2].firerate, _IM.itemDataBase[2].projectileRange, _PE.sabertoothPS);
             ExecuteAfterSeconds(1, () => returned = true);
             if (_FDM.leftFireFilling == false)
             {
@@ -302,8 +301,10 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     }
 
 
-    public void BasicFireProjectileHead(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
+    public void BasicFireProjectileHead(GameObject _prefab, float _projectileSpeed, float _firerate, float _range, ParticleSystem _PS)
     {
+
+
         Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
         Vector3 flatAimTarget = screenPoint + cursorRay / Mathf.Abs(cursorRay.y) * Mathf.Abs(screenPoint.y - transform.position.y);
@@ -319,6 +320,8 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             {
                 print("Fire");
                 //particle system
+
+                if (_PS != null) _PS.Play();
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
