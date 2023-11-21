@@ -9,7 +9,7 @@ public class PauseSlotStats : GameBehaviour
 
     public Item itemInfo;
 
-    public UnityEngine.UI.Image itemSprite;
+    public Image itemSprite;
     //public UnityEngine.UI.Image itemSlot;
 
     public Sprite itemEmpty;
@@ -28,7 +28,6 @@ public class PauseSlotStats : GameBehaviour
     void Update()
     {
         MatchPlayerInventory(slotNumber);
-        itemSprite.sprite = itemInfo.pauseIcon;
         if(itemInfo.pauseIcon == null)
         {
             itemSprite.sprite = itemEmpty;
@@ -74,13 +73,16 @@ public class PauseSlotStats : GameBehaviour
         switch(i)
         {
             case 0:
-                inslot = _PC.headItem;
+                itemInfo = _PC.headItem;
+                Debug.Log(_PC.headItem.itemName);
                 break;
             case 1:
-                inslot = _PC.torsoItem;
+                itemInfo = _PC.torsoItem;
+                Debug.Log(_PC.torsoItem.itemName);
                 break;
             case 2:
-                inslot = _PC.legItem;
+                itemInfo = _PC.legItem;
+                Debug.Log(_PC.legItem.itemName);
                 break;
         }
 

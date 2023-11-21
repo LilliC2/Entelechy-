@@ -31,6 +31,12 @@ public class Item
     public bool modifier;
     public float modifierID;
 
+    [Header("Abilities")]
+    public float cooldownAbility;
+    public string abilityName;
+    public string abilityDescription;
+
+
     [Header("Animation")]
     public Sprite icon;
     public Sprite pauseIcon;

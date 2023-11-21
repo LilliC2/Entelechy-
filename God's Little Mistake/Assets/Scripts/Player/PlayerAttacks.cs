@@ -9,12 +9,15 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     [SerializeField]
     float angle;
     [SerializeField]
-    float power;
+    float power = 5;
 
     [Header("Projectile")]
     public Vector3 target;
+
     bool projectileShot;
     bool projectileShot2;
+    bool projectileShot3;
+
 
     [Header("Sabertooth Projectile")]
     public bool returned = true;
@@ -49,7 +52,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 break;
                 
-            case 3: //Sabertooth
+            case 3: //Antlers
 
 
                 BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF, _IM.itemDataBase[3].firerate);
@@ -63,6 +66,30 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 SquitoAttack();
 
                 break;
+                
+            case 7: //Rocket Launcher Eyeball
+
+                print("Rocket");
+
+                RocketAttack();
+
+                break;
+
+            case 8: //LMG Porcupine
+
+                print("LMG");
+
+                LMGAttack(_IM.itemDataBase[8].projectilePF, _IM.itemDataBase[8].projectileSpeed, _IM.itemDataBase[8].firerate, _IM.itemDataBase[8].projectileRange);
+
+                break;
+            
+            case 9: //Shotgun
+
+                print("Shotgun");
+
+                ShotgunAttack(_IM.itemDataBase[9].projectilePF, _IM.itemDataBase[9].projectileSpeed, _IM.itemDataBase[9].firerate, _IM.itemDataBase[9].projectileRange);
+
+                break;
 
 
 
@@ -70,17 +97,156 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     }
 
+    public void LMGAttack(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
+    {
+        Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
+        Vector3 flatAimTarget = screenPoint + cursorRay / Mathf.Abs(cursorRay.y) * Mathf.Abs(screenPoint.y - transform.position.y);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            _PC.headFiringPoint.transform.LookAt(hit.point);
+
+            if (!projectileShot3)
+            {
+                print("Fire");
+                //particle system
+
+                //Spawn bullet and apply force in the direction of the mouse
+                //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
+                GameObject bullet1 = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                GameObject bullet2 = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                GameObject bullet3 = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+
+                bullet1.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
+                bullet2.GetComponent<Rigidbody>().AddRelativeForce(Vector3.right * _projectileSpeed);
+                bullet3.GetComponent<Rigidbody>().AddRelativeForce(Vector3.left * _projectileSpeed);
+
+                //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
+                bullet1.GetComponent<RangeDetector>().range = _range;
+                bullet1.GetComponent<RangeDetector>().positionShotFrom = _PC.transform.position;
+                
+                bullet2.GetComponent<RangeDetector>().range = _range;
+                bullet2.GetComponent<RangeDetector>().positionShotFrom = _PC.transform.position;
+                                
+                bullet3.GetComponent<RangeDetector>().range = _range;
+                bullet3.GetComponent<RangeDetector>().positionShotFrom = _PC.transform.position;
+
+
+                //knockbackActive = true;
+                //knockbackStartTime = Time.time;
+                Mathf.Clamp(bullet1.transform.position.y, 0, 0);
+                Mathf.Clamp(bullet2.transform.position.y, 0, 0);
+                Mathf.Clamp(bullet3.transform.position.y, 0, 0);
+
+
+
+                //Controls the firerate, player can shoot another bullet after a certain amount of time
+                projectileShot3 = true;
+
+                ExecuteAfterSeconds(_firerate, () => projectileShot3 = false);
+
+            }
+            print("FIRE PROJECTILE");
+
+
+            if (_FDM.rightFireFilling == false)
+            {
+                _FDM.SetRightAttack(_IM.itemDataBase[8].firerate);
+            }
+
+        }
+    }
+
+    public void ShotgunAttack(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
+    {
+        Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
+        Vector3 flatAimTarget = screenPoint + cursorRay / Mathf.Abs(cursorRay.y) * Mathf.Abs(screenPoint.y - transform.position.y);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            _PC.headFiringPoint.transform.LookAt(hit.point);
+
+            if (!projectileShot3)
+            {
+                print("Fire");
+                //particle system
+
+                //Spawn bullet and apply force in the direction of the mouse
+                //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
+                List<GameObject> bulletInstances = new List<GameObject>();
+
+                for (int i = 0; i < 10; i++)
+                {
+                    GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                    //bullet1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-2,2),Vector3.forward.y, Vector3.forward.z) * _projectileSpeed);
+                    //bullet1.GetComponent<RangeDetector>().range = _range;
+                    //Mathf.Clamp(bullet1.transform.position.y, 0, 0);
+
+                    bulletInstances.Add(bullet);
+                    print("Make bullet");
+                }
+
+                foreach (var bullet in bulletInstances)
+                {
+                    bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-1f, 1f), Vector3.forward.y, Vector3.forward.z) * Random.Range(_projectileSpeed-1f, _projectileSpeed));
+                    bullet.GetComponent<RangeDetector>().range = _range;
+                    bullet.GetComponent<RangeDetector>().positionShotFrom = _PC.torsoFiringPoint.transform.position;
+                    Mathf.Clamp(bullet.transform.position.y, 0, 0);
+                }
+                //Controls the firerate, player can shoot another bullet after a certain amount of time
+                projectileShot3 = true;
+
+                ExecuteAfterSeconds(_firerate, () => projectileShot3 = false);
+            }
+            print("FIRE PROJECTILE");
+
+
+            if (_FDM.rightFireFilling == false)
+            {
+                _FDM.SetRightAttack(_IM.itemDataBase[9].firerate);
+            }
+
+        }
+    }
+
+
+    public void RocketAttack()
+    {
+        BasicFireProjectileTorso(_IM.itemDataBase[7].projectilePF, _IM.itemDataBase[7].projectileSpeed, _IM.itemDataBase[7].firerate, _IM.itemDataBase[7].projectileRange);
+
+        if (_FDM.rightFireFilling == false)
+        {
+            _FDM.SetRightAttack(_IM.itemDataBase[7].firerate);
+        }
+
+    }
+
     public void PeaShooterAttack()
     {
         _PE.peaShooterPS.Play();
-        BasicFireProjectile(_IM.itemDataBase[0].projectilePF, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange);
+        BasicFireProjectileHead(_IM.itemDataBase[0].projectilePF, _IM.itemDataBase[0].projectileSpeed, _IM.itemDataBase[0].firerate, _IM.itemDataBase[0].projectileRange);
+        if (_FDM.leftFireFilling == false)
+        {
+            _FDM.SetLeftAttack(_IM.itemDataBase[0].firerate);
+        }
 
     }
     
     public void SquitoAttack()
     {
-        BasicFireProjectile(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange);
-
+        BasicFireProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange);
+        if (_FDM.leftFireFilling == false)
+        {
+            _FDM.SetLeftAttack(_IM.itemDataBase[4].firerate);
+        }
     }
 
 
@@ -91,8 +257,13 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         if(returned)
         {
             returned = false;
-            BasicFireProjectile(_IM.itemDataBase[2].projectilePF, _IM.itemDataBase[2].projectileSpeed, _IM.itemDataBase[2].firerate, _IM.itemDataBase[2].projectileRange);
+            BasicFireProjectileHead(_IM.itemDataBase[2].projectilePF, _IM.itemDataBase[2].projectileSpeed, _IM.itemDataBase[2].firerate, _IM.itemDataBase[2].projectileRange);
             ExecuteAfterSeconds(1, () => returned = true);
+            if (_FDM.leftFireFilling == false)
+            {
+                _FDM.SetLeftAttack(_IM.itemDataBase[2].firerate);
+
+            }
         }
         
 
@@ -105,14 +276,19 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         //bullet.GetComponent<CurveProjectile>().Shoot();
 
         //bullet.GetComponent<CurveProjectile>().angle = _PC.directional.transform.rotation.y;
-
-        if(!projectileShot2)
+        if (_FDM.leftFireFilling == false)
+        {
+            _FDM.SetLeftAttack(_IM.itemDataBase[3].firerate);
+        }
+        if (!projectileShot2)
         {
             GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
 
             print(_PC.directional.transform.forward);
 
-            _PC.torsoFiringPoint.transform.localEulerAngles = new(-angle, _PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
+            _PC.torsoFiringPoint.transform.localEulerAngles = _PC.directional.transform.localEulerAngles;
+
+            _PC.torsoFiringPoint.transform.localEulerAngles = new(angle, _PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
 
 
             bullet.GetComponent<Rigidbody>().AddForce(power * _PC.torsoFiringPoint.transform.forward, ForceMode.Impulse);
@@ -125,19 +301,8 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     }
 
-    Vector3 CalculateTarget(Vector3 _originalPos, float _distance, float _angle)
-    {
-        // Convert the angle from degrees to radians
-        float angleInRadians = _angle * Mathf.Deg2Rad;
 
-        // Calculate the new position
-        float newX = _originalPos.x + _distance * Mathf.Cos(angleInRadians);
-        float newY = _originalPos.y + _distance * Mathf.Sin(angleInRadians);
-
-        return new Vector3(newX, newY, _originalPos.z);
-    }
-
-    public void BasicFireProjectile(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
+    public void BasicFireProjectileHead(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
     {
         Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
         Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
@@ -174,6 +339,49 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 projectileShot = true;
 
                 ExecuteAfterSeconds(_firerate, () => projectileShot = false);
+            }
+            print("FIRE PROJECTILE");
+
+        }
+    }
+    
+    public void BasicFireProjectileTorso(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
+    {
+        Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
+        Vector3 flatAimTarget = screenPoint + cursorRay / Mathf.Abs(cursorRay.y) * Mathf.Abs(screenPoint.y - transform.position.y);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            _PC.headFiringPoint.transform.LookAt(hit.point);
+
+            if (!projectileShot3)
+            {
+                print("Fire");
+                //particle system
+
+                //Spawn bullet and apply force in the direction of the mouse
+                //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
+                GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
+
+                //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
+                bullet.GetComponent<RangeDetector>().range = _range;
+                bullet.GetComponent<RangeDetector>().positionShotFrom = _PC.transform.position;
+
+                //knockbackActive = true;
+                //knockbackStartTime = Time.time;
+                Mathf.Clamp(bullet.transform.position.y, 0, 0);
+
+
+
+                //Controls the firerate, player can shoot another bullet after a certain amount of time
+                projectileShot3 = true;
+
+                ExecuteAfterSeconds(_firerate, () => projectileShot3 = false);
             }
             print("FIRE PROJECTILE");
 
