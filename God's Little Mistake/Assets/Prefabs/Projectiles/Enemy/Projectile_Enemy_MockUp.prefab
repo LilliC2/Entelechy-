@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 4347991386478800833}
   - component: {fileID: 7821976584456850140}
   - component: {fileID: 4933160686750720999}
+  - component: {fileID: 8327845822191815641}
   m_Layer: 11
   m_Name: Image
   m_TagString: EnemyProjectile
@@ -66,7 +67,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 54dfdbd2009d06a4aa4bec56ce05fabf, type: 2}
+  - {fileID: 0}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -98,6 +99,24 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &8327845822191815641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 215733643793970339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f6d3c6e4250e84192f5b34ce9e71bc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  glowColor: {r: 1, g: 0.5364162, b: 0, a: 1}
+  glowBrightness: 2.55
+  outlineWidth: 4
+  alphaThreshold: 0
+  drawOutside: 0
+  enableInstancing: 0
 --- !u!1 &7752005100104120040
 GameObject:
   m_ObjectHideFlags: 0
