@@ -168,7 +168,7 @@ GameObject:
   - component: {fileID: 7377353240563137762}
   - component: {fileID: 7791782639288566668}
   m_Layer: 0
-  m_Name: MissyTestHead1
+  m_Name: MissyHeadSprite
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -182,9 +182,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 583666106706433869}
   m_LocalRotation: {x: 7.1054257e-15, y: -0, z: -8.326874e-17, w: 1}
-  m_LocalPosition: {x: 0.04233492, y: -0.234, z: 0.027999999}
-  m_LocalScale: {x: 0.09472346, y: 0.09472343, z: 0.09472346}
-  m_ConstrainProportionsScale: 0
+  m_LocalPosition: {x: -0.006, y: 0.031, z: 0.063}
+  m_LocalScale: {x: 0.07797825, y: 0.07797825, z: 0.07797825}
+  m_ConstrainProportionsScale: 1
   m_Children: []
   m_Father: {fileID: 6816467437761659010}
   m_RootOrder: -1
@@ -229,8 +229,8 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 383807773
   m_SortingLayer: 2
-  m_SortingOrder: 991
-  m_Sprite: {fileID: 21300000, guid: 5aadd6f8f596b87408ae8a6916c35fea, type: 3}
+  m_SortingOrder: 992
+  m_Sprite: {fileID: 21300000, guid: f0462076cd61a7d4b9a5f24872afe7f6, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -320,6 +320,90 @@ SpriteRenderer:
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 3.9099996, y: 3.8814144}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
+--- !u!1 &1308008731924282810
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6864295318560393598}
+  - component: {fileID: 7309435184313122027}
+  m_Layer: 0
+  m_Name: TorsoSprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6864295318560393598
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308008731924282810}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: -0, y: 0.338, z: -0.186}
+  m_LocalScale: {x: 0.060060274, y: 0.060060274, z: 0.060060274}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7383142118705551422}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!212 &7309435184313122027
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1308008731924282810}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 991
+  m_Sprite: {fileID: 21300000, guid: ba61c96b201633f4b971855b908e3a8f, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 8.11, y: 7.66}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -5374,90 +5458,6 @@ SpriteRenderer:
   m_FlipY: 0
   m_DrawMode: 0
   m_Size: {x: 8.169999, y: 7.7392426}
-  m_AdaptiveModeThreshold: 0.5
-  m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
-  m_MaskInteraction: 0
-  m_SpriteSortPoint: 0
---- !u!1 &1426014906528287119
-GameObject:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  serializedVersion: 6
-  m_Component:
-  - component: {fileID: 5165496410535455701}
-  - component: {fileID: 1064748437738618870}
-  m_Layer: 0
-  m_Name: MissyTestHead2
-  m_TagString: Untagged
-  m_Icon: {fileID: 0}
-  m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
-  m_IsActive: 0
---- !u!4 &5165496410535455701
-Transform:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426014906528287119}
-  m_LocalRotation: {x: 7.1054257e-15, y: -0, z: -8.326874e-17, w: 1}
-  m_LocalPosition: {x: 0.011334918, y: -0.22600001, z: 0.03599998}
-  m_LocalScale: {x: 0.09472346, y: 0.09472343, z: 0.09472346}
-  m_ConstrainProportionsScale: 0
-  m_Children: []
-  m_Father: {fileID: 6816467437761659010}
-  m_RootOrder: -1
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1064748437738618870
-SpriteRenderer:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1426014906528287119}
-  m_Enabled: 1
-  m_CastShadows: 0
-  m_ReceiveShadows: 0
-  m_DynamicOccludee: 1
-  m_StaticShadowCaster: 0
-  m_MotionVectors: 1
-  m_LightProbeUsage: 1
-  m_ReflectionProbeUsage: 1
-  m_RayTracingMode: 0
-  m_RayTraceProcedural: 0
-  m_RenderingLayerMask: 257
-  m_RendererPriority: 0
-  m_Materials:
-  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
-  m_StaticBatchInfo:
-    firstSubMesh: 0
-    subMeshCount: 0
-  m_StaticBatchRoot: {fileID: 0}
-  m_ProbeAnchor: {fileID: 0}
-  m_LightProbeVolumeOverride: {fileID: 0}
-  m_ScaleInLightmap: 1
-  m_ReceiveGI: 1
-  m_PreserveUVs: 0
-  m_IgnoreNormalsForChartDetection: 0
-  m_ImportantGI: 0
-  m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 0
-  m_MinimumChartSize: 4
-  m_AutoUVMaxDistance: 0.5
-  m_AutoUVMaxAngle: 89
-  m_LightmapParameters: {fileID: 0}
-  m_SortingLayerID: 0
-  m_SortingLayer: 0
-  m_SortingOrder: 991
-  m_Sprite: {fileID: 21300000, guid: f698825f710993549a443a7a5d4f9a8d, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_FlipX: 0
-  m_FlipY: 0
-  m_DrawMode: 0
-  m_Size: {x: 8.55, y: 7.02}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
   m_WasSpriteAssigned: 1
@@ -31587,7 +31587,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &9177636803732861396
 Transform:
   m_ObjectHideFlags: 0
@@ -32120,8 +32120,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
-  angle: 0
-  power: 0
+  angle: 45
+  power: 5
   target: {x: 0, y: 0, z: 0}
   returned: 1
 --- !u!1 &6057041955502080585
@@ -32324,6 +32324,8 @@ Transform:
   - {fileID: 9177636803732861396}
   - {fileID: 6816467437761659010}
   - {fileID: 3219948144964813556}
+  - {fileID: 6864295318560393598}
+  - {fileID: 34634152290394515}
   m_Father: {fileID: 2549374392105567490}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -38774,24 +38776,24 @@ MonoBehaviour:
   controller: {fileID: 0}
   bearTrap: {fileID: 0}
   cactusTrap: {fileID: 0}
-  immortal: 1
-  canFloat: 1
+  immortal: 0
+  canFloat: 0
   rotateAmount: 15
   time: 0.1
   ease: 31
   headItem:
-    itemName: Pea Shooter
+    itemName: NULL
     ID: 0
     lvl: 0
     segment: 0
     currencyValue: 0
     active: 0
-    dmg: 10
-    firerate: 0.25
-    critChance: 30
-    projectileRange: 5
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
     projectile: 1
-    projectileSpeed: 1000
+    projectileSpeed: 0
     projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
     movementSpeed: 0
     modifier: 0
@@ -38811,28 +38813,25 @@ MonoBehaviour:
     avtarPrefabBackLeft: {fileID: 0}
     avtarPrefabBackRight: {fileID: 0}
   torsoItem:
-    itemName: Teeth Shotgun
-    ID: 9
+    itemName: NULL
+    ID: 0
     lvl: 0
     segment: 1
     currencyValue: 0
     active: 0
-    dmg: 5
-    firerate: 2
-    critChance: 18
-    projectileRange: 3.5
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
     projectile: 1
-    projectileSpeed: 500
+    projectileSpeed: 0
     projectilePF: {fileID: 8524524292363796634, guid: ac411dc545c0dfd4b80d828a2b68e9d9, type: 3}
-    movementSpeed: 3
+    movementSpeed: 0
     modifier: 0
     modifierID: 0
     cooldownAbility: 0
-    abilityName: Gummy Maw
-    abilityDescription: 'A grinning maw filled with hundreds of serrated teeth, is
-      eagerly ready to be ejected from their gummy homes and launched in a short
-      and spontaneous direction ideally ending up lodged into the soft gooey flesh
-      of prey. Moments after hundreds of serrated teeth refill those empty gums.     '
+    abilityName: 
+    abilityDescription: 
     icon: {fileID: 21300000, guid: 425fe672fcb53694398ba22032574758, type: 3}
     pauseIcon: {fileID: 21300000, guid: 425fe672fcb53694398ba22032574758, type: 3}
     staticTempSprite: {fileID: 0}
@@ -38875,9 +38874,9 @@ MonoBehaviour:
     avtarPrefabBackRight: {fileID: 0}
   headFiringPoint: {fileID: 2708584586246381614}
   torsoFiringPoint: {fileID: 8098602294582984727}
-  headSprite: {fileID: 0}
-  torsoSprite: {fileID: 0}
-  legSprite: {fileID: 0}
+  headSprite: {fileID: 7791782639288566668}
+  torsoSprite: {fileID: 7309435184313122027}
+  legSprite: {fileID: 1409256681410964438}
   enableMovement: 1
   move: {x: 0, y: 0, z: 0}
   speed: 0
@@ -54281,7 +54280,6 @@ Transform:
   - {fileID: 4259517557596005886}
   - {fileID: 4972706985156991601}
   - {fileID: 7377353240563137762}
-  - {fileID: 5165496410535455701}
   m_Father: {fileID: 7383142118705551422}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -59184,6 +59182,90 @@ ParticleSystemRenderer:
   m_MeshWeighting2: 1
   m_MeshWeighting3: 1
   m_MaskInteraction: 0
+--- !u!1 &9057514340940777276
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 34634152290394515}
+  - component: {fileID: 1409256681410964438}
+  m_Layer: 0
+  m_Name: LegSprite
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &34634152290394515
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9057514340940777276}
+  m_LocalRotation: {x: 0.38268343, y: 0, z: 0, w: 0.92387956}
+  m_LocalPosition: {x: 0.012, y: 0.19, z: -0.334}
+  m_LocalScale: {x: 0.060060274, y: 0.060060274, z: 0.060060274}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 7383142118705551422}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 45, y: 0, z: 0}
+--- !u!212 &1409256681410964438
+SpriteRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9057514340940777276}
+  m_Enabled: 1
+  m_CastShadows: 0
+  m_ReceiveShadows: 0
+  m_DynamicOccludee: 1
+  m_StaticShadowCaster: 0
+  m_MotionVectors: 1
+  m_LightProbeUsage: 1
+  m_ReflectionProbeUsage: 1
+  m_RayTracingMode: 0
+  m_RayTraceProcedural: 0
+  m_RenderingLayerMask: 257
+  m_RendererPriority: 0
+  m_Materials:
+  - {fileID: 10754, guid: 0000000000000000f000000000000000, type: 0}
+  m_StaticBatchInfo:
+    firstSubMesh: 0
+    subMeshCount: 0
+  m_StaticBatchRoot: {fileID: 0}
+  m_ProbeAnchor: {fileID: 0}
+  m_LightProbeVolumeOverride: {fileID: 0}
+  m_ScaleInLightmap: 1
+  m_ReceiveGI: 1
+  m_PreserveUVs: 0
+  m_IgnoreNormalsForChartDetection: 0
+  m_ImportantGI: 0
+  m_StitchLightmapSeams: 1
+  m_SelectedEditorRenderState: 0
+  m_MinimumChartSize: 4
+  m_AutoUVMaxDistance: 0.5
+  m_AutoUVMaxAngle: 89
+  m_LightmapParameters: {fileID: 0}
+  m_SortingLayerID: 0
+  m_SortingLayer: 0
+  m_SortingOrder: 990
+  m_Sprite: {fileID: 21300000, guid: 3299ad833bfdcba4b923b38bf01769cb, type: 3}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_FlipX: 0
+  m_FlipY: 0
+  m_DrawMode: 0
+  m_Size: {x: 8.11, y: 7.66}
+  m_AdaptiveModeThreshold: 0.5
+  m_SpriteTileMode: 0
+  m_WasSpriteAssigned: 1
+  m_MaskInteraction: 0
+  m_SpriteSortPoint: 0
 --- !u!1 &9082981536393106504
 GameObject:
   m_ObjectHideFlags: 0
