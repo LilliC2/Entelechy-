@@ -62,7 +62,7 @@ public class ItemIdentifier : GameBehaviour
                 {
                     //check which segment it is
 
-                    Item prevItem = new();
+                    Item prevItem = new Item();
                     bool itemOnPlayer = false;
                     //determine if there is already an item of that segment equipped
 
