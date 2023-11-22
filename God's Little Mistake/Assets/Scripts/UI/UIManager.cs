@@ -150,6 +150,26 @@ public class UIManager : Singleton<UIManager>
         //Show score, time, etc.
     }
 
+    public void PausingFromUI()
+    {
+        _GM.OnPause();
+    }
+
+    public void ResumingFromUI()
+    {
+        _GM.OnResume();
+    }
+
+    public void ExitingFromUI()
+    {
+        _GM.QuitGame();
+    }
+
+    public void TitleFromUI()
+    {
+        _GM.ToTitle();
+    }
+
 
 
 
@@ -239,7 +259,7 @@ public class UIManager : Singleton<UIManager>
 
     //    print("Update pop up");
 
- 
+
     //}
 
     //public void PopupStat(Item _hoverItem)
@@ -354,7 +374,7 @@ public class UIManager : Singleton<UIManager>
 
 
     //}
-    
+
     //public void UpdateItemPopUpComp2(Item _itemInfo)
     //{
     //    //ADD LATER FORMATTING FOR FLOATS
