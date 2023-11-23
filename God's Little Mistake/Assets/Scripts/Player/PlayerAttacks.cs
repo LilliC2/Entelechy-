@@ -195,7 +195,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                     //Mathf.Clamp(bullet1.transform.position.y, 0, 0);
 
                     bulletInstances.Add(bullet);
-                    print("Make bullet");
+                    //print("Make bullet");
                 }
 
                 foreach (var bullet in bulletInstances)
@@ -263,8 +263,8 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         if(returned)
         {
             returned = false;
-            BasicFireProjectileHead(_IM.itemDataBase[2].projectilePF, _IM.itemDataBase[2].projectileSpeed, _IM.itemDataBase[2].firerate, _IM.itemDataBase[2].projectileRange, _PE.sabertoothPS);
-            ExecuteAfterSeconds(1, () => returned = true);
+            BoomerangProjectile(_IM.itemDataBase[2].projectilePF, _IM.itemDataBase[2].projectileSpeed, _IM.itemDataBase[2].firerate, _IM.itemDataBase[2].projectileRange, _PE.sabertoothPS);
+            //ExecuteAfterSeconds(1, () => returned = true);
             if (_FDM.leftFireFilling == false)
             {
                 _FDM.SetLeftAttack(_IM.itemDataBase[2].firerate);
@@ -307,6 +307,50 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     }
 
+    void BoomerangProjectile(GameObject _prefab,float _projectileSpeed, float _firerate,float _range  , ParticleSystem _PS)
+    {
+
+
+        Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
+        Vector3 flatAimTarget = screenPoint + cursorRay / Mathf.Abs(cursorRay.y) * Mathf.Abs(screenPoint.y - transform.position.y);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            _PC.headFiringPoint.transform.LookAt(hit.point);
+
+            if (!projectileShot)
+            {
+                print("Fire");
+                //particle system
+
+                if (_PS != null) _PS.Play();
+
+                //Spawn bullet and apply force in the direction of the mouse
+                //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
+                GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                //Vector3 target = new Vector3(0, _PC.headFiringPoint.transform.position.y, _PC.headFiringPoint.transform.position.z + 10);
+                //print(target);
+                //bullet.GetComponent<BoomerangProjectile>().initalTarget = target;
+
+
+                //knockbackActive = true;
+                //knockbackStartTime = Time.time;
+                //Mathf.Clamp(bullet.transform.position.y, 0, 0);
+
+                //Controls the firerate, player can shoot another bullet after a certain amount of time
+                projectileShot = true;
+
+                ExecuteAfterSeconds(_firerate, () => projectileShot = false);
+            }
+            print("FIRE PROJECTILE");
+
+        }
+
+    }
 
     public void BasicFireProjectileHead(GameObject _prefab, float _projectileSpeed, float _firerate, float _range, ParticleSystem _PS)
     {

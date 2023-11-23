@@ -41,7 +41,7 @@ public class RangeDetector : GameBehaviour
                 Destroy(gameObject);
             }
 
-            print("Range is " + range + ". Out of range at (PC)" + Vector3.Distance(transform.position, _PC.transform.position));
+            //print("Range is " + range + ". Out of range at (PC)" + Vector3.Distance(transform.position, _PC.transform.position));
             //print("Range is " + range + ". Out of range at (pos shot) " + Vector3.Distance(transform.position, positionShotFrom));
             //ExecuteAfterFrames(3, () => Destroy(gameObject));
 
