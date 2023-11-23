@@ -2,10 +2,10 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class EnemyHiveSpawner : MonoBehaviour
+public class EnemyHiveSpawner : GameBehaviour
 {
     public GameObject enemyPrefab;
-    public float spawnInterval = 3.0f;
+    public float spawnInterval = 2.0f;
     public string playerTag = "Player";
     public float activationRange = 10.0f;
 
@@ -29,7 +29,11 @@ public class EnemyHiveSpawner : MonoBehaviour
     private void SpawnEnemy()
     {
         // Spawn enemy at the position of the spawner.
-        Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+
+
+        var enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
+        _EM.enemiesSpawned.Add(enemy);
+
     }
 
     private bool IsPlayerInRange()

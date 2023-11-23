@@ -6,7 +6,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
 
     [Header("Lob Projectile")]
-    float angle = -45;
+    [SerializeField]
+    float angle;
+    [SerializeField]
     float power = 5;
 
     [Header("Projectile")]

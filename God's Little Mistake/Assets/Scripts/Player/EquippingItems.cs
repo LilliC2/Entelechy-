@@ -47,6 +47,31 @@ public class EquippingItems : Singleton<EquippingItems>
                 if (_IM.itemDataBase[6].staticTempSprite != null) _PC.legSprite.sprite = _IM.itemDataBase[6].staticTempSprite;
 
                 break;
+            case 7: //rocket launcher
+
+                if (_IM.itemDataBase[7].staticTempSprite != null) _PC.torsoSprite.sprite = _IM.itemDataBase[7].staticTempSprite;
+
+                break;
+            case 8: //LMG
+
+                if (_IM.itemDataBase[8].staticTempSprite != null) _PC.torsoSprite.sprite = _IM.itemDataBase[8].staticTempSprite;
+
+                break;
+            case 9: //shotgun
+
+                if (_IM.itemDataBase[9].staticTempSprite != null) _PC.torsoSprite.sprite = _IM.itemDataBase[9].staticTempSprite;
+
+                break;
+            case 10: //missy head
+
+                if (_IM.itemDataBase[10].staticTempSprite != null) _PC.headSprite.sprite = _IM.itemDataBase[10].staticTempSprite;
+
+                break;
+            case 11: //missy torso
+
+                if (_IM.itemDataBase[11].staticTempSprite != null) _PC.torsoSprite.sprite = _IM.itemDataBase[11].staticTempSprite;
+
+                break;
         }
     }
 }
