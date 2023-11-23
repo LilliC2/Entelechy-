@@ -8,8 +8,7 @@ using DG.Tweening;
 
 public class PlayerEffects : Singleton<PlayerEffects>
 {
-    [SerializeField]
-    ParticleSystem explosionPS;
+    public ParticleSystem explosionPS;
 
     [Header("Player Particle Systems")]
     public ParticleSystem deathExplosionPS;
@@ -30,6 +29,9 @@ public class PlayerEffects : Singleton<PlayerEffects>
 
     [Header("Big Eye Particle")]
     public GameObject bigEyePS;
+
+    [Header("Teeth Shotgun Particle")]
+    public ParticleSystem teethShotgunPS;
 
     [Header("Squito Particle")]
     public ParticleSystem squitoPS;
@@ -102,7 +104,6 @@ public class PlayerEffects : Singleton<PlayerEffects>
 
 
         ExecuteAfterSeconds(0.5f, () => updateRedDot = false);
-        ExecuteAfterSeconds(0.5f, () => explosionPS.Play());
         ExecuteAfterSeconds(0.5f, () => redDot.SetPosition(1, Vector3.zero));
 
     }
