@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 public class PlayerAttacks : Singleton<PlayerAttacks>
 {
 
@@ -18,6 +19,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     bool projectileShot2;
     bool projectileShot3;
 
+    
 
     [Header("Sabertooth Projectile")]
     public bool returned = true;
@@ -31,7 +33,8 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     // Update is called once per frame
     void Update()
     {
-
+        //change red dot length
+       
     }
 
     public void CallAttack(Item _item)
@@ -241,9 +244,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     
     public void SquitoAttack()
     {
-        BasicFireProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange,_PE.squitoPS);
+
+        ExecuteAfterSeconds(0.5f,()=> BasicFireProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange, _PE.squitoPS));
         if (_FDM.leftFireFilling == false)
         {
+            _PE.SquitoRedDot();
+
             _FDM.SetLeftAttack(_IM.itemDataBase[4].firerate);
         }
     }
@@ -390,5 +396,5 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
         }
     }
-
+   
 }
