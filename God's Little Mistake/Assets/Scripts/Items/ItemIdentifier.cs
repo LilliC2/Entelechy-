@@ -62,7 +62,7 @@ public class ItemIdentifier : GameBehaviour
                 {
                     //check which segment it is
 
-                    Item prevItem = new();
+                    Item prevItem = new Item();
                     bool itemOnPlayer = false;
                     //determine if there is already an item of that segment equipped
 
@@ -162,7 +162,9 @@ public class ItemIdentifier : GameBehaviour
             print("player");
             inRange = false;
 
-        _PM.popupPanel.SetActive(false);
+            _PM.popupPanel1.SetActive(false);
+            _PM.popupPanel2.SetActive(false);
+            _PM.popupPanel.SetActive(false);
         }
     }
 

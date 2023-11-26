@@ -73,6 +73,20 @@ public class GameManager : Singleton<GameManager>
             isPaused = true;
         }
 
+        if (Input.GetKeyDown(KeyCode.I) && isPlaying)
+        {
+            OnPause();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I) && isPaused)
+        {
+            OnResume();
+        }
+
+        if (Input.GetKeyDown(KeyCode.I) && gameState == GameState.Dead)
+        {
+
+        }
 
         if (Input.GetKeyDown(KeyCode.Escape) && isPlaying)
         {
