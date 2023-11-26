@@ -21,19 +21,20 @@ public class BoomerangProjectile : GameBehaviour
     [SerializeField]
     float minSize;
 
-    bool turn = true;
+    bool turn = false;
 
     public Vector3 initalTarget;
 
 
     Vector3 playerPosWhenThrown;
 
+    bool turnTime;
+    public float duration = 3; // in seconds
 
-    public float duration = 1; // in seconds
+    public Vector3 beginPoint;
+    Vector3 endPoint;
 
-    public Vector3 beginPoint = new Vector3(0, 0, 0);
-    public Vector3 finalPoint = new Vector3(0, 0, 10);
-    public Vector3 farPoint = new Vector3(0, 0, 0);
+    Vector3 center;
 
     private float startTime;
     public bool startAgain = true;
@@ -41,6 +42,10 @@ public class BoomerangProjectile : GameBehaviour
 
     private void Awake()
     {
+        beginPoint = _PC.transform.position;
+
+        endPoint = initalTarget;
+
         rb = GetComponent<Rigidbody>();
         explosionAnim = explosionAnimOB.GetComponent<Animator>();
     }
@@ -49,6 +54,7 @@ public class BoomerangProjectile : GameBehaviour
     {
         startTime = Time.time;
 
+        ExecuteAfterSeconds(duration, () => turn = true);
 
 
         totalDistance = _IM.itemDataBase[2].projectileRange*2;
@@ -61,19 +67,46 @@ public class BoomerangProjectile : GameBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if(!turn)
+        //{
+        //    if (startAgain) Start();
 
-        if (startAgain) Start();
+        //    Vector3 center = (beginPoint + finalPoint) * .5f;
+        //    center -= farPoint;
 
-        Vector3 center = (beginPoint + finalPoint) * .5f;
-        center -= farPoint;
+        //    Vector3 riseRelCenter = beginPoint - center;
+        //    Vector3 setRelCenter = finalPoint - center;
 
-        Vector3 riseRelCenter = beginPoint - center;
-        Vector3 setRelCenter = finalPoint - center;
+        //    transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, (Time.time - startTime) / duration);
+        //    transform.position += center;
 
-        transform.position = Vector3.Slerp(riseRelCenter, setRelCenter, (Time.time - startTime) / duration);
-        transform.position += center;
+        //    if (Vector3.Distance(transform.position, finalPoint) < 1) print("Close");
 
-        ExecuteAfterSeconds(duration, () => TurnBack());
+        //}
+
+        center = (beginPoint + endPoint) * .5f;
+
+        transform.position = Vector3.Slerp(beginPoint - center, endPoint - center, (Time.time - startTime) / duration) + center;
+
+        //if (turn)
+        //{
+        //    if (turnTime)
+        //    {
+        //        print("turn time");
+        //        turnTime = false;
+        //        startTime = Time.time;
+        //    }
+
+        //    print("go back");
+        //    Vector3 center2 = (beginPoint + finalPoint) * .5f;
+        //    center2 -= farPoint;
+
+        //    Vector3 riseRelCenter2 = finalPoint - center2;
+        //    Vector3 setRelCenter2 = beginPoint - center2;
+
+        //    transform.position = Vector3.Slerp(riseRelCenter2, setRelCenter2, (Time.time - startTime) / duration);
+        //    transform.position += center2;
+        //}
 
         //if(turn && Vector3.Distance(playerPosWhenThrown, transform.position) > halfway)
         //{
@@ -97,13 +130,6 @@ public class BoomerangProjectile : GameBehaviour
         //    Destroy(gameObject);
         //}
 
-    }
-
-    void TurnBack()
-    {
-        beginPoint = new Vector3(0, 0, 10);
-        finalPoint = new Vector3(0, 0, 0);
-        farPoint = new Vector3(0, 0, 0);
     }
 
     private void OnCollisionEnter(Collision collision)
