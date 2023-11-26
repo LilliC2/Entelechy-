@@ -63,7 +63,6 @@ public class EnemyManager : Singleton<EnemyManager>
                 type = 3;
             }
 
-            print(r + " " + type);
 
             GameObject enemy = Instantiate(Resources.Load("Enemy" + enemyTypes[type], typeof(GameObject)), spawnPoint.transform.position, new Quaternion(0, 0, 0, 0)) as GameObject;
 
