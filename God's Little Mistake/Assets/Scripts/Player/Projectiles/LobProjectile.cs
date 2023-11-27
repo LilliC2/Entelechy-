@@ -42,6 +42,15 @@ public class CurveProjectile : GameBehaviour
  
     }
 
+    void PlayAnimation()
+    {
+        playedPS = true;
+        endOfRangePS.Play();
+
+        //image.SetActive(false);
+        //ExecuteAfterSeconds(endOfRangePS.main.duration, () => Destroy(gameObject));
+    }
+
     private void OnCollisionEnter(Collision collision)
     {
         if (collision.collider.CompareTag("Ground"))
@@ -50,13 +59,10 @@ public class CurveProjectile : GameBehaviour
 
             if (endOfRangePS != null)
             {
+
                 if (!playedPS)
                 {
-                    playedPS = true;
-                    endOfRangePS.Play();
-
-                    image.SetActive(false);
-                    ExecuteAfterSeconds(endOfRangePS.main.duration, () => Destroy(gameObject));
+                    ExecuteAfterSeconds(1, () => PlayAnimation());
                 }
 
             }
@@ -70,7 +76,7 @@ public class CurveProjectile : GameBehaviour
                 //spawn antler
                 Instantiate(antlerTrap, transform.position, Quaternion.identity);
             }
-            
+
             Destroy(gameObject);
         }
 
