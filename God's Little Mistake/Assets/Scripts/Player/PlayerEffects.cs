@@ -41,6 +41,10 @@ public class PlayerEffects : Singleton<PlayerEffects>
     float redDotLength;
     bool updateRedDot;
 
+    [Header("Eyeball Particle")]
+    public ParticleSystem eyeballPS;
+
+
     [Header("Sabertooth Particle")]
     public ParticleSystem sabertoothPS;
 

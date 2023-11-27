@@ -162,9 +162,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c90cb2e99ab216a4b94ea50dffc89b19, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  explosionAnimOB: {fileID: 863517425893743271}
+  impactPS: {fileID: 0}
   image: {fileID: 8883858910056376675}
-  explosionAnim: {fileID: 0}
   explosionSound: {fileID: 0}
   initialDamage: 50
   damageDecayRate: 0.5
@@ -182,6 +181,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   range: 0
   positionShotFrom: {x: 0, y: 0, z: 0}
+  endOfRangePS: {fileID: 0}
+  image: {fileID: 8883858910056376675}
 --- !u!1001 &5777046672366874572
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -536,11 +537,6 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: ed45cbddeb40a884db678d5a07e7b212, type: 3}
---- !u!1 &863517425893743271 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6439806560867377295, guid: ed45cbddeb40a884db678d5a07e7b212, type: 3}
-  m_PrefabInstance: {fileID: 5955198468493113896}
-  m_PrefabAsset: {fileID: 0}
 --- !u!4 &5400859015174136411 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 1753775868474349683, guid: ed45cbddeb40a884db678d5a07e7b212, type: 3}

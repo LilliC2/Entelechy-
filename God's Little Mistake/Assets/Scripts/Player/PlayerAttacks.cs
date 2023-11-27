@@ -228,6 +228,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
         if (_FDM.rightFireFilling == false)
         {
+            _PE.eyeballPS.Play();
             _FDM.SetRightAttack(_IM.itemDataBase[7].firerate);
         }
 

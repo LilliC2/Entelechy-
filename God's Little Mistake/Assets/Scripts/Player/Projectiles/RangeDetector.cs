@@ -9,6 +9,7 @@ public class RangeDetector : GameBehaviour
 
     public ParticleSystem endOfRangePS;
 
+    public GameObject image;
     bool playedPS;
 
     Rigidbody rb;
@@ -32,6 +33,7 @@ public class RangeDetector : GameBehaviour
                     playedPS = true;
                     endOfRangePS.Play();
 
+                    image.SetActive(false);
                     ExecuteAfterSeconds(endOfRangePS.main.duration, () => Destroy(gameObject));
                 }
 
