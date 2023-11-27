@@ -126,15 +126,17 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 print("Fire");
                 //particle system
 
+                Vector3 firingPos = _PC.headFiringPoint.transform.position;
+
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
-                GameObject bullet1 = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
-                GameObject bullet2 = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
-                GameObject bullet3 = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                GameObject bullet1 = Instantiate(_prefab, new Vector3(firingPos.x,firingPos.y + 0.2f,firingPos.z), _PC.headFiringPoint.transform.rotation);
+                GameObject bullet2 = Instantiate(_prefab, new Vector3(firingPos.x, firingPos.y, firingPos.z+0.2f), _PC.headFiringPoint.transform.rotation);
+                GameObject bullet3 = Instantiate(_prefab, new Vector3(firingPos.x, firingPos.y, firingPos.z - 0.2f), _PC.headFiringPoint.transform.rotation);
 
-                bullet1.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
-                bullet2.GetComponent<Rigidbody>().AddRelativeForce(Vector3.right * _projectileSpeed);
-                bullet3.GetComponent<Rigidbody>().AddRelativeForce(Vector3.left * _projectileSpeed);
+                bullet1.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Random.Range(_projectileSpeed-50, _projectileSpeed));
+                bullet2.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Random.Range(_projectileSpeed - 50, _projectileSpeed));
+                bullet3.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Random.Range(_projectileSpeed - 50, _projectileSpeed));
 
                 //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
                 bullet1.GetComponent<RangeDetector>().range = _range;
