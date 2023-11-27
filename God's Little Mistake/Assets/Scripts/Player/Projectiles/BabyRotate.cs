@@ -1,18 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
-public class BabyRotate : MonoBehaviour
+public class BabyRotate : GameBehaviour
 {
     // Start is called before the first frame update
     void Start()
     {
-        
+        InvokeRepeating("Rotate", 0, 0.6f);
     }
 
-    // Update is called once per frame
-    void Update()
+    void Rotate()
     {
-        
+        gameObject.transform.DORotate(new Vector3(-0,0,Random.Range(40,60)), 0.3f);
+
+        ExecuteAfterSeconds(0.3f,()=> gameObject.transform.DORotate(new Vector3(-0, 0, Random.Range(-40, -60)), 0.3f));
     }
 }

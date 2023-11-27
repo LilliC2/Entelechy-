@@ -55,10 +55,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 break;
                 
-            case 3: //Antlers
+            case 3: //Baby Lob
 
-
-                BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF, _IM.itemDataBase[3].firerate);
+                BabyAttack();
 
                 break;
 
@@ -98,6 +97,15 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
         }
 
+    }
+
+    public void BabyAttack()
+    {
+        BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF, _IM.itemDataBase[3].firerate, _PE.babyPS);
+        if (_FDM.leftFireFilling == false)
+        {
+            _FDM.SetLeftAttack(_IM.itemDataBase[3].firerate);
+        }
     }
 
     public void LMGAttack(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
@@ -256,9 +264,6 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         }
     }
 
-
-
-
     public void SabertoothAttack()
     {
         if(returned)
@@ -276,19 +281,19 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     }
 
-    public void BasicLobProjectile(float _range, float _projectileSpeed, GameObject _prefab, float _firerate)
+    public void BasicLobProjectile(float _range, float _projectileSpeed, GameObject _prefab, float _firerate, ParticleSystem _PS)
     {
 
         print("lobbed");
         //bullet.GetComponent<CurveProjectile>().Shoot();
 
         //bullet.GetComponent<CurveProjectile>().angle = _PC.directional.transform.rotation.y;
-        if (_FDM.leftFireFilling == false)
-        {
-            _FDM.SetLeftAttack(_IM.itemDataBase[3].firerate);
-        }
+
         if (!projectileShot2)
         {
+
+            if (_PS != null) _PS.Play();
+
             GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
 
             print(_PC.directional.transform.forward);
@@ -300,7 +305,6 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             }
             else _PC.torsoFiringPoint.transform.localEulerAngles = new(angle, -_PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
 
-            _PC.torsoFiringPoint.transform.localEulerAngles = new Vector3(angle, _PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
 
 
             bullet.GetComponent<Rigidbody>().AddForce(power * _PC.torsoFiringPoint.transform.forward, ForceMode.Impulse);
