@@ -196,7 +196,7 @@ public class GameManager : Singleton<GameManager>
         var randomLevel = Random.Range(0, 2); // last digit excluded
 
         //will change to change to Environment_Floor_ later //randomLevel changed to 2
-        currentLevel = Instantiate(Resources.Load("Enviroment_Floor_2", typeof(GameObject)), levelParent) as GameObject;
+        currentLevel = Instantiate(Resources.Load("Environment_Floor_2", typeof(GameObject)), levelParent) as GameObject;
 
         //find beginning room
 
@@ -207,8 +207,8 @@ public class GameManager : Singleton<GameManager>
         if(dungeonLevel == 1)
         {
 
-            var controls = Instantiate(Resources.Load("ControlsPrefab", typeof(GameObject)), new Vector3(levelStartRoom.position.x, 0.02f, levelStartRoom.position.z), Quaternion.Euler(new Vector3(90f,0f,0f)), levelParent) as GameObject;
-            var startingItem = Instantiate(itemPF, new Vector3(levelStartRoom.position.x, 0.02f, levelStartRoom.position.z-2.5f), Quaternion.Euler(new Vector3(0f,0f,0f)), levelParent) as GameObject;
+            var controls = Instantiate(Resources.Load("ControlsPrefab", typeof(GameObject)), new Vector3(levelStartRoom.position.x, -1.5f, levelStartRoom.position.z), Quaternion.Euler(new Vector3(90f,0f,0f)), levelParent) as GameObject;
+            var startingItem = Instantiate(itemPF, new Vector3(levelStartRoom.position.x, -1.5f, levelStartRoom.position.z-2.5f), Quaternion.Euler(new Vector3(0f,0f,0f)), levelParent) as GameObject;
 
             startingItem.GetComponent<ItemIdentifier>().itemInfo = _IM.itemDataBase[0]; //set as peashooter
 
