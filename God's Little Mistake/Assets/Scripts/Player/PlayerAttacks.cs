@@ -305,7 +305,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             }
             else _PC.torsoFiringPoint.transform.localEulerAngles = new(angle, -_PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
 
-
+            print(_PC.torsoFiringPoint.transform.localEulerAngles.y);
 
             bullet.GetComponent<Rigidbody>().AddForce(power * _PC.torsoFiringPoint.transform.forward, ForceMode.Impulse);
 
