@@ -5958,6 +5958,7 @@ MonoBehaviour:
   redDotGO: {fileID: 8190003897123745371}
   eyeballPS: {fileID: 4347520619849854363}
   babyPS: {fileID: 5371319428054872834}
+  urchinPS: {fileID: 3990202096488494510}
   sabertoothPS: {fileID: 0}
   activeTime: 0.3
   fader: {fileID: 7252923412102815679, guid: 5c38488465e7ad14da49f8750ef93b4c, type: 3}
@@ -38642,7 +38643,6 @@ GameObject:
   - component: {fileID: 6168779392120787942}
   - component: {fileID: 2085717904217303114}
   - component: {fileID: 2541063913563578442}
-  - component: {fileID: 2372092247442240463}
   m_Layer: 6
   m_Name: Player V7
   m_TagString: Player
@@ -38752,31 +38752,31 @@ MonoBehaviour:
     avtarPrefabBackLeft: {fileID: 0}
     avtarPrefabBackRight: {fileID: 0}
   torsoItem:
-    itemName: Lob
-    ID: 3
+    itemName: Porcupine LMG
+    ID: 8
     lvl: 0
     segment: 1
     currencyValue: 0
     active: 0
-    dmg: 20
-    firerate: 1
-    critChance: 17
-    projectileRange: 5
-    projectile: 1
-    projectileSpeed: 700
-    projectilePF: {fileID: 1753417278855635134, guid: 3c79b25e1dc54074ab1e23e354351e05, type: 3}
-    movementSpeed: 0
+    dmg: 2
+    firerate: 0.5
+    critChance: 5
+    projectileRange: 6
+    projectile: 0
+    projectileSpeed: 400
+    projectilePF: {fileID: 8524524292363796634, guid: fc63ee3b35d6f1c49a97cf0260e8e257, type: 3}
+    movementSpeed: 3
     modifier: 0
     modifierID: 0
     cooldownAbility: 0
-    abilityName: "The Brood\_"
-    abilityDescription: 'This brood will protect their host at any cost. Throwing
-      themselves screaming and wailing at opponents in a fetal fury. They will erupt
-      upon foes from their innate love for their kin as they explode in a bloody
-      blastula blast. '
-    icon: {fileID: 21300000, guid: 65c64af71c726eb4fab13c016e2cc3d4, type: 3}
-    pauseIcon: {fileID: 21300000, guid: 65c64af71c726eb4fab13c016e2cc3d4, type: 3}
-    staticTempSprite: {fileID: 21300000, guid: 65c64af71c726eb4fab13c016e2cc3d4, type: 3}
+    abilityName: The Prickle Pack
+    abilityDescription: 'A hellion cluster of prickly urchins grow like low hanging
+      fruit from subtle flesh. Their hunger is outmatched by their barrage of needles
+      readily fired at any competitor that wants a slice of their host. Their relentless
+      offense will leave them defenseless if all spines are dislodged. '
+    icon: {fileID: 21300000, guid: 269d18c4178a15a4b8647624ed10afd9, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 269d18c4178a15a4b8647624ed10afd9, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: 269d18c4178a15a4b8647624ed10afd9, type: 3}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -39041,26 +39041,6 @@ MonoBehaviour:
   ramHornsStunDuration: 2
   ramHornsDamage: 0
   ramming: 0
---- !u!114 &2372092247442240463
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 7690431182153463806}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 5f7f2a1154679b14888ded6a5c5256f3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  activeTime: 0.3
-  fader: {fileID: 7252923412102815679, guid: 5c38488465e7ad14da49f8750ef93b4c, type: 3}
-  childrenWithSprites:
-  - {fileID: 6098768159084579837}
-  - {fileID: 583666106706433869}
-  - {fileID: 1308008731924282810}
-  - {fileID: 9057514340940777276}
-  spriteRenderers: []
 --- !u!1 &7794343255709536028
 GameObject:
   m_ObjectHideFlags: 0
@@ -48953,7 +48933,8 @@ Transform:
   m_LocalPosition: {x: -0, y: 0.272, z: -0.139}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6576586668307289968}
   m_Father: {fileID: 7383142118705551422}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -60179,6 +60160,77 @@ PrefabInstance:
 Transform:
   m_CorrespondingSourceObject: {fileID: 174818817017975797, guid: ce5e6153dd734724e99dcb026ab9a051, type: 3}
   m_PrefabInstance: {fileID: 6112256545748190484}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1001 &6231842294241401364
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 3219948144964813556}
+    m_Modifications:
+    - target: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_RootOrder
+      value: -1
+      objectReference: {fileID: 0}
+    - target: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0.15
+      objectReference: {fileID: 0}
+    - target: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.139
+      objectReference: {fileID: 0}
+    - target: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -2.039827e-21
+      objectReference: {fileID: 0}
+    - target: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 7288690088450504376, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+      propertyPath: m_Name
+      value: LMG_Firing_PS
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+--- !u!198 &3990202096488494510 stripped
+ParticleSystem:
+  m_CorrespondingSourceObject: {fileID: 6997459292097130426, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+  m_PrefabInstance: {fileID: 6231842294241401364}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &6576586668307289968 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 954562148804398436, guid: 2d75a88912ad81243a8cf4d179bb8e2e, type: 3}
+  m_PrefabInstance: {fileID: 6231842294241401364}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6308420108176350446
 PrefabInstance:

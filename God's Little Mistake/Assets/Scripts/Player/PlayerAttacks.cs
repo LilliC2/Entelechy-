@@ -19,7 +19,14 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     bool projectileShot2;
     bool projectileShot3;
 
-    
+    [Header("LMG Overheat")]
+    bool overHeatCooldown;
+    [SerializeField]
+    float maxOverheat;
+    [SerializeField]
+    float currentOverheat;
+    [SerializeField]
+    float resetOverheatTime;
 
     [Header("Sabertooth Projectile")]
     public bool returned = true;
@@ -34,7 +41,11 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     void Update()
     {
         //change red dot length
-       
+       if(_PC.torsoItem.ID == 8 && !Input.GetButton("Fire2") && !overHeatCooldown)
+       {
+            if(currentOverheat > 0) currentOverheat -= 0.5f;
+
+       }
     }
 
     public void CallAttack(Item _item)
@@ -79,9 +90,14 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
             case 8: //LMG Porcupine
 
-                print("LMG");
 
-                LMGAttack(_IM.itemDataBase[8].projectilePF, _IM.itemDataBase[8].projectileSpeed, _IM.itemDataBase[8].firerate, _IM.itemDataBase[8].projectileRange);
+                if(currentOverheat <= maxOverheat && !overHeatCooldown)
+                {
+                    print("LMG");
+                    UrchinAttack();
+                }
+
+                
 
                 break;
             
@@ -108,6 +124,34 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         }
     }
 
+    void OverHeatCoolDown()
+    {
+        if(currentOverheat >=0)
+        {
+            overHeatCooldown = true;
+            currentOverheat -= 0.5f;
+
+            if (currentOverheat <= 0)
+            {
+                overHeatCooldown = false;
+
+                currentOverheat = 0;
+            }
+            ExecuteAfterSeconds(resetOverheatTime,()=> OverHeatCoolDown());
+
+        }
+    }
+
+    public void UrchinAttack()
+    {
+        LMGAttack(_IM.itemDataBase[8].projectilePF, _IM.itemDataBase[8].projectileSpeed, _IM.itemDataBase[8].firerate, _IM.itemDataBase[8].projectileRange);
+
+        //if (_FDM.rightFireFilling == false)
+        //{
+        //    _FDM.SetRightAttack(_IM.itemDataBase[8].firerate);
+        //}
+    }
+
     public void LMGAttack(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
     {
         Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -119,20 +163,24 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
         if (Physics.Raycast(ray, out hit))
         {
-            _PC.headFiringPoint.transform.LookAt(hit.point);
+            _PC.torsoFiringPoint.transform.LookAt(hit.point);
 
             if (!projectileShot3)
             {
+                _PE.urchinPS.Play();
+
+
+
                 print("Fire");
                 //particle system
 
-                Vector3 firingPos = _PC.headFiringPoint.transform.position;
+                Vector3 firingPos = _PC.torsoFiringPoint.transform.position;
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
-                GameObject bullet1 = Instantiate(_prefab, new Vector3(firingPos.x,firingPos.y + 0.2f,firingPos.z), _PC.headFiringPoint.transform.rotation);
-                GameObject bullet2 = Instantiate(_prefab, new Vector3(firingPos.x, firingPos.y, firingPos.z+0.2f), _PC.headFiringPoint.transform.rotation);
-                GameObject bullet3 = Instantiate(_prefab, new Vector3(firingPos.x, firingPos.y, firingPos.z - 0.2f), _PC.headFiringPoint.transform.rotation);
+                GameObject bullet1 = Instantiate(_prefab, new Vector3(firingPos.x,firingPos.y + 0.2f,firingPos.z), _PC.torsoFiringPoint.transform.rotation);
+                GameObject bullet2 = Instantiate(_prefab, new Vector3(firingPos.x, firingPos.y, firingPos.z+0.2f), _PC.torsoFiringPoint.transform.rotation);
+                GameObject bullet3 = Instantiate(_prefab, new Vector3(firingPos.x, firingPos.y, firingPos.z - 0.2f), _PC.torsoFiringPoint.transform.rotation);
 
                 bullet1.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Random.Range(_projectileSpeed-50, _projectileSpeed));
                 bullet2.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Random.Range(_projectileSpeed - 50, _projectileSpeed));
@@ -160,16 +208,17 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 //Controls the firerate, player can shoot another bullet after a certain amount of time
                 projectileShot3 = true;
 
+
+                currentOverheat += 0.5f;
+
+                if (currentOverheat > maxOverheat) OverHeatCoolDown();
+
                 ExecuteAfterSeconds(_firerate, () => projectileShot3 = false);
 
             }
             print("FIRE PROJECTILE");
 
 
-            if (_FDM.rightFireFilling == false)
-            {
-                _FDM.SetRightAttack(_IM.itemDataBase[8].firerate);
-            }
 
         }
     }

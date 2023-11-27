@@ -48,6 +48,9 @@ public class PlayerEffects : Singleton<PlayerEffects>
     [Header("Baby Lob")]
     public ParticleSystem babyPS;
 
+    [Header("Urchin Particle")]
+    public ParticleSystem urchinPS;
+
     [Header("Sabertooth Particle")]
     public ParticleSystem sabertoothPS;
 
