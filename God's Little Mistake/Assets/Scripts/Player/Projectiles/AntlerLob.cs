@@ -1,9 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Rendering;
 
-public class CurveProjectile : GameBehaviour
+public class AntlerLob : GameBehaviour
 {
     public ParticleSystem impactPS;
 
@@ -26,17 +25,8 @@ public class CurveProjectile : GameBehaviour
     [SerializeField]
     LayerMask enemy;
 
-
-
-
-    void PlayAnimation()
-    {
-        playedPS = true;
-        endOfRangePS.Play();
-
-        image.SetActive(false);
-        ExecuteAfterSeconds(endOfRangePS.main.duration, () => Destroy(gameObject));
-    }
+    [SerializeField]
+    GameObject antlerTrap;
 
     private void OnCollisionEnter(Collision collision)
     {
@@ -49,7 +39,13 @@ public class CurveProjectile : GameBehaviour
 
                 if (!playedPS)
                 {
-                    ExecuteAfterSeconds(1, () => PlayAnimation());
+                    //spawn antler
+                    Instantiate(antlerTrap, transform.position, Quaternion.identity);
+                    playedPS = true;
+                    endOfRangePS.Play();
+
+                    image.SetActive(false);
+                    ExecuteAfterSeconds(endOfRangePS.main.duration, () => Destroy(gameObject));
                 }
 
             }
@@ -62,7 +58,7 @@ public class CurveProjectile : GameBehaviour
         }
 
 
-        
+
 
         if (collision.collider.CompareTag("Enemy"))
         {
@@ -72,21 +68,12 @@ public class CurveProjectile : GameBehaviour
             print("Destroy Projectile");
             //ooze animation
             //explosionAnim.SetTrigger("Death");
-
-            
+            collision.gameObject.GetComponent<BaseEnemy>().Hit(_IM.itemDataBase[3].dmg);
 
             if (impactPS != null)
             {
                 if (!playedPS)
                 {
-                    var enemyCol = Physics.OverlapSphere(transform.position, 3, enemy);
-
-                    foreach (var col in enemyCol)
-                    {
-                        col.gameObject.GetComponent<BaseEnemy>().Hit(_IM.itemDataBase[3].dmg);
-
-                    }
-
                     playedPS = true;
                     impactPS.Play();
 
@@ -99,6 +86,4 @@ public class CurveProjectile : GameBehaviour
             //collision.gameObject.GetComponent<BaseEnemy>().Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);
         }
     }
-
-
 }

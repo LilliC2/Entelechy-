@@ -13,8 +13,13 @@ public class BabyRotate : GameBehaviour
 
     void Rotate()
     {
-        gameObject.transform.DORotate(new Vector3(-0,0,Random.Range(40,60)), 0.3f);
+        if(gameObject.activeSelf)
+        {
 
-        ExecuteAfterSeconds(0.3f,()=> gameObject.transform.DORotate(new Vector3(-0, 0, Random.Range(-40, -60)), 0.3f));
+            gameObject.transform.DORotate(new Vector3(45, 0, Random.Range(45, 60)), 0.3f);
+
+            ExecuteAfterSeconds(0.3f, () => gameObject.transform.DORotate(new Vector3(45, 0, Random.Range(-40, -60)), 0.3f));
+        }
+
     }
 }
