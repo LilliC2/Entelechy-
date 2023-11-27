@@ -4,12 +4,13 @@ using UnityEngine;
 
 public class BasicProjectile : GameBehaviour
 {
-    [SerializeField]
-    GameObject explosionAnimOB;
+    public ParticleSystem impactPS;
+
     [SerializeField]
     public GameObject image;
-    [SerializeField]
-    Animator explosionAnim;
+
+    bool playedPS;
+
     Rigidbody rb;
     [SerializeField]
     AudioSource explosionSound;
@@ -20,7 +21,6 @@ public class BasicProjectile : GameBehaviour
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        explosionAnim = explosionAnimOB.GetComponent<Animator>();
     }
 
     private void Update()
@@ -31,7 +31,7 @@ public class BasicProjectile : GameBehaviour
     {
         if (collision.collider.CompareTag("Enemy"))
         {
-
+            
             // how much damage falls off
             float currentDamage = initialDamage * (1.0f - damageDecayRate);
 
@@ -45,15 +45,26 @@ public class BasicProjectile : GameBehaviour
 
             image.SetActive(false);
             print("Destroy Projectile");
-            //ooze animation
-            explosionAnim.SetTrigger("Death");
 
 
             rb.velocity = Vector3.zero;
-            Destroy(this.gameObject);
 
             //get dmg from enemy
             collision.collider.gameObject.GetComponent<BaseEnemy>().Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);
+
+            if (impactPS != null)
+            {
+                if (!playedPS)
+                {
+                    playedPS = true;
+                    impactPS.Play();
+
+                    ExecuteAfterSeconds(impactPS.main.duration, () => Destroy(gameObject));
+                }
+            }
+            else Destroy(gameObject);
+
+
         }
     }
 }

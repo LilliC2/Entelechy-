@@ -11,6 +11,7 @@ public class HealPool : GameBehaviour
     public float shrinkTime;
     public bool inRange;
 
+    ParticleSystem healingEffect;
     AudioSource audiosource;
 
     private void Start()
@@ -18,6 +19,7 @@ public class HealPool : GameBehaviour
         StartCoroutine(ScaleOverTime(shrinkTime));
         StartCoroutine(HealPlayer());
         audiosource = GetComponent<AudioSource>();
+        healingEffect = GetComponentInChildren<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -33,6 +35,8 @@ public class HealPool : GameBehaviour
             inRange = false;
 
             //how to add audio fade?
+            healingEffect.Stop();
+
             audiosource.Stop();
         }
     }
@@ -42,6 +46,8 @@ public class HealPool : GameBehaviour
         if(other.CompareTag("Player"))
         {
             inRange = true;
+            healingEffect.Play();
+
             audiosource.Play();
         }
     }

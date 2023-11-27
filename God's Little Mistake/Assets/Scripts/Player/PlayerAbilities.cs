@@ -135,6 +135,8 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
     {
         Dash(5, 0.3f);
 
+        _PE.TripodVFX();
+
         //CoolDown
         isOnCoolDown = true;
 

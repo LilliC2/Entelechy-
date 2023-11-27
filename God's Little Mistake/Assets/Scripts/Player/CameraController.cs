@@ -23,13 +23,15 @@ public class CameraController : GameBehaviour
 
     public GameObject dummy;
 
+    float cameraZ = -8;
+
     Vector3 defaultPOS;
     Vector3 velocity = Vector3.zero;
 
     // Start is called before the first frame update
     void Start()
     {
-        defaultPOS =  new Vector3(player.transform.position.x, 6, player.transform.position.z + -6);
+        defaultPOS =  new Vector3(player.transform.position.x, 6, player.transform.position.z + cameraZ);
         player = _PC.gameObject;
     }
 
@@ -40,7 +42,7 @@ public class CameraController : GameBehaviour
         switch (cameraState)
         {
             case CameraStates.Default:
-                gameObject.transform.position = new Vector3(player.transform.position.x, 6, player.transform.position.z + -6);
+                gameObject.transform.position = new Vector3(player.transform.position.x, 6, player.transform.position.z + cameraZ);
 
                 var target = GetNearbyEnemies();
 
@@ -64,18 +66,18 @@ public class CameraController : GameBehaviour
                     var x = (player.transform.position.x + target.transform.position.x) / 2;
                     var z = (player.transform.position.z + target.transform.position.z) / 2;
 
-                    gameObject.transform.position = Vector3.SmoothDamp(transform.position,new Vector3(x, 6, z + -6),ref velocity,lerpSpeed);
+                    gameObject.transform.position = Vector3.SmoothDamp(transform.position,new Vector3(x, 6, z + cameraZ),ref velocity,lerpSpeed);
 
                     if (Vector3.Distance(player.transform.position, target.transform.position) > playerCheckRadius)
                     {
                         closestToMouse = null;
-                        gameObject.transform.position = Vector3.SmoothDamp(transform.position, new Vector3(player.transform.position.x, 6, player.transform.position.z + -6), ref velocity, lerpSpeed);
+                        gameObject.transform.position = Vector3.SmoothDamp(transform.position, new Vector3(player.transform.position.x, 6, player.transform.position.z + cameraZ), ref velocity, lerpSpeed);
                     }
 
                 }
                 else
                 {
-                    gameObject.transform.position = Vector3.SmoothDamp(transform.position, new Vector3(player.transform.position.x, 6, player.transform.position.z + -6), ref velocity, 0.2f);
+                    gameObject.transform.position = Vector3.SmoothDamp(transform.position, new Vector3(player.transform.position.x, 6, player.transform.position.z + cameraZ), ref velocity, 0.2f);
 
                     //ExecuteAfterSeconds(lerpSpeed, () => cameraState = CameraStates.Default);
 

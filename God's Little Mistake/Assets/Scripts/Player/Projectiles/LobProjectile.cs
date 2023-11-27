@@ -1,9 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Rendering;
 
 public class CurveProjectile : GameBehaviour
 {
+    public ParticleSystem impactPS;
+
+    public ParticleSystem endOfRangePS;
+
     [SerializeField]
     GameObject explosionAnimOB;
     [SerializeField]
@@ -13,20 +18,24 @@ public class CurveProjectile : GameBehaviour
     [SerializeField]
     AudioSource explosionSound;
 
+    bool playedPS;
+
+
     [SerializeField]
     LayerMask ground;
-
     [SerializeField]
-    GameObject antlerTrap;
-    private void Start()
+    LayerMask enemy;
+
+
+
+
+    void PlayAnimation()
     {
+        playedPS = true;
+        endOfRangePS.Play();
 
-
-    }
-
-    private void Update()
-    {
- 
+        image.SetActive(false);
+        ExecuteAfterSeconds(endOfRangePS.main.duration, () => Destroy(gameObject));
     }
 
     private void OnCollisionEnter(Collision collision)
@@ -34,10 +43,26 @@ public class CurveProjectile : GameBehaviour
         if (collision.collider.CompareTag("Ground"))
         {
             print("on ground");
-            //spawn antler
-            Instantiate(antlerTrap,transform.position,Quaternion.identity);
-            Destroy(gameObject);
+
+            if (endOfRangePS != null)
+            {
+
+                if (!playedPS)
+                {
+                    ExecuteAfterSeconds(1, () => PlayAnimation());
+                }
+
+            }
+            else
+            {
+                Destroy(gameObject);
+            }
+
+
         }
+
+
+        
 
         if (collision.collider.CompareTag("Enemy"))
         {
@@ -48,10 +73,27 @@ public class CurveProjectile : GameBehaviour
             //ooze animation
             //explosionAnim.SetTrigger("Death");
 
+            
 
-            Destroy(this.gameObject);
+            if (impactPS != null)
+            {
+                if (!playedPS)
+                {
+                    var enemyCol = Physics.OverlapSphere(transform.position, 3, enemy);
 
-            collision.gameObject.GetComponent<BaseEnemy>().Hit(_IM.itemDataBase[3].dmg);
+                    foreach (var col in enemyCol)
+                    {
+                        col.gameObject.GetComponent<BaseEnemy>().Hit(_IM.itemDataBase[3].dmg);
+
+                    }
+
+                    playedPS = true;
+                    impactPS.Play();
+
+                    ExecuteAfterSeconds(impactPS.main.duration, () => Destroy(gameObject));
+                }
+            }
+            else Destroy(gameObject);
 
             //get dmg from enemy
             //collision.gameObject.GetComponent<BaseEnemy>().Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);
