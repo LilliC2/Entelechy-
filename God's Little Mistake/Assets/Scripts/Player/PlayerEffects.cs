@@ -16,13 +16,10 @@ public class PlayerEffects : Singleton<PlayerEffects>
     public ParticleSystem missyHitParticle;
     public ParticleSystem landingPS;
 
-    [Header("Chromatic Abberation")]
-    public Volume vignetteVC;
-    public bool vigABbool = false;
-    public float speedVig;
-    bool resetSpeedVig = true;
-    [SerializeReference]
-    VolumeProfile profile;
+    [Header("Vignettes")]
+    [SerializeField]
+    Animator redVignetteAnim;
+    public Animator greenVignetteAnim;
 
     [Header("Pea Shooter Particle")]
     public ParticleSystem peaShooterPS;
@@ -74,13 +71,7 @@ public class PlayerEffects : Singleton<PlayerEffects>
 
         redDot = redDotGO.GetComponent<LineRenderer>();
 
-        //make sure it starts at 0
-        profile.TryGet<Vignette>(out var vig);
-        if (vig != null)
-        {
-            vig.intensity.value = 0;
 
-        }
     }
 
     private void Update()
@@ -94,22 +85,7 @@ public class PlayerEffects : Singleton<PlayerEffects>
             redDotGO.transform.localEulerAngles = new Vector3(0, _PC.directional.transform.eulerAngles.y, 0);
         }
 
-        if (vigABbool)
-        {
-            resetSpeedVig = true;
-
-
-            //get volume profile reference
-            profile.TryGet<Vignette>(out var vig);
-            if(vig!= null)
-            {
-                print("vig");
-                vig.intensity.value = speedVig;
-                VigTweenSpeed(0, 0.5f);
-                ExecuteAfterSeconds(0.5f, () => vigABbool = false);
-            }
-                
-        }
+ 
     }
 
 
@@ -152,15 +128,11 @@ public class PlayerEffects : Singleton<PlayerEffects>
         isTrailActive = false;
     }
 
-    public void VignetteFade()
+    public void RedVignetteFade()
     {
-        vigABbool = true;
-        if (resetSpeedVig)
-        {
-            resetSpeedVig = false;
-            speedVig = 0.4f;
-        }
+        redVignetteAnim.SetTrigger("Hit");
     }
+    
 
     public void SquitoRedDot()
     {
@@ -174,11 +146,7 @@ public class PlayerEffects : Singleton<PlayerEffects>
 
     }
 
-    private Tween VigTweenSpeed(float endValue, float time)
-    {
-        var speedTween = DOTween.To(() => speedVig, (x) => speedVig = x, endValue, time);
-        return speedTween;
-    }
+  
     private Tween RedDotLength(float endValue, float time)
     {
         var redDotTween = DOTween.To(() => redDotLength, (x) => redDotLength = x, endValue, time);
