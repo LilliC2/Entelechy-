@@ -65,6 +65,7 @@ public class BaseEnemy : GameBehaviour
     {
         enemySpritesArray = GetComponentsInChildren<SpriteRenderer>();
         enemyRnd = GetComponentInChildren<EnemyRandomisation>();
+        explosionAnimOB.SetActive(false);
 
     }
 
@@ -96,9 +97,9 @@ public class BaseEnemy : GameBehaviour
     {
         float currentHPpercent = _health / _maxHP;
 
-        if (currentHPpercent < 75 && currentHPpercent > 50) bleedingSpots[0].Play();
-        if (currentHPpercent < 50 && currentHPpercent > 25) bleedingSpots[1].Play();
-        if (currentHPpercent < 25) bleedingSpots[2].Play();
+        if (currentHPpercent < 75 && currentHPpercent > 50 && bleedingSpots[0] != null) bleedingSpots[0].Play();
+        if (currentHPpercent < 50 && currentHPpercent > 25 && bleedingSpots[1] != null) bleedingSpots[1].Play();
+        if (currentHPpercent < 25 && bleedingSpots[2] != null) bleedingSpots[2].Play();
 
         
     }

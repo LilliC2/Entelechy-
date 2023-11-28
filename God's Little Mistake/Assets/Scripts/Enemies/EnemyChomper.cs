@@ -5,8 +5,6 @@ using UnityEngine;
 public class EnemyChomper : GameBehaviour
 {
     [Header("Enemy Navigation")]
-    bool projectileShot;
-    GameObject firingPoint;
     public GameObject player;
     public UnityEngine.AI.NavMeshAgent agent;
 
@@ -24,10 +22,11 @@ public class EnemyChomper : GameBehaviour
     float normalSpeed;
 
     bool jumpingBack;
-    //patrolling
-    //patrolling
+
     public Vector3 walkPoint;
     public float walkPointRange;
+
+    [Header("Enemy Visuals")]
 
     [SerializeField]
     GameObject runningParticleGO;
@@ -38,26 +37,11 @@ public class EnemyChomper : GameBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
-    [Header("Enemy Sprites")]
-    public GameObject frontOB;
-    public GameObject backOB;
-    public GameObject rightSideOB;
-    public GameObject leftSideOB;
 
-    [SerializeField]
-    Animator frontAnim;
-    [SerializeField]
-    Animator backAnim;
-    [SerializeField]
-    Animator rightSideAnim;
-    [SerializeField]
-    Animator leftSideAnim;
 
 
     public BaseEnemy enemyStats;
     BaseEnemy baseEnemy;
-
-    Vector3 target;
 
     void Start()
     {
@@ -73,7 +57,6 @@ public class EnemyChomper : GameBehaviour
         //leftSideAnim = leftSideOB.GetComponentInChildren<Animator>();
 
         attackRange = enemyStats.stats.range;
-        target = SearchWalkPoint();
 
         normalSpeed = enemyStats.stats.speed;
         jumpSpeed = enemyStats.stats.speed*1.5f;
@@ -261,21 +244,6 @@ public class EnemyChomper : GameBehaviour
 
     }
 
-    void PlayAttackAnimation()
-    {
-        print("Attack anim");
-        frontAnim.SetBool("Walking", false);
-        backAnim.SetBool("Walking", false);
-        leftSideAnim.SetBool("Walking", false);
-        rightSideAnim.SetBool("Walking", false);
-
-        if (frontOB.activeSelf == true) frontAnim.SetTrigger("Attack");
-        if (backOB.activeSelf == true) backAnim.SetTrigger("Attack");
-        if (rightSideOB.activeSelf == true) rightSideAnim.SetTrigger("Attack");
-        if (leftSideOB.activeSelf == true) leftSideAnim.SetTrigger("Attack");
-
-
-    }
 
     private Vector3 SearchWalkPoint()
     {
