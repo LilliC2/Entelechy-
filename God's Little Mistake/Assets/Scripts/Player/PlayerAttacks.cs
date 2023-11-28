@@ -43,6 +43,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         //change red dot length
        if(_PC.torsoItem.ID == 8 && !Input.GetButton("Fire2") && !overHeatCooldown)
        {
+            print("passive cooldown on");
             if(currentOverheat > 0) currentOverheat -= 0.5f;
 
        }
@@ -126,20 +127,25 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     void OverHeatCoolDown()
     {
-        if(currentOverheat >=0)
+
+        print("cooldown on");
+
+        if (currentOverheat >=0)
         {
             overHeatCooldown = true;
             currentOverheat -= 0.5f;
 
-            if (currentOverheat <= 0)
-            {
-                overHeatCooldown = false;
 
-                currentOverheat = 0;
-            }
-            ExecuteAfterSeconds(resetOverheatTime,()=> OverHeatCoolDown());
-
+            ExecuteAfterSeconds(resetOverheatTime, () => OverHeatCoolDown());
         }
+        if (currentOverheat <= 0)
+        {
+            overHeatCooldown = false;
+
+            currentOverheat = 0;
+        }
+
+
     }
 
     public void UrchinAttack()

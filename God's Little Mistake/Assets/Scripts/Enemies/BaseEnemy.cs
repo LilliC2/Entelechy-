@@ -45,6 +45,9 @@ public class BaseEnemy : GameBehaviour
     [Header("Animation and Visuals")]
 
     [SerializeField]
+    ParticleSystem[] bleedingSpots;
+
+    [SerializeField]
     GameObject explosionAnimOB;
     [SerializeField]
     GameObject enemyVisuals;
@@ -93,14 +96,9 @@ public class BaseEnemy : GameBehaviour
     {
         float currentHPpercent = _health / _maxHP;
 
-        float H, S, V;
-
-        foreach (var sprite in enemySpritesArray)
-        {
-            Color.RGBToHSV(sprite.color, out H, out S, out V);
-
-            sprite.color = Color.HSVToRGB(H, currentHPpercent, V);
-        }
+        if (currentHPpercent < 75 && currentHPpercent > 50) bleedingSpots[0].Play();
+        if (currentHPpercent < 50 && currentHPpercent > 25) bleedingSpots[1].Play();
+        if (currentHPpercent < 25) bleedingSpots[2].Play();
 
         
     }
@@ -135,7 +133,7 @@ public class BaseEnemy : GameBehaviour
         if (stats.health > 0)
         {
             stats.health -= _dmg;
-
+            HealthVisualIndicator(stats.health, stats.maxHP);
             //print(enemyStats.stats.health);
         }
     }
@@ -279,6 +277,12 @@ public class BaseEnemy : GameBehaviour
     {
         if(!died)
         {
+
+            foreach (var PS in bleedingSpots)
+            {
+                PS.Stop();
+            }
+
             //death.Play();
             print("Enemy dies");
             died = true;

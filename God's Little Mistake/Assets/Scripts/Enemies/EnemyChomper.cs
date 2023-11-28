@@ -32,6 +32,8 @@ public class EnemyChomper : GameBehaviour
     [SerializeField]
     GameObject runningParticleGO;
     [SerializeField]
+    TrailRenderer runningTrail;
+    [SerializeField]
     ParticleSystem runningParticle;
 
     public LayerMask whatIsGround, whatIsPlayer;
@@ -85,8 +87,6 @@ public class EnemyChomper : GameBehaviour
 
         if (agent.velocity.magnitude > 0.5f) baseEnemy.walking.Play();
 
-        runningParticleGO.transform.rotation = gameObject.transform.rotation;
-
         agent.speed = enemyStats.stats.speed;
 
         //if player isnt dead
@@ -110,52 +110,7 @@ public class EnemyChomper : GameBehaviour
         else baseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
 
 
-        //#region Turning Sprites
-        ////if angle is between 136 and 45, backwards
-        //var heading = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-        //if (heading >= -45 && heading <= 45)
-        //{
-        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    backOB.transform.GetChild(0).gameObject.SetActive(true);
-
-        //}
-
-        ////if angle is between 46 and 315, right side
-        //if (heading >= 46 && heading <= 135)
-        //{
-        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(true);
-        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
-
-        //}
-
-        ////if angle is between 316 and 225, forwards
-        //if (heading >= 136 && heading >= -135)
-        //{
-        //    frontOB.transform.GetChild(0).gameObject.SetActive(true);
-        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
-
-        //}
-
-        ////if angle is between 226 and 135, left side
-        //if (heading >= -136 && heading <= -45)
-        //{
-        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(true);
-        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
-
-        //}
-
-
-
-
-        //#endregion
+       
 
         #region Animating Sprites
 
@@ -202,6 +157,7 @@ public class EnemyChomper : GameBehaviour
                     {
                         //print("Player RUn part");
                         runningParticle.Play();
+                        runningTrail.enabled = true;
                         enemyStats.stats.speed = normalSpeed;
 
 
@@ -220,26 +176,12 @@ public class EnemyChomper : GameBehaviour
                     if(!jumpingBack)
                     {
 
-                        //frontAnim.SetBool("Walking", false);
-                        //backAnim.SetBool("Walking", false);
-                        //leftSideAnim.SetBool("Walking", false);
-                        //rightSideAnim.SetBool("Walking", false);
-
+                        
                         enemyStats.stats.speed = jumpSpeed;
 
 
                         print("Stop to attack");
-
-                        //agent.isStopped = false;
-
-                        //Vector3 toPlayer = player.transform.position - transform.position;
-                        //Vector3 targetPosition = toPlayer.normalized * -5;
-
-                        //agent.SetDestination(targetPosition);
-
-                        //targetPosition = toPlayer.normalized * 8;
-
-                        //agent.SetDestination(targetPosition);
+                        PerformAttack(baseEnemy.stats.fireRate);
 
                         transform.LookAt(player.transform.position);
                         if (!animationPlayed)
@@ -263,6 +205,8 @@ public class EnemyChomper : GameBehaviour
                 else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange)
                 {
                     runningParticle.Stop();
+                    runningTrail.enabled = false;
+
 
                     PauseMotion(1);
                     ExecuteAfterSeconds(1, () => jumpingBack = true);
@@ -289,7 +233,8 @@ public class EnemyChomper : GameBehaviour
 
                 break;
             case BaseEnemy.EnemyState.Die:
-
+                runningParticle.Stop();
+                runningTrail.enabled = false;
                 baseEnemy.Die();
 
 
