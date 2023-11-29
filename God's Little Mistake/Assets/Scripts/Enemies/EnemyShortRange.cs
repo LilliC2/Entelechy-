@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using DG.Tweening;
 
 public class EnemyShortRange : GameBehaviour
 {
@@ -47,6 +48,9 @@ public class EnemyShortRange : GameBehaviour
     [SerializeField]
     Animator leftSideAnim;
 
+    [SerializeField]
+    float scaleIncrease = 0.1f;
+    float currentScale = 1;
 
     public BaseEnemy enemyStats;
     BaseEnemy baseEnemy;
@@ -98,56 +102,9 @@ public class EnemyShortRange : GameBehaviour
         else baseEnemy.enemyState = BaseEnemy.EnemyState.Patrolling;
 
 
-        //#region Turning Sprites
-        ////if angle is between 136 and 45, backwards
-        //var heading = Mathf.Atan2(transform.right.z, transform.right.x) * Mathf.Rad2Deg;
-        //if (heading >= -45 && heading <= 45)
-        //{
-        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    backOB.transform.GetChild(0).gameObject.SetActive(true);
-
-        //}
-
-        ////if angle is between 46 and 315, right side
-        //if (heading >= 46 && heading <= 135)
-        //{
-        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(true);
-        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
-
-        //}
-
-        ////if angle is between 316 and 225, forwards
-        //if (heading >= 136 && heading >= -135)
-        //{
-        //    frontOB.transform.GetChild(0).gameObject.SetActive(true);
-        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
-
-        //}
-
-        ////if angle is between 226 and 135, left side
-        //if (heading >= -136 && heading <= -45)
-        //{
-        //    frontOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        //    leftSideOB.transform.GetChild(0).gameObject.SetActive(true);
-        //    backOB.transform.GetChild(0).gameObject.SetActive(false);
-
-        //}
-
-
-
 
         //#endregion
 
-
-        //Visual indicator for health
-        //HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
 
         switch (baseEnemy.enemyState)
         {
@@ -196,7 +153,7 @@ public class EnemyShortRange : GameBehaviour
                     {
                         animationPlayed = true;
                         PlayAttackAnimation();
-                        //PerformAttack(enemyStats.stats.fireRate);
+                        PerformAttack(enemyStats.stats.fireRate);
                         ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
                     }
 
@@ -226,6 +183,16 @@ public class EnemyShortRange : GameBehaviour
 
 
 
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Projectile"))
+        {
+            print("Size increase");
+            currentScale += scaleIncrease;
+            gameObject.transform.DOScale(new Vector3(currentScale,currentScale,currentScale), 1);
+        }
     }
 
     void ResetAttackAnimation()

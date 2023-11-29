@@ -7,6 +7,11 @@ public class EnemyProjectile : GameBehaviour
     public float dmg;
     bool hit = false;
     public GameObject image;
+
+    [SerializeField]
+    ParticleSystem impactPS;
+    bool playedPS;
+
     private void Start()
     {
 
@@ -21,9 +26,18 @@ public class EnemyProjectile : GameBehaviour
                 hit = true;
                 print("player has been hit in collision");
                 _PC.Hit(dmg);
+                if (impactPS != null)
+                {
+                    if (!playedPS)
+                    {
+                        playedPS = true;
+                        impactPS.Play();
 
+                        ExecuteAfterSeconds(impactPS.main.duration, () => Destroy(gameObject));
+                    }
+                }
+                else Destroy(this.gameObject);
 
-                Destroy(this.gameObject);
             }
 
         }

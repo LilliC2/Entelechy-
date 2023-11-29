@@ -33,7 +33,6 @@ public class HealPool : GameBehaviour
         if(other.CompareTag("Player"))
         {
             inRange = false;
-
             //how to add audio fade?
             healingEffect.Stop();
 
@@ -46,6 +45,7 @@ public class HealPool : GameBehaviour
         if(other.CompareTag("Player"))
         {
             inRange = true;
+
             healingEffect.Play();
 
             audiosource.Play();
@@ -73,12 +73,14 @@ public class HealPool : GameBehaviour
     {
         if(inRange)
         {
+            _PE.greenVignetteAnim.SetTrigger("Healing");
+
             print("healing");
             if(_PC.health < _PC.maxHP) _PC.health += healAmount;
             if (_PC.health > _PC.maxHP) _PC.health = _PC.maxHP;
 
         }
-        
+
         yield return new WaitForSeconds(secondBetweenHeal);
         StartCoroutine(HealPlayer());
     }

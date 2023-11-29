@@ -23,7 +23,8 @@ public class Layering : GameBehaviour
             //in front
             foreach (var sprite in spritesOnObject)
             {
-                sprite.sortingLayerID = SortingLayer.NameToID("Front");
+                if(sprite != null) sprite.sortingLayerID = SortingLayer.NameToID("Front");
+
             }
         }
         else if(transform.position.z > _PC.transform.position.z)
@@ -32,7 +33,7 @@ public class Layering : GameBehaviour
             //behind
             foreach (var sprite in spritesOnObject)
             {
-                sprite.sortingLayerID = SortingLayer.NameToID("Back");
+                if (sprite != null) sprite.sortingLayerID = SortingLayer.NameToID("Back");
             }
         }
     }

@@ -120,6 +120,7 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
     public void NubsAbility()
     {
         isOnCoolDown = true;
+        _PE.nubsPS.Play();
         Dash(3, 0.3f);
 
         ////OPTIONAL: Invunerable while dashing

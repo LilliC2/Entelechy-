@@ -402,7 +402,7 @@ public class PlayerController : Singleton<PlayerController>
             if (health > 0)
             {
                 _PE.missyHitParticle.Play();
-                _PE.VignetteFade();
+                _PE.RedVignetteFade();
                 //HeadBobble();
                 _UI.UpdateHealthText(health);
                 _UI.UpdateHealthBar(health, maxHP);

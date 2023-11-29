@@ -39,6 +39,8 @@ public class EnemyLongRange : GameBehaviour
     BaseEnemy baseEnemy;
     Vector3 target;
 
+    [SerializeField]
+    ParticleSystem attackPS;
 
     Animator frontAnim;
     [SerializeField]
@@ -109,85 +111,6 @@ public class EnemyLongRange : GameBehaviour
 
 
 
-        //Change sprites based on direction
-
-        //#region Turning Sprites
-        ////if angle is between 136 and 45, backwards
-
-        //firingPoint = firingPointFront;
-
-        ////if(heading >= -45 && heading <=45)
-        ////{
-        ////    frontOB.transform.GetChild(0).gameObject.SetActive(false);
-        ////    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        ////    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        ////    backOB.transform.GetChild(0).gameObject.SetActive(true);
-
-        ////    firingPoint = firingPointBack;
-        ////}
-
-        //////if angle is between 46 and 315, right side
-        ////if(heading >= 46 && heading <= 135)
-        ////{
-        ////    frontOB.transform.GetChild(0).gameObject.SetActive(false);
-        ////    rightSideOB.transform.GetChild(0).gameObject.SetActive(true);
-        ////    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        ////    backOB.transform.GetChild(0).gameObject.SetActive(false);
-
-        ////    firingPoint = firingPointRight;
-        ////}
-
-        //////if angle is between 316 and 225, forwards
-        ////if (heading >= 136 && heading >= -135)
-        ////{
-        ////    frontOB.transform.GetChild(0).gameObject.SetActive(true);
-        ////    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        ////    leftSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        ////    backOB.transform.GetChild(0).gameObject.SetActive(false);
-
-        ////    firingPoint = firingPointFront;
-        ////}
-
-        //////if angle is between 226 and 135, left side
-        ////if (heading >= -136 && heading <= -45)
-        ////{
-        ////    frontOB.transform.GetChild(0).gameObject.SetActive(false);
-        ////    rightSideOB.transform.GetChild(0).gameObject.SetActive(false);
-        ////    leftSideOB.transform.GetChild(0).gameObject.SetActive(true);
-        ////    backOB.transform.GetChild(0).gameObject.SetActive(false);
-
-        ////    firingPoint = firingPointLeft;
-        ////}
-
-
-
-
-        //#endregion
-
-        //#region Animating Sprites
-
-        ////check if walking
-        //if (agent.velocity.magnitude > 0.1f)
-        //{
-        //    frontAnim.SetBool("Walking", true);
-        //    backAnim.SetBool("Walking", true);
-        //    leftSideAnim.SetBool("Walking", true);
-        //    rightSideAnim.SetBool("Walking", true);
-        //}
-        //else
-        //{
-        //    frontAnim.SetBool("Walking", false);
-        //    backAnim.SetBool("Walking", false);
-        //    leftSideAnim.SetBool("Walking", false);
-        //    rightSideAnim.SetBool("Walking", false);
-
-        //}
-
-
-        //#endregion
-        //Visual indicator for health
-        //HealthVisualIndicator(enemyStats.stats.health, enemyStats.stats.maxHP);
-
         firingPoint = firingPointFront;
         firingPoint.transform.LookAt(player.transform.position);
 
@@ -236,29 +159,30 @@ public class EnemyLongRange : GameBehaviour
                     //change destination
 
                 }
-                else if(Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange  && 
-                    Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange +3)
+                else if(Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange  && 
+                    Vector3.Distance(player.transform.position, gameObject.transform.position) > 5)
                 {
                     if(!runAway)
                     {
 
 
+                        print("shooot");
                         agent.isStopped = true;
+                        FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
 
                         transform.LookAt(player.transform.position);
-                        if (!animationPlayed)
-                        {
-                            animationPlayed = true;
-                            //PlayAttackAnimation();
-                            FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
-                            ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
-                        }
+                        //if (!animationPlayed)
+                        //{
+                        //    animationPlayed = true;
+                        //    //PlayAttackAnimation();
+                        //    ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
+                        //}
                     }
 
                     
 
                 }
-                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange)
+                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
                 {
                     runAway = true;
 
@@ -319,6 +243,7 @@ public class EnemyLongRange : GameBehaviour
     {
         if (!projectileShot)
         {
+            attackPS.Play();
 
             print("i shot");
             baseEnemy.attack.Play();

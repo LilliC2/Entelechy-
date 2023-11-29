@@ -45,12 +45,16 @@ public class BaseEnemy : GameBehaviour
     [Header("Animation and Visuals")]
 
     [SerializeField]
-    GameObject explosionAnimOB;
+    ParticleSystem[] bleedingSpots;
+
     [SerializeField]
-    GameObject enemyVisuals;
+    GameObject explosionAnimOB;
+    public GameObject enemyVisuals;
     public SpriteRenderer[] enemySpritesArray;
     [SerializeField]
     GameObject shadow;
+
+
 
     [Header("Children")]
     bool spawnItem = false;
@@ -61,13 +65,12 @@ public class BaseEnemy : GameBehaviour
     private void Start()
     {
         enemySpritesArray = GetComponentsInChildren<SpriteRenderer>();
-        enemyRnd = GetComponentInChildren<EnemyRandomisation>();
+        explosionAnimOB.SetActive(false);
 
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K)) ApplySlowness(3, 10);
 
 
         //HealthVisualIndicator(stats.health, stats.maxHP);
@@ -93,16 +96,10 @@ public class BaseEnemy : GameBehaviour
     {
         float currentHPpercent = _health / _maxHP;
 
-        float H, S, V;
+        if (currentHPpercent < 75 && currentHPpercent > 50 && bleedingSpots[0] != null) bleedingSpots[0].Play();
+        if (currentHPpercent < 50 && currentHPpercent > 25 && bleedingSpots[1] != null) bleedingSpots[1].Play();
+        if (currentHPpercent < 25 && bleedingSpots[2] != null) bleedingSpots[2].Play();
 
-        foreach (var sprite in enemySpritesArray)
-        {
-            Color.RGBToHSV(sprite.color, out H, out S, out V);
-
-            sprite.color = Color.HSVToRGB(H, currentHPpercent, V);
-        }
-
-        
     }
 
     public void FlipSprite(Vector3 _destination)
@@ -135,7 +132,7 @@ public class BaseEnemy : GameBehaviour
         if (stats.health > 0)
         {
             stats.health -= _dmg;
-
+            HealthVisualIndicator(stats.health, stats.maxHP);
             //print(enemyStats.stats.health);
         }
     }
@@ -279,6 +276,12 @@ public class BaseEnemy : GameBehaviour
     {
         if(!died)
         {
+
+            foreach (var PS in bleedingSpots)
+            {
+                PS.Stop();
+            }
+
             //death.Play();
             print("Enemy dies");
             died = true;
@@ -297,7 +300,6 @@ public class BaseEnemy : GameBehaviour
             //ooze animation
             explosionAnimOB.GetComponent<Animator>().SetTrigger("Boom");
 
-            //eye is for testing
             int rand = Random.Range(0, 6);
 
             print("Number gen when enemy dies " + rand);
@@ -332,6 +334,8 @@ public class BaseEnemy : GameBehaviour
                     break;
             }
 
+            //make death splatter
+            _EM.DeathSplatter(transform.position);
 
             //remove from list
             _EM.enemiesSpawned.Remove(this.gameObject);
