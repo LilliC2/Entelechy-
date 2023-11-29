@@ -165,7 +165,6 @@ public class EnemyLongRange : GameBehaviour
                     if(!runAway)
                     {
 
-                        attackPS.Play();
 
                         print("shooot");
                         agent.isStopped = true;
@@ -244,6 +243,7 @@ public class EnemyLongRange : GameBehaviour
     {
         if (!projectileShot)
         {
+            attackPS.Play();
 
             print("i shot");
             baseEnemy.attack.Play();

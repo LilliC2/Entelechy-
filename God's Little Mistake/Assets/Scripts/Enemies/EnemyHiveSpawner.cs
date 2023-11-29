@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using DG.Tweening;
 
 public class EnemyHiveSpawner : GameBehaviour
 {
@@ -8,6 +9,9 @@ public class EnemyHiveSpawner : GameBehaviour
     public float spawnInterval = 2.0f;
     public string playerTag = "Player";
     public float activationRange = 10.0f;
+
+    [SerializeField]
+    ParticleSystem spawningPS;
 
     private void Start()
     {
@@ -20,7 +24,9 @@ public class EnemyHiveSpawner : GameBehaviour
         {
             if (IsPlayerInRange())
             {
-                SpawnEnemy();
+                gameObject.transform.DOScale(new Vector3(0.3f, 0.3f, 0.3f), 1f);
+                ExecuteAfterSeconds(1, () => SpawnEnemy());
+
             }
             yield return new WaitForSeconds(spawnInterval);
         }
@@ -29,8 +35,8 @@ public class EnemyHiveSpawner : GameBehaviour
     private void SpawnEnemy()
     {
         // Spawn enemy at the position of the spawner.
-
-
+        gameObject.transform.DOScale(new Vector3(0.25f, 0.25f, 0.25f), 0.5f);
+        spawningPS.Play();
         var enemy = Instantiate(enemyPrefab, transform.position, Quaternion.identity);
         _EM.enemiesSpawned.Add(enemy);
 

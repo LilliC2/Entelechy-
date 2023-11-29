@@ -150,12 +150,12 @@ public class EnemyChomper : GameBehaviour
 
 
                 }
-                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < 2)
+                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
                 {
                     runningParticle.Stop();
                     enemyStats.stats.speed = normalSpeed;
 
-                    attackPS.Play();
+                    agent.isStopped = true;
 
                     PerformAttack(enemyStats.stats.fireRate);
 
@@ -217,6 +217,9 @@ public class EnemyChomper : GameBehaviour
 
             if (canAttack)
             {
+
+                attackPS.Play();
+
                 baseEnemy.attack.Play();
 
                 print("Attack");
