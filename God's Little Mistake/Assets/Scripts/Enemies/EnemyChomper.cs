@@ -31,7 +31,8 @@ public class EnemyChomper : GameBehaviour
     [SerializeField]
     GameObject runningParticleGO;
     [SerializeField]
-    TrailRenderer runningTrail;
+    ParticleSystem attackPS;
+
     [SerializeField]
     ParticleSystem runningParticle;
 
@@ -123,6 +124,7 @@ public class EnemyChomper : GameBehaviour
         switch (baseEnemy.enemyState)
         {
             case BaseEnemy.EnemyState.Patrolling:
+                runningParticle.Stop();
 
                 enemyStats.stats.speed = normalSpeed;
 
@@ -133,81 +135,30 @@ public class EnemyChomper : GameBehaviour
                 break;
             case BaseEnemy.EnemyState.Chase:
 
-                if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange +2)
+                if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange)
                 {
                     print("Chase player");
-                    if(!jumpingBack)
-                    {
-                        //print("Player RUn part");
-                        runningParticle.Play();
-                        runningTrail.enabled = true;
-                        enemyStats.stats.speed = normalSpeed;
+                    //print("Player RUn part");
+                    runningParticle.Play();
+                    enemyStats.stats.speed = jumpSpeed;
 
 
-                        agent.isStopped = false;
+                    agent.isStopped = false;
 
-                        agent.SetDestination(player.transform.position);
-                    }
+                    agent.SetDestination(player.transform.position);
 
 
 
                 }
-                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange &&
-                    Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange + 3)
-                {
-
-                    if(!jumpingBack)
-                    {
-
-                        
-                        enemyStats.stats.speed = jumpSpeed;
-
-
-                        print("Stop to attack");
-                        PerformAttack(baseEnemy.stats.fireRate);
-
-                        transform.LookAt(player.transform.position);
-                        if (!animationPlayed)
-                        {
-
-                            agent.isStopped = true;
-                            animationPlayed = true;
-                            //PlayAttackAnimation();
-
-                            agent.isStopped = false;
-                            agent.SetDestination(player.transform.position);
-
-                            //PerformAttack(enemyStats.stats.fireRate);
-                            //ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
-                        }
-                        
-                    }
-                   
-
-                }
-                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < attackRange)
+                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < 2)
                 {
                     runningParticle.Stop();
-                    runningTrail.enabled = false;
+                    enemyStats.stats.speed = normalSpeed;
 
+                    attackPS.Play();
 
-                    PauseMotion(1);
-                    ExecuteAfterSeconds(1, () => jumpingBack = true);
-                    
-                    if(jumpingBack)
-                    {
-                        enemyStats.stats.speed = normalSpeed;
+                    PerformAttack(enemyStats.stats.fireRate);
 
-
-                        print("should go back");
-                        agent.isStopped = false;
-                        Vector3 toPlayer = player.transform.position - transform.position;
-                        Vector3 targetPosition = toPlayer.normalized * -0.1f;
-
-                        agent.SetDestination(targetPosition);
-
-                        ExecuteAfterSeconds(3, () => jumpingBack = false);
-                    }
 
                 }
 
@@ -217,7 +168,6 @@ public class EnemyChomper : GameBehaviour
                 break;
             case BaseEnemy.EnemyState.Die:
                 runningParticle.Stop();
-                runningTrail.enabled = false;
                 baseEnemy.Die();
 
 

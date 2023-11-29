@@ -49,8 +49,7 @@ public class BaseEnemy : GameBehaviour
 
     [SerializeField]
     GameObject explosionAnimOB;
-    [SerializeField]
-    GameObject enemyVisuals;
+    public GameObject enemyVisuals;
     public SpriteRenderer[] enemySpritesArray;
     [SerializeField]
     GameObject shadow;
@@ -105,7 +104,6 @@ public class BaseEnemy : GameBehaviour
 
     public void FlipSprite(Vector3 _destination)
     {
-        if (enemyVisuals == null) print("Disapeared");
         bool positive = new();
         if(enemyVisuals.transform.localScale.x < 0) positive = false;
         else if (enemyVisuals.transform.localScale.x > 0) positive = true;

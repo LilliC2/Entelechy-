@@ -39,6 +39,8 @@ public class EnemyLongRange : GameBehaviour
     BaseEnemy baseEnemy;
     Vector3 target;
 
+    [SerializeField]
+    ParticleSystem attackPS;
 
     Animator frontAnim;
     [SerializeField]
@@ -162,6 +164,8 @@ public class EnemyLongRange : GameBehaviour
                 {
                     if(!runAway)
                     {
+
+                        attackPS.Play();
 
                         print("shooot");
                         agent.isStopped = true;
