@@ -196,7 +196,7 @@ public class EnemyShortRange : GameBehaviour
                     {
                         animationPlayed = true;
                         PlayAttackAnimation();
-                        //PerformAttack(enemyStats.stats.fireRate);
+                        PerformAttack(enemyStats.stats.fireRate);
                         ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
                     }
 
