@@ -41,12 +41,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     void Update()
     {
         //change red dot length
-       if(_PC.torsoItem.ID == 8 && !Input.GetButton("Fire2") && !overHeatCooldown)
-       {
+        if (_PC.torsoItem.ID == 8 && !Input.GetButton("Fire2") && !overHeatCooldown)
+        {
             print("passive cooldown on");
-            if(currentOverheat > 0) currentOverheat -= 0.5f;
+            if (currentOverheat > 0) currentOverheat -= 0.5f;
 
-       }
+        }
     }
 
     public void CallAttack(Item _item)
@@ -136,14 +136,15 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             currentOverheat -= 0.5f;
 
 
-            ExecuteAfterSeconds(resetOverheatTime, () => OverHeatCoolDown());
-        }
-        if (currentOverheat <= 0)
-        {
-            overHeatCooldown = false;
+            if (currentOverheat <= 0)
+            {
+                overHeatCooldown = false;
 
-            currentOverheat = 0;
+                currentOverheat = 0;
+            }
+            else ExecuteAfterSeconds(resetOverheatTime, () => OverHeatCoolDown());
         }
+       
 
 
     }

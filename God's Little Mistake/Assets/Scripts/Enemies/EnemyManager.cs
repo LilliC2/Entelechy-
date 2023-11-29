@@ -10,6 +10,9 @@ public class EnemyManager : Singleton<EnemyManager>
 
     public List<GameObject> enemiesSpawned;
 
+    public Sprite[] deathSplatter;
+    public GameObject deathSplattergObj;
+
 
     // Start is called before the first frame update
     void Start()
@@ -24,6 +27,18 @@ public class EnemyManager : Singleton<EnemyManager>
         {
             _GM.isLevelCleared = true;
         }
+    }
+
+
+    public void DeathSplatter(Vector3 _pos)
+    {
+        GameObject splatter = Instantiate(deathSplattergObj, _pos, Quaternion.identity);
+        splatter.transform.localEulerAngles = new Vector3(90, 0, Random.Range(0, 360));
+        float newScale = Random.Range(0.3f, 1);
+        splatter.transform.localScale = new Vector3(newScale, newScale, newScale);
+        splatter.GetComponent<SpriteRenderer>().sprite = deathSplatter[Random.Range(0, 1)];
+        Color color = new Color(Random.Range(0, 1), 1, Random.Range(0, 1), 1);
+        splatter.GetComponent<SpriteRenderer>().color = color;
     }
 
     public void SpawnEnemiesForLevel()

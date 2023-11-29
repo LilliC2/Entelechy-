@@ -55,6 +55,8 @@ public class BaseEnemy : GameBehaviour
     [SerializeField]
     GameObject shadow;
 
+
+
     [Header("Children")]
     bool spawnItem = false;
     bool spawnHealPool = false;
@@ -64,14 +66,12 @@ public class BaseEnemy : GameBehaviour
     private void Start()
     {
         enemySpritesArray = GetComponentsInChildren<SpriteRenderer>();
-        enemyRnd = GetComponentInChildren<EnemyRandomisation>();
         explosionAnimOB.SetActive(false);
 
     }
 
     private void Update()
     {
-        if (Input.GetKeyDown(KeyCode.K)) ApplySlowness(3, 10);
 
 
         //HealthVisualIndicator(stats.health, stats.maxHP);
@@ -101,11 +101,11 @@ public class BaseEnemy : GameBehaviour
         if (currentHPpercent < 50 && currentHPpercent > 25 && bleedingSpots[1] != null) bleedingSpots[1].Play();
         if (currentHPpercent < 25 && bleedingSpots[2] != null) bleedingSpots[2].Play();
 
-        
     }
 
     public void FlipSprite(Vector3 _destination)
     {
+        if (enemyVisuals == null) print("Disapeared");
         bool positive = new();
         if(enemyVisuals.transform.localScale.x < 0) positive = false;
         else if (enemyVisuals.transform.localScale.x > 0) positive = true;
@@ -302,7 +302,6 @@ public class BaseEnemy : GameBehaviour
             //ooze animation
             explosionAnimOB.GetComponent<Animator>().SetTrigger("Boom");
 
-            //eye is for testing
             int rand = Random.Range(0, 6);
 
             print("Number gen when enemy dies " + rand);
@@ -337,6 +336,8 @@ public class BaseEnemy : GameBehaviour
                     break;
             }
 
+            //make death splatter
+            _EM.DeathSplatter(transform.position);
 
             //remove from list
             _EM.enemiesSpawned.Remove(this.gameObject);
