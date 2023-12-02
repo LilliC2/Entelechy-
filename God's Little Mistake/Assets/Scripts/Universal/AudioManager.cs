@@ -32,6 +32,10 @@ public class AudioManager : Singleton<AudioManager>
     [Header("Nubs")]
     public AudioSource nubsAbility;
 
+    [Header("Tripod")]
+    public AudioSource tripodAbility;
+
+
     public AudioClip playerHover;
     public AudioClip playerSlugLegs;
     public AudioClip playerPeaShoot;

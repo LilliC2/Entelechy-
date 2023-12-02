@@ -137,6 +137,7 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
     public void TripodAbility()
     {
         Dash(5, 0.3f);
+        _AM.tripodAbility.Play();
 
         _PE.TripodVFX();
 
