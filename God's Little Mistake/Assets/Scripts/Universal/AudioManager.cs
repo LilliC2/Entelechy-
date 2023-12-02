@@ -24,6 +24,11 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip[] playerDeathSounds;
 
     [Header("Items")]
+
+    [Header("Sabertooth")]
+    public AudioSource sabretoothCatch;
+    public AudioSource sabretoothThrow;
+
     public AudioClip playerHover;
     public AudioClip playerSlugLegs;
     public AudioClip playerPeaShoot;

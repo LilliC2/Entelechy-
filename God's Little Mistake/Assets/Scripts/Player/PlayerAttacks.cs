@@ -323,8 +323,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     public void SabertoothAttack()
     {
+
         if(returned)
         {
+            _AM.sabretoothThrow.Play();
+
+
             returned = false;
             BoomerangProjectile(_IM.itemDataBase[2].projectilePF, _IM.itemDataBase[2].projectileSpeed, _IM.itemDataBase[2].firerate, _IM.itemDataBase[2].projectileRange, _PE.sabertoothPS);
             //ExecuteAfterSeconds(1, () => returned = true);
