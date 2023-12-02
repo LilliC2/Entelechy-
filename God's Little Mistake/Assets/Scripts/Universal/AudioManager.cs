@@ -29,6 +29,9 @@ public class AudioManager : Singleton<AudioManager>
     public AudioSource sabretoothCatch;
     public AudioSource sabretoothThrow;
 
+    [Header("Nubs")]
+    public AudioSource nubsAbility;
+
     public AudioClip playerHover;
     public AudioClip playerSlugLegs;
     public AudioClip playerPeaShoot;
