@@ -4,19 +4,26 @@ using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
+
+    [Header("Universal Items")]
+    public AudioClip equipItem;
+    public AudioClip unequipItem;
+    public AudioSource audioManagerSourceItem;
+
+    [Header("Missy")]
     [SerializeField]
     AudioSource audioManagerSourcePlayerHurt;
     [SerializeField]
     AudioSource audioManagerSourcePlayerDead;
-    public AudioSource audioManagerSourceItem;
     public AudioSource playerAttackAudioSource;
+    public AudioSource playerMovement;
+    public AudioSource playerThud;
+    public AudioClip playerDeathExplosionSound;
+    public AudioClip playerSquishyStep;
     public AudioClip[] playerHurtSounds;
     public AudioClip[] playerDeathSounds;
 
-    public AudioSource playerMovement;
-
-    public AudioClip playerDeathExplosionSound;
-    public AudioClip playerSquishyStep;
+    [Header("Items")]
     public AudioClip playerHover;
     public AudioClip playerSlugLegs;
     public AudioClip playerPeaShoot;
@@ -25,7 +32,6 @@ public class AudioManager : Singleton<AudioManager>
     public AudioClip playerBigEyesExplosion;
     public AudioClip playerSlugEyes;
     public AudioClip playerRamHit;
-    public AudioSource playerThud;
     // Start is called before the first frame update
     void Start()
     {
