@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 8131078138101766082}
   - component: {fileID: 6149075988073239519}
   - component: {fileID: -3370031360521855638}
-  - component: {fileID: 7089329513668198043}
+  - component: {fileID: 8925095067382274345}
   m_Layer: 0
   m_Name: Item
   m_TagString: Item Drop
@@ -72,28 +72,25 @@ MonoBehaviour:
     itemName: Chicken Beak
     ID: 13
     lvl: 0
-    inSlot: -1
-    category: 1
     segment: 0
-    attackType: 0
-    itemType: 0
-    hasActiveAbility: 0
     currencyValue: 0
     active: 0
     dmg: 1
     firerate: 0
-    critX: 0
     critChance: 2
-    projectile_range: 0
-    melee_range: 0
+    projectileRange: 0
     projectile: 0
     projectileSpeed: 5
     projectilePF: {fileID: 7752005100104120040, guid: a87cb4239dac660478ead56179c65ae9, type: 3}
     movementSpeed: 0
     modifier: 0
     modifierID: 0
+    cooldownAbility: 0
+    abilityName: 
+    abilityDescription: 
     icon: {fileID: 21300000, guid: 9bdc47d447b98b34f862c99f0e6ff591, type: 3}
     pauseIcon: {fileID: 0}
+    staticTempSprite: {fileID: 0}
     avatarPrefabFrontLeft: {fileID: 6746399273307538296, guid: e1d04f8ecd7742e40b66da4fd27cca07, type: 3}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 2944755447898596729, guid: 6d922066a28d80e4cbd9aa6957658322, type: 3}
@@ -104,83 +101,107 @@ MonoBehaviour:
   anim1: {fileID: 0}
   anim2: {fileID: 0}
   statPop: {fileID: 0}
---- !u!114 &7089329513668198043
-MonoBehaviour:
+  holdEFill: {fileID: 0}
+  startTimer: 0
+  holdTimer: 2
+  isTiming: 0
+  glowingHold: {fileID: 0}
+--- !u!82 &8925095067382274345
+AudioSource:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5956623696610171656}
   m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 32c93f2e497511b41ae79b335ca418f4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  selectedItem:
-    itemName: 
-    ID: 0
-    lvl: 0
-    inSlot: -1
-    category: 0
-    segment: 0
-    attackType: 0
-    itemType: 0
-    hasActiveAbility: 0
-    currencyValue: 0
-    active: 0
-    dmg: 0
-    firerate: 0
-    critX: 0
-    critChance: 0
-    projectile_range: 0
-    melee_range: 0
-    projectile: 0
-    projectileSpeed: 0
-    projectilePF: {fileID: 0}
-    movementSpeed: 0
-    modifier: 0
-    modifierID: 0
-    icon: {fileID: 0}
-    pauseIcon: {fileID: 0}
-    avatarPrefabFrontLeft: {fileID: 0}
-    avatarPrefabFrontRight: {fileID: 0}
-    avtarPrefabLeft: {fileID: 0}
-    avtarPrefabRight: {fileID: 0}
-    avtarPrefabBackLeft: {fileID: 0}
-    avtarPrefabBackRight: {fileID: 0}
-  itemGO: {fileID: 0}
-  previousItem:
-    itemName: 
-    ID: 0
-    lvl: 0
-    inSlot: -1
-    category: 0
-    segment: 0
-    attackType: 0
-    itemType: 0
-    hasActiveAbility: 0
-    currencyValue: 0
-    active: 0
-    dmg: 0
-    firerate: 0
-    critX: 0
-    critChance: 0
-    projectile_range: 0
-    melee_range: 0
-    projectile: 0
-    projectileSpeed: 0
-    projectilePF: {fileID: 0}
-    movementSpeed: 0
-    modifier: 0
-    modifierID: 0
-    icon: {fileID: 0}
-    pauseIcon: {fileID: 0}
-    avatarPrefabFrontLeft: {fileID: 0}
-    avatarPrefabFrontRight: {fileID: 0}
-    avtarPrefabLeft: {fileID: 0}
-    avtarPrefabRight: {fileID: 0}
-    avtarPrefabBackLeft: {fileID: 0}
-    avtarPrefabBackRight: {fileID: 0}
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: -7799258030970568552, guid: c08b6d80cd53d4648b1e29553ca1a356, type: 2}
+  m_audioClip: {fileID: 8300000, guid: b34dbecc0572c2240ae362f528bbbde6, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 1
+  m_Pitch: 1
+  Loop: 0
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 1
+  MaxDistance: 500
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
 --- !u!1 &8504357115592238806
 GameObject:
   m_ObjectHideFlags: 0
