@@ -35,6 +35,12 @@ public class AudioManager : Singleton<AudioManager>
     [Header("Tripod")]
     public AudioSource tripodAbility;
 
+    [Header("Pea Shooter")]
+    public AudioSource peaShooterAttack;
+
+    [Header("Squtio")]
+    public AudioSource SquitoAttack;
+
 
     public AudioClip playerHover;
     public AudioClip playerSlugLegs;
