@@ -22,7 +22,6 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
 
     [Header("Torso Fire")]
     public bool rightHasFired;
-    public bool rightHasHeat;
     public bool rightFireFilling;
     public GameObject rightFillObject;
     public Image rightFirerate;
@@ -33,6 +32,10 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     public float rightFireTotal;
     public float rightHeatCurrent;
     public float rightHeatTotal;
+
+    [Header("Torso Heat")]
+    public bool rightHasHeat;
+    public bool rHeatActive;
 
 
     // Start is called before the first frame update
@@ -76,38 +79,41 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
             StartCoroutine(ProcessRightFire());
         }
 
-        //Left overheat fill
-        if (leftHasHeat)
+        if (rightHasFired && !rightFireFilling)
         {
-
-            if (leftHeatCurrent > 0)
-            {
-                leftHeatCurrent -= Time.deltaTime;
-                leftOverheat.fillAmount = leftHeatCurrent / leftHeatTotal;
-                Debug.Log(rightFirerate.fillAmount);
-            }
-            if (leftHeatCurrent <= 0)
-            {
-                leftHasHeat = false;
-            }
+            StartCoroutine(ProcessRightFire());
         }
 
-        //Right overheat fill
-        if (rightHasHeat)
-        {
+        //if(Input.GetButtonDown("Fire2") && rightHasHeat && _PAtk.overHeatCooldown == false)
+        //{
+        //    rHeatActive = true;
+        //}
 
-            if (rightHeatCurrent > 0)
-            {
-                rightHeatCurrent -= Time.deltaTime;
-                rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
-                Debug.Log(rightFirerate.fillAmount);
-            }
-            if (rightHeatCurrent <= 0)
-            {
-                rightHasFired = false;
-            }
+        //if (Input.GetButtonUp("Fire2") && rightHasHeat)
+        //{
+        //    rHeatActive = false;
+        //}
 
-        }
+        //if(rHeatActive)
+        //{
+        //    if (rightHeatCurrent < rightHeatTotal)
+        //    {
+        //        rightHeatCurrent += Time.deltaTime;
+        //        rightOverheat.fillAmount = rightHeatCurrent / rightFireTotal;
+        //    }
+        //    else
+        //    {
+        //        rHeatActive = false;
+        //    }
+        //}
+        //else
+        //{
+        //    if (rightHeatCurrent > 0)
+        //    {
+        //        rightHeatCurrent -= Time.deltaTime;
+        //        rightOverheat.fillAmount = rightHeatCurrent / rightFireTotal;
+        //    }
+        //}
     }
 
     public void SetLeftAttack(float firerate)
@@ -124,34 +130,48 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
         rightFireTotal = firerate;
     }
 
-    public void SetRightHeat(float firerate)
-    {
-        rightHasHeat = true;
-        rightFirerate.fillAmount = 1;
-        rightHeatTotal = firerate;
-        rightHeatCurrent = 0;
-    }
+    //public void SetRightHeat(float firerate)
+    //{
+    //    rightHasHeat = true;
+    //    rightFirerate.fillAmount = 1;
+    //    rightHeatTotal = firerate;
+    //    rightHeatCurrent = 0;
+    //}
 
-    public IEnumerator HeatRight()
-    {
-        if(_PAtk.overHeatCooldown)
-        {
-            rightFireFilling = true;
-            
+    //public IEnumerator HeatRight()
+    //{
+    //    //if(_PAtk.overHeatCooldown)
+    //    //{
+    //    //    rightFireFilling = true;
 
-            while(rightHeatCurrent > 0)
-            {
-                rightMouseHeat.SetActive(true);
-                leftFirerate.fillAmount = 1;
-                rightHeatCurrent += Time.deltaTime;
-                rightOverheat.fillAmount = rightHeatCurrent / rightFireTotal;
-                yield return null;
-            }
 
-            leftFireFilling = false;
-            rightMouseHeat.SetActive(false);
-        }
-    }
+    //    //    while(rightHeatCurrent < rightHeatTotal)
+    //    //    {
+    //    //        rightMouseHeat.SetActive(true);
+    //    //        leftFirerate.fillAmount = 1;
+    //    //        rightHeatCurrent += Time.deltaTime;
+    //    //        rightOverheat.fillAmount = rightHeatCurrent / rightFireTotal;
+    //    //        yield return null;
+    //    //    }
+
+    //    //    leftFireFilling = false;
+    //    //    rightMouseHeat.SetActive(false);
+    //    //}
+
+    //    rightHasHeat = true;
+
+
+    //    while (rightHeatCurrent < rightHeatTotal)
+    //    {
+    //        leftFirerate.fillAmount = 1;
+    //        rightHeatCurrent += Time.deltaTime;
+    //        rightOverheat.fillAmount = rightHeatCurrent / rightFireTotal;
+    //        yield return null;
+    //    }
+
+    //    leftFireFilling = false;
+    //    rightMouseHeat.SetActive(true);
+    //}
 
     public IEnumerator ProcessLeftFire()
     {
@@ -159,9 +179,9 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
 
         while (leftFireCurrent < leftFireTotal)
         {
-            rightHeatCurrent -= Time.deltaTime;
-            rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
-            Debug.Log(rightFirerate.fillAmount);
+            leftMouseDis.SetActive(true);
+            leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
+            leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
             yield return null;
         }
 
