@@ -61,12 +61,12 @@ public class BaseEnemy : GameBehaviour
     bool spawnHealPool = false;
     bool died = false;
     public GameObject healPool;
+    public Animator childAnim;
 
     private void Start()
     {
         enemySpritesArray = GetComponentsInChildren<SpriteRenderer>();
         explosionAnimOB.SetActive(false);
-
     }
 
     private void Update()
@@ -127,10 +127,13 @@ public class BaseEnemy : GameBehaviour
     public void Hit(float _dmg)
     {
         //  hurt.Play();
+        
 
 
         if (stats.health > 0)
         {
+            if(childAnim !=null)childAnim.SetTrigger("Hurt");
+
             stats.health -= _dmg;
             HealthVisualIndicator(stats.health, stats.maxHP);
             //print(enemyStats.stats.health);
@@ -276,7 +279,7 @@ public class BaseEnemy : GameBehaviour
     {
         if(!died)
         {
-
+            childAnim.SetTrigger("Hurt");
             foreach (var PS in bleedingSpots)
             {
                 PS.Stop();
