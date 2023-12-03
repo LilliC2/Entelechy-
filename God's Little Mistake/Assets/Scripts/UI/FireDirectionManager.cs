@@ -128,25 +128,29 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     {
         rightHasHeat = true;
         rightFirerate.fillAmount = 1;
-        rightHeatCurrent = firerate;
+        rightHeatTotal = firerate;
+        rightHeatCurrent = 0;
     }
 
     public IEnumerator HeatRight()
     {
-        leftFireFilling = true;
-
-        while (leftHeatCurrent > 0)
+        if(_PAtk.overHeatCooldown)
         {
-            leftMouseDis.SetActive(true);
-            leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
-            leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
-            yield return null;
+            rightFireFilling = true;
+            
+
+            while(rightHeatCurrent > 0)
+            {
+                rightMouseHeat.SetActive(true);
+                leftFirerate.fillAmount = 1;
+                rightHeatCurrent += Time.deltaTime;
+                rightOverheat.fillAmount = rightHeatCurrent / rightFireTotal;
+                yield return null;
+            }
+
+            leftFireFilling = false;
+            rightMouseHeat.SetActive(false);
         }
-
-        leftMouseDis.SetActive(false);
-        leftHasFired = false; // Set to false only when it reaches the total
-
-        leftFireFilling = false;
     }
 
     public IEnumerator ProcessLeftFire()

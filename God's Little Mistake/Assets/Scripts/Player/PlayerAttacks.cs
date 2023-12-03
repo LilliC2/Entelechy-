@@ -20,7 +20,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     bool projectileShot3;
 
     [Header("LMG Overheat")]
-    bool overHeatCooldown;
+    public bool overHeatCooldown;
     [SerializeField]
     float maxOverheat;
     [SerializeField]
@@ -152,10 +152,11 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     {
         LMGAttack(_IM.itemDataBase[8].projectilePF, _IM.itemDataBase[8].projectileSpeed, _IM.itemDataBase[8].firerate, _IM.itemDataBase[8].projectileRange);
 
-        //if (_FDM.rightFireFilling == false)
-        //{
-        //    _FDM.SetRightAttack(_IM.itemDataBase[8].firerate);
-        //}
+
+        if (_FDM.rightFireFilling == false)
+        {
+            _FDM.SetRightHeat(maxOverheat);
+        }
     }
 
     public void LMGAttack(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
