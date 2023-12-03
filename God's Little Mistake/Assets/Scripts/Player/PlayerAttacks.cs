@@ -95,7 +95,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 {
                     print("LMG");
                     UrchinAttack();
-                    //_FDM.rightHasHeat = true;
+                    _FDM.rightHasHeat = true;
                 }
 
                 
@@ -152,7 +152,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     public void UrchinAttack()
     {
         LMGAttack(_IM.itemDataBase[8].projectilePF, _IM.itemDataBase[8].projectileSpeed, _IM.itemDataBase[8].firerate, _IM.itemDataBase[8].projectileRange);
-            //_FDM.SetRightHeat(maxOverheat);
+            _FDM.SetRightHeat(maxOverheat);
         
     }
 
