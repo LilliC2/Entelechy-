@@ -81,6 +81,7 @@ public class PlayerEffects : Singleton<PlayerEffects>
 
         if (updateRedDot)
         {
+            print("update red dot");
             redDot.SetPosition(1, new Vector3(0, 0, Mathf.Lerp(0, _IM.itemDataBase[4].projectileRange, 1)));
             redDotGO.transform.localEulerAngles = new Vector3(0, _PC.directional.transform.eulerAngles.y, 0);
         }
