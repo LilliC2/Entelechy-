@@ -344,7 +344,7 @@ public class BaseEnemy : GameBehaviour
             }
 
             //make death splatter
-            _EM.DeathSplatter(transform.position);
+            _EM.DeathSplatter(new Vector3(transform.position.x, -1.64f, transform.position.z));
 
             //remove from list
             _EM.enemiesSpawned.Remove(this.gameObject);
