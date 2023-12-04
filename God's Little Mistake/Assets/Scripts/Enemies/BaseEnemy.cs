@@ -325,15 +325,21 @@ public class BaseEnemy : GameBehaviour
 
                     break;
                 default:
-                    if (!spawnItem)
+                    //ensure butt bugs dont spawn items
+                    if(!gameObject.name.Contains("Butt"))
                     {
-                        spawnItem = true;
-                        GameObject item = Instantiate(_IG.GenerateItem(), gameObject.transform.position, Quaternion.identity);
+                        if (!spawnItem)
+                        {
+                            spawnItem = true;
+                            GameObject item = Instantiate(_IG.GenerateItem(), gameObject.transform.position, Quaternion.identity);
 
-                        item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+                            item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
-                        print(item.name);
+                            print(item.name);
+                        }
                     }
+
+                    
                     break;
             }
 

@@ -243,7 +243,7 @@ Transform:
   m_GameObject: {fileID: 8524524292363796634}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -3.36, y: 0.507, z: -3.94}
-  m_LocalScale: {x: 0.02398688, y: 0.02398688, z: 0.02398688}
+  m_LocalScale: {x: 0.01398688, y: 0.01398688, z: 0.01398688}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 5689038564465464273}
@@ -1165,6 +1165,22 @@ PrefabInstance:
     - target: {fileID: 5224981731957040805, guid: 76e008ead12bd4b4b861cc0c243caf6f, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174505779132686940, guid: 76e008ead12bd4b4b861cc0c243caf6f, type: 3}
+      propertyPath: InitialModule.startSize.scalar
+      value: 0.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174505779132686940, guid: 76e008ead12bd4b4b861cc0c243caf6f, type: 3}
+      propertyPath: InitialModule.startSize.minScalar
+      value: 0.3
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174505779132686940, guid: 76e008ead12bd4b4b861cc0c243caf6f, type: 3}
+      propertyPath: InitialModule.startSpeed.minScalar
+      value: 15
+      objectReference: {fileID: 0}
+    - target: {fileID: 9174505779132686940, guid: 76e008ead12bd4b4b861cc0c243caf6f, type: 3}
+      propertyPath: InitialModule.startSpeed.minMaxState
+      value: 3
       objectReference: {fileID: 0}
     m_RemovedComponents: []
     m_RemovedGameObjects: []

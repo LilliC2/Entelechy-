@@ -25,24 +25,17 @@ public class ItemGeneration : Singleton<ItemGeneration>
 
         //create list of all possible item drops
         //List<Item> possibleDrops;
-        
-        
+        int rand = 0;
+
+        rand = Random.Range(0, _IM.itemDataBase.Length);
+        if (_IM.itemDataBase[rand].ID == 10 || _IM.itemDataBase[rand].ID == 11)
+            rand = Random.Range(0, _IM.itemDataBase.Length);
 
         //pick a random possible drop
-        int rand = Random.Range(0, _IM.itemDataBase.Length);
 
         Item itemSpawned = _IM.itemDataBase[rand];
 
-        //scaling section here
-        /*Here we would edit the item values here, so based on level and etc. the prefab of the item would be saved on this too
-         */
-
-        //add item to inscene list
-        //_ISitemD.inSceneItemDataBase.Add(itemSpawned);
-
-        //give item inscene id
-
-        //give item script inscene id
+        
         itemTemp.GetComponentInChildren<ItemIdentifier>().itemInfo = itemSpawned;
         
         
