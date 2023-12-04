@@ -99,8 +99,8 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
         {
             if (rightHeatCurrent < rightHeatTotal)
             {
-                rightHeatCurrent += Time.deltaTime;
-                rightOverheat.fillAmount = rightHeatCurrent / rightFireTotal;
+                rightHeatCurrent += Time.deltaTime * 4.99f;
+                rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
                 rHeatFilling = true;
             }
             else
@@ -108,19 +108,20 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
                 rHeatActive = false;
             }
         }
-        else
-        {
-            if (rightHeatCurrent < rightHeatTotal)
-            {
-                rightHeatCurrent -= Time.deltaTime;
-                rightOverheat.fillAmount = rightHeatCurrent / rightFireTotal;
-                rHeatFilling = true;
-            }
-        }
 
-        if(rightHeatCurrent == 0) 
+        if (!rHeatActive)
         {
-            rHeatFilling = false;  
+                rightHeatCurrent -= Time.deltaTime * 2.2f;
+                rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
+                rHeatFilling = true;
+
+
+            if(rightHeatCurrent <= 0)
+            {
+                rightHeatCurrent = 0;
+                rightOverheat.fillAmount = 0;
+                rHeatFilling = false;
+            }
         }
     }
 
