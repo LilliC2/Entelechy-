@@ -193,11 +193,11 @@ public class GameManager : Singleton<GameManager>
         //FLOOR TEMP
         //instantiate new prefab
 
-        var randomLevel = Random.Range(0, 2); // last digit excluded
+        var randomLevel = Random.Range(2, 5); // last digit excluded
 
         //will change to change to Environment_Floor_ later //randomLevel changed to 2
-        currentLevel = Instantiate(Resources.Load("Environment_Floor_2", typeof(GameObject)), levelParent) as GameObject;
-        AddObjectsToMaskObject(currentLevel);
+        currentLevel = Instantiate(Resources.Load("Environment_Floor_" + randomLevel, typeof(GameObject)), levelParent) as GameObject;
+        //AddObjectsToMaskObject(currentLevel);
         //find beginning room
 
         levelStartRoom = currentLevel.transform.Find("BeginningRoom");

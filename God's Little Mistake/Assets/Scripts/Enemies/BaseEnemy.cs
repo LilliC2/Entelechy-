@@ -279,7 +279,7 @@ public class BaseEnemy : GameBehaviour
     {
         if(!died)
         {
-            childAnim.SetTrigger("Hurt");
+            if(childAnim != null)childAnim.SetTrigger("Hurt");
             foreach (var PS in bleedingSpots)
             {
                 PS.Stop();
