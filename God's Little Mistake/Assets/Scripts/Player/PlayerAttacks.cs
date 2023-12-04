@@ -264,7 +264,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 foreach (var bullet in bulletInstances)
                 {
-                    bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-1f, 1f), Vector3.forward.y, Vector3.forward.z) * Random.Range(_projectileSpeed-1f, _projectileSpeed));
+                    bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-1f, 1f), Vector3.forward.y, Vector3.forward.z) * Random.Range(_projectileSpeed-2f, _projectileSpeed+2f));
                     bullet.GetComponent<RangeDetector>().range = _range;
                     bullet.GetComponent<RangeDetector>().positionShotFrom = _PC.torsoFiringPoint.transform.position;
                     Mathf.Clamp(bullet.transform.position.y, 0, 0);
