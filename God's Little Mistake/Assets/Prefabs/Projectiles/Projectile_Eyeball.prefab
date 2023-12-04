@@ -121,6 +121,7 @@ GameObject:
   - component: {fileID: 7203876690098025589}
   - component: {fileID: 296095155406730445}
   - component: {fileID: 1221330813449595208}
+  - component: {fileID: 1711588799059781591}
   m_Layer: 13
   m_Name: Projectile_Eyeball
   m_TagString: Projectile
@@ -481,6 +482,21 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1711588799059781591
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8524524292363796634}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 44db4d4ff76383e40acc6faea5906328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  enemy:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1001 &5210505782597831904
 PrefabInstance:
   m_ObjectHideFlags: 0

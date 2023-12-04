@@ -351,7 +351,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
             GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
 
-            print(_PC.directional.transform.forward);
+            //print(_PC.directional.transform.forward);
 
             _PC.torsoFiringPoint.transform.localEulerAngles = _PC.directional.transform.localEulerAngles;
 
