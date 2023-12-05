@@ -85,44 +85,44 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
             StartCoroutine(ProcessRightFire());
         }
 
-        if (Input.GetButtonDown("Fire2") && rightHasHeat && _PAtk.overHeatCooldown == false)
-        {
-            rHeatActive = true;
-        }
+        //if (Input.GetButtonDown("Fire2") && rightHasHeat && _PAtk.overHeatCooldown == false)
+        //{
+        //    rHeatActive = true;
+        //}
 
-        if (Input.GetButtonUp("Fire2") && rightHasHeat)
-        {
-            rHeatActive = false;
-        }
+        //if (Input.GetButtonUp("Fire2") && rightHasHeat)
+        //{
+        //    rHeatActive = false;
+        //}
 
-        if (rHeatActive)
-        {
-            if (rightHeatCurrent < rightHeatTotal)
-            {
-                rightHeatCurrent += Time.deltaTime * 4.99f;
-                rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
-                rHeatFilling = true;
-            }
-            else
-            {
-                rHeatActive = false;
-            }
-        }
+        //if (rHeatActive)
+        //{
+        //    if (rightHeatCurrent < rightHeatTotal)
+        //    {
+        //        rightHeatCurrent += Time.deltaTime * 4.99f;
+        //        rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
+        //        rHeatFilling = true;
+        //    }
+        //    else
+        //    {
+        //        rHeatActive = false;
+        //    }
+        //}
 
-        if (!rHeatActive)
-        {
-                rightHeatCurrent -= Time.deltaTime * 2.2f;
-                rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
-                rHeatFilling = true;
+        //if (!rHeatActive)
+        //{
+        //        rightHeatCurrent -= Time.deltaTime * 2.2f;
+        //        rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
+        //        rHeatFilling = true;
 
 
-            if(rightHeatCurrent <= 0)
-            {
-                rightHeatCurrent = 0;
-                rightOverheat.fillAmount = 0;
-                rHeatFilling = false;
-            }
-        }
+        //    if(rightHeatCurrent <= 0)
+        //    {
+        //        rightHeatCurrent = 0;
+        //        rightOverheat.fillAmount = 0;
+        //        rHeatFilling = false;
+        //    }
+        //}
     }
 
     public void SetLeftAttack(float firerate)
