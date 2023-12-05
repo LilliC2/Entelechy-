@@ -193,11 +193,11 @@ public class GameManager : Singleton<GameManager>
         //FLOOR TEMP
         //instantiate new prefab
 
-        var randomLevel = Random.Range(0, 2); // last digit excluded
+        var randomLevel = Random.Range(2, 3); // last digit excluded
 
         //will change to change to Environment_Floor_ later //randomLevel changed to 2
-        currentLevel = Instantiate(Resources.Load("Environment_Floor_2", typeof(GameObject)), levelParent) as GameObject;
-
+        currentLevel = Instantiate(Resources.Load("Environment_Floor_" + randomLevel, typeof(GameObject)), levelParent) as GameObject;
+        //AddObjectsToMaskObject(currentLevel);
         //find beginning room
 
         levelStartRoom = currentLevel.transform.Find("BeginningRoom");
@@ -232,6 +232,24 @@ public class GameManager : Singleton<GameManager>
         _EM.SpawnEnemiesForLevel();
 
     }
+    
+    void AddObjectsToMaskObject(GameObject currentLevel)
+    {
+        GameObject props = currentLevel.transform.Find("Props").gameObject;
+
+        for (int i = 0; i < props.transform.childCount; i++)
+        {
+            var currentProp = props.transform.GetChild(i);
+
+            if (currentProp.name.Contains("Huge") || currentProp.name.Contains("Hanging"))
+            {
+                _Mask.ObjMasked.Add(props.transform.GetChild(i).gameObject);
+            }
+           
+        }
+
+        _Mask.UpdateMaskedObjects();
+    }
 
     void ClearPreviousLevel()
     {
@@ -240,6 +258,8 @@ public class GameManager : Singleton<GameManager>
         {
             foreach (Transform child in levelParent.transform)
             {
+                if (_Mask.ObjMasked.Contains(child.gameObject)) _Mask.ObjMasked.Remove(child.gameObject);
+
                 Destroy(child.gameObject);
             }
 

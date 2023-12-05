@@ -74,7 +74,6 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
             case 4: //Squito
 
-                print("Lob");
 
                 SquitoAttack();
 
@@ -264,7 +263,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 foreach (var bullet in bulletInstances)
                 {
-                    bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-1f, 1f), Vector3.forward.y, Vector3.forward.z) * Random.Range(_projectileSpeed-1f, _projectileSpeed));
+                    bullet.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-1f, 1f), Vector3.forward.y, Vector3.forward.z) * Random.Range(_projectileSpeed-2f, _projectileSpeed+2f));
                     bullet.GetComponent<RangeDetector>().range = _range;
                     bullet.GetComponent<RangeDetector>().positionShotFrom = _PC.torsoFiringPoint.transform.position;
                     Mathf.Clamp(bullet.transform.position.y, 0, 0);
@@ -314,7 +313,6 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         ExecuteAfterSeconds(0.5f,()=> BasicFireProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange, _PE.explosionPS));
         if (_FDM.leftFireFilling == false)
         {
-            _PE.SquitoRedDot();
 
             _FDM.SetLeftAttack(_IM.itemDataBase[4].firerate);
         }
@@ -352,7 +350,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
             GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
 
-            print(_PC.directional.transform.forward);
+            //print(_PC.directional.transform.forward);
 
             _PC.torsoFiringPoint.transform.localEulerAngles = _PC.directional.transform.localEulerAngles;
 
@@ -438,6 +436,54 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             {
                 print("Fire");
                 //particle system
+
+                if (_PS != null) _PS.Play();
+
+                //Spawn bullet and apply force in the direction of the mouse
+                //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
+                GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
+
+                //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
+                bullet.GetComponent<RangeDetector>().range = _range;
+                bullet.GetComponent<RangeDetector>().positionShotFrom = _PC.transform.position;
+
+                //knockbackActive = true;
+                //knockbackStartTime = Time.time;
+                Mathf.Clamp(bullet.transform.position.y, 0, 0);
+
+
+
+                //Controls the firerate, player can shoot another bullet after a certain amount of time
+                projectileShot = true;
+
+                ExecuteAfterSeconds(_firerate, () => projectileShot = false);
+            }
+            print("FIRE PROJECTILE");
+
+        }
+    } 
+    
+    public void SquitoProjectileHead(GameObject _prefab, float _projectileSpeed, float _firerate, float _range, ParticleSystem _PS)
+    {
+
+
+        Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
+        Vector3 cursorRay = Camera.main.ScreenPointToRay(Input.mousePosition).direction;
+        Vector3 flatAimTarget = screenPoint + cursorRay / Mathf.Abs(cursorRay.y) * Mathf.Abs(screenPoint.y - transform.position.y);
+
+        Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);
+        RaycastHit hit;
+
+        if (Physics.Raycast(ray, out hit))
+        {
+            _PC.headFiringPoint.transform.LookAt(hit.point);
+
+            if (!projectileShot)
+            {
+                print("Fire");
+                //particle system
+                _PE.SquitoRedDot();
 
                 if (_PS != null) _PS.Play();
 

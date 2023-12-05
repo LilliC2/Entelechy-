@@ -31,6 +31,16 @@ public class CurveProjectile : GameBehaviour
 
     void PlayAnimation()
     {
+        var enemyCol = Physics.OverlapSphere(transform.position, 3, enemy);
+        print("trying to hit something");
+        print(enemyCol.Length);
+        foreach (var col in enemyCol)
+        {
+            print("hit in explosion");
+            col.gameObject.GetComponent<BaseEnemy>().Hit(_IM.itemDataBase[3].dmg);
+
+        }
+
         playedPS = true;
         endOfRangePS.Play();
 
@@ -42,6 +52,8 @@ public class CurveProjectile : GameBehaviour
     {
         if (collision.collider.CompareTag("Ground"))
         {
+            
+
             print("on ground");
 
             if (endOfRangePS != null)
@@ -79,13 +91,8 @@ public class CurveProjectile : GameBehaviour
             {
                 if (!playedPS)
                 {
-                    var enemyCol = Physics.OverlapSphere(transform.position, 3, enemy);
+                    PlayAnimation();
 
-                    foreach (var col in enemyCol)
-                    {
-                        col.gameObject.GetComponent<BaseEnemy>().Hit(_IM.itemDataBase[3].dmg);
-
-                    }
 
                     playedPS = true;
                     impactPS.Play();

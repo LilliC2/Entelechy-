@@ -190,7 +190,7 @@ public class EnemyShortRange : GameBehaviour
         if(collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Projectile"))
         {
             print("Size increase");
-            currentScale += scaleIncrease;
+            currentScale = Mathf.Clamp(currentScale +=scaleIncrease,1,2.5f);
             gameObject.transform.DOScale(new Vector3(currentScale,currentScale,currentScale), 1);
         }
     }

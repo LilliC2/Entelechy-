@@ -61,12 +61,12 @@ public class BaseEnemy : GameBehaviour
     bool spawnHealPool = false;
     bool died = false;
     public GameObject healPool;
+    public Animator childAnim;
 
     private void Start()
     {
         enemySpritesArray = GetComponentsInChildren<SpriteRenderer>();
         explosionAnimOB.SetActive(false);
-
     }
 
     private void Update()
@@ -127,10 +127,13 @@ public class BaseEnemy : GameBehaviour
     public void Hit(float _dmg)
     {
         //  hurt.Play();
+        
 
 
         if (stats.health > 0)
         {
+            if(childAnim !=null)childAnim.SetTrigger("Hurt");
+
             stats.health -= _dmg;
             HealthVisualIndicator(stats.health, stats.maxHP);
             //print(enemyStats.stats.health);
@@ -276,7 +279,7 @@ public class BaseEnemy : GameBehaviour
     {
         if(!died)
         {
-
+            if(childAnim != null)childAnim.SetTrigger("Hurt");
             foreach (var PS in bleedingSpots)
             {
                 PS.Stop();
@@ -322,20 +325,26 @@ public class BaseEnemy : GameBehaviour
 
                     break;
                 default:
-                    if (!spawnItem)
+                    //ensure butt bugs dont spawn items
+                    if(!gameObject.name.Contains("Butt"))
                     {
-                        spawnItem = true;
-                        GameObject item = Instantiate(_IG.GenerateItem(), gameObject.transform.position, Quaternion.identity);
+                        if (!spawnItem)
+                        {
+                            spawnItem = true;
+                            GameObject item = Instantiate(_IG.GenerateItem(), gameObject.transform.position, Quaternion.identity);
 
-                        item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
+                            item.GetComponentInChildren<SpriteRenderer>().sprite = item.GetComponent<ItemIdentifier>().itemInfo.icon;
 
-                        print(item.name);
+                            print(item.name);
+                        }
                     }
+
+                    
                     break;
             }
 
             //make death splatter
-            _EM.DeathSplatter(transform.position);
+            _EM.DeathSplatter(new Vector3(transform.position.x, -1.64f, transform.position.z));
 
             //remove from list
             _EM.enemiesSpawned.Remove(this.gameObject);

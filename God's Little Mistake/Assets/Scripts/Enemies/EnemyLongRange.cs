@@ -39,21 +39,17 @@ public class EnemyLongRange : GameBehaviour
     BaseEnemy baseEnemy;
     Vector3 target;
 
+    [Header("Animation")]
+    [SerializeField]
+    Animator anim;
+
     [SerializeField]
     ParticleSystem attackPS;
 
-    Animator frontAnim;
-    [SerializeField]
-
-    Animator backAnim;
-    [SerializeField]
-
-    Animator rightSideAnim;
-    [SerializeField]
-    Animator leftSideAnim;
-
-    Vector3 prevDest; 
-    Vector3 currentDest; 
+    [Header("Audio")]
+    public AudioSource attackAudio;
+    public AudioSource hurtAudio;
+    public AudioSource deathAudio;
 
     void Start()
     {
@@ -73,14 +69,20 @@ public class EnemyLongRange : GameBehaviour
         
         projectileRange = enemyStats.stats.range +2;
 
-
+        baseEnemy.childAnim = anim;
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        if (agent.velocity.magnitude > 0.5f) baseEnemy.walking.Play();
+        if (agent.velocity.magnitude > 0.5f)
+        {
+            anim.SetBool("Walking", true);
+            //baseEnemy.walking.Play();
+        }
+        else anim.SetBool("Walking", false);
+
 
         baseEnemy.FlipSprite(agent.destination);
 
@@ -165,18 +167,13 @@ public class EnemyLongRange : GameBehaviour
                     if(!runAway)
                     {
 
-
+                        baseEnemy.FlipSprite(_PC.transform.position);
                         print("shooot");
                         agent.isStopped = true;
                         FireProjectile(enemyStats.stats.projectilePF, enemyStats.stats.projectileSpeed, enemyStats.stats.fireRate, enemyStats.stats.range);
 
                         transform.LookAt(player.transform.position);
-                        //if (!animationPlayed)
-                        //{
-                        //    animationPlayed = true;
-                        //    //PlayAttackAnimation();
-                        //    ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
-                        //}
+           
                     }
 
                     
@@ -224,12 +221,6 @@ public class EnemyLongRange : GameBehaviour
 
     }
 
-    void ResetAttackAnimation()
-    {
-
-        animationPlayed = false;
-        
-    }
 
     private Vector3 SearchWalkPoint()
     {
@@ -244,8 +235,8 @@ public class EnemyLongRange : GameBehaviour
         if (!projectileShot)
         {
             attackPS.Play();
+            anim.SetTrigger("Attack");
 
-            print("i shot");
             baseEnemy.attack.Play();
             //Spawn bullet and apply force in the direction of the mouse
             //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
@@ -274,30 +265,4 @@ public class EnemyLongRange : GameBehaviour
     }
 
 
-    //void PlayAttackAnimation()
-    //{
-    //    frontAnim.SetBool("Walking", false);
-    //    backAnim.SetBool("Walking", false);
-    //    leftSideAnim.SetBool("Walking", false);
-    //    rightSideAnim.SetBool("Walking", false);
-
-    //    if (frontOB.activeSelf == true) frontAnim.SetTrigger("Attack");
-    //    if(backOB.activeSelf == true) backAnim.SetTrigger("Attack");
-    //    if(rightSideOB.activeSelf == true) rightSideAnim.SetTrigger("Attack");
-    //    if(leftSideOB.activeSelf == true) leftSideAnim.SetTrigger("Attack");
-
-
-    //}
-
-    //visualise sight range
-    //private void OnDrawGizmosSelected()
-    //{
-    //    Gizmos.color = Color.red;
-    //    Gizmos.DrawWireSphere(player.transform.position, 5);
-    //    //Gizmos.color = Color.yellow;
-    //    //Gizmos.DrawWireSphere(transform.position, enemyStats.stats.range+1);
-
-
-
-    //}   
 }

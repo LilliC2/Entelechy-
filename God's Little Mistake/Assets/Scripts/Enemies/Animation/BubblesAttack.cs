@@ -13,7 +13,12 @@ public class BubblesAttack : GameBehaviour
 
     public void Attack()
     {
-        ELR.FireProjectile(ELR.enemyStats.stats.projectilePF, ELR.enemyStats.stats.projectileSpeed, ELR.enemyStats.stats.fireRate, ELR.enemyStats.stats.range);
+        ELR.attackAudio.Play();
+
+    }
+    public void Hurt()
+    {
+        ELR.hurtAudio.Play();
 
     }
 }
