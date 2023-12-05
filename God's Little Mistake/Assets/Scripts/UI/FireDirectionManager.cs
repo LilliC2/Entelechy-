@@ -37,6 +37,7 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     public bool rightHasHeat;
     public bool rHeatActive;
     public bool rHeatFilling;
+    public bool cooldownRight;
 
 
     // Start is called before the first frame update
@@ -83,6 +84,16 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
         if (rightHasFired && !rightFireFilling)
         {
             StartCoroutine(ProcessRightFire());
+        }
+
+        if(!cooldownRight && rightHasHeat)
+        {
+            if (rightHeatCurrent < rightHeatTotal)
+            {
+                rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
+                rHeatFilling = true;
+                rHeatActive = true;
+            }
         }
 
         //if (Input.GetButtonDown("Fire2") && rightHasHeat && _PAtk.overHeatCooldown == false)

@@ -151,8 +151,8 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     {
         LMGAttack(_IM.itemDataBase[8].projectilePF, _IM.itemDataBase[8].projectileSpeed, _IM.itemDataBase[8].firerate, _IM.itemDataBase[8].projectileRange);
             
-        //_FDM.SetRightHeat(maxOverheat);
-        //_FDM.rightHasHeat = true;
+        _FDM.SetRightHeat(maxOverheat);
+        _FDM.rightHasHeat = true;
 
     }
 
@@ -218,6 +218,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 if (currentOverheat > maxOverheat) OverHeatCoolDown();
 
                 ExecuteAfterSeconds(_firerate, () => projectileShot3 = false);
+                _FDM.rightFireCurrent = currentOverheat;
 
             }
             print("FIRE PROJECTILE");
@@ -356,10 +357,10 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
             if (_PC.torsoFiringPoint.transform.localEulerAngles.y < 360 && _PC.torsoFiringPoint.transform.localEulerAngles.y > 180)
             {
-                _PC.torsoFiringPoint.transform.localEulerAngles = new(angle, _PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
+                _PC.torsoFiringPoint.transform.localEulerAngles = new Vector3(angle, _PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
 
             }
-            else _PC.torsoFiringPoint.transform.localEulerAngles = new(angle, -_PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
+            else _PC.torsoFiringPoint.transform.localEulerAngles = new Vector3(angle, -_PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
 
 
             bullet.GetComponent<Rigidbody>().AddForce(power * _PC.torsoFiringPoint.transform.forward, ForceMode.Impulse);
