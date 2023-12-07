@@ -17,10 +17,20 @@ public class EnemyHiveBug : GameBehaviour
     public EnemyHiveSpawner spawner;
 
     public BaseEnemy enemyStats;
+    [SerializeField]
     BaseEnemy baseEnemy;
+    [Header("Animation")]
+    [SerializeField]
+    public Animator anim;
+
+    [Header("Audio")]
+    public AudioSource attackAudio;
+    public AudioSource hurtAudio;
+    public AudioSource deathAudio;
 
     private void Start()
     {
+
         agent = GetComponent<NavMeshAgent>();
         initialPosition = transform.position;
         agent.angularSpeed = 0;
@@ -29,6 +39,8 @@ public class EnemyHiveBug : GameBehaviour
 
         enemyStats = GetComponent<BaseEnemy>();
         baseEnemy = GetComponent<BaseEnemy>();
+        baseEnemy.childAnim = anim;
+
     }
 
     private void EnsureCorrectRotation()
@@ -76,6 +88,9 @@ public class EnemyHiveBug : GameBehaviour
 
     private void Update()
     {
+
+        baseEnemy.FlipSprite(agent.destination);
+
         if (_GM.gameState != GameManager.GameState.Dead)
         {
 
