@@ -157,7 +157,7 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
         {
             rightHeatCurrent -= Time.deltaTime;
             rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
-            Debug.Log(rightFirerate.fillAmount);
+            //Debug.Log(rightFirerate.fillAmount);
             yield return null;
         }
 
