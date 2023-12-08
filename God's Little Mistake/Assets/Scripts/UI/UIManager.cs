@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using DG.Tweening;
+using Unity.VisualScripting;
 
 public class UIManager : Singleton<UIManager>
 {
@@ -50,6 +51,12 @@ public class UIManager : Singleton<UIManager>
     public GameObject optionPanel;
     public GameObject ingameUI;
 
+    [Header("Health")]
+    public Animator heathAnim;
+    public float playerHeath;
+    public float maxHeath;
+    public Gradient gradient;
+
     private void Start()
     {   
         UpdateInventorySlotImages();
@@ -75,6 +82,8 @@ public class UIManager : Singleton<UIManager>
 
         //healthbar related
         healhBar.fillAmount = 1;
+
+        maxHeath = _PC.maxHP;
 
     }
 
@@ -110,8 +119,18 @@ public class UIManager : Singleton<UIManager>
             levelAnim.SetTrigger("Reset");
         }
 
+        playerHeath = _PC.health;
+
+        heathAnim.SetFloat("Health", playerHeath);
+
+        healhBar.color = gradient.Evaluate(playerHeath/maxHeath);
+
+
 
     }
+
+
+
 
     #region Pause
     public void OnPause()

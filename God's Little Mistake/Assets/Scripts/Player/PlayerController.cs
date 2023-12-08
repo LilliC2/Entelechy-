@@ -398,6 +398,7 @@ public class PlayerController : Singleton<PlayerController>
             //_PE.ChromaticABFade();
             health -= _dmg;
             _AM.PlayerHurt();
+            _UI.heathAnim.SetTrigger("Damage");
 
             if (health > 0)
             {
