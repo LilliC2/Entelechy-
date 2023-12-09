@@ -310,7 +310,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     
     public void SquitoAttack()
     {
-
+        _AM.SquitoAttack.Play();
         ExecuteAfterSeconds(0.5f,()=> BasicFireProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange, _PE.explosionPS));
         if (_FDM.leftFireFilling == false)
         {
@@ -321,8 +321,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     public void SabertoothAttack()
     {
+
         if(returned)
         {
+            _AM.sabretoothThrow.Play();
+
+
             returned = false;
             BoomerangProjectile(_IM.itemDataBase[2].projectilePF, _IM.itemDataBase[2].projectileSpeed, _IM.itemDataBase[2].firerate, _IM.itemDataBase[2].projectileRange, _PE.sabertoothPS);
             //ExecuteAfterSeconds(1, () => returned = true);
