@@ -14,10 +14,13 @@ public class EnemyPlant : MonoBehaviour
     private Transform underground;
     private bool playerInRange = false;
     private float nextShootTime;
-    private Vector3 initialPosition; 
+    private Vector3 initialPosition;
+
+    Animator anim;
 
     private void Start()
     {
+        anim = GetComponentInChildren<Animator>();
         turret = transform.Find("Turret"); 
         underground = transform.Find("Underground");
         initialPosition = transform.position;
@@ -35,6 +38,7 @@ public class EnemyPlant : MonoBehaviour
         }
         else
         {
+
             GoUnderground();
         }
     }
@@ -58,6 +62,8 @@ public class EnemyPlant : MonoBehaviour
      
     private void ShootMultipleProjectiles(int numProjectiles)
     {
+        anim.SetTrigger("Attack");
+
         for (int i = 0; i < numProjectiles; i++)
         {
             float angle = i * 360f / numProjectiles;
@@ -79,12 +85,16 @@ public class EnemyPlant : MonoBehaviour
 
     private void GoUnderground()
     {
+        anim.SetTrigger("Death");
+
         Vector3 newPosition = new Vector3(transform.position.x, undergroundY, transform.position.z);
         transform.position = newPosition;
     }
 
     private void GoAboveGround()
     {
+        anim.SetTrigger("Spawn");
+
         transform.position = initialPosition;
     }
 }
