@@ -117,9 +117,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     public void BabyAttack()
     {
         BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF, _IM.itemDataBase[3].firerate, _PE.babyPS);
-        if (_FDM.leftFireFilling == false)
+        if (_FDM.rightFireFilling == false)
         {
-            _FDM.SetLeftAttack(_IM.itemDataBase[3].firerate);
+            _FDM.SetRightAttack(_IM.itemDataBase[3].firerate);
         }
     }
 

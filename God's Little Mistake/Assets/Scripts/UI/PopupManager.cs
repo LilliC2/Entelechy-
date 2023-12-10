@@ -92,6 +92,8 @@ public class PopupManager : Singleton<PopupManager>
         isHead = false;
         isTorso = false;
         isLegs = false;
+
+        holdTimer = _UI.holdTimer;
     }
 
     // Update is called once per frame

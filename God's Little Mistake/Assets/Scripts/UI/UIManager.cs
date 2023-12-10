@@ -57,6 +57,9 @@ public class UIManager : Singleton<UIManager>
     public float maxHeath;
     public Gradient gradient;
 
+    [Header("Popup")]
+    public float holdTimer = 1f;
+
     private void Start()
     {   
         UpdateInventorySlotImages();
@@ -84,6 +87,7 @@ public class UIManager : Singleton<UIManager>
         healhBar.fillAmount = 1;
 
         maxHeath = _PC.maxHP;
+        holdTimer = 1f;
 
     }
 
