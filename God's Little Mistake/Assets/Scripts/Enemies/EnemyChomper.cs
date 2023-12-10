@@ -75,11 +75,11 @@ public class EnemyChomper : GameBehaviour
 
         if (agent.velocity.magnitude > 0.5f)
         {
-            if(anim.GetBool("Walking")) anim.SetBool("Walking", true);
+             anim.SetBool("Walking", true);
 
             //baseEnemy.walking.Play();
         }
-        else if (anim.GetBool("Walking")) anim.SetBool("Walking", false);
+        else anim.SetBool("Walking", false);
 
         agent.speed = enemyStats.stats.speed;
 

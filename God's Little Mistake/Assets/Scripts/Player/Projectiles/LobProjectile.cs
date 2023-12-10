@@ -37,7 +37,7 @@ public class CurveProjectile : GameBehaviour
         foreach (var col in enemyCol)
         {
             print("hit in explosion");
-            col.gameObject.GetComponent<BaseEnemy>().Hit(_IM.itemDataBase[3].dmg);
+            if(col!=null)  col.gameObject.GetComponent<BaseEnemy>().Hit(_IM.itemDataBase[3].dmg);
 
         }
 
