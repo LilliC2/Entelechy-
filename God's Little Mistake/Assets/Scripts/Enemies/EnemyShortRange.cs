@@ -30,23 +30,18 @@ public class EnemyShortRange : GameBehaviour
     public Vector3 walkPoint;
     public float walkPointRange;
 
+    [Header("Audio")]
+    public AudioSource attackAudio;
+    public AudioSource hurtAudio;
+    public AudioSource deathAudio;
+
+    [Header("Animation")]
+    [SerializeField]
+    Animator anim;
 
     public LayerMask whatIsGround, whatIsPlayer;
 
     [Header("Enemy Sprites")]
-    public GameObject frontOB;
-    public GameObject backOB;
-    public GameObject rightSideOB;
-    public GameObject leftSideOB;
-
-    [SerializeField]
-    Animator frontAnim;
-    [SerializeField]
-    Animator backAnim;
-    [SerializeField]
-    Animator rightSideAnim;
-    [SerializeField]
-    Animator leftSideAnim;
 
     [SerializeField]
     float scaleIncrease = 0.1f;
@@ -68,6 +63,7 @@ public class EnemyShortRange : GameBehaviour
 
         attackRange = enemyStats.stats.range;
         target = SearchWalkPoint();
+        baseEnemy.childAnim = anim;
 
     }
 
@@ -76,7 +72,13 @@ public class EnemyShortRange : GameBehaviour
     {
         baseEnemy.FlipSprite(agent.destination);
 
-        if (agent.velocity.magnitude > 0.5f) baseEnemy.walking.Play();
+        if (agent.velocity.magnitude > 0.5f)
+        {
+            anim.SetBool("Walking", true);
+            //baseEnemy.walking.Play();
+        }
+        else anim.SetBool("Walking", false);
+
 
         agent.speed = enemyStats.stats.speed;
 
@@ -149,13 +151,8 @@ public class EnemyShortRange : GameBehaviour
                     agent.isStopped = true;
 
                     transform.LookAt(player.transform.position);
-                    if (!animationPlayed)
-                    {
-                        animationPlayed = true;
-                        PlayAttackAnimation();
-                        PerformAttack(enemyStats.stats.fireRate);
-                        ExecuteAfterSeconds(enemyStats.stats.fireRate, () => ResetAttackAnimation());
-                    }
+                    PerformAttack(enemyStats.stats.fireRate);
+
 
 
 
@@ -195,30 +192,6 @@ public class EnemyShortRange : GameBehaviour
         }
     }
 
-    void ResetAttackAnimation()
-    {
-
-        print("Reset aniamtions");
-        animationPlayed = false;
-
-    }
-
-    void PlayAttackAnimation()
-    {
-        //print("Attack anim");
-        //frontAnim.SetBool("Walking", false);
-        //backAnim.SetBool("Walking", false);
-        //leftSideAnim.SetBool("Walking", false);
-        //rightSideAnim.SetBool("Walking", false);
-
-        //if (frontOB.activeSelf == true) frontAnim.SetTrigger("Attack");
-        //if (backOB.activeSelf == true) backAnim.SetTrigger("Attack");
-        //if (rightSideOB.activeSelf == true) rightSideAnim.SetTrigger("Attack");
-        //if (leftSideOB.activeSelf == true) leftSideAnim.SetTrigger("Attack");
-
-
-    }
-
     private Vector3 SearchWalkPoint()
     {
 
@@ -233,7 +206,8 @@ public class EnemyShortRange : GameBehaviour
 
             if (canAttack)
             {
-                baseEnemy.attack.Play();
+                //baseEnemy.attack.Play();
+                anim.SetTrigger("Attack");
 
                 print("Attack");
                 //attack shit

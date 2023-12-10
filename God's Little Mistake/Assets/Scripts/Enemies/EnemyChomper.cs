@@ -1,15 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.AI;
 
 public class EnemyChomper : GameBehaviour
 {
     [Header("Enemy Navigation")]
     public GameObject player;
-    public UnityEngine.AI.NavMeshAgent agent;
-
-    bool animationPlayed;
-
+    public NavMeshAgent agent;
     public float sightRange = 7;
     public float attackRange;
 
@@ -25,6 +23,15 @@ public class EnemyChomper : GameBehaviour
 
     public Vector3 walkPoint;
     public float walkPointRange;
+
+    [Header("Animation")]
+    [SerializeField]
+    Animator anim;
+
+    [Header("Audio")]
+    public AudioSource attackAudio;
+    public AudioSource hurtAudio;
+    public AudioSource deathAudio;
 
     [Header("Enemy Visuals")]
 
@@ -49,13 +56,9 @@ public class EnemyChomper : GameBehaviour
 
         enemyStats = GetComponent<BaseEnemy>();
         baseEnemy = GetComponent<BaseEnemy>();
-        agent = GetComponent<UnityEngine.AI.NavMeshAgent>();
+        agent = GetComponent<NavMeshAgent>();
         player = GameObject.FindGameObjectWithTag("Player");
 
-        //frontAnim = frontOB.GetComponentInChildren<Animator>();
-        //backAnim = backOB.GetComponentInChildren<Animator>();
-        //rightSideAnim = rightSideOB.GetComponentInChildren<Animator>();
-        //leftSideAnim = leftSideOB.GetComponentInChildren<Animator>();
 
         attackRange = enemyStats.stats.range;
 
@@ -69,7 +72,14 @@ public class EnemyChomper : GameBehaviour
     {
         baseEnemy.FlipSprite(agent.destination);
 
-        if (agent.velocity.magnitude > 0.5f) baseEnemy.walking.Play();
+
+        if (agent.velocity.magnitude > 0.5f)
+        {
+            if(anim.GetBool("Walking")) anim.SetBool("Walking", true);
+
+            //baseEnemy.walking.Play();
+        }
+        else if (anim.GetBool("Walking")) anim.SetBool("Walking", false);
 
         agent.speed = enemyStats.stats.speed;
 
@@ -150,7 +160,7 @@ public class EnemyChomper : GameBehaviour
 
 
                 }
-                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) < 3)
+                else if (Vector3.Distance(player.transform.position, gameObject.transform.position) <= attackRange)
                 {
                     runningParticle.Stop();
                     enemyStats.stats.speed = normalSpeed;
@@ -186,14 +196,6 @@ public class EnemyChomper : GameBehaviour
 
     }
 
-    void ResetAttackAnimation()
-    {
-
-        print("Reset aniamtions");
-        animationPlayed = false;
-
-    }
-
 
     private Vector3 SearchWalkPoint()
     {
@@ -217,7 +219,7 @@ public class EnemyChomper : GameBehaviour
 
             if (canAttack)
             {
-
+                anim.SetTrigger("Attack");
                 attackPS.Play();
 
                 baseEnemy.attack.Play();

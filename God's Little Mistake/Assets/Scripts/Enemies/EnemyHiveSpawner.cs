@@ -10,12 +10,17 @@ public class EnemyHiveSpawner : GameBehaviour
     public string playerTag = "Player";
     public float activationRange = 10.0f;
 
+    EnemyHiveBug enemyHiveBug;
+
     [SerializeField]
     ParticleSystem spawningPS;
-
+    Animator anim;
+    
     private void Start()
     {
         StartCoroutine(SpawnEnemies());
+        enemyHiveBug = GetComponent<EnemyHiveBug>();
+        anim = enemyHiveBug.anim;
     }
 
     private IEnumerator SpawnEnemies()
@@ -34,6 +39,7 @@ public class EnemyHiveSpawner : GameBehaviour
 
     private void SpawnEnemy()
     {
+        anim.SetTrigger("Spawning");
         // Spawn enemy at the position of the spawner.
         gameObject.transform.DOScale(new Vector3(0.25f, 0.25f, 0.25f), 0.5f);
         spawningPS.Play();
