@@ -212,9 +212,9 @@ public class EnemyShortRange : GameBehaviour
                 print("Attack");
                 //attack shit
 
-                _PC.Hit(enemyStats.stats.dmg);
                 attacking = true;
                 ExecuteAfterSeconds(_firerate, () => attacking = false);
+                _PC.Hit(enemyStats.stats.dmg);
 
             }
 
