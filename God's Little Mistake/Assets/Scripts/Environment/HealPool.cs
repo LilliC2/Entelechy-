@@ -69,6 +69,7 @@ public class HealPool : GameBehaviour
         } while (currentTime <= time);
 
         Destroy(gameObject);
+        _UI.heathAnim.SetBool("IsHealing", false);
     }
 
     IEnumerator HealPlayer()

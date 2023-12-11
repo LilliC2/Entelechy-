@@ -45,6 +45,7 @@ public class EnemyChomper : GameBehaviour
 
     public LayerMask whatIsGround, whatIsPlayer;
 
+    public bool hasAttacked;
 
 
 
@@ -65,6 +66,7 @@ public class EnemyChomper : GameBehaviour
         normalSpeed = enemyStats.stats.speed;
         jumpSpeed = enemyStats.stats.speed*1.5f;
 
+        hasAttacked = false;
     }
 
     // Update is called once per frame
@@ -145,6 +147,7 @@ public class EnemyChomper : GameBehaviour
                 break;
             case BaseEnemy.EnemyState.Chase:
 
+
                 if (Vector3.Distance(player.transform.position, gameObject.transform.position) > attackRange)
                 {
                     print("Chase player");
@@ -161,7 +164,7 @@ public class EnemyChomper : GameBehaviour
 
                 }
                 else if (Vector3.Distance(player.transform.position, gameObject.transform.position) <= attackRange)
-                {
+                {            
                     runningParticle.Stop();
                     enemyStats.stats.speed = normalSpeed;
 
@@ -169,8 +172,8 @@ public class EnemyChomper : GameBehaviour
 
                     PerformAttack(enemyStats.stats.fireRate);
 
-
                 }
+
 
 
 
@@ -216,22 +219,18 @@ public class EnemyChomper : GameBehaviour
     {
         if (!attacking)
         {
+            anim.SetTrigger("Attack");
+            attackPS.Play();
 
-            if (canAttack)
-            {
-                anim.SetTrigger("Attack");
-                attackPS.Play();
+            baseEnemy.attack.Play();
 
-                baseEnemy.attack.Play();
+            print("Attack");
+            print("firerate"  + _firerate);
+            //attack shit
 
-                print("Attack");
-                //attack shit
-
-                _PC.Hit(enemyStats.stats.dmg);
-                attacking = true;
-                ExecuteAfterSeconds(_firerate, () => attacking = false);
-
-            }
+            attacking = true;
+            ExecuteAfterSeconds(_firerate, () => attacking = false);
+            _PC.Hit(enemyStats.stats.dmg);
 
 
         }

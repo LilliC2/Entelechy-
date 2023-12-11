@@ -183,8 +183,13 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet1 = Instantiate(_prefab, new Vector3(firingPos.x,firingPos.y + 0.2f,firingPos.z), _PC.torsoFiringPoint.transform.rotation);
+                bullet1.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[8].dmg;
+
                 GameObject bullet2 = Instantiate(_prefab, new Vector3(firingPos.x, firingPos.y, firingPos.z+0.2f), _PC.torsoFiringPoint.transform.rotation);
+                bullet1.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[8].dmg;
+
                 GameObject bullet3 = Instantiate(_prefab, new Vector3(firingPos.x, firingPos.y, firingPos.z - 0.2f), _PC.torsoFiringPoint.transform.rotation);
+                bullet1.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[8].dmg;
 
                 bullet1.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Random.Range(_projectileSpeed-50, _projectileSpeed));
                 bullet2.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Random.Range(_projectileSpeed - 50, _projectileSpeed));
@@ -254,6 +259,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 for (int i = 0; i < 10; i++)
                 {
                     GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                    bullet.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[9].dmg;
                     //bullet1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-2,2),Vector3.forward.y, Vector3.forward.z) * _projectileSpeed);
                     //bullet1.GetComponent<RangeDetector>().range = _range;
                     //Mathf.Clamp(bullet1.transform.position.y, 0, 0);
@@ -311,7 +317,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     public void SquitoAttack()
     {
         _AM.SquitoAttack.Play();
-        ExecuteAfterSeconds(0.5f,()=> BasicFireProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange, _PE.explosionPS));
+        ExecuteAfterSeconds(0.5f,()=> SquitoProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange, _PE.explosionPS));
         if (_FDM.leftFireFilling == false)
         {
 
@@ -354,6 +360,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             if (_PS != null) _PS.Play();
 
             GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
+
 
             //print(_PC.directional.transform.forward);
 
@@ -447,6 +454,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                bullet.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[0].dmg;
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
                 //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
@@ -495,6 +503,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                bullet.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[4].dmg;
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
                 //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
@@ -538,6 +547,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                bullet.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[7].dmg;
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
                 //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
