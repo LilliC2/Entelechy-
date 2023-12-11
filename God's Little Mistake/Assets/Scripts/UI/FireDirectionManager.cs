@@ -81,20 +81,32 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
             StartCoroutine(ProcessRightFire());
         }
 
-        if (rightHasFired && !rightFireFilling)
-        {
-            StartCoroutine(ProcessRightFire());
-        }
 
-        if(!cooldownRight && rightHasHeat)
+        //Overheat Goes UP
+        if(rightHasHeat)
         {
             if (rightHeatCurrent < rightHeatTotal)
             {
-                rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
                 rHeatFilling = true;
                 rHeatActive = true;
+                rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
             }
+
         }
+
+        //if(!cooldownRight && rightHasHeat)
+        //{
+        //    if (rightHeatCurrent < rightHeatTotal)
+        //    {
+        //        rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
+        //        rHeatFilling = true;
+        //        rHeatActive = true;
+        //    }
+        //}
+
+        //Overheats Goes Down
+
+
 
         //if (Input.GetButtonDown("Fire2") && rightHasHeat && _PAtk.overHeatCooldown == false)
         //{
@@ -146,8 +158,10 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     public void SetRightAttack(float firerate)
     {
         rightHasFired = true;
-        rightFireCurrent = 0;
         rightFireTotal = firerate;
+        rightFireCurrent = 0;
+        rightHasHeat = false;
+
     }
 
     public void SetRightHeat(float firerate)

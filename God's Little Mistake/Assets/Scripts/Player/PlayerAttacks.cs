@@ -43,8 +43,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         //change red dot length
         if (_PC.torsoItem.ID == 8 && !Input.GetButton("Fire2") && !overHeatCooldown)
         {
-            if (currentOverheat > 0) currentOverheat -= 0.5f;
+            if (currentOverheat > 0)
+            {
+                currentOverheat -= 0.5f;
+                _FDM.rightHeatCurrent -= 0.5f;
 
+            }
         }
     }
 
@@ -130,8 +134,10 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
         if (currentOverheat >=0)
         {
+            _FDM.rightMouseHeat.SetActive(true);
             overHeatCooldown = true;
             currentOverheat -= 0.5f;
+            _FDM.rightHeatCurrent -= 0.5f;
 
 
             if (currentOverheat <= 0)
@@ -139,6 +145,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 overHeatCooldown = false;
 
                 currentOverheat = 0;
+                _FDM.rightHeatCurrent -= 0;
+                _FDM.rightMouseHeat.SetActive(false);
+
             }
             else ExecuteAfterSeconds(resetOverheatTime, () => OverHeatCoolDown());
         }
@@ -219,6 +228,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
 
                 currentOverheat += 0.5f;
+                _FDM.rightHeatCurrent += 0.5f;
 
                 if (currentOverheat > maxOverheat) OverHeatCoolDown();
 
