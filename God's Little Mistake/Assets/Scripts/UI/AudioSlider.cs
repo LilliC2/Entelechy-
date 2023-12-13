@@ -6,80 +6,92 @@ using UnityEngine.UI;
 
 public class AudioSlider : GameBehaviour
 {
-    public AudioMixer audioMixer;
-    public AudioType audioType;
+    public enum AudioType { Master, Game, BGM, Environment }
 
     [Header("Slider")]
     public Slider volumeSlider;
-    
-    [Header("Audio Source")]
-    public AudioSource audioSource;
-    public AudioSource gameSource;
-    public AudioSource bgmSource;
-    public AudioSource squishySource;
 
+    [Header("Audio Mixers")]
+    public AudioMixer backgroundMixer;
+    public AudioMixer enemyMixer;
+    public AudioMixer environmentMixer;
+    public AudioMixer gameMixer;
+    public AudioMixer playerMixer;
 
-    public enum AudioType { Master, Game, BGM, Squishy }
+    [Header("Audio Mixers Group")]
+    public AudioMixerGroup musicMixer;
+    public AudioMixerGroup ambianceMixer;
 
-    void Start()
+    [Header("Audio Types")]
+    public AudioType audioType;
+
+    private string volumeParameter;
+
+    private void Start()
     {
-        volumeSlider.value = GetAudioVolume();
-
-        audioMixer.SetFloat("Volume", Mathf.Log10(PlayerPrefs.GetFloat("Volume", 1) * 20));
+        Initialize();
     }
 
-    // Update is called once per frame
-    float GetAudioVolume()
+    private void Initialize()
     {
-        float volume = 1f;
-
-        switch(audioType)
-        {
-            case AudioType.Master:
-                volume = PlayerPrefs.GetFloat("MasterVolume", 1f);
-                break;
-            case AudioType.Game:
-                volume = PlayerPrefs.GetFloat("GameVolume", 1f);
-                break;
-            case AudioType.BGM:
-                volume = PlayerPrefs.GetFloat("BGMVolume", 1f);
-                break;
-            case AudioType.Squishy:
-                volume = PlayerPrefs.GetFloat("SquishyVolume", 1f);
-                break;
-        }
-
-        return volume;
-    }
-
-    public void OnChangeSlider(float value)
-    {
-        value = Mathf.Clamp01(value);
-        float audioVolume = Mathf.Log10(value) * 20;
-        audioMixer.SetFloat("Volume", audioVolume);
-        
         switch (audioType)
         {
             case AudioType.Master:
-                PlayerPrefs.SetFloat("MasterVolume", value);
+                volumeParameter = "MasterVolume";
                 break;
-
             case AudioType.Game:
-                gameSource.volume = value;
-                PlayerPrefs.SetFloat("GameVolume", value);
+                volumeParameter = "GameVolume";
                 break;
-
             case AudioType.BGM:
-                bgmSource.volume = value;
-                PlayerPrefs.SetFloat("BGMVolume", value);
+                volumeParameter = "BGMVolume";
                 break;
-
-            case AudioType.Squishy:
-                squishySource.volume = value;
-                PlayerPrefs.SetFloat("BGMVolume", value);
+            case AudioType.Environment:
+                volumeParameter = "EnvironmentVolume";
                 break;
         }
 
-        PlayerPrefs.Save();
+        volumeSlider.value = GetAudioVolume();
+        ApplyVolume();
+    }
+
+    private float GetAudioVolume()
+    {
+        return PlayerPrefs.GetFloat(volumeParameter, 1f);
+    }
+
+    public void OnVolumeSliderChanged()
+    {
+        float volume = volumeSlider.value;
+        PlayerPrefs.SetFloat(volumeParameter, volume);
+        ApplyVolume();
+        print("volume is " + volume);
+    }
+
+    private void ApplyVolume()
+    {
+        float volume = GetAudioVolume();
+
+        switch (audioType)
+        {
+            case AudioType.Master:
+                backgroundMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
+                enemyMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
+                environmentMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
+                gameMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
+                playerMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
+                break;
+            case AudioType.Game:
+                gameMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
+                enemyMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
+                playerMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
+                break;
+            case AudioType.BGM:
+                musicMixer.audioMixer.SetFloat("VolumeMusic", Mathf.Log10(volume) * 20);
+                break;
+            case AudioType.Environment:
+                environmentMixer.SetFloat("Volume", Mathf.Log10(volume) * 20);
+                ambianceMixer.audioMixer.SetFloat("VolumeAmbiance", Mathf.Log10(volume) * 20);
+                break;
+        }
     }
 }
