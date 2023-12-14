@@ -193,6 +193,11 @@ public class UIManager : Singleton<UIManager>
         _GM.ToTitle();
     }
 
+    public void ReloadFromUI()
+    {
+        _GM.GameLevel();
+    }
+
 
 
 
