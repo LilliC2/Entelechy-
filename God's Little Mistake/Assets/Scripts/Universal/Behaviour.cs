@@ -25,6 +25,7 @@ namespace LC
             gameObject.transform.localScale = new Vector3(0.0f, 0.0f, 0.0f);
         }
 
+
         /// <summary>
         /// Get random float between two numbers
         /// </summary>

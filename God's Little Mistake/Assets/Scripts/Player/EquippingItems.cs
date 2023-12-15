@@ -4,12 +4,9 @@ using UnityEngine;
 
 public class EquippingItems : Singleton<EquippingItems>
 {
-    [SerializeField]
-    GameObject HeadAvatar;
-    [SerializeField]
-    GameObject TorsoAvatar;
-    [SerializeField]
-    GameObject LegAvatar;
+    public GameObject HeadAvatar;
+    public GameObject TorsoAvatar;
+    public GameObject LegAvatar;
 
     // Update is called once per frame
     public void EquipItem(Item _item)
@@ -23,10 +20,13 @@ public class EquippingItems : Singleton<EquippingItems>
                 if (_item.avatarPrefab != null)
                 {
                     if (HeadAvatar.transform.childCount != 0) Destroy(HeadAvatar.transform.GetChild(0));
-                    Instantiate(_item.avatarPrefab, HeadAvatar.transform);
+                    var head = Instantiate(_item.avatarPrefab, HeadAvatar.transform);
+                    _PC.headFiringPoint = TransformDeepChildExtension.FindDeepChild(head.transform, "FiringPoint").gameObject;
+
                 }
                 else
                 {
+                    _PC.headFiringPoint = _PC.headFiringPointDefault;
 
                     if (_IM.itemDataBase[ID].staticTempSprite != null) _PC.headSprite.sprite = _IM.itemDataBase[ID].staticTempSprite;
 
@@ -67,4 +67,41 @@ public class EquippingItems : Singleton<EquippingItems>
             
         }
     }
+
+   
+}
+
+public static class TransformDeepChildExtension
+{
+    //Breadth-first search
+    public static Transform FindDeepChild(this Transform aParent, string aName)
+    {
+        Queue<Transform> queue = new Queue<Transform>();
+        queue.Enqueue(aParent);
+        while (queue.Count > 0)
+        {
+            var c = queue.Dequeue();
+            if (c.name == aName)
+                return c;
+            foreach (Transform t in c)
+                queue.Enqueue(t);
+        }
+        return null;
+    }
+
+    /*
+    //Depth-first search
+    public static Transform FindDeepChild(this Transform aParent, string aName)
+    {
+        foreach(Transform child in aParent)
+        {
+            if(child.name == aName )
+                return child;
+            var result = child.FindDeepChild(aName);
+            if (result != null)
+                return result;
+        }
+        return null;
+    }
+    */
 }

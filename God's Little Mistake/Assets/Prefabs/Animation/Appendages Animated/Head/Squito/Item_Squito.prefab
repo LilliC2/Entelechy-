@@ -94,6 +94,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3187892631839093511}
   - component: {fileID: 6277861844334768040}
+  - component: {fileID: 5847916065516192040}
   m_Layer: 0
   m_Name: Item_Squito
   m_TagString: Untagged
@@ -108,8 +109,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1332521995275406873}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 33.29, y: 3.37, z: 2.1366909}
+  m_LocalRotation: {x: 0, y: 0, z: -0.77196854, w: 0.63566077}
+  m_LocalPosition: {x: -0.12098064, y: 0.15597999, z: 0.1350064}
   m_LocalScale: {x: 0.06719883, y: 0.06719883, z: 0.06719883}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -122,8 +123,8 @@ Transform:
   - {fileID: 2946499100449386598}
   - {fileID: 2321667822552730771}
   m_Father: {fileID: 0}
-  m_RootOrder: 16
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: -101.062}
 --- !u!95 &6277861844334768040
 Animator:
   serializedVersion: 5
@@ -145,6 +146,18 @@ Animator:
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorStateOnDisable: 0
   m_WriteDefaultValuesOnDisable: 0
+--- !u!114 &5847916065516192040
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1332521995275406873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3bcd2b253deabec42ab5d970e6d8e4e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1422585803091049642
 GameObject:
   m_ObjectHideFlags: 0
@@ -481,6 +494,37 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4885330137613262975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2946987003793594671}
+  m_Layer: 0
+  m_Name: FiringPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &2946987003793594671
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4885330137613262975}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -6.16, y: -3.23, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 4849621980485182276}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5315059514650421408
 GameObject:
   m_ObjectHideFlags: 0
@@ -677,7 +721,8 @@ Transform:
   m_LocalPosition: {x: -0.5450172, y: 0.2538824, z: -2.136691}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 2946987003793594671}
   m_Father: {fileID: 3187892631839093511}
   m_RootOrder: -1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

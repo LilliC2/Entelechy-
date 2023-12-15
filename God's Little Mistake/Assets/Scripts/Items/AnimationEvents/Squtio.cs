@@ -7,7 +7,7 @@ public class Squtio : GameBehaviour
     // Start is called before the first frame update
     public void Attack()
     {
-        //_AM.
-        _PE.squitoPS.Play();
+        _AM.SquitoAttack.Play();
+        _PAtk.SquitoAttack();
     }
 }

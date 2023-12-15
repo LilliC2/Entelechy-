@@ -21,6 +21,7 @@ public class PlayerController : Singleton<PlayerController>
     public Item legItem;
 
     public GameObject headFiringPoint;
+    public GameObject headFiringPointDefault;
     public GameObject torsoFiringPoint;
 
     [Header("Sprites")] //this will be changed to prefabs when they are animated

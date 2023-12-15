@@ -1256,6 +1256,54 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a96ad81aa5c212443b532597a04a5e31, type: 3}
+--- !u!1 &1207551836
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1207551837}
+  - component: {fileID: 1207551838}
+  m_Layer: 0
+  m_Name: EquipItemManager
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1207551837
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207551836}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1753369149}
+  m_RootOrder: -1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1207551838
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1207551836}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6c003fc706b31e240b1c44d11d97eb2b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroy: 0
+  HeadAvatar: {fileID: 1975289193}
+  TorsoAvatar: {fileID: 0}
+  LegAvatar: {fileID: 0}
 --- !u!1 &1217107500
 GameObject:
   m_ObjectHideFlags: 0
@@ -1964,6 +2012,7 @@ Transform:
   - {fileID: 2049498144}
   - {fileID: 840429338}
   - {fileID: 1846396942}
+  - {fileID: 1207551837}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2078,7 +2127,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1453463789393201993, guid: fe1aa68cd33288f479c20ae5342769a8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.7734528
+      value: 4.773468
       objectReference: {fileID: 0}
     - target: {fileID: 1453463789393201993, guid: fe1aa68cd33288f479c20ae5342769a8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2206,7 +2255,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3478553812822760586, guid: fe1aa68cd33288f479c20ae5342769a8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.7734528
+      value: 4.773468
       objectReference: {fileID: 0}
     - target: {fileID: 3478553812822760586, guid: fe1aa68cd33288f479c20ae5342769a8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2458,7 +2507,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 7994757733395381082, guid: fe1aa68cd33288f479c20ae5342769a8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.7734528
+      value: 4.773468
       objectReference: {fileID: 0}
     - target: {fileID: 7994757733395381082, guid: fe1aa68cd33288f479c20ae5342769a8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -2506,7 +2555,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9193473056179856906, guid: fe1aa68cd33288f479c20ae5342769a8, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 4.7734528
+      value: 4.773468
       objectReference: {fileID: 0}
     - target: {fileID: 9193473056179856906, guid: fe1aa68cd33288f479c20ae5342769a8, type: 3}
       propertyPath: m_AnchoredPosition.y
@@ -3247,6 +3296,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 693a1bc36304a5f4babfad816509987f, type: 3}
+--- !u!1 &1975289193 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3325165157508764271, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+  m_PrefabInstance: {fileID: 7449056275972375405}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2043003165
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -3603,6 +3657,63 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1692694739}
     m_Modifications:
+    - target: {fileID: 583666106706433869, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.ID
+      value: 4
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.dmg
+      value: 60
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.icon
+      value: 
+      objectReference: {fileID: 21300000, guid: 88f4c3c6e5b0a9846ae1df67e909b4cf, type: 3}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.firerate
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.itemName
+      value: Squito
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.pauseIcon
+      value: 
+      objectReference: {fileID: 21300000, guid: 88f4c3c6e5b0a9846ae1df67e909b4cf, type: 3}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.abilityName
+      value: Skito
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.avatarPrefab
+      value: 
+      objectReference: {fileID: 1332521995275406873, guid: e74b4a5408dea174ca8c389edaf1e483, type: 3}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.projectilePF
+      value: 
+      objectReference: {fileID: 8524524292363796634, guid: 46b3d5886c67a3445802954a5790866f, type: 3}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.projectileRange
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.projectileSpeed
+      value: 3000
+      objectReference: {fileID: 0}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.staticTempSprite
+      value: 
+      objectReference: {fileID: 21300000, guid: ef4c89ceea6e71e4ca80af1de32b6f24, type: 3}
+    - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: headItem.abilityDescription
+      value: 'This Insectoid cannon with its freakish compound eyes snipes down prey
+        from great distances with regurgitated shards of coagulated blood.  '
+      objectReference: {fileID: 0}
     - target: {fileID: 2549374392105567490, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -3647,16 +3758,13 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    - target: {fileID: 4675487016541853357, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
-      propertyPath: nubsCooldownTime
-      value: 1
-      objectReference: {fileID: 0}
     - target: {fileID: 7690431182153463806, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: m_Name
       value: Player V7
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 6298284066991721049, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}

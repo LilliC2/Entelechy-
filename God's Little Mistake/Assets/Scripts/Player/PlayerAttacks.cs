@@ -78,8 +78,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
             case 4: //Squito
 
+                if (projectileShot == false)
+                {
+                    _EI.HeadAvatar.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Attack");
 
-                SquitoAttack();
+                }
+                //SquitoAttack();
 
                 break;
                 
@@ -326,10 +330,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     
     public void SquitoAttack()
     {
-        _AM.SquitoAttack.Play();
-        ExecuteAfterSeconds(0.5f,()=> SquitoProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange, _PE.explosionPS));
         if (_FDM.leftFireFilling == false)
         {
+            SquitoProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange, _PE.explosionPS);
 
             _FDM.SetLeftAttack(_IM.itemDataBase[4].firerate);
         }

@@ -254,7 +254,7 @@ public class GameManager : Singleton<GameManager>
            
         }
 
-        _Mask.UpdateMaskedObjects();
+        //_Mask.UpdateMaskedObjects();
     }
 
     void ClearPreviousLevel()
@@ -264,7 +264,7 @@ public class GameManager : Singleton<GameManager>
         {
             foreach (Transform child in levelParent.transform)
             {
-                if (_Mask.ObjMasked.Contains(child.gameObject)) _Mask.ObjMasked.Remove(child.gameObject);
+                //if (_Mask.ObjMasked.Contains(child.gameObject)) _Mask.ObjMasked.Remove(child.gameObject);
 
                 Destroy(child.gameObject);
             }
