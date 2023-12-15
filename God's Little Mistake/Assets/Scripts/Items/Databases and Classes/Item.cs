@@ -43,15 +43,8 @@ public class Item
 
     public Sprite staticTempSprite;
 
-    public GameObject avatarPrefabFrontLeft;
-    public GameObject avatarPrefabFrontRight;
-
-    public GameObject avtarPrefabLeft;
-    public GameObject avtarPrefabRight;
-
-    public GameObject avtarPrefabBackLeft;
-    public GameObject avtarPrefabBackRight;
-
+    public GameObject avatarPrefab;
+    
     public Item()
     {
         
