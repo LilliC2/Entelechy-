@@ -37,6 +37,7 @@ public class HealPool : GameBehaviour
             healingEffect.Stop();
 
             audiosource.Stop();
+            _UI.heathAnim.SetBool("IsHealing", false);
         }
     }
 
@@ -49,6 +50,7 @@ public class HealPool : GameBehaviour
             healingEffect.Play();
 
             audiosource.Play();
+            _UI.heathAnim.SetBool("IsHealing", true);
         }
     }
 
@@ -67,6 +69,7 @@ public class HealPool : GameBehaviour
         } while (currentTime <= time);
 
         Destroy(gameObject);
+        _UI.heathAnim.SetBool("IsHealing", false);
     }
 
     IEnumerator HealPlayer()

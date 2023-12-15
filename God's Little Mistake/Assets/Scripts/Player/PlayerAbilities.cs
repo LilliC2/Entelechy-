@@ -120,8 +120,10 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
     public void NubsAbility()
     {
         isOnCoolDown = true;
+        _AM.nubsAbility.Play();
         _PE.nubsPS.Play();
         Dash(3, 0.3f);
+
 
         ////OPTIONAL: Invunerable while dashing
         _PC.immortal = true;
@@ -135,6 +137,7 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
     public void TripodAbility()
     {
         Dash(5, 0.3f);
+        _AM.tripodAbility.Play();
 
         _PE.TripodVFX();
 

@@ -31269,10 +31269,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   dontDestroy: 0
-  tripodCooldownTime: 8
-  nubsCooldownTime: 5
+  tripodCooldownTime: 5
+  nubsCooldownTime: 2
   hoverLegsDuration: 5
-  hoverLegsCooldownTime: 10
+  hoverLegsCooldownTime: 8
   dashEase: 0
   dashDuration: 0
   dashPower: 0
@@ -32065,6 +32065,7 @@ MonoBehaviour:
   angle: -45
   power: 5
   target: {x: 0, y: 0, z: 0}
+  overHeatCooldown: 0
   maxOverheat: 5
   currentOverheat: 0
   resetOverheatTime: 0.2
@@ -38726,30 +38727,30 @@ MonoBehaviour:
   time: 0.1
   ease: 31
   headItem:
-    itemName: Sabertooth
-    ID: 2
+    itemName: Pea Shooter
+    ID: 0
     lvl: 0
     segment: 0
     currencyValue: 0
     active: 0
-    dmg: 20
-    firerate: 1
-    critChance: 17
+    dmg: 14
+    firerate: 0.25
+    critChance: 30
     projectileRange: 5
     projectile: 1
-    projectileSpeed: 700
-    projectilePF: {fileID: 2270622985260862806, guid: 252be8e94cd0cdc49a7f757070716c54, type: 3}
+    projectileSpeed: 1000
+    projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
     movementSpeed: 0
     modifier: 0
     modifierID: 0
     cooldownAbility: 0
-    abilityName: Saber-Rang
-    abilityDescription: 'A predator''s greatest asset is its carnivorous canines.
-      shooting those fangs as if it where a boomerang is a predator''s greatest use
-      for its carnivorous canines. '
-    icon: {fileID: 21300000, guid: 080168d2c1c53264aaddefe34309af5d, type: 3}
-    pauseIcon: {fileID: 21300000, guid: 080168d2c1c53264aaddefe34309af5d, type: 3}
-    staticTempSprite: {fileID: 21300000, guid: 9d105bacfd5e39248890f97a58aef89d, type: 3}
+    abilityName: Slobber Skwid
+    abilityDescription: 'Saliva glands are so inflamed it has no choice but to spit
+      upon every living organism in its wake. With barely caustic saliva, what this
+      peashooter lacks in damage makes up with its slimy stubborn splutter. '
+    icon: {fileID: 21300000, guid: c73dac31fde96a24db3dde9f9db5c4e1, type: 3}
+    pauseIcon: {fileID: 21300000, guid: c73dac31fde96a24db3dde9f9db5c4e1, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: bca1b5a772994574c8366d846b38c62c, type: 3}
     avatarPrefabFrontLeft: {fileID: 0}
     avatarPrefabFrontRight: {fileID: 0}
     avtarPrefabLeft: {fileID: 0}
@@ -38763,13 +38764,13 @@ MonoBehaviour:
     segment: 1
     currencyValue: 0
     active: 0
-    dmg: 2
-    firerate: 0.5
+    dmg: 8
+    firerate: 0.1
     critChance: 5
-    projectileRange: 6
+    projectileRange: 7
     projectile: 0
-    projectileSpeed: 400
-    projectilePF: {fileID: 8524524292363796634, guid: fc63ee3b35d6f1c49a97cf0260e8e257, type: 3}
+    projectileSpeed: 2000
+    projectilePF: {fileID: 6704227780447140647, guid: fc63ee3b35d6f1c49a97cf0260e8e257, type: 3}
     movementSpeed: 3
     modifier: 0
     modifierID: 0
@@ -49029,7 +49030,7 @@ LineRenderer:
       m_Curve:
       - serializedVersion: 3
         time: 0
-        value: 1
+        value: 0.26865768
         inSlope: 0
         outSlope: 0
         tangentMode: 0
@@ -60349,6 +60350,10 @@ PrefabInstance:
       value: NewDirectionalPointer
       objectReference: {fileID: 0}
     - target: {fileID: 1804849684147028267, guid: ce5e6153dd734724e99dcb026ab9a051, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6740777459484097966, guid: ce5e6153dd734724e99dcb026ab9a051, type: 3}
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}

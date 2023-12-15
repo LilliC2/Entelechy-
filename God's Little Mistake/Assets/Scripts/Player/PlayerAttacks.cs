@@ -20,7 +20,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     bool projectileShot3;
 
     [Header("LMG Overheat")]
-    bool overHeatCooldown;
+    public bool overHeatCooldown;
     [SerializeField]
     float maxOverheat;
     [SerializeField]
@@ -43,8 +43,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         //change red dot length
         if (_PC.torsoItem.ID == 8 && !Input.GetButton("Fire2") && !overHeatCooldown)
         {
-            if (currentOverheat > 0) currentOverheat -= 0.5f;
+            if (currentOverheat > 0)
+            {
+                currentOverheat -= 0.5f;
+                _FDM.rightHeatCurrent -= 0.5f;
 
+            }
         }
     }
 
@@ -117,9 +121,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     public void BabyAttack()
     {
         BasicLobProjectile(_IM.itemDataBase[3].projectileRange, _IM.itemDataBase[3].projectileSpeed, _IM.itemDataBase[3].projectilePF, _IM.itemDataBase[3].firerate, _PE.babyPS);
-        if (_FDM.leftFireFilling == false)
+        if (_FDM.rightFireFilling == false)
         {
-            _FDM.SetLeftAttack(_IM.itemDataBase[3].firerate);
+            _FDM.SetRightAttack(_IM.itemDataBase[3].firerate);
         }
     }
 
@@ -130,8 +134,10 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
         if (currentOverheat >=0)
         {
+            _FDM.rightMouseHeat.SetActive(true);
             overHeatCooldown = true;
             currentOverheat -= 0.5f;
+            _FDM.rightHeatCurrent -= 0.5f;
 
 
             if (currentOverheat <= 0)
@@ -139,6 +145,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 overHeatCooldown = false;
 
                 currentOverheat = 0;
+                _FDM.rightHeatCurrent -= 0;
+                _FDM.rightMouseHeat.SetActive(false);
+
             }
             else ExecuteAfterSeconds(resetOverheatTime, () => OverHeatCoolDown());
         }
@@ -150,11 +159,10 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     public void UrchinAttack()
     {
         LMGAttack(_IM.itemDataBase[8].projectilePF, _IM.itemDataBase[8].projectileSpeed, _IM.itemDataBase[8].firerate, _IM.itemDataBase[8].projectileRange);
+            
+        _FDM.SetRightHeat(maxOverheat);
+        _FDM.rightHasHeat = true;
 
-        //if (_FDM.rightFireFilling == false)
-        //{
-        //    _FDM.SetRightAttack(_IM.itemDataBase[8].firerate);
-        //}
     }
 
     public void LMGAttack(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
@@ -184,8 +192,13 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet1 = Instantiate(_prefab, new Vector3(firingPos.x,firingPos.y + 0.2f,firingPos.z), _PC.torsoFiringPoint.transform.rotation);
+                bullet1.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[8].dmg;
+
                 GameObject bullet2 = Instantiate(_prefab, new Vector3(firingPos.x, firingPos.y, firingPos.z+0.2f), _PC.torsoFiringPoint.transform.rotation);
+                bullet1.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[8].dmg;
+
                 GameObject bullet3 = Instantiate(_prefab, new Vector3(firingPos.x, firingPos.y, firingPos.z - 0.2f), _PC.torsoFiringPoint.transform.rotation);
+                bullet1.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[8].dmg;
 
                 bullet1.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Random.Range(_projectileSpeed-50, _projectileSpeed));
                 bullet2.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * Random.Range(_projectileSpeed - 50, _projectileSpeed));
@@ -215,10 +228,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
 
                 currentOverheat += 0.5f;
+                _FDM.rightHeatCurrent += 0.5f;
 
                 if (currentOverheat > maxOverheat) OverHeatCoolDown();
 
                 ExecuteAfterSeconds(_firerate, () => projectileShot3 = false);
+                _FDM.rightFireCurrent = currentOverheat;
 
             }
             print("FIRE PROJECTILE");
@@ -254,6 +269,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 for (int i = 0; i < 10; i++)
                 {
                     GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                    bullet.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[9].dmg;
                     //bullet1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-2,2),Vector3.forward.y, Vector3.forward.z) * _projectileSpeed);
                     //bullet1.GetComponent<RangeDetector>().range = _range;
                     //Mathf.Clamp(bullet1.transform.position.y, 0, 0);
@@ -310,8 +326,8 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     
     public void SquitoAttack()
     {
-
-        ExecuteAfterSeconds(0.5f,()=> BasicFireProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange, _PE.explosionPS));
+        _AM.SquitoAttack.Play();
+        ExecuteAfterSeconds(0.5f,()=> SquitoProjectileHead(_IM.itemDataBase[4].projectilePF, _IM.itemDataBase[4].projectileSpeed, _IM.itemDataBase[4].firerate, _IM.itemDataBase[4].projectileRange, _PE.explosionPS));
         if (_FDM.leftFireFilling == false)
         {
 
@@ -321,8 +337,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
     public void SabertoothAttack()
     {
+
         if(returned)
         {
+            _AM.sabretoothThrow.Play();
+
+
             returned = false;
             BoomerangProjectile(_IM.itemDataBase[2].projectilePF, _IM.itemDataBase[2].projectileSpeed, _IM.itemDataBase[2].firerate, _IM.itemDataBase[2].projectileRange, _PE.sabertoothPS);
             //ExecuteAfterSeconds(1, () => returned = true);
@@ -351,16 +371,17 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
             GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.torsoFiringPoint.transform.rotation);
 
+
             //print(_PC.directional.transform.forward);
 
             _PC.torsoFiringPoint.transform.localEulerAngles = _PC.directional.transform.localEulerAngles;
 
             if (_PC.torsoFiringPoint.transform.localEulerAngles.y < 360 && _PC.torsoFiringPoint.transform.localEulerAngles.y > 180)
             {
-                _PC.torsoFiringPoint.transform.localEulerAngles = new(angle, _PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
+                _PC.torsoFiringPoint.transform.localEulerAngles = new Vector3(angle, _PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
 
             }
-            else _PC.torsoFiringPoint.transform.localEulerAngles = new(angle, -_PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
+            else _PC.torsoFiringPoint.transform.localEulerAngles = new Vector3(angle, -_PC.torsoFiringPoint.transform.localEulerAngles.y, _PC.torsoFiringPoint.transform.localEulerAngles.z);
 
 
             bullet.GetComponent<Rigidbody>().AddForce(power * _PC.torsoFiringPoint.transform.forward, ForceMode.Impulse);
@@ -443,6 +464,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                bullet.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[0].dmg;
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
                 //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
@@ -491,6 +513,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                bullet.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[4].dmg;
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
                 //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;
@@ -534,6 +557,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
                 GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                bullet.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[7].dmg;
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
                 //bullet.GetComponent<ItemLook>().firingPoint = _PC.headFiringPoint;

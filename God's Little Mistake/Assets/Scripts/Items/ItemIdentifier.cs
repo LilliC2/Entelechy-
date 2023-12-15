@@ -24,7 +24,7 @@ public class ItemIdentifier : GameBehaviour
     [Header("Hold E")]
     public Image holdEFill;
     public float startTimer;
-    public float holdTimer = 2f;
+    public float holdTimer = 1f;
     public bool isTiming;
     public Image glowingHold;
 
@@ -35,6 +35,7 @@ public class ItemIdentifier : GameBehaviour
 
         isTiming = false;
 
+        holdTimer = _UI.holdTimer;
     }
 
     private void Update()

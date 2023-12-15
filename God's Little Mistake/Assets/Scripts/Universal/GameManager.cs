@@ -45,7 +45,7 @@ public class GameManager : Singleton<GameManager>
         Time.timeScale = 1.0f;
 
         GenerateLevel();
-        readyForGeneration = false;
+        readyForGeneration = true;
 
     }
 
@@ -57,7 +57,7 @@ public class GameManager : Singleton<GameManager>
         {
             print("Generate new level");
             GenerateLevel();
-
+            readyForGeneration = false;
         }
 
         if (gameState == GameState.Playing)
@@ -143,6 +143,12 @@ public class GameManager : Singleton<GameManager>
     public void ToTitle()
     {
         SceneManager.LoadScene("TitleScreen");
+    }
+
+    public void GameLevel()
+    {
+        SceneManager.LoadScene("GameLoopPrototype");
+        //GenerateLevel();
     }
 
     public void FeedbackLink()

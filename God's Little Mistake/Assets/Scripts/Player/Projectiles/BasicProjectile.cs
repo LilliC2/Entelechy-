@@ -18,6 +18,8 @@ public class BasicProjectile : GameBehaviour
     public float initialDamage = 50f; 
     public float damageDecayRate = 0.5f;
 
+    public float projectileDamage;
+
     private void Awake()
     {
         rb = GetComponent<Rigidbody>();
@@ -50,7 +52,7 @@ public class BasicProjectile : GameBehaviour
             rb.velocity = Vector3.zero;
 
             //get dmg from enemy
-            collision.collider.gameObject.GetComponent<BaseEnemy>().Hit(collision.collider.gameObject.GetComponent<BaseEnemy>().stats.dmg);
+            collision.collider.gameObject.GetComponent<BaseEnemy>().Hit(projectileDamage);
 
             if (impactPS != null)
             {

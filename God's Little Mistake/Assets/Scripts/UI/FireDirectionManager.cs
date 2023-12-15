@@ -22,7 +22,6 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
 
     [Header("Torso Fire")]
     public bool rightHasFired;
-    public bool rightHasHeat;
     public bool rightFireFilling;
     public GameObject rightFillObject;
     public Image rightFirerate;
@@ -33,6 +32,12 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     public float rightFireTotal;
     public float rightHeatCurrent;
     public float rightHeatTotal;
+
+    [Header("Torso Heat")]
+    public bool rightHasHeat;
+    public bool rHeatActive;
+    public bool rHeatFilling;
+    public bool cooldownRight;
 
 
     // Start is called before the first frame update
@@ -76,38 +81,71 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
             StartCoroutine(ProcessRightFire());
         }
 
-        //Left overheat fill
-        if (leftHasHeat)
+
+        //Overheat Goes UP
+        if(rightHasHeat)
         {
-
-            if (leftHeatCurrent > 0)
+            if (rightHeatCurrent < rightHeatTotal)
             {
-                leftHeatCurrent -= Time.deltaTime;
-                leftOverheat.fillAmount = leftHeatCurrent / leftHeatTotal;
-                Debug.Log(rightFirerate.fillAmount);
-            }
-            if (leftHeatCurrent <= 0)
-            {
-                leftHasHeat = false;
-            }
-        }
-
-        //Right overheat fill
-        if (rightHasHeat)
-        {
-
-            if (rightHeatCurrent > 0)
-            {
-                rightHeatCurrent -= Time.deltaTime;
+                rHeatFilling = true;
+                rHeatActive = true;
                 rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
-                Debug.Log(rightFirerate.fillAmount);
-            }
-            if (rightHeatCurrent <= 0)
-            {
-                rightHasFired = false;
             }
 
         }
+
+        //if(!cooldownRight && rightHasHeat)
+        //{
+        //    if (rightHeatCurrent < rightHeatTotal)
+        //    {
+        //        rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
+        //        rHeatFilling = true;
+        //        rHeatActive = true;
+        //    }
+        //}
+
+        //Overheats Goes Down
+
+
+
+        //if (Input.GetButtonDown("Fire2") && rightHasHeat && _PAtk.overHeatCooldown == false)
+        //{
+        //    rHeatActive = true;
+        //}
+
+        //if (Input.GetButtonUp("Fire2") && rightHasHeat)
+        //{
+        //    rHeatActive = false;
+        //}
+
+        //if (rHeatActive)
+        //{
+        //    if (rightHeatCurrent < rightHeatTotal)
+        //    {
+        //        rightHeatCurrent += Time.deltaTime * 4.99f;
+        //        rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
+        //        rHeatFilling = true;
+        //    }
+        //    else
+        //    {
+        //        rHeatActive = false;
+        //    }
+        //}
+
+        //if (!rHeatActive)
+        //{
+        //        rightHeatCurrent -= Time.deltaTime * 2.2f;
+        //        rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
+        //        rHeatFilling = true;
+
+
+        //    if(rightHeatCurrent <= 0)
+        //    {
+        //        rightHeatCurrent = 0;
+        //        rightOverheat.fillAmount = 0;
+        //        rHeatFilling = false;
+        //    }
+        //}
     }
 
     public void SetLeftAttack(float firerate)
@@ -120,33 +158,58 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
     public void SetRightAttack(float firerate)
     {
         rightHasFired = true;
-        rightFireCurrent = 0;
         rightFireTotal = firerate;
+        rightFireCurrent = 0;
+        rightHasHeat = false;
+
     }
 
     public void SetRightHeat(float firerate)
     {
-        rightHasHeat = true;
-        rightFirerate.fillAmount = 1;
-        rightHeatCurrent = firerate;
+        if(!rHeatFilling)
+        {
+            rightHasHeat = true;
+            rightFirerate.fillAmount = 1;
+            rightHeatTotal = firerate;
+            rightHeatCurrent = 0;
+        }
+        
+        
     }
 
     public IEnumerator HeatRight()
     {
-        leftFireFilling = true;
+        //if(_PAtk.overHeatCooldown)
+        //{
+        //    rightFireFilling = true;
 
-        while (leftHeatCurrent > 0)
+
+        //    while(rightHeatCurrent < rightHeatTotal)
+        //    {
+        //        rightMouseHeat.SetActive(true);
+        //        leftFirerate.fillAmount = 1;
+        //        rightHeatCurrent += Time.deltaTime;
+        //        rightOverheat.fillAmount = rightHeatCurrent / rightFireTotal;
+        //        yield return null;
+        //    }
+
+        //    leftFireFilling = false;
+        //    rightMouseHeat.SetActive(false);
+        //}
+
+        rightHasHeat = true;
+
+
+        while (rightHeatCurrent < rightHeatTotal)
         {
-            leftMouseDis.SetActive(true);
-            leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
-            leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
+            leftFirerate.fillAmount = 1;
+            rightHeatCurrent += Time.deltaTime;
+            rightOverheat.fillAmount = rightHeatCurrent / rightFireTotal;
             yield return null;
         }
 
-        leftMouseDis.SetActive(false);
-        leftHasFired = false; // Set to false only when it reaches the total
-
         leftFireFilling = false;
+        rightMouseHeat.SetActive(true);
     }
 
     public IEnumerator ProcessLeftFire()
@@ -155,9 +218,9 @@ public class FireDirectionManager : Singleton<FireDirectionManager>
 
         while (leftFireCurrent < leftFireTotal)
         {
-            rightHeatCurrent -= Time.deltaTime;
-            rightOverheat.fillAmount = rightHeatCurrent / rightHeatTotal;
-            //Debug.Log(rightFirerate.fillAmount);
+            leftMouseDis.SetActive(true);
+            leftFireCurrent += Time.deltaTime; // Increment by Time.deltaTime for a linear 
+            leftFirerate.fillAmount = leftFireCurrent / leftFireTotal;
             yield return null;
         }
 
