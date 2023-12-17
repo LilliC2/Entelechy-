@@ -33,8 +33,7 @@ public class PlayerEffects : Singleton<PlayerEffects>
     [Header("Squito Particle")]
     public ParticleSystem squitoPS;
     LineRenderer redDot;
-    [SerializeField]
-    GameObject redDotGO;
+    public GameObject redDotGO;
     float redDotLength;
     bool updateRedDot;
 
@@ -69,7 +68,6 @@ public class PlayerEffects : Singleton<PlayerEffects>
     {
 
 
-        redDot = redDotGO.GetComponent<LineRenderer>();
 
 
     }
@@ -82,7 +80,7 @@ public class PlayerEffects : Singleton<PlayerEffects>
         if (updateRedDot)
         {
             print("update red dot");
-            redDot.SetPosition(1, new Vector3(0, 0, Mathf.Lerp(0, _IM.itemDataBase[4].projectileRange, 1)));
+            redDot.SetPosition(1, new Vector3(redDotGO.transform.position.x, redDotGO.transform.position.y, Mathf.Lerp(0, _IM.itemDataBase[4].projectileRange, 1)));
             redDotGO.transform.localEulerAngles = new Vector3(0, _PC.directional.transform.eulerAngles.y, 0);
         }
 
@@ -137,6 +135,8 @@ public class PlayerEffects : Singleton<PlayerEffects>
 
     public void SquitoRedDot()
     {
+        redDot = redDotGO.GetComponent<LineRenderer>();
+
         print("play anim");
         //squitoPS.Play();
         updateRedDot = true;

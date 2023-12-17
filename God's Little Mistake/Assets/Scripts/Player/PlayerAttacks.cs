@@ -4,7 +4,7 @@ using UnityEngine;
 using DG.Tweening;
 public class PlayerAttacks : Singleton<PlayerAttacks>
 {
-
+    bool squitoAnimBool;
 
     [Header("Lob Projectile")]
     [SerializeField]
@@ -78,8 +78,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
             case 4: //Squito
 
-                if (projectileShot == false)
+                if (squitoAnimBool == false)
                 {
+                    squitoAnimBool = true;
                     _EI.HeadAvatar.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Attack");
 
                 }
@@ -509,9 +510,9 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             {
                 print("Fire");
                 //particle system
-                _PE.SquitoRedDot();
+                //_PE.SquitoRedDot();
 
-                if (_PS != null) _PS.Play();
+                //if (_PS != null) _PS.Play();
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
@@ -533,6 +534,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 projectileShot = true;
 
                 ExecuteAfterSeconds(_firerate, () => projectileShot = false);
+                ExecuteAfterSeconds(_firerate, () => squitoAnimBool = false);
             }
             print("FIRE PROJECTILE");
 
