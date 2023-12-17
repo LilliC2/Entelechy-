@@ -119,6 +119,8 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
 
     public void NubsAbility()
     {
+        _EI.LegAvatar.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Ability");
+
         isOnCoolDown = true;
         _AM.nubsAbility.Play();
         _PE.nubsPS.Play();

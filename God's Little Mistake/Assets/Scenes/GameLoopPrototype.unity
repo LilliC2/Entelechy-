@@ -778,6 +778,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemDatabse V2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7455442518472495796, guid: 06dc1da0b8f02c44eb810bfafeaa2095, type: 3}
+      propertyPath: itemDataBase.Array.data[1].avatarPrefab
+      value: 
+      objectReference: {fileID: 8100464723609161426, guid: 8bd2c196c3cd11c418ae9a684d378e86, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -1303,7 +1307,7 @@ MonoBehaviour:
   dontDestroy: 0
   HeadAvatar: {fileID: 1975289193}
   TorsoAvatar: {fileID: 0}
-  LegAvatar: {fileID: 0}
+  LegAvatar: {fileID: 2099022193}
 --- !u!1 &1217107500
 GameObject:
   m_ObjectHideFlags: 0
@@ -3571,6 +3575,11 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &2099022193 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 9057514340940777276, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+  m_PrefabInstance: {fileID: 7449056275972375405}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2100787354
 GameObject:
   m_ObjectHideFlags: 0
@@ -3661,6 +3670,18 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 777874392035829500, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: redDotGO
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 777874392035829500, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: squitoPS
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 777874392035829500, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: explosionPS
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.ID
       value: 4
@@ -3714,6 +3735,10 @@ PrefabInstance:
       value: 'This Insectoid cannon with its freakish compound eyes snipes down prey
         from great distances with regurgitated shards of coagulated blood.  '
       objectReference: {fileID: 0}
+    - target: {fileID: 1409256681410964438, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2549374392105567490, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: m_RootOrder
       value: -1
@@ -3765,6 +3790,8 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects:
     - {fileID: 6298284066991721049, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+    - {fileID: 2561977465606825550, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+    - {fileID: 8190003897123745371, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}

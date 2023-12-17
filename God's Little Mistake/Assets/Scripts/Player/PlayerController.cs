@@ -30,7 +30,7 @@ public class PlayerController : Singleton<PlayerController>
     public SpriteRenderer legSprite;
 
     [Header("Movement")]
-    bool isMoving;
+    public bool isMoving;
     public bool enableMovement = true;
     public Vector3 move;
     public float speed;
@@ -50,6 +50,7 @@ public class PlayerController : Singleton<PlayerController>
     GameObject playerAvatar;
     Vector3 currentPos;
     Vector3 lastPos;
+    Animator legs;
 
 
     [Header("Knockback")]
@@ -82,7 +83,6 @@ public class PlayerController : Singleton<PlayerController>
 
     private void Start()
     {
-
         health = maxHP;
         controller = gameObject.GetComponent<CharacterController>();
         _UI.UpdateHealthText(health);
@@ -93,7 +93,7 @@ public class PlayerController : Singleton<PlayerController>
 
         CheckForStartingItems();
 
-
+        legs = _EI.LegAvatar.transform.GetChild(0).GetComponent<Animator>();
     }
 
     void Update()
@@ -115,6 +115,10 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Movement
 
+                if (controller.velocity.magnitude > 1f) legs.SetBool("Walking", true);
+                else legs.SetBool("Walking", false);
+
+
                 if (enableMovement)
                 {
                     move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
@@ -134,6 +138,7 @@ public class PlayerController : Singleton<PlayerController>
                     //find inpus for movement
                     if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
                     {
+                        legs.SetBool("Walking", true);
                         if (!isMoving)
                         {
                             speed = speed + initalSpeedBoost;
@@ -142,6 +147,7 @@ public class PlayerController : Singleton<PlayerController>
                         }
 
                     }
+                    else 
 
                     if (!isMoving)
                     {
