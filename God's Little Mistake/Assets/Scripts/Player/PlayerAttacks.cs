@@ -6,6 +6,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 {
     bool squitoAnimBool;
     bool sharkAnimBool;
+    bool eyeballAnimBool;
 
     [Header("Lob Projectile")]
     [SerializeField]
@@ -92,8 +93,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             case 7: //Rocket Launcher Eyeball
 
                 print("Rocket");
+                if (eyeballAnimBool == false)
+                {
+                    eyeballAnimBool = true;
+                    _EI.TorsoAvatar.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Attack");
 
-                RocketAttack();
+                }
 
                 break;
 
@@ -330,10 +335,10 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     public void RocketAttack()
     {
         BasicFireProjectileTorso(_IM.itemDataBase[7].projectilePF, _IM.itemDataBase[7].projectileSpeed, _IM.itemDataBase[7].firerate, _IM.itemDataBase[7].projectileRange);
+        ExecuteAfterSeconds(_IM.itemDataBase[7].firerate, () => eyeballAnimBool = false);
 
         if (_FDM.rightFireFilling == false)
         {
-            _PE.eyeballPS.Play();
             _FDM.SetRightAttack(_IM.itemDataBase[7].firerate);
         }
 
@@ -581,7 +586,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
-                GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
                 bullet.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[7].dmg;
                 bullet.GetComponent<Rigidbody>().AddRelativeForce(Vector3.forward * _projectileSpeed);
 
