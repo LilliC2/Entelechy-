@@ -7,6 +7,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
     bool squitoAnimBool;
     bool sharkAnimBool;
     bool eyeballAnimBool;
+    bool babyAnimBool;
 
     [Header("Lob Projectile")]
     [SerializeField]
@@ -74,7 +75,12 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 
             case 3: //Baby Lob
 
-                BabyAttack();
+                if (babyAnimBool == false)
+                {
+                    babyAnimBool = true;
+                    _EI.TorsoAvatar.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Attack");
+
+                }
 
                 break;
 
@@ -418,6 +424,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             projectileShot2 = true;
 
             ExecuteAfterSeconds(_firerate, () => projectileShot2 = false);
+            ExecuteAfterSeconds(_firerate, () => babyAnimBool = false);
         }
 
 
