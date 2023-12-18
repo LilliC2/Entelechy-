@@ -138,6 +138,8 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
 
     public void TripodAbility()
     {
+        _EI.LegAvatar.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Ability");
+
         Dash(5, 0.3f);
         _AM.tripodAbility.Play();
 

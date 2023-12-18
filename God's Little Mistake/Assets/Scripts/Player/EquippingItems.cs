@@ -56,8 +56,11 @@ public class EquippingItems : Singleton<EquippingItems>
                 if (_item.avatarPrefab != null)
                 {
                     if (LegAvatar.transform.childCount != 0) Destroy(LegAvatar.transform.GetChild(0).gameObject);
-
-                    Instantiate(_item.avatarPrefab, LegAvatar.transform);
+                    print("add legfs");
+                    var legs = Instantiate(_item.avatarPrefab, LegAvatar.transform);
+                    var anim = legs.GetComponent<Animator>();
+                    print(anim);
+                    _PC.legsAnim = anim;
                 }
                 else
                 {

@@ -50,7 +50,7 @@ public class PlayerController : Singleton<PlayerController>
     GameObject playerAvatar;
     Vector3 currentPos;
     Vector3 lastPos;
-    Animator legs;
+    public Animator legsAnim;
 
 
     [Header("Knockback")]
@@ -93,7 +93,7 @@ public class PlayerController : Singleton<PlayerController>
 
         CheckForStartingItems();
 
-        legs = _EI.LegAvatar.transform.GetChild(0).GetComponent<Animator>();
+       // legsAnim = _EI.LegAvatar.transform.GetChild(0).GetComponent<Animator>();
     }
 
     void Update()
@@ -115,10 +115,10 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Movement
 
-                if(legs!=null)
+                if(legsAnim!=null)
                 {
-                    if (controller.velocity.magnitude > 1f) legs.SetBool("Walking", true);
-                    else legs.SetBool("Walking", false);
+                    if (controller.velocity.magnitude > 1f) legsAnim.SetBool("Walking", true);
+                    else legsAnim.SetBool("Walking", false);
                 }
 
 
@@ -362,6 +362,7 @@ public class PlayerController : Singleton<PlayerController>
 
             _UI.CreateItemSelected(legItem);
             legItem.active = true;
+
         }
 
         //_PIA.PassiveAbilityItemCheck();
