@@ -19,7 +19,7 @@ public class EquippingItems : Singleton<EquippingItems>
 
                 if (_item.avatarPrefab != null)
                 {
-                    if (HeadAvatar.transform.childCount != 0) Destroy(HeadAvatar.transform.GetChild(0));
+                    if (HeadAvatar.transform.childCount != 0) Destroy(HeadAvatar.transform.GetChild(0).gameObject);
                     var head = Instantiate(_item.avatarPrefab, HeadAvatar.transform);
                     _PC.headFiringPoint = TransformDeepChildExtension.FindDeepChild(head.transform, "FiringPoint").gameObject;
 
@@ -38,9 +38,12 @@ public class EquippingItems : Singleton<EquippingItems>
                 //if has animations
                 if(_item.avatarPrefab != null)
                 {
-                    if (TorsoAvatar.transform.childCount != 0) Destroy(TorsoAvatar.transform.GetChild(0));
+                    if (TorsoAvatar.transform.childCount != 0) Destroy(TorsoAvatar.transform.GetChild(0).gameObject);
 
-                    Instantiate(_item.avatarPrefab, TorsoAvatar.transform);
+                    var torso = Instantiate(_item.avatarPrefab, TorsoAvatar.transform);
+                    _PC.torsoFiringPoint = TransformDeepChildExtension.FindDeepChild(torso.transform, "FiringPoint").gameObject;
+
+
                 }
                 else
                 {
@@ -52,7 +55,7 @@ public class EquippingItems : Singleton<EquippingItems>
 
                 if (_item.avatarPrefab != null)
                 {
-                    if (LegAvatar.transform.childCount != 0) Destroy(LegAvatar.transform.GetChild(0));
+                    if (LegAvatar.transform.childCount != 0) Destroy(LegAvatar.transform.GetChild(0).gameObject);
 
                     Instantiate(_item.avatarPrefab, LegAvatar.transform);
                 }

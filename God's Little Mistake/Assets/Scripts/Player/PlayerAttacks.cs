@@ -5,6 +5,7 @@ using DG.Tweening;
 public class PlayerAttacks : Singleton<PlayerAttacks>
 {
     bool squitoAnimBool;
+    bool sharkAnimBool;
 
     [Header("Lob Projectile")]
     [SerializeField]
@@ -111,9 +112,21 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             
             case 9: //Shotgun
 
-                print("Shotgun");
 
-                ShotgunAttack(_IM.itemDataBase[9].projectilePF, _IM.itemDataBase[9].projectileSpeed, _IM.itemDataBase[9].firerate, _IM.itemDataBase[9].projectileRange);
+                if (sharkAnimBool == false)
+                {
+                    sharkAnimBool = true;
+                    _EI.TorsoAvatar.transform.GetChild(0).GetComponent<Animator>().SetTrigger("Attack");
+
+                }
+                print("Shotgun");
+                //if (sharkAnimBool == false)
+                //{
+                //    sharkAnimBool = true;
+                //    
+
+                //}
+
 
                 break;
 
@@ -248,6 +261,16 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
         }
     }
 
+    public void SharkAttack()
+    {
+        _PAtk.ShotgunAttack(_IM.itemDataBase[9].projectilePF, _IM.itemDataBase[9].projectileSpeed, _IM.itemDataBase[9].firerate, _IM.itemDataBase[9].projectileRange);
+
+        if (_FDM.rightFireFilling == false)
+        {
+            _FDM.SetRightAttack(_IM.itemDataBase[9].firerate);
+        }
+    }
+
     public void ShotgunAttack(GameObject _prefab, float _projectileSpeed, float _firerate, float _range)
     {
         Vector3 screenPoint = Camera.main.ScreenToWorldPoint(Input.mousePosition);
@@ -265,7 +288,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
             {
                 print("Fire");
                 //particle system
-                _PE.teethShotgunPS.Play();
+                //_PE.teethShotgunPS.Play();
 
                 //Spawn bullet and apply force in the direction of the mouse
                 //Quaternion.LookRotation(flatAimTarget,Vector3.forward);
@@ -273,7 +296,7 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
 
                 for (int i = 0; i < 10; i++)
                 {
-                    GameObject bullet = Instantiate(_prefab, _PC.headFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
+                    GameObject bullet = Instantiate(_prefab, _PC.torsoFiringPoint.transform.position, _PC.headFiringPoint.transform.rotation);
                     bullet.GetComponent<BasicProjectile>().projectileDamage = _IM.itemDataBase[9].dmg;
                     //bullet1.GetComponent<Rigidbody>().AddRelativeForce(new Vector3(Vector3.forward.x + Random.Range(-2,2),Vector3.forward.y, Vector3.forward.z) * _projectileSpeed);
                     //bullet1.GetComponent<RangeDetector>().range = _range;
@@ -294,14 +317,11 @@ public class PlayerAttacks : Singleton<PlayerAttacks>
                 projectileShot3 = true;
 
                 ExecuteAfterSeconds(_firerate, () => projectileShot3 = false);
+                ExecuteAfterSeconds(_firerate, () => sharkAnimBool = false);
             }
             print("FIRE PROJECTILE");
 
 
-            if (_FDM.rightFireFilling == false)
-            {
-                _FDM.SetRightAttack(_IM.itemDataBase[9].firerate);
-            }
 
         }
     }

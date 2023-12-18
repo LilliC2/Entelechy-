@@ -115,8 +115,12 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Movement
 
-                if (controller.velocity.magnitude > 1f) legs.SetBool("Walking", true);
-                else legs.SetBool("Walking", false);
+                if(legs!=null)
+                {
+                    if (controller.velocity.magnitude > 1f) legs.SetBool("Walking", true);
+                    else legs.SetBool("Walking", false);
+                }
+
 
 
                 if (enableMovement)
@@ -138,7 +142,6 @@ public class PlayerController : Singleton<PlayerController>
                     //find inpus for movement
                     if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
                     {
-                        legs.SetBool("Walking", true);
                         if (!isMoving)
                         {
                             speed = speed + initalSpeedBoost;
