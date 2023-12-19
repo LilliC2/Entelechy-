@@ -32,7 +32,7 @@ public class GameManager : Singleton<GameManager>
 
     public enum GameState
     {
-        Playing, Pause, Iventory, Dead
+        Playing, Pause, Iventory, Dead, Instruction
     }
 
     public GameState gameState;
