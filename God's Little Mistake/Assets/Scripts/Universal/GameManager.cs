@@ -41,7 +41,7 @@ public class GameManager : Singleton<GameManager>
     {
         player = GameObject.FindGameObjectWithTag("Player");
         fadeImage.fillAmount = 1;
-        gameState = GameState.Playing;
+        gameState = GameState.Instruction;
         Time.timeScale = 1.0f;
 
         GenerateLevel();
@@ -110,6 +110,11 @@ public class GameManager : Singleton<GameManager>
             isPaused = false;
         }
 
+        if(gameState == GameState.Instruction)
+        {
+            TerryIntro();
+        }
+
 
     }
 
@@ -125,6 +130,11 @@ public class GameManager : Singleton<GameManager>
         gameState = GameState.Playing;
         _UI.OnResume();
         Time.timeScale = 1;
+    }
+
+    public void TerryIntro()
+    {
+        Time.timeScale = 0;
     }
 
 
