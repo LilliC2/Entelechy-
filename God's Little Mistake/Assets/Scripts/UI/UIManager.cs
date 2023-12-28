@@ -61,6 +61,11 @@ public class UIManager : Singleton<UIManager>
     [Header("Popup")]
     public float holdTimer = 1f;
 
+    [Header("Popup")]
+    public GameObject inGameTerry;
+    public TMP_Text inGameTerryTextl;
+    public int enemyCount;
+
     private void Start()
     {   
         UpdateInventorySlotImages();
@@ -130,6 +135,9 @@ public class UIManager : Singleton<UIManager>
 
         healhBar.color = gradient.Evaluate(playerHeath/maxHeath);
 
+
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+        inGameTerryTextl.text = enemyCount.ToString();
 
 
     }
