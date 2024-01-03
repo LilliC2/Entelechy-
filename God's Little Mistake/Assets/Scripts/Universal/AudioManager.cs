@@ -41,6 +41,10 @@ public class AudioManager : Singleton<AudioManager>
     [Header("Squtio")]
     public AudioSource SquitoAttack;
 
+    [Header("Shotgun")]
+    public AudioSource shotgunAttack; //shoot
+    public AudioSource shotgunAttackHit; //when projhectile hits enemy
+
 
     public AudioClip playerHover;
     public AudioClip playerSlugLegs;

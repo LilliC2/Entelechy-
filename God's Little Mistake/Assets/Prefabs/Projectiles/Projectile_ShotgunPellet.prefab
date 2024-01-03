@@ -379,8 +379,10 @@ MonoBehaviour:
   impactPS: {fileID: 6342617779489861287}
   image: {fileID: 7381536268127285845}
   explosionSound: {fileID: 1221330813449595208}
+  hitSound: {fileID: 296095155406730445}
   initialDamage: 50
   damageDecayRate: 0.5
+  projectileDamage: 0
 --- !u!114 &7203876690098025589
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -407,8 +409,8 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7480726050088606192, guid: c08b6d80cd53d4648b1e29553ca1a356, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 47c5da2a25d0cd44ab217a6bb1c206c7, type: 3}
-  m_PlayOnAwake: 1
+  m_audioClip: {fileID: 8300000, guid: 3ebf487b237d30e45abe8a246ebfa3d4, type: 3}
+  m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
   Loop: 0
@@ -503,7 +505,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 7480726050088606192, guid: c08b6d80cd53d4648b1e29553ca1a356, type: 2}
-  m_audioClip: {fileID: 8300000, guid: 7d9f986886c48f94694f4ff5587f7fec, type: 3}
+  m_audioClip: {fileID: 8300000, guid: eac0b18df21ab09479c59256b0c092cd, type: 3}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1

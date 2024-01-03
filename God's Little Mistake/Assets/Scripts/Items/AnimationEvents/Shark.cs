@@ -12,6 +12,12 @@ public class Shark : GameBehaviour
         _PAtk.SharkAttack();
     }
 
+    public void AttackAudio()
+    {
+        _AM.shotgunAttack.Play();
+
+    }
+
     public void Explosion()
     {
         explosionPS.Play();

@@ -14,6 +14,8 @@ public class BasicProjectile : GameBehaviour
     Rigidbody rb;
     [SerializeField]
     AudioSource explosionSound;
+    [SerializeField]
+    AudioSource hitSound;
 
     public float initialDamage = 50f; 
     public float damageDecayRate = 0.5f;
@@ -60,6 +62,8 @@ public class BasicProjectile : GameBehaviour
                 {
                     playedPS = true;
                     impactPS.Play();
+
+                    hitSound.Play();
 
                     ExecuteAfterSeconds(impactPS.main.duration, () => Destroy(gameObject));
                 }
