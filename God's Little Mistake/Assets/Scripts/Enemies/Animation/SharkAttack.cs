@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class SharkAttack : MonoBehaviour
 {
-    EnemyShortRange ESR;
+    EnemyPlant ESR;
     [SerializeField]
     ParticleSystem leftParticle;
     [SerializeField]
@@ -12,12 +12,11 @@ public class SharkAttack : MonoBehaviour
 
     private void Start()
     {
-        ESR = GetComponentInParent<EnemyShortRange>();
+        ESR = GetComponentInParent<EnemyPlant>();
     }
 
     public void Attack()
     {
-        ESR.PerformAttack(ESR.enemyStats.stats.fireRate);
     }
 
     public void LeftParticle()

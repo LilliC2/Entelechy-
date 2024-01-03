@@ -4,11 +4,11 @@ using UnityEngine;
 
 public class SpongeAttack : GameBehaviour
 {
-    EnemyShortRange ESR;
+    EnemyPlant ESR;
 
     private void Start()
     {
-        ESR = GetComponentInParent<EnemyShortRange>();
+        ESR = GetComponentInParent<EnemyPlant>();
     }
 
     public void Attack()
@@ -24,7 +24,7 @@ public class SpongeAttack : GameBehaviour
 
     public void Walk()
     {
-        ESR.walkAudio.Play();
+        ESR.spawnAudio.Play();
 
     }
 

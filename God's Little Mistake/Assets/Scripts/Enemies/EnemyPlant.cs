@@ -16,6 +16,12 @@ public class EnemyPlant : MonoBehaviour
     private float nextShootTime;
     private Vector3 initialPosition;
 
+    [Header("Audio")]
+    public AudioSource attackAudio;
+    public AudioSource hurtAudio;
+    public AudioSource deathAudio;
+    public AudioSource spawnAudio;
+
     Animator anim;
 
     private void Start()
@@ -86,7 +92,7 @@ public class EnemyPlant : MonoBehaviour
     private void GoUnderground()
     {
         anim.SetTrigger("Death");
-
+        deathAudio.Play();
         Vector3 newPosition = new Vector3(transform.position.x, undergroundY, transform.position.z);
         transform.position = newPosition;
     }
