@@ -52,8 +52,9 @@ public class AudioManager : Singleton<AudioManager>
 
     [Header("Baby Lob")]
     public AudioSource babyAttack;
-    
 
+    [Header("Eyeball")]
+    public AudioSource eyeballAttack;
 
 
     public AudioClip playerHover;

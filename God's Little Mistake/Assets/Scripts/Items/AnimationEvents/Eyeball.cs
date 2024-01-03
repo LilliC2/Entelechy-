@@ -11,4 +11,9 @@ public class Eyeball : GameBehaviour
         explosionPS.Play();
         _PAtk.RocketAttack();
     }
+
+    public void AttackAudio()
+    {
+        _AM.eyeballAttack.Play();
+    }
 }
