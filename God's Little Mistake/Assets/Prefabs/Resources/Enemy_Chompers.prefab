@@ -63,9 +63,10 @@ MonoBehaviour:
   walkPoint: {x: 0, y: 0, z: 0}
   walkPointRange: 0
   anim: {fileID: 6380450525867102919}
-  attackAudio: {fileID: 0}
-  hurtAudio: {fileID: 0}
-  deathAudio: {fileID: 0}
+  attackAudio: {fileID: 6778538761647081805}
+  hurtAudio: {fileID: 3649395963753369670}
+  deathAudio: {fileID: 2583303415216714746}
+  walkAudio: {fileID: 8079309410661439231}
   runningParticleGO: {fileID: 3034898265258847353}
   attackPS: {fileID: 2759032827925750013}
   runningParticle: {fileID: 171135230700216053}
@@ -313,7 +314,7 @@ GameObject:
   - component: {fileID: 5313670905677483449}
   - component: {fileID: 8300539501007268520}
   m_Layer: 0
-  m_Name: Chompers_Static
+  m_Name: Chompers_Visuals
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -11298,8 +11299,28 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 245892207370885557, guid: d9bcdd00ccd8b614bbcaa563a5468768, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 6585446239948541120}
   m_SourcePrefab: {fileID: 100100000, guid: d9bcdd00ccd8b614bbcaa563a5468768, type: 3}
+--- !u!1 &4758292923989393284 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 245892207370885557, guid: d9bcdd00ccd8b614bbcaa563a5468768, type: 3}
+  m_PrefabInstance: {fileID: 4711134219974518321}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &6585446239948541120
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4758292923989393284}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f4986340f371d1345925ec4ef6838bff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!95 &6380450525867102919 stripped
 Animator:
   m_CorrespondingSourceObject: {fileID: 1867487988947612918, guid: d9bcdd00ccd8b614bbcaa563a5468768, type: 3}
