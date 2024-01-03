@@ -11,4 +11,9 @@ public class BabyLauncher : GameBehaviour
         explosionPS.Play();
         _PAtk.BabyAttack();
     }
+
+    public void AttackAudio()
+    {
+        _AM.babyAttack.Play();
+    }
 }

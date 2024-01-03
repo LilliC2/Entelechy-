@@ -47,6 +47,9 @@ public class AudioManager : Singleton<AudioManager>
     public AudioSource shotgunAttack; //shoot
     public AudioSource shotgunAttackHit; //when projhectile hits enemy
 
+    [Header("Baby Lob")]
+    public AudioSource babyAttack;
+
 
     public AudioClip playerHover;
     public AudioClip playerSlugLegs;

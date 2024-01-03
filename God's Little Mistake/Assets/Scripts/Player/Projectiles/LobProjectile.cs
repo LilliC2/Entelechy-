@@ -15,11 +15,11 @@ public class CurveProjectile : GameBehaviour
     public GameObject image;
     [SerializeField]
     Animator explosionAnim;
-    [SerializeField]
-    AudioSource explosionSound;
-
+    
     bool playedPS;
 
+    [SerializeField]
+    AudioSource explosionAudio;
 
     [SerializeField]
     LayerMask ground;
@@ -34,6 +34,9 @@ public class CurveProjectile : GameBehaviour
         var enemyCol = Physics.OverlapSphere(transform.position, 3, enemy);
         print("trying to hit something");
         print(enemyCol.Length);
+
+        explosionAudio.Play();
+
         foreach (var col in enemyCol)
         {
             print("hit in explosion");
