@@ -49,11 +49,12 @@ public class AudioManager : Singleton<AudioManager>
 
     [Header("Baby Lob")]
     public AudioSource babyAttack;
+    
+
 
 
     public AudioClip playerHover;
     public AudioClip playerSlugLegs;
-    public AudioClip playerPeaShoot;
     public AudioClip playerBlink;
     public AudioClip playerSparkle;
     public AudioClip playerBigEyesExplosion;

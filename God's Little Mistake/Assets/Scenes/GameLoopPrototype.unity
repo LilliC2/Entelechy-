@@ -778,6 +778,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ItemDatabse V2 (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 7455442518472495796, guid: 06dc1da0b8f02c44eb810bfafeaa2095, type: 3}
+      propertyPath: itemDataBase.Array.data[0].avatarPrefab
+      value: 
+      objectReference: {fileID: 713123126002175703, guid: 8ba8d3da1ff77644c96ae222cc94fdcc, type: 3}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3761,7 +3765,15 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 777874392035829500, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: eyeballPS
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 777874392035829500, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: explosionPS
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 777874392035829500, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
+      propertyPath: teethShotgunPS
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 1246707868698259444, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
@@ -3774,11 +3786,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.ID
-      value: 4
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.dmg
-      value: 60
+      value: 14
       objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: legItem.icon
@@ -3791,7 +3803,7 @@ PrefabInstance:
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.icon
       value: 
-      objectReference: {fileID: 21300000, guid: 88f4c3c6e5b0a9846ae1df67e909b4cf, type: 3}
+      objectReference: {fileID: 21300000, guid: c73dac31fde96a24db3dde9f9db5c4e1, type: 3}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: torsoItem.dmg
       value: 20
@@ -3806,11 +3818,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.firerate
-      value: 2
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.itemName
-      value: Squito
+      value: Pea Shooter
       objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: legItem.pauseIcon
@@ -3819,7 +3831,7 @@ PrefabInstance:
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.pauseIcon
       value: 
-      objectReference: {fileID: 21300000, guid: 88f4c3c6e5b0a9846ae1df67e909b4cf, type: 3}
+      objectReference: {fileID: 21300000, guid: c73dac31fde96a24db3dde9f9db5c4e1, type: 3}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: torsoItem.firerate
       value: 1
@@ -3838,7 +3850,7 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 65c64af71c726eb4fab13c016e2cc3d4, type: 3}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.abilityName
-      value: Skito
+      value: Slobber Skwid
       objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: legItem.avatarPrefab
@@ -3855,11 +3867,11 @@ PrefabInstance:
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.avatarPrefab
       value: 
-      objectReference: {fileID: 1332521995275406873, guid: e74b4a5408dea174ca8c389edaf1e483, type: 3}
+      objectReference: {fileID: 713123126002175703, guid: 8ba8d3da1ff77644c96ae222cc94fdcc, type: 3}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.projectilePF
       value: 
-      objectReference: {fileID: 8524524292363796634, guid: 46b3d5886c67a3445802954a5790866f, type: 3}
+      objectReference: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: legItem.movementSpeed
       value: 8
@@ -3886,11 +3898,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.projectileRange
-      value: 10
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.projectileSpeed
-      value: 3000
+      value: 1000
       objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: legItem.staticTempSprite
@@ -3899,7 +3911,7 @@ PrefabInstance:
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.staticTempSprite
       value: 
-      objectReference: {fileID: 21300000, guid: ef4c89ceea6e71e4ca80af1de32b6f24, type: 3}
+      objectReference: {fileID: 21300000, guid: bca1b5a772994574c8366d846b38c62c, type: 3}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: torsoItem.projectileRange
       value: 5
@@ -3919,8 +3931,9 @@ PrefabInstance:
       objectReference: {fileID: 21300000, guid: 65c64af71c726eb4fab13c016e2cc3d4, type: 3}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: headItem.abilityDescription
-      value: 'This Insectoid cannon with its freakish compound eyes snipes down prey
-        from great distances with regurgitated shards of coagulated blood.  '
+      value: 'Saliva glands are so inflamed it has no choice but to spit upon every
+        living organism in its wake. With barely caustic saliva, what this peashooter
+        lacks in damage makes up with its slimy stubborn splutter. '
       objectReference: {fileID: 0}
     - target: {fileID: 1361327948038656133, guid: 2dec7e07533b8954db6c5cf2d8477dd4, type: 3}
       propertyPath: torsoItem.abilityDescription
