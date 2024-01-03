@@ -34,6 +34,7 @@ public class EnemyShortRange : GameBehaviour
     public AudioSource attackAudio;
     public AudioSource hurtAudio;
     public AudioSource deathAudio;
+    public AudioSource walkAudio;
 
     [Header("Animation")]
     [SerializeField]
@@ -164,6 +165,7 @@ public class EnemyShortRange : GameBehaviour
                 break;
             case BaseEnemy.EnemyState.Die:
 
+                deathAudio.Play();
                 baseEnemy.Die();
 
 
