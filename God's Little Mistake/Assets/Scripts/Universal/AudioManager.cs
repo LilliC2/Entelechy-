@@ -62,14 +62,6 @@ public class AudioManager : Singleton<AudioManager>
     public AudioSource urchinAttack;
 
 
-
-    public AudioClip playerHover;
-    public AudioClip playerSlugLegs;
-    public AudioClip playerBlink;
-    public AudioClip playerSparkle;
-    public AudioClip playerBigEyesExplosion;
-    public AudioClip playerSlugEyes;
-    public AudioClip playerRamHit;
     // Start is called before the first frame update
     void Start()
     {
@@ -102,11 +94,7 @@ public class AudioManager : Singleton<AudioManager>
         audioManagerSourcePlayerDead.Play();
     }
 
-    public void RamHit()
-    {
-        playerAttackAudioSource.clip = playerRamHit;
-        playerAttackAudioSource.Play();
-    }
+ 
 
     public void VaryPitch(AudioSource _audioSource)
     {

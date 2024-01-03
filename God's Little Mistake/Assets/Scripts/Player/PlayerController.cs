@@ -376,29 +376,6 @@ public class PlayerController : Singleton<PlayerController>
     }
 
 
-    private void OnCollisionEnter(Collision collision)
-    {
-        if (collision.gameObject.CompareTag("Enemy"))
-        {
-
-
-            if (_PIA.ramming)
-            {
-
-                _AM.RamHit();
-                print("Ramming hit someone");
-                collision.gameObject.GetComponent<BaseEnemy>().ApplyStun(_PIA.ramHornsStunDuration);
-                collision.gameObject.GetComponent<BaseEnemy>().Hit(_PIA.ramHornsDamage);
-
-            }
-            if(_PIA.gutpunch)
-            {
-                print("GUT PUNCHED");
-                collision.gameObject.GetComponent<BaseEnemy>().Hit(_PIA.humanFistDamage);
-            }
-        }
-        
-    }
 
     public void Hit(float _dmg)
     {

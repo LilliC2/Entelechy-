@@ -13,7 +13,6 @@ public class BigEyes : GameBehaviour
     }
     public void BigEyePS()
     {
-        _AM.playerAttackAudioSource.clip = _AM.playerBigEyesExplosion;
         _AM.playerAttackAudioSource.Play();
         bigEyesPS.GetComponent<ParticleSystem>().Play();
     }
