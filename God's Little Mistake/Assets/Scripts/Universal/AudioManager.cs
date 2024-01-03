@@ -56,6 +56,10 @@ public class AudioManager : Singleton<AudioManager>
     [Header("Eyeball")]
     public AudioSource eyeballAttack;
 
+    [Header("Quill LMG")]
+    public AudioSource urchinAttack;
+
+
 
     public AudioClip playerHover;
     public AudioClip playerSlugLegs;
