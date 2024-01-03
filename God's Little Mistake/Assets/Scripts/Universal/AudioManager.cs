@@ -34,6 +34,8 @@ public class AudioManager : Singleton<AudioManager>
 
     [Header("Nubs")]
     public AudioSource nubsAbility;
+    public AudioSource nubsStep0;
+    public AudioSource nubsStep1;
 
     [Header("Tripod")]
     public AudioSource tripodAbility;
