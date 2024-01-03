@@ -34,6 +34,8 @@ public class AudioManager : Singleton<AudioManager>
 
     [Header("Tripod")]
     public AudioSource tripodAbility;
+    public AudioSource tripodWalk;
+    public AudioSource tripodBounce;
 
     [Header("Pea Shooter")]
     public AudioSource peaShooterAttack;
