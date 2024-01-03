@@ -50,6 +50,7 @@ public class EnemyLongRange : GameBehaviour
     public AudioSource attackAudio;
     public AudioSource hurtAudio;
     public AudioSource deathAudio;
+    public AudioSource stepAudio;
 
     void Start()
     {
@@ -205,6 +206,7 @@ public class EnemyLongRange : GameBehaviour
                 break;
             case BaseEnemy.EnemyState.Die:
 
+                deathAudio.Play();
                 baseEnemy.Die();
 
                 break;

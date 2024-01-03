@@ -21,4 +21,15 @@ public class BubblesAttack : GameBehaviour
         ELR.hurtAudio.Play();
 
     }
+
+    public void Step()
+    {
+        ELR.stepAudio.Play();
+
+    }
+
+    public void Death()
+    {
+        ELR.deathAudio.Play();
+    }
 }
