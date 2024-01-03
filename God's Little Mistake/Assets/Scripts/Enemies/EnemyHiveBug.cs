@@ -24,9 +24,10 @@ public class EnemyHiveBug : GameBehaviour
     public Animator anim;
 
     [Header("Audio")]
-    public AudioSource attackAudio;
     public AudioSource hurtAudio;
     public AudioSource deathAudio;
+    public AudioSource walkAudio;
+    public AudioSource spawnAudio;
 
     private void Start()
     {
@@ -120,7 +121,7 @@ public class EnemyHiveBug : GameBehaviour
 
                 case BaseEnemy.EnemyState.Die:
                     StopAllCoroutines();
-
+                    deathAudio.Play();
                     baseEnemy.Die();
 
 
