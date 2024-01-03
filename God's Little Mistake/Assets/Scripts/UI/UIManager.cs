@@ -137,7 +137,23 @@ public class UIManager : Singleton<UIManager>
 
 
         enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
-        inGameTerryTextl.text = enemyCount.ToString();
+
+        if (enemyCount > 0)
+        {
+            if (enemyCount > 1)
+            {
+                inGameTerryTextl.text = enemyCount.ToString() + " Enemies Left";
+            }
+            else
+            {
+                inGameTerryTextl.text = enemyCount.ToString() + " MORE MISTAKE TO ELIMINATE";
+            }
+        }
+        else
+        {
+            inGameTerryTextl.text = "Mistake Free At last";
+        }
+
 
 
     }
