@@ -32,6 +32,7 @@ public class EnemyChomper : GameBehaviour
     public AudioSource attackAudio;
     public AudioSource hurtAudio;
     public AudioSource deathAudio;
+    public AudioSource walkAudio;
 
     [Header("Enemy Visuals")]
 
@@ -180,6 +181,7 @@ public class EnemyChomper : GameBehaviour
 
                 break;
             case BaseEnemy.EnemyState.Die:
+                deathAudio.Play();
                 runningParticle.Stop();
                 baseEnemy.Die();
 
