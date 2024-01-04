@@ -314,7 +314,7 @@ public class BaseEnemy : GameBehaviour
                     if(!spawnHealPool)
                     {
                         spawnHealPool = true;
-                        Instantiate(healPool, gameObject.transform.position, Quaternion.identity);
+                        Instantiate(healPool, new Vector3(gameObject.transform.position.x, -1.63f, gameObject.transform.position.z), Quaternion.identity);
                         print("Heal pool spawns");
                     }
                     break;
@@ -344,7 +344,7 @@ public class BaseEnemy : GameBehaviour
             }
 
             //make death splatter
-            _EM.DeathSplatter(new Vector3(transform.position.x, -1.64f, transform.position.z));
+            _EM.DeathSplatter(new Vector3(transform.position.x, -1.65f, transform.position.z));
 
             //remove from list
             _EM.enemiesSpawned.Remove(this.gameObject);
