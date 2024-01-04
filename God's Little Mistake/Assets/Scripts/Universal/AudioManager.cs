@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class AudioManager : Singleton<AudioManager>
 {
+    [Header("UI")]
+    public AudioSource buttonClick;
 
     [Header("Universal Items")]
     public AudioClip equipItem;
@@ -72,6 +74,10 @@ public class AudioManager : Singleton<AudioManager>
         audioManagerSourceItem.Play();
     }
 
+    public void ButtonClick()
+    {
+        buttonClick.Play();
+    }
     public void PlayerHurt()
     {
         var sound = playerHurtSounds[Random.Range(0, playerHurtSounds.Length)];
