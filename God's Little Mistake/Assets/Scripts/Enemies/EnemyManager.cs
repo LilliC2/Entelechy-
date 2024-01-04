@@ -17,7 +17,7 @@ public class EnemyManager : Singleton<EnemyManager>
     // Start is called before the first frame update
     void Start()
     {
-        enemyTypes = new string[] { "_Long_Range", "_Chompers", "_Bullet_Sponge", "_HiveBug",  };
+        enemyTypes = new string[] { "_Long_Range", "_Chompers", "_Bullet_Sponge", "_HiveBug", "_Plant"  };
     }
 
     // Update is called once per frame
