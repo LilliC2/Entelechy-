@@ -58,6 +58,7 @@ public class GameManager : Singleton<GameManager>
             print("Generate new level");
             GenerateLevel();
             readyForGeneration = false;
+            endRoomOB.SetActive(false);
         }
 
         if (gameState == GameState.Playing)
@@ -113,6 +114,14 @@ public class GameManager : Singleton<GameManager>
         if(gameState == GameState.Instruction)
         {
             TerryIntro();
+        }
+
+        if(isLevelCleared)
+        {
+            endRoomOB.SetActive(true);
+
+            endRoomOB.transform.position = player.transform.position;
+            ExecuteAfterSeconds(1, () => readyForGeneration = true);
         }
 
 
@@ -238,7 +247,6 @@ public class GameManager : Singleton<GameManager>
 
         //endRoomOB.GetComponent<EndLevelTrigger>().ResetDoor(); //reset animations
         //move end room trigger
-        endRoomOB.transform.position = new Vector3(levelEndRoom.position.x, 0.5f, levelEndRoom.position.z);
 
         //move player to room
         player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z);
@@ -248,24 +256,7 @@ public class GameManager : Singleton<GameManager>
         _EM.SpawnEnemiesForLevel();
 
     }
-    
-    void AddObjectsToMaskObject(GameObject currentLevel)
-    {
-        GameObject props = currentLevel.transform.Find("Props").gameObject;
 
-        for (int i = 0; i < props.transform.childCount; i++)
-        {
-            var currentProp = props.transform.GetChild(i);
-
-            if (currentProp.name.Contains("Huge") || currentProp.name.Contains("Hanging"))
-            {
-                _Mask.ObjMasked.Add(props.transform.GetChild(i).gameObject);
-            }
-           
-        }
-
-        //_Mask.UpdateMaskedObjects();
-    }
 
     void ClearPreviousLevel()
     {
