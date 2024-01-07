@@ -140,7 +140,7 @@ public class Terrystruction : MonoBehaviour
                 break;
 
             case PageNumber.Page4:
-                instructionImage.sprite = insImg[2];
+                instructionImage.sprite = insImg[3];
                 titleText.text = "Evict and Loot";
                 bodyText.text = "Finish those misfits before they eat us and swipe their limbs by holding E to make us stonger.  member, you are only the sum of your parts!";
                 nextButton.interactable = true;
@@ -148,7 +148,7 @@ public class Terrystruction : MonoBehaviour
                 break;
 
             case PageNumber.Page5:
-                instructionImage.sprite = insImg[2];
+                instructionImage.sprite = insImg[4];
                 titleText.text = "Spa Day";
                 bodyText.text = "Take a dip in the pink goo of vanquished foes to rejuvenate. Ah, nothing beats a good viscera spa day!";
                 nextButton.interactable = true;
@@ -156,7 +156,7 @@ public class Terrystruction : MonoBehaviour
                 break;
 
             case PageNumber.Page6:
-                instructionImage.sprite = insImg[2];
+                instructionImage.sprite = insImg[5];
                 titleText.text = "Doors of Opportunity";
                 bodyText.text = "Deplete this ecosystem of mistakes to break into new biomes. It's extinction day, every day! :)";
                 nextButton.interactable = true;
@@ -164,7 +164,7 @@ public class Terrystruction : MonoBehaviour
                 break;
 
             case PageNumber.Page7:
-                instructionImage.sprite = insImg[2];
+                instructionImage.sprite = insImg[6];
                 titleText.text = "Final Words";
                 bodyText.text = "Good luck sport and prove that you aren't Natures little mistake";
                 nextButton.interactable = false;
