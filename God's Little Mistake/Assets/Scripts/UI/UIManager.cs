@@ -21,6 +21,7 @@ public class UIManager : Singleton<UIManager>
     public TMP_Text hpText;
     public TMP_Text levelText;
     public Image healhBar;
+    public GameObject terryIntro;
 
     [Header("Equip")]
     public Sprite defaultCursor;
@@ -59,6 +60,11 @@ public class UIManager : Singleton<UIManager>
 
     [Header("Popup")]
     public float holdTimer = 1f;
+
+    [Header("Popup")]
+    public GameObject inGameTerry;
+    public TMP_Text inGameTerryTextl;
+    public int enemyCount;
 
     private void Start()
     {   
@@ -128,6 +134,25 @@ public class UIManager : Singleton<UIManager>
         heathAnim.SetFloat("Health", playerHeath);
 
         healhBar.color = gradient.Evaluate(playerHeath/maxHeath);
+
+
+        enemyCount = GameObject.FindGameObjectsWithTag("Enemy").Length;
+
+        if (enemyCount > 0)
+        {
+            if (enemyCount > 1)
+            {
+                inGameTerryTextl.text = enemyCount.ToString() + " Enemies Left";
+            }
+            else
+            {
+                inGameTerryTextl.text = enemyCount.ToString() + " MORE MISTAKE TO ELIMINATE";
+            }
+        }
+        else
+        {
+            inGameTerryTextl.text = "Mistake Free At last";
+        }
 
 
 
@@ -484,9 +509,18 @@ public class UIManager : Singleton<UIManager>
 
     //}
 
+    #endregion
+
+    #region Heath & Other HUD
+
     public void UpdateHealthText(float _hp)
     {
         hpText.text = _hp.ToString("F0"); //removes any decimals
+
+        if(_hp < 0)
+        {
+            hpText.text = "0";
+        }
     }
 
     public void UpdateHealthBar(float _currentHp, float _maxHp)
@@ -497,7 +531,14 @@ public class UIManager : Singleton<UIManager>
     }
     public void UpdateLevelext(int _lvl)
     {
-        //levelText.text = "Level " + _lvl.ToString();
+        levelText.text = "Level " + _lvl.ToString();
+    }
+
+    public void CloseTerryInstruction()
+    {
+        terryIntro.SetActive(false);
+        _GM.gameState = GameManager.GameState.Playing;
+        Time.timeScale = 1;
     }
 
     #endregion
@@ -657,40 +698,6 @@ public class UIManager : Singleton<UIManager>
 
     #endregion
 
-
-    #region Popup animaions
-
-    //public void PlayPopupOpen()
-    //{
-    //    hoverItemAnimator.SetTrigger("Open");
-    //}
-    //public void PlayPopupClose()
-    //{
-    //    hoverItemAnimator.SetTrigger("Close");
-    //}
-
-    //public void PlayPopup1Open()
-    //{
-    //    hoverItemStatComp1Animator.SetTrigger("Open");
-    //}
-
-    //public void PlayPopup1Close()
-    //{
-    //    hoverItemStatComp1Animator.SetTrigger("Close");
-    //}
-
-    //public void PlayPopup2Open()
-    //{
-    //    hoverItemStatComp2Animator.SetTrigger("Open");
-    //}
-
-    //public void PlayPopup2Close()
-    //{
-    //    hoverItemStatComp2Animator.SetTrigger("Close");
-    //}
-
-
-    #endregion
 
 
     #region Game Over
