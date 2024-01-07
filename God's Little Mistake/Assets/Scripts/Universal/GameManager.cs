@@ -199,7 +199,7 @@ public class GameManager : Singleton<GameManager>
         //FLOOR TEMP
         //instantiate new prefab
 
-        var randomLevel = Random.Range(2, 3); // last digit excluded
+        var randomLevel = 5;//Random.Range(1, 3); // last digit excluded
 
         //will change to change to Environment_Floor_ later //randomLevel changed to 2
         currentLevel = Instantiate(Resources.Load("Environment_Floor_" + randomLevel, typeof(GameObject)), levelParent) as GameObject;
