@@ -91,7 +91,7 @@ public class PlayerController : Singleton<PlayerController>
 
         groundCheck = GameObject.Find("GroundCheck");
 
-
+        CheckForStartingItems();
        // legsAnim = _EI.LegAvatar.transform.GetChild(0).GetComponent<Animator>();
     }
 
@@ -339,7 +339,7 @@ public class PlayerController : Singleton<PlayerController>
 
     public void CheckForStartingItems()
     {
-
+        print("looking for starting items");
         if(headItem.itemName != "NULL")
         {
             print("Head item is: " + headItem.itemName);

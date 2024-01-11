@@ -10,6 +10,8 @@ public class GameManager : Singleton<GameManager>
 
     GameObject player;
 
+    public LayerMask ground;
+
     [Header("Dungeon Generation")]
     public bool readyForGeneration;
     public int dungeonLevel;
@@ -47,9 +49,9 @@ public class GameManager : Singleton<GameManager>
         GenerateLevel();
         readyForGeneration = true;
 
-        _PC.headItem = _IM.itemDataBase[10];
+        _PC.headItem = _IM.itemDataBase[0];
         _PC.torsoItem = _IM.itemDataBase[11];
-        _PC.legItem = _IM.itemDataBase[0];
+        _PC.legItem = _IM.itemDataBase[1];
         //_PC.CheckForStartingItems();
 
 
@@ -255,7 +257,7 @@ public class GameManager : Singleton<GameManager>
         //move end room trigger
 
         //move player to room
-        player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z);
+        player.transform.position = levelStartRoom.transform.position;
         print(levelStartRoom.transform.position);
         print("player pos " + player.transform.position);
 
