@@ -2479,6 +2479,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: ParallaxVoid
       objectReference: {fileID: 0}
+    - target: {fileID: 1375675105393317908, guid: 693a1bc36304a5f4babfad816509987f, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8715965759612300036, guid: 693a1bc36304a5f4babfad816509987f, type: 3}
       propertyPath: m_RootOrder
       value: 8
@@ -2543,11 +2547,11 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 1041529881908036511, guid: 09990d2b3202025468acf33005a74089, type: 3}
       propertyPath: m_LocalPosition.x
-      value: -2.76
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1041529881908036511, guid: 09990d2b3202025468acf33005a74089, type: 3}
       propertyPath: m_LocalPosition.z
-      value: 0.82
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 1410661118243919111, guid: 09990d2b3202025468acf33005a74089, type: 3}
       propertyPath: m_RootOrder
@@ -2593,11 +2597,17 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5541821112717220169, guid: 09990d2b3202025468acf33005a74089, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 8691346681390188977, guid: 09990d2b3202025468acf33005a74089, type: 3}
       propertyPath: m_Name
       value: NextLevelDoor
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3191740498894332811, guid: 09990d2b3202025468acf33005a74089, type: 3}
+    - {fileID: 5541821112717220169, guid: 09990d2b3202025468acf33005a74089, type: 3}
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
     m_AddedComponents: []
@@ -2610,6 +2620,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1753369149}
     m_Modifications:
+    - target: {fileID: 304818604121493889, guid: c7daf4e5d9b47ef44a1f487ce2a92cb0, type: 3}
+      propertyPath: Priority
+      value: 183
+      objectReference: {fileID: 0}
+    - target: {fileID: 304818604121493889, guid: c7daf4e5d9b47ef44a1f487ce2a92cb0, type: 3}
+      propertyPath: m_Volume
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 304818604121493889, guid: c7daf4e5d9b47ef44a1f487ce2a92cb0, type: 3}
+      propertyPath: panLevelCustomCurve.m_Curve.Array.data[0].value
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 351075117863457657, guid: c7daf4e5d9b47ef44a1f487ce2a92cb0, type: 3}
       propertyPath: buttonClick
       value: 

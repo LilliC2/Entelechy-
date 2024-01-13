@@ -189,7 +189,7 @@ public class EnemySponge : GameBehaviour
         if (collision.gameObject.CompareTag("Player") || collision.gameObject.CompareTag("Projectile"))
         {
             print("Size increase");
-            currentScale = Mathf.Clamp(currentScale += scaleIncrease, 1, 2.5f);
+            currentScale = Mathf.Clamp(currentScale += scaleIncrease, 1, 1.5f);
             gameObject.transform.DOScale(new Vector3(currentScale, currentScale, currentScale), 1);
         }
     }
