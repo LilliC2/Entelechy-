@@ -75,9 +75,12 @@ public class EquippingItems : Singleton<EquippingItems>
                     
             
         }
+
+        _IM.AddItemToInventory(_item);
+
     }
 
-   
+
 }
 
 public static class TransformDeepChildExtension

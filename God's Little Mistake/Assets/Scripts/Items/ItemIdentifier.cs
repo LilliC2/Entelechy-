@@ -122,14 +122,11 @@ public class ItemIdentifier : GameBehaviour
                     {
 
                         _AM.ItemPickUp();
-
-                        _AM.ItemPickUp();
                         itemAdd = true;
 
                         //equip new items
                         _UI.CreateItemSelected(itemInfo);
 
-                        _IM.AddItemToInventory(itemInfo);
 
 
 
