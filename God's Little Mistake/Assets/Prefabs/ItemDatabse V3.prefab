@@ -1,0 +1,405 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &2492582331322291843
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4982075783631096959}
+  - component: {fileID: 1896487148996392288}
+  m_Layer: 0
+  m_Name: ItemDatabse V3
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4982075783631096959
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2492582331322291843}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1896487148996392288
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2492582331322291843}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: be817fdf5188e9e43baba6ceff269d71, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  dontDestroy: 0
+  itemDataBase:
+  - itemName: Pea Shooter
+    ID: 0
+    lvl: 0
+    segment: 0
+    currencyValue: 0
+    active: 0
+    dmg: 14
+    firerate: 0.25
+    critChance: 30
+    projectileRange: 5
+    projectile: 1
+    projectileSpeed: 1000
+    projectilePF: {fileID: 8524524292363796634, guid: 6f53b5081d6d9d045a403a4e7e02742b, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: Slobber Skwid
+    abilityDescription: 'Saliva glands are so inflamed it has no choice but to spit
+      upon every living organism in its wake. With barely caustic saliva, what this
+      peashooter lacks in damage makes up with its slimy stubborn splutter. '
+    icon: {fileID: 21300000, guid: c73dac31fde96a24db3dde9f9db5c4e1, type: 3}
+    pauseIcon: {fileID: 21300000, guid: c73dac31fde96a24db3dde9f9db5c4e1, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: bca1b5a772994574c8366d846b38c62c, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Nubs
+    ID: 1
+    lvl: 0
+    segment: 2
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 5
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 1
+    abilityName: Nubs
+    abilityDescription: 'With a short intestinal tract and a bad gut microbiome these
+      nubs produce a cloud of propelling propane from between its cheeks pushing
+      the organism in any desired direction avoiding projectiles '
+    icon: {fileID: 21300000, guid: 3299ad833bfdcba4b923b38bf01769cb, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 3299ad833bfdcba4b923b38bf01769cb, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: 3299ad833bfdcba4b923b38bf01769cb, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Sabertooth
+    ID: 2
+    lvl: 0
+    segment: 0
+    currencyValue: 0
+    active: 0
+    dmg: 20
+    firerate: 1
+    critChance: 17
+    projectileRange: 5
+    projectile: 1
+    projectileSpeed: 700
+    projectilePF: {fileID: 2270622985260862806, guid: 252be8e94cd0cdc49a7f757070716c54, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: Saber-Rang
+    abilityDescription: 'A predator''s greatest asset is its carnivorous canines.
+      shooting those fangs as if it where a boomerang is a predator''s greatest use
+      for its carnivorous canines. '
+    icon: {fileID: 21300000, guid: 080168d2c1c53264aaddefe34309af5d, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 080168d2c1c53264aaddefe34309af5d, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: 9d105bacfd5e39248890f97a58aef89d, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Baby Lob
+    ID: 3
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 20
+    firerate: 0.7
+    critChance: 17
+    projectileRange: 5
+    projectile: 1
+    projectileSpeed: 700
+    projectilePF: {fileID: 1753417278855635134, guid: 3c79b25e1dc54074ab1e23e354351e05, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: "The Brood\_"
+    abilityDescription: 'This brood will protect their host at any cost. Throwing
+      themselves screaming and wailing at opponents in a fetal fury. They will erupt
+      upon foes from their innate love for their kin as they explode in a bloody
+      blastula blast. '
+    icon: {fileID: 21300000, guid: 65c64af71c726eb4fab13c016e2cc3d4, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 65c64af71c726eb4fab13c016e2cc3d4, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: 65c64af71c726eb4fab13c016e2cc3d4, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Squito
+    ID: 4
+    lvl: 0
+    segment: 0
+    currencyValue: 0
+    active: 0
+    dmg: 60
+    firerate: 2
+    critChance: 30
+    projectileRange: 10
+    projectile: 1
+    projectileSpeed: 3000
+    projectilePF: {fileID: 8524524292363796634, guid: 46b3d5886c67a3445802954a5790866f, type: 3}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: Skito
+    abilityDescription: 'This Insectoid cannon with its freakish compound eyes snipes
+      down prey from great distances with regurgitated shards of coagulated blood.  '
+    icon: {fileID: 21300000, guid: 88f4c3c6e5b0a9846ae1df67e909b4cf, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 88f4c3c6e5b0a9846ae1df67e909b4cf, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: ef4c89ceea6e71e4ca80af1de32b6f24, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Tripod
+    ID: 5
+    lvl: 0
+    segment: 2
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 8
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 5
+    abilityName: Dirty Diglets
+    abilityDescription: 'With two overbearing fingers and a strong thumb this mutated
+      triped fist can swiftly evade oncoming projectiles with a flick and a click. '
+    icon: {fileID: 21300000, guid: 93a0af030088a8f4aa938d9072f7a1ac, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 93a0af030088a8f4aa938d9072f7a1ac, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: 93a0af030088a8f4aa938d9072f7a1ac, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Slug Legs
+    ID: 6
+    lvl: 0
+    segment: 2
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 3
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 8
+    abilityName: Slug
+    abilityDescription: 'This gastropod produces copious amounts of toxic grime,
+      leaving a slow-moving trail behind. Moving within its own filth the fat footed
+      appendage glides along the floor like a lubricated goop balloon. '
+    icon: {fileID: 21300000, guid: 43f49f30b1060ab4d9e682562f548133, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 43f49f30b1060ab4d9e682562f548133, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: 43f49f30b1060ab4d9e682562f548133, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Eyeball Rocket Launcher
+    ID: 7
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 28
+    firerate: 2
+    critChance: 10
+    projectileRange: 8
+    projectile: 0
+    projectileSpeed: 400
+    projectilePF: {fileID: 8524524292363796634, guid: 09f4da9afb26cab4c8084a371acad746, type: 3}
+    movementSpeed: 3
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: "Eldritch Eye\_"
+    abilityDescription: 'Bare witness to the cyclopean eyeball as it launches its
+      slimy orb at a mob of monsters. They will be subject to a bombastic optic boom
+      tearing their entrails from their gory parts. '
+    icon: {fileID: 21300000, guid: dbe3bb981f7f96742a873c44ac146e64, type: 3}
+    pauseIcon: {fileID: 21300000, guid: dbe3bb981f7f96742a873c44ac146e64, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: dbe3bb981f7f96742a873c44ac146e64, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Porcupine LMG
+    ID: 8
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 8
+    firerate: 0.1
+    critChance: 5
+    projectileRange: 7
+    projectile: 0
+    projectileSpeed: 2000
+    projectilePF: {fileID: 6704227780447140647, guid: fc63ee3b35d6f1c49a97cf0260e8e257, type: 3}
+    movementSpeed: 3
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: The Prickle Pack
+    abilityDescription: 'A hellion cluster of prickly urchins grow like low hanging
+      fruit from subtle flesh. Their hunger is outmatched by their barrage of needles
+      readily fired at any competitor that wants a slice of their host. Their relentless
+      offense will leave them defenseless if all spines are dislodged. '
+    icon: {fileID: 21300000, guid: 269d18c4178a15a4b8647624ed10afd9, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 269d18c4178a15a4b8647624ed10afd9, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: 269d18c4178a15a4b8647624ed10afd9, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Teeth Shotgun
+    ID: 9
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 10
+    firerate: 0.6
+    critChance: 18
+    projectileRange: 3.5
+    projectile: 1
+    projectileSpeed: 500
+    projectilePF: {fileID: 8524524292363796634, guid: ac411dc545c0dfd4b80d828a2b68e9d9, type: 3}
+    movementSpeed: 3
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: Gummy Maw
+    abilityDescription: 'A grinning maw filled with hundreds of serrated teeth, is
+      eagerly ready to be ejected from their gummy homes and launched in a short
+      and spontaneous direction ideally ending up lodged into the soft gooey flesh
+      of prey. Moments after hundreds of serrated teeth refill those empty gums.     '
+    icon: {fileID: 21300000, guid: 425fe672fcb53694398ba22032574758, type: 3}
+    pauseIcon: {fileID: 21300000, guid: 425fe672fcb53694398ba22032574758, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: 425fe672fcb53694398ba22032574758, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Missy Head
+    ID: 10
+    lvl: 0
+    segment: 0
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 0
+    abilityDescription: 0
+    icon: {fileID: 21300000, guid: f0462076cd61a7d4b9a5f24872afe7f6, type: 3}
+    pauseIcon: {fileID: 21300000, guid: f0462076cd61a7d4b9a5f24872afe7f6, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: d51d2c8b5d6b1b74ca58450531d1b041, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
+  - itemName: Missy Torso
+    ID: 11
+    lvl: 0
+    segment: 1
+    currencyValue: 0
+    active: 0
+    dmg: 0
+    firerate: 0
+    critChance: 0
+    projectileRange: 0
+    projectile: 0
+    projectileSpeed: 0
+    projectilePF: {fileID: 0}
+    movementSpeed: 0
+    modifier: 0
+    modifierID: 0
+    cooldownAbility: 0
+    abilityName: 0
+    abilityDescription: 0
+    icon: {fileID: 21300000, guid: ba61c96b201633f4b971855b908e3a8f, type: 3}
+    pauseIcon: {fileID: 21300000, guid: ba61c96b201633f4b971855b908e3a8f, type: 3}
+    staticTempSprite: {fileID: 21300000, guid: ba61c96b201633f4b971855b908e3a8f, type: 3}
+    avatarPrefabFrontLeft: {fileID: 0}
+    avatarPrefabFrontRight: {fileID: 0}
+    avtarPrefabLeft: {fileID: 0}
+    avtarPrefabRight: {fileID: 0}
+    avtarPrefabBackLeft: {fileID: 0}
+    avtarPrefabBackRight: {fileID: 0}
