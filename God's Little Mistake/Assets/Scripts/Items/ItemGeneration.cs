@@ -22,13 +22,12 @@ public class ItemGeneration : Singleton<ItemGeneration>
 
     public GameObject GenerateItem()
     {
-
         //create list of all possible item drops
         //List<Item> possibleDrops;
         int rand = 0;
 
         rand = Random.Range(0, _IM.itemDataBase.Length);
-        if (_IM.itemDataBase[rand].ID == 10 || _IM.itemDataBase[rand].ID == 11)
+        if (_IM.itemDataBase[rand].ID == 10 || _IM.itemDataBase[rand].ID == 11 || _IM.itemDataBase[rand].ID == -5)
             rand = Random.Range(0, _IM.itemDataBase.Length);
 
         //pick a random possible drop

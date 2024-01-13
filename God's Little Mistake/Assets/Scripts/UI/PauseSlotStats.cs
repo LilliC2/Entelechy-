@@ -74,15 +74,15 @@ public class PauseSlotStats : GameBehaviour
         {
             case 0:
                 itemInfo = _PC.headItem;
-                Debug.Log(_PC.headItem.itemName);
+                //Debug.Log(_PC.headItem.itemName);
                 break;
             case 1:
                 itemInfo = _PC.torsoItem;
-                Debug.Log(_PC.torsoItem.itemName);
+                //Debug.Log(_PC.torsoItem.itemName);
                 break;
             case 2:
                 itemInfo = _PC.legItem;
-                Debug.Log(_PC.legItem.itemName);
+                //Debug.Log(_PC.legItem.itemName);
                 break;
         }
 

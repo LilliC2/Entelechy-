@@ -87,7 +87,7 @@ public class PlayerController : Singleton<PlayerController>
         controller = gameObject.GetComponent<CharacterController>();
         _UI.UpdateHealthText(health);
         _UI.UpdateHealthBar(health, maxHP);
-        lastPos = transform.position;
+        //lastPos = transform.position;
 
         groundCheck = GameObject.Find("GroundCheck");
 
@@ -114,118 +114,110 @@ public class PlayerController : Singleton<PlayerController>
 
                 #region Movement
 
-                if(legsAnim!=null)
+                if (legsAnim != null)
                 {
                     if (controller.velocity.magnitude > 1f) legsAnim.SetBool("Walking", true);
                     else legsAnim.SetBool("Walking", false);
                 }
 
+                move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
 
-
-                if (enableMovement)
+                if (!canFloat)
                 {
-                    move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
+                    move.y -= gravity;
+                }
 
-                    if (!canFloat)
-                    {
-                        move.y -= gravity;
-                    }
-
-                    controller.Move(move * Time.deltaTime * legItem.movementSpeed);
+                controller.Move(move * Time.deltaTime * legItem.movementSpeed);
 
 
-                    #region isMoving Check
+                #region isMoving Check
 
-                    if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) isMoving = false;
+                if (Input.GetAxis("Horizontal") == 0 && Input.GetAxis("Vertical") == 0) isMoving = false;
 
-                    //find inpus for movement
-                    if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
-                    {
-                        if (!isMoving)
-                        {
-                            speed = speed + initalSpeedBoost;
-
-                            ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed, 1));
-                        }
-
-                    }
-                    else 
-
+                ////find inpus for movement
+                if (Input.GetKeyDown(KeyCode.W) || Input.GetKeyDown(KeyCode.S) || Input.GetKeyDown(KeyCode.A) || Input.GetKeyDown(KeyCode.D))
+                {
                     if (!isMoving)
                     {
-                        speed = maxSpeed;
+                        speed = speed + initalSpeedBoost;
+
+                        ExecuteAfterSeconds(0.1f, () => TweenSpeed(maxSpeed, 1));
                     }
 
-
                 }
-                else
+                else if (!isMoving)
                 {
-                    move = new Vector3(0, 0, 0);
-                    move.y -= gravity;
-
-                    controller.Move(move * Time.deltaTime * legItem.movementSpeed);
-
+                    speed = maxSpeed;
                 }
 
-                isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
+                ////if (enableMovement)
+                ////{
+                ////    
+
+
+                //}
+                ////else
+
+
+                ////isGrounded = Physics.CheckSphere(groundCheck.transform.position, 1, groundMask);
 
 
                 #endregion
 
                 #region Respawn If Fell Off
 
-                //grounded check
+                //////grounded check
 
-                if (isGrounded)
-                {
-                    lastPosOnGround = lastPos;
-                    var col = Physics.OverlapSphere(groundCheck.transform.position, 0.5f, groundMask);
-                    if (col.Length != 0) tileLastStoodOn = col[0].gameObject;
-                    fallDamage = true;
-                    enableMovement = true;
-
-
-                }
-                else
-                {
-                    if (transform.position.y < -3)
-                    {
-                        enableMovement = false;
-                        //remove control
-
-                        //find closest tile, put player above
-                        Vector3 targetPos = new Vector3(tileLastStoodOn.transform.position.x, 4, tileLastStoodOn.transform.position.z);
+                //////if (isGrounded)
+                //////{
+                //////    lastPosOnGround = lastPos;
+                //////    var col = Physics.OverlapSphere(groundCheck.transform.position, 0.5f, groundMask);
+                //////    if (col.Length != 0) tileLastStoodOn = col[0].gameObject;
+                //////    fallDamage = true;
+                //////    enableMovement = true;
 
 
+                //////}
+                //////else
+                //////{
+                //////    if (transform.position.y < -3)
+                //////    {
+                //////        enableMovement = false;
+                //////        //remove control
 
-                        print("Put on ground");
-
-                        //player lose health when fall off
-
-                        if (fallDamage)
-                        {
-                            fallDamage = false;
-                            health = (health / 2) - 1;
-                            print("Taken fall damage");
-                            ExecuteAfterSeconds(1, () => transform.position = targetPos);
-                            ExecuteAfterSeconds(1.3f, () => _PE.landingPS.Play());
-                            ExecuteAfterSeconds(1.3f, () => _AM.playerThud.Play());
-                            ExecuteAfterSeconds(1.5f, () => RespawnAfterFallingCheck(targetPos));
+                //////        //find closest tile, put player above
+                //////        Vector3 targetPos = new Vector3(tileLastStoodOn.transform.position.x, 4, tileLastStoodOn.transform.position.z);
 
 
 
+                //////        print("Put on ground");
 
-                        }
+                //////        //player lose health when fall off
 
-                    }
+                //////        if (fallDamage)
+                //////        {
+                //////            fallDamage = false;
+                //////            health = (health / 2) - 1;
+                //////            print("Taken fall damage");
+                //////            ExecuteAfterSeconds(1, () => transform.position = targetPos);
+                //////            ExecuteAfterSeconds(1.3f, () => _PE.landingPS.Play());
+                //////            ExecuteAfterSeconds(1.3f, () => _AM.playerThud.Play());
+                //////            ExecuteAfterSeconds(1.5f, () => RespawnAfterFallingCheck(targetPos));
 
-                }
 
-                //while grounded lastPosGrounded = lastPos;
 
-                //if not grounded execute after 1 second and respawn them
 
-                //for some pizazz could have them fly back in from the roof
+                //////        }
+
+                //////    }
+
+                //////}
+
+                //////while grounded lastPosGrounded = lastPos;
+
+                //////if not grounded execute after 1 second and respawn them
+
+                //////for some pizazz could have them fly back in from the roof
 
 
                 #endregion
@@ -339,17 +331,17 @@ public class PlayerController : Singleton<PlayerController>
 
     public void CheckForStartingItems()
     {
-        print("looking for starting items");
+        //print("looking for starting items");
         if(headItem.itemName != "NULL")
         {
-            print("Head item is: " + headItem.itemName);
+            //print("Head item is: " + headItem.itemName);
 
             _UI.CreateItemSelected(headItem);
             headItem.active = true;
         }
         if(torsoItem.itemName != "NULL")
         {
-            print("Torso item is: " + torsoItem.itemName);
+            //print("Torso item is: " + torsoItem.itemName);
 
 
             _UI.CreateItemSelected(torsoItem);
@@ -357,7 +349,7 @@ public class PlayerController : Singleton<PlayerController>
         }
         if(legItem.itemName != "NULL")
         {
-            print("Leg item is: " + legItem.itemName);
+            //print("Leg item is: " + legItem.itemName);
 
             _UI.CreateItemSelected(legItem);
             legItem.active = true;
@@ -424,5 +416,3 @@ public class PlayerController : Singleton<PlayerController>
 
         
 }
-
-

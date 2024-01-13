@@ -46,13 +46,14 @@ public class GameManager : Singleton<GameManager>
         gameState = GameState.Instruction;
         Time.timeScale = 1.0f;
 
-        GenerateLevel();
+        //GenerateLevel();
         readyForGeneration = true;
 
         _PC.headItem = _IM.itemDataBase[0];
         _PC.torsoItem = _IM.itemDataBase[11];
         _PC.legItem = _IM.itemDataBase[1];
         //_PC.CheckForStartingItems();
+        isLevelCleared = true;
 
 
     }
@@ -61,11 +62,14 @@ public class GameManager : Singleton<GameManager>
     // Update is called once per frame
     void Update()
     {
-        if (readyForGeneration)
+
+        if (readyForGeneration && isLevelCleared)
         {
+            isLevelCleared = false;
+            readyForGeneration = false;
+
             print("Generate new level");
             GenerateLevel();
-            readyForGeneration = false;
             endRoomOB.SetActive(false);
         }
 
@@ -126,6 +130,7 @@ public class GameManager : Singleton<GameManager>
 
         if(isLevelCleared)
         {
+            print("Level is clear");
             endRoomOB.SetActive(true);
 
             endRoomOB.transform.position = player.transform.position;
@@ -183,27 +188,6 @@ public class GameManager : Singleton<GameManager>
         Application.OpenURL("https://forms.gle/TQJNc4cRzDxJzh9i9");
     }
 
-    public void Restart()
-    {
-        var currentScene = SceneManager.GetActiveScene().name;
-        Time.timeScale = 1f;
-        dungeonLevel = 0;
-        readyForGeneration = true;
-        
-        //SceneManager.LoadScene(currentScene);
-        levelStartRoom = currentLevel.transform.Find("BeginningRoom");
-        player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z);
-
-        ClearPreviousLevel();
-
-        //reset player
-        _PC.health = 100;
-        _PC.maxHP = 100;
-
-
-        //give player tentacle mouth
-        gameState = GameState.Playing;
-    }
 
     void GenerateLevel()
     {
@@ -221,13 +205,8 @@ public class GameManager : Singleton<GameManager>
         //clear dungeon
         ClearPreviousLevel();
 
-        //pick prefab
-        //use this to load any thing with room and can search for difficulty too 
-        //FLOOR TEMP
-        //instantiate new prefab
-
-        var randomLevel = Random.Range(1, 3); // last digit excluded
-
+        int randomLevel = Random.Range(0, 3);
+        print("Random Level " + randomLevel);
         //will change to change to Environment_Floor_ later //randomLevel changed to 2
         currentLevel = Instantiate(Resources.Load("Environment_Floor_" + randomLevel, typeof(GameObject)), levelParent) as GameObject;
         //AddObjectsToMaskObject(currentLevel);
@@ -236,30 +215,11 @@ public class GameManager : Singleton<GameManager>
         levelStartRoom = currentLevel.transform.Find("BeginningRoom");
         Transform levelEndRoom = currentLevel.transform.Find("EndRoom");
 
-        //add in controls
-        if(dungeonLevel == 1)
-        {
-
-            var controls = Instantiate(Resources.Load("ControlsPrefab", typeof(GameObject)), new Vector3(levelStartRoom.position.x, -1.5f, levelStartRoom.position.z), Quaternion.Euler(new Vector3(90f,0f,0f)), levelParent) as GameObject;
-            var startingItem = Instantiate(itemPF, new Vector3(levelStartRoom.position.x, -1.5f, levelStartRoom.position.z-2.5f), Quaternion.Euler(new Vector3(0f,0f,0f)), levelParent) as GameObject;
-
-            startingItem.GetComponent<ItemIdentifier>().itemInfo = _IM.itemDataBase[0]; //set as peashooter
-
-            //ExecuteAfterSeconds(0.5f, () => player.transform.position = new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z));
-            //ExecuteAfterSeconds(0.5f, () => fadeImage.DOFade(0f, fadeOutTime));
-
-        
-        }
-
-        _RP.RandomiseEnvionmentProps();
-
-        //endRoomOB.GetComponent<EndLevelTrigger>().ResetDoor(); //reset animations
-        //move end room trigger
-
-        //move player to room
+        _PC.controller.enabled = false;
         player.transform.position = levelStartRoom.transform.position;
         print(levelStartRoom.transform.position);
         print("player pos " + player.transform.position);
+        _PC.controller.enabled = true;
 
         //print("Player is at " + player.transform.position);
         //print("Spawan is at " + new Vector3(levelStartRoom.position.x, 0, levelStartRoom.position.z));
@@ -268,7 +228,12 @@ public class GameManager : Singleton<GameManager>
 
     }
 
-
+    public void PlayerToStart()
+    {
+        player.transform.position = levelStartRoom.transform.position;
+        print(levelStartRoom.transform.position);
+        print("player pos " + player.transform.position);
+    }
     void ClearPreviousLevel()
     {
         //destroy all room and any enemies, item etc. (could be all in same layer)

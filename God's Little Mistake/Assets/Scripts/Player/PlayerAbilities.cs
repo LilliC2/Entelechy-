@@ -85,6 +85,8 @@ public class PlayerAbilities : Singleton<PlayerAbilities>
             {
                 spawnedTrail = true;
                 GameObject trail = Instantiate(slugLeg_trail, _PC.transform.position, Quaternion.identity);
+                trail.GetComponent<SlugLegs>().enabled = false;
+                ExecuteAfterFrames(10, () => trail.GetComponent<SlugLegs>().enabled = true);
                 ExecuteAfterSeconds(timeBetweenTrail, () => spawnedTrail = false);
             }
         }

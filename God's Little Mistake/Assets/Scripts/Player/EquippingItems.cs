@@ -21,7 +21,8 @@ public class EquippingItems : Singleton<EquippingItems>
                 {
                     if (HeadAvatar.transform.childCount != 0) Destroy(HeadAvatar.transform.GetChild(0).gameObject);
                     var head = Instantiate(_item.avatarPrefab, HeadAvatar.transform);
-                    _PC.headFiringPoint = TransformDeepChildExtension.FindDeepChild(head.transform, "FiringPoint").gameObject;
+                    if(_PC.headItem.projectile)
+                        _PC.headFiringPoint = TransformDeepChildExtension.FindDeepChild(head.transform, "FiringPoint").gameObject;
 
                 }
                 else
@@ -41,7 +42,9 @@ public class EquippingItems : Singleton<EquippingItems>
                     if (TorsoAvatar.transform.childCount != 0) Destroy(TorsoAvatar.transform.GetChild(0).gameObject);
 
                     var torso = Instantiate(_item.avatarPrefab, TorsoAvatar.transform);
-                    _PC.torsoFiringPoint = TransformDeepChildExtension.FindDeepChild(torso.transform, "FiringPoint").gameObject;
+                    if (_PC.torsoItem.projectile)
+                        _PC.torsoFiringPoint = TransformDeepChildExtension.FindDeepChild(torso.transform, "FiringPoint").gameObject;
+
 
 
                 }
